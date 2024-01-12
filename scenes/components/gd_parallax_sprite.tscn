@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://5olmpni5o7wv"]
+
+[ext_resource type="Texture2D" uid="uid://djstmwdco77pp" path="res://assets/textures/backgrounds/background1-3.png" id="1_am0nv"]
+[ext_resource type="Script" path="res://src/GDParallaxSprite.gd" id="2_up5od"]
+
+[node name="GDParallaxSprite" type="Sprite2D"]
+modulate = Color(0.27451, 0.627451, 1, 1)
+texture_repeat = 2
+position = Vector2(950, 530)
+texture = ExtResource("1_am0nv")
+region_enabled = true
+region_rect = Rect2(0, 0, 10240, 2048)
+script = ExtResource("2_up5od")
+autoscroll_speed = Vector2(500, 0)
+metadata/_edit_group_ = true
+
+[node name="NotifierLeft" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="NotifierRight" type="VisibleOnScreenNotifier2D" parent="."]
