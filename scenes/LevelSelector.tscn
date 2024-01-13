@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b42xp7ytqmepb"]
+
+[ext_resource type="PackedScene" uid="uid://kwe5xtryavgg" path="res://scenes/components/GDLevelSelectorTab.tscn" id="1_y8ut0"]
+[ext_resource type="Script" path="res://src/components/GDPhantomCameraHistory.gd" id="2_dbhv0"]
+
+[node name="LevelSelector" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GDLevelSelectorTab" parent="." instance=ExtResource("1_y8ut0")]
+layout_mode = 1
+
+[node name="GDPhantomCameraHistory" type="Node" parent="."]
+script = ExtResource("2_dbhv0")

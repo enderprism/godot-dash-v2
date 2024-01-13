@@ -6,9 +6,8 @@ extends BaseButton
 		level_selector_button = value
 		notify_property_list_changed()
 
-@export var selected_level: String
+@export var selected_level: PackedScene
 @export var block_palette_button: bool
-var _selected_level_scene: PackedScene
 
 func _validate_property(property: Dictionary):
 	if property.name == "selected_level" and not level_selector_button:
