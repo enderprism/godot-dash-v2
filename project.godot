@@ -8,10 +8,20 @@
 
 config_version=5
 
+[addons]
+
+instance_dock/scenes=[{
+"name": "Solids",
+"scenes": [],
+"scroll": 0
+}]
+instance_dock/preview_resolution=Vector2i(64, 64)
+
 [application]
 
 config/name="godot-dash-v2"
-run/main_scene="res://scenes/TitleScreen.tscn"
+config/version="0.0.1"
+run/main_scene="res://scenes/MainScene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/bg_color=Color(0.117647, 0.117647, 0.180392, 1)
 boot_splash/image="res://assets/logo/NewIcon.png"
@@ -27,6 +37,10 @@ buses/default_bus_layout="res://resources/default_bus_layout.tres"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/script-tabs/plugin.cfg")
 
 [input]
 
