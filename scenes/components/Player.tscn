@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://bl48psvuka73y"]
+
+[ext_resource type="Script" path="res://src/Player.gd" id="1_nvqsc"]
+[ext_resource type="Texture2D" uid="uid://d27bxpaocdhwi" path="res://assets/textures/player_icons/cube/cube.svg" id="2_aqwc1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ccd0p"]
+radius = 64.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4mg1a"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t218l"]
+size = Vector2(128, 128)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 34
+script = ExtResource("1_nvqsc")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_aqwc1")
+
+[node name="GroundCollider" type="CollisionShape2D" parent="."]
+editor_description = "Detects collisions with the local gravity's ground."
+shape = SubResource("CircleShape2D_ccd0p")
+debug_color = Color(0, 0.0705882, 0.701961, 0.419608)
+
+[node name="KillColliderSolid" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="KillColliderSolidHitbox" type="CollisionShape2D" parent="KillColliderSolid"]
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_4mg1a")
+debug_color = Color(0.701961, 0, 0, 0.419608)
+
+[node name="KillColliderHazard" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="KillColliderHazardHitbox" type="CollisionShape2D" parent="KillColliderHazard"]
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_t218l")
+debug_color = Color(0.701961, 0, 0, 0.419608)
+
+[node name="TransporterCollider" type="Area2D" parent="."]
+collision_mask = 24
+
+[node name="TransporterColliderHitbox" type="CollisionShape2D" parent="TransporterCollider"]
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_t218l")
+debug_color = Color(0, 0.701961, 0.0941176, 0.419608)

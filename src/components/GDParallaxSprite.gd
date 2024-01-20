@@ -2,7 +2,6 @@ extends Sprite2D
 
 class_name GDParallaxSprite
 
-@export var camera: Camera2D
 @export var parallax_factor: Vector2
 # Intended for use in menus, where the GDParallaxObject needs to scroll but the camera is static.
 @export var autoscroll_speed: Vector2
@@ -32,10 +31,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	delta_camera_position = camera.get_screen_center_position() - previous_camera_position
-	position.x += delta_camera_position.x * parallax_factor.x + autoscroll_speed.x * delta
-	position.y += delta_camera_position.y * parallax_factor.y + autoscroll_speed.y * delta
-	
-	position.x += texture.get_width() * scale.x * (int($NotifierRight.is_on_screen()) - int($NotifierLeft.is_on_screen()))
-	
-	previous_camera_position = camera.get_screen_center_position()
+	if get_viewport().get_camera_2d() != null:
+		delta_camera_position = get_viewport().get_camera_2d().get_screen_center_position() - previous_camera_position
+		position.x += delta_camera_position.x * parallax_factor.x + autoscroll_speed.x * delta
+		position.y += delta_camera_position.y * parallax_factor.y + autoscroll_speed.y * delta
+		
+		position.x += texture.get_width() * scale.x * (int($NotifierRight.is_on_screen()) - int($NotifierLeft.is_on_screen()))
+		
+		previous_camera_position = get_viewport().get_camera_2d().get_screen_center_position()

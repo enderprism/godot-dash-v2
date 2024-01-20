@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://vx22wmjgsl50"
+path="res://.godot/imported/Dash (Mashup).wav-4212b0617c7e2c716a004a14ccaecc86.sample"
+
+[deps]
+
+source_file="res://assets/sounds/music/level_music/Dash (Mashup).wav"
+dest_files=["res://.godot/imported/Dash (Mashup).wav-4212b0617c7e2c716a004a14ccaecc86.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

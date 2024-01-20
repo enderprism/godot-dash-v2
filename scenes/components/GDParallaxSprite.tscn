@@ -11,7 +11,6 @@ texture = ExtResource("1_am0nv")
 region_enabled = true
 region_rect = Rect2(0, 0, 10240, 2048)
 script = ExtResource("2_up5od")
-autoscroll_speed = Vector2(500, 0)
 metadata/_edit_group_ = true
 
 [node name="NotifierLeft" type="VisibleOnScreenNotifier2D" parent="."]

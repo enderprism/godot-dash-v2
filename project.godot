@@ -32,6 +32,11 @@ config/icon="res://assets/logo/NewIcon.svg"
 
 buses/default_bus_layout="res://resources/default_bus_layout.tres"
 
+[autoload]
+
+LevelManager="*res://src/autoloads/LevelManager.gd"
+SFXManager="*res://src/autoloads/SFXManager.gd"
+
 [display]
 
 window/size/viewport_width=1920

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cvghwtoh32k5q"
+path="res://.godot/imported/Scheming Weasel.mp3-fb4ad96e0ba2010f6c4d4c65d0a0429a.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/music/level_music/Scheming Weasel.mp3"
+dest_files=["res://.godot/imported/Scheming Weasel.mp3-fb4ad96e0ba2010f6c4d4c65d0a0429a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

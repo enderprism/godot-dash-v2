@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://2ie2uex1m8mb"]
+
+[ext_resource type="Script" path="res://src/LevelProps.gd" id="1_sk2ra"]
+[ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
+[ext_resource type="FontFile" uid="uid://8e1lxpyo40t5" path="res://assets/fonts/PUSAB.otf" id="3_tr72a"]
+
+[node name="Dash V2" type="Node2D"]
+script = ExtResource("1_sk2ra")
+song = ExtResource("2_8grye")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 244.0
+offset_top = -244.0
+offset_right = 1891.0
+offset_bottom = -59.0
+theme_override_fonts/font = ExtResource("3_tr72a")
+theme_override_font_sizes/font_size = 100
+text = "THE LEVEL LOADED WOOOO"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=3 uid="uid://db7ebleody4s3"]
+
+[ext_resource type="PackedScene" uid="uid://5olmpni5o7wv" path="res://scenes/components/GDParallaxSprite.tscn" id="1_3pwrm"]
+[ext_resource type="Script" path="res://src/GameScene.gd" id="1_k47tp"]
+[ext_resource type="Texture2D" uid="uid://dewrklmfoeg7m" path="res://assets/textures/grounds/ground-1.png" id="2_ylgfk"]
+[ext_resource type="PackedScene" uid="uid://bl48psvuka73y" path="res://scenes/components/Player.tscn" id="3_22pbm"]
+[ext_resource type="Texture2D" uid="uid://dga7nm2rjr2b0" path="res://assets/textures/ground_overlays/floorLine_001.png" id="3_l4t8r"]
+[ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/GDFadeScreen.tscn" id="6_7ju4w"]
+[ext_resource type="Script" path="res://src/components/GDCameraFollow2D.gd" id="6_kvomc"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="7_iep1r"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="7_jsfcj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l4i0t"]
+size = Vector2(9602, 240)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vslon"]
+blend_mode = 1
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("1_k47tp")
+metadata/_edit_lock_ = true
+
+[node name="Background" parent="." instance=ExtResource("1_3pwrm")]
+position = Vector2(622, -1109)
+scale = Vector2(2, 2)
+parallax_factor = Vector2(0.5, 0)
+
+[node name="Level" type="Node2D" parent="."]
+position = Vector2(0, 925)
+
+[node name="Player" parent="." instance=ExtResource("3_22pbm")]
+position = Vector2(622, 855)
+
+[node name="Ground" parent="." instance=ExtResource("1_3pwrm")]
+modulate = Color(0.290196, 0.266667, 1, 1)
+position = Vector2(940, 1225)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_ylgfk")
+region_rect = Rect2(0, 0, 9600, 240)
+
+[node name="GroundCollider" type="StaticBody2D" parent="Ground"]
+collision_layer = 32
+
+[node name="GroundHitbox" type="CollisionShape2D" parent="Ground/GroundCollider"]
+shape = SubResource("RectangleShape2D_l4i0t")
+debug_color = Color(0.701961, 0, 0, 0.419608)
+
+[node name="Line" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_vslon")
+position = Vector2(950, 926)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_l4t8r")
+script = ExtResource("6_kvomc")
+copy_x = true
+
+[node name="FadeScreenLayer" parent="." instance=ExtResource("6_7ju4w")]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(822, 540)
+limit_bottom = 1080
+editor_draw_limits = true
+metadata/_edit_lock_ = true
+
+[node name="PhantomCameraHost" type="Node" parent="Camera"]
+script = ExtResource("7_jsfcj")
+
+[node name="PlayerCamera" type="Node2D" parent="."]
+position = Vector2(822, 540)
+script = ExtResource("7_iep1r")
+priority_override = false
+priority = 0
+zoom = Vector2(1, 1)
+follow_mode = 2
+follow_target = NodePath("../Player")
+follow_parameters/target_offset = Vector2(200, 0)
+follow_parameters/damping = false
+frame_preview = true
+pixel_perfect = false
+limit/draw_limits = true
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 1080
+limit/limit_node_target = NodePath("")
+limit/smoothed = false
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0

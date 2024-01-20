@@ -1,0 +1,107 @@
+[gd_scene load_steps=9 format=3 uid="uid://kwe5xtryavgg"]
+
+[ext_resource type="Script" path="res://src/LevelSelectorTab.gd" id="1_byc33"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="1_m8x5r"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_25fwn"]
+[ext_resource type="FontFile" uid="uid://8e1lxpyo40t5" path="res://assets/fonts/PUSAB.otf" id="4_3yq55"]
+[ext_resource type="Script" path="res://src/components/GDBouncyButton.gd" id="5_pa43o"]
+
+[sub_resource type="Resource" id="Resource_38ea1"]
+script = ExtResource("2_25fwn")
+duration = 1.0
+transition = 5
+ease = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oc3rl"]
+bg_color = Color(0.741176, 0.741176, 0.741176, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bfpn3"]
+
+[node name="GDLevelSelectorTab" type="Control"]
+self_modulate = Color(0.27451, 0.627451, 1, 1)
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_byc33")
+
+[node name="LevelSelectorTabCamera" type="Node2D" parent="."]
+position = Vector2(960, 540)
+script = ExtResource("1_m8x5r")
+priority_override = false
+priority = 0
+zoom = Vector2(1, 1)
+follow_mode = 1
+follow_target = NodePath("../TabCenter")
+follow_parameters/damping = false
+frame_preview = true
+pixel_perfect = false
+limit/draw_limits = true
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = false
+tween_parameters = SubResource("Resource_38ea1")
+tween_on_load = true
+inactive_update_mode = 0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -764.0
+offset_top = -328.0
+offset_right = 765.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(764.5, 224)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("4_3yq55")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_oc3rl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_oc3rl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oc3rl")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_oc3rl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bfpn3")
+script = ExtResource("5_pa43o")
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -11.5
+offset_right = 37.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("4_3yq55")
+theme_override_font_sizes/font_size = 75
+text = "LevelTitle"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TabCenter" type="Marker2D" parent="."]
+position = Vector2(960, 540)
+gizmo_extents = 64.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

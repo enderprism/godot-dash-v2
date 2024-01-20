@@ -629,7 +629,6 @@ color = Color(0.137255, 0.14902, 0.196078, 1)
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -1
-texture_filter = 1
 scale = Vector2(3, 3)
 tile_set = SubResource("TileSet_kf7eg")
 format = 2

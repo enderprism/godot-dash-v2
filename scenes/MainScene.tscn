@@ -1,21 +1,28 @@
-[gd_scene load_steps=20 format=3 uid="uid://cinyg32n0bonm"]
+[gd_scene load_steps=28 format=3 uid="uid://cinyg32n0bonm"]
 
 [ext_resource type="PackedScene" uid="uid://5olmpni5o7wv" path="res://scenes/components/GDParallaxSprite.tscn" id="1_dur2s"]
+[ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/GDFadeScreen.tscn" id="1_e44lk"]
 [ext_resource type="Texture2D" uid="uid://dewrklmfoeg7m" path="res://assets/textures/grounds/ground-1.png" id="2_5u8e8"]
-[ext_resource type="Texture2D" uid="uid://dga7nm2rjr2b0" path="res://assets/textures/ground-overlays/floorLine_001.png" id="3_skuyc"]
+[ext_resource type="Texture2D" uid="uid://dga7nm2rjr2b0" path="res://assets/textures/ground_overlays/floorLine_001.png" id="3_skuyc"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/ButtonNoFocusColor.tres" id="4_eh0ur"]
-[ext_resource type="Texture2D" uid="uid://bjrdbga1v3vba" path="res://assets/textures/title_screen/PlayButton.png" id="4_tln2n"]
-[ext_resource type="Texture2D" uid="uid://bu2hpb5owl44q" path="res://assets/textures/title_screen/Title.png" id="4_yqc6o"]
-[ext_resource type="Texture2D" uid="uid://cwoultxx6k47" path="res://assets/textures/title_screen/GarageButton.png" id="5_th0n8"]
+[ext_resource type="Texture2D" uid="uid://bjrdbga1v3vba" path="res://assets/textures/guis/title_screen/PlayButton.png" id="4_tln2n"]
+[ext_resource type="Texture2D" uid="uid://bu2hpb5owl44q" path="res://assets/textures/guis/title_screen/Title.png" id="4_yqc6o"]
+[ext_resource type="Script" path="res://src/components/GDCameraFollow2D.gd" id="5_4luv8"]
+[ext_resource type="Texture2D" uid="uid://cwoultxx6k47" path="res://assets/textures/guis/title_screen/GarageButton.png" id="5_th0n8"]
 [ext_resource type="Script" path="res://src/components/GDBouncyButton.gd" id="5_wiac2"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="6_0wc6k"]
-[ext_resource type="Texture2D" uid="uid://bwxk6tcq5v31v" path="res://assets/textures/title_screen/CreateButton.png" id="6_2eto3"]
-[ext_resource type="AudioStream" uid="uid://c4sjh7a6mxgv3" path="res://assets/sounds/sfx/game_sfx/MenuLoop.mp3" id="7_ir7j4"]
+[ext_resource type="Texture2D" uid="uid://bwxk6tcq5v31v" path="res://assets/textures/guis/title_screen/CreateButton.png" id="6_2eto3"]
+[ext_resource type="AudioStream" uid="uid://c4sjh7a6mxgv3" path="res://assets/sounds/music/game_music/MenuLoop.mp3" id="7_ir7j4"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="8_04kr6"]
 [ext_resource type="Script" path="res://src/SubsceneManager.gd" id="9_iy7r1"]
+[ext_resource type="Texture2D" uid="uid://bylba27vuavv5" path="res://assets/textures/guis/shared/CloseButton.png" id="10_fqvm0"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="12_ct30d"]
-[ext_resource type="PackedScene" uid="uid://b42xp7ytqmepb" path="res://scenes/LevelSelector.tscn" id="14_18l4b"]
+[ext_resource type="PackedScene" uid="uid://kwe5xtryavgg" path="res://scenes/components/LevelSelectorTab.tscn" id="14_ade78"]
+[ext_resource type="Texture2D" uid="uid://bf00dudjlkg0q" path="res://assets/textures/guis/shared/BackButton.png" id="14_t3hvn"]
+[ext_resource type="Texture2D" uid="uid://docsh85xkmade" path="res://assets/textures/guis/level_selector/LevelSelectorPrevious.png" id="15_7mwgk"]
+[ext_resource type="Texture2D" uid="uid://bswqhh121flny" path="res://assets/textures/guis/level_selector/LevelSelectorNext.png" id="16_btcin"]
 [ext_resource type="PackedScene" uid="uid://dfde2ns6le0wd" path="res://scenes/components/GDPhantomCamera2DHistory.tscn" id="16_dgsi1"]
+[ext_resource type="PackedScene" uid="uid://2ie2uex1m8mb" path="res://scenes/levels/DashV2.tscn" id="17_vj3ol"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_stpof"]
 blend_mode = 1
@@ -28,30 +35,38 @@ duration = 1.0
 transition = 5
 ease = 1
 
+[sub_resource type="Resource" id="Resource_vjtrj"]
+script = ExtResource("12_ct30d")
+duration = 1.0
+transition = 5
+ease = 0
+
 [node name="MainScene" type="Node2D"]
 metadata/_edit_lock_ = true
 
+[node name="FadeScreenLayer" parent="." instance=ExtResource("1_e44lk")]
+
 [node name="TitleScreen" type="Node2D" parent="."]
 
-[node name="Background" parent="TitleScreen" node_paths=PackedStringArray("camera") instance=ExtResource("1_dur2s")]
+[node name="Background" parent="TitleScreen" instance=ExtResource("1_dur2s")]
 position = Vector2(973, 3.05176e-05)
 scale = Vector2(1.25, 1.25)
-camera = NodePath("../../Camera")
 autoscroll_speed = Vector2(-300, 0)
 
-[node name="Ground" parent="TitleScreen" node_paths=PackedStringArray("camera") instance=ExtResource("1_dur2s")]
+[node name="Ground" parent="TitleScreen" instance=ExtResource("1_dur2s")]
 modulate = Color(0.290196, 0.266667, 1, 1)
 position = Vector2(940, 1005)
 texture = ExtResource("2_5u8e8")
 region_rect = Rect2(0, 0, 9600, 240)
-camera = NodePath("../../Camera")
 autoscroll_speed = Vector2(-800, 0)
 
-[node name="Line" type="Sprite2D" parent="TitleScreen"]
+[node name="GroundLine" type="Sprite2D" parent="TitleScreen"]
 material = SubResource("CanvasItemMaterial_stpof")
 position = Vector2(950, 886)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_skuyc")
+script = ExtResource("5_4luv8")
+copy_x = true
 
 [node name="Control" type="Control" parent="TitleScreen"]
 layout_mode = 3
@@ -114,6 +129,19 @@ icon = ExtResource("6_2eto3")
 flat = true
 script = ExtResource("5_wiac2")
 
+[node name="QuitGame" type="Button" parent="TitleScreen/Control"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 100.0
+offset_bottom = 101.0
+pivot_offset = Vector2(34, 34.5)
+theme = ExtResource("4_eh0ur")
+icon = ExtResource("10_fqvm0")
+flat = true
+expand_icon = true
+script = ExtResource("5_wiac2")
+
 [node name="CreatedLevelsList" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -136,6 +164,19 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.164706, 0.278431, 0.721569, 1)
 
+[node name="BackButton" type="Button" parent="CreatedLevelsList"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 100.0
+offset_bottom = 101.0
+pivot_offset = Vector2(34, 34.5)
+theme = ExtResource("4_eh0ur")
+icon = ExtResource("14_t3hvn")
+flat = true
+expand_icon = true
+script = ExtResource("5_wiac2")
+
 [node name="IconGarage" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -156,8 +197,126 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5)
 
+[node name="BackButton" type="Button" parent="IconGarage"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 100.0
+offset_bottom = 101.0
+pivot_offset = Vector2(34, 34.5)
+theme = ExtResource("4_eh0ur")
+icon = ExtResource("14_t3hvn")
+flat = true
+expand_icon = true
+script = ExtResource("5_wiac2")
+
+[node name="LevelSelector" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -1080.0
+offset_right = 1921.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+metadata/_edit_group_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="LevelSelector"]
+
+[node name="PageControlContainer" type="Control" parent="LevelSelector/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PagePreviousNext" type="HBoxContainer" parent="LevelSelector/CanvasLayer/PageControlContainer"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -124.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="MarginVSeparatorLeft" type="VSeparator" parent="LevelSelector/CanvasLayer/PageControlContainer/PagePreviousNext"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("4_eh0ur")
+theme_override_constants/separation = 15
+
+[node name="PreviousLevel" type="Button" parent="LevelSelector/CanvasLayer/PageControlContainer/PagePreviousNext"]
+layout_mode = 2
+theme = ExtResource("4_eh0ur")
+icon = ExtResource("15_7mwgk")
+flat = true
+script = ExtResource("5_wiac2")
+
+[node name="VSeparator" type="VSeparator" parent="LevelSelector/CanvasLayer/PageControlContainer/PagePreviousNext"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme = ExtResource("4_eh0ur")
+
+[node name="NextLevel" type="Button" parent="LevelSelector/CanvasLayer/PageControlContainer/PagePreviousNext"]
+layout_mode = 2
+theme = ExtResource("4_eh0ur")
+icon = ExtResource("16_btcin")
+flat = true
+script = ExtResource("5_wiac2")
+
+[node name="MarginVSeparatorRight" type="VSeparator" parent="LevelSelector/CanvasLayer/PageControlContainer/PagePreviousNext"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("4_eh0ur")
+theme_override_constants/separation = 15
+
+[node name="BackButton" type="Button" parent="LevelSelector/CanvasLayer/PageControlContainer"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 100.0
+offset_bottom = 101.0
+pivot_offset = Vector2(34, 34.5)
+theme = ExtResource("4_eh0ur")
+icon = ExtResource("14_t3hvn")
+flat = true
+expand_icon = true
+script = ExtResource("5_wiac2")
+
+[node name="PageContainer" type="HBoxContainer" parent="LevelSelector"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -1080.0
+offset_right = 5768.0
+grow_vertical = 0
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="Dash V2" parent="LevelSelector/PageContainer" instance=ExtResource("14_ade78")]
+layout_mode = 2
+selected_level = ExtResource("17_vj3ol")
+
+[node name="Dash V3" parent="LevelSelector/PageContainer" instance=ExtResource("14_ade78")]
+self_modulate = Color(1, 0.105882, 0.92549, 1)
+layout_mode = 2
+
+[node name="Dash V4" parent="LevelSelector/PageContainer" instance=ExtResource("14_ade78")]
+self_modulate = Color(1, 0.784314, 0, 1)
+layout_mode = 2
+
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(960, 540)
+position = Vector2(961, -540)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera"]
 script = ExtResource("6_0wc6k")
@@ -184,6 +343,26 @@ limit/bottom = 10000000
 limit/limit_node_target = NodePath("")
 limit/smoothed = false
 tween_parameters = SubResource("Resource_assks")
+tween_on_load = true
+inactive_update_mode = 0
+
+[node name="QuitGameCamera" type="Node2D" parent="."]
+position = Vector2(960, 540)
+script = ExtResource("8_04kr6")
+priority_override = false
+priority = 0
+zoom = Vector2(2, 2)
+follow_mode = 0
+frame_preview = true
+pixel_perfect = false
+limit/draw_limits = true
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = false
+tween_parameters = SubResource("Resource_vjtrj")
 tween_on_load = true
 inactive_update_mode = 0
 
@@ -227,13 +406,6 @@ tween_parameters = SubResource("Resource_assks")
 tween_on_load = true
 inactive_update_mode = 0
 
-[node name="LevelSelector" parent="LevelSelectorCamera" instance=ExtResource("14_18l4b")]
-offset_left = -960.0
-offset_top = -540.0
-offset_right = 960.0
-offset_bottom = 540.0
-pivot_offset = Vector2(960, 540)
-
 [node name="CreatedLevelsListCamera" type="Node2D" parent="."]
 position = Vector2(2880, 540)
 script = ExtResource("8_04kr6")
@@ -263,3 +435,9 @@ _active_pcam = NodePath("../TitleScreenCamera")
 [connection signal="pressed" from="TitleScreen/Control/VBoxContainer/HBoxContainer/GoToIconGarage" to="Subscene Manager" method="_on_go_to_icon_garage_pressed"]
 [connection signal="pressed" from="TitleScreen/Control/VBoxContainer/HBoxContainer/GoToLevelSelector" to="Subscene Manager" method="_on_go_to_level_selector_pressed"]
 [connection signal="pressed" from="TitleScreen/Control/VBoxContainer/HBoxContainer/GoToCreatedLevelsList" to="Subscene Manager" method="_on_go_to_created_levels_list_pressed"]
+[connection signal="pressed" from="TitleScreen/Control/QuitGame" to="Subscene Manager" method="_on_quit_game_pressed"]
+[connection signal="pressed" from="CreatedLevelsList/BackButton" to="Subscene Manager" method="_on_back_button_pressed"]
+[connection signal="pressed" from="IconGarage/BackButton" to="Subscene Manager" method="_on_back_button_pressed"]
+[connection signal="pressed" from="LevelSelector/CanvasLayer/PageControlContainer/PagePreviousNext/PreviousLevel" to="Subscene Manager" method="_on_previous_level_pressed"]
+[connection signal="pressed" from="LevelSelector/CanvasLayer/PageControlContainer/PagePreviousNext/NextLevel" to="Subscene Manager" method="_on_next_level_pressed"]
+[connection signal="pressed" from="LevelSelector/CanvasLayer/PageControlContainer/BackButton" to="Subscene Manager" method="_on_back_button_pressed"]

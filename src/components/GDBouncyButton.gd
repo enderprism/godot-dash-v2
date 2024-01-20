@@ -1,17 +1,17 @@
 @tool
 extends BaseButton
 
-@export var level_selector_button: bool :
-	set(value):
-		level_selector_button = value
-		notify_property_list_changed()
+# @export var level_selector_button: bool :
+# 	set(value):
+# 		level_selector_button = value
+# 		notify_property_list_changed()
 
-@export var selected_level: PackedScene
+# @export var selected_level: PackedScene
 @export var block_palette_button: bool
 
-func _validate_property(property: Dictionary):
-	if property.name == "selected_level" and not level_selector_button:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
+# func _validate_property(property: Dictionary):
+# 	if property.name == "selected_level" and not level_selector_button:
+# 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 func _ready() -> void:
 	connect("button_down", Callable(self, "_button_held"))
