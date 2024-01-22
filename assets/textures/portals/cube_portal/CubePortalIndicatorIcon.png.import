@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d27bxpaocdhwi"
-path="res://.godot/imported/cube.svg-5339e0054545e82e0767af4592bdeb40.ctex"
+uid="uid://3mefye2oh6jy"
+path="res://.godot/imported/CubePortalIndicatorIcon.png-64a56a33b674cfc31f0147ddc73fb551.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/player_icons/cube/cube.svg"
-dest_files=["res://.godot/imported/cube.svg-5339e0054545e82e0767af4592bdeb40.ctex"]
+source_file="res://assets/textures/portals/cube_portal/CubePortalIndicatorIcon.png"
+dest_files=["res://.godot/imported/CubePortalIndicatorIcon.png-64a56a33b674cfc31f0147ddc73fb551.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=0.25
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

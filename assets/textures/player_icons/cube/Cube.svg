@@ -27,16 +27,25 @@
      inkscape:pagecheckerboard="false"
      inkscape:deskcolor="#181825"
      inkscape:document-units="px"
-     inkscape:zoom="0.75781254"
-     inkscape:cx="294.26802"
-     inkscape:cy="273.15462"
+     inkscape:zoom="1.3617021"
+     inkscape:cx="282"
+     inkscape:cy="282"
      inkscape:window-width="1900"
      inkscape:window-height="1019"
      inkscape:window-x="6"
      inkscape:window-y="47"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
-     showgrid="false" />
+     showgrid="false">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="149.22502"
+       height="149.22502"
+       id="page1"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
   <defs
      id="defs1">
     <linearGradient
@@ -156,13 +165,12 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient26"
-       id="linearGradient35"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.158209,0,0,1.1262141,84.717878,-1.6697192)"
-       x1="67.733345"
-       y1="13.229183"
-       x2="67.733345"
-       y2="122.23749" />
+       id="linearGradient6"
+       x1="118.01795"
+       y1="13.229176"
+       x2="118.01795"
+       y2="135.99588"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <g
      inkscape:label="Calque 1"
@@ -197,7 +205,7 @@
        x="56.634602"
        y="13.229178" />
     <rect
-       style="display:inline;fill:url(#linearGradient35);fill-opacity:1;stroke:none;stroke-width:13.2291;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       style="display:inline;fill:url(#linearGradient6);stroke:none;stroke-width:13.2291;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
        id="rect35"
        width="35.955856"
        height="122.7667"

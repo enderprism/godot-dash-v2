@@ -2,8 +2,7 @@ extends Node
 
 class_name GDPhantomCameraHistory
 
-enum PhantomCameraStatus
-{
+enum PhantomCameraStatus {
 	INACTIVE,
 	PREVIOUS_ACTIVE,
 	CURRENT_ACTIVE,

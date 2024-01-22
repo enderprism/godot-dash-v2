@@ -4,8 +4,7 @@ signal fade_finished
 
 var is_fading: bool
 
-enum FADE_TYPE
-{
+enum FADE_TYPE {
 	FADE_IN,
 	FADE_OUT
 }

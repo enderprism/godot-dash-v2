@@ -1,7 +1,6 @@
 extends Node
 
-enum SubScene
-{
+enum SubScene {
 	TITLE_SCREEN,
 	LEVEL_SELECTOR,
 	ICON_GARAGE,
@@ -18,6 +17,7 @@ var _hide_page_control: bool = true
 
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_page_control_container.hide()
 	_page_control_container.modulate.a = 0.0
 	$"../CreatedLevelsList".hide()
@@ -99,20 +99,20 @@ func _on_go_to_icon_garage_pressed() -> void:
 func _toggle_background_sprites_autoscroll(enabled: bool) -> void:
 	if enabled:
 		create_tween() \
-			.tween_property($"../TitleScreen/Background", "autoscroll_speed:x", -300, 1.0) \
+			.tween_property($"../TitleScreen/Background", "_autoscroll_speed:x", -300, 1.0) \
 			.set_ease(Tween.EASE_OUT) \
 			.set_trans(Tween.TRANS_EXPO)
 		create_tween() \
-			.tween_property($"../TitleScreen/Ground", "autoscroll_speed:x", -800.0, 1.0) \
+			.tween_property($"../TitleScreen/Ground", "_autoscroll_speed:x", -800.0, 1.0) \
 			.set_ease(Tween.EASE_OUT) \
 			.set_trans(Tween.TRANS_EXPO)
 	else:
 		create_tween() \
-			.tween_property($"../TitleScreen/Background", "autoscroll_speed:x", 0.0, 1.0) \
+			.tween_property($"../TitleScreen/Background", "_autoscroll_speed:x", 0.0, 1.0) \
 			.set_ease(Tween.EASE_OUT) \
 			.set_trans(Tween.TRANS_EXPO)
 		create_tween() \
-			.tween_property($"../TitleScreen/Ground", "autoscroll_speed:x", 0.0, 1.0) \
+			.tween_property($"../TitleScreen/Ground", "_autoscroll_speed:x", 0.0, 1.0) \
 			.set_ease(Tween.EASE_OUT) \
 			.set_trans(Tween.TRANS_EXPO)
 
