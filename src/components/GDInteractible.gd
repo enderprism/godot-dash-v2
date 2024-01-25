@@ -127,6 +127,15 @@ func _ready() -> void:
 	connect("body_entered", Callable(self, "_on_player_enter"))
 	connect("body_exited", Callable(self, "_on_player_exit"))
 
+func _process(_delta: float) -> void:
+	if object_type == ObjectType.GAMEMODE_PORTAL or (object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.GRAVITY_PORTAL):
+		if not Engine.is_editor_hint() and LevelManager.player_camera != null and _other_portal_type != OtherPortal.GRAVITY_PORTAL:
+			$IndicatorIcon.global_rotation = LevelManager.player_camera.rotation
+		else:
+			$IndicatorIcon.global_rotation = 0.0
+		$IndicatorIcon.global_scale.x = abs(scale.x)
+		$IndicatorIcon.global_scale.y = abs(scale.y)
+
 func _on_player_enter(_body: Node2D) -> void:
 	if object_type == ObjectType.ORB:
 		_player.orb_collisions |= _orb_type

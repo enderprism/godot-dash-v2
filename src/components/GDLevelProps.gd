@@ -11,6 +11,7 @@ func start_level() -> void:
 	var song_player = AudioStreamPlayer.new()
 	add_child(song_player)
 	song_player.process_mode = Node.PROCESS_MODE_PAUSABLE
+	song_player.set_bus("Music")
 	song_player.stream = song
 	if get_tree().paused:
 		await _pause_manager.unpaused

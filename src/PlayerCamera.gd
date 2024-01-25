@@ -3,18 +3,44 @@ extends Camera2D
 class_name PlayerCamera
 
 @onready var player: Player = LevelManager.player
+
+const MIN_HEIGHT: float = -5500.0
+const MAX_HEIGHT: float = 560.0
+const MAX_DISTANCE: float = 200.0
+
 var _previous_position: Vector2
 var _delta_position: Vector2
-var _horizontal_snap: float = 1.0
-var _offset_snap: float = 0.5
+var _player_distance: Vector2
+var _position_snap: Vector2 = Vector2(1.0, 0.1)
+var _offset_snap: Vector2 = Vector2(0.5, 0.1)
+var _freefly: bool = true
 
 const DEFAULT_OFFSET: Vector2 = Vector2(300.0, 0.0)
 
-func _process(_delta: float) -> void:
+var _static: Vector2i
+
+func _ready() -> void:
+	LevelManager.player_camera = self
+
+func _process(delta: float) -> void:
+	_player_distance = player.position - position
 	_previous_position = position
 
-	position.x = lerpf(position.x, player.position.x, _horizontal_snap)
 	if not $"../Level".get_child(0).platformer:
-		offset.x = lerpf(offset.x, DEFAULT_OFFSET.x * player._get_direction(), _offset_snap)
+		offset.x = lerpf(offset.x, DEFAULT_OFFSET.x * player._get_direction(), _offset_snap.x)
+	if not _static.y and _freefly and abs(_player_distance.y) > MAX_DISTANCE:
+		position.y = lerpf(
+			position.y,
+			player.position.y - sign(_player_distance.y) * MAX_DISTANCE,
+			_position_snap.y,
+		)
+
+	position.x = lerpf(position.x, player.position.x, _position_snap.x)
+	position.y = clampf(
+		position.y,
+		MIN_HEIGHT,
+		MAX_HEIGHT,
+	)
+
 
 	_delta_position = position - _previous_position

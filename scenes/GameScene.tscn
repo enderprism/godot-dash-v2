@@ -21,9 +21,19 @@ script = ExtResource("1_k47tp")
 metadata/_edit_lock_ = true
 
 [node name="Background" parent="." node_paths=PackedStringArray("_camera") instance=ExtResource("1_3pwrm")]
-position = Vector2(622, -1109)
+z_index = -100
+position = Vector2(622, -1121)
 scale = Vector2(2, 2)
-_parallax_factor = Vector2(0.5, 0)
+_parallax_factor = Vector2(0.5, 0.5)
+_camera = NodePath("../PlayerCamera")
+
+[node name="Background2" parent="." node_paths=PackedStringArray("_camera") instance=ExtResource("1_3pwrm")]
+z_index = -100
+position = Vector2(622, 2972)
+rotation = -6.28318
+scale = Vector2(2, 2)
+flip_v = true
+_parallax_factor = Vector2(0.5, 0.5)
 _camera = NodePath("../PlayerCamera")
 
 [node name="Level" type="Node2D" parent="."]
@@ -63,6 +73,7 @@ target = NodePath("../PlayerCamera")
 copy_x = true
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
+process_priority = 1
 position = Vector2(622, 561)
 offset = Vector2(300, 0)
 ignore_rotation = false
@@ -92,3 +103,11 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.5)
 
 [node name="FadeScreenLayer" parent="." instance=ExtResource("6_7ju4w")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = 12940.0
+offset_top = 200.0
+offset_right = 13978.0
+offset_bottom = 696.0
+color = Color(1, 0, 0, 1)

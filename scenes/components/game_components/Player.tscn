@@ -1,7 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://bl48psvuka73y"]
+[gd_scene load_steps=31 format=3 uid="uid://bl48psvuka73y"]
 
 [ext_resource type="Script" path="res://src/Player.gd" id="1_nvqsc"]
-[ext_resource type="Texture2D" uid="uid://omcvgcf1uk5p" path="res://assets/textures/player_icons/cube/Cube.svg" id="2_6ab5b"]
+[ext_resource type="Texture2D" uid="uid://omcvgcf1uk5p" path="res://assets/textures/player/cube/Cube.svg" id="2_6ab5b"]
+[ext_resource type="Script" path="res://src/components/GDIconGamemodeProp.gd" id="2_sxyn3"]
+[ext_resource type="Texture2D" uid="uid://b54ubk48x1iu1" path="res://assets/textures/player/ship/Ship.svg" id="4_mqpwg"]
+[ext_resource type="Texture2D" uid="uid://dc6xv64ap0xqk" path="res://assets/textures/player/FireBoost.png" id="5_34x12"]
+[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="5_dvha5"]
+[ext_resource type="Texture2D" uid="uid://cvrhuk7gkomp1" path="res://assets/textures/particles/Square.png" id="5_qm8k0"]
+[ext_resource type="Texture2D" uid="uid://c4eickhp3v3uy" path="res://assets/textures/player/swing/SwingGlow.svg" id="6_6vub1"]
+[ext_resource type="Texture2D" uid="uid://blyx75lqpafjt" path="res://assets/textures/player/death_effect/DeathEffect1.png" id="6_7vph0"]
+[ext_resource type="Texture2D" uid="uid://d3amssdvmvmr7" path="res://assets/textures/player/death_effect/DeathEffect2.png" id="7_6qmxy"]
+[ext_resource type="Texture2D" uid="uid://crdnjnclglcuc" path="res://assets/textures/player/swing/SwingNoGlow.svg" id="7_qd53y"]
+[ext_resource type="Texture2D" uid="uid://b320v0xosyxbe" path="res://assets/textures/player/death_effect/DeathEffect3.png" id="8_mvuhw"]
+[ext_resource type="Texture2D" uid="uid://cir8movmh6iqs" path="res://assets/textures/player/death_effect/DeathEffect4.png" id="9_6ucl4"]
+[ext_resource type="Texture2D" uid="uid://cde8d3baybtg3" path="res://assets/textures/player/death_effect/DeathEffect5.png" id="10_ahecb"]
+[ext_resource type="Texture2D" uid="uid://c8v2272sja861" path="res://assets/textures/player/death_effect/DeathEffect6.png" id="11_hi4a5"]
+[ext_resource type="Texture2D" uid="uid://bpy13a0h4xapo" path="res://assets/textures/player/death_effect/DeathEffect7.png" id="12_3a4d0"]
+[ext_resource type="Texture2D" uid="uid://ueo08l1tglg1" path="res://assets/textures/player/death_effect/DeathEffect8.png" id="13_wjvdp"]
+[ext_resource type="Texture2D" uid="uid://cfeorbji3dtdx" path="res://assets/textures/player/death_effect/DeathEffect9.png" id="14_ytq4k"]
+[ext_resource type="Texture2D" uid="uid://br8sou620rxv4" path="res://assets/textures/player/death_effect/DeathEffect10.png" id="15_tt21x"]
+[ext_resource type="Texture2D" uid="uid://btd3nl8o3v0ij" path="res://assets/textures/player/death_effect/DeathEffect11.png" id="16_4ncex"]
+[ext_resource type="Texture2D" uid="uid://ci828dwxt326b" path="res://assets/textures/player/death_effect/DeathEffect12.png" id="17_ctfuu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8d76"]
 size = Vector2(128, 128)
@@ -12,15 +31,146 @@ size = Vector2(48, 48)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t218l"]
 size = Vector2(128, 128)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_x7s6i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7vph0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_6qmxy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mvuhw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_6ucl4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ahecb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_hi4a5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_3a4d0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_wjvdp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ytq4k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_tt21x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_4ncex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ctfuu")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="Curve" id="Curve_66fbk"]
+_data = [Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6aglk"]
+curve = SubResource("Curve_66fbk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uynvo"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_6aglk")
+
+[sub_resource type="Animation" id="Animation_yov85"]
+resource_name = "DeathAnimation"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_player_death"
+}, {
+"args": [],
+"method": &"_on_death_restart"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sr0vc"]
+_data = {
+"DeathAnimation": SubResource("Animation_yov85")
+}
+
 [node name="Player" type="CharacterBody2D"]
+process_mode = 1
 collision_mask = 34
 floor_constant_speed = true
 floor_max_angle = 1.55334
 floor_snap_length = 32.0
 script = ExtResource("1_nvqsc")
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="Icon" type="Node2D" parent="."]
+
+[node name="Cube" type="Node2D" parent="Icon"]
+visible = false
+script = ExtResource("2_sxyn3")
+
+[node name="CubeIcon" type="Sprite2D" parent="Icon/Cube"]
 texture = ExtResource("2_6ab5b")
+
+[node name="Ship" type="Node2D" parent="Icon"]
+visible = false
+script = ExtResource("2_sxyn3")
+gamemode = 1
+
+[node name="ShipIcon" type="Sprite2D" parent="Icon/Ship"]
+texture = ExtResource("4_mqpwg")
+
+[node name="Swing" type="Node2D" parent="Icon"]
+script = ExtResource("2_sxyn3")
+gamemode = 7
+
+[node name="Swing-glow" type="Sprite2D" parent="Icon/Swing"]
+texture = ExtResource("6_6vub1")
+
+[node name="FireBoostTop" type="Sprite2D" parent="Icon/Swing"]
+position = Vector2(-24, -33)
+rotation = 2.35619
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("5_34x12")
+
+[node name="FireBoostMiddle" type="Sprite2D" parent="Icon/Swing"]
+position = Vector2(-82, 0)
+rotation = 1.57079
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("5_34x12")
+
+[node name="FireBoostBottom" type="Sprite2D" parent="Icon/Swing"]
+position = Vector2(-54, 63)
+rotation = 0.785397
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("5_34x12")
+
+[node name="Swing-NoGlow" type="Sprite2D" parent="Icon/Swing"]
+texture = ExtResource("7_qd53y")
 
 [node name="GroundCollider" type="CollisionShape2D" parent="."]
 editor_description = "Detects collisions with the local gravity's ground."
@@ -52,3 +202,30 @@ collision_mask = 24
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_t218l")
 debug_color = Color(0, 0.701961, 0.0941176, 0.419608)
+
+[node name="DeathEffect" type="AnimatedSprite2D" parent="."]
+z_index = 100
+material = ExtResource("5_dvha5")
+sprite_frames = SubResource("SpriteFrames_x7s6i")
+frame = 12
+frame_progress = 1.0
+
+[node name="DeathParticles" type="GPUParticles2D" parent="."]
+modulate = Color(0, 1, 1, 1)
+material = ExtResource("5_dvha5")
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_uynvo")
+texture = ExtResource("5_qm8k0")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+
+[node name="DeathAnimator" type="AnimationPlayer" parent="."]
+process_mode = 1
+libraries = {
+"": SubResource("AnimationLibrary_sr0vc")
+}
+
+[connection signal="body_entered" from="KillColliderSolid" to="." method="_on_kill_collider_solid_body_entered"]
+[connection signal="body_entered" from="KillColliderHazard" to="." method="_on_kill_collider_hazard_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=17 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
@@ -9,9 +9,17 @@
 [ext_resource type="Texture2D" uid="uid://byomqjoflsnnw" path="res://assets/textures/portals/ship_portal/ShipPortalFront.png" id="6_i23lf"]
 [ext_resource type="Texture2D" uid="uid://c4mobi87veuqk" path="res://assets/textures/portals/ship_portal/ShipPortalIndicatorBG.png" id="7_vb50f"]
 [ext_resource type="Texture2D" uid="uid://6rnw7yavnvg7" path="res://assets/textures/portals/ship_portal/ShipPortalIndicatorIcon.png" id="8_uvv28"]
+[ext_resource type="Texture2D" uid="uid://b5x6gqlo78mnx" path="res://assets/textures/portals/swing_portal/SwingPortalBack.png" id="10_uqqoa"]
+[ext_resource type="Texture2D" uid="uid://bp6ukusnk6ufx" path="res://assets/textures/portals/swing_portal/SwingPortalFront.png" id="11_d7wlk"]
+[ext_resource type="Texture2D" uid="uid://hjsvkyfi6wqo" path="res://assets/textures/portals/swing_portal/SwingPortalIndicatorBG.png" id="12_luljl"]
+[ext_resource type="Texture2D" uid="uid://bcwax4487q6kc" path="res://assets/textures/portals/swing_portal/SwingPortalIndicatorIcon.png" id="13_h40hg"]
+[ext_resource type="Texture2D" uid="uid://djlnfy6mugjwc" path="res://assets/textures/hazards/RegularSpike01.svg" id="14_bba04"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
 size = Vector2(128, 384)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hu62t"]
+size = Vector2(20, 31)
 
 [node name="Dash V2" type="Node2D"]
 script = ExtResource("1_7ju0m")
@@ -39,7 +47,7 @@ position = Vector2(2624, -64)
 position = Vector2(2624, -192)
 
 [node name="ShipPortal" type="Area2D" parent="."]
-position = Vector2(3008, -448)
+position = Vector2(4032, -768)
 collision_layer = 8
 script = ExtResource("5_ghgp5")
 object_type = 2
@@ -56,13 +64,61 @@ scale = Vector2(1.1, 1.1)
 texture = ExtResource("5_0b2jm")
 
 [node name="ShipPortalFront" type="Sprite2D" parent="ShipPortal"]
+z_index = 1
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("6_i23lf")
 
 [node name="ShipPortalIndicatorBg" type="Sprite2D" parent="ShipPortal"]
+z_index = 1
 position = Vector2(48, 0)
 texture = ExtResource("7_vb50f")
 
-[node name="ShipPortalIndicatorIcon" type="Sprite2D" parent="ShipPortal"]
+[node name="IndicatorIcon" type="Sprite2D" parent="ShipPortal"]
+z_index = 1
 position = Vector2(44, 0)
 texture = ExtResource("8_uvv28")
+
+[node name="SwingPortal" type="Area2D" parent="."]
+position = Vector2(3008, -384)
+collision_layer = 8
+script = ExtResource("5_ghgp5")
+object_type = 2
+_gamemode_portal_type = 7
+metadata/_edit_group_ = true
+
+[node name="Hitbox" type="CollisionShape2D" parent="SwingPortal"]
+shape = SubResource("RectangleShape2D_cghk8")
+debug_color = Color(0, 0.701961, 0.0823529, 0.419608)
+
+[node name="ShipPortalBack" type="Sprite2D" parent="SwingPortal"]
+z_index = -1
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("10_uqqoa")
+
+[node name="ShipPortalFront" type="Sprite2D" parent="SwingPortal"]
+z_index = 1
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("11_d7wlk")
+
+[node name="ShipPortalIndicatorBg" type="Sprite2D" parent="SwingPortal"]
+z_index = 1
+position = Vector2(48, 0)
+texture = ExtResource("12_luljl")
+
+[node name="IndicatorIcon" type="Sprite2D" parent="SwingPortal"]
+z_index = 1
+position = Vector2(44, 0)
+texture = ExtResource("13_h40hg")
+
+[node name="Spike" type="StaticBody2D" parent="."]
+position = Vector2(1984, -64)
+collision_layer = 4
+metadata/_edit_group_ = true
+
+[node name="RegularSpike01" type="Sprite2D" parent="Spike"]
+texture = ExtResource("14_bba04")
+
+[node name="Hitbox" type="CollisionShape2D" parent="Spike"]
+position = Vector2(0, 27.5)
+shape = SubResource("RectangleShape2D_hu62t")
+debug_color = Color(0.960784, 0, 0, 0.419608)

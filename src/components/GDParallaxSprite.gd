@@ -19,19 +19,23 @@ func _ready() -> void:
 		)
 	$NotifierLeft.rect = Rect2(
 		region_rect.position.x - region_rect.size.x/2,
-		region_rect.position.y - region_rect.size.y/2,
+		region_rect.position.y - (region_rect.size.y/2),
 		NOTIFIER_WIDTH,
 		region_rect.size.y,
 		)
 	$NotifierRight.rect = Rect2(
 		region_rect.position.x + region_rect.size.x/2 + NOTIFIER_WIDTH,
-		region_rect.position.y - region_rect.size.y/2,
+		region_rect.position.y - (region_rect.size.y/2),
 		NOTIFIER_WIDTH,
 		region_rect.size.y,
 		)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	$NotifierLeft.rect.position.y = to_local(get_viewport().get_camera_2d().get_screen_center_position()).y
+	$NotifierRight.rect.position.y = to_local(get_viewport().get_camera_2d().get_screen_center_position()).y
 	if _camera != null:
+		if name == "Ground":
+			print_debug($NotifierRight.is_on_screen(), ", ", $NotifierRight.rect.position.y, ", ", name)
 		position.x += _camera._delta_position.x * _parallax_factor.x + _autoscroll_speed.x * delta
 		position.y += _camera._delta_position.y * _parallax_factor.y + _autoscroll_speed.y * delta
 		position.x += texture.get_width() * scale.x * (int($NotifierRight.is_on_screen()) - int($NotifierLeft.is_on_screen()))

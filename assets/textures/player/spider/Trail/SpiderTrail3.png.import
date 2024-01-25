@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b54ubk48x1iu1"
-path="res://.godot/imported/Ship.svg-fa553c9a5f9654193da0f4d7d3886fd8.ctex"
+uid="uid://dflys74mxfg0p"
+path="res://.godot/imported/SpiderTrail3.png-cf763add8b0119936e3474ff7ea79f3f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/player_icons/ship/Ship.svg"
-dest_files=["res://.godot/imported/Ship.svg-fa553c9a5f9654193da0f4d7d3886fd8.ctex"]
+source_file="res://assets/textures/player/spider/Trail/SpiderTrail3.png"
+dest_files=["res://.godot/imported/SpiderTrail3.png-cf763add8b0119936e3474ff7ea79f3f.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=0.25
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

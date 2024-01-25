@@ -11,8 +11,11 @@ texture = ExtResource("1_am0nv")
 region_enabled = true
 region_rect = Rect2(0, 0, 10240, 2048)
 script = ExtResource("2_up5od")
-metadata/_edit_group_ = true
 
 [node name="NotifierLeft" type="VisibleOnScreenNotifier2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+z_index = 2
 
 [node name="NotifierRight" type="VisibleOnScreenNotifier2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+z_index = 2

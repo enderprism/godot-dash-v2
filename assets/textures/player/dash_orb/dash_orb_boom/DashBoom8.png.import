@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://omcvgcf1uk5p"
-path="res://.godot/imported/Cube.svg-3a245fbf4526fb88313ede7a8a8231ab.ctex"
+uid="uid://dx0vu56ian3tw"
+path="res://.godot/imported/DashBoom8.png-7346b4228a45b55cdd9296956dd4b95e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/player_icons/cube/Cube.svg"
-dest_files=["res://.godot/imported/Cube.svg-3a245fbf4526fb88313ede7a8a8231ab.ctex"]
+source_file="res://assets/textures/player/dash_orb/dash_orb_boom/DashBoom8.png"
+dest_files=["res://.godot/imported/DashBoom8.png-7346b4228a45b55cdd9296956dd4b95e.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=0.25
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
