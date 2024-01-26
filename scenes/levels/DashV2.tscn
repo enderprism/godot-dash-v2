@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=19 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://hjsvkyfi6wqo" path="res://assets/textures/portals/swing_portal/SwingPortalIndicatorBG.png" id="12_luljl"]
 [ext_resource type="Texture2D" uid="uid://bcwax4487q6kc" path="res://assets/textures/portals/swing_portal/SwingPortalIndicatorIcon.png" id="13_h40hg"]
 [ext_resource type="Texture2D" uid="uid://djlnfy6mugjwc" path="res://assets/textures/hazards/RegularSpike01.svg" id="14_bba04"]
+[ext_resource type="Texture2D" uid="uid://dgxusv262ihsp" path="res://assets/textures/portals/size_portal_normal/SizePortalNormalBack.png" id="14_uksi4"]
+[ext_resource type="Texture2D" uid="uid://cgh6cf5sa4uce" path="res://assets/textures/portals/size_portal_normal/SizePortalNormalFront.png" id="15_xdkqa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
 size = Vector2(128, 384)
@@ -79,7 +81,7 @@ position = Vector2(44, 0)
 texture = ExtResource("8_uvv28")
 
 [node name="SwingPortal" type="Area2D" parent="."]
-position = Vector2(3008, -384)
+position = Vector2(3008, -576)
 collision_layer = 8
 script = ExtResource("5_ghgp5")
 object_type = 2
@@ -109,6 +111,31 @@ texture = ExtResource("12_luljl")
 z_index = 1
 position = Vector2(44, 0)
 texture = ExtResource("13_h40hg")
+
+[node name="MiniPortal" type="Area2D" parent="."]
+position = Vector2(5312, -448)
+scale = Vector2(2, 2)
+collision_layer = 8
+script = ExtResource("5_ghgp5")
+object_type = 4
+_gamemode_portal_type = 7
+_other_portal_type = 1
+_mini = true
+metadata/_edit_group_ = true
+
+[node name="Hitbox" type="CollisionShape2D" parent="MiniPortal"]
+shape = SubResource("RectangleShape2D_cghk8")
+debug_color = Color(0, 0.701961, 0.0823529, 0.419608)
+
+[node name="SizePortalSmallBack" type="Sprite2D" parent="MiniPortal"]
+z_index = -1
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("14_uksi4")
+
+[node name="SizePortalSmallFront" type="Sprite2D" parent="MiniPortal"]
+z_index = 1
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("15_xdkqa")
 
 [node name="Spike" type="StaticBody2D" parent="."]
 position = Vector2(1984, -64)

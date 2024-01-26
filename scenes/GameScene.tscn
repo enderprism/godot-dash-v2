@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://db7ebleody4s3"]
+[gd_scene load_steps=13 format=3 uid="uid://db7ebleody4s3"]
 
-[ext_resource type="PackedScene" uid="uid://5olmpni5o7wv" path="res://scenes/components/game_components/GDParallaxSprite.tscn" id="1_3pwrm"]
 [ext_resource type="Script" path="res://src/GameScene.gd" id="1_k47tp"]
+[ext_resource type="Texture2D" uid="uid://djstmwdco77pp" path="res://assets/textures/backgrounds/background1-3.png" id="2_i4f6q"]
 [ext_resource type="Texture2D" uid="uid://dewrklmfoeg7m" path="res://assets/textures/grounds/ground-1.png" id="2_ylgfk"]
 [ext_resource type="PackedScene" uid="uid://bl48psvuka73y" path="res://scenes/components/game_components/Player.tscn" id="3_22pbm"]
 [ext_resource type="Texture2D" uid="uid://dga7nm2rjr2b0" path="res://assets/textures/ground_overlays/floorLine_001.png" id="3_l4t8r"]
+[ext_resource type="Script" path="res://src/components/GDParallaxSprite.gd" id="3_my51g"]
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/GDFadeScreen.tscn" id="6_7ju4w"]
 [ext_resource type="Script" path="res://src/components/GDPositionFollow2D.gd" id="6_kvomc"]
 [ext_resource type="Script" path="res://src/PlayerCamera.gd" id="7_vnv5l"]
@@ -20,19 +21,31 @@ blend_mode = 1
 script = ExtResource("1_k47tp")
 metadata/_edit_lock_ = true
 
-[node name="Background" parent="." node_paths=PackedStringArray("_camera") instance=ExtResource("1_3pwrm")]
+[node name="Background" type="Sprite2D" parent="." node_paths=PackedStringArray("_camera")]
+modulate = Color(0.27451, 0.627451, 1, 1)
 z_index = -100
+texture_repeat = 2
 position = Vector2(622, -1121)
 scale = Vector2(2, 2)
+texture = ExtResource("2_i4f6q")
+region_enabled = true
+region_rect = Rect2(0, 0, 10240, 2048)
+script = ExtResource("3_my51g")
 _parallax_factor = Vector2(0.5, 0.5)
 _camera = NodePath("../PlayerCamera")
 
-[node name="Background2" parent="." node_paths=PackedStringArray("_camera") instance=ExtResource("1_3pwrm")]
+[node name="Background2" type="Sprite2D" parent="." node_paths=PackedStringArray("_camera")]
+modulate = Color(0.27451, 0.627451, 1, 1)
 z_index = -100
+texture_repeat = 2
 position = Vector2(622, 2972)
 rotation = -6.28318
 scale = Vector2(2, 2)
+texture = ExtResource("2_i4f6q")
 flip_v = true
+region_enabled = true
+region_rect = Rect2(0, 0, 10240, 2048)
+script = ExtResource("3_my51g")
 _parallax_factor = Vector2(0.5, 0.5)
 _camera = NodePath("../PlayerCamera")
 
@@ -42,12 +55,15 @@ position = Vector2(0, 925)
 [node name="Player" parent="." instance=ExtResource("3_22pbm")]
 position = Vector2(622, 862)
 
-[node name="Ground" parent="." node_paths=PackedStringArray("_camera") instance=ExtResource("1_3pwrm")]
+[node name="Ground" type="Sprite2D" parent="." node_paths=PackedStringArray("_camera")]
 modulate = Color(0.290196, 0.266667, 1, 1)
+texture_repeat = 2
 position = Vector2(940, 1225)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_ylgfk")
+region_enabled = true
 region_rect = Rect2(0, 0, 9600, 240)
+script = ExtResource("3_my51g")
 _camera = NodePath("../PlayerCamera")
 
 [node name="GroundCollider" type="StaticBody2D" parent="." node_paths=PackedStringArray("target")]

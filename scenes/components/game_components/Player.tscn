@@ -137,7 +137,6 @@ script = ExtResource("2_sxyn3")
 texture = ExtResource("2_6ab5b")
 
 [node name="Ship" type="Node2D" parent="Icon"]
-visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 1
 
@@ -145,6 +144,7 @@ gamemode = 1
 texture = ExtResource("4_mqpwg")
 
 [node name="Swing" type="Node2D" parent="Icon"]
+visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 7
 
