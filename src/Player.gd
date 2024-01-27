@@ -43,6 +43,7 @@ var _is_in_h_block: bool
 var _speed_multiplier: float = 1.0
 var _gravity_multiplier: float = 1.0
 var _fly_gravity_multiplier: float = 0.5
+var _ufo_gravity_multiplier: float = 0.9
 var _dual_instance: bool
 var _gameplay_rotation_degrees: float = 0.0
 var _gameplay_rotation: float
@@ -95,17 +96,19 @@ func _compute_velocity(_delta: float,
 	if gamemode == Gamemode.SWING and _jump_state == 1.0:
 		_gravity_multiplier *= -1
 
-	if not is_on_floor() and not (gamemode == Gamemode.SHIP or gamemode == Gamemode.SWING or gamemode == Gamemode.WAVE):
-		_velocity.y += GRAVITY * _delta * _gravity_multiplier
-	
 	if gamemode == Gamemode.SHIP:
 		_velocity.y += GRAVITY * _delta * _gravity_multiplier * _jump_state * -1 * _fly_gravity_multiplier
 		_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
 	elif gamemode == Gamemode.SWING:
 		_velocity.y += GRAVITY * _delta * _gravity_multiplier * _fly_gravity_multiplier
 		_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
+	elif not is_on_floor():
+		if gamemode == Gamemode.UFO:
+			_velocity.y += GRAVITY * _delta * _gravity_multiplier * _ufo_gravity_multiplier
+		elif gamemode == Gamemode.CUBE:
+			_velocity.y += GRAVITY * _delta * _gravity_multiplier
 
-	if is_on_floor() and _jump_state == 0:
+	if is_on_floor() and _jump_state == -1:
 		_velocity.y = 0.0
 
 	# Handle jump.
@@ -129,28 +132,24 @@ func _compute_velocity(_delta: float,
 		return Vector2.ZERO
 
 func _rotate_sprite_degrees(delta: float, previous_rotation_degrees: float) -> float:
-	if gamemode == Gamemode.CUBE or gamemode == Gamemode.SHIP or gamemode == Gamemode.ROBOT or gamemode == Gamemode.UFO:
-		$Icon.scale.y = _gravity_multiplier
+	$Icon.scale.y = _gravity_multiplier
+	if gamemode == Gamemode.CUBE:
+		if not is_on_floor():
+			return previous_rotation_degrees + delta * _gravity_multiplier * 400
+		else:
+			return lerpf(previous_rotation_degrees, snapped(previous_rotation_degrees, 90), 0.5)
+	elif gamemode == Gamemode.SHIP or gamemode == Gamemode.SWING:
+			if not is_on_floor():
+				return velocity.rotated(-_gameplay_rotation).y * delta
+			else:
+				return lerpf(previous_rotation_degrees, 0.0, 0.5)
+	elif gamemode == Gamemode.UFO:
+		if not is_on_floor():
+			return velocity.rotated(-_gameplay_rotation).y * delta * 0.2
+		else:
+			return lerpf(previous_rotation_degrees, 0.0, 0.5)
 	else:
-		$Icon.scale.y = 1.0
-	match gamemode:
-		Gamemode.CUBE:
-			if not is_on_floor():
-				return previous_rotation_degrees + delta * _gravity_multiplier * 400
-			else:
-				return lerpf(previous_rotation_degrees, snapped(previous_rotation_degrees, 90), 0.5)
-		Gamemode.SHIP:
-			if not is_on_floor():
-				return velocity.rotated(-_gameplay_rotation).y * delta
-			else:
-				return lerpf(previous_rotation_degrees, 0.0, 0.5)
-		Gamemode.SWING:
-			if not is_on_floor():
-				return velocity.rotated(-_gameplay_rotation).y * delta
-			else:
-				return lerpf(previous_rotation_degrees, 0.0, 0.5)
-		_:
-			return previous_rotation_degrees
+		return previous_rotation_degrees
 
 func _update_swing_fire() -> void:
 	if _gravity_multiplier < 0.0:

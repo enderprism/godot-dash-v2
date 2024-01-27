@@ -136,6 +136,14 @@ script = ExtResource("2_sxyn3")
 [node name="CubeIcon" type="Sprite2D" parent="Icon/Cube"]
 texture = ExtResource("2_6ab5b")
 
+[node name="UFO" type="Node2D" parent="Icon"]
+visible = false
+script = ExtResource("2_sxyn3")
+gamemode = 2
+
+[node name="CubeIcon" type="Sprite2D" parent="Icon/UFO"]
+texture = ExtResource("2_6ab5b")
+
 [node name="Ship" type="Node2D" parent="Icon"]
 script = ExtResource("2_sxyn3")
 gamemode = 1

@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l5xdm"]
 size = Vector2(128, 128)
 
-[node name="Solid" type="StaticBody2D"]
+[node name="DefaultCube" type="StaticBody2D"]
 collision_layer = 2
 script = ExtResource("1_8i826")
 metadata/_edit_group_ = true

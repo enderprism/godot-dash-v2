@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dspnvt3u8uhqy"]
+
+[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_p86pj"]
+[ext_resource type="Texture2D" uid="uid://b5x6gqlo78mnx" path="res://assets/textures/portals/swing_portal/SwingPortalBack.png" id="2_yfowc"]
+[ext_resource type="Texture2D" uid="uid://bp6ukusnk6ufx" path="res://assets/textures/portals/swing_portal/SwingPortalFront.png" id="3_1igv7"]
+[ext_resource type="Texture2D" uid="uid://hjsvkyfi6wqo" path="res://assets/textures/portals/swing_portal/SwingPortalIndicatorBG.png" id="4_ohnxr"]
+[ext_resource type="Texture2D" uid="uid://bcwax4487q6kc" path="res://assets/textures/portals/swing_portal/SwingPortalIndicatorIcon.png" id="5_dmdv1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
+size = Vector2(128, 384)
+
+[node name="SwingPortal" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_p86pj")
+object_type = 2
+_gamemode_portal_type = 7
+metadata/_edit_group_ = true
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cghk8")
+debug_color = Color(0, 0.701961, 0.0823529, 0.419608)
+
+[node name="SwingPortalBack" type="Sprite2D" parent="."]
+z_index = -1
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("2_yfowc")
+
+[node name="SwingPortalFront" type="Sprite2D" parent="."]
+z_index = 1
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("3_1igv7")
+
+[node name="SwingPortalIndicatorBg" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(48, 0)
+texture = ExtResource("4_ohnxr")
+
+[node name="IndicatorIcon" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(44, 0)
+texture = ExtResource("5_dmdv1")

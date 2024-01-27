@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://vpt16j3wambx"]
+
+[ext_resource type="Script" path="res://addons/tabby_explorer/editor/sub_fs_dock/sub_fs_dock.gd" id="1_132to"]
+[ext_resource type="PackedScene" uid="uid://dnrd5u6usdt5j" path="res://addons/tabby_explorer/editor/sub_fs_dock/sub_fs_dock_main.tscn" id="2_hwacf"]
+
+[node name="Sub FileSystem" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_132to")
+
+[node name="main" parent="." instance=ExtResource("2_hwacf")]
+layout_mode = 2
+
+[node name="config_cont" type="MarginContainer" parent="."]
+layout_mode = 2

@@ -16,6 +16,30 @@ instance_dock/scenes=[{
 "scene": "res://scenes/components/level_components/solids/DefaultCube.tscn"
 }],
 "scroll": 0
+}, {
+"name": "Hazards",
+"scenes": [{
+"scene": "res://scenes/components/level_components/hazards/Spike.tscn"
+}],
+"scroll": 0
+}, {
+"name": "Gamemode Portals",
+"scenes": [{
+"scene": "res://scenes/components/level_components/portals/gamemode_portals/ShipPortal.tscn"
+}, {
+"scene": "res://scenes/components/level_components/portals/gamemode_portals/SwingPortal.tscn"
+}, {
+"scene": "res://scenes/components/level_components/portals/gamemode_portals/UFOPortal.tscn"
+}],
+"scroll": 0
+}, {
+"name": "Speed Portals",
+"scenes": [],
+"scroll": 0
+}, {
+"name": "Other Portals",
+"scenes": [],
+"scroll": 0
 }]
 instance_dock/preview_resolution=Vector2i(64, 64)
 
@@ -48,7 +72,7 @@ window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/InstanceDock/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/inspector_extender/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/tabby_explorer/plugin.cfg")
 
 [input]
 

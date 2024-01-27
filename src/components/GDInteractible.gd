@@ -59,65 +59,33 @@ enum GravityPortal {
 #endregion
 
 #region exports
-@export var object_type: ObjectType:
-	set(value):
-		object_type = value
-		notify_property_list_changed()
+@export var object_type: ObjectType
 
-@export var _orb_type: Orb:
-	set(value):
-		_orb_type = value
-		notify_property_list_changed()
+# @@show_if(object_type == ObjectType.ORB)
+@export var _orb_type: Orb
 
-@export var _pad_type: Pad:
-	set(value):
-		_pad_type = value
-		notify_property_list_changed()
+# @@show_if(object_type == ObjectType.PAD)
+@export var _pad_type: Pad
 
-@export var _gamemode_portal_type: Player.Gamemode:
-	set(value):
-		_gamemode_portal_type = value
-		notify_property_list_changed()
+# @@show_if(object_type == ObjectType.GAMEMODE_PORTAL)
+@export var _gamemode_portal_type: Player.Gamemode
 
-@export var _speed_portal_type: SpeedPortal:
-	set(value):
-		_speed_portal_type = value
-		notify_property_list_changed()
+# @@show_if(object_type == ObjectType.SPEED_PORTAL)
+@export var _speed_portal_type: SpeedPortal
 
-@export var _other_portal_type: OtherPortal:
-	set(value):
-		_other_portal_type = value
-		notify_property_list_changed()
+# @@show_if(object_type == ObjectType.OTHER_PORTAL)
+@export var _other_portal_type: OtherPortal
 
+# @@show_if(object_type == ObjectType.OTHER_PORTAL and _other_portal_type == GRAVITY_PORTAL)
 @export var _gravity_portal_type: GravityPortal
-# Size portal
+# @@show_if(object_type == ObjectType.OTHER_PORTAL and _other_portal_type == SIZE_PORTAL)
 @export var _mini: bool
 
+# @@show_if(object_type == ObjectType.ORB or object_type == ObjectType.PAD)
 @export var _reverse: bool
+# @@show_if(object_type == ObjectType.GAMEMODE_PORTAL)
 @export var _freefly: bool = true
 
-
-func _validate_property(property: Dictionary) -> void:
-	if property.name in ["_orb_type"] and object_type != ObjectType.ORB:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
-	elif property.name in ["_pad_type"] and object_type != ObjectType.PAD:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
-	elif property.name in ["_gamemode_portal_type"] and object_type != ObjectType.GAMEMODE_PORTAL:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
-	elif property.name in ["_speed_portal_type"] and object_type != ObjectType.SPEED_PORTAL:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
-	elif property.name in ["_other_portal_type"] and object_type != ObjectType.OTHER_PORTAL:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
-	elif property.name in ["_reverse"] and object_type != ObjectType.ORB and object_type != ObjectType.PAD:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
-	elif property.name in ["_freefly"] and object_type != ObjectType.GAMEMODE_PORTAL:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
-	elif property.name in ["_gravity_portal_type", "_mini"] and object_type != ObjectType.OTHER_PORTAL:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
-	elif property.name in ["_gravity_portal_type"] and _other_portal_type != OtherPortal.GRAVITY_PORTAL:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
-	elif property.name in ["_mini"] and _other_portal_type != OtherPortal.SIZE_PORTAL:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
 #endregion
 
 var _player: Player
