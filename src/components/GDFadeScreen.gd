@@ -13,7 +13,7 @@ func _ready() -> void:
 	color = Color("000000ff")
 	hide()
 
-func fade_in(fade_duration: float, ease_type: Tween.EaseType, trans_type: Tween.TransitionType) -> void:
+func fade_in(fade_duration: float, ease_type: Tween.EaseType = Tween.EASE_IN_OUT, trans_type: Tween.TransitionType = Tween.TRANS_SINE) -> void:
 	is_fading = true
 	show()
 	var fade_tween = get_tree().create_tween()

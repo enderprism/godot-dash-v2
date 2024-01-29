@@ -74,17 +74,28 @@ enum GravityPortal {
 @export var _speed_portal_type: SpeedPortal
 
 # @@show_if(object_type == ObjectType.OTHER_PORTAL)
-@export var _other_portal_type: OtherPortal
+@export var _other_portal_type: OtherPortal = OtherPortal.GRAVITY_PORTAL
 
-# @@show_if(object_type == ObjectType.OTHER_PORTAL and _other_portal_type == GRAVITY_PORTAL)
-@export var _gravity_portal_type: GravityPortal
-# @@show_if(object_type == ObjectType.OTHER_PORTAL and _other_portal_type == SIZE_PORTAL)
+# @@show_if(object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.GRAVITY_PORTAL)
+@export var _gravity_portal_type: GravityPortal = GravityPortal.NORMAL
+
+# @@show_if(object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.SIZE_PORTAL)
 @export var _mini: bool
 
 # @@show_if(object_type == ObjectType.ORB or object_type == ObjectType.PAD)
 @export var _reverse: bool
+
 # @@show_if(object_type == ObjectType.GAMEMODE_PORTAL)
 @export var _freefly: bool = true
+
+# @@show_if(object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.TELEPORTAL)
+@export var _teleport_target: Node2D
+
+# @@show_if(object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.TELEPORTAL)
+@export var _override_player_velocity: bool = false
+
+# @@show_if(object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.TELEPORTAL and _override_player_velocity)
+@export var _new_player_velocity: Vector2
 
 #endregion
 
@@ -96,7 +107,9 @@ func _ready() -> void:
 	connect("body_exited", Callable(self, "_on_player_exit"))
 
 func _process(_delta: float) -> void:
-	if object_type == ObjectType.GAMEMODE_PORTAL or (object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.GRAVITY_PORTAL):
+	if has_node("./IndicatorIcon") \
+		and object_type == ObjectType.GAMEMODE_PORTAL \
+		or (object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.GRAVITY_PORTAL):
 		if not Engine.is_editor_hint() and LevelManager.player_camera != null and _other_portal_type != OtherPortal.GRAVITY_PORTAL:
 			$IndicatorIcon.global_rotation = LevelManager.player_camera.rotation
 		else:
@@ -105,8 +118,12 @@ func _process(_delta: float) -> void:
 		$IndicatorIcon.global_scale.y = abs(scale.y)
 
 func _on_player_enter(_body: Node2D) -> void:
+	if (object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT) \
+		or (object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.TELEPORTAL):
+		_teleport_player(_teleport_target, _override_player_velocity, _new_player_velocity)
 	if object_type == ObjectType.ORB:
 		_player.orb_collisions |= _orb_type
+		_player._reverse = _reverse
 		if _orb_type == Orb.SPIDER:
 			_player._set_spider_shapecast_rotation(rotation)
 	elif object_type == ObjectType.PAD:
@@ -114,8 +131,17 @@ func _on_player_enter(_body: Node2D) -> void:
 	elif object_type == ObjectType.GAMEMODE_PORTAL:
 		LevelManager.player.gamemode = _gamemode_portal_type
 	elif object_type == ObjectType.OTHER_PORTAL:
-		if _other_portal_type == OtherPortal.SIZE_PORTAL:
-			_player._mini = _mini
+		match _other_portal_type:
+			OtherPortal.SIZE_PORTAL:
+				_player._mini = _mini
+			OtherPortal.GRAVITY_PORTAL:
+				match _gravity_portal_type:
+					GravityPortal.NORMAL:
+						_player._gravity_multiplier = abs(_player._gravity_multiplier)
+					GravityPortal.FLIPPED:
+						_player._gravity_multiplier = abs(_player._gravity_multiplier) * -1
+					GravityPortal.TOGGLE:
+						_player._gravity_multiplier *= -1
 
 
 func _on_player_exit(_body: Node2D) -> void:
@@ -125,3 +151,8 @@ func _on_player_exit(_body: Node2D) -> void:
 			_player._set_spider_shapecast_rotation(0.0)
 	elif object_type == ObjectType.PAD:
 		_player.pad_collisions &= ~_pad_type
+
+func _teleport_player(_target: Node2D, _override_velocity: bool, _new_velocity: Vector2) -> void:
+	_player.position = _target.position
+	if _override_velocity:
+		_player.velocity = _new_velocity.rotated(_player._gameplay_rotation)

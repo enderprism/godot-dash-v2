@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/GDFadeScreen.tscn" id="6_7ju4w"]
 [ext_resource type="Script" path="res://src/components/GDPositionFollow2D.gd" id="6_kvomc"]
 [ext_resource type="Script" path="res://src/PlayerCamera.gd" id="7_vnv5l"]
-[ext_resource type="Script" path="res://src/PauseMenu.gd" id="9_br61f"]
+[ext_resource type="PackedScene" uid="uid://th7jwdop3hdv" path="res://scenes/components/game_components/PauseMenu.tscn" id="9_vv033"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4i0t"]
 size = Vector2(194.4, 154.4)
@@ -89,7 +89,7 @@ target = NodePath("../PlayerCamera")
 copy_x = true
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
-process_priority = 1
+process_priority = 2
 position = Vector2(622, 561)
 offset = Vector2(300, 0)
 ignore_rotation = false
@@ -97,26 +97,8 @@ limit_bottom = 1080
 editor_draw_limits = true
 script = ExtResource("7_vnv5l")
 
-[node name="PauseMenuLayer" type="CanvasLayer" parent="."]
-
-[node name="PauseMenu" type="Control" parent="PauseMenuLayer"]
+[node name="PauseMenuLayer" parent="." instance=ExtResource("9_vv033")]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("9_br61f")
-
-[node name="ColorRect" type="ColorRect" parent="PauseMenuLayer/PauseMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.5)
 
 [node name="FadeScreenLayer" parent="." instance=ExtResource("6_7ju4w")]
 

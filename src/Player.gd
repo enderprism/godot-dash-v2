@@ -99,14 +99,18 @@ func _compute_velocity(_delta: float,
 	if gamemode == Gamemode.SHIP:
 		_velocity.y += GRAVITY * _delta * _gravity_multiplier * _jump_state * -1 * _fly_gravity_multiplier
 		_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
+		up_direction.y = _jump_state
 	elif gamemode == Gamemode.SWING:
 		_velocity.y += GRAVITY * _delta * _gravity_multiplier * _fly_gravity_multiplier
 		_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
+		up_direction.y = _gravity_multiplier * -1
 	elif not is_on_floor():
+		up_direction.y = _gravity_multiplier * -1
 		if gamemode == Gamemode.UFO:
 			_velocity.y += GRAVITY * _delta * _gravity_multiplier * _ufo_gravity_multiplier
 		elif gamemode == Gamemode.CUBE:
 			_velocity.y += GRAVITY * _delta * _gravity_multiplier
+		_velocity.y = clamp(_velocity.y, -TERMINAL_VELOCITY.y, TERMINAL_VELOCITY.y)
 
 	if is_on_floor() and _jump_state == -1:
 		_velocity.y = 0.0
@@ -132,7 +136,10 @@ func _compute_velocity(_delta: float,
 		return Vector2.ZERO
 
 func _rotate_sprite_degrees(delta: float, previous_rotation_degrees: float) -> float:
-	$Icon.scale.y = _gravity_multiplier
+	if gamemode != Gamemode.SWING:
+		$Icon.scale.y = _gravity_multiplier
+	else:
+		$Icon.scale.y = 1.0
 	if gamemode == Gamemode.CUBE:
 		if not is_on_floor():
 			return previous_rotation_degrees + delta * _gravity_multiplier * 400

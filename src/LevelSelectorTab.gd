@@ -17,6 +17,7 @@ func _on_button_pressed() -> void:
 		var fade_screen = get_node("/root/MainScene/FadeScreenLayer/FadeScreen")
 		fade_screen.fade_in(0.5, Tween.EASE_IN_OUT, Tween.TRANS_EXPO)
 		await get_tree().create_timer(0.5).timeout
+		LevelManager.current_level_name = name
 		LevelManager.is_first_attempt = true
 		LevelManager.current_level = selected_level
 		get_tree().change_scene_to_file("res://scenes/GameScene.tscn")

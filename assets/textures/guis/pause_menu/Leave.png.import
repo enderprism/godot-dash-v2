@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pf8fudglemps"
-path="res://.godot/imported/RestartLevel.png-f981b206f236fc311a7ef81da5ce1374.ctex"
+uid="uid://d0bf2sf5rea0v"
+path="res://.godot/imported/Leave.png-2be15642ca6fb5c04e5083d0c42054d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/guis/pause_menu/RestartLevel.png"
-dest_files=["res://.godot/imported/RestartLevel.png-f981b206f236fc311a7ef81da5ce1374.ctex"]
+source_file="res://assets/textures/guis/pause_menu/Leave.png"
+dest_files=["res://.godot/imported/Leave.png-2be15642ca6fb5c04e5083d0c42054d8.ctex"]
 
 [params]
 

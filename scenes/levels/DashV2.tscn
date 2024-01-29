@@ -39,7 +39,8 @@ position = Vector2(2624, -192)
 position = Vector2(3776, -768)
 
 [node name="SwingPortal" parent="." instance=ExtResource("6_kf1ai")]
-position = Vector2(3008, -448)
+position = Vector2(3136, -448)
+rotation = 1.57079
 
 [node name="UFOPortal" parent="." instance=ExtResource("7_cxfn3")]
 position = Vector2(832, -256)
@@ -47,6 +48,7 @@ rotation = -1.57079
 
 [node name="SizePortalSmall" parent="." instance=ExtResource("8_i7fjd")]
 position = Vector2(4608, -256)
+_gravity_portal_type = 1
 
 [node name="Spike" parent="." instance=ExtResource("16_l5jmn")]
 position = Vector2(1984, -64)

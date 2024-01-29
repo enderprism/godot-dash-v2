@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://kwe5xtryavgg"]
+[gd_scene load_steps=10 format=3 uid="uid://kwe5xtryavgg"]
 
 [ext_resource type="Script" path="res://src/LevelSelectorTab.gd" id="1_byc33"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="1_m8x5r"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_25fwn"]
 [ext_resource type="FontFile" uid="uid://8e1lxpyo40t5" path="res://assets/fonts/PUSAB.otf" id="4_3yq55"]
 [ext_resource type="Script" path="res://src/components/GDBouncyButton.gd" id="5_pa43o"]
+[ext_resource type="Theme" uid="uid://ctubgkgi0wilt" path="res://resources/PusabLabels.tres" id="6_l3bfk"]
 
 [sub_resource type="Resource" id="Resource_38ea1"]
 script = ExtResource("2_25fwn")
@@ -92,10 +93,7 @@ offset_right = 37.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 16
-theme_override_fonts/font = ExtResource("4_3yq55")
-theme_override_font_sizes/font_size = 75
+theme = ExtResource("6_l3bfk")
 text = "LevelTitle"
 horizontal_alignment = 1
 vertical_alignment = 1

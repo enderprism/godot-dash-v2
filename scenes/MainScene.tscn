@@ -327,7 +327,7 @@ self_modulate = Color(1, 0.784314, 0, 1)
 layout_mode = 2
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(961, -540)
+position = Vector2(960, 540)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera"]
 script = ExtResource("6_0wc6k")
