@@ -82,14 +82,20 @@ func _get_direction() -> int:
 
 func _get_jump_state() -> int:
 	var jump_state: int
-	if gamemode == Gamemode.CUBE or gamemode == Gamemode.ROBOT:
-		jump_state = 1 if Input.is_action_pressed("jump") && is_on_floor() else -1
+	if gamemode == Gamemode.CUBE:
+		jump_state = 1 if Input.is_action_pressed("jump") and is_on_floor() else -1
+	elif gamemode == Gamemode.ROBOT:
+		if Input.is_action_just_pressed("jump") and is_on_floor():
+			$RobotTimer.start(0.25)
+		if Input.is_action_just_released("jump"):
+			$RobotTimer.stop()
+		jump_state = 1 if Input.is_action_pressed("jump") and $RobotTimer.get_time_left() > 0 else -1
 	elif gamemode == Gamemode.SHIP or gamemode == Gamemode.WAVE:
 		jump_state = 1 if Input.is_action_pressed("jump") else -1
 	elif gamemode == Gamemode.UFO or gamemode == Gamemode.SWING:
 		jump_state = 1 if Input.is_action_just_pressed("jump") else -1
 	elif gamemode == Gamemode.BALL or gamemode == Gamemode.SPIDER:
-		jump_state = 1 if Input.is_action_just_pressed("jump") && (is_on_floor() or is_on_ceiling()) else -1
+		jump_state = 1 if Input.is_action_just_pressed("jump") and (is_on_floor() or is_on_ceiling()) else -1
 	return jump_state
 
 func _compute_velocity(_delta: float,
@@ -102,7 +108,6 @@ func _compute_velocity(_delta: float,
 
 	if (gamemode == Gamemode.SWING or gamemode == Gamemode.BALL) and _jump_state == 1:
 		_gravity_multiplier *= -1
-
 
 #section Apply Gravity
 	if gamemode == Gamemode.SHIP:
@@ -138,6 +143,8 @@ func _compute_velocity(_delta: float,
 		elif gamemode == Gamemode.BALL:
 			_velocity.y = _speed.y * _gravity_multiplier * 0.5
 			up_direction.y *= -1
+		elif gamemode == Gamemode.ROBOT:
+			_velocity.y = SPEED.x * _gravity_multiplier * -1
 		else:
 			_velocity.y = -_speed.y
 	if _direction:

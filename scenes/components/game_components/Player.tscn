@@ -287,5 +287,9 @@ libraries = {
 "": SubResource("AnimationLibrary_sr0vc")
 }
 
+[node name="RobotTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="body_entered" from="KillColliderSolid" to="." method="_on_kill_collider_solid_body_entered"]
 [connection signal="body_entered" from="KillColliderHazard" to="." method="_on_kill_collider_hazard_body_entered"]
