@@ -130,6 +130,7 @@ func _on_player_enter(_body: Node2D) -> void:
 		_player.pad_collisions |= _pad_type
 	elif object_type == ObjectType.GAMEMODE_PORTAL:
 		LevelManager.player.gamemode = _gamemode_portal_type
+		_player._mini = _player._mini
 	elif object_type == ObjectType.OTHER_PORTAL:
 		match _other_portal_type:
 			OtherPortal.SIZE_PORTAL:

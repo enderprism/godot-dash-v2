@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=11 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dspnvt3u8uhqy" path="res://scenes/components/level_components/portals/gamemode_portals/SwingPortal.tscn" id="6_kf1ai"]
 [ext_resource type="PackedScene" uid="uid://bd0j0ubumn1dc" path="res://scenes/components/level_components/portals/gamemode_portals/UFOPortal.tscn" id="7_cxfn3"]
 [ext_resource type="PackedScene" uid="uid://b2civdkigbcth" path="res://scenes/components/level_components/portals/other_portals/SizePortalSmall.tscn" id="8_i7fjd"]
+[ext_resource type="PackedScene" uid="uid://cct7q7sr6fwc0" path="res://scenes/components/level_components/portals/gamemode_portals/WavePortal.tscn" id="10_ofhqo"]
 [ext_resource type="PackedScene" uid="uid://calhypvupvj4m" path="res://scenes/components/level_components/hazards/Spike.tscn" id="16_l5jmn"]
 [ext_resource type="PackedScene" uid="uid://ctf8cfrxbjfdk" path="res://scenes/components/level_components/portals/gamemode_portals/ShipPortal.tscn" id="17_qfdey"]
 
@@ -52,3 +53,7 @@ _gravity_portal_type = 1
 
 [node name="Spike" parent="." instance=ExtResource("16_l5jmn")]
 position = Vector2(1984, -64)
+
+[node name="WavePortal" parent="." instance=ExtResource("10_ofhqo")]
+position = Vector2(1344, -256)
+rotation = -1.57079

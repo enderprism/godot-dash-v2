@@ -36,6 +36,8 @@ const CAMERA_3D_RESOURCE_PROPERTY_NAME: StringName = "camera_3D_resource"
 signal became_active
 ## Emitted when the PhantomCamera3D becomes inactive.
 signal became_inactive
+## Emitted when follow_target changes
+signal follow_target_changed
 
 ## Emitted when the Camera3D starts to tween to the PhantomCamera3D.
 signal tween_started
@@ -57,7 +59,7 @@ var Properties: Object = preload("res://addons/phantom_camera/scripts/phantom_ca
 var follow_distance: float = 1:
 	set(value):
 		follow_distance = value
-		if is_instance_valid(Properties.follow_target_node):
+		if is_instance_valid(Properties.follow_target_node) and Properties.follow_mode != Constants.FollowMode.THIRD_PERSON:
 			set_global_position(_get_target_position_offset())
 	get:
 		return follow_distance
@@ -211,7 +213,7 @@ func _get_property_list() -> Array:
 				"usage": PROPERTY_USAGE_DEFAULT,
 			})
 		if _should_look_at:
-			if look_at_mode_enum == LookAtMode.SIMPLE:
+			if look_at_mode_enum == LookAtMode.SIMPLE or look_at_mode_enum == LookAtMode.GROUP:
 				property_list.append({
 					"name": LOOK_AT_TARGET_OFFSET_PROPERTY_NAME,
 					"type": TYPE_VECTOR3,
@@ -684,12 +686,12 @@ func _process(delta: float) -> void:
 			LookAtMode.GROUP:
 				if _has_look_at_target_group:
 					if _look_at_group_nodes.size() == 1:
-						look_at(_look_at_group_nodes[0].get_global_position())
+						look_at(_look_at_group_nodes[0].get_global_position() + look_at_target_offset)
 					elif _look_at_group_nodes.size() > 1:
 						var bounds: AABB = AABB(_look_at_group_nodes[0].get_global_position(), Vector3.ZERO)
 						for node in _look_at_group_nodes:
 							bounds = bounds.expand(node.get_global_position())
-						look_at(bounds.get_center())
+						look_at(bounds.get_center() + look_at_target_offset)
 
 
 func _get_target_position_offset() -> Vector3:
@@ -851,18 +853,21 @@ func get_follow_mode() -> int:
 
 ## Assigns a new Node3D as the Follow Target.
 func set_follow_target_node(value: Node3D) -> void:
+	if Properties.follow_target_node == value:
+		return
 	Properties.follow_target_node = value
-	Properties.should_follow = true
+	Properties.should_follow = Properties.follow_target_node != null
+	follow_target_changed.emit()
 ## Removes the current Node3D Follow Target.
 func erase_follow_target_node() -> void:
-	Properties.should_follow = false
+	if Properties.follow_target_node == null:
+		return
 	Properties.follow_target_node = null
+	Properties.should_follow = false
+	follow_target_changed.emit()
 ## Gets the current Node3D target.
 func get_follow_target_node():
-	if Properties.follow_target_node:
-		return Properties.follow_target_node
-	else:
-		printerr("No Follow Target Node assigned")
+	return Properties.follow_target_node
 
 
 ## Assigns a new Path3D to the Follow Path property.
@@ -1049,6 +1054,11 @@ func append_look_at_group_node_array(value: Array[Node3D]) -> void:
 			_has_look_at_target_group = true
 		else:
 			printerr(val, " is already part of Look At Group")
+## Sets array of type Node3D to Look At Group array.
+func set_look_at_group_node_array(value: Array[Node3D]) -> void:
+	_look_at_group_nodes.clear()
+	_look_at_group_nodes.append_array(value)
+	_has_look_at_target_group = _look_at_group_nodes.size() > 0
 ## Removes Node3D from Look At Group array.
 func erase_look_at_group_node(value: Node3D) -> void:
 	_look_at_group_nodes.erase(value)

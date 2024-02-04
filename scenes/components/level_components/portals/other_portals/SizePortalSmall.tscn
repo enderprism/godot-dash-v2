@@ -20,12 +20,12 @@ metadata/_edit_group_ = true
 shape = SubResource("RectangleShape2D_cghk8")
 debug_color = Color(0, 0.701961, 0.0823529, 0.419608)
 
-[node name="SizePortalSmallBack" type="Sprite2D" parent="."]
+[node name="PortalBack" type="Sprite2D" parent="."]
 z_index = -1
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("2_q1isf")
 
-[node name="SizePortalSmallFront" type="Sprite2D" parent="."]
+[node name="PortalFront" type="Sprite2D" parent="."]
 z_index = 1
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("3_rtfwu")

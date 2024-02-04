@@ -18,6 +18,11 @@ const SPEED: Vector2 = Vector2(625.0 * 2, 1100.0 * 2)
 const SPEED_MINI: Vector2 = Vector2(625.0 * 2, 800.0 * 2)
 const TERMINAL_VELOCITY: Vector2 = Vector2(0.0 * 2, 1500.0 * 2)
 const FLY_TERMINAL_VELOCITY: Vector2 = Vector2(0.0 * 2, 900.0 * 2)
+const FLY_GRAVITY_MULTIPLIER: float = 0.5
+const UFO_GRAVITY_MULTIPLIER: float = 0.9
+const WAVE_PLAYER_SCALE: Vector2 = Vector2(0.6, 0.6)
+const MINI_PLAYER_SCALE: Vector2 = Vector2(0.6, 0.6)
+const WAVE_TRAIL_WIDTH: float = 50.0
 
 @export var gamemode: Gamemode:
 	set(value):
@@ -31,19 +36,20 @@ var _reverse: bool
 var _mini: bool:
 	set(value):
 		_mini = value
+		var _mini_scale: Vector2
 		if value:
-			create_tween().tween_property(self, "scale", Vector2(0.6, 0.6), 0.25) \
+			_mini_scale = MINI_PLAYER_SCALE * WAVE_PLAYER_SCALE if gamemode == Gamemode.WAVE else MINI_PLAYER_SCALE
+			create_tween().tween_property(self, "scale", _mini_scale, 0.25) \
 				.set_ease(Tween.EASE_OUT) \
 				.set_trans(Tween.TRANS_BACK)
 		else:
-			create_tween().tween_property(self, "scale", Vector2.ONE, 0.25) \
+			_mini_scale = Vector2.ONE * WAVE_PLAYER_SCALE if gamemode == Gamemode.WAVE else Vector2.ONE
+			create_tween().tween_property(self, "scale", _mini_scale, 0.25) \
 				.set_ease(Tween.EASE_OUT) \
 				.set_trans(Tween.TRANS_BACK)
 var _is_in_h_block: bool
 var _speed_multiplier: float = 1.0
 var _gravity_multiplier: float = 1.0
-var _fly_gravity_multiplier: float = 0.5
-var _ufo_gravity_multiplier: float = 0.9
 var _dual_instance: bool
 var _gameplay_rotation_degrees: float = 0.0
 var _gameplay_rotation: float
@@ -61,6 +67,7 @@ func _physics_process(delta: float) -> void:
 	_gameplay_rotation = deg_to_rad(_gameplay_rotation_degrees)
 	up_direction = Vector2.UP.rotated(_gameplay_rotation)
 	$Icon.rotation_degrees = _rotate_sprite_degrees(delta, $Icon.rotation_degrees)
+	_update_wave_trail()
 	if gamemode == Gamemode.SWING: _update_swing_fire()
 	velocity = _compute_velocity(delta, velocity, _get_direction(), _get_jump_state())
 	move_and_slide()
@@ -97,17 +104,21 @@ func _compute_velocity(_delta: float,
 		_gravity_multiplier *= -1
 
 	if gamemode == Gamemode.SHIP:
-		_velocity.y += GRAVITY * _delta * _gravity_multiplier * _jump_state * -1 * _fly_gravity_multiplier
+		_velocity.y += GRAVITY * _delta * _gravity_multiplier * _jump_state * -1 * FLY_GRAVITY_MULTIPLIER
 		_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
 		up_direction.y = _jump_state
 	elif gamemode == Gamemode.SWING:
-		_velocity.y += GRAVITY * _delta * _gravity_multiplier * _fly_gravity_multiplier
+		_velocity.y += GRAVITY * _delta * _gravity_multiplier * FLY_GRAVITY_MULTIPLIER
 		_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
+		up_direction.y = _gravity_multiplier * -1
+	elif gamemode == Gamemode.WAVE:
+		_velocity.y = SPEED.x * _gravity_multiplier * _jump_state * -1
+		if _mini: _velocity.y *= 2
 		up_direction.y = _gravity_multiplier * -1
 	elif not is_on_floor():
 		up_direction.y = _gravity_multiplier * -1
 		if gamemode == Gamemode.UFO:
-			_velocity.y += GRAVITY * _delta * _gravity_multiplier * _ufo_gravity_multiplier
+			_velocity.y += GRAVITY * _delta * _gravity_multiplier * UFO_GRAVITY_MULTIPLIER
 		elif gamemode == Gamemode.CUBE:
 			_velocity.y += GRAVITY * _delta * _gravity_multiplier
 		_velocity.y = clamp(_velocity.y, -TERMINAL_VELOCITY.y, TERMINAL_VELOCITY.y)
@@ -146,10 +157,21 @@ func _rotate_sprite_degrees(delta: float, previous_rotation_degrees: float) -> f
 		else:
 			return lerpf(previous_rotation_degrees, snapped(previous_rotation_degrees, 90), 0.5)
 	elif gamemode == Gamemode.SHIP or gamemode == Gamemode.SWING:
-			if not is_on_floor():
-				return velocity.rotated(-_gameplay_rotation).y * delta
+		if not is_on_floor():
+			return velocity.rotated(-_gameplay_rotation).y * delta
+		else:
+			return lerpf(previous_rotation_degrees, 0.0, 0.5)
+	elif gamemode == Gamemode.WAVE:
+		if not is_on_floor():
+			if velocity.rotated(-_gameplay_rotation).x != 0.0:
+				if not _mini:
+					return lerpf(previous_rotation_degrees, 45.0 * -_get_jump_state(), 0.25)
+				else:
+					return lerpf(previous_rotation_degrees, 60.0 * -_get_jump_state(), 0.25)
 			else:
-				return lerpf(previous_rotation_degrees, 0.0, 0.5)
+				return lerpf(previous_rotation_degrees, 90.0 * -_get_jump_state(), 0.25)
+		else:
+			return lerpf(previous_rotation_degrees, 0.0, 0.5)
 	elif gamemode == Gamemode.UFO:
 		if not is_on_floor():
 			return velocity.rotated(-_gameplay_rotation).y * delta * 0.2
@@ -165,6 +187,26 @@ func _update_swing_fire() -> void:
 	else:
 		$Icon/Swing/FireBoostTop.position = $Icon/Swing/FireBoostTop.position.lerp(Vector2(-54.0, -63.0), 0.2)
 		$Icon/Swing/FireBoostBottom.position = $Icon/Swing/FireBoostBottom.position.lerp(Vector2.ZERO, 0.2)
+
+func _update_wave_trail() -> void:
+	if not _mini:
+		$WaveTrail.width = lerpf($WaveTrail.width, WAVE_TRAIL_WIDTH, 0.25)
+		$WaveTrail2.width = lerpf($WaveTrail2.width, WAVE_TRAIL_WIDTH * 0.5, 0.25)
+	else:
+		$WaveTrail.width = lerpf($WaveTrail.width, WAVE_TRAIL_WIDTH * MINI_PLAYER_SCALE.y, 0.25)
+		$WaveTrail2.width = lerpf($WaveTrail2.width, WAVE_TRAIL_WIDTH * MINI_PLAYER_SCALE.y * 0.5, 0.25)
+	# $WaveTrail.visible = gamemode == Gamemode.WAVE
+	# $WaveTrail2.visible = gamemode == Gamemode.WAVE
+	if gamemode == Gamemode.WAVE:
+		$WaveTrail.length = lerpf($WaveTrail.length, 50.0, 0.2)
+		$WaveTrail2.length = lerpf($WaveTrail.length, 50.0, 0.2)
+	else:
+		$WaveTrail.length = 0
+		$WaveTrail2.length = 0
+		if $WaveTrail.get_point_count() > $WaveTrail.length:
+			for i in range(2):
+				$WaveTrail.remove_point($WaveTrail.get_point_count() - 1)
+				$WaveTrail2.remove_point($WaveTrail2.get_point_count() - 1)
 
 func _set_spider_shapecast_rotation(new_rotation: float) -> void:
 	pass

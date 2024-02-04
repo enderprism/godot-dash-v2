@@ -53,6 +53,7 @@ _camera = NodePath("../PlayerCamera")
 position = Vector2(622, 925)
 
 [node name="Player" parent="." instance=ExtResource("3_22pbm")]
+unique_name_in_owner = true
 position = Vector2(622, 862)
 
 [node name="Ground" type="Sprite2D" parent="." node_paths=PackedStringArray("_camera")]

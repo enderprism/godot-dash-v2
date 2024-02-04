@@ -1,7 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://bl48psvuka73y"]
+[gd_scene load_steps=32 format=3 uid="uid://bl48psvuka73y"]
 
 [ext_resource type="Script" path="res://src/Player.gd" id="1_nvqsc"]
 [ext_resource type="Texture2D" uid="uid://omcvgcf1uk5p" path="res://assets/textures/player/cube/Cube.svg" id="2_6ab5b"]
+[ext_resource type="Script" path="res://addons/trail_2d/trail_2d.gd" id="2_s0etf"]
 [ext_resource type="Script" path="res://src/components/GDIconGamemodeProp.gd" id="2_sxyn3"]
 [ext_resource type="Texture2D" uid="uid://b54ubk48x1iu1" path="res://assets/textures/player/ship/Ship.svg" id="4_mqpwg"]
 [ext_resource type="Texture2D" uid="uid://dc6xv64ap0xqk" path="res://assets/textures/player/FireBoost.png" id="5_34x12"]
@@ -127,6 +128,29 @@ floor_max_angle = 1.55334
 floor_snap_length = 32.0
 script = ExtResource("1_nvqsc")
 
+[node name="WaveTrail" type="Line2D" parent="."]
+z_index = -1
+width = 50.0
+default_color = Color(0, 1, 1, 0.2)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+script = ExtResource("2_s0etf")
+length = 0
+
+[node name="WaveTrail2" type="Line2D" parent="."]
+z_index = -1
+material = ExtResource("5_dvha5")
+width = 25.0
+default_color = Color(0, 1, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+script = ExtResource("2_s0etf")
+length = 0
+
 [node name="Icon" type="Node2D" parent="."]
 
 [node name="Cube" type="Node2D" parent="Icon"]
@@ -134,6 +158,14 @@ visible = false
 script = ExtResource("2_sxyn3")
 
 [node name="CubeIcon" type="Sprite2D" parent="Icon/Cube"]
+texture = ExtResource("2_6ab5b")
+
+[node name="Wave" type="Node2D" parent="Icon"]
+visible = false
+script = ExtResource("2_sxyn3")
+gamemode = 4
+
+[node name="CubeIcon" type="Sprite2D" parent="Icon/Wave"]
 texture = ExtResource("2_6ab5b")
 
 [node name="UFO" type="Node2D" parent="Icon"]
@@ -219,6 +251,7 @@ frame = 12
 frame_progress = 1.0
 
 [node name="DeathParticles" type="GPUParticles2D" parent="."]
+visible = false
 modulate = Color(0, 1, 1, 1)
 material = ExtResource("5_dvha5")
 emitting = false
