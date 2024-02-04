@@ -89,7 +89,7 @@ func _get_jump_state() -> int:
 	elif gamemode == Gamemode.UFO or gamemode == Gamemode.SWING:
 		jump_state = 1 if Input.is_action_just_pressed("jump") else -1
 	elif gamemode == Gamemode.BALL or gamemode == Gamemode.SPIDER:
-		jump_state = 1 if Input.is_action_just_pressed("jump") && is_on_floor() else -1
+		jump_state = 1 if Input.is_action_just_pressed("jump") && (is_on_floor() or is_on_ceiling()) else -1
 	return jump_state
 
 func _compute_velocity(_delta: float,
@@ -100,9 +100,11 @@ func _compute_velocity(_delta: float,
 	var _speed: Vector2 = SPEED if not _mini else SPEED_MINI
 	var _is_flying_gamemode: bool = (gamemode == Gamemode.SHIP or gamemode == Gamemode.SWING or gamemode == Gamemode.WAVE)
 
-	if gamemode == Gamemode.SWING and _jump_state == 1.0:
+	if (gamemode == Gamemode.SWING or gamemode == Gamemode.BALL) and _jump_state == 1:
 		_gravity_multiplier *= -1
 
+
+#section Apply Gravity
 	if gamemode == Gamemode.SHIP:
 		_velocity.y += GRAVITY * _delta * _gravity_multiplier * _jump_state * -1 * FLY_GRAVITY_MULTIPLIER
 		_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
@@ -119,9 +121,10 @@ func _compute_velocity(_delta: float,
 		up_direction.y = _gravity_multiplier * -1
 		if gamemode == Gamemode.UFO:
 			_velocity.y += GRAVITY * _delta * _gravity_multiplier * UFO_GRAVITY_MULTIPLIER
-		elif gamemode == Gamemode.CUBE:
+		elif gamemode == Gamemode.CUBE or gamemode == Gamemode.BALL or gamemode == Gamemode.ROBOT:
 			_velocity.y += GRAVITY * _delta * _gravity_multiplier
 		_velocity.y = clamp(_velocity.y, -TERMINAL_VELOCITY.y, TERMINAL_VELOCITY.y)
+#endsection
 
 	if is_on_floor() and _jump_state == -1:
 		_velocity.y = 0.0
@@ -132,6 +135,9 @@ func _compute_velocity(_delta: float,
 			pass
 		elif _is_flying_gamemode:
 			pass
+		elif gamemode == Gamemode.BALL:
+			_velocity.y = _speed.y * _gravity_multiplier * 0.5
+			up_direction.y *= -1
 		else:
 			_velocity.y = -_speed.y
 	if _direction:
@@ -177,6 +183,8 @@ func _rotate_sprite_degrees(delta: float, previous_rotation_degrees: float) -> f
 			return velocity.rotated(-_gameplay_rotation).y * delta * 0.2
 		else:
 			return lerpf(previous_rotation_degrees, 0.0, 0.5)
+	elif gamemode == Gamemode.BALL:
+		return previous_rotation_degrees + delta * _gravity_multiplier * 600
 	else:
 		return previous_rotation_degrees
 
