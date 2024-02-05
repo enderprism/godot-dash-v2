@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=11 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
@@ -6,10 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://ccdry45jmn43w" path="res://scenes/components/level_components/solids/DefaultCube.tscn" id="4_ybmr0"]
 [ext_resource type="PackedScene" uid="uid://dspnvt3u8uhqy" path="res://scenes/components/level_components/portals/gamemode_portals/SwingPortal.tscn" id="6_kf1ai"]
 [ext_resource type="PackedScene" uid="uid://bd0j0ubumn1dc" path="res://scenes/components/level_components/portals/gamemode_portals/UFOPortal.tscn" id="7_cxfn3"]
-[ext_resource type="PackedScene" uid="uid://b2civdkigbcth" path="res://scenes/components/level_components/portals/other_portals/SizePortalSmall.tscn" id="8_i7fjd"]
 [ext_resource type="PackedScene" uid="uid://cct7q7sr6fwc0" path="res://scenes/components/level_components/portals/gamemode_portals/WavePortal.tscn" id="10_ofhqo"]
-[ext_resource type="PackedScene" uid="uid://duu44mnb4uo8u" path="res://scenes/components/level_components/portals/gamemode_portals/BallPortal.tscn" id="11_qsrsx"]
-[ext_resource type="PackedScene" uid="uid://bxutnqoa41uso" path="res://scenes/components/level_components/portals/gamemode_portals/RobotPortal.tscn" id="12_fnmr4"]
+[ext_resource type="PackedScene" uid="uid://duj3dae6qcvtm" path="res://scenes/components/level_components/portals/gamemode_portals/SpiderPortal.tscn" id="13_yweqy"]
 [ext_resource type="PackedScene" uid="uid://calhypvupvj4m" path="res://scenes/components/level_components/hazards/Spike.tscn" id="16_l5jmn"]
 [ext_resource type="PackedScene" uid="uid://ctf8cfrxbjfdk" path="res://scenes/components/level_components/portals/gamemode_portals/ShipPortal.tscn" id="17_qfdey"]
 
@@ -33,8 +31,20 @@ vertical_alignment = 1
 position = Vector2(2112, -64)
 
 [node name="Solid4" parent="." instance=ExtResource("4_ybmr0")]
-position = Vector2(6464, 192)
-scale = Vector2(15, 1)
+position = Vector2(4544, -448)
+scale = Vector2(5, 1)
+
+[node name="Solid5" parent="." instance=ExtResource("4_ybmr0")]
+position = Vector2(5184, -704)
+scale = Vector2(5, 1)
+
+[node name="Solid6" parent="." instance=ExtResource("4_ybmr0")]
+position = Vector2(5824, -320)
+scale = Vector2(5, 1)
+
+[node name="Solid7" parent="." instance=ExtResource("4_ybmr0")]
+position = Vector2(6208, -960)
+scale = Vector2(5, 1)
 
 [node name="Solid" parent="." instance=ExtResource("4_ybmr0")]
 position = Vector2(2624, -64)
@@ -53,10 +63,6 @@ rotation = 1.57079
 position = Vector2(832, -256)
 rotation = -1.57079
 
-[node name="SizePortalSmall" parent="." instance=ExtResource("8_i7fjd")]
-position = Vector2(4608, 576)
-_gravity_portal_type = 1
-
 [node name="Spike" parent="." instance=ExtResource("16_l5jmn")]
 position = Vector2(1984, -64)
 
@@ -64,8 +70,5 @@ position = Vector2(1984, -64)
 position = Vector2(1344, -256)
 rotation = -1.57079
 
-[node name="BallPortal" parent="." instance=ExtResource("11_qsrsx")]
-position = Vector2(5312, 576)
-
-[node name="RobotPortal" parent="." instance=ExtResource("12_fnmr4")]
-position = Vector2(3776, -192)
+[node name="SpiderPortal" parent="." instance=ExtResource("13_yweqy")]
+position = Vector2(4160, -192)

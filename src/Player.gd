@@ -23,6 +23,7 @@ const UFO_GRAVITY_MULTIPLIER: float = 0.9
 const WAVE_PLAYER_SCALE: Vector2 = Vector2(0.6, 0.6)
 const MINI_PLAYER_SCALE: Vector2 = Vector2(0.6, 0.6)
 const WAVE_TRAIL_WIDTH: float = 50.0
+const SPIDER_TRAIL: PackedScene = preload("res://scenes/components/game_components/GDSpiderTrail.tscn")
 
 @export var gamemode: Gamemode:
 	set(value):
@@ -53,6 +54,8 @@ var _gravity_multiplier: float = 1.0
 var _dual_instance: bool
 var _gameplay_rotation_degrees: float = 0.0
 var _gameplay_rotation: float
+var _last_spider_trail: GDSpiderTrail
+var _last_spider_trail_height: float
 
 # Bit flags
 var _orb_collisions: int
@@ -71,6 +74,11 @@ func _physics_process(delta: float) -> void:
 	if gamemode == Gamemode.SWING: _update_swing_fire()
 	velocity = _compute_velocity(delta, velocity, _get_direction(), _get_jump_state())
 	move_and_slide()
+	if _last_spider_trail != null:
+		add_child(_last_spider_trail)
+		_last_spider_trail._global_position = $Icon/Spider/SpiderTrailSpawnPoint.global_position
+		_last_spider_trail._scale_y = abs(_last_spider_trail_height) * sign(_gravity_multiplier)
+		_last_spider_trail = null
 
 func _get_direction() -> int:
 	var _direction: int
@@ -106,27 +114,23 @@ func _compute_velocity(_delta: float,
 	var _speed: Vector2 = SPEED if not _mini else SPEED_MINI
 	var _is_flying_gamemode: bool = (gamemode == Gamemode.SHIP or gamemode == Gamemode.SWING or gamemode == Gamemode.WAVE)
 
-	if (gamemode == Gamemode.SWING or gamemode == Gamemode.BALL) and _jump_state == 1:
+	if (gamemode == Gamemode.SWING or gamemode == Gamemode.BALL or gamemode == Gamemode.SPIDER) and _jump_state == 1:
 		_gravity_multiplier *= -1
 
 #section Apply Gravity
 	if gamemode == Gamemode.SHIP:
 		_velocity.y += GRAVITY * _delta * _gravity_multiplier * _jump_state * -1 * FLY_GRAVITY_MULTIPLIER
 		_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
-		up_direction.y = _jump_state
 	elif gamemode == Gamemode.SWING:
 		_velocity.y += GRAVITY * _delta * _gravity_multiplier * FLY_GRAVITY_MULTIPLIER
 		_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
-		up_direction.y = _gravity_multiplier * -1
 	elif gamemode == Gamemode.WAVE:
 		_velocity.y = SPEED.x * _gravity_multiplier * _jump_state * -1
 		if _mini: _velocity.y *= 2
-		up_direction.y = _gravity_multiplier * -1
 	elif not is_on_floor():
-		up_direction.y = _gravity_multiplier * -1
 		if gamemode == Gamemode.UFO:
 			_velocity.y += GRAVITY * _delta * _gravity_multiplier * UFO_GRAVITY_MULTIPLIER
-		elif gamemode == Gamemode.CUBE or gamemode == Gamemode.BALL or gamemode == Gamemode.ROBOT:
+		else:
 			_velocity.y += GRAVITY * _delta * _gravity_multiplier
 		_velocity.y = clamp(_velocity.y, -TERMINAL_VELOCITY.y, TERMINAL_VELOCITY.y)
 #endsection
@@ -140,6 +144,10 @@ func _compute_velocity(_delta: float,
 			pass
 		elif _is_flying_gamemode:
 			pass
+		elif gamemode == Gamemode.SPIDER:
+			_velocity.y = _get_spider_velocity_delta() * 1/_delta
+			_last_spider_trail_height = abs(_get_spider_velocity_delta()/_last_spider_trail.SPIDER_TRAIL_HEIGHT)
+			up_direction.y *= -1
 		elif gamemode == Gamemode.BALL:
 			_velocity.y = _speed.y * _gravity_multiplier * 0.5
 			up_direction.y *= -1
@@ -160,10 +168,7 @@ func _compute_velocity(_delta: float,
 		return Vector2.ZERO
 
 func _rotate_sprite_degrees(delta: float, previous_rotation_degrees: float) -> float:
-	if gamemode != Gamemode.SWING:
-		$Icon.scale.y = _gravity_multiplier
-	else:
-		$Icon.scale.y = 1.0
+	$Icon.scale.y = _gravity_multiplier if gamemode != Gamemode.SWING else 1.0
 	if gamemode == Gamemode.CUBE:
 		if not is_on_floor():
 			return previous_rotation_degrees + delta * _gravity_multiplier * 400
@@ -192,6 +197,8 @@ func _rotate_sprite_degrees(delta: float, previous_rotation_degrees: float) -> f
 			return lerpf(previous_rotation_degrees, 0.0, 0.5)
 	elif gamemode == Gamemode.BALL:
 		return previous_rotation_degrees + delta * _gravity_multiplier * 600
+	elif gamemode == Gamemode.SPIDER or gamemode == Gamemode.ROBOT:
+		return 0.0
 	else:
 		return previous_rotation_degrees
 
@@ -223,8 +230,15 @@ func _update_wave_trail() -> void:
 				$WaveTrail.remove_point($WaveTrail.get_point_count() - 1)
 				$WaveTrail2.remove_point($WaveTrail2.get_point_count() - 1)
 
+func _get_spider_velocity_delta() -> float:
+	var _target_position = $Icon/Spider/SpiderCast.get_collision_point(0)
+	var _spider_velocity_delta: float = abs((_target_position - position).rotated(-_gameplay_rotation).y)
+	_spider_velocity_delta -= $GroundCollider.shape.size.y/2 * scale.y
+	_last_spider_trail = SPIDER_TRAIL.instantiate()
+	return _spider_velocity_delta * _gravity_multiplier
+
 func _set_spider_shapecast_rotation(new_rotation: float) -> void:
-	pass
+	$Icon/Spider/SpiderCast.rotation = new_rotation
 
 func _player_death() -> void:
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), true)

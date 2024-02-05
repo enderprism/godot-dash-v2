@@ -130,8 +130,9 @@ script = ExtResource("1_nvqsc")
 
 [node name="WaveTrail" type="Line2D" parent="."]
 z_index = -1
+points = PackedVector2Array(-1088, -64)
 width = 50.0
-default_color = Color(0, 1, 1, 0.3)
+default_color = Color(0.4, 0, 1, 0.301961)
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
@@ -143,7 +144,7 @@ length = 0
 z_index = -1
 material = ExtResource("5_dvha5")
 width = 25.0
-default_color = Color(0, 1, 1, 1)
+default_color = Color(0.4, 0, 1, 1)
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
@@ -159,6 +160,32 @@ script = ExtResource("2_sxyn3")
 
 [node name="CubeIcon" type="Sprite2D" parent="Icon/Cube"]
 texture = ExtResource("2_6ab5b")
+
+[node name="Robot" type="Node2D" parent="Icon"]
+visible = false
+script = ExtResource("2_sxyn3")
+gamemode = 5
+
+[node name="CubeIcon" type="Sprite2D" parent="Icon/Robot"]
+texture = ExtResource("2_6ab5b")
+
+[node name="Spider" type="Node2D" parent="Icon"]
+script = ExtResource("2_sxyn3")
+gamemode = 6
+
+[node name="CubeIcon" type="Sprite2D" parent="Icon/Spider"]
+texture = ExtResource("2_6ab5b")
+
+[node name="SpiderTrailSpawnPoint" type="Marker2D" parent="Icon/Spider"]
+position = Vector2(0, -64)
+
+[node name="SpiderCast" type="ShapeCast2D" parent="Icon/Spider"]
+modulate = Color(0, 0, 0, 0.301961)
+show_behind_parent = true
+shape = SubResource("RectangleShape2D_p8d76")
+target_position = Vector2(0, -8192)
+collision_mask = 102
+collide_with_areas = true
 
 [node name="Ball" type="Node2D" parent="Icon"]
 visible = false
@@ -185,6 +212,7 @@ gamemode = 2
 texture = ExtResource("2_6ab5b")
 
 [node name="Ship" type="Node2D" parent="Icon"]
+visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 1
 
@@ -271,6 +299,7 @@ one_shot = true
 explosiveness = 1.0
 
 [node name="DebugTrail" type="Line2D" parent="."]
+visible = false
 z_index = 2
 width = 5.0
 default_color = Color(1, 0, 0, 1)
@@ -279,7 +308,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 antialiased = true
 script = ExtResource("2_s0etf")
-length = 50
+length = 0
 
 [node name="DeathAnimator" type="AnimationPlayer" parent="."]
 process_mode = 1

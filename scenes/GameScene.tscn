@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://db7ebleody4s3"]
+[gd_scene load_steps=14 format=3 uid="uid://db7ebleody4s3"]
 
 [ext_resource type="Script" path="res://src/GameScene.gd" id="1_k47tp"]
 [ext_resource type="Texture2D" uid="uid://djstmwdco77pp" path="res://assets/textures/backgrounds/background1-3.png" id="2_i4f6q"]
@@ -10,6 +10,9 @@
 [ext_resource type="Script" path="res://src/components/GDPositionFollow2D.gd" id="6_kvomc"]
 [ext_resource type="Script" path="res://src/PlayerCamera.gd" id="7_vnv5l"]
 [ext_resource type="PackedScene" uid="uid://th7jwdop3hdv" path="res://scenes/components/game_components/PauseMenu.tscn" id="9_vv033"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y3ubx"]
+size = Vector2(1554, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4i0t"]
 size = Vector2(194.4, 154.4)
@@ -33,6 +36,19 @@ region_rect = Rect2(0, 0, 10240, 2048)
 script = ExtResource("3_my51g")
 _parallax_factor = Vector2(0.5, 0.5)
 _camera = NodePath("../PlayerCamera")
+
+[node name="BackgroundKillCollider" type="StaticBody2D" parent="Background" node_paths=PackedStringArray("target")]
+position = Vector2(0, -1376)
+collision_layer = 4
+script = ExtResource("6_kvomc")
+target = NodePath("../../Player")
+copy_x = true
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/BackgroundKillCollider"]
+position = Vector2(0, 112.5)
+shape = SubResource("RectangleShape2D_y3ubx")
+debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="Background2" type="Sprite2D" parent="." node_paths=PackedStringArray("_camera")]
 modulate = Color(0.27451, 0.627451, 1, 1)
