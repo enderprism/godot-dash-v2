@@ -74,6 +74,10 @@ window/stretch/aspect="keep_height"
 
 enabled=PackedStringArray("res://addons/inspector_extender/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/tabby_explorer/plugin.cfg", "res://addons/trail_2d/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 jump={

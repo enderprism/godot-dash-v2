@@ -1,74 +1,62 @@
-[gd_scene load_steps=11 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=9 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
-[ext_resource type="FontFile" uid="uid://8e1lxpyo40t5" path="res://assets/fonts/PUSAB.otf" id="3_tr72a"]
 [ext_resource type="PackedScene" uid="uid://ccdry45jmn43w" path="res://scenes/components/level_components/solids/DefaultCube.tscn" id="4_ybmr0"]
-[ext_resource type="PackedScene" uid="uid://dspnvt3u8uhqy" path="res://scenes/components/level_components/portals/gamemode_portals/SwingPortal.tscn" id="6_kf1ai"]
-[ext_resource type="PackedScene" uid="uid://bd0j0ubumn1dc" path="res://scenes/components/level_components/portals/gamemode_portals/UFOPortal.tscn" id="7_cxfn3"]
-[ext_resource type="PackedScene" uid="uid://cct7q7sr6fwc0" path="res://scenes/components/level_components/portals/gamemode_portals/WavePortal.tscn" id="10_ofhqo"]
-[ext_resource type="PackedScene" uid="uid://duj3dae6qcvtm" path="res://scenes/components/level_components/portals/gamemode_portals/SpiderPortal.tscn" id="13_yweqy"]
-[ext_resource type="PackedScene" uid="uid://calhypvupvj4m" path="res://scenes/components/level_components/hazards/Spike.tscn" id="16_l5jmn"]
-[ext_resource type="PackedScene" uid="uid://ctf8cfrxbjfdk" path="res://scenes/components/level_components/portals/gamemode_portals/ShipPortal.tscn" id="17_qfdey"]
+[ext_resource type="PackedScene" uid="uid://bf1l71kmqh0i0" path="res://scenes/components/level_components/pads/RedPad.tscn" id="8_8fi0x"]
+[ext_resource type="PackedScene" uid="uid://nsvkooc5od83" path="res://scenes/components/level_components/pads/YellowPad.tscn" id="11_l1bej"]
+[ext_resource type="PackedScene" uid="uid://cugg15j2jxyay" path="res://scenes/components/level_components/pads/PinkPad.tscn" id="12_46q4f"]
+[ext_resource type="PackedScene" uid="uid://ht60eohfg08" path="res://scenes/components/level_components/pads/SpiderPad.tscn" id="13_n82n6"]
+[ext_resource type="PackedScene" uid="uid://dnah6ge1p0rr3" path="res://scenes/components/level_components/pads/BluePad.tscn" id="14_2dnjn"]
 
 [node name="Dash V2" type="Node2D"]
 script = ExtResource("1_7ju0m")
 song = ExtResource("2_8grye")
 metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="."]
-offset_left = 244.0
-offset_top = -244.0
-offset_right = 1891.0
-offset_bottom = -59.0
-theme_override_fonts/font = ExtResource("3_tr72a")
-theme_override_font_sizes/font_size = 100
-text = "THE LEVEL LOADED WOOOO"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Solid2" parent="." instance=ExtResource("4_ybmr0")]
-position = Vector2(2112, -64)
-
 [node name="Solid4" parent="." instance=ExtResource("4_ybmr0")]
-position = Vector2(4544, -448)
+position = Vector2(4416, -576)
 scale = Vector2(5, 1)
 
-[node name="Solid5" parent="." instance=ExtResource("4_ybmr0")]
-position = Vector2(5184, -704)
+[node name="Solid8" parent="." instance=ExtResource("4_ybmr0")]
+position = Vector2(5312, -448)
 scale = Vector2(5, 1)
 
-[node name="Solid6" parent="." instance=ExtResource("4_ybmr0")]
-position = Vector2(5824, -320)
-scale = Vector2(5, 1)
+[node name="YellowPad" parent="." instance=ExtResource("11_l1bej")]
+position = Vector2(2240, -64)
 
-[node name="Solid7" parent="." instance=ExtResource("4_ybmr0")]
-position = Vector2(6208, -960)
-scale = Vector2(5, 1)
+[node name="PinkPad" parent="." instance=ExtResource("12_46q4f")]
+position = Vector2(3392, -64)
 
-[node name="Solid" parent="." instance=ExtResource("4_ybmr0")]
-position = Vector2(2624, -64)
+[node name="SpiderPad3" parent="." instance=ExtResource("13_n82n6")]
+position = Vector2(4160, -64)
+rotation = 6.28318
+_horizontal_direction = 1
 
-[node name="Solid3" parent="." instance=ExtResource("4_ybmr0")]
-position = Vector2(2624, -192)
+[node name="SpiderPad4" parent="." instance=ExtResource("13_n82n6")]
+position = Vector2(4672, -448)
+rotation = 3.14159
 
-[node name="ShipPortal" parent="." instance=ExtResource("17_qfdey")]
-position = Vector2(3776, -768)
+[node name="BluePad" parent="." instance=ExtResource("14_2dnjn")]
+position = Vector2(5056, -64)
 
-[node name="SwingPortal" parent="." instance=ExtResource("6_kf1ai")]
-position = Vector2(3136, -448)
-rotation = 1.57079
+[node name="BluePad2" parent="." instance=ExtResource("14_2dnjn")]
+position = Vector2(5568, -320)
+rotation = 3.14159
+_horizontal_direction = 2
+_reverse = true
 
-[node name="UFOPortal" parent="." instance=ExtResource("7_cxfn3")]
-position = Vector2(832, -256)
-rotation = -1.57079
+[node name="BluePad3" parent="." instance=ExtResource("14_2dnjn")]
+position = Vector2(5952, -576)
+rotation = 3.14159
 
-[node name="Spike" parent="." instance=ExtResource("16_l5jmn")]
-position = Vector2(1984, -64)
+[node name="BluePad4" parent="." instance=ExtResource("14_2dnjn")]
+position = Vector2(5824, -576)
+rotation = 3.14159
 
-[node name="WavePortal" parent="." instance=ExtResource("10_ofhqo")]
-position = Vector2(1344, -256)
-rotation = -1.57079
+[node name="BluePad5" parent="." instance=ExtResource("14_2dnjn")]
+position = Vector2(6080, -576)
+rotation = 3.14159
 
-[node name="SpiderPortal" parent="." instance=ExtResource("13_yweqy")]
-position = Vector2(4160, -192)
+[node name="PinkPad2" parent="." instance=ExtResource("8_8fi0x")]
+position = Vector2(704, -64)

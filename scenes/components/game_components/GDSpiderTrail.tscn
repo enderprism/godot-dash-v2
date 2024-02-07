@@ -51,7 +51,7 @@ animations = [{
 
 [node name="SpiderTrail" type="AnimatedSprite2D"]
 modulate = Color(0.4, 1, 1, 1)
-z_index = 15
+z_index = -1
 material = ExtResource("1_mttt2")
 rotation = -1.57079
 scale = Vector2(1, -1)

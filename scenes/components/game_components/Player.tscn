@@ -122,7 +122,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 process_mode = 1
-collision_mask = 34
+collision_mask = 122
 floor_constant_speed = true
 floor_max_angle = 1.55334
 floor_snap_length = 32.0
@@ -177,7 +177,7 @@ gamemode = 6
 texture = ExtResource("2_6ab5b")
 
 [node name="SpiderTrailSpawnPoint" type="Marker2D" parent="Icon/Spider"]
-position = Vector2(0, -64)
+position = Vector2(64, -64)
 
 [node name="SpiderCast" type="ShapeCast2D" parent="Icon/Spider"]
 modulate = Color(0, 0, 0, 0.301961)
@@ -269,15 +269,6 @@ collision_mask = 4
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_t218l")
 debug_color = Color(0.701961, 0, 0, 0.419608)
-
-[node name="InteractibleCollider" type="Area2D" parent="."]
-visible = false
-collision_mask = 24
-
-[node name="InteractibleColliderHitbox" type="CollisionShape2D" parent="InteractibleCollider"]
-rotation = 3.14159
-shape = SubResource("RectangleShape2D_t218l")
-debug_color = Color(0, 0.701961, 0.0941176, 0.419608)
 
 [node name="DeathEffect" type="AnimatedSprite2D" parent="."]
 z_index = 100

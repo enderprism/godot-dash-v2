@@ -2,6 +2,9 @@
 
 class_name GDInteractible
 
+const CIRCLE_EFFECT_GROW_DURATION: float = 0.25
+const CIRCLE_EFFECT_GROW_SIZE: Vector2 = Vector2(2.0, 2.0)
+
 #region enums
 enum Orb {
 	YELLOW = 1,
@@ -56,6 +59,11 @@ enum GravityPortal {
 	TOGGLE,
 }
 
+enum HorizontalDirection {
+	USE_CURRENT,
+	SET,
+	FLIP,
+}
 #endregion
 
 #region exports
@@ -83,6 +91,9 @@ enum GravityPortal {
 @export var _mini: bool
 
 # @@show_if(object_type == ObjectType.ORB or object_type == ObjectType.PAD)
+@export var _horizontal_direction: HorizontalDirection
+
+# @@show_if(object_type == ObjectType.ORB or object_type == ObjectType.PAD and _horizontal_direction == HorizontalDirection.SET)
 @export var _reverse: bool
 
 # @@show_if(object_type == ObjectType.GAMEMODE_PORTAL)
@@ -107,6 +118,18 @@ func _ready() -> void:
 	connect("body_exited", Callable(self, "_on_player_exit"))
 
 func _process(_delta: float) -> void:
+	if has_node("ParticleEmitter"):
+		$ParticleEmitter.process_material.gravity = Vector3(
+			Vector2(
+				0.0,
+				-128.0,
+			).rotated(rotation).x,
+			Vector2(
+				0.0,
+				-128.0,
+			).rotated(rotation).y,
+			0.0
+		)
 	if has_node("./IndicatorIcon") \
 		and object_type == ObjectType.GAMEMODE_PORTAL \
 		or (object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.GRAVITY_PORTAL):
@@ -122,12 +145,21 @@ func _on_player_enter(_body: Node2D) -> void:
 		or (object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.TELEPORTAL):
 		_teleport_player(_teleport_target, _override_player_velocity, _new_player_velocity)
 	if object_type == ObjectType.ORB:
-		_player.orb_collisions |= _orb_type
-		_player._reverse = _reverse
+		_circle_effect()
+		_player._orb_collisions |= _orb_type
+		if _horizontal_direction == HorizontalDirection.SET:
+			_player._reverse = _reverse
+		elif _horizontal_direction == HorizontalDirection.FLIP:
+			_player._reverse =  not _player._reverse
 		if _orb_type == Orb.SPIDER:
 			_player._set_spider_shapecast_rotation(rotation)
 	elif object_type == ObjectType.PAD:
-		_player.pad_collisions |= _pad_type
+		_circle_effect()
+		if _horizontal_direction == HorizontalDirection.SET:
+			_player._reverse = _reverse
+		elif _horizontal_direction == HorizontalDirection.FLIP:
+			_player._reverse =  not _player._reverse
+		_player._pad_collisions |= _pad_type
 	elif object_type == ObjectType.GAMEMODE_PORTAL:
 		LevelManager.player.gamemode = _gamemode_portal_type
 		_player._mini = _player._mini
@@ -144,6 +176,25 @@ func _on_player_enter(_body: Node2D) -> void:
 					GravityPortal.TOGGLE:
 						_player._gravity_multiplier *= -1
 
+func _circle_effect() -> void:
+	if has_node("Circle"):
+		# $Circle.position = 
+		create_tween().tween_property(
+			$Circle,
+			"scale",
+			CIRCLE_EFFECT_GROW_SIZE,
+			CIRCLE_EFFECT_GROW_DURATION,) \
+			.from(Vector2.ZERO) \
+			.set_ease(Tween.EASE_OUT) \
+			.set_trans(Tween.TRANS_QUART)
+		create_tween().tween_property(
+			$Circle,
+			"modulate:a",
+			0.0,
+			CIRCLE_EFFECT_GROW_DURATION,) \
+			.from(1.0) \
+			.set_ease(Tween.EASE_OUT) \
+			.set_trans(Tween.TRANS_QUART)
 
 func _on_player_exit(_body: Node2D) -> void:
 	if object_type == ObjectType.ORB:
@@ -151,7 +202,7 @@ func _on_player_exit(_body: Node2D) -> void:
 		if _orb_type == Orb.SPIDER:
 			_player._set_spider_shapecast_rotation(0.0)
 	elif object_type == ObjectType.PAD:
-		_player.pad_collisions &= ~_pad_type
+		_player._pad_collisions &= ~_pad_type
 
 func _teleport_player(_target: Node2D, _override_velocity: bool, _new_velocity: Vector2) -> void:
 	_player.position = _target.position

@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://cugg15j2jxyay"]
+
+[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_3d3oy"]
+[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="2_dn0c5"]
+[ext_resource type="Texture2D" uid="uid://dst5b25su68xl" path="res://assets/textures/pads/PinkPad.webp" id="2_xylnt"]
+[ext_resource type="Texture2D" uid="uid://cvrhuk7gkomp1" path="res://assets/textures/particles/Square.png" id="3_2j100"]
+[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/OrbPadPlayerInteractEffect.svg" id="5_qi3d5"]
+
+[sub_resource type="Curve" id="Curve_5udhs"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_dol5j"]
+curve = SubResource("Curve_5udhs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w36s8"]
+resource_local_to_scene = true
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(40, 0, 0)
+gravity = Vector3(0, -128, 0)
+scale_min = 0.25
+scale_max = 0.25
+scale_curve = SubResource("CurveTexture_dol5j")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4v8oj"]
+size = Vector2(98, 18)
+
+[node name="PinkPad" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_3d3oy")
+object_type = 1
+_pad_type = 2
+
+[node name="ParticleEmitter" type="GPUParticles2D" parent="."]
+modulate = Color(1, 0.364706, 0.945098, 1)
+material = ExtResource("2_dn0c5")
+position = Vector2(0, 57)
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_w36s8")
+texture = ExtResource("3_2j100")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, 57)
+texture = ExtResource("2_xylnt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 57)
+shape = SubResource("RectangleShape2D_4v8oj")
+debug_color = Color(0, 1, 0, 0.419608)
+
+[node name="Circle" type="Sprite2D" parent="."]
+modulate = Color(1, 0.364706, 0.945098, 1)
+z_index = 51
+material = ExtResource("2_dn0c5")
+position = Vector2(0, 57)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("5_qi3d5")

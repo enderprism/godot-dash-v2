@@ -11,8 +11,11 @@ collision_layer = 2
 script = ExtResource("1_8i826")
 metadata/_edit_group_ = true
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="RegularBlock01" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_yn5k1")
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 512)
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_l5xdm")
