@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpk73kf5k0bp1"
-path="res://.godot/imported/YellowPad.webp-51b15d5723db61693df45d7942191c4a.ctex"
+uid="uid://bmyejgekcl17a"
+path="res://.godot/imported/SpiderPad.svg-edfb4895e4c5d19d0a26000d29dd470e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/pads/YellowPad.webp"
-dest_files=["res://.godot/imported/YellowPad.webp-51b15d5723db61693df45d7942191c4a.ctex"]
+source_file="res://assets/textures/pads/SpiderPad.svg"
+dest_files=["res://.godot/imported/SpiderPad.svg-edfb4895e4c5d19d0a26000d29dd470e.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

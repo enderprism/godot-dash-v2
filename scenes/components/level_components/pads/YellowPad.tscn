@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://nsvkooc5od83"]
 
-[ext_resource type="Texture2D" uid="uid://cpk73kf5k0bp1" path="res://assets/textures/pads/YellowPad.webp" id="1_45r0e"]
 [ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_218k0"]
 [ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="2_2ovfi"]
 [ext_resource type="Texture2D" uid="uid://cvrhuk7gkomp1" path="res://assets/textures/particles/Square.png" id="3_0m2ra"]
+[ext_resource type="Texture2D" uid="uid://dwu2fxe16epee" path="res://assets/textures/pads/YellowPad.svg" id="4_qk8gr"]
 [ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/OrbPadPlayerInteractEffect.svg" id="5_f7osb"]
 
 [sub_resource type="Curve" id="Curve_6hqd0"]
@@ -40,10 +40,10 @@ position = Vector2(0, 57)
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_ctvm8")
 texture = ExtResource("3_0m2ra")
+preprocess = 5.0
 
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(0, 57)
-texture = ExtResource("1_45r0e")
+[node name="YellowPad" type="Sprite2D" parent="."]
+texture = ExtResource("4_qk8gr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 57)

@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://ht60eohfg08"]
 
 [ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_qseui"]
-[ext_resource type="Texture2D" uid="uid://s8rg6v1le5en" path="res://assets/textures/pads/SpiderPad.webp" id="2_t84to"]
 [ext_resource type="Texture2D" uid="uid://cvrhuk7gkomp1" path="res://assets/textures/particles/Square.png" id="3_3t4xc"]
 [ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="3_figy2"]
 [ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/OrbPadPlayerInteractEffect.svg" id="3_nqfx8"]
+[ext_resource type="Texture2D" uid="uid://bmyejgekcl17a" path="res://assets/textures/pads/SpiderPad.svg" id="4_kj2v3"]
 
 [sub_resource type="Curve" id="Curve_dfnxf"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -13,19 +13,19 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_yja76"]
 curve = SubResource("Curve_dfnxf")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sctgy"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cyl6s"]
 resource_local_to_scene = true
 particle_flag_align_y = true
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(40, 0, 0)
+emission_box_extents = Vector3(48, 0, 0)
 gravity = Vector3(0, -128, 0)
 scale_min = 0.25
 scale_max = 0.25
 scale_curve = SubResource("CurveTexture_yja76")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4v8oj"]
-size = Vector2(92, 18)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dmxk1"]
+size = Vector2(106, 20)
 
 [node name="SpiderPad" type="Area2D"]
 collision_layer = 8
@@ -38,17 +38,16 @@ modulate = Color(0.694118, 0.180392, 0.980392, 1)
 material = ExtResource("3_figy2")
 position = Vector2(0, 52)
 amount = 30
-process_material = SubResource("ParticleProcessMaterial_sctgy")
+process_material = SubResource("ParticleProcessMaterial_cyl6s")
 texture = ExtResource("3_3t4xc")
+preprocess = 5.0
 
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(0, 46)
-scale = Vector2(0.837209, 0.837209)
-texture = ExtResource("2_t84to")
+[node name="SpiderPad" type="Sprite2D" parent="."]
+texture = ExtResource("4_kj2v3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 54)
-shape = SubResource("RectangleShape2D_4v8oj")
+position = Vector2(0, 53)
+shape = SubResource("RectangleShape2D_dmxk1")
 debug_color = Color(0, 1, 0, 0.419608)
 
 [node name="Circle" type="Sprite2D" parent="."]

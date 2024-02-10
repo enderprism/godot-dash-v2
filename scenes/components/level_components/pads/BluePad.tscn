@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_3t3gb"]
 [ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="2_u258l"]
 [ext_resource type="Texture2D" uid="uid://cvrhuk7gkomp1" path="res://assets/textures/particles/Square.png" id="3_2rxhn"]
-[ext_resource type="Texture2D" uid="uid://cdvugunwxapvc" path="res://assets/textures/pads/BluePad.webp" id="4_0max3"]
+[ext_resource type="Texture2D" uid="uid://c0bsvfc1ce8wd" path="res://assets/textures/pads/BluePad.svg" id="4_8t53w"]
 [ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/OrbPadPlayerInteractEffect.svg" id="5_tb85p"]
 
 [sub_resource type="Curve" id="Curve_6hqd0"]
@@ -40,13 +40,13 @@ position = Vector2(0, 57)
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_ctvm8")
 texture = ExtResource("3_2rxhn")
+preprocess = 5.0
 
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(0, 57)
-texture = ExtResource("4_0max3")
+[node name="BluePad" type="Sprite2D" parent="."]
+texture = ExtResource("4_8t53w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 57)
+position = Vector2(0, 53)
 shape = SubResource("RectangleShape2D_4v8oj")
 debug_color = Color(0, 1, 0, 0.419608)
 

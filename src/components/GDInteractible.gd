@@ -4,6 +4,7 @@ class_name GDInteractible
 
 const CIRCLE_EFFECT_GROW_DURATION: float = 0.25
 const CIRCLE_EFFECT_GROW_SIZE: Vector2 = Vector2(2.0, 2.0)
+const REBOUND_VELOCITY_SETTER_THRESHOLD: float = 20.0
 
 #region enums
 enum Orb {
@@ -108,9 +109,12 @@ enum HorizontalDirection {
 # @@show_if(object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.TELEPORTAL and _override_player_velocity)
 @export var _new_player_velocity: Vector2
 
+# @@show_if(object_type == ObjectType.ORB and _orb_type == Orb.REBOUND or object_type == ObjectType.PAD and _pad_type == Pad.REBOUND)
+@export var _rebound_gradient: Gradient
 #endregion
 
 var _player: Player
+var _rebound_factor: float
 
 func _ready() -> void:
 	_player = LevelManager.player
@@ -118,6 +122,30 @@ func _ready() -> void:
 	connect("body_exited", Callable(self, "_on_player_exit"))
 
 func _process(_delta: float) -> void:
+	if not Engine.is_editor_hint() \
+			and (object_type == ObjectType.ORB and _orb_type == Orb.REBOUND or object_type == ObjectType.PAD and _pad_type == Pad.REBOUND):
+		if _player.position.rotated(-_player._gameplay_rotation).y < $ReboundObjectScaleOrigin.global_position.rotated(-_player._gameplay_rotation).y \
+			and _player.velocity.rotated(-_player._gameplay_rotation).y <= 0:
+			var _player_rebound_offset: float = $ReboundObjectScaleOrigin.global_position.rotated(-_player._gameplay_rotation).y - _player.position.rotated(-_player._gameplay_rotation).y
+			_rebound_factor = _player_rebound_offset/(Player.TERMINAL_VELOCITY.y*0.25)
+		var _rebound_color: Color = _rebound_gradient.sample(clampf(_rebound_factor, 0.0, 1.0))
+		$ParticleEmitter.modulate = _rebound_color
+		$Circle.modulate.r = _rebound_color.r
+		$Circle.modulate.g = _rebound_color.g
+		$Circle.modulate.b = _rebound_color.b
+		$ReboundObjectScaleOrigin/Fill.modulate = _rebound_color
+		$ReboundObjectScaleOrigin.scale.y = lerpf(0.7, 1.7, _rebound_factor)
+		$CollisionShape2D.scale.y = lerpf(0.7, 1.7, _rebound_factor)
+		# if _player.position.rotated(-_player._gameplay_rotation).y < global_position.rotated(-_player._gameplay_rotation).y:
+		# 	# var _is_player_before_pad: bool = (
+		# 	# 	(not _player._reverse and _player.global_position.rotated(-_player._gameplay_rotation).x < $PlayerNonReverseDetector.global_position.rotated(-_player._gameplay_rotation).x)
+		# 	# 	or (_player._reverse and _player.global_position.rotated(-_player._gameplay_rotation).x > $PlayerReverseDetector.global_position.rotated(-_player._gameplay_rotation).x)
+		# 	# 	)
+		if _player.velocity.rotated(-_player._gameplay_rotation).y * sign(_player._gravity_multiplier) > 0:
+			_player._rebound_velocity = _player.velocity.rotated(-_player._gameplay_rotation).y
+		elif _player.velocity.rotated(-_player._gameplay_rotation).y == 0 and _player._get_jump_state() == -1 and _player.is_on_floor() and $ReboundCancelArea.has_overlapping_bodies():
+			_player._rebound_velocity = 0.0
+
 	if has_node("ParticleEmitter"):
 		$ParticleEmitter.process_material.gravity = Vector3(
 			Vector2(

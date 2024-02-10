@@ -56,6 +56,7 @@ var _gameplay_rotation_degrees: float = 0.0
 var _gameplay_rotation: float
 var _last_spider_trail: GDSpiderTrail
 var _last_spider_trail_height: float
+var _rebound_velocity: float
 
 # Bit flags
 var _orb_collisions: int
@@ -76,8 +77,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if _last_spider_trail != null:
 		add_child(_last_spider_trail)
-		_last_spider_trail._global_position = $Icon/Spider/SpiderTrailSpawnPoint.global_position
+		_last_spider_trail._global_position = $Icon/Spider/SpiderTrailSpawnPoint.global_position if not _reverse \
+			else $Icon/Spider/SpiderTrailSpawnPointReverse.global_position
 		_last_spider_trail._scale_y = abs(_last_spider_trail_height) * sign(_gravity_multiplier)
+		_last_spider_trail._scale_x = 1.0 if _reverse else -1.0
 		_last_spider_trail = null
 
 func _get_direction() -> int:
@@ -135,7 +138,7 @@ func _compute_velocity(_delta: float,
 		_velocity.y = clamp(_velocity.y, -TERMINAL_VELOCITY.y, TERMINAL_VELOCITY.y)
 #endsection
 
-	if is_on_floor() and _jump_state == -1:
+	if is_on_floor() and _jump_state == -1 and _pad_collisions == 0:
 		_velocity.y = 0.0
 
 #section Pad Collisions
@@ -150,9 +153,8 @@ func _compute_velocity(_delta: float,
 			_velocity.y = -_speed.y * (365.0/194.0)
 			_pad_collisions &= ~GDInteractible.Pad.RED
 		elif _pad_collisions & GDInteractible.Pad.REBOUND:
-			_velocity.y *= -1
+			_velocity.y = -_rebound_velocity
 			_pad_collisions &= ~GDInteractible.Pad.REBOUND
-	
 	# These pads are supposed to work with the wave
 	if _pad_collisions & GDInteractible.Pad.SPIDER:
 		_gravity_multiplier *= -1

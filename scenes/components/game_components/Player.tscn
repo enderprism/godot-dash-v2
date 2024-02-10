@@ -179,6 +179,9 @@ texture = ExtResource("2_6ab5b")
 [node name="SpiderTrailSpawnPoint" type="Marker2D" parent="Icon/Spider"]
 position = Vector2(64, -64)
 
+[node name="SpiderTrailSpawnPointReverse" type="Marker2D" parent="Icon/Spider"]
+position = Vector2(-64, -64)
+
 [node name="SpiderCast" type="ShapeCast2D" parent="Icon/Spider"]
 modulate = Color(0, 0, 0, 0.301961)
 show_behind_parent = true
