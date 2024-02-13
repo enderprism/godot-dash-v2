@@ -2,18 +2,18 @@
 
 [ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_218k0"]
 [ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="2_2ovfi"]
-[ext_resource type="Texture2D" uid="uid://cvrhuk7gkomp1" path="res://assets/textures/particles/Square.png" id="3_0m2ra"]
+[ext_resource type="PackedScene" uid="uid://05h0teol0odp" path="res://scenes/particle_emitter_presets/PadParticles.tscn" id="2_812fi"]
 [ext_resource type="Texture2D" uid="uid://dwu2fxe16epee" path="res://assets/textures/pads/YellowPad.svg" id="4_qk8gr"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/OrbPadPlayerInteractEffect.svg" id="5_f7osb"]
+[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="5_f7osb"]
 
 [sub_resource type="Curve" id="Curve_6hqd0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_dol5j"]
+[sub_resource type="CurveTexture" id="CurveTexture_gy0q0"]
 curve = SubResource("Curve_6hqd0")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ctvm8"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x85lj"]
 resource_local_to_scene = true
 particle_flag_align_y = true
 particle_flag_disable_z = true
@@ -22,7 +22,7 @@ emission_box_extents = Vector3(40, 0, 0)
 gravity = Vector3(0, -128, 0)
 scale_min = 0.25
 scale_max = 0.25
-scale_curve = SubResource("CurveTexture_dol5j")
+scale_curve = SubResource("CurveTexture_gy0q0")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4v8oj"]
 size = Vector2(98, 18)
@@ -33,24 +33,20 @@ script = ExtResource("1_218k0")
 object_type = 1
 _pad_type = 1
 
-[node name="ParticleEmitter" type="GPUParticles2D" parent="."]
+[node name="ParticleEmitter" parent="." instance=ExtResource("2_812fi")]
 modulate = Color(1, 1, 0, 1)
-material = ExtResource("2_2ovfi")
 position = Vector2(0, 57)
-amount = 30
-process_material = SubResource("ParticleProcessMaterial_ctvm8")
-texture = ExtResource("3_0m2ra")
-preprocess = 5.0
+process_material = SubResource("ParticleProcessMaterial_x85lj")
 
 [node name="YellowPad" type="Sprite2D" parent="."]
 texture = ExtResource("4_qk8gr")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 57)
 shape = SubResource("RectangleShape2D_4v8oj")
-debug_color = Color(0, 1, 0, 0.419608)
+debug_color = Color(0, 1, 0, 0)
 
-[node name="Circle" type="Sprite2D" parent="."]
+[node name="PulseGrow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 0, 1)
 z_index = 51
 material = ExtResource("2_2ovfi")

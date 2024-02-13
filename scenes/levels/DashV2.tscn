@@ -1,97 +1,110 @@
-[gd_scene load_steps=13 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=12 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
-[ext_resource type="PackedScene" uid="uid://ccdry45jmn43w" path="res://scenes/components/level_components/solids/DefaultCube.tscn" id="4_ybmr0"]
-[ext_resource type="Script" path="res://resources/GDSpawnedGroup.gd" id="6_1sfbj"]
-[ext_resource type="PackedScene" uid="uid://bf1l71kmqh0i0" path="res://scenes/components/level_components/pads/RedPad.tscn" id="8_8fi0x"]
-[ext_resource type="PackedScene" uid="uid://cjbdfuvh8nxcn" path="res://scenes/components/level_components/pads/ReboundPad.tscn" id="9_tyffj"]
-[ext_resource type="PackedScene" uid="uid://nsvkooc5od83" path="res://scenes/components/level_components/pads/YellowPad.tscn" id="11_l1bej"]
-[ext_resource type="PackedScene" uid="uid://cugg15j2jxyay" path="res://scenes/components/level_components/pads/PinkPad.tscn" id="12_46q4f"]
-[ext_resource type="PackedScene" uid="uid://ht60eohfg08" path="res://scenes/components/level_components/pads/SpiderPad.tscn" id="13_n82n6"]
-[ext_resource type="PackedScene" uid="uid://dnah6ge1p0rr3" path="res://scenes/components/level_components/pads/BluePad.tscn" id="14_2dnjn"]
-
-[sub_resource type="Resource" id="Resource_a443c"]
-script = ExtResource("6_1sfbj")
-path = NodePath("../Solid4")
-time = 0.5
-
-[sub_resource type="Resource" id="Resource_21lda"]
-script = ExtResource("6_1sfbj")
-path = NodePath("../BluePad4")
-time = 0.9
+[ext_resource type="PackedScene" uid="uid://d0dk4786hlokq" path="res://scenes/components/level_components/orbs/BlueOrb.tscn" id="4_hh450"]
+[ext_resource type="PackedScene" uid="uid://bbcetmg5ilsc1" path="res://scenes/components/level_components/orbs/TeleportationOrb.tscn" id="5_w14p8"]
+[ext_resource type="PackedScene" uid="uid://ccdry45jmn43w" path="res://scenes/components/level_components/solids/DefaultCube.tscn" id="6_jdq35"]
+[ext_resource type="PackedScene" uid="uid://dnah6ge1p0rr3" path="res://scenes/components/level_components/pads/BluePad.tscn" id="7_gjkul"]
+[ext_resource type="PackedScene" uid="uid://33mc0xa2wc8i" path="res://scenes/components/level_components/orbs/SpiderOrb.tscn" id="8_lrpx2"]
+[ext_resource type="PackedScene" uid="uid://cglxf6jw4fmi" path="res://scenes/components/level_components/orbs/RedOrb.tscn" id="8_q4nd8"]
+[ext_resource type="PackedScene" uid="uid://cugg15j2jxyay" path="res://scenes/components/level_components/pads/PinkPad.tscn" id="10_bl823"]
+[ext_resource type="PackedScene" uid="uid://dvxuhegi7klq8" path="res://scenes/components/level_components/orbs/DashOrbGreen.tscn" id="10_i63c4"]
+[ext_resource type="PackedScene" uid="uid://cd4end0ruw2y3" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal05x.tscn" id="11_v01jb"]
 
 [node name="Dash V2" type="Node2D"]
 script = ExtResource("1_7ju0m")
 song = ExtResource("2_8grye")
 metadata/_edit_lock_ = true
 
-[node name="Solid4" parent="." instance=ExtResource("4_ybmr0")]
-position = Vector2(4416, -576)
-scale = Vector2(5, 1)
+[node name="BlueOrb" parent="." instance=ExtResource("4_hh450")]
+position = Vector2(512, -128)
+_freefly = true
+_mirror_screen = null
+_dual = null
 
-[node name="Solid8" parent="." instance=ExtResource("4_ybmr0")]
-position = Vector2(5312, -448)
-scale = Vector2(5, 1)
+[node name="TeleportationOrb" parent="." node_paths=PackedStringArray("_teleport_target") instance=ExtResource("5_w14p8")]
+self_modulate = Color(0, 0.505882, 1, 1)
+position = Vector2(1088, -704)
+_freefly = true
+_teleport_target = NodePath("../TeleportationOrb2")
+_mirror_screen = null
+_dual = null
 
-[node name="Solid9" parent="." instance=ExtResource("4_ybmr0")]
-position = Vector2(5504, -832)
-scale = Vector2(3, 1)
-
-[node name="YellowPad" parent="." instance=ExtResource("11_l1bej")]
-position = Vector2(2240, -64)
-_spawned_groups = null
-
-[node name="PinkPad" parent="." instance=ExtResource("12_46q4f")]
-position = Vector2(3392, -64)
-_spawned_groups = Array[ExtResource("6_1sfbj")]([SubResource("Resource_a443c"), SubResource("Resource_21lda")])
-
-[node name="SpiderPad3" parent="." instance=ExtResource("13_n82n6")]
+[node name="TeleportationOrb3" parent="." node_paths=PackedStringArray("_teleport_target") instance=ExtResource("5_w14p8")]
+self_modulate = Color(0, 0.505882, 1, 1)
 position = Vector2(4160, -64)
-rotation = 6.28318
-_horizontal_direction = 1
-_spawned_groups = null
+_freefly = true
+_teleport_target = NodePath("../TeleportationOrb4")
+_mirror_screen = null
+_dual = null
 
-[node name="SpiderPad4" parent="." instance=ExtResource("13_n82n6")]
-position = Vector2(4672, -448)
+[node name="TeleportationOrb2" parent="." instance=ExtResource("5_w14p8")]
+self_modulate = Color(1, 0.537255, 0, 1)
+position = Vector2(768, -896)
 rotation = 3.14159
-_spawned_groups = null
+_freefly = true
+_mirror_screen = null
+_dual = null
 
-[node name="BluePad" parent="." instance=ExtResource("14_2dnjn")]
-position = Vector2(5056, -64)
-_spawned_groups = null
+[node name="TeleportationOrb4" parent="." instance=ExtResource("5_w14p8")]
+self_modulate = Color(1, 0.537255, 0, 1)
+position = Vector2(4160, -896)
+rotation = 3.14159
+_freefly = true
+_mirror_screen = null
+_dual = null
 
-[node name="BluePad2" parent="." instance=ExtResource("14_2dnjn")]
-position = Vector2(5568, -320)
+[node name="DefaultCube" parent="." instance=ExtResource("6_jdq35")]
+position = Vector2(960, -384)
+scale = Vector2(5, 1)
+
+[node name="DefaultCube2" parent="." instance=ExtResource("6_jdq35")]
+position = Vector2(2880, -1088)
+scale = Vector2(15, 1)
+
+[node name="BluePad" parent="." instance=ExtResource("7_gjkul")]
+position = Vector2(832, -64)
+_freefly = true
+_mirror_screen = null
+_dual = null
+
+[node name="BluePad2" parent="." instance=ExtResource("7_gjkul")]
+position = Vector2(1216, -256)
+rotation = -3.14159
+_freefly = true
+_mirror_screen = null
+_dual = null
+
+[node name="RedOrb" parent="." instance=ExtResource("8_q4nd8")]
+position = Vector2(320, -128)
+_freefly = true
+_mirror_screen = null
+_dual = null
+
+[node name="SpiderOrb" parent="." instance=ExtResource("8_lrpx2")]
+position = Vector2(2496, -192)
+_horizontal_direction = 2
+_mirror_screen = null
+_dual = null
+
+[node name="SpiderOrb2" parent="." instance=ExtResource("8_lrpx2")]
+position = Vector2(1664, -832)
 rotation = 3.14159
 _horizontal_direction = 2
-_reverse = true
-_spawned_groups = null
+_mirror_screen = null
+_dual = null
 
-[node name="BluePad3" parent="." instance=ExtResource("14_2dnjn")]
-position = Vector2(5504, -704)
-rotation = 3.14159
-
-[node name="BluePad4" parent="." instance=ExtResource("14_2dnjn")]
-position = Vector2(5376, -704)
-rotation = 3.14159
-_spawned_groups = null
-
-[node name="BluePad5" parent="." instance=ExtResource("14_2dnjn")]
-position = Vector2(5632, -704)
-rotation = 3.14159
-_spawned_groups = null
-
-[node name="PinkPad2" parent="." instance=ExtResource("8_8fi0x")]
-position = Vector2(704, -64)
-_horizontal_direction = 1
-_spawned_groups = null
-
-[node name="ReboundPad2" parent="." instance=ExtResource("9_tyffj")]
+[node name="PinkPad" parent="." instance=ExtResource("10_bl823")]
 position = Vector2(3008, -64)
-_spawned_groups = null
+_mirror_screen = null
+_dual = null
 
-[node name="ReboundPad4" parent="." instance=ExtResource("9_tyffj")]
-position = Vector2(6336, -1216)
-rotation = 3.14159
-_spawned_groups = null
+[node name="DashOrbGreen" parent="." instance=ExtResource("10_i63c4")]
+position = Vector2(1792, -512)
+rotation = -0.523598
+_mirror_screen = null
+_dual = null
+
+[node name="SpeedPortal05x" parent="." instance=ExtResource("11_v01jb")]
+position = Vector2(1472, -192)

@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://43t0kgu3lhyt"]
+
+[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_xonqy"]
+[ext_resource type="Texture2D" uid="uid://c2ngjixel2d42" path="res://assets/textures/orbs/ToggleOrbOutline.svg" id="2_4qwcb"]
+[ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_803s0"]
+[ext_resource type="Texture2D" uid="uid://cddn6sfd4abug" path="res://assets/textures/orbs/ToggleOrbFill.svg" id="3_2jqxi"]
+[ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="5_sef7t"]
+[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="6_832d6"]
+[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="7_gccei"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwypc"]
+size = Vector2(128, 128)
+
+[node name="ToggleOrb" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_xonqy")
+_orb_type = 2048
+
+[node name="ParticleEmitter" parent="." instance=ExtResource("2_803s0")]
+
+[node name="Outline" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_4qwcb")
+
+[node name="Fill" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_2jqxi")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+scale = Vector2(1.2, 1.2)
+shape = SubResource("RectangleShape2D_jwypc")
+debug_color = Color(0, 1, 0, 0)
+
+[node name="PulseGrow" type="Sprite2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("5_sef7t")
+
+[node name="PulseShrink" type="Sprite2D" parent="."]
+material = ExtResource("6_832d6")
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("7_gccei")

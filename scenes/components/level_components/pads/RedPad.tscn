@@ -1,19 +1,19 @@
 [gd_scene load_steps=10 format=3 uid="uid://bf1l71kmqh0i0"]
 
 [ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_f3ijl"]
+[ext_resource type="PackedScene" uid="uid://05h0teol0odp" path="res://scenes/particle_emitter_presets/PadParticles.tscn" id="2_287b4"]
 [ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="2_yin3r"]
-[ext_resource type="Texture2D" uid="uid://cvrhuk7gkomp1" path="res://assets/textures/particles/Square.png" id="3_tlrkf"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/OrbPadPlayerInteractEffect.svg" id="5_ty4n2"]
+[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="5_ty4n2"]
 [ext_resource type="Texture2D" uid="uid://cbbt17ufbgqqu" path="res://assets/textures/pads/RedPad.svg" id="6_ielrm"]
 
-[sub_resource type="Curve" id="Curve_5udhs"]
+[sub_resource type="Curve" id="Curve_6hqd0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_dol5j"]
-curve = SubResource("Curve_5udhs")
+[sub_resource type="CurveTexture" id="CurveTexture_gy0q0"]
+curve = SubResource("Curve_6hqd0")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w36s8"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h36jg"]
 resource_local_to_scene = true
 particle_flag_align_y = true
 particle_flag_disable_z = true
@@ -22,7 +22,7 @@ emission_box_extents = Vector3(40, 0, 0)
 gravity = Vector3(0, -128, 0)
 scale_min = 0.25
 scale_max = 0.25
-scale_curve = SubResource("CurveTexture_dol5j")
+scale_curve = SubResource("CurveTexture_gy0q0")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twl62"]
 size = Vector2(112, 24)
@@ -33,24 +33,20 @@ script = ExtResource("1_f3ijl")
 object_type = 1
 _pad_type = 4
 
-[node name="ParticleEmitter" type="GPUParticles2D" parent="."]
+[node name="ParticleEmitter" parent="." instance=ExtResource("2_287b4")]
 modulate = Color(1, 0.2, 0.239216, 1)
-material = ExtResource("2_yin3r")
 position = Vector2(0, 57)
-amount = 30
-process_material = SubResource("ParticleProcessMaterial_w36s8")
-texture = ExtResource("3_tlrkf")
-preprocess = 5.0
+process_material = SubResource("ParticleProcessMaterial_h36jg")
 
 [node name="RedPad" type="Sprite2D" parent="."]
 texture = ExtResource("6_ielrm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 52)
 shape = SubResource("RectangleShape2D_twl62")
-debug_color = Color(0, 1, 0, 0.419608)
+debug_color = Color(0, 1, 0, 0)
 
-[node name="Circle" type="Sprite2D" parent="."]
+[node name="PulseGrow" type="Sprite2D" parent="."]
 modulate = Color(1, 0.2, 0.239216, 1)
 z_index = 51
 material = ExtResource("2_yin3r")

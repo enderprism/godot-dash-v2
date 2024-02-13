@@ -25,11 +25,11 @@
      inkscape:document-units="px"
      inkscape:zoom="6.1875005"
      inkscape:cx="28.12121"
-     inkscape:cy="116.84848"
+     inkscape:cy="116.92928"
      inkscape:window-width="944"
-     inkscape:window-height="1019"
+     inkscape:window-height="504"
      inkscape:window-x="962"
-     inkscape:window-y="47"
+     inkscape:window-y="562"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" /><defs
      id="defs1"><inkscape:path-effect
@@ -77,7 +77,8 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1"><path
-       id="path2"
-       style="color:#000000;fill:#ffffff;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none;paint-order:stroke fill markers"
-       d="M 16.929717 29.56624 C 15.031051 29.57104 13.102259 29.586545 11.322307 29.874748 C 9.4112929 30.18417 7.7853616 30.799308 6.4941781 31.550615 C 5.2029939 32.301921 4.2953646 33.16559 3.4824756 33.933415 A 1.322915 1.322915 0 0 0 3.073715 34.896147 L 4.3899137 34.896147 C 5.2028027 34.128323 6.0158009 33.360677 7.1602873 32.694731 C 8.3047735 32.028784 9.7809302 31.464572 11.534697 31.180612 C 13.168187 30.916124 15.04246 30.894483 16.933334 30.889673 C 18.824208 30.894473 20.698483 30.916128 22.331971 31.180612 C 24.085738 31.464572 25.561895 32.028784 26.706381 32.694731 C 27.850868 33.360677 28.663866 34.128323 29.476755 34.896147 L 30.797604 34.896147 A 1.322915 1.322915 0 0 0 30.38471 33.933415 C 29.571816 33.16559 28.662124 32.301921 27.37094 31.550615 C 26.079756 30.799308 24.453825 30.18417 22.542811 29.874748 C 20.762859 29.586547 18.836135 29.57107 16.937468 29.56624 A 1.3230472 1.3230472 0 0 0 16.929717 29.56624 z "
+       style="display:inline;fill:none;stroke:#ffffff;stroke-width:2.64583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       d="m 4.390035,34.896202 c 0.8128906,-0.767826 1.625772,-1.535643 2.7702606,-2.201591 1.1444886,-0.665949 2.6205544,-1.230013 4.3743254,-1.513975 1.633492,-0.264488 3.507834,-0.285964 5.398712,-0.290774 1.890878,0.0048 3.76522,0.02629 5.398712,0.290774 1.753771,0.283962 3.229837,0.848026 4.374325,1.513975 1.144489,0.665948 1.95737,1.433765 2.770261,2.201591"
+       id="path1"
+       sodipodi:nodetypes="cccc"
        transform="translate(-7.5e-7,-8.5639583e-5)" /></g></svg>

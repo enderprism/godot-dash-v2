@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmb3bpsvcre7y"]
+
+[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_abic0"]
+[ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_vhs35"]
+[ext_resource type="Texture2D" uid="uid://fw4dir7i5dm1" path="res://assets/textures/orbs/BlackOrb.svg" id="3_eu14b"]
+[ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="4_fioah"]
+[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="6_r7324"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwypc"]
+size = Vector2(128, 128)
+
+[node name="BlackOrb" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_abic0")
+_orb_type = 32
+_other_portal_type = 2
+_freefly = true
+
+[node name="ParticleEmitter" parent="." instance=ExtResource("2_vhs35")]
+modulate = Color(0.121569, 0.121569, 0.121569, 1)
+material = null
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_eu14b")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+scale = Vector2(1.2, 1.2)
+shape = SubResource("RectangleShape2D_jwypc")
+debug_color = Color(0, 1, 0, 0)
+
+[node name="PulseGrow" type="Sprite2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("4_fioah")
+
+[node name="PulseShrink" type="Sprite2D" parent="."]
+modulate = Color(0.121569, 0.121569, 0.121569, 1)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("6_r7324")

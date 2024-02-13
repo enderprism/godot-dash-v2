@@ -1,0 +1,62 @@
+[gd_scene load_steps=13 format=3 uid="uid://c53uyku2qt2pb"]
+
+[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="1_o67rb"]
+[ext_resource type="Texture2D" uid="uid://cmelnnj26eea5" path="res://assets/textures/player/dash_orb/dash_orb_boom/DashBoom1.png" id="1_p6llo"]
+[ext_resource type="Texture2D" uid="uid://bfk8ufki40wnj" path="res://assets/textures/player/dash_orb/dash_orb_boom/DashBoom2.png" id="2_qd4nt"]
+[ext_resource type="Texture2D" uid="uid://c111h2kcdqnpm" path="res://assets/textures/player/dash_orb/dash_orb_boom/DashBoom3.png" id="3_rl5i5"]
+[ext_resource type="Texture2D" uid="uid://cin1bj1g28ms1" path="res://assets/textures/player/dash_orb/dash_orb_boom/DashBoom4.png" id="4_vxcsy"]
+[ext_resource type="Texture2D" uid="uid://c0nayyj0wvvxv" path="res://assets/textures/player/dash_orb/dash_orb_boom/DashBoom5.png" id="5_3er0m"]
+[ext_resource type="Texture2D" uid="uid://du6lr58bcrwvo" path="res://assets/textures/player/dash_orb/dash_orb_boom/DashBoom6.png" id="6_0cdls"]
+[ext_resource type="Texture2D" uid="uid://cxncrqn6oy2uo" path="res://assets/textures/player/dash_orb/dash_orb_boom/DashBoom7.png" id="7_c4wnh"]
+[ext_resource type="Texture2D" uid="uid://dx0vu56ian3tw" path="res://assets/textures/player/dash_orb/dash_orb_boom/DashBoom8.png" id="8_oeh4o"]
+[ext_resource type="Texture2D" uid="uid://cdq7c26ac45d3" path="res://assets/textures/player/dash_orb/dash_orb_boom/DashBoom9.png" id="9_hivtv"]
+[ext_resource type="Script" path="res://src/components/GDChildPositionLock.gd" id="11_f68mf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5xf5y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_p6llo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qd4nt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rl5i5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vxcsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3er0m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0cdls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_c4wnh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_oeh4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_hivtv")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="DashBoom" type="AnimatedSprite2D"]
+modulate = Color(0, 1, 1, 1)
+material = ExtResource("1_o67rb")
+sprite_frames = SubResource("SpriteFrames_5xf5y")
+autoplay = "default"
+frame = 9
+frame_progress = 1.0
+script = ExtResource("11_f68mf")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

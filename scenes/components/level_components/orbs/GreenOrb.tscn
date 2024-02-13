@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://danxhobafrnci"]
+
+[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_rhyrg"]
+[ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_1dxkm"]
+[ext_resource type="Texture2D" uid="uid://c2yhbwvo7g3jj" path="res://assets/textures/orbs/GreenOrb.svg" id="3_iopft"]
+[ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="4_n16vf"]
+[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="5_gr2rq"]
+[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="5_ms3c4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwypc"]
+size = Vector2(128, 128)
+
+[node name="GreenOrb" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_rhyrg")
+_orb_type = 16
+_other_portal_type = 2
+_freefly = true
+
+[node name="ParticleEmitter" parent="." instance=ExtResource("2_1dxkm")]
+modulate = Color(0.364706, 1, 0.172549, 1)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_iopft")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+scale = Vector2(1.2, 1.2)
+shape = SubResource("RectangleShape2D_jwypc")
+debug_color = Color(0, 1, 0, 0)
+
+[node name="PulseGrow" type="Sprite2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("4_n16vf")
+
+[node name="PulseShrink" type="Sprite2D" parent="."]
+modulate = Color(0.364706, 1, 0.172549, 1)
+material = ExtResource("5_gr2rq")
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("5_ms3c4")

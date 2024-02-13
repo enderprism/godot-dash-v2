@@ -1,13 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctf8cfrxbjfdk"]
+[gd_scene load_steps=12 format=3 uid="uid://ctf8cfrxbjfdk"]
 
 [ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_n2coa"]
-[ext_resource type="Texture2D" uid="uid://cilrx38i18agf" path="res://assets/textures/portals/ship_portal/ShipPortalBack.png" id="2_cs1mo"]
-[ext_resource type="Texture2D" uid="uid://byomqjoflsnnw" path="res://assets/textures/portals/ship_portal/ShipPortalFront.png" id="3_kgeug"]
-[ext_resource type="Texture2D" uid="uid://c4mobi87veuqk" path="res://assets/textures/portals/ship_portal/ShipPortalIndicatorBG.png" id="4_u5rr6"]
-[ext_resource type="Texture2D" uid="uid://6rnw7yavnvg7" path="res://assets/textures/portals/ship_portal/ShipPortalIndicatorIcon.png" id="5_dwkn1"]
+[ext_resource type="Texture2D" uid="uid://cilrx38i18agf" path="res://assets/textures/portals/gamemode_portals/ship_portal/ShipPortalBack.png" id="2_cs1mo"]
+[ext_resource type="Shader" path="res://resources/ColorPulse.gdshader" id="2_eb732"]
+[ext_resource type="Texture2D" uid="uid://byomqjoflsnnw" path="res://assets/textures/portals/gamemode_portals/ship_portal/ShipPortalFront.png" id="3_kgeug"]
+[ext_resource type="Texture2D" uid="uid://c4mobi87veuqk" path="res://assets/textures/portals/gamemode_portals/ship_portal/ShipPortalIndicatorBG.png" id="4_u5rr6"]
+[ext_resource type="Texture2D" uid="uid://6rnw7yavnvg7" path="res://assets/textures/portals/gamemode_portals/ship_portal/ShipPortalIndicatorIcon.png" id="5_dwkn1"]
+[ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="6_kigd0"]
+[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="7_6rd21"]
+[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="8_41ghv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
 size = Vector2(128, 384)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hn81s"]
+shader = ExtResource("2_eb732")
+shader_parameter/shine_color = Color(1, 1, 1, 0)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 1.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 2
 
 [node name="ShipPortal" type="Area2D"]
 collision_layer = 8
@@ -18,24 +30,40 @@ metadata/_edit_group_ = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cghk8")
-debug_color = Color(0, 0.701961, 0.0823529, 0.419608)
+debug_color = Color(0, 1, 0, 0)
 
-[node name="ShipPortalBack" type="Sprite2D" parent="."]
+[node name="Sprites" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_hn81s")
+
+[node name="ShipPortalBack" type="Sprite2D" parent="Sprites"]
 z_index = -1
+use_parent_material = true
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("2_cs1mo")
 
-[node name="ShipPortalFront" type="Sprite2D" parent="."]
+[node name="ShipPortalFront" type="Sprite2D" parent="Sprites"]
 z_index = 1
+use_parent_material = true
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("3_kgeug")
 
-[node name="ShipPortalIndicatorBg" type="Sprite2D" parent="."]
+[node name="ShipPortalIndicatorBg" type="Sprite2D" parent="Sprites"]
 z_index = 1
+use_parent_material = true
 position = Vector2(48, 0)
 texture = ExtResource("4_u5rr6")
 
-[node name="IndicatorIcon" type="Sprite2D" parent="."]
+[node name="IndicatorIcon" type="Sprite2D" parent="Sprites"]
 z_index = 1
+use_parent_material = true
 position = Vector2(44, 0)
 texture = ExtResource("5_dwkn1")
+
+[node name="ParticleEmitter" parent="." instance=ExtResource("6_kigd0")]
+modulate = Color(1, 0.121569, 1, 1)
+
+[node name="PulseShrink" type="Sprite2D" parent="."]
+modulate = Color(1, 0.121569, 1, 1)
+material = ExtResource("7_6rd21")
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("8_41ghv")

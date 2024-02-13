@@ -11,13 +11,27 @@ collision_layer = 2
 script = ExtResource("1_8i826")
 metadata/_edit_group_ = true
 
-[node name="RegularBlock01" type="Sprite2D" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(256, 256)
 texture = ExtResource("2_yn5k1")
-region_enabled = true
-region_rect = Rect2(0, 0, 512, 512)
+patch_margin_left = 35
+patch_margin_top = 35
+patch_margin_right = 35
+patch_margin_bottom = 35
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_l5xdm")
 one_way_collision = true
-debug_color = Color(0, 0.0588235, 0.701961, 0.203922)
+debug_color = Color(0, 0.0588235, 0.701961, 0.196078)

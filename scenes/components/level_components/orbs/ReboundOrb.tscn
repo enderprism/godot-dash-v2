@@ -1,0 +1,68 @@
+[gd_scene load_steps=12 format=3 uid="uid://ckkbbbslsv0pg"]
+
+[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_ew07g"]
+[ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_ndx7n"]
+[ext_resource type="Texture2D" uid="uid://bdy8wcalqbwiu" path="res://assets/textures/orbs/ReboundOrbOuterOutline.svg" id="3_s8hqh"]
+[ext_resource type="Texture2D" uid="uid://dar1nqnlymki6" path="res://assets/textures/orbs/ReboundOrbFill.svg" id="4_mkr36"]
+[ext_resource type="Texture2D" uid="uid://bjbe424vr8rtw" path="res://assets/textures/orbs/ReboundOrbInnerOutline.svg" id="4_tdstw"]
+[ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="5_jahis"]
+[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="6_c455q"]
+[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="7_w7wsg"]
+
+[sub_resource type="Gradient" id="Gradient_7adnw"]
+offsets = PackedFloat32Array(0, 0.333, 0.667, 1)
+colors = PackedColorArray(1, 0.8, 0.8, 1, 1, 1, 0, 1, 1, 0.492188, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1vqf"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwypc"]
+size = Vector2(128, 128)
+
+[node name="ReboundOrb" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_ew07g")
+_orb_type = 512
+_rebound_gradient = SubResource("Gradient_7adnw")
+
+[node name="ParticleEmitter" parent="." instance=ExtResource("2_ndx7n")]
+modulate = Color(1, 0.796078, 0.796078, 1)
+
+[node name="OuterOutline" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_s8hqh")
+
+[node name="ReboundObjectScaleOrigin" type="Marker2D" parent="."]
+
+[node name="Outline" type="Sprite2D" parent="ReboundObjectScaleOrigin"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_tdstw")
+
+[node name="Fill" type="Sprite2D" parent="ReboundObjectScaleOrigin"]
+modulate = Color(1, 0.796078, 0.796078, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_mkr36")
+
+[node name="ReboundCancelArea" type="Area2D" parent="."]
+editor_description = "Cancels the rebound velocity if the player isn't falling in this area."
+collision_layer = 8
+
+[node name="Hitbox" type="CollisionShape2D" parent="ReboundCancelArea"]
+scale = Vector2(2.4, 1.2)
+shape = SubResource("RectangleShape2D_c1vqf")
+debug_color = Color(0.223529, 0.498039, 0, 0)
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+scale = Vector2(1.2, 1.2)
+shape = SubResource("RectangleShape2D_jwypc")
+debug_color = Color(0, 1, 0, 0)
+
+[node name="PulseGrow" type="Sprite2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("5_jahis")
+
+[node name="PulseShrink" type="Sprite2D" parent="."]
+modulate = Color(1, 0.796078, 0.796078, 1)
+material = ExtResource("6_c455q")
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("7_w7wsg")

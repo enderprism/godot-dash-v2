@@ -15,4 +15,4 @@ texture = ExtResource("1_yfgdv")
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 27.5)
 shape = SubResource("RectangleShape2D_hu62t")
-debug_color = Color(0.960784, 0, 0, 0.419608)
+debug_color = Color(0.960784, 0, 0, 0)

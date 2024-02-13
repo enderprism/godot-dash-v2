@@ -1,27 +1,83 @@
-[gd_scene load_steps=32 format=3 uid="uid://bl48psvuka73y"]
+[gd_scene load_steps=45 format=3 uid="uid://bl48psvuka73y"]
 
 [ext_resource type="Script" path="res://src/Player.gd" id="1_nvqsc"]
 [ext_resource type="Texture2D" uid="uid://omcvgcf1uk5p" path="res://assets/textures/player/cube/Cube.svg" id="2_6ab5b"]
+[ext_resource type="Texture2D" uid="uid://1mnqmwellt2q" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame1.png" id="2_mjacn"]
 [ext_resource type="Script" path="res://addons/trail_2d/trail_2d.gd" id="2_s0etf"]
 [ext_resource type="Script" path="res://src/components/GDIconGamemodeProp.gd" id="2_sxyn3"]
+[ext_resource type="Texture2D" uid="uid://da262ssovimq3" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame2.png" id="3_go6vy"]
+[ext_resource type="Texture2D" uid="uid://c0yd5dehfdmfb" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame3.png" id="4_lmais"]
 [ext_resource type="Texture2D" uid="uid://b54ubk48x1iu1" path="res://assets/textures/player/ship/Ship.svg" id="4_mqpwg"]
+[ext_resource type="Texture2D" uid="uid://bqtjw0dj4adi0" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame4.png" id="5_5qxcb"]
 [ext_resource type="Texture2D" uid="uid://dc6xv64ap0xqk" path="res://assets/textures/player/FireBoost.png" id="5_34x12"]
 [ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="5_dvha5"]
 [ext_resource type="Texture2D" uid="uid://cvrhuk7gkomp1" path="res://assets/textures/particles/Square.png" id="5_qm8k0"]
 [ext_resource type="Texture2D" uid="uid://c4eickhp3v3uy" path="res://assets/textures/player/swing/SwingGlow.svg" id="6_6vub1"]
 [ext_resource type="Texture2D" uid="uid://blyx75lqpafjt" path="res://assets/textures/player/death_effect/DeathEffect1.png" id="6_7vph0"]
+[ext_resource type="Texture2D" uid="uid://5b4w3lcvvo7y" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame5.png" id="6_owbcc"]
 [ext_resource type="Texture2D" uid="uid://d3amssdvmvmr7" path="res://assets/textures/player/death_effect/DeathEffect2.png" id="7_6qmxy"]
+[ext_resource type="Texture2D" uid="uid://desukkfdjcyt6" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame6.png" id="7_pyfou"]
 [ext_resource type="Texture2D" uid="uid://crdnjnclglcuc" path="res://assets/textures/player/swing/SwingNoGlow.svg" id="7_qd53y"]
+[ext_resource type="Texture2D" uid="uid://jlphwup1ny0n" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame7.png" id="8_7k8wd"]
 [ext_resource type="Texture2D" uid="uid://b320v0xosyxbe" path="res://assets/textures/player/death_effect/DeathEffect3.png" id="8_mvuhw"]
+[ext_resource type="Texture2D" uid="uid://bn7xmnthn03vd" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame8.png" id="9_1v0ar"]
 [ext_resource type="Texture2D" uid="uid://cir8movmh6iqs" path="res://assets/textures/player/death_effect/DeathEffect4.png" id="9_6ucl4"]
+[ext_resource type="Texture2D" uid="uid://7i2o538tocnk" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame9.png" id="10_75sd8"]
 [ext_resource type="Texture2D" uid="uid://cde8d3baybtg3" path="res://assets/textures/player/death_effect/DeathEffect5.png" id="10_ahecb"]
+[ext_resource type="Texture2D" uid="uid://csm0u7ad5qmwv" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame10.png" id="11_3oskt"]
 [ext_resource type="Texture2D" uid="uid://c8v2272sja861" path="res://assets/textures/player/death_effect/DeathEffect6.png" id="11_hi4a5"]
 [ext_resource type="Texture2D" uid="uid://bpy13a0h4xapo" path="res://assets/textures/player/death_effect/DeathEffect7.png" id="12_3a4d0"]
+[ext_resource type="Texture2D" uid="uid://46uma0gih3kj" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame11.png" id="12_m0gkk"]
+[ext_resource type="Texture2D" uid="uid://c4r0y3sf05frk" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame12.png" id="13_v1y8k"]
 [ext_resource type="Texture2D" uid="uid://ueo08l1tglg1" path="res://assets/textures/player/death_effect/DeathEffect8.png" id="13_wjvdp"]
 [ext_resource type="Texture2D" uid="uid://cfeorbji3dtdx" path="res://assets/textures/player/death_effect/DeathEffect9.png" id="14_ytq4k"]
 [ext_resource type="Texture2D" uid="uid://br8sou620rxv4" path="res://assets/textures/player/death_effect/DeathEffect10.png" id="15_tt21x"]
 [ext_resource type="Texture2D" uid="uid://btd3nl8o3v0ij" path="res://assets/textures/player/death_effect/DeathEffect11.png" id="16_4ncex"]
 [ext_resource type="Texture2D" uid="uid://ci828dwxt326b" path="res://assets/textures/player/death_effect/DeathEffect12.png" id="17_ctfuu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_whmfp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mjacn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_go6vy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lmais")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5qxcb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_owbcc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pyfou")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7k8wd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_1v0ar")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_75sd8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3oskt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_m0gkk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_v1y8k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8d76"]
 size = Vector2(128, 128)
@@ -128,6 +184,16 @@ floor_max_angle = 1.55334
 floor_snap_length = 32.0
 script = ExtResource("1_nvqsc")
 
+[node name="DashFlame" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(0, 1, 1, 1)
+material = ExtResource("5_dvha5")
+scale = Vector2(1.3, 1.3)
+sprite_frames = SubResource("SpriteFrames_whmfp")
+autoplay = "default"
+frame_progress = 0.0377119
+offset = Vector2(-96, 0)
+
 [node name="WaveTrail" type="Line2D" parent="."]
 z_index = -1
 points = PackedVector2Array(-1088, -64)
@@ -176,12 +242,6 @@ gamemode = 6
 [node name="CubeIcon" type="Sprite2D" parent="Icon/Spider"]
 texture = ExtResource("2_6ab5b")
 
-[node name="SpiderTrailSpawnPoint" type="Marker2D" parent="Icon/Spider"]
-position = Vector2(64, -64)
-
-[node name="SpiderTrailSpawnPointReverse" type="Marker2D" parent="Icon/Spider"]
-position = Vector2(-64, -64)
-
 [node name="SpiderCast" type="ShapeCast2D" parent="Icon/Spider"]
 modulate = Color(0, 0, 0, 0.301961)
 show_behind_parent = true
@@ -189,6 +249,12 @@ shape = SubResource("RectangleShape2D_p8d76")
 target_position = Vector2(0, -8192)
 collision_mask = 102
 collide_with_areas = true
+
+[node name="SpiderTrailSpawnPoint" type="Marker2D" parent="Icon/Spider/SpiderCast"]
+position = Vector2(64, -64)
+
+[node name="SpiderTrailSpawnPointReverse" type="Marker2D" parent="Icon/Spider/SpiderCast"]
+position = Vector2(-64, -64)
 
 [node name="Ball" type="Node2D" parent="Icon"]
 visible = false
@@ -293,7 +359,6 @@ one_shot = true
 explosiveness = 1.0
 
 [node name="DebugTrail" type="Line2D" parent="."]
-visible = false
 z_index = 2
 width = 5.0
 default_color = Color(1, 0, 0, 1)

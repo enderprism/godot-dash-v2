@@ -35,7 +35,6 @@ region_enabled = true
 region_rect = Rect2(0, 0, 10240, 2048)
 script = ExtResource("3_my51g")
 _parallax_factor = Vector2(0.5, 0.5)
-_enable_delta_threshold = true
 _camera_delta_threshold = Vector2(0, 20)
 _camera = NodePath("../PlayerCamera")
 
@@ -90,6 +89,7 @@ _camera_delta_threshold = Vector2(0, 20)
 _camera = NodePath("../PlayerCamera")
 
 [node name="GroundCollider" type="StaticBody2D" parent="." node_paths=PackedStringArray("target")]
+z_index = 50
 position = Vector2(622, 1118)
 scale = Vector2(2.5, 2.5)
 collision_layer = 32

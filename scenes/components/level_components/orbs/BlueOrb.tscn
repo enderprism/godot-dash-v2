@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://d0dk4786hlokq"]
+
+[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_el2ht"]
+[ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_7rlbo"]
+[ext_resource type="Texture2D" uid="uid://did756jp8kche" path="res://assets/textures/orbs/BlueOrb.svg" id="2_iiq7e"]
+[ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="3_wl22v"]
+[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="4_ei6fx"]
+[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="4_mwpte"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwypc"]
+size = Vector2(128, 128)
+
+[node name="BlueOrb" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_el2ht")
+_orb_type = 8
+
+[node name="ParticleEmitter" parent="." instance=ExtResource("2_7rlbo")]
+modulate = Color(0.0862745, 1, 1, 1)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_iiq7e")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+scale = Vector2(1.2, 1.2)
+shape = SubResource("RectangleShape2D_jwypc")
+debug_color = Color(0, 1, 0, 0)
+
+[node name="PulseGrow" type="Sprite2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_wl22v")
+
+[node name="PulseShrink" type="Sprite2D" parent="."]
+modulate = Color(0.247059, 1, 1, 1)
+material = ExtResource("4_ei6fx")
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("4_mwpte")

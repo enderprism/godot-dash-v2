@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cd4end0ruw2y3"]
+
+[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_72xjr"]
+[ext_resource type="PackedScene" uid="uid://dl5c5hukbve28" path="res://scenes/particle_emitter_presets/SpeedPortalParticles.tscn" id="2_36ths"]
+[ext_resource type="Texture2D" uid="uid://bh5xvhek8i1m6" path="res://assets/textures/portals/speed_portals/SpeedPortal05.svg" id="2_hh1xf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2qhc"]
+size = Vector2(128, 256)
+
+[node name="SpeedPortal05x" type="Area2D"]
+script = ExtResource("1_72xjr")
+object_type = 3
+_speed_portal_type = 4
+
+[node name="ParticleEmitter" parent="." instance=ExtResource("2_36ths")]
+modulate = Color(1, 0.882353, 0, 1)
+rotation = 1.57079
+
+[node name="SpeedPortal05" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_hh1xf")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w2qhc")
+debug_color = Color(0, 1, 0, 0)

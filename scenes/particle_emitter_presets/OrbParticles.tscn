@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bejm8xhsl8h0b"]
+
+[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="1_gth05"]
+[ext_resource type="Texture2D" uid="uid://cvrhuk7gkomp1" path="res://assets/textures/particles/Square.png" id="2_ch33w"]
+
+[sub_resource type="Curve" id="Curve_viky3"]
+_data = [Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kvaj4"]
+curve = SubResource("Curve_viky3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k58vk"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 96.0
+emission_ring_inner_radius = 95.0
+velocity_pivot = Vector3(1, 1, 0)
+orbit_velocity_min = 0.05
+orbit_velocity_max = 0.15
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -64.0
+radial_accel_max = -64.0
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_kvaj4")
+
+[node name="ParticleEmitter" type="GPUParticles2D"]
+material = ExtResource("1_gth05")
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_k58vk")
+texture = ExtResource("2_ch33w")
+lifetime = 2.0
+preprocess = 5.0
+speed_scale = 3.0
+fixed_fps = 60
+local_coords = true

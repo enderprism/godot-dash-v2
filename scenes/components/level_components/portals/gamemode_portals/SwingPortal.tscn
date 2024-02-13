@@ -1,13 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://dspnvt3u8uhqy"]
+[gd_scene load_steps=12 format=3 uid="uid://dspnvt3u8uhqy"]
 
 [ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_p86pj"]
-[ext_resource type="Texture2D" uid="uid://b5x6gqlo78mnx" path="res://assets/textures/portals/swing_portal/SwingPortalBack.png" id="2_yfowc"]
-[ext_resource type="Texture2D" uid="uid://bp6ukusnk6ufx" path="res://assets/textures/portals/swing_portal/SwingPortalFront.png" id="3_1igv7"]
-[ext_resource type="Texture2D" uid="uid://hjsvkyfi6wqo" path="res://assets/textures/portals/swing_portal/SwingPortalIndicatorBG.png" id="4_ohnxr"]
-[ext_resource type="Texture2D" uid="uid://bcwax4487q6kc" path="res://assets/textures/portals/swing_portal/SwingPortalIndicatorIcon.png" id="5_dmdv1"]
+[ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_u83oa"]
+[ext_resource type="Texture2D" uid="uid://b5x6gqlo78mnx" path="res://assets/textures/portals/gamemode_portals/swing_portal/SwingPortalBack.png" id="2_yfowc"]
+[ext_resource type="Texture2D" uid="uid://bp6ukusnk6ufx" path="res://assets/textures/portals/gamemode_portals/swing_portal/SwingPortalFront.png" id="3_1igv7"]
+[ext_resource type="Shader" path="res://resources/ColorPulse.gdshader" id="3_nc2th"]
+[ext_resource type="Texture2D" uid="uid://hjsvkyfi6wqo" path="res://assets/textures/portals/gamemode_portals/swing_portal/SwingPortalIndicatorBG.png" id="4_ohnxr"]
+[ext_resource type="Texture2D" uid="uid://bcwax4487q6kc" path="res://assets/textures/portals/gamemode_portals/swing_portal/SwingPortalIndicatorIcon.png" id="5_dmdv1"]
+[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="7_gklbd"]
+[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="8_eh3es"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
 size = Vector2(128, 384)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3id5d"]
+shader = ExtResource("3_nc2th")
+shader_parameter/shine_color = Color(1, 1, 1, 0)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 1.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 2
 
 [node name="SwingPortal" type="Area2D"]
 collision_layer = 8
@@ -18,24 +30,40 @@ metadata/_edit_group_ = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cghk8")
-debug_color = Color(0, 0.701961, 0.0823529, 0.419608)
+debug_color = Color(0, 1, 0, 0)
 
-[node name="SwingPortalBack" type="Sprite2D" parent="."]
+[node name="ParticleEmitter" parent="." instance=ExtResource("2_u83oa")]
+modulate = Color(1, 1, 0, 1)
+
+[node name="Sprites" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_3id5d")
+
+[node name="SwingPortalBack" type="Sprite2D" parent="Sprites"]
 z_index = -1
+use_parent_material = true
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("2_yfowc")
 
-[node name="SwingPortalFront" type="Sprite2D" parent="."]
+[node name="SwingPortalFront" type="Sprite2D" parent="Sprites"]
 z_index = 1
+use_parent_material = true
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("3_1igv7")
 
-[node name="SwingPortalIndicatorBg" type="Sprite2D" parent="."]
+[node name="SwingPortalIndicatorBg" type="Sprite2D" parent="Sprites"]
 z_index = 1
+use_parent_material = true
 position = Vector2(48, 0)
 texture = ExtResource("4_ohnxr")
 
-[node name="IndicatorIcon" type="Sprite2D" parent="."]
+[node name="IndicatorIcon" type="Sprite2D" parent="Sprites"]
 z_index = 1
+use_parent_material = true
 position = Vector2(44, 0)
 texture = ExtResource("5_dmdv1")
+
+[node name="PulseShrink" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+material = ExtResource("7_gklbd")
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("8_eh3es")
