@@ -1,11 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://cd4end0ruw2y3"]
+[gd_scene load_steps=12 format=3 uid="uid://cd4end0ruw2y3"]
 
 [ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_72xjr"]
 [ext_resource type="PackedScene" uid="uid://dl5c5hukbve28" path="res://scenes/particle_emitter_presets/SpeedPortalParticles.tscn" id="2_36ths"]
-[ext_resource type="Texture2D" uid="uid://bh5xvhek8i1m6" path="res://assets/textures/portals/speed_portals/SpeedPortal05.svg" id="2_hh1xf"]
+[ext_resource type="Texture2D" uid="uid://bh5xvhek8i1m6" path="res://assets/textures/portals/speed_portals/SpeedPortal05x.svg" id="2_hh1xf"]
+[ext_resource type="Shader" path="res://resources/ColorPulse.gdshader" id="3_acq6p"]
+[ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="5_8glu3"]
+[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="5_482be"]
+
+[sub_resource type="Curve" id="Curve_f0tdc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_0y2x4"]
+curve = SubResource("Curve_f0tdc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8cooc"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(96, 128, 1)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_0y2x4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3k1gh"]
+shader = ExtResource("3_acq6p")
+shader_parameter/shine_color = Color(1, 1, 1, 0)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 1.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w2qhc"]
-size = Vector2(128, 256)
+size = Vector2(144, 174)
 
 [node name="SpeedPortal05x" type="Area2D"]
 script = ExtResource("1_72xjr")
@@ -14,12 +41,19 @@ _speed_portal_type = 4
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_36ths")]
 modulate = Color(1, 0.882353, 0, 1)
-rotation = 1.57079
+process_material = SubResource("ParticleProcessMaterial_8cooc")
 
-[node name="SpeedPortal05" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3k1gh")
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_hh1xf")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_w2qhc")
 debug_color = Color(0, 1, 0, 0)
+
+[node name="PulseGrow" type="Sprite2D" parent="."]
+modulate = Color(1, 0.882353, 0, 1)
+material = ExtResource("5_482be")
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("5_8glu3")

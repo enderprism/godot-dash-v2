@@ -227,7 +227,7 @@ func _compute_velocity(_delta: float,
 			$DashFlame.hide()
 
 	if _direction:
-		_velocity.x = _direction * _speed.x * int(get_parent().has_level_started)
+		_velocity.x = _direction * _speed.x * _speed_multiplier * int(get_parent().has_level_started)
 	else:
 		_velocity.x = move_toward(_velocity.x, 0, _speed.x)
 

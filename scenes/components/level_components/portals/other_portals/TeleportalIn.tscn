@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://d05asiy6k2voi"]
+
+[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_ujapm"]
+[ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_6nd4y"]
+[ext_resource type="Texture2D" uid="uid://nycdkrteceqa" path="res://assets/textures/ArrowedLine.svg" id="2_fwov6"]
+[ext_resource type="Shader" path="res://resources/ColorPulse.gdshader" id="3_c01u1"]
+[ext_resource type="Texture2D" uid="uid://dpymoijvgn47q" path="res://assets/textures/portals/other_portals/teleportal_in/TeleportalInBack.png" id="4_62kgg"]
+[ext_resource type="Texture2D" uid="uid://bjkrqus0iq7o2" path="res://assets/textures/portals/other_portals/teleportal_in/TeleportalInFront.png" id="5_toxp5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bg8ge"]
+shader = ExtResource("3_c01u1")
+shader_parameter/shine_color = Color(1, 1, 1, 0)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 1.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k1q4x"]
+size = Vector2(106, 384)
+
+[node name="TeleportalIn" type="Area2D"]
+script = ExtResource("1_ujapm")
+object_type = 4
+_other_portal_type = 2
+
+[node name="TargetLink" type="Line2D" parent="."]
+texture_repeat = 2
+width = 50.0
+default_color = Color(1, 0, 1, 1)
+texture = ExtResource("2_fwov6")
+texture_mode = 1
+
+[node name="ParticleEmitter" parent="." instance=ExtResource("2_6nd4y")]
+modulate = Color(0.356863, 0.85098, 1, 1)
+
+[node name="Sprites" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_bg8ge")
+
+[node name="TeleportalInBack" type="Sprite2D" parent="Sprites"]
+z_index = -1
+use_parent_material = true
+texture = ExtResource("4_62kgg")
+
+[node name="TeleportalInFront" type="Sprite2D" parent="Sprites"]
+z_index = 1
+use_parent_material = true
+texture = ExtResource("5_toxp5")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(53, 0)
+shape = SubResource("RectangleShape2D_k1q4x")
+debug_color = Color(0, 1, 0, 0)

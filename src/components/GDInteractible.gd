@@ -115,7 +115,7 @@ enum HorizontalDirection {
 # @@show_if(_other_portal_type == OtherPortal.TELEPORTAL and object_type == ObjectType.OTHER_PORTAL or object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT)
 @export var _override_player_velocity: bool
 
-# @@show_if(object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.TELEPORTAL or object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT and _override_player_velocity)
+# @@show_if(_override_player_velocity and object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.TELEPORTAL or object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT)
 @export var _new_player_velocity: Vector2
 
 # @@show_if(object_type == ObjectType.ORB and _orb_type == Orb.REBOUND or object_type == ObjectType.PAD and _pad_type == Pad.REBOUND)
@@ -126,6 +126,8 @@ enum HorizontalDirection {
 
 # @@show_if(object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.DUAL_PORTAL)
 @export var _dual: bool
+
+@export var _multi_usage: bool = true
 #endregion
 
 var _player: Player
@@ -161,7 +163,7 @@ func _process(delta: float) -> void:
 		if object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT \
 				or object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.TELEPORTAL:
 			$TargetLink.hide()
-		if object_type != ObjectType.ORB and object_type != ObjectType.PAD and has_node("Sprites"):
+		if object_type != ObjectType.ORB and object_type != ObjectType.PAD:
 			_pulse_white_tick()
 		if object_type == ObjectType.ORB and _orb_type == Orb.SPIDER and scale.y < 0:
 			scale.y *= -1
@@ -204,6 +206,7 @@ func _process(delta: float) -> void:
 		$Sprites/IndicatorIcon.global_scale.y = abs(scale.y)
 
 func _on_player_enter(_body: Node2D) -> void:
+	monitoring = _multi_usage
 	_pulse_grow()
 	if object_type == ObjectType.ORB:
 		_player._orb_collisions |= _orb_type
@@ -225,6 +228,23 @@ func _on_player_enter(_body: Node2D) -> void:
 		_pulse_white_start()
 		LevelManager.player.gamemode = _gamemode_portal_type
 		_player._mini = _player._mini
+	elif object_type == ObjectType.SPEED_PORTAL:
+		_pulse_white_start()
+		match _speed_portal_type:
+			SpeedPortal.SPEED_1X:
+				_player._speed_multiplier = 1.0
+			SpeedPortal.SPEED_2X:
+				_player._speed_multiplier = 1.243
+			SpeedPortal.SPEED_3X:
+				_player._speed_multiplier = 1.502
+			SpeedPortal.SPEED_4X:
+				_player._speed_multiplier = 1.849
+			SpeedPortal.SPEED_5X:
+				_player._speed_multiplier = 1.0
+			SpeedPortal.SPEED_0X:
+				_player._speed_multiplier = 0.0
+			SpeedPortal.SPEED_05X:
+				_player._speed_multiplier = 0.807
 	elif object_type == ObjectType.OTHER_PORTAL:
 		_pulse_shrink()
 		_pulse_white_start()
@@ -287,7 +307,7 @@ func _pulse_grow() -> void:
 			.set_trans(Tween.TRANS_SINE)
 
 func _pulse_white_start() -> void:
-	if object_type != ObjectType.ORB and object_type != ObjectType.PAD and has_node("Sprites"):
+	if object_type != ObjectType.ORB and object_type != ObjectType.PAD:
 		create_tween().tween_property(
 			self,
 			"_pulse_white_color:a",
@@ -298,10 +318,10 @@ func _pulse_white_start() -> void:
 			.set_trans(Tween.TRANS_SINE)
 
 func _pulse_white_tick() -> void:
-	if has_node("Sprites"):
+	if has_node("Sprites"): # For multiple-sprite GDInteractibles (Gamemode Portals, etc.)
 		$Sprites.material.set_shader_parameter("shine_color", _pulse_white_color)
-	else:
-		printerr("No 'Sprites' node found on ", name)
+	if has_node("Sprite"): # For single-sprite GDInteractibles (Speed Portals)
+		$Sprite.material.set_shader_parameter("shine_color", _pulse_white_color)
 
 func _pulse_shrink() -> void:
 	if has_node("PulseShrink") and (object_type == ObjectType.GAMEMODE_PORTAL or object_type == ObjectType.OTHER_PORTAL or (object_type == ObjectType.ORB and has_overlapping_bodies())):

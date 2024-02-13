@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh5xvhek8i1m6"
-path="res://.godot/imported/SpeedPortal05.svg-0fbf25769f64895a2aa16e2835e8004f.ctex"
+uid="uid://ba7uh3fv4d5jq"
+path="res://.godot/imported/SpeedPortal2x.svg-0ef67031facbb8eb80f2e31437197994.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/portals/speed_portals/SpeedPortal05.svg"
-dest_files=["res://.godot/imported/SpeedPortal05.svg-0fbf25769f64895a2aa16e2835e8004f.ctex"]
+source_file="res://assets/textures/portals/speed_portals/SpeedPortal2x.svg"
+dest_files=["res://.godot/imported/SpeedPortal2x.svg-0ef67031facbb8eb80f2e31437197994.ctex"]
 
 [params]
 
