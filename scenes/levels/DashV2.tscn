@@ -109,7 +109,7 @@ position = Vector2(3584, -832)
 
 [node name="ToggleOrb" parent="." instance=ExtResource("14_u3rtq")]
 self_modulate = Color(0, 1, 0, 1)
-position = Vector2(1920, 64)
+position = Vector2(1856, -256)
 rotation = 1.57079
 scale = Vector2(5, 5)
 _toggled_groups = Array[ExtResource("15_rfcqd")]([SubResource("Resource_gyjwq")])

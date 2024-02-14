@@ -147,16 +147,8 @@ var _queue_index: int
 func _ready() -> void:
 	_pulse_white_color.a = 0
 	_player = LevelManager.player
-	connect("body_entered", Callable(self, "_on_player_enter"))
-	connect("body_exited", Callable(self, "_on_player_exit"))
-	if object_type == ObjectType.ORB:
-		_player.orb_clicked.connect(_pulse_shrink)
-		# if _multi_usage:
-		# 	_player.orb_clicked.connect(_set_player_orb_collisions)
-		if _orb_type == Orb.TELEPORT:
-			_player.teleported.connect(_teleport_player)
-		elif _orb_type == Orb.TOGGLE:
-			_player.orb_clicked.connect(_toggle.bind(_toggled_groups))
+	body_entered.connect(_on_player_enter)
+	body_exited.connect(_on_player_exit)
 
 func _process(delta: float) -> void:
 
@@ -223,11 +215,11 @@ func _process(delta: float) -> void:
 func _on_player_enter(_body: Node2D) -> void:
 	_pulse_grow()
 	if object_type == ObjectType.ORB:
-		_player._orb_queue.append(self)
+		_player._orb_queue.push_front(self)
 		_queue_index = len(_player._orb_queue) - 1 if len(_player._orb_queue) - 1 > 0 else 0
 	elif object_type == ObjectType.PAD:
 		set_deferred("monitoring", _multi_usage)
-		_player._pad_queue.append(self)
+		_player._pad_queue.push_front(self)
 		_queue_index = len(_player._pad_queue) - 1 if len(_player._pad_queue) - 1 > 0 else 0
 	elif object_type == ObjectType.GAMEMODE_PORTAL:
 		set_deferred("monitoring", _multi_usage)

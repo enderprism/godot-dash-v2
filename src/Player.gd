@@ -2,9 +2,6 @@ extends CharacterBody2D
 
 class_name Player
 
-signal teleported
-signal orb_clicked
-
 enum Gamemode {
 	CUBE,
 	SHIP,
