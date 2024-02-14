@@ -44,10 +44,6 @@ const DASH_BOOM: PackedScene = preload("res://scenes/components/game_components/
 			else: icon.show()
 
 var _click_buffer_state: ClickBufferState
-var _reverse_direction_buffer: int
-var _teleport_position_buffer: Vector2
-var _teleport_override_velocity: bool = false
-var _teleport_velocity_buffer: Vector2
 var _dash_orb_rotation: float
 var _dash_orb_position: Vector2
 var _is_dashing: bool
@@ -79,11 +75,10 @@ var _last_spider_trail: GDSpiderTrail
 var _last_spider_trail_height: float
 var _rebound_velocity: float
 
-var _orb_collisions_last_setters: Dictionary
 
-# Bit flags
-var _orb_collisions: int
-var _pad_collisions: int
+# Queues
+var _orb_queue: Array[GDInteractible]
+var _pad_queue: Array[GDInteractible]
 
 func _ready() -> void:
 	gamemode = Gamemode.CUBE
@@ -121,7 +116,7 @@ func _get_jump_state() -> int:
 	if _click_buffer_state == ClickBufferState.NOT_HOLDING and Input.is_action_just_pressed("jump") and not (is_on_floor() or is_on_ceiling()) \
 		and gamemode != Gamemode.SHIP and gamemode != Gamemode.SWING and gamemode != Gamemode.WAVE:
 		_click_buffer_state = ClickBufferState.BUFFERING
-	if _click_buffer_state == ClickBufferState.BUFFERING and _orb_collisions != 0:
+	if _click_buffer_state == ClickBufferState.BUFFERING and not _orb_queue.is_empty():
 		_click_buffer_state = ClickBufferState.JUMPING
 	if Input.is_action_just_released("jump") or (is_on_floor() or is_on_ceiling()):
 		_click_buffer_state = ClickBufferState.NOT_HOLDING
@@ -173,37 +168,33 @@ func _compute_velocity(_delta: float,
 			_velocity.y = clamp(_velocity.y, -TERMINAL_VELOCITY.y, TERMINAL_VELOCITY.y)
 #endsection
 
-	if is_on_floor() and _jump_state == -1 and _pad_collisions == 0:
+	if is_on_floor() and _jump_state == -1 and _pad_queue.is_empty():
 		_velocity.y = 0.0
 
 #section Pad Collisions
-	if gamemode != Gamemode.WAVE:
-		if _pad_collisions & GDInteractible.Pad.YELLOW:
-			_velocity.y = -_speed.y * (277.0/194.0)
-			_pad_collisions &= ~GDInteractible.Pad.YELLOW
-		elif _pad_collisions & GDInteractible.Pad.PINK:
-			_velocity.y = -_speed.y * (179.0/194.0)
-			_pad_collisions &= ~GDInteractible.Pad.PINK
-		elif _pad_collisions & GDInteractible.Pad.RED:
-			_velocity.y = -_speed.y * (365.0/194.0)
-			_pad_collisions &= ~GDInteractible.Pad.RED
-		elif _pad_collisions & GDInteractible.Pad.REBOUND:
-			_velocity.y = -_rebound_velocity
-			_pad_collisions &= ~GDInteractible.Pad.REBOUND
-	# These pads are supposed to work with the wave
-	if _pad_collisions & GDInteractible.Pad.SPIDER:
-		_gravity_multiplier = Vector2.UP.rotated($Icon/Spider/SpiderCast.rotation).y
-		_velocity.y = _get_spider_velocity_delta() * 1/_delta
-		_last_spider_trail_height = abs(_get_spider_velocity_delta()/_last_spider_trail.SPIDER_TRAIL_HEIGHT)
-		_pad_collisions &= ~GDInteractible.Pad.SPIDER
-	elif _pad_collisions & GDInteractible.Pad.BLUE:
-		_gravity_multiplier *= -1
-		_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
-		_pad_collisions &= ~GDInteractible.Pad.BLUE
+	if not _pad_queue.is_empty():
+		var _colliding_pad: GDInteractible = _pad_queue.pop_front()
+		if gamemode != Gamemode.WAVE:
+			if _colliding_pad._pad_type == GDInteractible.Pad.YELLOW:
+				_velocity.y = -_speed.y * (277.0/194.0)
+			elif _colliding_pad._pad_type == GDInteractible.Pad.PINK:
+				_velocity.y = -_speed.y * (179.0/194.0)
+			elif _colliding_pad._pad_type == GDInteractible.Pad.RED:
+				_velocity.y = -_speed.y * (365.0/194.0)
+			elif _colliding_pad._pad_type == GDInteractible.Pad.REBOUND:
+				_velocity.y = -_rebound_velocity
+		# These pads are supposed to work with the wave
+		if _colliding_pad._pad_type == GDInteractible.Pad.SPIDER:
+			_gravity_multiplier = Vector2.UP.rotated($Icon/Spider/SpiderCast.rotation).y
+			_velocity.y = _get_spider_velocity_delta() * 1/_delta
+			_last_spider_trail_height = abs(_get_spider_velocity_delta()/_last_spider_trail.SPIDER_TRAIL_HEIGHT)
+		elif _colliding_pad._pad_type == GDInteractible.Pad.BLUE:
+			_gravity_multiplier *= -1
+			_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
 #endsection
 
 	# Handle jump.
-	if _jump_state == 1 and _pad_collisions == 0 and _orb_collisions == 0:
+	if _jump_state == 1 and _pad_queue.is_empty() and _orb_queue.is_empty():
 		if _is_flying_gamemode:
 			pass
 		elif gamemode == Gamemode.SPIDER:
@@ -235,67 +226,61 @@ func _compute_velocity(_delta: float,
 		_velocity.x = move_toward(_velocity.x, 0, _speed.x)
 
 #section orbs
-	if _orb_collisions != 0 and (
+	if not _orb_queue.is_empty() and (
 		_click_buffer_state == ClickBufferState.JUMPING
 		or (_jump_state == 1 and not _is_flying_gamemode)
 		or (Input.is_action_just_pressed("jump") and _is_flying_gamemode)
 		):
-		emit_signal("orb_clicked")
+		var _colliding_orb: GDInteractible = _orb_queue.pop_front()
+		_colliding_orb._pulse_shrink()
+		_colliding_orb._set_reverse(_colliding_orb._reverse)
 		_click_buffer_state = ClickBufferState.BUFFER_USED
-		if _reverse_direction_buffer != 0:
-			_horizontal_direction = _reverse_direction_buffer
-			_reverse_direction_buffer = 0
 		if gamemode != Gamemode.WAVE:
-			if _orb_collisions & GDInteractible.Orb.YELLOW:
+			if _colliding_orb._orb_type == GDInteractible.Orb.YELLOW:
 				_velocity.y = -_speed.y * (191.0/194.0)
-				_orb_collisions &= ~GDInteractible.Orb.YELLOW
-			if _orb_collisions & GDInteractible.Orb.PINK:
+			if _colliding_orb._orb_type == GDInteractible.Orb.PINK:
 				_velocity.y = -_speed.y * (137.0/194.0)
-				_orb_collisions &= ~GDInteractible.Orb.PINK
-			if _orb_collisions & GDInteractible.Orb.RED:
+			if _colliding_orb._orb_type == GDInteractible.Orb.RED:
 				_velocity.y = -_speed.y * (268.0/194.0)
-				_orb_collisions &= ~GDInteractible.Orb.RED
-			if _orb_collisions & GDInteractible.Orb.BLACK:
+			if _colliding_orb._orb_type == GDInteractible.Orb.BLACK:
 				_velocity.y = -_speed.y * -(260.0/194.0)
-				_orb_collisions &= ~GDInteractible.Orb.BLACK
-			if _orb_collisions & GDInteractible.Orb.REBOUND:
+			if _colliding_orb._orb_type == GDInteractible.Orb.REBOUND:
 				_velocity.y = -_rebound_velocity
-				_orb_collisions &= ~GDInteractible.Orb.REBOUND
 		# These orbs are supposed to work with the wave
-		if _orb_collisions & GDInteractible.Orb.SPIDER:
+		if _colliding_orb._orb_type == GDInteractible.Orb.SPIDER:
+			_colliding_orb._set_spider_props()
 			_gravity_multiplier *= -1 * $Icon/Spider/SpiderCast.scale.y
-			# _gravity_multiplier *= $Icon/Spider/SpiderCast.scale.y
 			_velocity.y = _get_spider_velocity_delta() * 1/_delta
 			_last_spider_trail_height = abs(_get_spider_velocity_delta()/_last_spider_trail.SPIDER_TRAIL_HEIGHT)
 			_in_j_block = true
-			_orb_collisions &= ~GDInteractible.Orb.SPIDER
-		if _orb_collisions & GDInteractible.Orb.BLUE:
+		if _colliding_orb._orb_type == GDInteractible.Orb.BLUE:
 			_gravity_multiplier *= -1
 			_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
-			_orb_collisions &= ~GDInteractible.Orb.BLUE
-		if _orb_collisions & GDInteractible.Orb.GREEN:
+		if _colliding_orb._orb_type == GDInteractible.Orb.GREEN:
 			_gravity_multiplier *= -1
 			_velocity.y = -_speed.y * (191.0/194.0) * _gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
-			_pad_collisions &= ~GDInteractible.Orb.GREEN
-		if _orb_collisions & GDInteractible.Orb.DASH_GREEN:
+		if _colliding_orb._orb_type == GDInteractible.Orb.DASH_GREEN:
+			_colliding_orb._set_dash_props()
 			var _last_dash_boom = DASH_BOOM.instantiate()
 			_last_dash_boom.position = to_local(_dash_orb_position)
 			add_child(_last_dash_boom)
 			_is_dashing = true
-			_orb_collisions &= ~GDInteractible.Orb.DASH_GREEN
-		if _orb_collisions & GDInteractible.Orb.DASH_MAGENTA:
+		if _colliding_orb._orb_type == GDInteractible.Orb.DASH_MAGENTA:
+			_colliding_orb._set_dash_props()
 			var _last_dash_boom = DASH_BOOM.instantiate()
 			_last_dash_boom.position = to_local(_dash_orb_position)
 			add_child(_last_dash_boom)
 			_gravity_multiplier *= -1
 			_is_dashing = true
-			_orb_collisions &= ~GDInteractible.Orb.DASH_MAGENTA
-		if _orb_collisions & GDInteractible.Orb.TELEPORT:
-			emit_signal("teleported")
-			_orb_collisions &= ~GDInteractible.Orb.TELEPORT
-		if _orb_collisions & GDInteractible.Orb.TOGGLE:
+		if _colliding_orb._orb_type == GDInteractible.Orb.TELEPORT:
+			var _velocity_override: Vector2 = _colliding_orb._teleport_player()
+			if _colliding_orb._override_player_velocity: _velocity = _velocity_override * 1/_delta
+		if _colliding_orb._orb_type == GDInteractible.Orb.TOGGLE:
+			_colliding_orb._toggle(_colliding_orb._toggled_groups)
 			_in_j_block = true
-			_orb_collisions &= ~GDInteractible.Orb.TOGGLE
+	
+		if _colliding_orb._multi_usage:
+			_orb_queue.append(_colliding_orb)
 #endsection
 
 	_velocity.y *= int(get_parent().has_level_started)
@@ -399,11 +384,10 @@ func _update_wave_trail() -> void:
 	else:
 		$WaveTrail.length = 0
 		$WaveTrail2.length = 0
-		if $WaveTrail.get_point_count() > $WaveTrail.length:
-			for i in range(2):
-				if $WaveTrail.get_point_count() != 0:
-					$WaveTrail.remove_point($WaveTrail.get_point_count() - 1)
-					$WaveTrail2.remove_point($WaveTrail2.get_point_count() - 1)
+		for i in range(2):
+			if $WaveTrail.get_point_count() > $WaveTrail.length:
+				$WaveTrail.remove_point($WaveTrail.get_point_count() - 1)
+				$WaveTrail2.remove_point($WaveTrail2.get_point_count() - 1)
 
 func _get_spider_velocity_delta() -> float:
 	var _target_position = $Icon/Spider/SpiderCast.get_collision_point(0)

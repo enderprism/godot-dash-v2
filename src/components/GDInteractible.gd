@@ -124,7 +124,7 @@ enum ToggleState {
 # @@show_if(_other_portal_type == OtherPortal.TELEPORTAL and object_type == ObjectType.OTHER_PORTAL or object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT)
 @export var _override_player_velocity: bool
 
-# @@show_if(_override_player_velocity and object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.TELEPORTAL or object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT)
+# @@show_if(_override_player_velocity)
 @export var _new_player_velocity: Vector2
 
 # @@show_if(object_type == ObjectType.ORB and _orb_type == Orb.REBOUND or object_type == ObjectType.PAD and _pad_type == Pad.REBOUND)
@@ -142,7 +142,7 @@ enum ToggleState {
 var _player: Player
 var _rebound_factor: float
 var _pulse_white_color: Color = Color.WHITE
-
+var _queue_index: int
 
 func _ready() -> void:
 	_pulse_white_color.a = 0
@@ -151,8 +151,8 @@ func _ready() -> void:
 	connect("body_exited", Callable(self, "_on_player_exit"))
 	if object_type == ObjectType.ORB:
 		_player.orb_clicked.connect(_pulse_shrink)
-		if _multi_usage:
-			_player.orb_clicked.connect(_set_player_orb_collisions)
+		# if _multi_usage:
+		# 	_player.orb_clicked.connect(_set_player_orb_collisions)
 		if _orb_type == Orb.TELEPORT:
 			_player.teleported.connect(_teleport_player)
 		elif _orb_type == Orb.TOGGLE:
@@ -168,9 +168,6 @@ func _process(delta: float) -> void:
 			_rebound()
 			$ReboundCancelArea/Hitbox.debug_color = Color("397f0033")
 		if object_type == ObjectType.ORB:
-			if _player._orb_collisions_last_setters.has(_orb_type) and _player._orb_collisions_last_setters[_orb_type] == self \
-					and _player._click_buffer_state == Player.ClickBufferState.JUMPING and has_overlapping_bodies():
-				_player._click_buffer_state = Player.ClickBufferState.BUFFERING
 			if _orb_type == Orb.BLUE:
 				$Sprite.scale.y = sign(_player._gravity_multiplier)/4
 				$Sprite.global_rotation = _player._gameplay_rotation
@@ -202,6 +199,8 @@ func _process(delta: float) -> void:
 					$TargetLink.add_point(to_local(_teleport_target.global_position), 1)
 			elif $TargetLink.get_point_count() != 0:
 				$TargetLink.clear_points()
+		else:
+			_override_player_velocity = false
 		$Hitbox.debug_color = Color("00ff0000")
 
 
@@ -224,22 +223,12 @@ func _process(delta: float) -> void:
 func _on_player_enter(_body: Node2D) -> void:
 	_pulse_grow()
 	if object_type == ObjectType.ORB:
-		_player._orb_collisions_last_setters[_orb_type] = self
-		_player._orb_collisions |= _orb_type
-		_set_reverse(_reverse)
-		if _orb_type == Orb.SPIDER:
-			var _player_gravity_to_rotation: float = 0.0 if _player._gravity_multiplier > 0 else 180.0
-			if is_equal_approx(fmod((abs(rotation_degrees) - _player_gravity_to_rotation)/180, 2), 1):
-				_player.get_node("Icon/Spider/SpiderCast").scale.y = -1
-			else:
-				_player.get_node("Icon/Spider/SpiderCast").scale.y = 1
-		elif _orb_type == Orb.DASH_GREEN or _orb_type == Orb.DASH_MAGENTA:
-			_player._dash_orb_rotation = global_rotation
-			_player._dash_orb_position = global_position
+		_player._orb_queue.append(self)
+		_queue_index = len(_player._orb_queue) - 1 if len(_player._orb_queue) - 1 > 0 else 0
 	elif object_type == ObjectType.PAD:
 		set_deferred("monitoring", _multi_usage)
-		_set_reverse(_reverse)
-		_player._pad_collisions |= _pad_type
+		_player._pad_queue.append(self)
+		_queue_index = len(_player._pad_queue) - 1 if len(_player._pad_queue) - 1 > 0 else 0
 	elif object_type == ObjectType.GAMEMODE_PORTAL:
 		set_deferred("monitoring", _multi_usage)
 		_pulse_shrink()
@@ -308,13 +297,9 @@ func _rebound() -> void:
 		_player._rebound_velocity = 0.0
 
 func _on_player_exit(_body: Node2D) -> void:
-	_player._teleport_position_buffer = Vector2.ZERO
-	_player._teleport_velocity_buffer = Vector2.ZERO
-	_player._teleport_override_velocity = false
-	_player._reverse_direction_buffer = 0
 	if object_type == ObjectType.ORB:
-		if _player._orb_collisions_last_setters[_orb_type] == self:
-			_player._orb_collisions &= ~_orb_type
+		if self in _player._orb_queue:
+			_player._orb_queue.erase(self)
 		if _orb_type == Orb.SPIDER:
 			_player.get_node("Icon/Spider/SpiderCast").scale.y = 1
 
@@ -373,26 +358,39 @@ func _pulse_shrink() -> void:
 			.set_ease(Tween.EASE_OUT) \
 			.set_trans(Tween.TRANS_SINE)
 
-func _set_player_orb_collisions() -> void:
-	if has_overlapping_bodies():
-		_player._click_buffer_state = Player.ClickBufferState.JUMPING
-		_player._orb_collisions |= _orb_type
-		_player._orb_collisions_last_setters[_orb_type] = self
+# func _set_player_orb_collisions() -> void:
+# 	if has_overlapping_bodies():
+# 		_player._click_buffer_state = Player.ClickBufferState.JUMPING
+# 		_player._orb_collisions |= _orb_type
+# 		_player._orb_collisions_last_setters[_orb_type] = self
 
 func _set_reverse(reverse: bool) -> void:
 	if _horizontal_direction == HorizontalDirection.SET:
-		_player._reverse_direction_buffer = -1 if reverse else 1
+		_player._horizontal_direction = -1 if reverse else 1
 	elif _horizontal_direction == HorizontalDirection.FLIP:
-		_player._reverse_direction_buffer = _player._horizontal_direction * -1
+		_player._horizontal_direction *= -1
 
-func _teleport_player() -> void:
+func _set_dash_props() -> void:
+	_player._dash_orb_rotation = global_rotation
+	_player._dash_orb_position = global_position
+
+func _set_spider_props() -> void:
+	var _player_gravity_to_rotation: float = 0.0 if _player._gravity_multiplier > 0 else 180.0
+	if is_equal_approx(fmod((abs(rotation_degrees) - _player_gravity_to_rotation)/180, 2), 1):
+		_player.get_node("Icon/Spider/SpiderCast").scale.y = -1
+	else:
+		_player.get_node("Icon/Spider/SpiderCast").scale.y = 1
+
+func _teleport_player() -> Vector2:
 	if _teleport_target != null and has_overlapping_bodies():
 		if not _ignore_x:
 			_player.position.x = _teleport_target.global_position.x
 		if not _ignore_y:
 			_player.position.y = _teleport_target.global_position.y
 		if _override_player_velocity:
-			_player.velocity = _new_player_velocity.rotated(_player._gameplay_rotation)
+			return _new_player_velocity.rotated(_player._gameplay_rotation)
+		else: return Vector2.ZERO
+	else: return Vector2.ZERO
 
 func _toggle(toggled_groups):
 	if has_overlapping_bodies():

@@ -37,6 +37,8 @@ self_modulate = Color(0, 0.505882, 1, 1)
 position = Vector2(2496, -192)
 _freefly = true
 _teleport_target = NodePath("../TeleportationOrb2")
+_override_player_velocity = true
+_new_player_velocity = Vector2(0, -500)
 
 [node name="TeleportationOrb3" parent="." node_paths=PackedStringArray("_teleport_target") instance=ExtResource("5_w14p8")]
 self_modulate = Color(0, 0.505882, 1, 1)
@@ -49,7 +51,7 @@ _ignore_x = true
 self_modulate = Color(1, 0.537255, 0, 1)
 position = Vector2(-448, -192)
 rotation = 3.14159
-_horizontal_direction = 1
+_horizontal_direction = 2
 _freefly = true
 
 [node name="TeleportationOrb4" parent="." instance=ExtResource("5_w14p8")]
@@ -107,7 +109,7 @@ position = Vector2(3584, -832)
 
 [node name="ToggleOrb" parent="." instance=ExtResource("14_u3rtq")]
 self_modulate = Color(0, 1, 0, 1)
-position = Vector2(1856, -256)
+position = Vector2(1920, 64)
 rotation = 1.57079
 scale = Vector2(5, 5)
 _toggled_groups = Array[ExtResource("15_rfcqd")]([SubResource("Resource_gyjwq")])
