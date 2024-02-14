@@ -68,6 +68,12 @@ enum HorizontalDirection {
 	SET,
 	FLIP,
 }
+
+enum ToggleState {
+	ON,
+	OFF,
+	FLIP,
+}
 #endregion
 
 #region exports
@@ -102,6 +108,9 @@ enum HorizontalDirection {
 
 # @@show_if(object_type == ObjectType.GAMEMODE_PORTAL)
 @export var _freefly: bool
+
+# @@show_if(object_type == ObjectType.ORB and _orb_type == Orb.TOGGLE)
+@export var _toggled_groups: Array[GDToggledGroup]
 
 # @@show_if(_other_portal_type == OtherPortal.TELEPORTAL and object_type == ObjectType.OTHER_PORTAL or object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT)
 @export var _teleport_target: Node2D
@@ -140,10 +149,14 @@ func _ready() -> void:
 	_player = LevelManager.player
 	connect("body_entered", Callable(self, "_on_player_enter"))
 	connect("body_exited", Callable(self, "_on_player_exit"))
-	if object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT:
-		_player.connect("teleported", Callable(self, "_teleport_player"))
 	if object_type == ObjectType.ORB:
-		_player.connect("orb_clicked", Callable(self, "_pulse_shrink"))
+		_player.orb_clicked.connect(_pulse_shrink)
+		if _multi_usage:
+			_player.orb_clicked.connect(_set_player_orb_collisions)
+		if _orb_type == Orb.TELEPORT:
+			_player.teleported.connect(_teleport_player)
+		elif _orb_type == Orb.TOGGLE:
+			_player.orb_clicked.connect(_toggle.bind(_toggled_groups))
 
 func _process(delta: float) -> void:
 
@@ -155,6 +168,9 @@ func _process(delta: float) -> void:
 			_rebound()
 			$ReboundCancelArea/Hitbox.debug_color = Color("397f0033")
 		if object_type == ObjectType.ORB:
+			if _player._orb_collisions_last_setters.has(_orb_type) and _player._orb_collisions_last_setters[_orb_type] == self \
+					and _player._click_buffer_state == Player.ClickBufferState.JUMPING and has_overlapping_bodies():
+				_player._click_buffer_state = Player.ClickBufferState.BUFFERING
 			if _orb_type == Orb.BLUE:
 				$Sprite.scale.y = sign(_player._gravity_multiplier)/4
 				$Sprite.global_rotation = _player._gameplay_rotation
@@ -206,9 +222,9 @@ func _process(delta: float) -> void:
 		$Sprites/IndicatorIcon.global_scale.y = abs(scale.y)
 
 func _on_player_enter(_body: Node2D) -> void:
-	monitoring = _multi_usage
 	_pulse_grow()
 	if object_type == ObjectType.ORB:
+		_player._orb_collisions_last_setters[_orb_type] = self
 		_player._orb_collisions |= _orb_type
 		_set_reverse(_reverse)
 		if _orb_type == Orb.SPIDER:
@@ -221,14 +237,17 @@ func _on_player_enter(_body: Node2D) -> void:
 			_player._dash_orb_rotation = global_rotation
 			_player._dash_orb_position = global_position
 	elif object_type == ObjectType.PAD:
+		set_deferred("monitoring", _multi_usage)
 		_set_reverse(_reverse)
 		_player._pad_collisions |= _pad_type
 	elif object_type == ObjectType.GAMEMODE_PORTAL:
+		set_deferred("monitoring", _multi_usage)
 		_pulse_shrink()
 		_pulse_white_start()
 		LevelManager.player.gamemode = _gamemode_portal_type
 		_player._mini = _player._mini
 	elif object_type == ObjectType.SPEED_PORTAL:
+		set_deferred("monitoring", _multi_usage)
 		_pulse_white_start()
 		match _speed_portal_type:
 			SpeedPortal.SPEED_1X:
@@ -246,6 +265,7 @@ func _on_player_enter(_body: Node2D) -> void:
 			SpeedPortal.SPEED_05X:
 				_player._speed_multiplier = 0.807
 	elif object_type == ObjectType.OTHER_PORTAL:
+		set_deferred("monitoring", _multi_usage)
 		_pulse_shrink()
 		_pulse_white_start()
 		match _other_portal_type:
@@ -286,6 +306,17 @@ func _rebound() -> void:
 		_player._rebound_velocity = _player.velocity.rotated(-_player._gameplay_rotation).y
 	elif _player.velocity.rotated(-_player._gameplay_rotation).y == 0 and _player._get_jump_state() == -1 and _player.is_on_floor() and $ReboundCancelArea.has_overlapping_bodies():
 		_player._rebound_velocity = 0.0
+
+func _on_player_exit(_body: Node2D) -> void:
+	_player._teleport_position_buffer = Vector2.ZERO
+	_player._teleport_velocity_buffer = Vector2.ZERO
+	_player._teleport_override_velocity = false
+	_player._reverse_direction_buffer = 0
+	if object_type == ObjectType.ORB:
+		if _player._orb_collisions_last_setters[_orb_type] == self:
+			_player._orb_collisions &= ~_orb_type
+		if _orb_type == Orb.SPIDER:
+			_player.get_node("Icon/Spider/SpiderCast").scale.y = 1
 
 func _pulse_grow() -> void:
 	if has_node("PulseGrow"):
@@ -342,17 +373,11 @@ func _pulse_shrink() -> void:
 			.set_ease(Tween.EASE_OUT) \
 			.set_trans(Tween.TRANS_SINE)
 
-func _on_player_exit(_body: Node2D) -> void:
-	_player._teleport_position_buffer = Vector2.ZERO
-	_player._teleport_velocity_buffer = Vector2.ZERO
-	_player._teleport_override_velocity = false
-	_player._reverse_direction_buffer = 0
-	if object_type == ObjectType.ORB:
-		_player._orb_collisions &= ~_orb_type
-		if _orb_type == Orb.SPIDER:
-			_player.get_node("Icon/Spider/SpiderCast").scale.y = 1
-	elif object_type == ObjectType.PAD:
-		_player._pad_collisions &= ~_pad_type
+func _set_player_orb_collisions() -> void:
+	if has_overlapping_bodies():
+		_player._click_buffer_state = Player.ClickBufferState.JUMPING
+		_player._orb_collisions |= _orb_type
+		_player._orb_collisions_last_setters[_orb_type] = self
 
 func _set_reverse(reverse: bool) -> void:
 	if _horizontal_direction == HorizontalDirection.SET:
@@ -368,3 +393,21 @@ func _teleport_player() -> void:
 			_player.position.y = _teleport_target.global_position.y
 		if _override_player_velocity:
 			_player.velocity = _new_player_velocity.rotated(_player._gameplay_rotation)
+
+func _toggle(toggled_groups):
+	if has_overlapping_bodies():
+		for toggled_group in toggled_groups:
+			var group = get_node(toggled_group._group)
+			var state = toggled_group._state
+			if state == ToggleState.FLIP:
+				if group.process_mode == PROCESS_MODE_INHERIT: # If it is toggled on
+					state = ToggleState.OFF
+				elif group.process_mode == PROCESS_MODE_DISABLED: # If it is toggled off
+					state = ToggleState.ON
+			match state:
+				ToggleState.ON:
+					group.set_deferred("process_mode", PROCESS_MODE_INHERIT)
+					group.show()
+				ToggleState.OFF:
+					group.set_deferred("process_mode", PROCESS_MODE_DISABLED)
+					group.hide()

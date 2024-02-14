@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmm0kfmoluh0o"]
+
+[ext_resource type="Texture2D" uid="uid://brjeijb364bup" path="res://assets/textures/triggers/edit_eMoveComBtn_001.png" id="1_46s8c"]
+[ext_resource type="Script" path="res://src/components/GDTrigger.gd" id="1_tsbup"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_np4xx"]
+a = Vector2(0, -8192)
+b = Vector2(0, 8192)
+
+[node name="Trigger" type="Area2D"]
+script = ExtResource("1_tsbup")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_np4xx")
+debug_color = Color(1, 0.960784, 0, 0.419608)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_46s8c")

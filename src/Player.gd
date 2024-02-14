@@ -48,6 +48,7 @@ var _reverse_direction_buffer: int
 var _teleport_position_buffer: Vector2
 var _teleport_override_velocity: bool = false
 var _teleport_velocity_buffer: Vector2
+var _dash_orb_rotation: float
 var _dash_orb_position: Vector2
 var _is_dashing: bool
 var _dead: bool
@@ -77,7 +78,8 @@ var _gameplay_rotation: float
 var _last_spider_trail: GDSpiderTrail
 var _last_spider_trail_height: float
 var _rebound_velocity: float
-var _dash_orb_rotation: float
+
+var _orb_collisions_last_setters: Dictionary
 
 # Bit flags
 var _orb_collisions: int
@@ -224,6 +226,7 @@ func _compute_velocity(_delta: float,
 			_velocity.y = tan(_dash_orb_rotation - _gameplay_rotation) * _speed.x
 		if Input.is_action_just_released("jump"):
 			_is_dashing = false
+			_dash_orb_rotation = 0.0
 			$DashFlame.hide()
 
 	if _direction:
@@ -269,7 +272,7 @@ func _compute_velocity(_delta: float,
 		if _orb_collisions & GDInteractible.Orb.BLUE:
 			_gravity_multiplier *= -1
 			_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
-			_pad_collisions &= ~GDInteractible.Orb.BLUE
+			_orb_collisions &= ~GDInteractible.Orb.BLUE
 		if _orb_collisions & GDInteractible.Orb.GREEN:
 			_gravity_multiplier *= -1
 			_velocity.y = -_speed.y * (191.0/194.0) * _gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
@@ -290,6 +293,9 @@ func _compute_velocity(_delta: float,
 		if _orb_collisions & GDInteractible.Orb.TELEPORT:
 			emit_signal("teleported")
 			_orb_collisions &= ~GDInteractible.Orb.TELEPORT
+		if _orb_collisions & GDInteractible.Orb.TOGGLE:
+			_in_j_block = true
+			_orb_collisions &= ~GDInteractible.Orb.TOGGLE
 #endsection
 
 	_velocity.y *= int(get_parent().has_level_started)

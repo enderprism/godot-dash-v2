@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=18 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
@@ -10,10 +10,17 @@
 [ext_resource type="PackedScene" uid="uid://cglxf6jw4fmi" path="res://scenes/components/level_components/orbs/RedOrb.tscn" id="8_q4nd8"]
 [ext_resource type="PackedScene" uid="uid://cugg15j2jxyay" path="res://scenes/components/level_components/pads/PinkPad.tscn" id="10_bl823"]
 [ext_resource type="PackedScene" uid="uid://dvxuhegi7klq8" path="res://scenes/components/level_components/orbs/DashOrbGreen.tscn" id="10_i63c4"]
-[ext_resource type="PackedScene" uid="uid://cd4end0ruw2y3" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal05x.tscn" id="11_v01jb"]
 [ext_resource type="PackedScene" uid="uid://d05asiy6k2voi" path="res://scenes/components/level_components/portals/other_portals/TeleportalIn.tscn" id="12_757eh"]
 [ext_resource type="PackedScene" uid="uid://ckrakyci0r2eg" path="res://scenes/components/level_components/portals/other_portals/TeleportalOut.tscn" id="13_2k7qs"]
 [ext_resource type="PackedScene" uid="uid://cf2ads3atrx78" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal4x.tscn" id="14_1w461"]
+[ext_resource type="PackedScene" uid="uid://43t0kgu3lhyt" path="res://scenes/components/level_components/orbs/ToggleOrb.tscn" id="14_u3rtq"]
+[ext_resource type="Script" path="res://src/components/GDToggledGroup.gd" id="15_rfcqd"]
+[ext_resource type="PackedScene" uid="uid://calhypvupvj4m" path="res://scenes/components/level_components/hazards/Spike.tscn" id="15_svjr2"]
+
+[sub_resource type="Resource" id="Resource_gyjwq"]
+script = ExtResource("15_rfcqd")
+_group = NodePath("../Spike")
+_state = 2
 
 [node name="Dash V2" type="Node2D"]
 script = ExtResource("1_7ju0m")
@@ -22,11 +29,12 @@ metadata/_edit_lock_ = true
 
 [node name="BlueOrb" parent="." instance=ExtResource("4_hh450")]
 position = Vector2(512, -128)
+_horizontal_direction = 1
 _freefly = true
 
 [node name="TeleportationOrb" parent="." node_paths=PackedStringArray("_teleport_target") instance=ExtResource("5_w14p8")]
 self_modulate = Color(0, 0.505882, 1, 1)
-position = Vector2(1088, -704)
+position = Vector2(2496, -192)
 _freefly = true
 _teleport_target = NodePath("../TeleportationOrb2")
 
@@ -39,8 +47,9 @@ _ignore_x = true
 
 [node name="TeleportationOrb2" parent="." instance=ExtResource("5_w14p8")]
 self_modulate = Color(1, 0.537255, 0, 1)
-position = Vector2(768, -896)
+position = Vector2(-448, -192)
 rotation = 3.14159
+_horizontal_direction = 1
 _freefly = true
 
 [node name="TeleportationOrb4" parent="." instance=ExtResource("5_w14p8")]
@@ -71,7 +80,7 @@ position = Vector2(320, -128)
 _freefly = true
 
 [node name="SpiderOrb" parent="." instance=ExtResource("8_lrpx2")]
-position = Vector2(2496, -192)
+position = Vector2(2880, -192)
 _horizontal_direction = 2
 
 [node name="SpiderOrb2" parent="." instance=ExtResource("8_lrpx2")]
@@ -86,9 +95,6 @@ position = Vector2(3008, -64)
 position = Vector2(1792, -512)
 rotation = -0.523598
 
-[node name="SpeedPortal05x" parent="." instance=ExtResource("11_v01jb")]
-position = Vector2(1472, -192)
-
 [node name="TeleportalIn" parent="." node_paths=PackedStringArray("_teleport_target") instance=ExtResource("12_757eh")]
 position = Vector2(3200, -192)
 _teleport_target = NodePath("../TeleportalOut")
@@ -98,3 +104,13 @@ position = Vector2(3392, -832)
 
 [node name="SpeedPortal4x" parent="." instance=ExtResource("14_1w461")]
 position = Vector2(3584, -832)
+
+[node name="ToggleOrb" parent="." instance=ExtResource("14_u3rtq")]
+self_modulate = Color(0, 1, 0, 1)
+position = Vector2(1856, -256)
+rotation = 1.57079
+scale = Vector2(5, 5)
+_toggled_groups = Array[ExtResource("15_rfcqd")]([SubResource("Resource_gyjwq")])
+
+[node name="Spike" parent="." instance=ExtResource("15_svjr2")]
+position = Vector2(1856, -64)
