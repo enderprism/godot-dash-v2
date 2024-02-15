@@ -4,6 +4,8 @@ extends Node2D
 var has_level_started: bool
 
 func _ready() -> void:
+	LevelManager.background_sprites.append($Background)
+	LevelManager.background_sprites.append($Background2)
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), false)
 	var current_level = ResourceLoader.load(LevelManager.current_level.resource_path, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE).instantiate()

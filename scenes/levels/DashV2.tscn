@@ -1,118 +1,36 @@
-[gd_scene load_steps=18 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=8 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
-[ext_resource type="PackedScene" uid="uid://d0dk4786hlokq" path="res://scenes/components/level_components/orbs/BlueOrb.tscn" id="4_hh450"]
-[ext_resource type="PackedScene" uid="uid://bbcetmg5ilsc1" path="res://scenes/components/level_components/orbs/TeleportationOrb.tscn" id="5_w14p8"]
+[ext_resource type="Script" path="res://src/components/triggers/tMove.gd" id="4_mjsxf"]
+[ext_resource type="Script" path="res://src/resources/GDTriggerEasing.gd" id="5_jv2qn"]
 [ext_resource type="PackedScene" uid="uid://ccdry45jmn43w" path="res://scenes/components/level_components/solids/DefaultCube.tscn" id="6_jdq35"]
-[ext_resource type="PackedScene" uid="uid://dnah6ge1p0rr3" path="res://scenes/components/level_components/pads/BluePad.tscn" id="7_gjkul"]
-[ext_resource type="PackedScene" uid="uid://33mc0xa2wc8i" path="res://scenes/components/level_components/orbs/SpiderOrb.tscn" id="8_lrpx2"]
-[ext_resource type="PackedScene" uid="uid://cglxf6jw4fmi" path="res://scenes/components/level_components/orbs/RedOrb.tscn" id="8_q4nd8"]
-[ext_resource type="PackedScene" uid="uid://cugg15j2jxyay" path="res://scenes/components/level_components/pads/PinkPad.tscn" id="10_bl823"]
-[ext_resource type="PackedScene" uid="uid://dvxuhegi7klq8" path="res://scenes/components/level_components/orbs/DashOrbGreen.tscn" id="10_i63c4"]
-[ext_resource type="PackedScene" uid="uid://d05asiy6k2voi" path="res://scenes/components/level_components/portals/other_portals/TeleportalIn.tscn" id="12_757eh"]
-[ext_resource type="PackedScene" uid="uid://ckrakyci0r2eg" path="res://scenes/components/level_components/portals/other_portals/TeleportalOut.tscn" id="13_2k7qs"]
-[ext_resource type="PackedScene" uid="uid://cf2ads3atrx78" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal4x.tscn" id="14_1w461"]
-[ext_resource type="PackedScene" uid="uid://43t0kgu3lhyt" path="res://scenes/components/level_components/orbs/ToggleOrb.tscn" id="14_u3rtq"]
-[ext_resource type="Script" path="res://src/components/GDToggledGroup.gd" id="15_rfcqd"]
-[ext_resource type="PackedScene" uid="uid://calhypvupvj4m" path="res://scenes/components/level_components/hazards/Spike.tscn" id="15_svjr2"]
 
-[sub_resource type="Resource" id="Resource_gyjwq"]
-script = ExtResource("15_rfcqd")
-_group = NodePath("../Spike")
-_state = 2
+[sub_resource type="Curve" id="Curve_icdtk"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(0.4, 0), 0.0, 0.0, 0, 0, Vector2(0.6, 1), 0.0, 0.0, 0, 0, Vector2(0.8, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Resource" id="Resource_q8sst"]
+script = ExtResource("5_jv2qn")
+_tween_duration = 1.0
+_use_custom_easing = true
+_tween_transition = 9
+_tween_easing = 1
+_custom_easing = SubResource("Curve_icdtk")
 
 [node name="Dash V2" type="Node2D"]
 script = ExtResource("1_7ju0m")
 song = ExtResource("2_8grye")
 metadata/_edit_lock_ = true
 
-[node name="BlueOrb" parent="." instance=ExtResource("4_hh450")]
-position = Vector2(512, -128)
-_horizontal_direction = 1
-_freefly = true
-
-[node name="TeleportationOrb" parent="." node_paths=PackedStringArray("_teleport_target") instance=ExtResource("5_w14p8")]
-self_modulate = Color(0, 0.505882, 1, 1)
-position = Vector2(2496, -192)
-_freefly = true
-_teleport_target = NodePath("../TeleportationOrb2")
-_override_player_velocity = true
-_new_player_velocity = Vector2(0, -500)
-
-[node name="TeleportationOrb3" parent="." node_paths=PackedStringArray("_teleport_target") instance=ExtResource("5_w14p8")]
-self_modulate = Color(0, 0.505882, 1, 1)
-position = Vector2(4160, -64)
-_freefly = true
-_teleport_target = NodePath("../TeleportationOrb4")
-_ignore_x = true
-
-[node name="TeleportationOrb2" parent="." instance=ExtResource("5_w14p8")]
-self_modulate = Color(1, 0.537255, 0, 1)
-position = Vector2(-448, -192)
-rotation = 3.14159
-_horizontal_direction = 2
-_freefly = true
-
-[node name="TeleportationOrb4" parent="." instance=ExtResource("5_w14p8")]
-self_modulate = Color(1, 0.537255, 0, 1)
-position = Vector2(4160, -896)
-rotation = 3.14159
-_freefly = true
-
 [node name="DefaultCube" parent="." instance=ExtResource("6_jdq35")]
-position = Vector2(960, -384)
-scale = Vector2(5, 1)
+position = Vector2(704, -576)
 
-[node name="DefaultCube2" parent="." instance=ExtResource("6_jdq35")]
-position = Vector2(2880, -1088)
-scale = Vector2(15, 1)
-
-[node name="BluePad" parent="." instance=ExtResource("7_gjkul")]
-position = Vector2(832, -64)
-_freefly = true
-
-[node name="BluePad2" parent="." instance=ExtResource("7_gjkul")]
-position = Vector2(1216, -256)
-rotation = -3.14159
-_freefly = true
-
-[node name="RedOrb" parent="." instance=ExtResource("8_q4nd8")]
-position = Vector2(320, -128)
-_freefly = true
-
-[node name="SpiderOrb" parent="." instance=ExtResource("8_lrpx2")]
-position = Vector2(2880, -192)
-_horizontal_direction = 2
-
-[node name="SpiderOrb2" parent="." instance=ExtResource("8_lrpx2")]
-position = Vector2(1664, -832)
-rotation = 3.14159
-_horizontal_direction = 2
-
-[node name="PinkPad" parent="." instance=ExtResource("10_bl823")]
-position = Vector2(3008, -64)
-
-[node name="DashOrbGreen" parent="." instance=ExtResource("10_i63c4")]
-position = Vector2(1792, -512)
-rotation = -0.523598
-
-[node name="TeleportalIn" parent="." node_paths=PackedStringArray("_teleport_target") instance=ExtResource("12_757eh")]
-position = Vector2(3200, -192)
-_teleport_target = NodePath("../TeleportalOut")
-
-[node name="TeleportalOut" parent="." instance=ExtResource("13_2k7qs")]
-position = Vector2(3392, -832)
-
-[node name="SpeedPortal4x" parent="." instance=ExtResource("14_1w461")]
-position = Vector2(3584, -832)
-
-[node name="ToggleOrb" parent="." instance=ExtResource("14_u3rtq")]
-self_modulate = Color(0, 1, 0, 1)
-position = Vector2(1856, -256)
-rotation = 1.57079
-scale = Vector2(5, 5)
-_toggled_groups = Array[ExtResource("15_rfcqd")]([SubResource("Resource_gyjwq")])
-
-[node name="Spike" parent="." instance=ExtResource("15_svjr2")]
-position = Vector2(1856, -64)
+[node name="tMove" type="Area2D" parent="." node_paths=PackedStringArray("_target_group")]
+position = Vector2(448, -576)
+collision_layer = 16
+script = ExtResource("4_mjsxf")
+_move_coordinates = Vector2(512, 0)
+_target_group = NodePath("../DefaultCube")
+_relative = true
+_tween_properties = SubResource("Resource_q8sst")

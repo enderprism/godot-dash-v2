@@ -37,6 +37,7 @@ script = ExtResource("3_my51g")
 _parallax_factor = Vector2(0.5, 0.5)
 _camera_delta_threshold = Vector2(0, 20)
 _camera = NodePath("../PlayerCamera")
+metadata/_edit_lock_ = true
 
 [node name="BackgroundKillCollider" type="StaticBody2D" parent="Background" node_paths=PackedStringArray("target")]
 position = Vector2(0, -1376)
@@ -66,6 +67,7 @@ script = ExtResource("3_my51g")
 _parallax_factor = Vector2(0.5, 0.5)
 _camera_delta_threshold = Vector2(0, 20)
 _camera = NodePath("../PlayerCamera")
+metadata/_edit_lock_ = true
 
 [node name="Level" type="Node2D" parent="."]
 position = Vector2(622, 925)

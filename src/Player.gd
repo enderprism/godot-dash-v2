@@ -72,6 +72,7 @@ var _last_spider_trail: GDSpiderTrail
 var _last_spider_trail_height: float
 var _rebound_velocity: float
 
+var _gameplay_trigger_gravity_multiplier: float = 1
 
 # Queues
 var _orb_queue: Array[GDInteractible]
@@ -149,19 +150,19 @@ func _compute_velocity(_delta: float,
 #section Apply Gravity
 	if not _is_dashing:
 		if gamemode == Gamemode.SHIP:
-			_velocity.y += GRAVITY * _delta * _gravity_multiplier * _jump_state * -1 * FLY_GRAVITY_MULTIPLIER
+			_velocity.y += GRAVITY * _delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * _jump_state * -1 * FLY_GRAVITY_MULTIPLIER
 			_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
 		elif gamemode == Gamemode.SWING:
-			_velocity.y += GRAVITY * _delta * _gravity_multiplier * FLY_GRAVITY_MULTIPLIER
+			_velocity.y += GRAVITY * _delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * FLY_GRAVITY_MULTIPLIER
 			_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
 		elif gamemode == Gamemode.WAVE:
-			_velocity.y = SPEED.x * _gravity_multiplier * _jump_state * -1
+			_velocity.y = SPEED.x * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * _jump_state * -1
 			if _mini: _velocity.y *= 2
 		elif not is_on_floor():
 			if gamemode == Gamemode.UFO:
-				_velocity.y += GRAVITY * _delta * _gravity_multiplier * UFO_GRAVITY_MULTIPLIER
+				_velocity.y += GRAVITY * _delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * UFO_GRAVITY_MULTIPLIER
 			else:
-				_velocity.y += GRAVITY * _delta * _gravity_multiplier
+				_velocity.y += GRAVITY * _delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier
 			_velocity.y = clamp(_velocity.y, -TERMINAL_VELOCITY.y, TERMINAL_VELOCITY.y)
 #endsection
 
@@ -187,7 +188,7 @@ func _compute_velocity(_delta: float,
 			_last_spider_trail_height = abs(_get_spider_velocity_delta()/_last_spider_trail.SPIDER_TRAIL_HEIGHT)
 		elif _colliding_pad._pad_type == GDInteractible.Pad.BLUE:
 			_gravity_multiplier *= -1
-			_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
+			_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier * _gameplay_trigger_gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
 #endsection
 
 	# Handle jump.
@@ -199,11 +200,11 @@ func _compute_velocity(_delta: float,
 			_velocity.y = _get_spider_velocity_delta() * 1/_delta
 			_last_spider_trail_height = abs(_get_spider_velocity_delta()/_last_spider_trail.SPIDER_TRAIL_HEIGHT)
 		elif gamemode == Gamemode.BALL:
-			_velocity.y = _speed.y * _gravity_multiplier * 0.5
+			_velocity.y = _speed.y * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * 0.5
 		elif gamemode == Gamemode.ROBOT:
-			_velocity.y = SPEED.x * _gravity_multiplier * -1
+			_velocity.y = SPEED.x * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * -1
 		else:
-			_velocity.y = -_speed.y * _gravity_multiplier
+			_velocity.y = -_speed.y * _gravity_multiplier * _gameplay_trigger_gravity_multiplier
 
 	if _is_dashing:
 		$DashFlame.visible = true
@@ -252,10 +253,10 @@ func _compute_velocity(_delta: float,
 			_in_j_block = true
 		if _colliding_orb._orb_type == GDInteractible.Orb.BLUE:
 			_gravity_multiplier *= -1
-			_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
+			_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier * _gameplay_trigger_gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
 		if _colliding_orb._orb_type == GDInteractible.Orb.GREEN:
 			_gravity_multiplier *= -1
-			_velocity.y = -_speed.y * (191.0/194.0) * _gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
+			_velocity.y = -_speed.y * (191.0/194.0) * _gravity_multiplier * _gameplay_trigger_gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
 		if _colliding_orb._orb_type == GDInteractible.Orb.DASH_GREEN:
 			_colliding_orb._set_dash_props()
 			var _last_dash_boom = DASH_BOOM.instantiate()
@@ -273,7 +274,9 @@ func _compute_velocity(_delta: float,
 			var _velocity_override: Vector2 = _colliding_orb._teleport_player()
 			if _colliding_orb._override_player_velocity: _velocity = _velocity_override * 1/_delta
 		if _colliding_orb._orb_type == GDInteractible.Orb.TOGGLE:
-			_colliding_orb._toggle(_colliding_orb._toggled_groups)
+			var toggle = GDToggle.new()
+			toggle._toggle(_colliding_orb._toggled_groups, _colliding_orb)
+			toggle.queue_free()
 			_in_j_block = true
 	
 		if _colliding_orb._multi_usage:
@@ -294,7 +297,7 @@ func _rotate_sprite_degrees(delta: float):
 		$Icon/Cube.scale.x = _horizontal_direction
 	if not _is_dashing:
 		if not is_on_floor() and not is_on_ceiling():
-			$Icon/Cube.rotation_degrees += delta * _gravity_multiplier * 400 * _get_direction()
+			$Icon/Cube.rotation_degrees += delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * 400 * _get_direction()
 		else:
 			$Icon/Cube.rotation_degrees = lerpf($Icon/Cube.rotation_degrees, snapped($Icon/Cube.rotation_degrees, 90), 0.5)
 	else:
@@ -348,7 +351,7 @@ func _rotate_sprite_degrees(delta: float):
 	$Icon/Ball.scale.y = 1.0
 	if _horizontal_direction != 0:
 		$Icon/Ball.scale.x = _horizontal_direction
-	$Icon/Ball.rotation_degrees += delta * _gravity_multiplier * 600
+	$Icon/Ball.rotation_degrees += delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * 600
 #endsection
 #section spider/robot
 	$Icon/Spider.scale.y = sign(_gravity_multiplier)
@@ -391,7 +394,7 @@ func _get_spider_velocity_delta() -> float:
 	var _spider_velocity_delta: float = abs((_target_position - position).rotated(-_gameplay_rotation).y)
 	_spider_velocity_delta -= $GroundCollider.shape.size.y/2 * scale.y
 	_last_spider_trail = SPIDER_TRAIL.instantiate()
-	return _spider_velocity_delta * _gravity_multiplier
+	return _spider_velocity_delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier
 
 func _player_death() -> void:
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), true)

@@ -68,12 +68,6 @@ enum HorizontalDirection {
 	SET,
 	FLIP,
 }
-
-enum ToggleState {
-	ON,
-	OFF,
-	FLIP,
-}
 #endregion
 
 #region exports
@@ -383,21 +377,3 @@ func _teleport_player() -> Vector2:
 			return _new_player_velocity.rotated(_player._gameplay_rotation)
 		else: return Vector2.ZERO
 	else: return Vector2.ZERO
-
-func _toggle(toggled_groups):
-	if has_overlapping_bodies():
-		for toggled_group in toggled_groups:
-			var group = get_node(toggled_group._group)
-			var state = toggled_group._state
-			if state == ToggleState.FLIP:
-				if group.process_mode == PROCESS_MODE_INHERIT: # If it is toggled on
-					state = ToggleState.OFF
-				elif group.process_mode == PROCESS_MODE_DISABLED: # If it is toggled off
-					state = ToggleState.ON
-			match state:
-				ToggleState.ON:
-					group.set_deferred("process_mode", PROCESS_MODE_INHERIT)
-					group.show()
-				ToggleState.OFF:
-					group.set_deferred("process_mode", PROCESS_MODE_DISABLED)
-					group.hide()
