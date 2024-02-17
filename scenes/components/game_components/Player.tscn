@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bl48psvuka73y"]
+[gd_scene load_steps=46 format=3 uid="uid://bl48psvuka73y"]
 
 [ext_resource type="Script" path="res://src/Player.gd" id="1_nvqsc"]
 [ext_resource type="Texture2D" uid="uid://omcvgcf1uk5p" path="res://assets/textures/player/cube/Cube.svg" id="2_6ab5b"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://br8sou620rxv4" path="res://assets/textures/player/death_effect/DeathEffect10.png" id="15_tt21x"]
 [ext_resource type="Texture2D" uid="uid://btd3nl8o3v0ij" path="res://assets/textures/player/death_effect/DeathEffect11.png" id="16_4ncex"]
 [ext_resource type="Texture2D" uid="uid://ci828dwxt326b" path="res://assets/textures/player/death_effect/DeathEffect12.png" id="17_ctfuu"]
+[ext_resource type="Texture2D" uid="uid://dnpykktg8amk8" path="res://assets/textures/player/ufo/Ufo.svg" id="18_nmour"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_whmfp"]
 animations = [{
@@ -179,9 +180,11 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 process_mode = 1
 collision_mask = 122
+collision_priority = 2.0
 floor_constant_speed = true
 floor_max_angle = 1.55334
 floor_snap_length = 32.0
+platform_floor_layers = 4294967200
 script = ExtResource("1_nvqsc")
 
 [node name="DashFlame" type="AnimatedSprite2D" parent="."]
@@ -225,6 +228,7 @@ visible = false
 script = ExtResource("2_sxyn3")
 
 [node name="CubeIcon" type="Sprite2D" parent="Icon/Cube"]
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_6ab5b")
 
 [node name="Robot" type="Node2D" parent="Icon"]
@@ -233,9 +237,11 @@ script = ExtResource("2_sxyn3")
 gamemode = 5
 
 [node name="CubeIcon" type="Sprite2D" parent="Icon/Robot"]
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_6ab5b")
 
 [node name="Spider" type="Node2D" parent="Icon"]
+visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 6
 
@@ -273,12 +279,13 @@ gamemode = 4
 texture = ExtResource("2_6ab5b")
 
 [node name="UFO" type="Node2D" parent="Icon"]
-visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 2
 
-[node name="CubeIcon" type="Sprite2D" parent="Icon/UFO"]
-texture = ExtResource("2_6ab5b")
+[node name="UFOIcon" type="Sprite2D" parent="Icon/UFO"]
+position = Vector2(0, -3)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("18_nmour")
 
 [node name="Ship" type="Node2D" parent="Icon"]
 visible = false
@@ -286,6 +293,7 @@ script = ExtResource("2_sxyn3")
 gamemode = 1
 
 [node name="ShipIcon" type="Sprite2D" parent="Icon/Ship"]
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("4_mqpwg")
 
 [node name="Swing" type="Node2D" parent="Icon"]
@@ -294,6 +302,7 @@ script = ExtResource("2_sxyn3")
 gamemode = 7
 
 [node name="Swing-glow" type="Sprite2D" parent="Icon/Swing"]
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("6_6vub1")
 
 [node name="FireBoostTop" type="Sprite2D" parent="Icon/Swing"]
@@ -315,6 +324,7 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("5_34x12")
 
 [node name="Swing-NoGlow" type="Sprite2D" parent="Icon/Swing"]
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("7_qd53y")
 
 [node name="GroundCollider" type="CollisionShape2D" parent="."]

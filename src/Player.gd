@@ -275,7 +275,7 @@ func _compute_velocity(_delta: float,
 			if _colliding_orb._override_player_velocity: _velocity = _velocity_override * 1/_delta
 		if _colliding_orb._orb_type == GDInteractible.Orb.TOGGLE:
 			var toggle = GDToggle.new()
-			toggle._toggle(_colliding_orb._toggled_groups, _colliding_orb)
+			toggle._toggle(_colliding_orb, _colliding_orb._toggled_groups)
 			toggle.queue_free()
 			_in_j_block = true
 	

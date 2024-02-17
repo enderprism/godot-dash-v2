@@ -1,36 +1,82 @@
-[gd_scene load_steps=8 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=11 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
-[ext_resource type="Script" path="res://src/components/triggers/tMove.gd" id="4_mjsxf"]
-[ext_resource type="Script" path="res://src/resources/GDTriggerEasing.gd" id="5_jv2qn"]
-[ext_resource type="PackedScene" uid="uid://ccdry45jmn43w" path="res://scenes/components/level_components/solids/DefaultCube.tscn" id="6_jdq35"]
+[ext_resource type="Script" path="res://src/components/triggers/tMove.gd" id="3_aeds0"]
+[ext_resource type="Script" path="res://src/resources/tTriggerEasingRes.gd" id="4_eu330"]
+[ext_resource type="PackedScene" uid="uid://ccdry45jmn43w" path="res://scenes/components/level_components/solids/DefaultCube.tscn" id="5_g4mtk"]
+[ext_resource type="PackedScene" uid="uid://cglxf6jw4fmi" path="res://scenes/components/level_components/orbs/RedOrb.tscn" id="6_altr0"]
 
-[sub_resource type="Curve" id="Curve_icdtk"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(0.4, 0), 0.0, 0.0, 0, 0, Vector2(0.6, 1), 0.0, 0.0, 0, 0, Vector2(0.8, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 6
+[sub_resource type="Curve" id="Curve_nro2v"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
 
-[sub_resource type="Resource" id="Resource_q8sst"]
-script = ExtResource("5_jv2qn")
+[sub_resource type="Resource" id="Resource_ksrvg"]
+script = ExtResource("4_eu330")
 _tween_duration = 1.0
-_use_custom_easing = true
-_tween_transition = 9
+_use_custom_easing = false
+_tween_transition = 5
 _tween_easing = 1
-_custom_easing = SubResource("Curve_icdtk")
+_custom_easing = SubResource("Curve_nro2v")
+
+[sub_resource type="Resource" id="Resource_ojcph"]
+script = ExtResource("4_eu330")
+_tween_duration = 1.0
+_use_custom_easing = false
+_tween_transition = 8
+_tween_easing = 1
+_custom_easing = SubResource("Curve_nro2v")
+
+[sub_resource type="Resource" id="Resource_5s8vt"]
+script = ExtResource("4_eu330")
+_tween_duration = 1.0
+_use_custom_easing = false
+_tween_transition = 0
+_tween_easing = 2
+_custom_easing = SubResource("Curve_nro2v")
 
 [node name="Dash V2" type="Node2D"]
 script = ExtResource("1_7ju0m")
 song = ExtResource("2_8grye")
 metadata/_edit_lock_ = true
 
-[node name="DefaultCube" parent="." instance=ExtResource("6_jdq35")]
-position = Vector2(704, -576)
-
-[node name="tMove" type="Area2D" parent="." node_paths=PackedStringArray("_target_group")]
-position = Vector2(448, -576)
+[node name="tMove" type="Area2D" parent="." node_paths=PackedStringArray("_target_group", "_move_target")]
+position = Vector2(320, -320)
 collision_layer = 16
-script = ExtResource("4_mjsxf")
-_move_coordinates = Vector2(512, 0)
+script = ExtResource("3_aeds0")
 _target_group = NodePath("../DefaultCube")
+_easing = SubResource("Resource_ksrvg")
 _relative = true
-_tween_properties = SubResource("Resource_q8sst")
+_use_target = true
+_move_target = NodePath("../RedOrb")
+_move_target_offset = Vector2(64, 0)
+_move_coordinates = Vector2(768, 0)
+
+[node name="tMove2" type="Area2D" parent="." node_paths=PackedStringArray("_target_group", "_move_target")]
+position = Vector2(320, -448)
+collision_layer = 16
+script = ExtResource("3_aeds0")
+_target_group = NodePath("../RedOrb")
+_easing = SubResource("Resource_ojcph")
+_relative = true
+_move_target = NodePath("../DefaultCube")
+_move_target_offset = Vector2(64, 0)
+_move_coordinates = Vector2(768, 0)
+
+[node name="tMove3" type="Area2D" parent="." node_paths=PackedStringArray("_target_group", "_move_target")]
+position = Vector2(320, -576)
+collision_layer = 16
+script = ExtResource("3_aeds0")
+_target_group = NodePath("../RedOrb")
+_easing = SubResource("Resource_5s8vt")
+_relative = true
+_move_target = NodePath("../DefaultCube")
+_move_target_offset = Vector2(64, 0)
+_move_coordinates = Vector2(0, -512)
+
+[node name="RedOrb" parent="." instance=ExtResource("6_altr0")]
+position = Vector2(1216, -320)
+
+[node name="DefaultCube" parent="." instance=ExtResource("5_g4mtk")]
+position = Vector2(320, 64)
+scale = Vector2(3, 1)

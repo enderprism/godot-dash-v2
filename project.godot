@@ -72,7 +72,7 @@ window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/inspector_extender/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/tabby_explorer/plugin.cfg", "res://addons/trail_2d/plugin.cfg")
+enabled=PackedStringArray("res://addons/inspector_extender/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/tabby_explorer/plugin.cfg", "res://addons/trail_2d/plugin.cfg")
 
 [filesystem]
 
@@ -125,4 +125,4 @@ pause_level={
 2d_physics/layer_4="interactibles"
 2d_physics/layer_5="triggers"
 2d_physics/layer_6="ground"
-2d_physics/layer_7="slopes"
+2d_physics/layer_7="slope_enablers"

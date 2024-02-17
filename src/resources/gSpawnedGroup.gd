@@ -1,6 +1,6 @@
 extends Resource
 
-class_name GDSpawnedGroup
+class_name gSpawnedGroup
 
 @export var path: NodePath
 @export var time: float

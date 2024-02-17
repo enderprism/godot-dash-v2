@@ -6,7 +6,7 @@ enum ToggleState {
 	FLIP,
 }
 
-func _toggle(toggled_groups, instancer):
+func _toggle(instancer: Node, toggled_groups):
 	for toggled_group in toggled_groups:
 		var group = instancer.get_node(toggled_group.group)
 		var state = toggled_group.state

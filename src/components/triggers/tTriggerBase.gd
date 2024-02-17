@@ -1,4 +1,5 @@
 @tool
+class_name tTriggerBase
 extends Area2D
 ## The base class for Godot Dash triggers.
 
@@ -37,7 +38,7 @@ func _ready() -> void:
 	_sprite.set_texture(_texture)
 	body_entered.connect(_run)
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not get_tree().is_debugging_collisions_hint():
 		_sprite.hide()
 	_sprite.global_rotation = 0.0

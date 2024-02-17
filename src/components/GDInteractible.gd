@@ -104,7 +104,7 @@ enum HorizontalDirection {
 @export var _freefly: bool
 
 # @@show_if(object_type == ObjectType.ORB and _orb_type == Orb.TOGGLE)
-@export var _toggled_groups: Array[GDToggledGroup]
+@export var _toggled_groups: Array[gToggledGroup]
 
 # @@show_if(_other_portal_type == OtherPortal.TELEPORTAL and object_type == ObjectType.OTHER_PORTAL or object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT)
 @export var _teleport_target: Node2D
