@@ -1,9 +1,13 @@
 <p align="center">
-	<img src="assets/logo/NewIcon.png" align="center" width="256"></img>
-	<h1 align="center">Godot Dash V2</h1>
+ <img src="assets/logo/NewIcon.png" align="center" width="256" alt="Godot Dash logo"></img>
+ <h1 align="center">Godot Dash V2</h1>
 </p>
 
-A Geometry Dash remake in Godot Engine. This is V2, a full rewrite of the project. Check V1 [here](https://github.com/enderprism/godot-dash).
+A Geometry Dash fangame made with Godot Engine. This is V2, a full rewrite of the project. Check V1 [here](https://github.com/enderprism/godot-dash).
+
+## OS Support
+
+Godot Dash V2 is intended to work on Linux, Windows and macOS (unsigned app). **Android support is not planned.**
 
 ## Downloads
 
