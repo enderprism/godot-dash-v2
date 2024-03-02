@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/components/GDFadeScreen.gd" id="1_a1tqg"]
 
 [node name="FadeScreenLayer" type="CanvasLayer"]
-layer = 5
+layer = 110
 
 [node name="FadeScreen" type="ColorRect" parent="."]
 anchors_preset = 15

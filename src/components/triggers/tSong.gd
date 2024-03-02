@@ -1,7 +1,5 @@
 @tool
-class_name tSong extends "res://src/components/triggers/tSuperclass.gd"
-
-const EASABLE_TRIGGER = false
+class_name tSong extends tTriggerBase
 
 @export var _song_stream: AudioStream
 @export var _song_start: float

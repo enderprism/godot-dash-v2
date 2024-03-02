@@ -23,24 +23,23 @@ func _ready() -> void:
 	LevelManager.player_camera = self
 
 func _process(_delta: float) -> void:
-	_player_distance = player.position - position
-	_previous_position = position
+	if get_parent().has_level_started:
+		_player_distance = player.position - position
+		_previous_position = position
 
-	if not $"../Level".get_child(0).platformer:
-		offset.x = lerpf(offset.x, DEFAULT_OFFSET.x * player._get_direction(), _offset_snap.x)
-	if not _static.y and _freefly and abs(_player_distance.y) > MAX_DISTANCE:
-		position.y = lerpf(
+		if not $"../Level".get_child(0).platformer:
+			offset.x = lerpf(offset.x, DEFAULT_OFFSET.x * player._get_direction(), _offset_snap.x)
+		if not _static.y and _freefly and abs(_player_distance.y) > MAX_DISTANCE:
+			position.y = lerpf(
+				position.y,
+				player.position.y - sign(_player_distance.y) * MAX_DISTANCE,
+				_position_snap.y,
+			)
+
+		position.x = lerpf(position.x, player.position.x, _position_snap.x)
+		position.y = clampf(
 			position.y,
-			player.position.y - sign(_player_distance.y) * MAX_DISTANCE,
-			_position_snap.y,
+			MIN_HEIGHT,
+			MAX_HEIGHT,
 		)
-
-	position.x = lerpf(position.x, player.position.x, _position_snap.x)
-	position.y = clampf(
-		position.y,
-		MIN_HEIGHT,
-		MAX_HEIGHT,
-	)
-
-
-	_delta_position = position - _previous_position
+		_delta_position = position - _previous_position

@@ -39,3 +39,6 @@ jobs:
         generateReleaseNotes: true
         tag: ${{ github.ref_name }}
         artifacts: ${{ steps.export.outputs.archive_directory }}/*
+    
+    - name: Release Drafter
+      uses: release-drafter/release-drafter@v6.0.0

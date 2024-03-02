@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://pf8fudglemps" path="res://assets/textures/guis/pause_menu/Restart.png" id="6_k3ys4"]
 
 [node name="PauseMenuLayer" type="CanvasLayer"]
+layer = 101
 
 [node name="PauseMenu" type="Control" parent="."]
 layout_mode = 3

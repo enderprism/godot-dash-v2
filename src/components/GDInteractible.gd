@@ -357,7 +357,9 @@ func _set_reverse(reverse: bool) -> void:
 		_player._horizontal_direction *= -1
 
 func _set_dash_props() -> void:
-	_player._dash_orb_rotation = global_rotation
+	_player._dash_orb_rotation = pingpong(global_rotation, PI/2) * sign(global_rotation_degrees)
+	# _player._dash_orb_rotation = global_rotation
+	print_debug(rad_to_deg(_player._dash_orb_rotation))
 	_player._dash_orb_position = global_position
 
 func _set_spider_props() -> void:

@@ -1,0 +1,119 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3u17qn20dek3"]
+
+[ext_resource type="Script" path="res://scenes/EditorScene.gd" id="1_ftcrp"]
+[ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
+[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/ButtonNoFocusColor.tres" id="3_k1q1p"]
+[ext_resource type="Texture2D" uid="uid://cffmcdyqdl686" path="res://assets/textures/guis/editor/EditorPlayPlayer.svg" id="3_qy4mu"]
+[ext_resource type="Script" path="res://src/components/GDBouncyButton.gd" id="4_gl2yd"]
+
+[node name="LevelEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ftcrp")
+metadata/_edit_lock_ = true
+
+[node name="GameScene" parent="." instance=ExtResource("1_ql4al")]
+
+[node name="EditorUI" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditorUI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MenuBar" type="MenuBar" parent="EditorUI/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+flat = true
+
+[node name="File" type="PopupMenu" parent="EditorUI/HBoxContainer/MenuBar"]
+item_count = 4
+item_0/text = "Save"
+item_0/id = 0
+item_1/text = "Save As"
+item_1/id = 1
+item_2/text = ""
+item_2/id = 2
+item_2/separator = true
+item_3/text = "Level Options"
+item_3/id = 3
+
+[node name="Edit" type="PopupMenu" parent="EditorUI/HBoxContainer/MenuBar"]
+item_count = 1
+item_0/text = "Preferences"
+item_0/id = 0
+
+[node name="View" type="PopupMenu" parent="EditorUI/HBoxContainer/MenuBar"]
+hide_on_checkable_item_selection = false
+item_count = 1
+item_0/text = "Panel Visibility"
+item_0/id = 0
+
+[node name="PanelVisibility" type="PopupMenu" parent="EditorUI/HBoxContainer/MenuBar/View"]
+hide_on_checkable_item_selection = false
+item_count = 1
+item_0/text = "Block Palette"
+item_0/checkable = 1
+item_0/checked = true
+item_0/id = 0
+
+[node name="Help" type="PopupMenu" parent="EditorUI/HBoxContainer/MenuBar"]
+item_count = 1
+item_0/text = "Manual"
+item_0/id = 0
+
+[node name="TabContainer" type="TabContainer" parent="EditorUI"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -248.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Solids" type="Control" parent="EditorUI/TabContainer"]
+layout_mode = 2
+
+[node name="ButtonContainer" type="GridContainer" parent="EditorUI/TabContainer/Solids"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.0
+offset_top = -85.5
+offset_right = 53.0
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+columns = 10
+
+[node name="Hazards" type="Control" parent="EditorUI/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Interactibles" type="Control" parent="EditorUI/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Button" type="Button" parent="EditorUI"]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 192.0
+pivot_offset = Vector2(64, 64)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_k1q1p")
+icon = ExtResource("3_qy4mu")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+
+[connection signal="pressed" from="EditorUI/Button" to="." method="_on_button_pressed"]

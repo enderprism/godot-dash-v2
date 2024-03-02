@@ -246,6 +246,7 @@ script = ExtResource("2_sxyn3")
 gamemode = 6
 
 [node name="CubeIcon" type="Sprite2D" parent="Icon/Spider"]
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_6ab5b")
 
 [node name="SpiderCast" type="ShapeCast2D" parent="Icon/Spider"]

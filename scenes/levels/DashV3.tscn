@@ -1,0 +1,140 @@
+[gd_scene load_steps=9 format=3 uid="uid://pks0qdd1moi8"]
+
+[ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
+[ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
+[ext_resource type="PackedScene" uid="uid://duj3dae6qcvtm" path="res://scenes/components/level_components/portals/gamemode_portals/SpiderPortal.tscn" id="3_reyso"]
+[ext_resource type="PackedScene" uid="uid://ccdry45jmn43w" path="res://scenes/components/level_components/solids/DefaultCube.tscn" id="5_g4mtk"]
+[ext_resource type="PackedScene" uid="uid://d0dk4786hlokq" path="res://scenes/components/level_components/orbs/BlueOrb.tscn" id="5_iahbh"]
+[ext_resource type="PackedScene" uid="uid://cglxf6jw4fmi" path="res://scenes/components/level_components/orbs/RedOrb.tscn" id="6_altr0"]
+[ext_resource type="PackedScene" uid="uid://qfmv2p1wt1tn" path="res://scenes/components/level_components/portals/gamemode_portals/CubePortal.tscn" id="7_xptki"]
+[ext_resource type="PackedScene" uid="uid://nsvkooc5od83" path="res://scenes/components/level_components/pads/YellowPad.tscn" id="8_7c14y"]
+
+[node name="Dash V2" type="Node2D"]
+script = ExtResource("1_7ju0m")
+song = ExtResource("2_8grye")
+metadata/_edit_lock_ = true
+
+[node name="RedOrb" parent="." instance=ExtResource("6_altr0")]
+position = Vector2(1344, -320)
+
+[node name="BLOCKS" type="Node2D" parent="."]
+
+[node name="DefaultCube" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(1921, -448)
+
+[node name="DefaultCube33" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(1984, -64)
+
+[node name="DefaultCube34" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(2496, -64)
+
+[node name="DefaultCube35" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(3008, -64)
+
+[node name="DefaultCube2" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(2049, -448)
+
+[node name="DefaultCube3" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(2433, -576)
+
+[node name="DefaultCube4" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(2561, -576)
+
+[node name="DefaultCube5" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(2945, -320)
+
+[node name="DefaultCube6" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(3073, -320)
+
+[node name="DefaultCube7" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(3904, -448)
+
+[node name="DefaultCube8" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(4032, -448)
+
+[node name="DefaultCube9" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(4160, -448)
+
+[node name="DefaultCube10" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(4160, -1216)
+
+[node name="DefaultCube11" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(4288, -1216)
+
+[node name="DefaultCube12" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(4416, -1216)
+
+[node name="DefaultCube25" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(5568, -1216)
+
+[node name="DefaultCube26" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(5696, -1216)
+
+[node name="DefaultCube27" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(5824, -1216)
+
+[node name="DefaultCube28" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(5824, -704)
+
+[node name="DefaultCube29" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(5952, -704)
+
+[node name="DefaultCube30" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(6080, -704)
+
+[node name="DefaultCube13" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(4416, -704)
+
+[node name="DefaultCube16" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(4800, -704)
+
+[node name="DefaultCube14" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(4544, -704)
+
+[node name="DefaultCube15" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(4672, -704)
+
+[node name="DefaultCube17" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(4800, -1216)
+
+[node name="DefaultCube18" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(5184, -1216)
+
+[node name="DefaultCube19" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(4928, -1216)
+
+[node name="DefaultCube20" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(5056, -1216)
+
+[node name="DefaultCube21" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(5184, -448)
+
+[node name="DefaultCube22" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(5568, -448)
+
+[node name="DefaultCube31" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(6208, -704)
+
+[node name="DefaultCube32" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(6336, -704)
+
+[node name="DefaultCube23" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(5312, -448)
+
+[node name="DefaultCube24" parent="BLOCKS" instance=ExtResource("5_g4mtk")]
+position = Vector2(5440, -448)
+
+[node name="BlueOrb" parent="." instance=ExtResource("5_iahbh")]
+position = Vector2(3392, -704)
+
+[node name="BlueOrb2" parent="." instance=ExtResource("5_iahbh")]
+position = Vector2(3648, -1216)
+
+[node name="SpiderPortal" parent="." instance=ExtResource("3_reyso")]
+position = Vector2(3904, -704)
+
+[node name="CubePortal" parent="." instance=ExtResource("7_xptki")]
+position = Vector2(6336, -960)
+
+[node name="YellowPad" parent="." instance=ExtResource("8_7c14y")]
+position = Vector2(6336, -832)

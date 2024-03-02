@@ -1,82 +1,114 @@
-[gd_scene load_steps=11 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=17 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
-[ext_resource type="Script" path="res://src/components/triggers/tMove.gd" id="3_aeds0"]
-[ext_resource type="Script" path="res://src/resources/tTriggerEasingRes.gd" id="4_eu330"]
+[ext_resource type="PackedScene" uid="uid://33mc0xa2wc8i" path="res://scenes/components/level_components/orbs/SpiderOrb.tscn" id="4_rlanb"]
+[ext_resource type="PackedScene" uid="uid://dnah6ge1p0rr3" path="res://scenes/components/level_components/pads/BluePad.tscn" id="5_cx1fq"]
 [ext_resource type="PackedScene" uid="uid://ccdry45jmn43w" path="res://scenes/components/level_components/solids/DefaultCube.tscn" id="5_g4mtk"]
-[ext_resource type="PackedScene" uid="uid://cglxf6jw4fmi" path="res://scenes/components/level_components/orbs/RedOrb.tscn" id="6_altr0"]
+[ext_resource type="PackedScene" uid="uid://calhypvupvj4m" path="res://scenes/components/level_components/hazards/Spike.tscn" id="6_glkci"]
+[ext_resource type="PackedScene" uid="uid://bf1l71kmqh0i0" path="res://scenes/components/level_components/pads/RedPad.tscn" id="8_kjttm"]
+[ext_resource type="PackedScene" uid="uid://ctf8cfrxbjfdk" path="res://scenes/components/level_components/portals/gamemode_portals/ShipPortal.tscn" id="9_xhi3m"]
+[ext_resource type="PackedScene" uid="uid://ctw1jhwf8nsij" path="res://scenes/components/level_components/orbs/DashOrbMagenta.tscn" id="10_dgc28"]
+[ext_resource type="PackedScene" uid="uid://danxhobafrnci" path="res://scenes/components/level_components/orbs/GreenOrb.tscn" id="10_mawig"]
+[ext_resource type="PackedScene" uid="uid://43t0kgu3lhyt" path="res://scenes/components/level_components/orbs/ToggleOrb.tscn" id="10_nymdk"]
+[ext_resource type="Script" path="res://src/resources/gToggledGroup.gd" id="11_kwfb6"]
+[ext_resource type="Script" path="res://src/components/triggers/tSong.gd" id="11_vkgcw"]
+[ext_resource type="AudioStream" uid="uid://bc0kdg2n4p4ih" path="res://assets/sounds/music/level_music/Never Gonna Give You Up.mp3" id="12_yhb7r"]
 
-[sub_resource type="Curve" id="Curve_nro2v"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 4
+[sub_resource type="Resource" id="Resource_wg2jq"]
+script = ExtResource("11_kwfb6")
+group = NodePath("../tSong")
+state = 0
 
-[sub_resource type="Resource" id="Resource_ksrvg"]
-script = ExtResource("4_eu330")
-_tween_duration = 1.0
-_use_custom_easing = false
-_tween_transition = 5
-_tween_easing = 1
-_custom_easing = SubResource("Curve_nro2v")
-
-[sub_resource type="Resource" id="Resource_ojcph"]
-script = ExtResource("4_eu330")
-_tween_duration = 1.0
-_use_custom_easing = false
-_tween_transition = 8
-_tween_easing = 1
-_custom_easing = SubResource("Curve_nro2v")
-
-[sub_resource type="Resource" id="Resource_5s8vt"]
-script = ExtResource("4_eu330")
-_tween_duration = 1.0
-_use_custom_easing = false
-_tween_transition = 0
-_tween_easing = 2
-_custom_easing = SubResource("Curve_nro2v")
+[sub_resource type="Resource" id="Resource_f7m3y"]
+script = ExtResource("11_kwfb6")
+group = NodePath("../tSong")
+state = 1
 
 [node name="Dash V2" type="Node2D"]
 script = ExtResource("1_7ju0m")
 song = ExtResource("2_8grye")
 metadata/_edit_lock_ = true
 
-[node name="tMove" type="Area2D" parent="." node_paths=PackedStringArray("_target_group", "_move_target")]
-position = Vector2(320, -320)
-collision_layer = 16
-script = ExtResource("3_aeds0")
-_target_group = NodePath("../DefaultCube")
-_easing = SubResource("Resource_ksrvg")
-_relative = true
-_use_target = true
-_move_target = NodePath("../RedOrb")
-_move_target_offset = Vector2(64, 0)
-_move_coordinates = Vector2(768, 0)
-
-[node name="tMove2" type="Area2D" parent="." node_paths=PackedStringArray("_target_group", "_move_target")]
-position = Vector2(320, -448)
-collision_layer = 16
-script = ExtResource("3_aeds0")
-_target_group = NodePath("../RedOrb")
-_easing = SubResource("Resource_ojcph")
-_relative = true
-_move_target = NodePath("../DefaultCube")
-_move_target_offset = Vector2(64, 0)
-_move_coordinates = Vector2(768, 0)
-
-[node name="tMove3" type="Area2D" parent="." node_paths=PackedStringArray("_target_group", "_move_target")]
-position = Vector2(320, -576)
-collision_layer = 16
-script = ExtResource("3_aeds0")
-_target_group = NodePath("../RedOrb")
-_easing = SubResource("Resource_5s8vt")
-_relative = true
-_move_target = NodePath("../DefaultCube")
-_move_target_offset = Vector2(64, 0)
-_move_coordinates = Vector2(0, -512)
-
-[node name="RedOrb" parent="." instance=ExtResource("6_altr0")]
-position = Vector2(1216, -320)
-
 [node name="DefaultCube" parent="." instance=ExtResource("5_g4mtk")]
-position = Vector2(320, 64)
+position = Vector2(960, -576)
 scale = Vector2(3, 1)
+
+[node name="SpiderOrb" parent="." instance=ExtResource("4_rlanb")]
+position = Vector2(960, -64)
+
+[node name="BluePad2" parent="." instance=ExtResource("5_cx1fq")]
+position = Vector2(960, -320)
+rotation = -3.14159
+scale = Vector2(3, 3)
+
+[node name="DefaultCube2" parent="." instance=ExtResource("5_g4mtk")]
+position = Vector2(1728, -64)
+
+[node name="DefaultCube3" parent="." instance=ExtResource("5_g4mtk")]
+position = Vector2(2240, -128)
+scale = Vector2(1, 2)
+
+[node name="DefaultCube6" parent="." instance=ExtResource("5_g4mtk")]
+position = Vector2(2752, -192)
+scale = Vector2(1, 3)
+
+[node name="Spike" parent="." instance=ExtResource("6_glkci")]
+position = Vector2(1856, -64)
+
+[node name="Spike2" parent="." instance=ExtResource("6_glkci")]
+position = Vector2(1984, -64)
+
+[node name="Spike3" parent="." instance=ExtResource("6_glkci")]
+position = Vector2(2112, -64)
+
+[node name="Spike4" parent="." instance=ExtResource("6_glkci")]
+position = Vector2(2368, -64)
+
+[node name="Spike5" parent="." instance=ExtResource("6_glkci")]
+position = Vector2(2496, -64)
+
+[node name="Spike6" parent="." instance=ExtResource("6_glkci")]
+position = Vector2(2624, -64)
+
+[node name="RedPad" parent="." instance=ExtResource("8_kjttm")]
+position = Vector2(3136, -64)
+
+[node name="RedPad2" parent="." instance=ExtResource("8_kjttm")]
+position = Vector2(3008, -64)
+
+[node name="RedPad3" parent="." instance=ExtResource("8_kjttm")]
+position = Vector2(3264, -64)
+
+[node name="ShipPortal" parent="." instance=ExtResource("9_xhi3m")]
+position = Vector2(3456, -576)
+rotation = -0.523598
+
+[node name="GreenOrb" parent="." instance=ExtResource("10_mawig")]
+position = Vector2(3072, -640)
+
+[node name="ToggleOrb" parent="." instance=ExtResource("10_nymdk")]
+self_modulate = Color(1, 0, 0.823529, 1)
+position = Vector2(3661, -694)
+rotation = -0.261799
+scale = Vector2(2, 2)
+_toggled_groups = Array[ExtResource("11_kwfb6")]([SubResource("Resource_wg2jq")])
+
+[node name="ToggleOrb2" parent="." instance=ExtResource("10_nymdk")]
+self_modulate = Color(1, 0, 0.823529, 1)
+position = Vector2(448, -128)
+rotation = -0.261799
+scale = Vector2(2, 2)
+_toggled_groups = Array[ExtResource("11_kwfb6")]([SubResource("Resource_f7m3y")])
+
+[node name="DashOrbMagenta" parent="." instance=ExtResource("10_dgc28")]
+position = Vector2(3968, -704)
+rotation = -2.61799
+scale = Vector2(2, 2)
+_horizontal_direction = 2
+
+[node name="tSong" type="Area2D" parent="."]
+position = Vector2(2624, -1216)
+collision_layer = 16
+script = ExtResource("11_vkgcw")
+_song_stream = ExtResource("12_yhb7r")
