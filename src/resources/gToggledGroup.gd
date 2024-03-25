@@ -1,4 +1,4 @@
-extends Resource
+@tool extends Resource
 
 class_name gToggledGroup
 

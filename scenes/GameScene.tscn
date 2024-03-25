@@ -104,6 +104,7 @@ collision_layer = 32
 script = ExtResource("6_kvomc")
 target = NodePath("../Player")
 copy_x = true
+metadata/_edit_lock_ = true
 
 [node name="GroundHitbox" type="CollisionShape2D" parent="GroundCollider"]
 shape = SubResource("RectangleShape2D_l4i0t")
@@ -118,6 +119,7 @@ texture = ExtResource("3_l4t8r")
 script = ExtResource("6_kvomc")
 target = NodePath("../PlayerCamera")
 copy_x = true
+metadata/_edit_lock_ = true
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 process_priority = 2

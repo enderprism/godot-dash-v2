@@ -177,14 +177,7 @@ func _process(delta: float) -> void:
 			$ReboundCancelArea/Hitbox.debug_color = Color("397f0000")
 		if object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT \
 				or object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.TELEPORTAL:
-			# I KNOW THIS IS UGLY BUT IF I DON'T ENCASE IT IN 3 SEPARATE CHECKS THE DEBUGGER GOES CRAZY D:
-			if _teleport_target != null:
-				if $TargetLink.get_point_position(1) != _teleport_target.global_position:
-					$TargetLink.clear_points()
-					$TargetLink.add_point(Vector2.ZERO, 0)
-					$TargetLink.add_point(to_local(_teleport_target.global_position), 1)
-			elif $TargetLink.get_point_count() != 0:
-				$TargetLink.clear_points()
+			$TargetLink._target = _teleport_target
 		else:
 			_override_player_velocity = false
 		$Hitbox.debug_color = Color("00ff0000")

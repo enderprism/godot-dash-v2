@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_ujapm"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_6nd4y"]
-[ext_resource type="Texture2D" uid="uid://nycdkrteceqa" path="res://assets/textures/ArrowedLine.svg" id="2_fwov6"]
+[ext_resource type="PackedScene" uid="uid://l2ofoyvoxbr2" path="res://scenes/components/game_components/GDTargetLink.tscn" id="2_g4fee"]
 [ext_resource type="Shader" path="res://resources/ColorPulse.gdshader" id="3_c01u1"]
 [ext_resource type="Texture2D" uid="uid://dpymoijvgn47q" path="res://assets/textures/portals/other_portals/teleportal_in/TeleportalInBack.png" id="4_62kgg"]
 [ext_resource type="Texture2D" uid="uid://bjkrqus0iq7o2" path="res://assets/textures/portals/other_portals/teleportal_in/TeleportalInFront.png" id="5_toxp5"]
@@ -23,12 +23,7 @@ script = ExtResource("1_ujapm")
 object_type = 4
 _other_portal_type = 2
 
-[node name="TargetLink" type="Line2D" parent="."]
-texture_repeat = 2
-width = 50.0
-default_color = Color(1, 0, 1, 1)
-texture = ExtResource("2_fwov6")
-texture_mode = 1
+[node name="TargetLink" parent="." instance=ExtResource("2_g4fee")]
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_6nd4y")]
 modulate = Color(0.356863, 0.85098, 1, 1)

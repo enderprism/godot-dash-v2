@@ -33,7 +33,7 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 var _trigger_type = "Rotate"
-var _easer: tPropertyInterpolator = tPropertyInterpolator.new()
+var _easer: tEasingSender = tEasingSender.new()
 var _property: StringName:
 	get:
 		if not _use_local_rotation: return &"global_rotation_degrees"

@@ -174,6 +174,7 @@ func _compute_velocity(_delta: float,
 #section Pad Collisions
 	if not _pad_queue.is_empty():
 		var _colliding_pad: GDInteractible = _pad_queue.pop_front()
+		_colliding_pad._set_reverse(_colliding_pad._reverse)
 		if gamemode != Gamemode.WAVE:
 			if _colliding_pad._pad_type == GDInteractible.Pad.YELLOW:
 				_velocity.y = -_speed.y * (277.0/194.0)

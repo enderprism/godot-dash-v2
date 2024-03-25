@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://bbcetmg5ilsc1"]
 
 [ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_skdc6"]
-[ext_resource type="Texture2D" uid="uid://nycdkrteceqa" path="res://assets/textures/ArrowedLine.svg" id="2_0xxti"]
 [ext_resource type="Texture2D" uid="uid://bifer0ndxb2i0" path="res://assets/textures/orbs/TeleportationOrbOutline.svg" id="2_dyh4w"]
+[ext_resource type="PackedScene" uid="uid://l2ofoyvoxbr2" path="res://scenes/components/game_components/GDTargetLink.tscn" id="2_f50c8"]
 [ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="3_8pjrs"]
 [ext_resource type="Texture2D" uid="uid://8pxeolk4r1gm" path="res://assets/textures/orbs/TeleportationOrbFill.svg" id="3_xuxpc"]
 [ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="6_ptu4n"]
@@ -18,12 +18,7 @@ script = ExtResource("1_skdc6")
 _orb_type = 1024
 metadata/_edit_group_ = true
 
-[node name="TargetLink" type="Line2D" parent="."]
-texture_repeat = 2
-width = 50.0
-default_color = Color(1, 0, 1, 1)
-texture = ExtResource("2_0xxti")
-texture_mode = 1
+[node name="TargetLink" parent="." instance=ExtResource("2_f50c8")]
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("3_8pjrs")]
 

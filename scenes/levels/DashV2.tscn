@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=28 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
@@ -10,20 +10,59 @@
 [ext_resource type="PackedScene" uid="uid://ctf8cfrxbjfdk" path="res://scenes/components/level_components/portals/gamemode_portals/ShipPortal.tscn" id="9_xhi3m"]
 [ext_resource type="PackedScene" uid="uid://ctw1jhwf8nsij" path="res://scenes/components/level_components/orbs/DashOrbMagenta.tscn" id="10_dgc28"]
 [ext_resource type="PackedScene" uid="uid://danxhobafrnci" path="res://scenes/components/level_components/orbs/GreenOrb.tscn" id="10_mawig"]
-[ext_resource type="PackedScene" uid="uid://43t0kgu3lhyt" path="res://scenes/components/level_components/orbs/ToggleOrb.tscn" id="10_nymdk"]
-[ext_resource type="Script" path="res://src/resources/gToggledGroup.gd" id="11_kwfb6"]
-[ext_resource type="Script" path="res://src/components/triggers/tSong.gd" id="11_vkgcw"]
-[ext_resource type="AudioStream" uid="uid://bc0kdg2n4p4ih" path="res://assets/sounds/music/level_music/Never Gonna Give You Up.mp3" id="12_yhb7r"]
+[ext_resource type="Script" path="res://src/components/triggers/tToggle.gd" id="11_3wyr0"]
+[ext_resource type="Script" path="res://src/components/triggers/tSong.gd" id="11_xftif"]
+[ext_resource type="AudioStream" uid="uid://bc0kdg2n4p4ih" path="res://assets/sounds/music/level_music/Never Gonna Give You Up.mp3" id="12_lti45"]
+[ext_resource type="Script" path="res://src/resources/gToggledGroup.gd" id="12_vkjnk"]
+[ext_resource type="Script" path="res://src/components/triggers/tSpawn.gd" id="15_qq0d6"]
+[ext_resource type="Script" path="res://src/resources/gSpawnedGroup.gd" id="16_wxp02"]
+[ext_resource type="Script" path="res://src/resources/tTriggerEasingRes.gd" id="17_txdm0"]
+[ext_resource type="PackedScene" uid="uid://cugg15j2jxyay" path="res://scenes/components/level_components/pads/PinkPad.tscn" id="18_kwhcj"]
+[ext_resource type="Script" path="res://src/components/triggers/tMove.gd" id="19_ubupm"]
+[ext_resource type="Script" path="res://src/components/triggers/tRotate.gd" id="20_26ixw"]
 
-[sub_resource type="Resource" id="Resource_wg2jq"]
-script = ExtResource("11_kwfb6")
+[sub_resource type="Resource" id="Resource_fg5md"]
+script = ExtResource("12_vkjnk")
+group = NodePath("../tSong")
+state = 1
+
+[sub_resource type="Resource" id="Resource_6cqjm"]
+script = ExtResource("12_vkjnk")
 group = NodePath("../tSong")
 state = 0
 
-[sub_resource type="Resource" id="Resource_f7m3y"]
-script = ExtResource("11_kwfb6")
-group = NodePath("../tSong")
-state = 1
+[sub_resource type="Resource" id="Resource_1jnx7"]
+script = ExtResource("17_txdm0")
+_tween_duration = 0.5
+_use_custom_easing = false
+_tween_transition = 0
+_tween_easing = 2
+
+[sub_resource type="Resource" id="Resource_eykxy"]
+script = ExtResource("16_wxp02")
+path = NodePath("../tMove")
+time = 0.0
+used = false
+
+[sub_resource type="Resource" id="Resource_8puct"]
+script = ExtResource("16_wxp02")
+path = NodePath("../tRotate")
+time = 0.5
+used = false
+
+[sub_resource type="Resource" id="Resource_4gipc"]
+script = ExtResource("17_txdm0")
+_tween_duration = 0.5
+_use_custom_easing = false
+_tween_transition = 5
+_tween_easing = 1
+
+[sub_resource type="Resource" id="Resource_p5a6f"]
+script = ExtResource("17_txdm0")
+_tween_duration = 0.5
+_use_custom_easing = false
+_tween_transition = 5
+_tween_easing = 1
 
 [node name="Dash V2" type="Node2D"]
 script = ExtResource("1_7ju0m")
@@ -33,6 +72,9 @@ metadata/_edit_lock_ = true
 [node name="DefaultCube" parent="." instance=ExtResource("5_g4mtk")]
 position = Vector2(960, -576)
 scale = Vector2(3, 1)
+
+[node name="DefaultCube4" parent="." instance=ExtResource("5_g4mtk")]
+position = Vector2(320, -448)
 
 [node name="SpiderOrb" parent="." instance=ExtResource("4_rlanb")]
 position = Vector2(960, -64)
@@ -87,20 +129,6 @@ rotation = -0.523598
 [node name="GreenOrb" parent="." instance=ExtResource("10_mawig")]
 position = Vector2(3072, -640)
 
-[node name="ToggleOrb" parent="." instance=ExtResource("10_nymdk")]
-self_modulate = Color(1, 0, 0.823529, 1)
-position = Vector2(3661, -694)
-rotation = -0.261799
-scale = Vector2(2, 2)
-_toggled_groups = Array[ExtResource("11_kwfb6")]([SubResource("Resource_wg2jq")])
-
-[node name="ToggleOrb2" parent="." instance=ExtResource("10_nymdk")]
-self_modulate = Color(1, 0, 0.823529, 1)
-position = Vector2(448, -128)
-rotation = -0.261799
-scale = Vector2(2, 2)
-_toggled_groups = Array[ExtResource("11_kwfb6")]([SubResource("Resource_f7m3y")])
-
 [node name="DashOrbMagenta" parent="." instance=ExtResource("10_dgc28")]
 position = Vector2(3968, -704)
 rotation = -2.61799
@@ -108,7 +136,56 @@ scale = Vector2(2, 2)
 _horizontal_direction = 2
 
 [node name="tSong" type="Area2D" parent="."]
-position = Vector2(2624, -1216)
+position = Vector2(2496, -1472)
 collision_layer = 16
-script = ExtResource("11_vkgcw")
-_song_stream = ExtResource("12_yhb7r")
+script = ExtResource("11_xftif")
+_song_stream = ExtResource("12_lti45")
+
+[node name="tToggle" type="Area2D" parent="."]
+position = Vector2(64, -832)
+collision_layer = 16
+script = ExtResource("11_3wyr0")
+_toggled_groups = Array[ExtResource("12_vkjnk")]([SubResource("Resource_fg5md")])
+
+[node name="tToggle2" type="Area2D" parent="."]
+position = Vector2(3648, -960)
+collision_layer = 16
+script = ExtResource("11_3wyr0")
+_toggled_groups = Array[ExtResource("12_vkjnk")]([SubResource("Resource_6cqjm")])
+
+[node name="tSpawn" type="Area2D" parent="."]
+position = Vector2(192, -448)
+collision_layer = 16
+script = ExtResource("15_qq0d6")
+_easing = SubResource("Resource_1jnx7")
+_spawned_groups = Array[ExtResource("16_wxp02")]([SubResource("Resource_eykxy"), SubResource("Resource_8puct")])
+_loop_count = 5
+
+[node name="PinkPad" parent="." instance=ExtResource("18_kwhcj")]
+position = Vector2(64, -64)
+_horizontal_direction = 1
+
+[node name="PinkPad2" parent="." instance=ExtResource("18_kwhcj")]
+position = Vector2(1088, -64)
+_horizontal_direction = 1
+_reverse = true
+
+[node name="tMove" type="Area2D" parent="." node_paths=PackedStringArray("_target_group")]
+position = Vector2(192, -576)
+collision_layer = 16
+script = ExtResource("19_ubupm")
+_target_group = NodePath("../DefaultCube4")
+_easing = SubResource("Resource_4gipc")
+_relative = true
+_move_coordinates = Vector2(128, 0)
+_spawned_trigger = true
+
+[node name="tRotate" type="Area2D" parent="." node_paths=PackedStringArray("_target_group")]
+position = Vector2(448, -576)
+collision_layer = 16
+script = ExtResource("20_26ixw")
+_target_group = NodePath("../DefaultCube4")
+_easing = SubResource("Resource_p5a6f")
+_relative = true
+_rotation_angle = 90.0
+_spawned_trigger = true

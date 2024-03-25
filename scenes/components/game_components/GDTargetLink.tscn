@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://l2ofoyvoxbr2"]
+
+[ext_resource type="Texture2D" uid="uid://nycdkrteceqa" path="res://assets/textures/ArrowedLine.svg" id="1_ab8x7"]
+[ext_resource type="Script" path="res://src/components/GDTargetLink.gd" id="2_h3omo"]
+
+[node name="TargetLink" type="Line2D"]
+texture_repeat = 2
+width = 50.0
+default_color = Color(1, 0, 1, 1)
+texture = ExtResource("1_ab8x7")
+texture_mode = 1
+script = ExtResource("2_h3omo")

@@ -1,9 +1,9 @@
-@tool class_name tPropertyInterpolator extends Node
+@tool class_name tEasingSender extends Node
 ## Interpolates a given property of a target to a value using a
 ## trigger easing resource.
 
 var _parent_trigger_type
-var _validation: tPropertyInterpolatorValidate
+var _reciever: tEasingReciever
 ## Duration, easing type and transition or custom easing curve for the interpolation.
 var _easing: tTriggerEasingRes
 var _lerp_tween: Tween
@@ -50,7 +50,7 @@ func _get_lerp_weight() -> float:
 	else:
 		return 0.0
 
-## Start a [tPropertyInterpolator]. Only one [tPropertyInterpolator] can run at a time, and the running one is prioritary, so wait until it's done to start a new one.
+## Start a [tPropertysender]. Only one [tPropertysender] can run at a time, and the running one is prioritary, so wait until it's done to start a new one.
 func _start() -> void:
 	if "_trigger_type" in get_parent():
 		_parent_trigger_type = get_parent()._trigger_type
@@ -62,15 +62,15 @@ func _start() -> void:
 	if is_zero_approx(_lerp_weight):
 		_initial_value = _target.get(_property)
 		_start_lerp_tween()
-	if not _target.has_node("InterpolationValidate" + _parent_trigger_type):
-		_validation = tPropertyInterpolatorValidate.new()
-		_validation.name = "InterpolationValidate" + _parent_trigger_type
-		_validation._property = _property
-		_target.add_child(_validation)
+	if not _target.has_node("EasingReciever"):
+		_reciever = tEasingReciever.new()
+		_reciever.name = "EasingReciever"
+		_reciever._property = _property
+		_target.add_child(_reciever)
 	else:
-		_validation = _target.get_node("InterpolationValidate" + _parent_trigger_type)
-	if not self in _validation._active_interpolators:
-		_validation._active_interpolators.append(self)
+		_reciever = _target.get_node("EasingReciever")
+	if not self in _reciever._active_senders:
+		_reciever._active_senders.append(self)
 
 ## Cancel the running interpolation.
 func _cancel() -> void:
@@ -95,7 +95,7 @@ func _get_delta_value() -> Variant:
 		return _delta_value
 	else: return null
 
-## Automatically cancel the tPropertyInterpolator when it's done interpolating (only runs in the editor, see [method Engine.is_editor_hint]).
+## Automatically cancel the tPropertysender when it's done interpolating (only runs in the editor, see [method Engine.is_editor_hint]).
 func _editor_preview() -> void:
 	if _lerp_weight == 1.0:
 		_cancel()
