@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=18 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
@@ -10,59 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://ctf8cfrxbjfdk" path="res://scenes/components/level_components/portals/gamemode_portals/ShipPortal.tscn" id="9_xhi3m"]
 [ext_resource type="PackedScene" uid="uid://ctw1jhwf8nsij" path="res://scenes/components/level_components/orbs/DashOrbMagenta.tscn" id="10_dgc28"]
 [ext_resource type="PackedScene" uid="uid://danxhobafrnci" path="res://scenes/components/level_components/orbs/GreenOrb.tscn" id="10_mawig"]
-[ext_resource type="Script" path="res://src/components/triggers/tToggle.gd" id="11_3wyr0"]
-[ext_resource type="Script" path="res://src/components/triggers/tSong.gd" id="11_xftif"]
-[ext_resource type="AudioStream" uid="uid://bc0kdg2n4p4ih" path="res://assets/sounds/music/level_music/Never Gonna Give You Up.mp3" id="12_lti45"]
-[ext_resource type="Script" path="res://src/resources/gToggledGroup.gd" id="12_vkjnk"]
-[ext_resource type="Script" path="res://src/components/triggers/tSpawn.gd" id="15_qq0d6"]
-[ext_resource type="Script" path="res://src/resources/gSpawnedGroup.gd" id="16_wxp02"]
-[ext_resource type="Script" path="res://src/resources/tTriggerEasingRes.gd" id="17_txdm0"]
+[ext_resource type="Script" path="res://src/components/triggers/tEasing.gd" id="13_hhp6h"]
+[ext_resource type="Script" path="res://src/components/triggers/tBase.gd" id="14_tkmus"]
+[ext_resource type="PackedScene" uid="uid://l2ofoyvoxbr2" path="res://scenes/components/game_components/GDTargetLink.tscn" id="15_e6cug"]
+[ext_resource type="Texture2D" uid="uid://nycdkrteceqa" path="res://assets/textures/ArrowedLine.svg" id="16_7w5bw"]
+[ext_resource type="Script" path="res://src/components/GDTargetLink.gd" id="17_kaaqj"]
 [ext_resource type="PackedScene" uid="uid://cugg15j2jxyay" path="res://scenes/components/level_components/pads/PinkPad.tscn" id="18_kwhcj"]
 [ext_resource type="Script" path="res://src/components/triggers/tMove.gd" id="19_ubupm"]
-[ext_resource type="Script" path="res://src/components/triggers/tRotate.gd" id="20_26ixw"]
-
-[sub_resource type="Resource" id="Resource_fg5md"]
-script = ExtResource("12_vkjnk")
-group = NodePath("../tSong")
-state = 1
-
-[sub_resource type="Resource" id="Resource_6cqjm"]
-script = ExtResource("12_vkjnk")
-group = NodePath("../tSong")
-state = 0
-
-[sub_resource type="Resource" id="Resource_1jnx7"]
-script = ExtResource("17_txdm0")
-_tween_duration = 0.5
-_use_custom_easing = false
-_tween_transition = 0
-_tween_easing = 2
-
-[sub_resource type="Resource" id="Resource_eykxy"]
-script = ExtResource("16_wxp02")
-path = NodePath("../tMove")
-time = 0.0
-used = false
-
-[sub_resource type="Resource" id="Resource_8puct"]
-script = ExtResource("16_wxp02")
-path = NodePath("../tRotate")
-time = 0.5
-used = false
-
-[sub_resource type="Resource" id="Resource_4gipc"]
-script = ExtResource("17_txdm0")
-_tween_duration = 0.5
-_use_custom_easing = false
-_tween_transition = 5
-_tween_easing = 1
-
-[sub_resource type="Resource" id="Resource_p5a6f"]
-script = ExtResource("17_txdm0")
-_tween_duration = 0.5
-_use_custom_easing = false
-_tween_transition = 5
-_tween_easing = 1
 
 [node name="Dash V2" type="Node2D"]
 script = ExtResource("1_7ju0m")
@@ -72,9 +26,6 @@ metadata/_edit_lock_ = true
 [node name="DefaultCube" parent="." instance=ExtResource("5_g4mtk")]
 position = Vector2(960, -576)
 scale = Vector2(3, 1)
-
-[node name="DefaultCube4" parent="." instance=ExtResource("5_g4mtk")]
-position = Vector2(320, -448)
 
 [node name="SpiderOrb" parent="." instance=ExtResource("4_rlanb")]
 position = Vector2(960, -64)
@@ -135,32 +86,6 @@ rotation = -2.61799
 scale = Vector2(2, 2)
 _horizontal_direction = 2
 
-[node name="tSong" type="Area2D" parent="."]
-position = Vector2(2496, -1472)
-collision_layer = 16
-script = ExtResource("11_xftif")
-_song_stream = ExtResource("12_lti45")
-
-[node name="tToggle" type="Area2D" parent="."]
-position = Vector2(64, -832)
-collision_layer = 16
-script = ExtResource("11_3wyr0")
-_toggled_groups = Array[ExtResource("12_vkjnk")]([SubResource("Resource_fg5md")])
-
-[node name="tToggle2" type="Area2D" parent="."]
-position = Vector2(3648, -960)
-collision_layer = 16
-script = ExtResource("11_3wyr0")
-_toggled_groups = Array[ExtResource("12_vkjnk")]([SubResource("Resource_6cqjm")])
-
-[node name="tSpawn" type="Area2D" parent="."]
-position = Vector2(192, -448)
-collision_layer = 16
-script = ExtResource("15_qq0d6")
-_easing = SubResource("Resource_1jnx7")
-_spawned_groups = Array[ExtResource("16_wxp02")]([SubResource("Resource_eykxy"), SubResource("Resource_8puct")])
-_loop_count = 5
-
 [node name="PinkPad" parent="." instance=ExtResource("18_kwhcj")]
 position = Vector2(64, -64)
 _horizontal_direction = 1
@@ -170,22 +95,36 @@ position = Vector2(1088, -64)
 _horizontal_direction = 1
 _reverse = true
 
-[node name="tMove" type="Area2D" parent="." node_paths=PackedStringArray("_target_group")]
-position = Vector2(192, -576)
-collision_layer = 16
+[node name="tMove" type="Node2D" parent="." node_paths=PackedStringArray("_follow_target")]
+position = Vector2(320, -576)
 script = ExtResource("19_ubupm")
-_target_group = NodePath("../DefaultCube4")
-_easing = SubResource("Resource_4gipc")
-_relative = true
-_move_coordinates = Vector2(128, 0)
-_spawned_trigger = true
+_relative_offset = Vector2(512, 0)
+_follow_target = NodePath("../DefaultCube5")
+metadata/_edit_group_ = true
 
-[node name="tRotate" type="Area2D" parent="." node_paths=PackedStringArray("_target_group")]
-position = Vector2(448, -576)
+[node name="tEasing" type="Node" parent="tMove"]
+script = ExtResource("13_hhp6h")
+_duration = 1.0
+_easing_type = 1
+_easing_transition = 5
+
+[node name="tBase" type="Area2D" parent="tMove" node_paths=PackedStringArray("_target")]
 collision_layer = 16
-script = ExtResource("20_26ixw")
-_target_group = NodePath("../DefaultCube4")
-_easing = SubResource("Resource_p5a6f")
-_relative = true
-_rotation_angle = 90.0
-_spawned_trigger = true
+script = ExtResource("14_tkmus")
+_target = NodePath("../../DefaultCube4")
+
+[node name="TargetLink" type="Line2D" parent="tMove" instance=ExtResource("15_e6cug")]
+texture_repeat = 2
+points = PackedVector2Array(0, 128, 0, 0)
+width = 50.0
+default_color = Color(1, 0, 1, 1)
+texture = ExtResource("16_7w5bw")
+texture_mode = 1
+script = ExtResource("17_kaaqj")
+
+[node name="DefaultCube4" parent="." instance=ExtResource("5_g4mtk")]
+position = Vector2(320, -448)
+
+[node name="DefaultCube5" parent="." instance=ExtResource("5_g4mtk")]
+position = Vector2(640, -640)
+rotation = -0.785397
