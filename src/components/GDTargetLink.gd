@@ -5,6 +5,9 @@ class_name GDTargetLink
 
 var _target: Node2D
 
+func _ready() -> void:
+	z_index = -50
+
 func _process(_delta: float) -> void:
 	if _target == null:
 		clear_points()

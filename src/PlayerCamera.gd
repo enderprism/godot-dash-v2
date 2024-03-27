@@ -12,10 +12,10 @@ var _previous_position: Vector2
 var _delta_position: Vector2
 var _player_distance: Vector2
 var _position_snap: Vector2 = Vector2(1.0, 0.1)
-var _offset_snap: Vector2 = Vector2(0.1, 0.1)
+var _offset_snap: Vector2 = Vector2(0.125, 0.1)
 var _freefly: bool = true
 
-const DEFAULT_OFFSET: Vector2 = Vector2(300.0, 0.0)
+const DEFAULT_OFFSET: Vector2 = Vector2(400.0, 0.0)
 
 var _static: Vector2i
 

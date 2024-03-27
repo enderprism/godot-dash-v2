@@ -146,7 +146,7 @@ func _compute_velocity(_delta: float,
 	var _speed: Vector2 = SPEED if not _mini else SPEED_MINI
 	_is_flying_gamemode = (gamemode == Gamemode.SHIP or gamemode == Gamemode.SWING or gamemode == Gamemode.WAVE)
 
-	if (gamemode == Gamemode.SWING or gamemode == Gamemode.BALL) and _jump_state == 1:
+	if (gamemode == Gamemode.SWING or gamemode == Gamemode.BALL) and _jump_state == 1 and _orb_queue.is_empty():
 		_gravity_multiplier *= -1
 
 #section Apply Gravity

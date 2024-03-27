@@ -1,26 +1,25 @@
-[gd_scene load_steps=18 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=17 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
-[ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
+[ext_resource type="AudioStream" uid="uid://joye2dwki4j" path="res://assets/sounds/music/level_music/Conclusion.mp3" id="2_ub8as"]
 [ext_resource type="PackedScene" uid="uid://33mc0xa2wc8i" path="res://scenes/components/level_components/orbs/SpiderOrb.tscn" id="4_rlanb"]
 [ext_resource type="PackedScene" uid="uid://dnah6ge1p0rr3" path="res://scenes/components/level_components/pads/BluePad.tscn" id="5_cx1fq"]
 [ext_resource type="PackedScene" uid="uid://ccdry45jmn43w" path="res://scenes/components/level_components/solids/DefaultCube.tscn" id="5_g4mtk"]
 [ext_resource type="PackedScene" uid="uid://calhypvupvj4m" path="res://scenes/components/level_components/hazards/Spike.tscn" id="6_glkci"]
 [ext_resource type="PackedScene" uid="uid://bf1l71kmqh0i0" path="res://scenes/components/level_components/pads/RedPad.tscn" id="8_kjttm"]
-[ext_resource type="PackedScene" uid="uid://ctf8cfrxbjfdk" path="res://scenes/components/level_components/portals/gamemode_portals/ShipPortal.tscn" id="9_xhi3m"]
 [ext_resource type="PackedScene" uid="uid://ctw1jhwf8nsij" path="res://scenes/components/level_components/orbs/DashOrbMagenta.tscn" id="10_dgc28"]
 [ext_resource type="PackedScene" uid="uid://danxhobafrnci" path="res://scenes/components/level_components/orbs/GreenOrb.tscn" id="10_mawig"]
 [ext_resource type="Script" path="res://src/components/triggers/tEasing.gd" id="13_hhp6h"]
 [ext_resource type="Script" path="res://src/components/triggers/tBase.gd" id="14_tkmus"]
 [ext_resource type="PackedScene" uid="uid://l2ofoyvoxbr2" path="res://scenes/components/game_components/GDTargetLink.tscn" id="15_e6cug"]
-[ext_resource type="Texture2D" uid="uid://nycdkrteceqa" path="res://assets/textures/ArrowedLine.svg" id="16_7w5bw"]
-[ext_resource type="Script" path="res://src/components/GDTargetLink.gd" id="17_kaaqj"]
+[ext_resource type="PackedScene" uid="uid://dspnvt3u8uhqy" path="res://scenes/components/level_components/portals/gamemode_portals/SwingPortal.tscn" id="16_s381d"]
 [ext_resource type="PackedScene" uid="uid://cugg15j2jxyay" path="res://scenes/components/level_components/pads/PinkPad.tscn" id="18_kwhcj"]
+[ext_resource type="PackedScene" uid="uid://dmb3bpsvcre7y" path="res://scenes/components/level_components/orbs/BlackOrb.tscn" id="18_pxm5w"]
 [ext_resource type="Script" path="res://src/components/triggers/tMove.gd" id="19_ubupm"]
 
 [node name="Dash V2" type="Node2D"]
 script = ExtResource("1_7ju0m")
-song = ExtResource("2_8grye")
+song = ExtResource("2_ub8as")
 metadata/_edit_lock_ = true
 
 [node name="DefaultCube" parent="." instance=ExtResource("5_g4mtk")]
@@ -73,10 +72,6 @@ position = Vector2(3008, -64)
 [node name="RedPad3" parent="." instance=ExtResource("8_kjttm")]
 position = Vector2(3264, -64)
 
-[node name="ShipPortal" parent="." instance=ExtResource("9_xhi3m")]
-position = Vector2(3456, -576)
-rotation = -0.523598
-
 [node name="GreenOrb" parent="." instance=ExtResource("10_mawig")]
 position = Vector2(3072, -640)
 
@@ -95,12 +90,20 @@ position = Vector2(1088, -64)
 _horizontal_direction = 1
 _reverse = true
 
-[node name="tMove" type="Node2D" parent="." node_paths=PackedStringArray("_follow_target")]
-position = Vector2(320, -576)
+[node name="tilted cube" parent="." instance=ExtResource("5_g4mtk")]
+position = Vector2(640, -448)
+rotation = 0.785397
+
+[node name="tMove" type="Node2D" parent="." node_paths=PackedStringArray("_copy_target")]
+position = Vector2(320, -704)
 script = ExtResource("19_ubupm")
-_relative_offset = Vector2(512, 0)
-_follow_target = NodePath("../DefaultCube5")
+_mode = 2
+_copy_target = NodePath("../tilted cube")
 metadata/_edit_group_ = true
+
+[node name="TargetLink" parent="tMove" instance=ExtResource("15_e6cug")]
+z_index = -50
+points = PackedVector2Array(0, 256, 0, 0)
 
 [node name="tEasing" type="Node" parent="tMove"]
 script = ExtResource("13_hhp6h")
@@ -111,20 +114,34 @@ _easing_transition = 5
 [node name="tBase" type="Area2D" parent="tMove" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("14_tkmus")
-_target = NodePath("../../DefaultCube4")
+_target = NodePath("../../BlackOrb")
 
-[node name="TargetLink" type="Line2D" parent="tMove" instance=ExtResource("15_e6cug")]
-texture_repeat = 2
-points = PackedVector2Array(0, 128, 0, 0)
-width = 50.0
-default_color = Color(1, 0, 1, 1)
-texture = ExtResource("16_7w5bw")
-texture_mode = 1
-script = ExtResource("17_kaaqj")
+[node name="tMove2" type="Node2D" parent="."]
+position = Vector2(320, -832)
+rotation = -3.14159
+script = ExtResource("19_ubupm")
+_mode = 1
+_relative_offset = Vector2(0, -384)
+metadata/_edit_group_ = true
 
-[node name="DefaultCube4" parent="." instance=ExtResource("5_g4mtk")]
+[node name="TargetLink" parent="tMove2" instance=ExtResource("15_e6cug")]
+z_index = -50
+points = PackedVector2Array(-320.001, -383.999, 0, 0)
+
+[node name="tEasing" type="Node" parent="tMove2"]
+script = ExtResource("13_hhp6h")
+_duration = 1.0
+_easing_type = 1
+_easing_transition = 5
+
+[node name="tBase" type="Area2D" parent="tMove2" node_paths=PackedStringArray("_target")]
+collision_layer = 16
+script = ExtResource("14_tkmus")
+_target = NodePath("../../tilted cube")
+
+[node name="BlackOrb" parent="." instance=ExtResource("18_pxm5w")]
 position = Vector2(320, -448)
 
-[node name="DefaultCube5" parent="." instance=ExtResource("5_g4mtk")]
-position = Vector2(640, -640)
-rotation = -0.785397
+[node name="SwingPortal" parent="." instance=ExtResource("16_s381d")]
+position = Vector2(3520, -640)
+rotation = 0.523598
