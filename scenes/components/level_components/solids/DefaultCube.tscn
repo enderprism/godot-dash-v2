@@ -8,6 +8,7 @@ size = Vector2(128, 128)
 
 [node name="DefaultCube" type="AnimatableBody2D"]
 collision_layer = 2
+sync_to_physics = false
 script = ExtResource("1_8i826")
 metadata/_edit_group_ = true
 

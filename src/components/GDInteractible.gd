@@ -136,6 +136,7 @@ enum HorizontalDirection {
 var _player: Player
 var _rebound_factor: float
 var _pulse_white_color: Color = Color.WHITE
+var _0x_speed_centering_player: bool
 var _queue_index: int
 
 func _ready() -> void:
@@ -145,7 +146,6 @@ func _ready() -> void:
 	body_exited.connect(_on_player_exit)
 
 func _process(delta: float) -> void:
-
 	if has_node("Fill"):
 		$Fill.modulate = self_modulate
 
@@ -169,6 +169,11 @@ func _process(delta: float) -> void:
 			rotation_degrees *= -1
 		if has_node("DashOrbPreview"):
 			$DashOrbPreview.hide()
+		if _0x_speed_centering_player:
+			var _player_position_normalised = _player.global_position.rotated(-_player._gameplay_rotation)
+			var _self_position_normalised = global_position.rotated(-_player._gameplay_rotation)
+			_player.global_position = Vector2(_player_position_normalised.lerp(_self_position_normalised, 0.3).rotated(_player._gameplay_rotation).x, _player.global_position.y)
+			if is_equal_approx(_player_position_normalised.x, _self_position_normalised.x): _0x_speed_centering_player = false
 		$Hitbox.debug_color = Color("00ff0033")
 	else:
 		if object_type == ObjectType.ORB and _orb_type == Orb.BLUE:
@@ -227,9 +232,10 @@ func _on_player_enter(_body: Node2D) -> void:
 			SpeedPortal.SPEED_4X:
 				_player._speed_multiplier = 1.849
 			SpeedPortal.SPEED_5X:
-				_player._speed_multiplier = 1.0
+				_player._speed_multiplier = 2.431
 			SpeedPortal.SPEED_0X:
 				_player._speed_multiplier = 0.0
+				_0x_speed_centering_player = true
 			SpeedPortal.SPEED_05X:
 				_player._speed_multiplier = 0.807
 	elif object_type == ObjectType.OTHER_PORTAL:
@@ -352,7 +358,6 @@ func _set_reverse(reverse: bool) -> void:
 func _set_dash_props() -> void:
 	_player._dash_orb_rotation = pingpong(global_rotation, PI/2) * sign(global_rotation_degrees)
 	# _player._dash_orb_rotation = global_rotation
-	print_debug(rad_to_deg(_player._dash_orb_rotation))
 	_player._dash_orb_position = global_position
 
 func _set_spider_props() -> void:

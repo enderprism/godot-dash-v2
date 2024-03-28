@@ -16,7 +16,13 @@ enum TriggerHitboxShape {
 @export var _hitbox_shape: TriggerHitboxShape = TriggerHitboxShape.LINE:
 	set(value):
 		_hitbox_shape = value
-		_set_hitbox_shape(value)
+		_set_hitbox_shape()
+		notify_property_list_changed()
+
+@export var _hitbox_height: float = 64.0:
+	set(value):
+		_hitbox_height = value
+		_set_hitbox_shape()
 
 ## The trigger's target.
 @export var _target: Node:
@@ -24,18 +30,25 @@ enum TriggerHitboxShape {
 		_target = value
 		emit_signal("target_changed")
 
+## If the trigger can be used multiple times.
+@export var _multi_usage: bool = true
+
+func _validate_property(property: Dictionary) -> void:
+	if property.name == "_hitbox_height" and _hitbox_shape != TriggerHitboxShape.LINE:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+
 ## The trigger's sprite. Hidden at runtime unless collision shapes are visible ([code]Debug → Visible Collision Shapes[/codeb]).
 var _sprite: Sprite2D
 ## The trigger's collision shape.
 var _hitbox: CollisionShape2D
 
-func _set_hitbox_shape(hitbox_shape: TriggerHitboxShape) -> void:
+func _set_hitbox_shape() -> void:
 	if _hitbox != null:
-		match hitbox_shape:
+		match _hitbox_shape:
 			TriggerHitboxShape.LINE:
 				_hitbox.shape = SegmentShape2D.new()
-				_hitbox.shape.a = Vector2(0, -8192.0)
-				_hitbox.shape.b = Vector2(0,  8192.0)
+				_hitbox.shape.a = Vector2(0, -_hitbox_height*128)
+				_hitbox.shape.b = Vector2(0,  _hitbox_height*128)
 			TriggerHitboxShape.SQUARE:
 				_hitbox.shape = RectangleShape2D.new()
 				_hitbox.shape.size = Vector2.ONE * 128.0
@@ -50,7 +63,7 @@ func _ready() -> void:
 		_hitbox = CollisionShape2D.new()
 		_hitbox.name = "Hitbox"
 		_hitbox.debug_color = Color("fff5006b")
-		_set_hitbox_shape(_hitbox_shape)
+		_set_hitbox_shape()
 		add_child(_hitbox)
 		_hitbox.set_owner(self)
 	else:
@@ -64,8 +77,15 @@ func _ready() -> void:
 	else:
 		_sprite = $Sprite
 	_sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
+	if not _multi_usage and not body_entered.is_connected(_disable): body_entered.connect(_disable)
 
 func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not get_tree().is_debugging_collisions_hint():
 		_sprite.hide()
-	_sprite.global_rotation = 0.0
+	if not get_parent() is tGameplayRotate:
+		_sprite.global_rotation = 0.0
+
+func _disable(_body: Node2D) -> void:
+	monitorable = false
+	monitoring = false
+	set_deferred("process_mode", PROCESS_MODE_DISABLED)

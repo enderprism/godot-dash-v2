@@ -35,6 +35,7 @@ shader_parameter/mode = 2
 size = Vector2(130, 226)
 
 [node name="SpeedPortal1x" type="Area2D"]
+collision_layer = 8
 script = ExtResource("1_q1w2s")
 object_type = 3
 

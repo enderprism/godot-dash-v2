@@ -35,6 +35,7 @@ shader_parameter/mode = 2
 size = Vector2(260, 226)
 
 [node name="SpeedPortal3x" type="Area2D"]
+collision_layer = 8
 script = ExtResource("1_xhycg")
 object_type = 3
 _speed_portal_type = 2

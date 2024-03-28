@@ -26,6 +26,7 @@ func _validate_property(property: Dictionary) -> void:
 	if property.name in ["_copy_target", "_copy_offset"] and _mode != Mode.COPY:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
+var _target: Node2D
 var _base: tBase
 var _easing: tEasing
 var _target_link: GDTargetLink
@@ -51,34 +52,44 @@ func _ready() -> void:
 		_target_link = $TargetLink
 		_update_target_link()
 	# Signal connections
-	if not is_connected("_base.body_entered", _start): _base.body_entered.connect(_start)
-	if not is_connected("_base.body_entered", _easing._start): _base.body_entered.connect(_easing._start)
-	if not is_connected("_base.target_changed", _update_target_link): _base.target_changed.connect(_update_target_link)
+	if not _base.is_connected("body_entered", _start): _base.body_entered.connect(_start)
+	if not _base.is_connected("body_entered", _easing._start): _base.body_entered.connect(_easing._start)
+	if not _base.is_connected("target_changed", _update_target_link): _base.target_changed.connect(_update_target_link)
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/Move.svg"))
+	_target = _base._target
 
 func _update_target_link() -> void:
 	_target_link._target = _base._target
 
 func _start(_body: Node2D) -> void:
-	if _easing._weight == 0.0:
-		_initial_global_position = _base._target.global_position
+	if _easing._is_inactive():
+		if _target != null:
+			_initial_global_position = _target.global_position
+		else:
+			printerr("In ", name, ": _base._target is unset")
 
 func _reset() -> void:
-	_base._target.global_position = _initial_global_position
+	if _target != null:
+		_target.global_position = _initial_global_position
+	else:
+		printerr("In ", name, ": _target is unset")
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(_easing._weight):
-		var _weight_delta = _easing._get_weight_delta()
-		match _mode:
-			Mode.ABSOLUTE:
-				_base._target.global_position += (owner.to_global(_absolute_position) - _initial_global_position) * _weight_delta
-			Mode.RELATIVE:
-				_base._target.global_position += _relative_offset * _weight_delta
-			Mode.COPY:
-				if _copy_target != null:
-					_base._target.global_position = lerp(_initial_global_position, _copy_target.global_position + _copy_offset, _easing._weight)
-					# _base._target.global_position += (_copy_target.global_position - _initial_global_position + _copy_offset) * _weight_delta
-				else:
-					printerr("In ", name, ": copy_target is unset!")
+		if _base._target != null:
+			var _weight_delta = _easing._get_weight_delta()
+			match _mode:
+				Mode.ABSOLUTE:
+					_target.global_position += (owner.to_global(_absolute_position) - _initial_global_position) * _weight_delta
+				Mode.RELATIVE:
+					_target.global_position += _relative_offset * _weight_delta
+				Mode.COPY:
+					if _copy_target != null:
+						_target.global_position = lerp(_initial_global_position, _copy_target.global_position + _copy_offset, _easing._weight)
+					else:
+						printerr("In ", name, ": copy_target is unset!")
+		else:
+			printerr("In ", name, ": _target is unset")
 	elif Engine.is_editor_hint() or LevelManager.in_editor:
 		_target_link.position = Vector2.ZERO
+		if Engine.is_editor_hint(): _base.position = Vector2.ZERO

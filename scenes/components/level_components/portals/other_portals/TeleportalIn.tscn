@@ -24,6 +24,7 @@ object_type = 4
 _other_portal_type = 2
 
 [node name="TargetLink" parent="." instance=ExtResource("2_g4fee")]
+z_index = -50
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_6nd4y")]
 modulate = Color(0.356863, 0.85098, 1, 1)

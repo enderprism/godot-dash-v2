@@ -1,0 +1,59 @@
+[gd_scene load_steps=11 format=3 uid="uid://jdhlbkky38ej"]
+
+[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_3cwwl"]
+[ext_resource type="PackedScene" uid="uid://dl5c5hukbve28" path="res://scenes/particle_emitter_presets/SpeedPortalParticles.tscn" id="2_v7vet"]
+[ext_resource type="Shader" path="res://resources/ColorPulse.gdshader" id="3_q7yot"]
+[ext_resource type="Texture2D" uid="uid://bm4o6qn8mdapu" path="res://assets/textures/portals/speed_portals/SpeedPortal0x.svg" id="4_gln18"]
+[ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="6_2iajj"]
+
+[sub_resource type="Curve" id="Curve_f0tdc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_0y2x4"]
+curve = SubResource("Curve_f0tdc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_28a5j"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(96, 128, 1)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_0y2x4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3k1gh"]
+shader = ExtResource("3_q7yot")
+shader_parameter/shine_color = Color(1, 1, 1, 0)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 1.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vx3nn"]
+size = Vector2(0, 174)
+
+[node name="SpeedPortal0x" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_3cwwl")
+object_type = 3
+_speed_portal_type = 5
+
+[node name="ParticleEmitter" parent="." instance=ExtResource("2_v7vet")]
+modulate = Color(0.101961, 0.101961, 0.101961, 1)
+material = null
+process_material = SubResource("ParticleProcessMaterial_28a5j")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3k1gh")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_gln18")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vx3nn")
+debug_color = Color(0, 1, 0, 0)
+
+[node name="PulseGrow" type="Sprite2D" parent="."]
+modulate = Color(0.101961, 0.101961, 0.101961, 1)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("6_2iajj")
