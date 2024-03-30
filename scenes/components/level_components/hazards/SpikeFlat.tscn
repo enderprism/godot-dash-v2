@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh1l6k3qxgwdf"]
+
+[ext_resource type="Texture2D" uid="uid://b8twes5otuygx" path="res://assets/textures/hazards/RegularSpikeFlat.svg" id="1_yud3k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hu62t"]
+size = Vector2(20, 31)
+
+[node name="SpikeFlat" type="StaticBody2D"]
+collision_layer = 4
+metadata/_edit_group_ = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_yud3k")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 37.5)
+scale = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_hu62t")
+debug_color = Color(0.960784, 0, 0, 0)

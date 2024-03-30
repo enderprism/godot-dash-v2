@@ -7,7 +7,7 @@ var _weight: float
 
 # Tween controls
 @export_range(0.0, 10.0, 0.01, "or_more") var _duration: float = 1.0
-@export var _easing_type: Tween.EaseType
+@export var _easing_type: Tween.EaseType = Tween.EASE_IN_OUT
 @export var _easing_transition: Tween.TransitionType
 
 var _previous_weight: float

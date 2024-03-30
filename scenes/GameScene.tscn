@@ -124,7 +124,6 @@ metadata/_edit_lock_ = true
 [node name="PlayerCamera" type="Camera2D" parent="."]
 process_priority = 2
 position = Vector2(640, 561)
-offset = Vector2(400, 0)
 ignore_rotation = false
 limit_bottom = 1080
 limit_smoothed = true

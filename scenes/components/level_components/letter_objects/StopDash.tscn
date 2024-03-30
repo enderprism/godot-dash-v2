@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwjxj7jcot0cn"]
+
+[ext_resource type="Script" path="res://src/components/GDLetterObject.gd" id="1_1vsyb"]
+[ext_resource type="Texture2D" uid="uid://dwu7wyhadhlnu" path="res://assets/textures/solids/OutlineBlock01.svg" id="2_y2siu"]
+[ext_resource type="Theme" uid="uid://ctubgkgi0wilt" path="res://resources/PusabLabels.tres" id="3_sf5fp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65trp"]
+size = Vector2(128, 128)
+
+[node name="StopDash" type="Area2D"]
+script = ExtResource("1_1vsyb")
+_action = 1
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_65trp")
+debug_color = Color(0, 1, 0, 0)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(256, 256)
+texture = ExtResource("2_y2siu")
+patch_margin_left = 35
+patch_margin_top = 35
+patch_margin_right = 35
+patch_margin_bottom = 35
+
+[node name="Letter" type="Label" parent="."]
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(256, 256)
+theme = ExtResource("3_sf5fp")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 262
+text = "s"
+horizontal_alignment = 1
+vertical_alignment = 1

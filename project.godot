@@ -49,6 +49,7 @@ config/name="godot-dash-v2"
 config/version="0.0.1"
 run/main_scene="res://scenes/MainScene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/max_fps=60
 boot_splash/bg_color=Color(0.117647, 0.117647, 0.180392, 1)
 boot_splash/image="res://assets/logo/NewIcon.png"
 boot_splash/fullsize=false

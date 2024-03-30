@@ -184,6 +184,7 @@ collision_priority = 2.0
 floor_constant_speed = true
 floor_max_angle = 1.55334
 floor_snap_length = 32.0
+platform_on_leave = 1
 platform_floor_layers = 4294901802
 script = ExtResource("1_nvqsc")
 
@@ -269,6 +270,7 @@ script = ExtResource("2_sxyn3")
 gamemode = 3
 
 [node name="CubeIcon" type="Sprite2D" parent="Icon/Ball"]
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_6ab5b")
 
 [node name="Wave" type="Node2D" parent="Icon"]

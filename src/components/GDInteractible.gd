@@ -29,6 +29,7 @@ enum Pad {
 	BLUE = 8,
 	SPIDER = 16,
 	REBOUND = 32,
+	BLACK = 64,
 }
 
 enum SpeedPortal {
@@ -101,7 +102,7 @@ enum HorizontalDirection {
 @export var _reverse: bool
 
 # @@show_if(object_type == ObjectType.GAMEMODE_PORTAL)
-@export var _freefly: bool
+@export var _freefly: bool = true
 
 # @@show_if(object_type == ObjectType.ORB and _orb_type == Orb.TOGGLE)
 @export var _toggled_groups: Array[gToggledGroup]
@@ -134,6 +135,7 @@ enum HorizontalDirection {
 #endregion
 
 var _player: Player
+var _player_camera: PlayerCamera
 var _rebound_factor: float
 var _pulse_white_color: Color = Color.WHITE
 var _0x_speed_centering_player: bool
@@ -142,6 +144,7 @@ var _queue_index: int
 func _ready() -> void:
 	_pulse_white_color.a = 0
 	_player = LevelManager.player
+	_player_camera = LevelManager.player_camera
 	body_entered.connect(_on_player_enter)
 	body_exited.connect(_on_player_exit)
 
@@ -174,7 +177,7 @@ func _process(delta: float) -> void:
 			var _self_position_normalised = global_position.rotated(-_player._gameplay_rotation)
 			_player.global_position = Vector2(_player_position_normalised.lerp(_self_position_normalised, 0.3).rotated(_player._gameplay_rotation).x, _player.global_position.y)
 			if is_equal_approx(_player_position_normalised.x, _self_position_normalised.x): _0x_speed_centering_player = false
-		$Hitbox.debug_color = Color("00ff0033")
+		if has_node("Hitbox"): $Hitbox.debug_color = Color("00ff0033")
 	else:
 		if object_type == ObjectType.ORB and _orb_type == Orb.BLUE:
 			$Sprite.global_rotation = 0.0
@@ -185,7 +188,7 @@ func _process(delta: float) -> void:
 			$TargetLink._target = _teleport_target
 		else:
 			_override_player_velocity = false
-		$Hitbox.debug_color = Color("00ff0000")
+		if has_node("Hitbox"): $Hitbox.debug_color = Color("00ff0000")
 
 
 	if object_type == ObjectType.ORB and (_orb_type == Orb.TELEPORT or _orb_type == Orb.TOGGLE):
@@ -198,7 +201,7 @@ func _process(delta: float) -> void:
 		and object_type == ObjectType.GAMEMODE_PORTAL \
 		or (object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.GRAVITY_PORTAL):
 		if not Engine.is_editor_hint() and LevelManager.player_camera != null and _other_portal_type != OtherPortal.GRAVITY_PORTAL:
-			$Sprites/IndicatorIcon.global_rotation = LevelManager.player_camera.rotation
+			$Sprites/IndicatorIcon.global_rotation = LevelManager.player_camera.rotation + _player._gameplay_rotation
 		else:
 			$Sprites/IndicatorIcon.global_rotation = 0.0
 		$Sprites/IndicatorIcon.global_scale.x = abs(scale.x)
@@ -218,6 +221,7 @@ func _on_player_enter(_body: Node2D) -> void:
 		_pulse_shrink()
 		_pulse_white_start()
 		LevelManager.player.gamemode = _gamemode_portal_type
+		_player_camera._freefly = _freefly
 		_player._mini = _player._mini
 	elif object_type == ObjectType.SPEED_PORTAL:
 		set_deferred("monitoring", _multi_usage)

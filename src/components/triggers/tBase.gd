@@ -31,7 +31,7 @@ enum TriggerHitboxShape {
 		emit_signal("target_changed")
 
 ## If the trigger can be used multiple times.
-@export var _multi_usage: bool = true
+@export var _multi_usage: bool = false
 
 func _validate_property(property: Dictionary) -> void:
 	if property.name == "_hitbox_height" and _hitbox_shape != TriggerHitboxShape.LINE:
@@ -86,6 +86,6 @@ func _physics_process(_delta: float) -> void:
 		_sprite.global_rotation = 0.0
 
 func _disable(_body: Node2D) -> void:
-	monitorable = false
-	monitoring = false
+	set_deferred("monitorable", false)
+	set_deferred("monitoring", false)
 	set_deferred("process_mode", PROCESS_MODE_DISABLED)

@@ -43,6 +43,7 @@ const DASH_BOOM: PackedScene = preload("res://scenes/components/game_components/
 var _click_buffer_state: ClickBufferState
 var _dash_orb_rotation: float
 var _dash_orb_sprite_rotation: float
+var _spider_jump_invulnerability_frames: int = 0
 var _dash_orb_position: Vector2
 var _is_dashing: bool
 var _dead: bool
@@ -142,9 +143,11 @@ func _compute_velocity(_delta: float,
 		_previous_velocity: Vector2,
 		_direction: int, _jump_state: int,
 		) -> Vector2:
-	var _velocity: Vector2 = _previous_velocity.rotated(_gameplay_rotation * -1)
+	var _velocity: Vector2 = _previous_velocity.rotated(-_gameplay_rotation)
 	var _speed: Vector2 = SPEED if not _mini else SPEED_MINI
 	_is_flying_gamemode = (gamemode == Gamemode.SHIP or gamemode == Gamemode.SWING or gamemode == Gamemode.WAVE)
+	
+	if _spider_jump_invulnerability_frames > 0: _spider_jump_invulnerability_frames -= 1
 
 	if (gamemode == Gamemode.SWING or gamemode == Gamemode.BALL) and _jump_state == 1 and _orb_queue.is_empty():
 		_gravity_multiplier *= -1
@@ -185,10 +188,13 @@ func _compute_velocity(_delta: float,
 				_velocity.y = -_speed.y * (365.0/194.0)
 			elif _colliding_pad._pad_type == GDInteractible.Pad.REBOUND:
 				_velocity.y = -_rebound_velocity
+			elif _colliding_pad._pad_type == GDInteractible.Pad.BLACK:
+				_velocity.y = -_speed.y * -(260.0/194.0)
 		# These pads are supposed to work with the wave
 		if _colliding_pad._pad_type == GDInteractible.Pad.SPIDER:
 			_gravity_multiplier = Vector2.UP.rotated($Icon/Spider/SpiderCast.rotation).y
 			_velocity.y = _get_spider_velocity_delta() * 1/_delta
+			_spider_jump_invulnerability_frames = 2
 			_last_spider_trail_height = abs(_get_spider_velocity_delta()/_last_spider_trail.SPIDER_TRAIL_HEIGHT)
 		elif _colliding_pad._pad_type == GDInteractible.Pad.BLUE:
 			_gravity_multiplier *= -1
@@ -202,6 +208,7 @@ func _compute_velocity(_delta: float,
 		elif gamemode == Gamemode.SPIDER:
 			_gravity_multiplier *= -1
 			_velocity.y = _get_spider_velocity_delta() * 1/_delta
+			_spider_jump_invulnerability_frames = 2
 			_last_spider_trail_height = abs(_get_spider_velocity_delta()/_last_spider_trail.SPIDER_TRAIL_HEIGHT)
 		elif gamemode == Gamemode.BALL:
 			_velocity.y = _speed.y * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * 0.5
@@ -214,17 +221,14 @@ func _compute_velocity(_delta: float,
 
 	if _is_dashing:
 		$DashFlame.visible = true
-		$DashFlame.rotation = _dash_orb_rotation * _get_direction()
-		$DashFlame.scale.x = abs($DashFlame.scale.x) * _get_direction()
+		$DashFlame.rotation = _dash_orb_rotation * _direction
+		$DashFlame.scale.x = abs($DashFlame.scale.x) * _direction
 		if (is_on_floor() and sin(_dash_orb_rotation) > 0) or (is_on_ceiling() and sin(_dash_orb_rotation) < 0):
 			_velocity.y = 0
 		else:
 			_velocity.y = tan(_dash_orb_rotation - _gameplay_rotation) * _speed.x
 		if Input.is_action_just_released("jump"):
-			_is_dashing = false
-			# _dash_orb_rotation = 0.0
-			_dash_orb_rotation = 0.0
-			$DashFlame.hide()
+			_stop_dash()
 
 	if _direction:
 		_velocity.x = _direction * _speed.x * _speed_multiplier * int(get_parent().has_level_started)
@@ -257,6 +261,7 @@ func _compute_velocity(_delta: float,
 			_colliding_orb._set_spider_props()
 			_gravity_multiplier *= -1 * $Icon/Spider/SpiderCast.scale.y
 			_velocity.y = _get_spider_velocity_delta() * 1/_delta
+			_spider_jump_invulnerability_frames = 2
 			_last_spider_trail_height = abs(_get_spider_velocity_delta()/_last_spider_trail.SPIDER_TRAIL_HEIGHT)
 			_in_j_block = true
 		if _colliding_orb._orb_type == GDInteractible.Orb.BLUE:
@@ -362,7 +367,7 @@ func _rotate_sprite_degrees(delta: float):
 	if _horizontal_direction != 0:
 		$Icon/Ball.scale.x = _horizontal_direction
 	if _speed_multiplier > 0.0:
-		$Icon/Ball.rotation_degrees += delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * 600
+		$Icon/Ball.rotation_degrees += delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * 800
 #endsection
 #section spider/robot
 	$Icon/Spider.scale.y = sign(_gravity_multiplier)
@@ -390,8 +395,8 @@ func _update_wave_trail() -> void:
 	# $WaveTrail.visible = gamemode == Gamemode.WAVE
 	# $WaveTrail2.visible = gamemode == Gamemode.WAVE
 	if gamemode == Gamemode.WAVE:
-		$WaveTrail.length = lerpf($WaveTrail.length, 50.0, 0.2)
-		$WaveTrail2.length = lerpf($WaveTrail.length, 50.0, 0.2)
+		$WaveTrail.length = lerpf($WaveTrail.length, 100.0, 0.2)
+		$WaveTrail2.length = lerpf($WaveTrail.length, 100.0, 0.2)
 	else:
 		$WaveTrail.length = 0
 		$WaveTrail2.length = 0
@@ -405,6 +410,7 @@ func _get_spider_velocity_delta() -> float:
 	var _spider_velocity_delta: float = abs((_target_position - position).rotated(-_gameplay_rotation).y)
 	_spider_velocity_delta -= $GroundCollider.shape.size.y/2 * scale.y
 	_last_spider_trail = SPIDER_TRAIL.instantiate()
+	_last_spider_trail._rotation = _gameplay_rotation
 	return _spider_velocity_delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier
 
 func _player_death() -> void:
@@ -420,7 +426,14 @@ func _on_death_restart() -> void:
 	get_tree().reload_current_scene()
 
 func _on_kill_collider_solid_body_entered(_body:Node2D) -> void:
-	$DeathAnimator.play("DeathAnimation")
+	if _spider_jump_invulnerability_frames == 0:
+		$DeathAnimator.play("DeathAnimation")
 
 func _on_kill_collider_hazard_body_entered(_body:Node2D) -> void:
-	$DeathAnimator.play("DeathAnimation")
+	if _spider_jump_invulnerability_frames == 0:
+		$DeathAnimator.play("DeathAnimation")
+
+func _stop_dash() -> void:
+	_is_dashing = false
+	_dash_orb_rotation = 0.0
+	$DashFlame.hide()

@@ -3,25 +3,25 @@ extends Node2D
 class_name tMove
 
 enum Mode {
-	ABSOLUTE,
-	RELATIVE,
+	SET,
+	ADD,
 	COPY,
 }
 
-@export var _mode: Mode = Mode.ABSOLUTE:
+@export var _mode: Mode = Mode.ADD:
 	set(value):
 		_mode = value
 		notify_property_list_changed()
-@export var _absolute_position: Vector2
-@export var _relative_offset: Vector2
+@export var _set_position: Vector2
+@export var _add_position: Vector2
 @export var _copy_target: Node2D
 @export var _copy_offset: Vector2 ## Offset in global coordinates from the move target.
 
 # Hide unneeded elements in the inspector
 func _validate_property(property: Dictionary) -> void:
-	if property.name == "_absolute_position" and _mode != Mode.ABSOLUTE:
+	if property.name == "_set_position" and _mode != Mode.SET:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name == "_relative_offset" and _mode != Mode.RELATIVE:
+	if property.name == "_add_position" and _mode != Mode.ADD:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name in ["_copy_target", "_copy_offset"] and _mode != Mode.COPY:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
@@ -79,10 +79,10 @@ func _process(_delta: float) -> void:
 		if _base._target != null:
 			var _weight_delta = _easing._get_weight_delta()
 			match _mode:
-				Mode.ABSOLUTE:
-					_target.global_position += (owner.to_global(_absolute_position) - _initial_global_position) * _weight_delta
-				Mode.RELATIVE:
-					_target.global_position += _relative_offset * _weight_delta
+				Mode.SET:
+					_target.global_position += (owner.to_global(_set_position) - _initial_global_position) * _weight_delta
+				Mode.ADD:
+					_target.global_position += _add_position * _weight_delta
 				Mode.COPY:
 					if _copy_target != null:
 						_target.global_position = lerp(_initial_global_position, _copy_target.global_position + _copy_offset, _easing._weight)

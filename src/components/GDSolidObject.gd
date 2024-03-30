@@ -13,9 +13,9 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint():
-		$Hitbox.global_rotation = LevelManager.player._gameplay_rotation
+		$Hitbox.global_rotation = -abs(LevelManager.player._gameplay_rotation)
 		var dash_orb_rotation = (LevelManager.player._dash_orb_rotation - LevelManager.player._gameplay_rotation)
-		$Hitbox.scale.y = sign(LevelManager.player._gravity_multiplier) * sign(dash_orb_rotation) if dash_orb_rotation != 0 else sign(LevelManager.player._gravity_multiplier)
+		$Hitbox.scale.y = sign(LevelManager.player._gravity_multiplier) if dash_orb_rotation == 0 else sign(LevelManager.player._gravity_multiplier) * sign(dash_orb_rotation)
 		if $Hitbox is CollisionShape2D and $Hitbox.shape is RectangleShape2D:
 			$Hitbox.shape.size = BASE_HITBOX_SIZE.rotated(
 				snapped(global_rotation * sign(LevelManager.player._gravity_multiplier) + LevelManager.player._gameplay_rotation, PI/2)).abs()

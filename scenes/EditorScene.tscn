@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b3u17qn20dek3"]
 
-[ext_resource type="Script" path="res://scenes/EditorScene.gd" id="1_ftcrp"]
+[ext_resource type="Script" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/ButtonNoFocusColor.tres" id="3_k1q1p"]
 [ext_resource type="Texture2D" uid="uid://cffmcdyqdl686" path="res://assets/textures/guis/editor/EditorPlayPlayer.svg" id="3_qy4mu"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://calhypvupvj4m"]
 
-[ext_resource type="Texture2D" uid="uid://djlnfy6mugjwc" path="res://assets/textures/hazards/RegularSpike01.svg" id="1_yfgdv"]
+[ext_resource type="Texture2D" uid="uid://djlnfy6mugjwc" path="res://assets/textures/hazards/RegularSpikeNormal.svg" id="1_yfgdv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hu62t"]
 size = Vector2(20, 31)

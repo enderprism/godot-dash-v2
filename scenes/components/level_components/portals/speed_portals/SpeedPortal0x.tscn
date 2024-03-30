@@ -31,7 +31,7 @@ shader_parameter/full_pulse_cycle = false
 shader_parameter/mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vx3nn"]
-size = Vector2(0, 174)
+size = Vector2(140, 174)
 
 [node name="SpeedPortal0x" type="Area2D"]
 collision_layer = 8

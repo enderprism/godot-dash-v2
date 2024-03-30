@@ -1,32 +1,25 @@
 @tool
 extends Node2D
-class_name tScale
+class_name tAlpha
 
 enum Mode {
-	ADD,
+	SET,
 	MULTIPLY,
 	DIVIDE,
-	SET,
 	COPY,
 }
 
-@export var _mode: Mode = Mode.ADD:
+@export var _mode: Mode = Mode.SET:
 	set(value):
 		_mode = value
 		notify_property_list_changed()
-@export var _set_scale: Vector2
-@export var _add_scale: Vector2
-@export var _multiply_scale: Vector2
+@export_range(0.0, 1.0, 0.01) var _alpha: float
 @export var _copy_target: Node2D
-@export var _copy_multiplier: Vector2 = Vector2.ONE ## Offset in global coordinates from the move target.
+@export_range(0.0, 1.0, 0.01, "or_greater") var _copy_multiplier: float
 
 # Hide unneeded elements in the inspector
 func _validate_property(property: Dictionary) -> void:
-	if property.name == "_set_scale" and _mode != Mode.SET:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name == "_add_scale" and _mode != Mode.ADD:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name == "_multiply_scale" and _mode != Mode.MULTIPLY and _mode != Mode.DIVIDE:
+	if property.name == "_set_alpha" and _mode == Mode.COPY:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name in ["_copy_target", "_copy_multiplier"] and _mode != Mode.COPY:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
@@ -35,7 +28,7 @@ var _target: Node2D # Not useful in itself, but it provides autocompletion.
 var _base: tBase
 var _easing: tEasing
 var _target_link: GDTargetLink
-var _initial_global_scale: Vector2
+var _initial_alpha: float
 
 func _ready() -> void:
 	# Avoid re-instancing tBase, tEasing and TargetLink if they already exist
@@ -60,7 +53,7 @@ func _ready() -> void:
 	if not _base.is_connected("body_entered", _start): _base.body_entered.connect(_start)
 	if not _base.is_connected("body_entered", _easing._start): _base.body_entered.connect(_easing._start)
 	if not _base.is_connected("target_changed", _update_target_link): _base.target_changed.connect(_update_target_link)
-	_base._sprite.set_texture(preload("res://assets/textures/triggers/Scale.svg"))
+	_base._sprite.set_texture(preload("res://assets/textures/triggers/Alpha.svg"))
 	_target = _base._target
 
 func _update_target_link() -> void:
@@ -69,13 +62,13 @@ func _update_target_link() -> void:
 func _start(_body: Node2D) -> void:
 	if _easing._is_inactive():
 		if _target != null:
-			_initial_global_scale = _target.global_scale
+			_initial_alpha = _target.modulate.a
 		else:
 			printerr("In ", name, ": _target is unset")
 
 func _reset() -> void:
 	if _target != null:
-		_target.global_scale = _initial_global_scale
+		_target.modulate.a = _initial_alpha
 	else:
 		printerr("In ", name, ": _target is unset")
 
@@ -85,16 +78,12 @@ func _process(_delta: float) -> void:
 			var _weight_delta = _easing._get_weight_delta()
 			match _mode:
 				Mode.SET:
-					_target.global_scale += (_set_scale - _initial_global_scale) * _weight_delta
-				Mode.ADD:
-					_target.global_scale += _add_scale * _weight_delta
+					_target.modulate.a += (_alpha - _initial_alpha) * _weight_delta
 				Mode.MULTIPLY:
-					_target.global_scale -= (_initial_global_scale - (_initial_global_scale * _multiply_scale)) * _weight_delta
-				Mode.DIVIDE:
-					_target.global_scale -= (_initial_global_scale - (_initial_global_scale / _multiply_scale)) * _weight_delta
+					_target.modulate.a += (_alpha * _initial_alpha - _initial_alpha) * _weight_delta
 				Mode.COPY:
 					if _copy_target != null:
-						_target.global_scale = lerp(_initial_global_scale, _copy_target.global_scale * _copy_multiplier, _easing._weight)
+						_target.modulate.a = lerp(_initial_alpha, _copy_target.modulate.a * _copy_multiplier, _easing._weight)
 					else:
 						printerr("In ", name, ": copy_target is unset!")
 		else:
