@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=45 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_gg6c8"]
@@ -24,14 +24,14 @@
 [ext_resource type="PackedScene" uid="uid://dtumn0qc8usca" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal3x.tscn" id="24_rf2xj"]
 [ext_resource type="PackedScene" uid="uid://dvxuhegi7klq8" path="res://scenes/components/level_components/orbs/DashOrbGreen.tscn" id="24_sifkm"]
 [ext_resource type="Script" path="res://src/resources/gSpawnedGroup.gd" id="25_jkwa2"]
-[ext_resource type="Texture2D" uid="uid://nycdkrteceqa" path="res://assets/textures/ArrowedLine.svg" id="25_nr5sj"]
-[ext_resource type="Script" path="res://src/components/GDTargetLink.gd" id="26_f41ka"]
 [ext_resource type="Texture2D" uid="uid://cmcq4iubclsti" path="res://assets/textures/Cross.svg" id="26_ohbn7"]
 [ext_resource type="PackedScene" uid="uid://qfmv2p1wt1tn" path="res://scenes/components/level_components/portals/gamemode_portals/CubePortal.tscn" id="28_vs028"]
 [ext_resource type="PackedScene" uid="uid://fo7vbjwc7r60" path="res://scenes/components/level_components/letter_objects/StopJump.tscn" id="29_psv3v"]
 [ext_resource type="PackedScene" uid="uid://b3wrcjp4ua15k" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal1x.tscn" id="29_qa435"]
 [ext_resource type="Script" path="res://src/components/triggers/tAlpha.gd" id="30_4btpy"]
 [ext_resource type="PackedScene" uid="uid://bwjxj7jcot0cn" path="res://scenes/components/level_components/letter_objects/StopDash.tscn" id="30_me5kp"]
+[ext_resource type="Texture2D" uid="uid://nycdkrteceqa" path="res://assets/textures/ArrowedLine.svg" id="31_83fiw"]
+[ext_resource type="Script" path="res://src/components/GDTargetLink.gd" id="32_ksreo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l5xdm"]
 size = Vector2(128, 128)
@@ -84,6 +84,11 @@ time = 0.0
 [sub_resource type="Resource" id="Resource_ocq2q"]
 script = ExtResource("25_jkwa2")
 path = NodePath("../MoveBallPlatform")
+time = 0.0
+
+[sub_resource type="Resource" id="Resource_0qw7n"]
+script = ExtResource("25_jkwa2")
+path = NodePath("../tRotate2")
 time = 0.0
 
 [node name="Dash V2" type="Node2D"]
@@ -376,6 +381,25 @@ collision_layer = 16
 script = ExtResource("10_mcsxb")
 _target = NodePath("../../Cross")
 
+[node name="tCameraStatic4" type="Node2D" parent="."]
+position = Vector2(4928, -576)
+script = ExtResource("24_r7vme")
+metadata/_edit_group_ = true
+
+[node name="TargetLink" parent="tCameraStatic4" instance=ExtResource("6_bolvq")]
+z_index = -50
+points = PackedVector2Array(768, 0, 0, 0)
+
+[node name="tEasing" type="Node" parent="tCameraStatic4"]
+script = ExtResource("9_o2ont")
+_easing_type = 1
+_easing_transition = 3
+
+[node name="tBase" type="Area2D" parent="tCameraStatic4" node_paths=PackedStringArray("_target")]
+collision_layer = 16
+script = ExtResource("10_mcsxb")
+_target = NodePath("../../Cross2")
+
 [node name="SpeedPortal3x" parent="." instance=ExtResource("24_rf2xj")]
 modulate = Color(1, 1, 1, 0.25)
 position = Vector2(3264, -704)
@@ -435,6 +459,8 @@ _target = NodePath("../../PinkOrb2")
 position = Vector2(0, -576)
 script = ExtResource("24_l04c6")
 _spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_3ps4l"), SubResource("Resource_o6xvb")])
+_loop_delay = null
+_clear_external_target_links = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tSpawn" instance=ExtResource("6_bolvq")]
@@ -453,6 +479,8 @@ script = ExtResource("10_mcsxb")
 position = Vector2(2176, -640)
 script = ExtResource("24_l04c6")
 _spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_r33a3"), SubResource("Resource_vuqw3"), SubResource("Resource_a4pq3"), SubResource("Resource_14x7v")])
+_loop_delay = null
+_clear_external_target_links = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tSpawn2" instance=ExtResource("6_bolvq")]
@@ -491,10 +519,15 @@ script = ExtResource("10_mcsxb")
 _hitbox_shape = 2
 _target = NodePath("../../Spike1")
 
-[node name="SpawnTargetLink" parent="LowerSpike1" instance=ExtResource("6_bolvq")]
+[node name="SpawnTargetLink" type="Line2D" parent="LowerSpike1" instance=ExtResource("6_bolvq")]
 z_index = -50
+texture_repeat = 2
 points = PackedVector2Array(128, 0, 0, 0)
+width = 50.0
 default_color = Color(0, 1, 1, 1)
+texture = ExtResource("31_83fiw")
+texture_mode = 1
+script = ExtResource("32_ksreo")
 
 [node name="FloorButtonMove2" type="Node2D" parent="."]
 position = Vector2(2176, -1216)
@@ -518,10 +551,6 @@ script = ExtResource("10_mcsxb")
 _hitbox_shape = 2
 _target = NodePath("../../FloorButton2")
 
-[node name="SpawnTargetLink" parent="FloorButtonMove2" instance=ExtResource("6_bolvq")]
-z_index = -50
-default_color = Color(0, 1, 1, 1)
-
 [node name="LowerSpike2" type="Node2D" parent="."]
 position = Vector2(2304, -1088)
 script = ExtResource("8_ml13a")
@@ -544,10 +573,15 @@ script = ExtResource("10_mcsxb")
 _hitbox_shape = 2
 _target = NodePath("../../Spike2")
 
-[node name="SpawnTargetLink" parent="LowerSpike2" instance=ExtResource("6_bolvq")]
+[node name="SpawnTargetLink" type="Line2D" parent="LowerSpike2" instance=ExtResource("6_bolvq")]
 z_index = -50
+texture_repeat = 2
 points = PackedVector2Array(128, 0, 0, 0)
+width = 50.0
 default_color = Color(0, 1, 1, 1)
+texture = ExtResource("31_83fiw")
+texture_mode = 1
+script = ExtResource("32_ksreo")
 
 [node name="LowerSpike3" type="Node2D" parent="."]
 position = Vector2(2432, -1088)
@@ -571,10 +605,15 @@ script = ExtResource("10_mcsxb")
 _hitbox_shape = 2
 _target = NodePath("../../Spike3")
 
-[node name="SpawnTargetLink" parent="LowerSpike3" instance=ExtResource("6_bolvq")]
+[node name="SpawnTargetLink" type="Line2D" parent="LowerSpike3" instance=ExtResource("6_bolvq")]
 z_index = -50
+texture_repeat = 2
 points = PackedVector2Array(-256, -128, 0, 0)
+width = 50.0
 default_color = Color(0, 1, 1, 1)
+texture = ExtResource("31_83fiw")
+texture_mode = 1
+script = ExtResource("32_ksreo")
 
 [node name="Spike1" type="Marker2D" parent="."]
 position = Vector2(1856, -256)
@@ -643,6 +682,8 @@ position = Vector2(4032, -704)
 position = Vector2(1728, -896)
 script = ExtResource("24_l04c6")
 _spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_ky2bc"), SubResource("Resource_b3n5h")])
+_loop_delay = null
+_clear_external_target_links = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tSpawn3" instance=ExtResource("6_bolvq")]
@@ -736,6 +777,8 @@ default_color = Color(0, 1, 1, 1)
 position = Vector2(2176, -128)
 script = ExtResource("24_l04c6")
 _spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_2xerv"), SubResource("Resource_ocq2q")])
+_loop_delay = null
+_clear_external_target_links = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tSpawn4" instance=ExtResource("6_bolvq")]
@@ -764,15 +807,9 @@ position = Vector2(1344, -1216)
 script = ExtResource("30_4btpy")
 metadata/_edit_group_ = true
 
-[node name="TargetLink" type="Line2D" parent="tAlpha" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="tAlpha" instance=ExtResource("6_bolvq")]
 z_index = -50
-texture_repeat = 2
 points = PackedVector2Array(128, 640, 0, 0)
-width = 50.0
-default_color = Color(1, 0, 1, 1)
-texture = ExtResource("25_nr5sj")
-texture_mode = 1
-script = ExtResource("26_f41ka")
 
 [node name="tEasing" type="Node" parent="tAlpha"]
 script = ExtResource("9_o2ont")
@@ -782,3 +819,72 @@ _easing_transition = 3
 collision_layer = 16
 script = ExtResource("10_mcsxb")
 _target = NodePath("../../SpiderPortal")
+
+[node name="Cross2" type="Sprite2D" parent="."]
+position = Vector2(5696, -576)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("26_ohbn7")
+
+[node name="Pivot" type="Node2D" parent="."]
+position = Vector2(5696, -576)
+
+[node name="DefaultCube7" parent="Pivot" instance=ExtResource("5_g4mtk")]
+position = Vector2(384, 0)
+
+[node name="tSpawn5" type="Node2D" parent="."]
+position = Vector2(5824, -960)
+script = ExtResource("24_l04c6")
+_spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_0qw7n")])
+_loop = true
+_loop_count = -1
+_loop_delay = 1.0
+_clear_external_target_links = null
+metadata/_edit_group_ = true
+
+[node name="TargetLink" type="Line2D" parent="tSpawn5" instance=ExtResource("6_bolvq")]
+z_index = -50
+texture_repeat = 2
+points = PackedVector2Array(0, 128, 0, 0)
+width = 50.0
+default_color = Color(0, 1, 1, 1)
+texture = ExtResource("31_83fiw")
+texture_mode = 1
+script = ExtResource("32_ksreo")
+
+[node name="tEasing" type="Node" parent="tSpawn5"]
+script = ExtResource("9_o2ont")
+_duration = 0.4688
+
+[node name="tBase" type="Area2D" parent="tSpawn5"]
+collision_layer = 16
+script = ExtResource("10_mcsxb")
+_multi_usage = true
+
+[node name="tRotate2" type="Node2D" parent="."]
+position = Vector2(5824, -832)
+script = ExtResource("16_pj4c7")
+_add_rotation_degrees = 90.0
+metadata/_edit_group_ = true
+
+[node name="TargetLink" type="Line2D" parent="tRotate2" instance=ExtResource("6_bolvq")]
+z_index = -50
+texture_repeat = 2
+points = PackedVector2Array(-128, 256, 0, 0)
+width = 50.0
+default_color = Color(1, 0, 1, 1)
+texture = ExtResource("31_83fiw")
+texture_mode = 1
+script = ExtResource("32_ksreo")
+
+[node name="tEasing" type="Node" parent="tRotate2"]
+script = ExtResource("9_o2ont")
+_duration = 0.4688
+_easing_type = 1
+_easing_transition = 3
+
+[node name="tBase" type="Area2D" parent="tRotate2" node_paths=PackedStringArray("_target")]
+collision_layer = 16
+script = ExtResource("10_mcsxb")
+_hitbox_shape = 2
+_target = NodePath("../../Pivot")
+_multi_usage = true

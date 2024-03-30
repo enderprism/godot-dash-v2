@@ -14,6 +14,10 @@ class_name tSpawn
 @export var _refresh_target_link: bool:
 	set(value):
 		_update_target_link()
+@export var _clear_external_target_links: bool:
+	set(value):
+		for _group in _spawned_groups:
+			get_node(_group.path).get_node("SpawnTargetLink").queue_free()
 
 
 func _validate_property(property: Dictionary) -> void:
@@ -25,7 +29,6 @@ var _base: tBase
 var _easing: tEasing
 var _target_link: GDTargetLink
 var _player: Player
-var _loop_delay_timer: Timer
 
 func _ready() -> void:
 	# Avoid re-instancing tBase, tEasing and TargetLink if they already exist
@@ -55,7 +58,14 @@ func _ready() -> void:
 	_player = LevelManager.player
 
 func _start(_body: Node2D):
+	if _loop and not _easing._tween.is_connected("finished", _restart):
+		_easing._tween.finished.connect(_restart)
 	_current_loop += 1
+
+func _restart() -> void:
+	await get_tree().create_timer(_loop_delay).timeout
+	if _loop_count < 0 or _current_loop < _loop_count:
+		_base.emit_signal("body_entered", _player)
 
 func _update_target_link() -> void:
 	if len(_spawned_groups) >= 1:
