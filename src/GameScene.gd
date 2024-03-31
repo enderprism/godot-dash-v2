@@ -1,6 +1,5 @@
 extends Node2D
 
-@export var _time_scale: float = 1.0
 var has_level_started: bool
 
 func _ready() -> void:
@@ -14,7 +13,6 @@ func _ready() -> void:
 		var current_level = ResourceLoader.load(LevelManager.current_level.resource_path, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE).instantiate()
 		$Level.add_child(current_level)
 		_start_level()
-	Engine.time_scale = _time_scale
 
 func _start_level() -> void:
 	if LevelManager.is_first_attempt:

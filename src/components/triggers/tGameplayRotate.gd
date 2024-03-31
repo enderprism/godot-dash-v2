@@ -50,10 +50,6 @@ func _start(_body: Node2D) -> void:
 	if _easing._duration == 0.0:
 		_player._gameplay_rotation_degrees = _rotation_degrees
 		_player.velocity = _player.velocity.rotated(deg_to_rad(_rotation_degrees))
-	# if _player._gameplay_rotation_degrees != _rotation_degrees:
-	# 	_player._gameplay_rotation_degrees = _rotation_degrees
-	# 	if _set_velocity:
-	# 		_player.velocity = (_new_velocity * Player.SPEED).rotated(deg_to_rad(_rotation_degrees))
 
 func _reset() -> void:
 	if _player != null:

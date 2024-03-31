@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=46 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_gg6c8"]
@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://bwjxj7jcot0cn" path="res://scenes/components/level_components/letter_objects/StopDash.tscn" id="30_me5kp"]
 [ext_resource type="Texture2D" uid="uid://nycdkrteceqa" path="res://assets/textures/ArrowedLine.svg" id="31_83fiw"]
 [ext_resource type="Script" path="res://src/components/GDTargetLink.gd" id="32_ksreo"]
+[ext_resource type="Script" path="res://src/components/triggers/tTimewarp.gd" id="33_skqna"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l5xdm"]
 size = Vector2(128, 128)
@@ -388,7 +389,6 @@ metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tCameraStatic4" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(768, 0, 0, 0)
 
 [node name="tEasing" type="Node" parent="tCameraStatic4"]
 script = ExtResource("9_o2ont")
@@ -459,8 +459,6 @@ _target = NodePath("../../PinkOrb2")
 position = Vector2(0, -576)
 script = ExtResource("24_l04c6")
 _spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_3ps4l"), SubResource("Resource_o6xvb")])
-_loop_delay = null
-_clear_external_target_links = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tSpawn" instance=ExtResource("6_bolvq")]
@@ -479,8 +477,6 @@ script = ExtResource("10_mcsxb")
 position = Vector2(2176, -640)
 script = ExtResource("24_l04c6")
 _spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_r33a3"), SubResource("Resource_vuqw3"), SubResource("Resource_a4pq3"), SubResource("Resource_14x7v")])
-_loop_delay = null
-_clear_external_target_links = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tSpawn2" instance=ExtResource("6_bolvq")]
@@ -682,8 +678,6 @@ position = Vector2(4032, -704)
 position = Vector2(1728, -896)
 script = ExtResource("24_l04c6")
 _spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_ky2bc"), SubResource("Resource_b3n5h")])
-_loop_delay = null
-_clear_external_target_links = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tSpawn3" instance=ExtResource("6_bolvq")]
@@ -777,8 +771,6 @@ default_color = Color(0, 1, 1, 1)
 position = Vector2(2176, -128)
 script = ExtResource("24_l04c6")
 _spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_2xerv"), SubResource("Resource_ocq2q")])
-_loop_delay = null
-_clear_external_target_links = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tSpawn4" instance=ExtResource("6_bolvq")]
@@ -837,19 +829,12 @@ script = ExtResource("24_l04c6")
 _spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_0qw7n")])
 _loop = true
 _loop_count = -1
-_loop_delay = 1.0
-_clear_external_target_links = null
 metadata/_edit_group_ = true
 
-[node name="TargetLink" type="Line2D" parent="tSpawn5" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="tSpawn5" instance=ExtResource("6_bolvq")]
 z_index = -50
-texture_repeat = 2
 points = PackedVector2Array(0, 128, 0, 0)
-width = 50.0
 default_color = Color(0, 1, 1, 1)
-texture = ExtResource("31_83fiw")
-texture_mode = 1
-script = ExtResource("32_ksreo")
 
 [node name="tEasing" type="Node" parent="tSpawn5"]
 script = ExtResource("9_o2ont")
@@ -866,15 +851,9 @@ script = ExtResource("16_pj4c7")
 _add_rotation_degrees = 90.0
 metadata/_edit_group_ = true
 
-[node name="TargetLink" type="Line2D" parent="tRotate2" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="tRotate2" instance=ExtResource("6_bolvq")]
 z_index = -50
-texture_repeat = 2
 points = PackedVector2Array(-128, 256, 0, 0)
-width = 50.0
-default_color = Color(1, 0, 1, 1)
-texture = ExtResource("31_83fiw")
-texture_mode = 1
-script = ExtResource("32_ksreo")
 
 [node name="tEasing" type="Node" parent="tRotate2"]
 script = ExtResource("9_o2ont")
@@ -888,3 +867,29 @@ script = ExtResource("10_mcsxb")
 _hitbox_shape = 2
 _target = NodePath("../../Pivot")
 _multi_usage = true
+
+[node name="tTimewarp" type="Node2D" parent="."]
+position = Vector2(4288, -1088)
+script = ExtResource("33_skqna")
+_time_scale = 0.1
+metadata/_edit_group_ = true
+
+[node name="tEasing" type="Node" parent="tTimewarp"]
+script = ExtResource("9_o2ont")
+_duration = 0.0
+
+[node name="tBase" type="Area2D" parent="tTimewarp"]
+collision_layer = 16
+script = ExtResource("10_mcsxb")
+
+[node name="tTimewarp2" type="Node2D" parent="."]
+position = Vector2(4672, -1088)
+script = ExtResource("33_skqna")
+metadata/_edit_group_ = true
+
+[node name="tEasing" type="Node" parent="tTimewarp2"]
+script = ExtResource("9_o2ont")
+
+[node name="tBase" type="Area2D" parent="tTimewarp2"]
+collision_layer = 16
+script = ExtResource("10_mcsxb")

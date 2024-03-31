@@ -81,6 +81,7 @@ var _orb_queue: Array[GDInteractible]
 var _pad_queue: Array[GDInteractible]
 
 func _ready() -> void:
+	Engine.time_scale = 1.0
 	gamemode = Gamemode.CUBE
 	if not _dual_instance:
 		LevelManager.player = self

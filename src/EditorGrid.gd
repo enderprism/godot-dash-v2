@@ -19,11 +19,20 @@ class_name EditorGrid
 	set(value):
 		_symmetrize = value
 		queue_redraw()
+@export_group("Line Thickness")
+@export var _primary_line_thickness: int = LINE_WIDTH_PRIMARY:
+	set(value):
+		_primary_line_thickness = value
+		queue_redraw()
+@export var _secondary_line_thickness: int = LINE_WIDTH_SECONDARY:
+	set(value):
+		_secondary_line_thickness = value
+		queue_redraw()
 
 const LINE_COLOR_PRIMARY := Color.WHITE
 const LINE_COLOR_SECONDARY := Color("ffffff", 0.3)
-const LINE_WIDTH_PRIMARY := 4.0
-const LINE_WIDTH_SECONDARY := 2.0
+const LINE_WIDTH_PRIMARY := 4
+const LINE_WIDTH_SECONDARY := 2
 
 func _draw() -> void:
 	var _line_width: Vector2
@@ -32,10 +41,10 @@ func _draw() -> void:
 		var _line_base_y = 0.0 if not _symmetrize & 0b10 else _grid_size.y * _cell_size.y
 		if (cell_x % _primary_line_every.x) == 0:
 			_line_color_y = LINE_COLOR_PRIMARY
-			_line_width.y = LINE_WIDTH_PRIMARY
+			_line_width.y = _primary_line_thickness
 		else:
 			_line_color_y = LINE_COLOR_SECONDARY
-			_line_width.y = LINE_WIDTH_SECONDARY
+			_line_width.y = _secondary_line_thickness
 		draw_line(
 			Vector2(cell_x * _cell_size.x, _line_base_y),
 			Vector2(cell_x * _cell_size.x, -_grid_size.y * _cell_size.y),
@@ -44,16 +53,16 @@ func _draw() -> void:
 			draw_line(
 			Vector2(-cell_x * _cell_size.x, _line_base_y),
 			Vector2(-cell_x * _cell_size.x, -_grid_size.y * _cell_size.y),
-			_line_color_y, _line_width.y)
+			_line_color_y, _line_width.y, )
 	for cell_y in _grid_size.y:
 		var _line_color_x: Color
 		var _line_base_x = 0.0 if not _symmetrize & 0b01 else -_grid_size.x * _cell_size.x
 		if (cell_y % _primary_line_every.y) == 0:
 			_line_color_x = LINE_COLOR_PRIMARY
-			_line_width.x = LINE_WIDTH_PRIMARY
+			_line_width.x = _primary_line_thickness
 		else:
 			_line_color_x = LINE_COLOR_SECONDARY
-			_line_width.x = LINE_WIDTH_SECONDARY
+			_line_width.x = _secondary_line_thickness
 		draw_line(
 			Vector2(_line_base_x, -cell_y * _cell_size.y),
 			Vector2(_grid_size.x * _cell_size.x, -cell_y * _cell_size.y),

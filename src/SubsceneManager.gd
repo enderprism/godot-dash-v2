@@ -17,6 +17,7 @@ var _hide_page_control: bool = true
 
 
 func _ready() -> void:
+	Engine.time_scale = 1.0
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_page_control_container.hide()
 	_page_control_container.modulate.a = 0.0
