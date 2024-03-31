@@ -212,13 +212,13 @@ func _compute_velocity(_delta: float,
 			_spider_jump_invulnerability_frames = 2
 			_last_spider_trail_height = abs(_get_spider_velocity_delta()/_last_spider_trail.SPIDER_TRAIL_HEIGHT)
 		elif gamemode == Gamemode.BALL:
-			_velocity.y = _speed.y * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * 0.5
+			_velocity.y = _speed.y * _gravity_multiplier * 0.5
 		elif gamemode == Gamemode.ROBOT:
-			_velocity.y = SPEED.x * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * -1
+			_velocity.y = SPEED.x * _gravity_multiplier * -1
 		elif gamemode == Gamemode.UFO:
-			_velocity.y = -_speed.y * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * UFO_GRAVITY_MULTIPLIER
+			_velocity.y = -_speed.y * _gravity_multiplier * UFO_GRAVITY_MULTIPLIER
 		else:
-			_velocity.y = -_speed.y * _gravity_multiplier * _gameplay_trigger_gravity_multiplier
+			_velocity.y = -_speed.y * _gravity_multiplier
 
 	if _is_dashing:
 		$DashFlame.visible = true

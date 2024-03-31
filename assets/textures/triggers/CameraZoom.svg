@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="false"
      inkscape:deskcolor="#181825"
      inkscape:document-units="px"
-     inkscape:zoom="1.0938058"
-     inkscape:cx="348.32509"
-     inkscape:cy="604.76915"
+     inkscape:zoom="1.546875"
+     inkscape:cx="528.16162"
+     inkscape:cy="554.34344"
      inkscape:window-width="1920"
      inkscape:window-height="1080"
      inkscape:window-x="0"
@@ -35,6 +35,34 @@
      showguides="false" />
   <defs
      id="defs1">
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect12"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,5,0,1 @ F,0,0,1,0,5,0,1 @ F,0,0,1,0,5,0,1 @ F,0,0,1,0,5,0,1 @ F,0,0,1,0,5,0,1 @ F,0,0,1,0,5,0,1 @ F,0,0,1,0,5,0,1 @ F,0,0,1,0,5,0,1 @ F,0,0,1,0,5,0,1"
+       radius="5"
+       unit="px"
+       method="auto"
+       mode="F"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:path-effect
+       effect="offset"
+       id="path-effect8"
+       is_visible="true"
+       lpeversion="1.2"
+       linejoin_type="miter"
+       unit="px"
+       offset="22.8"
+       miter_limit="4"
+       attempt_force_join="false"
+       update_on_knot_move="true" />
     <inkscape:path-effect
        effect="offset"
        id="path-effect10"
@@ -188,7 +216,7 @@
     </g>
     <path
        d="m 86.882812,114.39844 31.871098,0 h 40.08007 a 5,5 45 0 1 5,5 v 12.83203 a 3.6927681,3.6927681 36.447856 0 0 4.77886,3.52944 l 15.65909,-4.81865 a 3.6927681,3.6927681 36.447856 0 1 4.77885,3.52944 v 41.83985 a 3.6927681,3.6927681 143.55214 0 1 -4.77885,3.52944 l -15.65909,-4.81865 a 3.6927681,3.6927681 143.55214 0 0 -4.77886,3.52944 v 12.83203 a 5,5 135 0 1 -5,5 l -71.951168,0 a 5,5 45 0 1 -5,-5 v -71.98437 a 5,5 135 0 1 5,-5 z"
-       style="fill:#7f7fff;fill-opacity:1;stroke:#000000;stroke-width:17.2202;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       style="fill:#7f7fff;fill-opacity:1;stroke:#000000;stroke-width:17.22021426;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
        id="path7"
        sodipodi:nodetypes="cccccccccc"
        inkscape:path-effect="#path-effect10;#path-effect9"
