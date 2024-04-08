@@ -84,6 +84,7 @@ func _physics_process(_delta: float) -> void:
 		_sprite.hide()
 	if not get_parent() is tGameplayRotate:
 		_sprite.global_rotation = 0.0
+	_sprite.global_scale = Vector2.ONE/4
 
 func _disable(_body: Node2D) -> void:
 	set_deferred("monitorable", false)

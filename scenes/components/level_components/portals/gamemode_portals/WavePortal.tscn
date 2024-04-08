@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cb1rbkb0djr36" path="res://assets/textures/portals/gamemode_portals/wave_portal/WavePortalFront.png" id="3_7str5"]
 [ext_resource type="Texture2D" uid="uid://hi7gplbmwoqd" path="res://assets/textures/portals/gamemode_portals/wave_portal/WavePortalIndicatorBG.png" id="4_c5wih"]
 [ext_resource type="Texture2D" uid="uid://pavsctvxcryh" path="res://assets/textures/portals/gamemode_portals/wave_portal/WavePortalIndicatorIcon.png" id="5_l71ex"]
-[ext_resource type="Shader" path="res://resources/ColorPulse.gdshader" id="6_n8jr8"]
+[ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="6_n8jr8"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="7_356b5"]
 [ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="8_f2cra"]
 [ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="9_phwxh"]

@@ -10,7 +10,7 @@ class_name tGameplayRotate
 	set(value):
 		_set_velocity = value
 		notify_property_list_changed()
-@export var _new_velocity: Vector2
+# @export var _new_velocity: Vector2
 
 func _validate_property(property: Dictionary) -> void:
 	if property.name == "_new_velocity" and not _set_velocity:
@@ -20,26 +20,10 @@ var _player: Player # Not useful in itself, but it provides autocompletion.
 var _base: tBase
 var _easing: tEasing
 var _initial_global_rotation_degrees: float
+var _setup: tSetup
 
 func _ready() -> void:
-	# Avoid re-instancing tBase, tEasing and TargetLink if they already exist
-	if not has_node("tBase") and not has_node("tEasing") and not has_node("TargetLink") and not has_node("BlackPad"):
-		# Init children
-		_base = tBase.new(); _easing = tEasing.new();
-		_base.name = "tBase"
-		_easing.name = "tEasing"
-		# Add children to the tree
-		add_child(_easing)
-		add_child(_base)
-		# Fix to make it show in the Scene Tree (in the Godot UI)
-		_base.set_owner(get_parent()); _easing.set_owner(get_parent());
-		_easing._duration = 0.0
-	else:
-		_base = $tBase
-		_easing = $tEasing
-	# Signal connections
-	if not _base.is_connected("body_entered", _start): _base.body_entered.connect(_start)
-	if not _base.is_connected("body_entered", _easing._start): _base.body_entered.connect(_easing._start)
+	_setup = tSetup.new(self, false)
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/GameplayRotate.svg"))
 	_player = LevelManager.player
 

@@ -29,29 +29,10 @@ var _base: tBase
 var _easing: tEasing
 var _target_link: GDTargetLink
 var _player: Player
+var _setup: tSetup
 
 func _ready() -> void:
-	# Avoid re-instancing tBase, tEasing and TargetLink if they already exist
-	if not has_node("tBase") and not has_node("tEasing") and not has_node("TargetLink"):
-		# Init children
-		_base = tBase.new(); _easing = tEasing.new();
-		_target_link = load("res://scenes/components/game_components/GDTargetLink.tscn").instantiate()
-		_base.name = "tBase"
-		_easing.name = "tEasing"
-		# Add children to the tree
-		add_child(_target_link)
-		add_child(_easing)
-		add_child(_base)
-		# Fix to make them show in the Scene Tree (in the Godot UI)
-		_easing.set_owner(get_parent()); _base.set_owner(get_parent()); _target_link.set_owner(get_parent());
-	else:
-		_base = $tBase
-		_easing = $tEasing
-		_target_link = $TargetLink
-		_update_target_link()
-	# Signal connections
-	if not _base.is_connected("body_entered", _start): _base.body_entered.connect(_start)
-	if not _base.is_connected("body_entered", _easing._start): _base.body_entered.connect(_easing._start)
+	_setup = tSetup.new(self, true)
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/Spawn.svg"))
 	_target_link.default_color = Color.CYAN
 	_update_target_link()
@@ -88,7 +69,6 @@ func _update_target_link() -> void:
 func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(_easing._weight):
 		if _spawned_groups != null:
-# 			print_debug(_time," ", _current_loop)
 			for _group in _spawned_groups:
 				if _easing._weight >= _group.time and _group.used_in_loop != _current_loop:
 					if get_node(_group.path).has_node("tBase"): get_node(_group.path)._base.emit_signal("body_entered", _player)
@@ -101,20 +81,3 @@ func _process(_delta: float) -> void:
 			_spawned_groups[0].changed.connect(_update_target_link)
 		if _spawned_groups.is_empty(): _target_link._target = null
 		if Engine.is_editor_hint(): _base.position = Vector2.ZERO
-
-# func _physics_process(delta: float) -> void:
-# 	super(delta)
-# 	if _easer._lerp_weight > 0.0:
-# 		for _group in _spawned_groups:
-# 			if _time >= _group.time and not _group.used:
-# 				get_node(_group.path)._run(self)
-# 				_group.used = true
-# 	if not Engine.is_editor_hint():
-# 		print_debug(_time," ", _current_loop)
-# 	if _loop and (_current_loop > 0 or _loop_count < 0) and _time >= 1.0:
-# 		_time = 0.0
-# 		if _loop_delay > 0.0: await get_tree().create_timer(_loop_delay).timeout
-# 		_easer._start()
-# 		print_debug("restarting")
-# 		if _current_loop > 0:
-# 			_current_loop -= 1

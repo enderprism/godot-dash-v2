@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://db7ebleody4s3"]
+[gd_scene load_steps=17 format=3 uid="uid://db7ebleody4s3"]
 
 [ext_resource type="Script" path="res://src/GameScene.gd" id="1_k47tp"]
 [ext_resource type="Texture2D" uid="uid://djstmwdco77pp" path="res://assets/textures/backgrounds/background1-3.png" id="2_i4f6q"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://src/components/GDPositionFollow2D.gd" id="6_kvomc"]
 [ext_resource type="Script" path="res://src/PlayerCamera.gd" id="7_vnv5l"]
 [ext_resource type="PackedScene" uid="uid://th7jwdop3hdv" path="res://scenes/components/game_components/PauseMenu.tscn" id="9_vv033"]
+[ext_resource type="Shader" path="res://resources/shaders/Grayscale.gdshader" id="10_tgbxk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y3ubx"]
 size = Vector2(4096, 20)
@@ -20,6 +21,10 @@ size = Vector2(194.4, 154.4)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vslon"]
 blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fr71x"]
+shader = ExtResource("10_tgbxk")
+shader_parameter/grayscale_factor = 0.0
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_k47tp")
@@ -129,6 +134,17 @@ limit_bottom = 1080
 limit_smoothed = true
 editor_draw_limits = true
 script = ExtResource("7_vnv5l")
+
+[node name="ShaderLayer" type="CanvasLayer" parent="."]
+layer = 50
+
+[node name="Grayscale" type="ColorRect" parent="ShaderLayer"]
+material = SubResource("ShaderMaterial_fr71x")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PauseMenuLayer" parent="." instance=ExtResource("9_vv033")]
 visible = false

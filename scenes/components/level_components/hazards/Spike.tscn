@@ -7,7 +7,6 @@ size = Vector2(20, 31)
 
 [node name="Spike" type="StaticBody2D"]
 collision_layer = 4
-metadata/_edit_group_ = true
 
 [node name="RegularSpike01" type="Sprite2D" parent="."]
 texture = ExtResource("1_yfgdv")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://bwqcjqk3as34v"]
 
 [ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_r5lgt"]
-[ext_resource type="Shader" path="res://resources/ColorPulse.gdshader" id="2_rwy5o"]
+[ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="2_rwy5o"]
 [ext_resource type="Texture2D" uid="uid://d0shbispfys6s" path="res://assets/textures/portals/other_portals/gravity_portal_normal/GravityPortalNormalBack.png" id="3_h3dng"]
 [ext_resource type="Texture2D" uid="uid://dsq6xk2pblqrm" path="res://assets/textures/portals/other_portals/gravity_portal_normal/GravityPortalNormalFront.png" id="4_m7fq6"]
 [ext_resource type="Texture2D" uid="uid://beiu6q5nankgc" path="res://assets/textures/portals/other_portals/gravity_portal_normal/GravityPortalNormalIndicatorBG.png" id="5_67rea"]

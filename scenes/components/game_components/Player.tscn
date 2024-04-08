@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bl48psvuka73y"]
+[gd_scene load_steps=48 format=3 uid="uid://bl48psvuka73y"]
 
 [ext_resource type="Script" path="res://src/Player.gd" id="1_nvqsc"]
 [ext_resource type="Texture2D" uid="uid://omcvgcf1uk5p" path="res://assets/textures/player/cube/Cube.svg" id="2_6ab5b"]
@@ -34,7 +34,9 @@
 [ext_resource type="Texture2D" uid="uid://br8sou620rxv4" path="res://assets/textures/player/death_effect/DeathEffect10.png" id="15_tt21x"]
 [ext_resource type="Texture2D" uid="uid://btd3nl8o3v0ij" path="res://assets/textures/player/death_effect/DeathEffect11.png" id="16_4ncex"]
 [ext_resource type="Texture2D" uid="uid://ci828dwxt326b" path="res://assets/textures/player/death_effect/DeathEffect12.png" id="17_ctfuu"]
+[ext_resource type="Texture2D" uid="uid://ddnfr4m8fgb15" path="res://assets/textures/player/ball/Ball.svg" id="18_b7ibp"]
 [ext_resource type="Texture2D" uid="uid://dnpykktg8amk8" path="res://assets/textures/player/ufo/Ufo.svg" id="18_nmour"]
+[ext_resource type="Texture2D" uid="uid://cf2nqx4cn1p4r" path="res://assets/textures/player/wave/Wave.svg" id="19_8jrwm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_whmfp"]
 animations = [{
@@ -265,24 +267,24 @@ position = Vector2(64, -64)
 position = Vector2(-64, -64)
 
 [node name="Ball" type="Node2D" parent="Icon"]
-visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 3
 
-[node name="CubeIcon" type="Sprite2D" parent="Icon/Ball"]
+[node name="Ball" type="Sprite2D" parent="Icon/Ball"]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_6ab5b")
+texture = ExtResource("18_b7ibp")
 
 [node name="Wave" type="Node2D" parent="Icon"]
 visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 4
 
-[node name="CubeIcon" type="Sprite2D" parent="Icon/Wave"]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_6ab5b")
+[node name="Wave" type="Sprite2D" parent="Icon/Wave"]
+scale = Vector2(0.417, 0.417)
+texture = ExtResource("19_8jrwm")
 
 [node name="UFO" type="Node2D" parent="Icon"]
+visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 2
 

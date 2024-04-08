@@ -200,8 +200,11 @@ func _process(delta: float) -> void:
 	if has_node("Sprites/IndicatorIcon") \
 		and object_type == ObjectType.GAMEMODE_PORTAL \
 		or (object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.GRAVITY_PORTAL):
-		if not Engine.is_editor_hint() and LevelManager.player_camera != null and _other_portal_type != OtherPortal.GRAVITY_PORTAL:
-			$Sprites/IndicatorIcon.global_rotation = LevelManager.player_camera.rotation + _player._gameplay_rotation
+		if not Engine.is_editor_hint() and LevelManager.player_camera != null:
+			if _other_portal_type == OtherPortal.GRAVITY_PORTAL:
+				$Sprites/IndicatorIcon.global_rotation = LevelManager.player._gameplay_rotation
+			else:
+				$Sprites/IndicatorIcon.global_rotation = LevelManager.player_camera.rotation
 		else:
 			$Sprites/IndicatorIcon.global_rotation = 0.0
 		$Sprites/IndicatorIcon.global_scale.x = abs(scale.x)

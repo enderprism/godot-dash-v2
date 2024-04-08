@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_72xjr"]
 [ext_resource type="PackedScene" uid="uid://dl5c5hukbve28" path="res://scenes/particle_emitter_presets/SpeedPortalParticles.tscn" id="2_36ths"]
 [ext_resource type="Texture2D" uid="uid://bh5xvhek8i1m6" path="res://assets/textures/portals/speed_portals/SpeedPortal05x.svg" id="2_hh1xf"]
-[ext_resource type="Shader" path="res://resources/ColorPulse.gdshader" id="3_acq6p"]
+[ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="3_acq6p"]
 [ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="5_8glu3"]
 [ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="5_482be"]
 

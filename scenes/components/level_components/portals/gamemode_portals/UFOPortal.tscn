@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_81exj"]
 [ext_resource type="Texture2D" uid="uid://n74audulsaf4" path="res://assets/textures/portals/gamemode_portals/ufo_portal/UFOPortalBack.png" id="2_ivt8v"]
-[ext_resource type="Shader" path="res://resources/ColorPulse.gdshader" id="2_n6vns"]
+[ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="2_n6vns"]
 [ext_resource type="Texture2D" uid="uid://g17qv6d5a8iq" path="res://assets/textures/portals/gamemode_portals/ufo_portal/UFOPortalFront.png" id="3_ogdae"]
 [ext_resource type="Texture2D" uid="uid://d10ak088yudm7" path="res://assets/textures/portals/gamemode_portals/ufo_portal/UFOPortalIndicatorBG.png" id="4_b1r1t"]
 [ext_resource type="Texture2D" uid="uid://6vdlyku2u7i8" path="res://assets/textures/portals/gamemode_portals/ufo_portal/UFOPortalIndicatorIcon.png" id="5_hl8ac"]

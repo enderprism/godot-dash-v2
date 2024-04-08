@@ -3,14 +3,14 @@
 [ext_resource type="Script" path="res://src/components/GDSolidObject.gd" id="1_8i826"]
 [ext_resource type="Texture2D" uid="uid://buwtqcrkk8knn" path="res://assets/textures/solids/RegularBlock01.svg" id="2_yn5k1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l5xdm"]
-size = Vector2(128, 128)
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_tn7hg"]
+resource_local_to_scene = true
+points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
 
 [node name="DefaultCube" type="AnimatableBody2D"]
 collision_layer = 2
 sync_to_physics = false
 script = ExtResource("1_8i826")
-metadata/_edit_group_ = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 anchors_preset = 8
@@ -33,6 +33,6 @@ patch_margin_right = 35
 patch_margin_bottom = 35
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_l5xdm")
+shape = SubResource("ConvexPolygonShape2D_tn7hg")
 one_way_collision = true
-debug_color = Color(0, 0.0588235, 0.701961, 0.196078)
+debug_color = Color(0, 0.0705882, 0.701961, 0.419608)

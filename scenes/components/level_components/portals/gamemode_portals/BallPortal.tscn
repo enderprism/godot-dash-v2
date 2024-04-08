@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_j3r41"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_n641x"]
 [ext_resource type="Texture2D" uid="uid://d3bxk0igncw1" path="res://assets/textures/portals/gamemode_portals/ball_portal/BallPortalBack.png" id="2_u2e3e"]
-[ext_resource type="Shader" path="res://resources/ColorPulse.gdshader" id="3_bjtqn"]
+[ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="3_bjtqn"]
 [ext_resource type="Texture2D" uid="uid://dd1s2apollksy" path="res://assets/textures/portals/gamemode_portals/ball_portal/BallPortalFront.png" id="3_natvh"]
 [ext_resource type="Texture2D" uid="uid://bosd0l1hcaf2j" path="res://assets/textures/portals/gamemode_portals/ball_portal/BallPortalIndicatorBG.png" id="4_mlyd2"]
 [ext_resource type="Texture2D" uid="uid://cklcutl8rj5wr" path="res://assets/textures/portals/gamemode_portals/ball_portal/BallPortalIndicatorIcon.png" id="5_ks1gp"]
