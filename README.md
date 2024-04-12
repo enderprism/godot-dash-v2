@@ -3,7 +3,7 @@
  <h1 align="center">Godot Dash V2</h1>
 </p>
 
-A Geometry Dash fangame made with Godot Engine. This is V2, a full rewrite of the project. Check V1 [here](https://github.com/enderprism/godot-dash).
+A Geometry Dash fangame made with Godot Engine. This is V2, a full rewrite of the project. Check V1 [here](https://github.com/enderprism/godot-dash) (or actually, don't, it's full of bugs and is unmaintained and people keep asking why Android doesn't work 😭).
 
 ## OS Support
 
@@ -12,6 +12,11 @@ Godot Dash V2 is intended to work on Linux, Windows and macOS (unsigned app). **
 ## Downloads
 
 Head to the [releases](https://github.com/enderprism/godot-dash-v2/releases/) section and download the latest one.
+
+## Contributing
+
+- Clone the repo and import it in Godot.
+- Open a PR with your changes.
 
 ## Compilation
 
