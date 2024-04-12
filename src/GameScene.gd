@@ -10,7 +10,7 @@ func _ready() -> void:
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), false)
 	if not get_parent() is EditorScene:
 		$EditorGrid.hide()
-		var current_level = ResourceLoader.load(LevelManager.current_level.resource_path, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE).instantiate()
+		var current_level = ResourceLoader.load(LevelManager.current_level, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE).instantiate()
 		$Level.add_child(current_level)
 		_start_level()
 

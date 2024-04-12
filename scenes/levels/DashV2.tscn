@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=43 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_gg6c8"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://src/components/triggers/tGameplayRotate.gd" id="15_3ludl"]
 [ext_resource type="PackedScene" uid="uid://duu44mnb4uo8u" path="res://scenes/components/level_components/portals/gamemode_portals/BallPortal.tscn" id="15_khho3"]
 [ext_resource type="Script" path="res://src/components/triggers/tRotate.gd" id="16_pj4c7"]
+[ext_resource type="Script" path="res://src/components/triggers/trigger_components/tGameplayRotateIndicator.gd" id="17_jvq2b"]
 [ext_resource type="Script" path="res://src/components/triggers/tScale.gd" id="19_vvu8j"]
 [ext_resource type="PackedScene" uid="uid://d05asiy6k2voi" path="res://scenes/components/level_components/portals/other_portals/TeleportalIn.tscn" id="20_ocowa"]
 [ext_resource type="Script" path="res://src/components/triggers/tSpawn.gd" id="24_l04c6"]
@@ -284,6 +285,7 @@ _freefly = false
 _override_player_velocity = true
 
 [node name="tGameplayRotate" type="Node2D" parent="."]
+z_index = 1
 position = Vector2(2112, -640)
 script = ExtResource("15_3ludl")
 _rotation_degrees = 90.0
@@ -298,6 +300,10 @@ _duration = 0.0
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_height = 2.0
+
+[node name="Indicator" type="Node2D" parent="tGameplayRotate"]
+show_behind_parent = true
+script = ExtResource("17_jvq2b")
 
 [node name="tGameplayRotate2" type="Node2D" parent="."]
 position = Vector2(1664, -448)
@@ -314,6 +320,11 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_height = 1.0
 _multi_usage = true
+
+[node name="Indicator" type="Node2D" parent="tGameplayRotate2"]
+show_behind_parent = true
+rotation = -1.57079
+script = ExtResource("17_jvq2b")
 
 [node name="Cross" type="Sprite2D" parent="."]
 position = Vector2(1856, -576)
@@ -373,7 +384,6 @@ _easing_transition = 3
 [node name="tBase" type="Area2D" parent="tCameraStatic4" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
-_hitbox_shape = 2
 _target = NodePath("../../Cross2")
 
 [node name="SpeedPortal3x" parent="." instance=ExtResource("24_rf2xj")]

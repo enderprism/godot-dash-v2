@@ -16,6 +16,7 @@ func _process(_delta: float) -> void:
 
 func _on_leave_pressed() -> void:
 	get_tree().paused = false
+	LevelManager.platformer = false
 	SFXManager.play_sfx("res://assets/sounds/sfx/game_sfx/LevelQuit.ogg")
 	get_tree().change_scene_to_file("res://scenes/MainScene.tscn")
 

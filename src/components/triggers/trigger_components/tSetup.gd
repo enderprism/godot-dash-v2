@@ -35,11 +35,9 @@ func _init(_parent: Node, _add_target_link: bool, _add_easing: bool = true):
 	#endregion
 	#endregion
 	#region Set children owner to make them show in the scene tree
-	var _children_owner: Node
-	_children_owner = _parent.get_parent() if _parent.get_parent().get_owner() == null else _parent.get_parent().get_owner()
-	_parent._base.set_owner(_children_owner)
-	if _add_easing: _parent._easing.set_owner(_children_owner)
-	if _add_target_link: _parent._target_link.set_owner(_children_owner)
+	_set_child_owner(_parent, _parent._base)
+	if _add_easing: _set_child_owner(_parent, _parent._easing)
+	if _add_target_link: _set_child_owner(_parent, _parent._target_link)
 	#endregion
 	#region Signal connections
 	if not _parent._base.is_connected("body_entered", _parent._start):
@@ -49,3 +47,7 @@ func _init(_parent: Node, _add_target_link: bool, _add_easing: bool = true):
 	if _add_target_link and not _parent._base.is_connected("target_changed", _parent._update_target_link):
 		_parent._base.target_changed.connect(_parent._update_target_link)
 	#endregion
+
+func _set_child_owner(_parent, _child) -> void:
+	var _owner: Node = _parent.get_parent() if _parent.get_parent().get_owner() == null else _parent.get_parent().get_owner()
+	_child.set_owner(_owner)

@@ -20,6 +20,7 @@ enum ClickBufferState {
 	BUFFER_USED,
 }
 
+#region Constants
 const GRAVITY: float = 5000.0 * 2
 const SPEED: Vector2 = Vector2(625.0 * 2, 1100.0 * 2)
 const SPEED_MINI: Vector2 = Vector2(625.0 * 2, 800.0 * 2)
@@ -30,8 +31,10 @@ const UFO_GRAVITY_MULTIPLIER: float = 0.7
 const WAVE_PLAYER_SCALE: Vector2 = Vector2(0.6, 0.6)
 const MINI_PLAYER_SCALE: Vector2 = Vector2(0.6, 0.6)
 const WAVE_TRAIL_WIDTH: float = 50.0
+const WAVE_TRAIL_LENGTH: int = 250
 const SPIDER_TRAIL: PackedScene = preload("res://scenes/components/game_components/GDSpiderTrail.tscn")
 const DASH_BOOM: PackedScene = preload("res://scenes/components/game_components/GDDashBoom.tscn")
+#endregion
 
 @export var gamemode: Gamemode:
 	set(value):
@@ -40,8 +43,12 @@ const DASH_BOOM: PackedScene = preload("res://scenes/components/game_components/
 			if icon.gamemode != value: icon.hide()
 			else: icon.show()
 
+@onready var _spider_animation_tree: AnimationTree = $Icon/Spider/SpiderStateMachine
+@onready var _spider_state_machine: AnimationNodeStateMachinePlayback = _spider_animation_tree["parameters/playback"]
+
 var _click_buffer_state: ClickBufferState
 var _dash_orb_rotation: float
+var _dash_orb_initial_gameplay_rotation: float
 var _dash_orb_sprite_rotation: float
 var _spider_jump_invulnerability_frames: int = 0
 var _dash_orb_position: Vector2
@@ -76,6 +83,7 @@ var _rebound_velocity: float
 
 var _gameplay_trigger_gravity_multiplier: float = 1
 
+
 # Queues
 var _orb_queue: Array[GDInteractible]
 var _pad_queue: Array[GDInteractible]
@@ -92,6 +100,7 @@ func _physics_process(delta: float) -> void:
 		up_direction = Vector2.UP.rotated(_gameplay_rotation) * sign(_gravity_multiplier)
 		_rotate_sprite_degrees(delta)
 		_update_wave_trail()
+		if gamemode == Gamemode.SPIDER: _update_spider_state_machine()
 		if gamemode == Gamemode.SWING: _update_swing_fire()
 		velocity = _compute_velocity(delta, velocity, _get_direction(), _get_jump_state())
 		move_and_slide()
@@ -176,7 +185,7 @@ func _compute_velocity(_delta: float,
 	if is_on_floor() and _jump_state == -1 and _pad_queue.is_empty():
 		_velocity.y = 0.0
 
-	#region Pad Collisions
+	#region Apply pads velocity
 	if not _pad_queue.is_empty():
 		var _colliding_pad: GDInteractible = _pad_queue.pop_front()
 		_colliding_pad._set_reverse(_colliding_pad._reverse)
@@ -220,23 +229,24 @@ func _compute_velocity(_delta: float,
 		else:
 			_velocity.y = -_speed.y * _gravity_multiplier
 
+	#region Dashing
 	if _is_dashing:
 		$DashFlame.visible = true
-		$DashFlame.rotation = _dash_orb_rotation * _direction
 		$DashFlame.scale.x = abs($DashFlame.scale.x) * _direction
 		if (is_on_floor() and sin(_dash_orb_rotation) > 0) or (is_on_ceiling() and sin(_dash_orb_rotation) < 0):
 			_velocity.y = 0
 		else:
-			_velocity.y = tan(_dash_orb_rotation - _gameplay_rotation) * _speed.x
+			_velocity.y = tan(_dash_orb_rotation - _dash_orb_initial_gameplay_rotation) * _speed.x
 		if Input.is_action_just_released("jump"):
 			_stop_dash()
+	#endregion
 
 	if _direction:
 		_velocity.x = _direction * _speed.x * _speed_multiplier * int(get_parent().has_level_started)
 	else:
 		_velocity.x = move_toward(_velocity.x, 0, _speed.x)
 
-	#region orbs
+	#region Apply orbs velocity
 	if not _orb_queue.is_empty() and (
 		_click_buffer_state == ClickBufferState.JUMPING
 		or (_jump_state == 1 and not _is_flying_gamemode)
@@ -257,6 +267,8 @@ func _compute_velocity(_delta: float,
 				_velocity.y = -_speed.y * -(260.0/194.0)
 			if _colliding_orb._orb_type == GDInteractible.Orb.REBOUND:
 				_velocity.y = -_rebound_velocity
+			if gamemode == Gamemode.SPIDER:
+				_spider_state_machine.travel("jump")
 		# These orbs are supposed to work with the wave
 		if _colliding_orb._orb_type == GDInteractible.Orb.SPIDER:
 			_colliding_orb._set_spider_props()
@@ -269,6 +281,8 @@ func _compute_velocity(_delta: float,
 			_gravity_multiplier *= -1
 			_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier * _gameplay_trigger_gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
 		if _colliding_orb._orb_type == GDInteractible.Orb.GREEN:
+			if gamemode == Gamemode.SPIDER:
+				_spider_state_machine.travel("jump")
 			_gravity_multiplier *= -1
 			_velocity.y = -_speed.y * (191.0/194.0) * _gravity_multiplier * _gameplay_trigger_gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
 		if _colliding_orb._orb_type == GDInteractible.Orb.DASH_GREEN:
@@ -276,12 +290,16 @@ func _compute_velocity(_delta: float,
 			var _last_dash_boom = DASH_BOOM.instantiate()
 			_last_dash_boom.position = to_local(_dash_orb_position)
 			add_child(_last_dash_boom)
+			_dash_orb_initial_gameplay_rotation = _gameplay_rotation
+			$DashFlame.rotation = _dash_orb_rotation * _direction
 			_is_dashing = true
 		if _colliding_orb._orb_type == GDInteractible.Orb.DASH_MAGENTA:
 			_colliding_orb._set_dash_props()
 			var _last_dash_boom = DASH_BOOM.instantiate()
 			_last_dash_boom.position = to_local(_dash_orb_position)
 			add_child(_last_dash_boom)
+			_dash_orb_initial_gameplay_rotation = _gameplay_rotation
+			$DashFlame.rotation = _dash_orb_rotation * _direction
 			_gravity_multiplier *= -1
 			_is_dashing = true
 		if _colliding_orb._orb_type == GDInteractible.Orb.TELEPORT:
@@ -396,8 +414,8 @@ func _update_wave_trail() -> void:
 	# $WaveTrail.visible = gamemode == Gamemode.WAVE
 	# $WaveTrail2.visible = gamemode == Gamemode.WAVE
 	if gamemode == Gamemode.WAVE:
-		$WaveTrail.length = lerpf($WaveTrail.length, 100.0, 0.2)
-		$WaveTrail2.length = lerpf($WaveTrail.length, 100.0, 0.2)
+		$WaveTrail.length = lerpf($WaveTrail.length, WAVE_TRAIL_LENGTH, 0.2)
+		$WaveTrail2.length = lerpf($WaveTrail.length, WAVE_TRAIL_LENGTH, 0.2)
 	else:
 		$WaveTrail.length = 0
 		$WaveTrail2.length = 0
@@ -413,6 +431,20 @@ func _get_spider_velocity_delta() -> float:
 	_last_spider_trail = SPIDER_TRAIL.instantiate()
 	_last_spider_trail._rotation = _gameplay_rotation
 	return _spider_velocity_delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier
+
+func _update_spider_state_machine() -> void:
+	# `jump` was moved to _compute_velocity to only be triggered with orbs and pads
+	# _spider_state_machine.travel("jump")
+	if _is_dashing or (_get_jump_state() == -1 and not is_on_floor() and not is_on_ceiling() and not is_on_wall()):
+		_spider_state_machine.travel("fall")
+	elif _speed_multiplier >= GDInteractible.SPEEDS[GDInteractible.SpeedPortal.SPEED_4X]:
+		_spider_animation_tree["parameters/run/PlayerSpeed/scale"] = _speed_multiplier/GDInteractible.SPEEDS[GDInteractible.SpeedPortal.SPEED_4X]
+		_spider_state_machine.travel("run")
+	elif _speed_multiplier == GDInteractible.SPEEDS[GDInteractible.SpeedPortal.SPEED_0X] or LevelManager.platformer:
+		_spider_state_machine.travel("idle")
+	else:
+		_spider_animation_tree["parameters/walk/PlayerSpeed/scale"] = _speed_multiplier
+		_spider_state_machine.travel("walk")
 
 func _player_death() -> void:
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), true)

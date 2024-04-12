@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://db7ebleody4s3"]
+[gd_scene load_steps=21 format=3 uid="uid://db7ebleody4s3"]
 
 [ext_resource type="Script" path="res://src/GameScene.gd" id="1_k47tp"]
 [ext_resource type="Texture2D" uid="uid://djstmwdco77pp" path="res://assets/textures/backgrounds/background1-3.png" id="2_i4f6q"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://src/PlayerCamera.gd" id="7_vnv5l"]
 [ext_resource type="PackedScene" uid="uid://th7jwdop3hdv" path="res://scenes/components/game_components/PauseMenu.tscn" id="9_vv033"]
 [ext_resource type="Shader" path="res://resources/shaders/Grayscale.gdshader" id="10_tgbxk"]
+[ext_resource type="Shader" path="res://resources/shaders/LensCircle.gdshader" id="11_bdlmb"]
+[ext_resource type="Shader" path="res://resources/shaders/Sepia.gdshader" id="11_yix40"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y3ubx"]
 size = Vector2(4096, 20)
@@ -24,7 +26,18 @@ blend_mode = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fr71x"]
 shader = ExtResource("10_tgbxk")
-shader_parameter/grayscale_factor = 0.0
+shader_parameter/grayscale_factor = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ussf4"]
+shader = ExtResource("11_bdlmb")
+shader_parameter/scale = Vector2(1, 1)
+shader_parameter/alpha = 1.0
+shader_parameter/inner_radius = 0.0
+shader_parameter/outer_radius = 0.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yg2l0"]
+shader = ExtResource("11_yix40")
+shader_parameter/base = Color(0.952941, 0.666667, 0.364706, 1)
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_k47tp")
@@ -139,7 +152,34 @@ script = ExtResource("7_vnv5l")
 layer = 50
 
 [node name="Grayscale" type="ColorRect" parent="ShaderLayer"]
+visible = false
 material = SubResource("ShaderMaterial_fr71x")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LensCircle" type="ColorRect" parent="ShaderLayer"]
+visible = false
+material = SubResource("ShaderMaterial_ussf4")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1280.0
+offset_top = -638.0
+offset_right = 640.0
+offset_bottom = 1282.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(960, 960)
+
+[node name="Sepia" type="ColorRect" parent="ShaderLayer"]
+visible = false
+material = SubResource("ShaderMaterial_yg2l0")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

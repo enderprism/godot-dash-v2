@@ -5,6 +5,15 @@ class_name GDInteractible
 const CIRCLE_EFFECT_GROW_DURATION: float = 0.25
 const CIRCLE_EFFECT_GROW_SIZE: Vector2 = Vector2(2.0/4, 2.0/4)
 const REBOUND_VELOCITY_SETTER_THRESHOLD: float = 20.0
+const SPEEDS: Dictionary = {
+	SpeedPortal.SPEED_1X: 1.0,
+	SpeedPortal.SPEED_2X: 1.243,
+	SpeedPortal.SPEED_3X: 1.502,
+	SpeedPortal.SPEED_4X: 1.849,
+	SpeedPortal.SPEED_5X: 2.431,
+	SpeedPortal.SPEED_0X: 0.0,
+	SpeedPortal.SPEED_05X: 0.807,
+}
 
 #region enums
 enum Orb {
@@ -162,6 +171,7 @@ func _process(delta: float) -> void:
 				$Sprite.global_rotation = _player._gameplay_rotation
 			elif _orb_type == Orb.BLACK or _orb_type == Orb.GREEN:
 				$Sprite.global_rotation += 5 * delta
+
 		if object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT \
 				or object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.TELEPORTAL:
 			$TargetLink.hide()
@@ -201,7 +211,7 @@ func _process(delta: float) -> void:
 		and object_type == ObjectType.GAMEMODE_PORTAL \
 		or (object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.GRAVITY_PORTAL):
 		if not Engine.is_editor_hint() and LevelManager.player_camera != null:
-			if _other_portal_type == OtherPortal.GRAVITY_PORTAL:
+			if object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.GRAVITY_PORTAL:
 				$Sprites/IndicatorIcon.global_rotation = LevelManager.player._gameplay_rotation
 			else:
 				$Sprites/IndicatorIcon.global_rotation = LevelManager.player_camera.rotation
@@ -229,22 +239,9 @@ func _on_player_enter(_body: Node2D) -> void:
 	elif object_type == ObjectType.SPEED_PORTAL:
 		set_deferred("monitoring", _multi_usage)
 		_pulse_white_start()
-		match _speed_portal_type:
-			SpeedPortal.SPEED_1X:
-				_player._speed_multiplier = 1.0
-			SpeedPortal.SPEED_2X:
-				_player._speed_multiplier = 1.243
-			SpeedPortal.SPEED_3X:
-				_player._speed_multiplier = 1.502
-			SpeedPortal.SPEED_4X:
-				_player._speed_multiplier = 1.849
-			SpeedPortal.SPEED_5X:
-				_player._speed_multiplier = 2.431
-			SpeedPortal.SPEED_0X:
-				_player._speed_multiplier = 0.0
-				_0x_speed_centering_player = true
-			SpeedPortal.SPEED_05X:
-				_player._speed_multiplier = 0.807
+		_player._speed_multiplier = SPEEDS[_speed_portal_type]
+		if _speed_portal_type == SpeedPortal.SPEED_0X:
+			_0x_speed_centering_player = true
 	elif object_type == ObjectType.OTHER_PORTAL:
 		set_deferred("monitoring", _multi_usage)
 		_pulse_shrink()

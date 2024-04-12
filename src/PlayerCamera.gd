@@ -34,7 +34,8 @@ func _process(_delta: float) -> void:
 	# limit_bottom = DEFAULT_LIMIT_BOTTOM - int(offset.y)
 	if get_parent().has_level_started:
 		_player_distance = player.position - position
-		_previous_position = position
+		_delta_position = get_screen_center_position() - _previous_position
+		_previous_position = get_screen_center_position()
 
 		# I'd love to use Vector2.rotated all over the place but it only works well with deltas, and here I change the position directly.
 		# If you find out how to use a position and offset delta instead, make sure to open a PR!
@@ -71,4 +72,3 @@ func _process(_delta: float) -> void:
 			MAX_HEIGHT,
 		)
 
-		_delta_position = position - _previous_position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cinyg32n0bonm"]
+[gd_scene load_steps=28 format=3 uid="uid://cinyg32n0bonm"]
 
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/GDFadeScreen.tscn" id="1_e44lk"]
 [ext_resource type="Texture2D" uid="uid://dewrklmfoeg7m" path="res://assets/textures/grounds/ground-1.png" id="2_5u8e8"]
@@ -23,8 +23,6 @@
 [ext_resource type="Texture2D" uid="uid://docsh85xkmade" path="res://assets/textures/guis/level_selector/LevelSelectorPrevious.png" id="15_7mwgk"]
 [ext_resource type="Texture2D" uid="uid://bswqhh121flny" path="res://assets/textures/guis/level_selector/LevelSelectorNext.png" id="16_btcin"]
 [ext_resource type="PackedScene" uid="uid://dfde2ns6le0wd" path="res://scenes/components/game_components/GDPhantomCamera2DHistory.tscn" id="16_dgsi1"]
-[ext_resource type="PackedScene" uid="uid://2ie2uex1m8mb" path="res://scenes/levels/DashV2.tscn" id="17_vj3ol"]
-[ext_resource type="PackedScene" uid="uid://pks0qdd1moi8" path="res://scenes/levels/DashV3.tscn" id="19_glr6u"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_stpof"]
 blend_mode = 1
@@ -234,6 +232,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(960, 540)
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="LevelSelector"]
 
@@ -317,16 +316,17 @@ metadata/_edit_group_ = true
 
 [node name="Dash V2" parent="LevelSelector/PageContainer" instance=ExtResource("14_ade78")]
 layout_mode = 2
-selected_level = ExtResource("17_vj3ol")
+selected_level = "res://scenes/levels/DashV2.tscn"
 
 [node name="Dash V3" parent="LevelSelector/PageContainer" instance=ExtResource("14_ade78")]
 self_modulate = Color(1, 0.105882, 0.92549, 1)
 layout_mode = 2
-selected_level = ExtResource("19_glr6u")
+selected_level = "res://scenes/levels/imported/Dash.tscn"
 
-[node name="Dash V4" parent="LevelSelector/PageContainer" instance=ExtResource("14_ade78")]
+[node name="SpiderTest" parent="LevelSelector/PageContainer" instance=ExtResource("14_ade78")]
 self_modulate = Color(1, 0.784314, 0, 1)
 layout_mode = 2
+selected_level = "res://scenes/levels/imported/SpiderTest.tscn"
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(961, -540)
@@ -418,6 +418,7 @@ limit/smoothed = false
 tween_parameters = SubResource("Resource_assks")
 tween_on_load = true
 inactive_update_mode = 0
+metadata/_edit_lock_ = true
 
 [node name="CreatedLevelsListCamera" type="Node2D" parent="."]
 position = Vector2(2880, 540)

@@ -3,27 +3,37 @@ extends Node2D
 class_name tGameplayRotate
 
 
-@export_range(-360, 360, 0.01, "or_greater", "or_less", "degrees" ) var _rotation_degrees: float
+@export_range(-360, 360, 0.01, "or_greater", "or_less", "degrees" ) var _rotation_degrees: float:
+	set(value):
+		_rotation_degrees = value
+		if _indicator != null: _indicator.queue_redraw()
 @export var _flip: bool
 @export var _reverse: bool
-@export var _set_velocity: bool:
-	set(value):
-		_set_velocity = value
-		notify_property_list_changed()
+# @export var _set_velocity: bool:
+# 	set(value):
+# 		_set_velocity = value
+# 		notify_property_list_changed()
 # @export var _new_velocity: Vector2
 
-func _validate_property(property: Dictionary) -> void:
-	if property.name == "_new_velocity" and not _set_velocity:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
+# func _validate_property(property: Dictionary) -> void:
+# 	if property.name == "_new_velocity" and not _set_velocity:
+# 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 var _player: Player # Not useful in itself, but it provides autocompletion.
 var _base: tBase
 var _easing: tEasing
 var _initial_global_rotation_degrees: float
 var _setup: tSetup
+var _indicator: tGameplayRotateIndicator
 
 func _ready() -> void:
 	_setup = tSetup.new(self, false)
+	if !has_node("Indicator"):
+		_indicator = tGameplayRotateIndicator.new()
+		_indicator.name = "Indicator"
+		add_child(_indicator)
+		_setup._set_child_owner(self, _indicator)
+	else: _indicator = $Indicator
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/GameplayRotate.svg"))
 	_player = LevelManager.player
 
@@ -47,7 +57,8 @@ func _process(_delta: float) -> void:
 			if _easing._duration > 0.0:
 				var _weight_delta: float = _easing._get_weight_delta()
 				var _rotation_delta: float = (_rotation_degrees - _initial_global_rotation_degrees) * _weight_delta
-				_player._gameplay_rotation_degrees += _rotation_delta
+				_player._gameplay_rotation_degrees = lerp(_initial_global_rotation_degrees, _rotation_degrees, _easing._weight)
+				_player.get_node("DashFlame").rotation_degrees += _rotation_delta
 				_player.velocity = _player.velocity.rotated(deg_to_rad(_rotation_delta))
 		else:
 			printerr("In ", name, ": _player is unset")
