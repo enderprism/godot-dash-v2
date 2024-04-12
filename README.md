@@ -4,6 +4,7 @@
 </p>
 
 A Geometry Dash fangame made with Godot Engine. This is V2, a full rewrite of the project.
+
 I won't link to Godot Dash V1 because people it's buggy, unpolished and Android is broken.
 
 ## OS Support
