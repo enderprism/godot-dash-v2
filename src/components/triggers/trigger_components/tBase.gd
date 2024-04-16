@@ -80,8 +80,7 @@ func _ready() -> void:
 	if not _multi_usage and not body_entered.is_connected(_disable): body_entered.connect(_disable)
 
 func _physics_process(_delta: float) -> void:
-	if not Engine.is_editor_hint() and not get_tree().is_debugging_collisions_hint():
-		_sprite.hide()
+	_sprite.visible = Engine.is_editor_hint() or (not Engine.is_editor_hint() and get_tree().is_debugging_collisions_hint())
 	if not get_parent() is tGameplayRotate:
 		_sprite.global_rotation = 0.0
 	_sprite.global_scale = Vector2.ONE/4

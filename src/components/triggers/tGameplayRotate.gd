@@ -36,6 +36,7 @@ func _ready() -> void:
 	else: _indicator = $Indicator
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/GameplayRotate.svg"))
 	_player = LevelManager.player
+	_indicator.visible = _base._sprite.visible
 
 func _start(_body: Node2D) -> void:
 	_player._gravity_multiplier = abs(_player._gravity_multiplier) * 1 if not _flip else -1
@@ -44,6 +45,7 @@ func _start(_body: Node2D) -> void:
 	if _easing._duration == 0.0:
 		_player._gameplay_rotation_degrees = _rotation_degrees
 		_player.velocity = _player.velocity.rotated(deg_to_rad(_rotation_degrees))
+		_indicator.hide()
 
 func _reset() -> void:
 	if _player != null:
@@ -59,10 +61,14 @@ func _process(_delta: float) -> void:
 				var _rotation_delta: float = (_rotation_degrees - _initial_global_rotation_degrees) * _weight_delta
 				_player._gameplay_rotation_degrees = lerp(_initial_global_rotation_degrees, _rotation_degrees, _easing._weight)
 				_player.get_node("DashFlame").rotation_degrees += _rotation_delta
+				_player.get_node("DashParticles").rotation_degrees += _rotation_delta
 				_player.velocity = _player.velocity.rotated(deg_to_rad(_rotation_delta))
+			if _easing._weight == 1.0:
+				_indicator.hide()
 		else:
 			printerr("In ", name, ": _player is unset")
 	if Engine.is_editor_hint() or LevelManager.in_editor or get_tree().is_debugging_collisions_hint():
+		if _indicator.visible: _indicator.queue_redraw()
 		_base._sprite.global_rotation_degrees = _rotation_degrees
 		_base._sprite.scale = Vector2.ONE/4
 		_base._sprite.flip_h = _reverse

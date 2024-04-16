@@ -36,12 +36,14 @@ const SPIDER_TRAIL: PackedScene = preload("res://scenes/components/game_componen
 const DASH_BOOM: PackedScene = preload("res://scenes/components/game_components/GDDashBoom.tscn")
 #endregion
 
-@export var gamemode: Gamemode:
+@export var displayed_gamemode: Gamemode:
 	set(value):
-		gamemode = value
+		displayed_gamemode = value
 		for icon in $Icon.get_children():
 			if icon.gamemode != value: icon.hide()
 			else: icon.show()
+@export var internal_gamemode: Gamemode
+
 
 @onready var _spider_animation_tree: AnimationTree = $Icon/Spider/SpiderStateMachine
 @onready var _spider_state_machine: AnimationNodeStateMachinePlayback = _spider_animation_tree["parameters/playback"]
@@ -60,12 +62,12 @@ var _mini: bool:
 		_mini = value
 		var _mini_scale: Vector2
 		if value:
-			_mini_scale = MINI_PLAYER_SCALE * WAVE_PLAYER_SCALE if gamemode == Gamemode.WAVE else MINI_PLAYER_SCALE
+			_mini_scale = MINI_PLAYER_SCALE * WAVE_PLAYER_SCALE if displayed_gamemode == Gamemode.WAVE else MINI_PLAYER_SCALE
 			create_tween().tween_property(self, "scale", _mini_scale, 0.25) \
 				.set_ease(Tween.EASE_OUT) \
 				.set_trans(Tween.TRANS_BACK)
 		else:
-			_mini_scale = Vector2.ONE * WAVE_PLAYER_SCALE if gamemode == Gamemode.WAVE else Vector2.ONE
+			_mini_scale = Vector2.ONE * WAVE_PLAYER_SCALE if displayed_gamemode == Gamemode.WAVE else Vector2.ONE
 			create_tween().tween_property(self, "scale", _mini_scale, 0.25) \
 				.set_ease(Tween.EASE_OUT) \
 				.set_trans(Tween.TRANS_BACK)
@@ -89,8 +91,9 @@ var _orb_queue: Array[GDInteractible]
 var _pad_queue: Array[GDInteractible]
 
 func _ready() -> void:
+	_stop_dash()
 	Engine.time_scale = 1.0
-	gamemode = Gamemode.CUBE
+	displayed_gamemode = Gamemode.CUBE
 	if not _dual_instance:
 		LevelManager.player = self
 
@@ -100,8 +103,8 @@ func _physics_process(delta: float) -> void:
 		up_direction = Vector2.UP.rotated(_gameplay_rotation) * sign(_gravity_multiplier)
 		_rotate_sprite_degrees(delta)
 		_update_wave_trail()
-		if gamemode == Gamemode.SPIDER: _update_spider_state_machine()
-		if gamemode == Gamemode.SWING: _update_swing_fire()
+		if displayed_gamemode == Gamemode.SPIDER: _update_spider_state_machine()
+		if displayed_gamemode == Gamemode.SWING: _update_swing_fire()
 		velocity = _compute_velocity(delta, velocity, _get_direction(), _get_jump_state())
 		move_and_slide()
 		if _last_spider_trail != null:
@@ -125,7 +128,7 @@ func _get_jump_state() -> int:
 	if Input.is_action_just_pressed("jump") and is_on_floor() and _in_j_block:
 		_in_j_block = false
 	if _click_buffer_state == ClickBufferState.NOT_HOLDING and Input.is_action_just_pressed("jump") and not (is_on_floor() or is_on_ceiling()) \
-		and gamemode != Gamemode.SHIP and gamemode != Gamemode.SWING and gamemode != Gamemode.WAVE:
+		and internal_gamemode != Gamemode.SHIP and internal_gamemode != Gamemode.SWING and internal_gamemode != Gamemode.WAVE:
 		_click_buffer_state = ClickBufferState.BUFFERING
 	if _click_buffer_state == ClickBufferState.BUFFERING and not _orb_queue.is_empty():
 		_click_buffer_state = ClickBufferState.JUMPING
@@ -133,19 +136,19 @@ func _get_jump_state() -> int:
 		_click_buffer_state = ClickBufferState.NOT_HOLDING
 	if _in_j_block:
 		jump_state = -1
-	elif gamemode == Gamemode.CUBE:
+	elif internal_gamemode == Gamemode.CUBE:
 		jump_state = 1 if (Input.is_action_pressed("jump") and (is_on_floor() or is_on_ceiling())) else -1
-	elif gamemode == Gamemode.ROBOT:
+	elif internal_gamemode == Gamemode.ROBOT:
 		if Input.is_action_just_pressed("jump") and (is_on_floor() or is_on_ceiling()):
 			$RobotTimer.start(0.25)
 		if Input.is_action_just_released("jump"):
 			$RobotTimer.stop()
 		jump_state = 1 if Input.is_action_pressed("jump") and $RobotTimer.get_time_left() > 0 else -1
-	elif gamemode == Gamemode.SHIP or gamemode == Gamemode.WAVE:
+	elif internal_gamemode == Gamemode.SHIP or internal_gamemode == Gamemode.WAVE:
 		jump_state = 1 if Input.is_action_pressed("jump") else -1
-	elif gamemode == Gamemode.UFO or gamemode == Gamemode.SWING:
+	elif internal_gamemode == Gamemode.UFO or internal_gamemode == Gamemode.SWING:
 		jump_state = 1 if Input.is_action_just_pressed("jump") else -1
-	elif gamemode == Gamemode.BALL or gamemode == Gamemode.SPIDER:
+	elif internal_gamemode == Gamemode.BALL or internal_gamemode == Gamemode.SPIDER:
 		jump_state = 1 if (Input.is_action_just_pressed("jump") and (is_on_floor() or is_on_ceiling())) else -1
 	return jump_state
 
@@ -155,27 +158,27 @@ func _compute_velocity(_delta: float,
 		) -> Vector2:
 	var _velocity: Vector2 = _previous_velocity.rotated(-_gameplay_rotation)
 	var _speed: Vector2 = SPEED if not _mini else SPEED_MINI
-	_is_flying_gamemode = (gamemode == Gamemode.SHIP or gamemode == Gamemode.SWING or gamemode == Gamemode.WAVE)
+	_is_flying_gamemode = (internal_gamemode == Gamemode.SHIP or internal_gamemode == Gamemode.SWING or internal_gamemode == Gamemode.WAVE)
 	
 	if _spider_jump_invulnerability_frames > 0: _spider_jump_invulnerability_frames -= 1
 
-	if (gamemode == Gamemode.SWING or gamemode == Gamemode.BALL) and _jump_state == 1 and _orb_queue.is_empty():
+	if (internal_gamemode == Gamemode.SWING or internal_gamemode == Gamemode.BALL) and _jump_state == 1 and _orb_queue.is_empty():
 		_gravity_multiplier *= -1
 
 	#region Apply Gravity
 	if not _is_dashing:
-		if gamemode == Gamemode.SHIP:
+		if internal_gamemode == Gamemode.SHIP:
 			_velocity.y += GRAVITY * _delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * _jump_state * -1 * FLY_GRAVITY_MULTIPLIER
 			_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
-		elif gamemode == Gamemode.SWING:
+		elif internal_gamemode == Gamemode.SWING:
 			_velocity.y += GRAVITY * _delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * FLY_GRAVITY_MULTIPLIER
 			_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
-		elif gamemode == Gamemode.WAVE:
+		elif internal_gamemode == Gamemode.WAVE:
 			_velocity.y = SPEED.x * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * _jump_state * -1
 			if _speed_multiplier > 0: _velocity.y *= _speed_multiplier
 			if _mini: _velocity.y *= 2
 		elif not is_on_floor():
-			if gamemode == Gamemode.UFO:
+			if internal_gamemode == Gamemode.UFO:
 				_velocity.y += GRAVITY * _delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * UFO_GRAVITY_MULTIPLIER
 			else:
 				_velocity.y += GRAVITY * _delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier
@@ -189,7 +192,7 @@ func _compute_velocity(_delta: float,
 	if not _pad_queue.is_empty():
 		var _colliding_pad: GDInteractible = _pad_queue.pop_front()
 		_colliding_pad._set_reverse(_colliding_pad._reverse)
-		if gamemode != Gamemode.WAVE:
+		if internal_gamemode != Gamemode.WAVE:
 			if _colliding_pad._pad_type == GDInteractible.Pad.YELLOW:
 				_velocity.y = -_speed.y * (277.0/194.0)
 			elif _colliding_pad._pad_type == GDInteractible.Pad.PINK:
@@ -208,23 +211,23 @@ func _compute_velocity(_delta: float,
 			_last_spider_trail_height = abs(_get_spider_velocity_delta()/_last_spider_trail.SPIDER_TRAIL_HEIGHT)
 		elif _colliding_pad._pad_type == GDInteractible.Pad.BLUE:
 			_gravity_multiplier *= -1
-			_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier * _gameplay_trigger_gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
+			_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier * _gameplay_trigger_gravity_multiplier if not displayed_gamemode == Gamemode.WAVE else 0.0
 	#endregion
 
 	# Handle jump.
 	if _jump_state == 1 and _pad_queue.is_empty() and _orb_queue.is_empty():
 		if _is_flying_gamemode:
 			pass
-		elif gamemode == Gamemode.SPIDER:
+		elif internal_gamemode == Gamemode.SPIDER:
 			_gravity_multiplier *= -1
 			_velocity.y = _get_spider_velocity_delta() * 1/_delta
 			# _spider_jump_invulnerability_frames = 2
 			_last_spider_trail_height = abs(_get_spider_velocity_delta()/_last_spider_trail.SPIDER_TRAIL_HEIGHT)
-		elif gamemode == Gamemode.BALL:
+		elif internal_gamemode == Gamemode.BALL:
 			_velocity.y = _speed.y * _gravity_multiplier * 0.5
-		elif gamemode == Gamemode.ROBOT:
+		elif internal_gamemode == Gamemode.ROBOT:
 			_velocity.y = SPEED.x * _gravity_multiplier * -1
-		elif gamemode == Gamemode.UFO:
+		elif internal_gamemode == Gamemode.UFO:
 			_velocity.y = -_speed.y * _gravity_multiplier * UFO_GRAVITY_MULTIPLIER
 		else:
 			_velocity.y = -_speed.y * _gravity_multiplier
@@ -232,6 +235,7 @@ func _compute_velocity(_delta: float,
 	#region Dashing
 	if _is_dashing:
 		$DashFlame.visible = true
+		$DashParticles.emitting = true
 		$DashFlame.scale.x = abs($DashFlame.scale.x) * _direction
 		if (is_on_floor() and sin(_dash_orb_rotation) > 0) or (is_on_ceiling() and sin(_dash_orb_rotation) < 0):
 			_velocity.y = 0
@@ -256,7 +260,7 @@ func _compute_velocity(_delta: float,
 		_colliding_orb._pulse_shrink()
 		_colliding_orb._set_reverse(_colliding_orb._reverse)
 		_click_buffer_state = ClickBufferState.BUFFER_USED
-		if gamemode != Gamemode.WAVE:
+		if displayed_gamemode != Gamemode.WAVE:
 			if _colliding_orb._orb_type == GDInteractible.Orb.YELLOW:
 				_velocity.y = -_speed.y * (191.0/194.0)
 			if _colliding_orb._orb_type == GDInteractible.Orb.PINK:
@@ -267,7 +271,7 @@ func _compute_velocity(_delta: float,
 				_velocity.y = -_speed.y * -(260.0/194.0)
 			if _colliding_orb._orb_type == GDInteractible.Orb.REBOUND:
 				_velocity.y = -_rebound_velocity
-			if gamemode == Gamemode.SPIDER:
+			if displayed_gamemode == Gamemode.SPIDER:
 				_spider_state_machine.travel("jump")
 		# These orbs are supposed to work with the wave
 		if _colliding_orb._orb_type == GDInteractible.Orb.SPIDER:
@@ -279,12 +283,12 @@ func _compute_velocity(_delta: float,
 			_in_j_block = true
 		if _colliding_orb._orb_type == GDInteractible.Orb.BLUE:
 			_gravity_multiplier *= -1
-			_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier * _gameplay_trigger_gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
+			_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier * _gameplay_trigger_gravity_multiplier if not displayed_gamemode == Gamemode.WAVE else 0.0
 		if _colliding_orb._orb_type == GDInteractible.Orb.GREEN:
-			if gamemode == Gamemode.SPIDER:
+			if displayed_gamemode == Gamemode.SPIDER:
 				_spider_state_machine.travel("jump")
 			_gravity_multiplier *= -1
-			_velocity.y = -_speed.y * (191.0/194.0) * _gravity_multiplier * _gameplay_trigger_gravity_multiplier if not gamemode == Gamemode.WAVE else 0.0
+			_velocity.y = -_speed.y * (191.0/194.0) * _gravity_multiplier * _gameplay_trigger_gravity_multiplier if not displayed_gamemode == Gamemode.WAVE else 0.0
 		if _colliding_orb._orb_type == GDInteractible.Orb.DASH_GREEN:
 			_colliding_orb._set_dash_props()
 			var _last_dash_boom = DASH_BOOM.instantiate()
@@ -411,18 +415,22 @@ func _update_wave_trail() -> void:
 	else:
 		$WaveTrail.width = lerpf($WaveTrail.width, WAVE_TRAIL_WIDTH * MINI_PLAYER_SCALE.y, 0.25)
 		$WaveTrail2.width = lerpf($WaveTrail2.width, WAVE_TRAIL_WIDTH * MINI_PLAYER_SCALE.y * 0.5, 0.25)
-	# $WaveTrail.visible = gamemode == Gamemode.WAVE
-	# $WaveTrail2.visible = gamemode == Gamemode.WAVE
-	if gamemode == Gamemode.WAVE:
+	# $WaveTrail.visible = displayed_gamemode == Gamemode.WAVE
+	# $WaveTrail2.visible = displayed_gamemode == Gamemode.WAVE
+	if internal_gamemode == Gamemode.WAVE or displayed_gamemode == Gamemode.WAVE:
+		$WaveTrail.modulate.a = 1.0
+		$WaveTrail2.modulate.a = 1.0
 		$WaveTrail.length = lerpf($WaveTrail.length, WAVE_TRAIL_LENGTH, 0.2)
 		$WaveTrail2.length = lerpf($WaveTrail.length, WAVE_TRAIL_LENGTH, 0.2)
 	else:
 		$WaveTrail.length = 0
 		$WaveTrail2.length = 0
-		for i in range(2):
-			if $WaveTrail.get_point_count() > $WaveTrail.length:
-				$WaveTrail.remove_point($WaveTrail.get_point_count() - 1)
-				$WaveTrail2.remove_point($WaveTrail2.get_point_count() - 1)
+		$WaveTrail.modulate.a = lerpf($WaveTrail.modulate.a, 0.0, 0.1)
+		$WaveTrail2.modulate.a = lerpf($WaveTrail.modulate.a, 0.0, 0.1)
+		# for i in range(2):
+		# 	if $WaveTrail.get_point_count() > $WaveTrail.length:
+		# 		$WaveTrail.remove_point($WaveTrail.get_point_count() - 2)
+		# 		$WaveTrail2.remove_point($WaveTrail2.get_point_count() - 2)
 
 func _get_spider_velocity_delta() -> float:
 	var _target_position = $Icon/Spider/SpiderCast.get_collision_point(0)
@@ -470,3 +478,4 @@ func _stop_dash() -> void:
 	_is_dashing = false
 	_dash_orb_rotation = 0.0
 	$DashFlame.hide()
+	$DashParticles.emitting = false

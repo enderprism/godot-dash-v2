@@ -5,3 +5,5 @@
 .vscode/
 
 scenes/levels/imported
+
+assets/sounds/music/level_music/*

@@ -113,6 +113,9 @@ enum HorizontalDirection {
 # @@show_if(object_type == ObjectType.GAMEMODE_PORTAL)
 @export var _freefly: bool = true
 
+# @@show_if(object_type == ObjectType.GAMEMODE_PORTAL)
+# @export var _keep_displayed_gamemode: bool = false
+
 # @@show_if(object_type == ObjectType.ORB and _orb_type == Orb.TOGGLE)
 @export var _toggled_groups: Array[gToggledGroup]
 
@@ -233,7 +236,8 @@ func _on_player_enter(_body: Node2D) -> void:
 		set_deferred("monitoring", _multi_usage)
 		_pulse_shrink()
 		_pulse_white_start()
-		LevelManager.player.gamemode = _gamemode_portal_type
+		LevelManager.player.internal_gamemode = _gamemode_portal_type
+		LevelManager.player.displayed_gamemode = _gamemode_portal_type
 		_player_camera._freefly = _freefly
 		_player._mini = _player._mini
 	elif object_type == ObjectType.SPEED_PORTAL:

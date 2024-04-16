@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://bl48psvuka73y"]
+[gd_scene load_steps=103 format=3 uid="uid://bl48psvuka73y"]
 
 [ext_resource type="Script" path="res://src/Player.gd" id="1_nvqsc"]
 [ext_resource type="Texture2D" uid="uid://omcvgcf1uk5p" path="res://assets/textures/player/cube/Cube.svg" id="2_6ab5b"]
@@ -41,6 +41,37 @@
 [ext_resource type="Texture2D" uid="uid://bxf2eny7xic88" path="res://assets/textures/player/spider/Spider.svg" id="20_bb8qe"]
 [ext_resource type="Texture2D" uid="uid://dnl23vymdbygl" path="res://assets/textures/player/spider/Parts/Spider_Leg-glow.svg" id="21_fajhm"]
 [ext_resource type="Texture2D" uid="uid://dyu6awwvh1u7c" path="res://assets/textures/player/spider/Parts/Spider_Leg.svg" id="22_2ro0i"]
+
+[sub_resource type="Gradient" id="Gradient_locq2"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_81vt3"]
+gradient = SubResource("Gradient_locq2")
+
+[sub_resource type="Curve" id="Curve_rn54d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_serl0"]
+curve = SubResource("Curve_rn54d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1h32q"]
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(0, 64, 1)
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 32.0
+initial_velocity_max = 32.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_serl0")
+color_ramp = SubResource("GradientTexture1D_81vt3")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_whmfp"]
 animations = [{
@@ -1807,6 +1838,13 @@ platform_on_leave = 1
 platform_floor_layers = 4294901802
 script = ExtResource("1_nvqsc")
 
+[node name="DashParticles" type="GPUParticles2D" parent="."]
+modulate = Color(0, 1, 1, 1)
+material = ExtResource("5_dvha5")
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_1h32q")
+texture = ExtResource("5_qm8k0")
+
 [node name="DashFlame" type="AnimatedSprite2D" parent="."]
 visible = false
 modulate = Color(0, 1, 1, 1)
@@ -1814,7 +1852,7 @@ material = ExtResource("5_dvha5")
 scale = Vector2(1.3, 1.3)
 sprite_frames = SubResource("SpriteFrames_whmfp")
 autoplay = "default"
-frame_progress = 0.0377119
+frame_progress = 0.144669
 offset = Vector2(-96, 0)
 
 [node name="WaveTrail" type="Line2D" parent="."]
@@ -2099,7 +2137,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 antialiased = true
 script = ExtResource("2_s0etf")
-length = 250
+length = 0
 
 [node name="DeathAnimator" type="AnimationPlayer" parent="."]
 process_mode = 1

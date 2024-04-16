@@ -302,6 +302,7 @@ script = ExtResource("11_w8j1w")
 _hitbox_height = 2.0
 
 [node name="Indicator" type="Node2D" parent="tGameplayRotate"]
+visible = false
 show_behind_parent = true
 script = ExtResource("17_jvq2b")
 
@@ -322,6 +323,7 @@ _hitbox_height = 1.0
 _multi_usage = true
 
 [node name="Indicator" type="Node2D" parent="tGameplayRotate2"]
+visible = false
 show_behind_parent = true
 rotation = -1.57079
 script = ExtResource("17_jvq2b")

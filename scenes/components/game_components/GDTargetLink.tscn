@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://src/components/GDTargetLink.gd" id="2_h3omo"]
 
 [node name="TargetLink" type="Line2D"]
+show_behind_parent = true
 texture_repeat = 2
 width = 50.0
 default_color = Color(1, 0, 1, 1)
