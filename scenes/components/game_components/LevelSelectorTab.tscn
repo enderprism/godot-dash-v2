@@ -80,7 +80,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TabCenter" type="Marker2D" parent="."]
-position = Vector2(1920, 540)
+position = Vector2(960, 540)
 gizmo_extents = 64.0
 
 [node name="LevelSelectorTabCamera" type="Node2D" parent="TabCenter"]
