@@ -1,4 +1,4 @@
-extends Control
+@tool extends Control
 
 @export_file("*.tscn") var selected_level
 
