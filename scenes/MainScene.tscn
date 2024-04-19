@@ -201,12 +201,13 @@ inactive_update_mode = 0
 metadata/_edit_lock_ = true
 
 [node name="IconGarage" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -3840.0
-offset_right = -3840.0
+offset_left = -1920.0
+offset_right = -1920.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -268,8 +269,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 3840.0
-offset_right = 3840.0
+offset_left = 1920.0
+offset_right = 1920.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -333,7 +334,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1080.0
-offset_right = 7680.0
+offset_right = 3840.0
 offset_bottom = -1080.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -467,7 +468,7 @@ inactive_update_mode = 0
 metadata/_edit_lock_ = true
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(1920, 540)
+position = Vector2(960, 540)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera"]
 script = ExtResource("6_0wc6k")
