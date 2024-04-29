@@ -26,48 +26,54 @@ func _validate_property(property: Dictionary) -> void:
 	if property.name in ["_copy_target", "_copy_offset"] and _mode != Mode.COPY:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
-var _target: Node2D
+var _targets: Array[Node]
+var _initial_positions: Array[Vector2]
 var _base: tBase
 var _easing: tEasing
 var _target_link: GDTargetLink
-var _initial_global_position: Vector2
 var _setup: tSetup
 
 func _ready() -> void:
 	_setup = tSetup.new(self, true)
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/Move.svg"))
-	_target = _base._target
+	_targets = get_tree().get_nodes_in_group(_base._target_group)
 
 func _update_target_link() -> void:
-	_target_link._target = _base._target
+	_target_link._target = _targets[0]
 
 func _start(_body: Node2D) -> void:
 	if _easing._is_inactive():
-		if _target != null:
-			_initial_global_position = _target.global_position
+		if not _targets.is_empty():
+			for i in range(len(_targets)):
+				_initial_positions.resize(len(_targets))
+				_initial_positions[i] = _targets[i].global_position
 		else:
 			printerr("In ", name, ": _base._target is unset")
 
 func _reset() -> void:
-	if _target != null:
-		_target.global_position = _initial_global_position
+	if not _targets.is_empty():
+		for i in range(len(_targets)):
+			_targets[i].global_position = _initial_positions[i]
 	else:
 		printerr("In ", name, ": _target is unset")
 
 func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(_easing._weight):
-		if _base._target != null:
+		if not _targets.is_empty():
 			var _weight_delta = _easing._get_weight_delta()
-			match _mode:
-				Mode.SET:
-					_target.global_position += (owner.to_global(_set_position) - _initial_global_position) * _weight_delta
-				Mode.ADD:
-					_target.global_position += _add_position * _weight_delta
-				Mode.COPY:
-					if _copy_target != null:
-						_target.global_position = lerp(_initial_global_position, _copy_target.global_position + _copy_offset, _easing._weight)
-					else:
-						printerr("In ", name, ": copy_target is unset!")
+			for i in range(len(_targets)):
+				var _target = _targets[i]
+				var _initial_global_position = _initial_positions[i]
+				match _mode:
+					Mode.SET:
+						_target.global_position += (owner.to_global(_set_position) - _initial_global_position) * _weight_delta
+					Mode.ADD:
+						_target.global_position += _add_position * _weight_delta
+					Mode.COPY:
+						if _copy_target != null:
+							_target.global_position = lerp(_initial_global_position, _copy_target.global_position + _copy_offset, _easing._weight)
+						else:
+							printerr("In ", name, ": copy_target is unset!")
 		else:
 			printerr("In ", name, ": _target is unset")
 	elif Engine.is_editor_hint() or LevelManager.in_editor:

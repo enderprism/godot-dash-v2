@@ -93,11 +93,11 @@ song = ExtResource("2_gg6c8")
 song_start_time = 5.6
 metadata/_edit_lock_ = true
 
-[node name="PinkOrb" parent="." instance=ExtResource("4_7gr6s")]
+[node name="PinkOrb" parent="." groups=["orb1"] instance=ExtResource("4_7gr6s")]
 position = Vector2(704, -192)
 _freefly = false
 
-[node name="PinkOrb2" parent="." instance=ExtResource("4_7gr6s")]
+[node name="PinkOrb2" parent="." groups=["orb2"] instance=ExtResource("4_7gr6s")]
 position = Vector2(1088, -320)
 _freefly = false
 
@@ -105,7 +105,7 @@ _freefly = false
 position = Vector2(0, -64)
 _freefly = false
 
-[node name="SpiderPortal" parent="." instance=ExtResource("3_iu2ry")]
+[node name="SpiderPortal" parent="." groups=["spiderportal"] instance=ExtResource("3_iu2ry")]
 position = Vector2(1472, -576)
 _freefly = false
 
@@ -125,7 +125,7 @@ scale = Vector2(6, 1)
 position = Vector2(2176, -960)
 scale = Vector2(10, 1)
 
-[node name="DefaultCube7" parent="." instance=ExtResource("5_g4mtk")]
+[node name="DefaultCube7" parent="." groups=["colon_jumpscare_wall"] instance=ExtResource("5_g4mtk")]
 position = Vector2(1472, -1216)
 scale = Vector2(1, 5)
 
@@ -155,6 +155,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../DefaultCube7")
+_target_group = &"colon_jumpscare_wall"
 _multi_usage = true
 
 [node name="SpawnTargetLink" parent="tMove" instance=ExtResource("6_bolvq")]
@@ -182,6 +183,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../FloorButton")
+_target_group = &"floorbutton1"
 _multi_usage = true
 
 [node name="DefaultCube9" parent="." instance=ExtResource("5_g4mtk")]
@@ -190,58 +192,54 @@ z_index = 5
 position = Vector2(2880, -224)
 scale = Vector2(3, 0.5)
 
-[node name="BallPortalWithPads" type="Marker2D" parent="."]
-position = Vector2(2880, 0)
-gizmo_extents = 64.0
-metadata/_edit_group_ = true
-
-[node name="BallPortal" parent="BallPortalWithPads" instance=ExtResource("15_khho3")]
-position = Vector2(0, 192)
-rotation = 1.57079
-_freefly = false
-
-[node name="DefaultCube8" parent="BallPortalWithPads" instance=ExtResource("5_g4mtk")]
-z_index = 5
-position = Vector2(0, 288)
-scale = Vector2(3, 0.5)
-
-[node name="YellowPadWide" parent="BallPortalWithPads" instance=ExtResource("6_cufna")]
+[node name="YellowPadWide" parent="." instance=ExtResource("6_cufna")]
 visible = false
 z_index = 5
-position = Vector2(0, 192)
+position = Vector2(2880, -320)
 scale = Vector2(3, 1)
 _freefly = false
 
-[node name="YellowPadDisplay" parent="BallPortalWithPads" instance=ExtResource("6_cufna")]
+[node name="BallPortal" parent="." groups=["BallPortalWithPads"] instance=ExtResource("15_khho3")]
+position = Vector2(2880, 192)
+rotation = 1.57079
+_freefly = false
+
+[node name="DefaultCube11" parent="." groups=["BallPortalWithPads"] instance=ExtResource("5_g4mtk")]
 z_index = 5
-position = Vector2(-128, 192)
+position = Vector2(2880, 288)
+scale = Vector2(3, 0.5)
+
+[node name="YellowPadDisplay" parent="." groups=["BallPortalWithPads"] instance=ExtResource("6_cufna")]
+z_index = 5
+position = Vector2(2752, 192)
 collision_layer = 0
 collision_mask = 0
 monitoring = false
 monitorable = false
 _freefly = false
 
-[node name="YellowPadDisplay2" parent="BallPortalWithPads" instance=ExtResource("6_cufna")]
+[node name="YellowPadDisplay2" parent="." groups=["BallPortalWithPads"] instance=ExtResource("6_cufna")]
 z_index = 5
-position = Vector2(0, 192)
+position = Vector2(2880, 192)
 collision_layer = 0
 collision_mask = 0
 monitoring = false
 monitorable = false
 _freefly = false
 
-[node name="YellowPadDisplay3" parent="BallPortalWithPads" instance=ExtResource("6_cufna")]
+[node name="YellowPadDisplay3" parent="." groups=["BallPortalWithPads"] instance=ExtResource("6_cufna")]
 z_index = 5
-position = Vector2(128, 192)
+position = Vector2(3008, 192)
 collision_layer = 0
 collision_mask = 0
 monitoring = false
 monitorable = false
 _freefly = false
 
-[node name="tRotate" type="Node2D" parent="."]
+[node name="tRotate" type="Node2D" parent="." node_paths=PackedStringArray("_rotation_center")]
 position = Vector2(1342, -960)
 script = ExtResource("16_pj4c7")
+_rotation_center = NodePath("../SpiderPortal")
 _add_rotation_degrees = 180.0
 metadata/_edit_group_ = true
 
@@ -256,6 +254,7 @@ _easing_transition = 3
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../SpiderPortal")
+_target_group = &"spiderportal"
 _multi_usage = true
 
 [node name="tScale" type="Node2D" parent="."]
@@ -415,6 +414,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../PinkOrb")
+_target_group = &"orb1"
 
 [node name="SpawnTargetLink" parent="tMove2" instance=ExtResource("6_bolvq")]
 z_index = -50
@@ -440,6 +440,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../PinkOrb2")
+_target_group = &"orb2"
 
 [node name="tSpawn" type="Node2D" parent="."]
 position = Vector2(0, -576)
@@ -479,34 +480,8 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 1
 
-[node name="LowerSpike1" type="Node2D" parent="."]
-position = Vector2(2176, -1088)
-script = ExtResource("8_ml13a")
-_add_position = Vector2(0, 512)
-metadata/_edit_group_ = true
-
-[node name="TargetLink" parent="LowerSpike1" instance=ExtResource("6_bolvq")]
-z_index = -50
-
-[node name="tEasing" type="Node" parent="LowerSpike1"]
-script = ExtResource("10_srhyw")
-_duration = 0.5
-_easing_type = 0
-_easing_transition = 1
-
-[node name="tBase" type="Area2D" parent="LowerSpike1" node_paths=PackedStringArray("_target")]
-collision_layer = 16
-script = ExtResource("11_w8j1w")
-_hitbox_shape = 2
-_target = NodePath("../../Spike1")
-
-[node name="SpawnTargetLink" parent="LowerSpike1" instance=ExtResource("6_bolvq")]
-z_index = -50
-points = PackedVector2Array(128, 0, 0, 0)
-default_color = Color(0, 1, 1, 1)
-
 [node name="FloorButtonMove2" type="Node2D" parent="."]
-position = Vector2(2176, -1216)
+position = Vector2(2560, -1088)
 script = ExtResource("8_ml13a")
 _add_position = Vector2(64, 0)
 metadata/_edit_group_ = true
@@ -525,6 +500,33 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../FloorButton2")
+_target_group = &"floorbutton2"
+
+[node name="LowerSpike1" type="Node2D" parent="."]
+position = Vector2(2176, -1088)
+script = ExtResource("8_ml13a")
+_add_position = Vector2(0, 512)
+metadata/_edit_group_ = true
+
+[node name="TargetLink" parent="LowerSpike1" instance=ExtResource("6_bolvq")]
+z_index = -50
+
+[node name="tEasing" type="Node" parent="LowerSpike1"]
+script = ExtResource("10_srhyw")
+_duration = 0.5
+_easing_type = 0
+_easing_transition = 1
+
+[node name="tBase" type="Area2D" parent="LowerSpike1"]
+collision_layer = 16
+script = ExtResource("11_w8j1w")
+_hitbox_shape = 2
+_target_group = &"spike1"
+
+[node name="SpawnTargetLink" parent="LowerSpike1" instance=ExtResource("6_bolvq")]
+z_index = -50
+points = PackedVector2Array(128, 0, 0, 0)
+default_color = Color(0, 1, 1, 1)
 
 [node name="LowerSpike2" type="Node2D" parent="."]
 position = Vector2(2304, -1088)
@@ -541,11 +543,11 @@ _duration = 0.5
 _easing_type = 0
 _easing_transition = 1
 
-[node name="tBase" type="Area2D" parent="LowerSpike2" node_paths=PackedStringArray("_target")]
+[node name="tBase" type="Area2D" parent="LowerSpike2"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
-_target = NodePath("../../Spike2")
+_target_group = &"spike2"
 
 [node name="SpawnTargetLink" parent="LowerSpike2" instance=ExtResource("6_bolvq")]
 z_index = -50
@@ -567,52 +569,37 @@ _duration = 0.5
 _easing_type = 0
 _easing_transition = 1
 
-[node name="tBase" type="Area2D" parent="LowerSpike3" node_paths=PackedStringArray("_target")]
+[node name="tBase" type="Area2D" parent="LowerSpike3"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
-_target = NodePath("../../Spike3")
+_target_group = &"spike3"
 
 [node name="SpawnTargetLink" parent="LowerSpike3" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(-256, -128, 0, 0)
+points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
-[node name="Spike1" type="Marker2D" parent="."]
-position = Vector2(1856, -256)
-gizmo_extents = 64.0
-metadata/_edit_group_ = true
-
-[node name="DefaultCube3" parent="Spike1" instance=ExtResource("5_g4mtk")]
-position = Vector2(0, -96)
+[node name="DefaultCube5" parent="." groups=["spike1"] instance=ExtResource("5_g4mtk")]
+position = Vector2(1856, -352)
 scale = Vector2(1, 0.5)
 
-[node name="SpikeFlat" parent="Spike1" instance=ExtResource("12_sa2ab")]
-position = Vector2(0, -192)
+[node name="SpikeFlat" parent="." groups=["spike1"] instance=ExtResource("12_sa2ab")]
+position = Vector2(1856, -448)
 
-[node name="Spike2" type="Marker2D" parent="."]
-position = Vector2(1984, -256)
-gizmo_extents = 64.0
-metadata/_edit_group_ = true
-
-[node name="DefaultCube3" parent="Spike2" instance=ExtResource("5_g4mtk")]
-position = Vector2(0, -96)
+[node name="DefaultCube8" parent="." groups=["spike2"] instance=ExtResource("5_g4mtk")]
+position = Vector2(1984, -352)
 scale = Vector2(1, 0.5)
 
-[node name="SpikeFlat" parent="Spike2" instance=ExtResource("12_sa2ab")]
-position = Vector2(0, -192)
+[node name="SpikeFlat2" parent="." groups=["spike2"] instance=ExtResource("12_sa2ab")]
+position = Vector2(1984, -448)
 
-[node name="Spike3" type="Marker2D" parent="."]
-position = Vector2(2112, -256)
-gizmo_extents = 64.0
-metadata/_edit_group_ = true
-
-[node name="DefaultCube3" parent="Spike3" instance=ExtResource("5_g4mtk")]
-position = Vector2(0, -96)
+[node name="DefaultCube10" parent="." groups=["spike3"] instance=ExtResource("5_g4mtk")]
+position = Vector2(2112, -352)
 scale = Vector2(1, 0.5)
 
-[node name="SpikeFlat" parent="Spike3" instance=ExtResource("12_sa2ab")]
-position = Vector2(0, -192)
+[node name="SpikeFlat3" parent="." groups=["spike3"] instance=ExtResource("12_sa2ab")]
+position = Vector2(2112, -448)
 
 [node name="tCameraStatic2" type="Node2D" parent="."]
 position = Vector2(1984, -320)
@@ -660,14 +647,14 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 1
 
-[node name="FloorButton" parent="." instance=ExtResource("5_g4mtk")]
+[node name="FloorButton" parent="." groups=["floorbutton1"] instance=ExtResource("5_g4mtk")]
 modulate = Color(0, 0.419608, 1, 1)
 position = Vector2(1728, -864)
 scale = Vector2(1, 0.5)
 collision_layer = 0
 collision_mask = 0
 
-[node name="FloorButton2" parent="." instance=ExtResource("5_g4mtk")]
+[node name="FloorButton2" parent="." groups=["floorbutton2"] instance=ExtResource("5_g4mtk")]
 modulate = Color(0, 0.419608, 1, 1)
 position = Vector2(2144, -640)
 rotation = 1.5708
@@ -675,7 +662,7 @@ scale = Vector2(1, 0.5)
 collision_layer = 0
 collision_mask = 0
 
-[node name="FloorButton3" parent="." instance=ExtResource("5_g4mtk")]
+[node name="FloorButton3" parent="." groups=["floorbutton3"] instance=ExtResource("5_g4mtk")]
 modulate = Color(0, 0.419608, 1, 1)
 position = Vector2(2176, -160)
 rotation = -3.14159
@@ -698,11 +685,11 @@ _duration = 0.5
 _easing_type = 1
 _easing_transition = 1
 
-[node name="tBase" type="Area2D" parent="MoveBallPlatform" node_paths=PackedStringArray("_target")]
+[node name="tBase" type="Area2D" parent="MoveBallPlatform"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
-_target = NodePath("../../BallPortalWithPads")
+_target_group = &"BallPortalWithPads"
 _multi_usage = true
 
 [node name="FloorButtonMove3" type="Node2D" parent="."]
@@ -725,6 +712,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../FloorButton3")
+_target_group = &"floorbutton3"
 _multi_usage = true
 
 [node name="SpawnTargetLink" parent="FloorButtonMove3" instance=ExtResource("6_bolvq")]

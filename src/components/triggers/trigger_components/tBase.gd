@@ -30,6 +30,8 @@ enum TriggerHitboxShape {
 		_target = value
 		emit_signal("target_changed")
 
+@export var _target_group: StringName
+
 ## If the trigger can be used multiple times.
 @export var _multi_usage: bool = false
 
