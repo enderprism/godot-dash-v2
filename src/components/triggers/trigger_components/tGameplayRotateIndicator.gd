@@ -21,10 +21,10 @@ func _process(_delta: float) -> void:
 func _draw() -> void:
 	# TODO: make the indicator's angle relative to the player's gameplay rotation in-game
 	if get_parent()._base._sprite.visible:
-		_angle_A = -get_parent().global_rotation
+		_angle_A = 0.0
 		if not Engine.is_editor_hint():
 			_angle_A += LevelManager.player._gameplay_rotation
-		_angle_B = deg_to_rad(get_parent()._rotation_degrees - get_parent().global_rotation_degrees)
+		_angle_B = deg_to_rad(get_parent()._rotation_degrees)
 		_color = Color.CYAN if sign(_angle_B - _angle_A) == 1 else Color.MAGENTA
 		_radius = 64 - (THICKNESS/2)
 		draw_arc(

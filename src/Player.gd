@@ -214,7 +214,7 @@ func _compute_velocity(_delta: float,
 			_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier * _gameplay_trigger_gravity_multiplier if not displayed_gamemode == Gamemode.WAVE else 0.0
 	#endregion
 
-	# Handle jump.
+	#region Handle jump.
 	if _jump_state == 1 and _pad_queue.is_empty() and _orb_queue.is_empty():
 		if _is_flying_gamemode:
 			pass
@@ -231,6 +231,7 @@ func _compute_velocity(_delta: float,
 			_velocity.y = -_speed.y * _gravity_multiplier * UFO_GRAVITY_MULTIPLIER
 		else:
 			_velocity.y = -_speed.y * _gravity_multiplier
+	#endregion
 
 	#region Dashing
 	if _is_dashing:

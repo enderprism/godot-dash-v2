@@ -41,7 +41,7 @@ func _ready() -> void:
 		region_rect.size.y,
 		)
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	if _enable_parallax:
 		_notifier_left.rect.position.y = to_local(get_viewport().get_camera_2d().get_screen_center_position()).y
 		_notifier_right.rect.position.y = to_local(get_viewport().get_camera_2d().get_screen_center_position()).y

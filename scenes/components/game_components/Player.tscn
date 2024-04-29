@@ -2004,9 +2004,6 @@ blend_times = [&"RESET", &"RESET", 1.0, &"RESET", &"walk", 1.0, &"walk", &"walk"
 
 [node name="SpiderStateMachine" type="AnimationTree" parent="Icon/Spider"]
 root_node = NodePath("../SpiderSprites")
-libraries = {
-"": SubResource("AnimationLibrary_mtow1")
-}
 tree_root = SubResource("AnimationNodeStateMachine_vvc3a")
 anim_player = NodePath("../SpiderSprites/SpiderAnimation")
 parameters/fall/TimeScale/scale = 4.0

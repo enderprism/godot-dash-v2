@@ -34,6 +34,7 @@ shader_parameter/mode = 2
 size = Vector2(140, 174)
 
 [node name="SpeedPortal0x" type="Area2D"]
+z_index = -5
 collision_layer = 8
 script = ExtResource("1_3cwwl")
 object_type = 3

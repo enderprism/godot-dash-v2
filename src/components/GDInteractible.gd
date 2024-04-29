@@ -113,7 +113,7 @@ enum HorizontalDirection {
 # @@show_if(object_type == ObjectType.GAMEMODE_PORTAL)
 @export var _freefly: bool = true
 
-# @@show_if(object_type == ObjectType.GAMEMODE_PORTAL)
+# show_if(object_type == ObjectType.GAMEMODE_PORTAL)
 # @export var _keep_displayed_gamemode: bool = false
 
 # @@show_if(object_type == ObjectType.ORB and _orb_type == Orb.TOGGLE)
@@ -213,11 +213,11 @@ func _process(delta: float) -> void:
 	if has_node("Sprites/IndicatorIcon") \
 		and object_type == ObjectType.GAMEMODE_PORTAL \
 		or (object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.GRAVITY_PORTAL):
-		if not Engine.is_editor_hint() and LevelManager.player_camera != null:
+		if not Engine.is_editor_hint() and _player_camera != null:
 			if object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.GRAVITY_PORTAL:
-				$Sprites/IndicatorIcon.global_rotation = LevelManager.player._gameplay_rotation
+				$Sprites/IndicatorIcon.global_rotation = _player._gameplay_rotation
 			else:
-				$Sprites/IndicatorIcon.global_rotation = LevelManager.player_camera.rotation
+				$Sprites/IndicatorIcon.global_rotation = _player_camera.rotation
 		else:
 			$Sprites/IndicatorIcon.global_rotation = 0.0
 		$Sprites/IndicatorIcon.global_scale.x = abs(scale.x)
@@ -236,9 +236,9 @@ func _on_player_enter(_body: Node2D) -> void:
 		set_deferred("monitoring", _multi_usage)
 		_pulse_shrink()
 		_pulse_white_start()
-		LevelManager.player.internal_gamemode = _gamemode_portal_type
-		LevelManager.player.displayed_gamemode = _gamemode_portal_type
 		_player_camera._freefly = _freefly
+		_player.internal_gamemode = _gamemode_portal_type
+		_player.displayed_gamemode = _gamemode_portal_type
 		_player._mini = _player._mini
 	elif object_type == ObjectType.SPEED_PORTAL:
 		set_deferred("monitoring", _multi_usage)

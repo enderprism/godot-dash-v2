@@ -68,6 +68,7 @@ SFXManager="*res://src/autoloads/SFXManager.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 
@@ -132,3 +133,7 @@ toggle_hitbox_visibility={
 2d_physics/layer_5="triggers"
 2d_physics/layer_6="ground"
 2d_physics/layer_7="slope_enablers"
+
+[phantom_camera]
+
+updater/enable_updater=false
