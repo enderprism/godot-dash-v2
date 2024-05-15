@@ -29,10 +29,9 @@ var _base: tBase
 var _easing: tEasing
 var _target_link: GDTargetLink
 var _initial_alpha: float
-var _setup: tSetup
 
 func _ready() -> void:
-	_setup = tSetup.new(self, true)
+	TriggerSetup.setup(self, true)
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/Alpha.svg"))
 	_target = _base._target
 

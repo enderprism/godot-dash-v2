@@ -24,10 +24,9 @@ var _target: Node2D
 var _base: tBase
 var _easing: tEasing
 var _initial_global_position: Vector2
-var _setup: tSetup
 
 func _ready() -> void:
-	_setup = tSetup.new(self, true)
+	TriggerSetup.setup(self, true)
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/CameraStatic.svg"))
 	_player_camera = LevelManager.player_camera
 	_player = LevelManager.player

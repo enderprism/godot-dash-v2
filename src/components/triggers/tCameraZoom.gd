@@ -26,10 +26,9 @@ var _player_camera: PlayerCamera
 var _base: tBase
 var _easing: tEasing
 var _initial_zoom: Vector2
-var _setup: tSetup
 
 func _ready() -> void:
-	_setup = tSetup.new(self, false)
+	TriggerSetup.setup(self, false)
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/CameraZoom.svg"))
 	_player_camera = LevelManager.player_camera
 

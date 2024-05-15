@@ -6,10 +6,9 @@ class_name tSong
 @export var _song_start: float
 
 var _base: tBase
-var _setup: tSetup
 
 func _ready() -> void:
-	_setup = tSetup.new(self, false, false)
+	TriggerSetup.setup(self, false, false)
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/Song.svg"))
 
 func _start(_body: Node2D) -> void:

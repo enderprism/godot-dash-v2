@@ -8,10 +8,9 @@ class_name tTimewarp
 var _base: tBase
 var _easing: tEasing
 var _initial_time_scale: float
-var _setup: tSetup
 
 func _ready() -> void:
-	_setup = tSetup.new(self, false)
+	TriggerSetup.setup(self, false)
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/Timewarp.svg"))
 
 func _start(_body: Node2D) -> void:

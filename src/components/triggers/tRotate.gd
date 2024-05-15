@@ -8,6 +8,8 @@ enum Mode {
 	COPY,
 }
 
+const TRIGGER_TYPE = ITC.TriggerType.ROTATE
+
 @export var _rotate_around_self: bool:
 	set(value):
 		_rotate_around_self = value
@@ -39,10 +41,9 @@ var _initial_distances: Array[Vector2] ## Distance from the [member _rotation_ce
 var _base: tBase
 var _easing: tEasing
 var _target_link: GDTargetLink
-var _setup: tSetup
 
 func _ready() -> void:
-	_setup = tSetup.new(self, true)
+	TriggerSetup.setup(self, true)
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/Rotate.svg"))
 	_targets = get_tree().get_nodes_in_group(_base._target_group)
 
@@ -66,7 +67,7 @@ func _reset() -> void:
 	else:
 		printerr("In ", name, ": _target is unset")
 
-func _refresh_distance(i) -> void:
+func _refresh_distance(i: int) -> void:
 	if not _targets.is_empty():
 		_initial_distances[i] = _targets[i].global_position - _rotation_center.global_position
 
@@ -95,10 +96,10 @@ func _process(_delta: float) -> void:
 						else:
 							printerr("In ", name, ": copy_target is unset!")
 						# Escape the current loop iteration to avoid adding the rotation delta, even if it's null.
-						# Resembles an "early return"
 						continue
 				# Add the rotation delta
 				_target.global_rotation_degrees += _rotation_delta
+				ITC.set_data(self, _target, _rotation_delta)
 				if not _rotate_around_self:
 					_target.global_position += _initial_distance.rotated(deg_to_rad(_rotation_delta)) - _initial_distance
 					_refresh_distance(i)

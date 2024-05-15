@@ -2,6 +2,7 @@
 extends Node2D
 class_name tGravity
 
+const TRIGGER_TYPE = ITC.TriggerType.GRAVITY
 
 @export_range(0.0, 1.0 , 0.01, "or_greater") var _gravity_multiplier: float = 1.0
 
@@ -9,10 +10,9 @@ var _player: Player
 var _base: tBase
 var _easing: tEasing
 var _initial_gravity_multiplier: float
-var _setup: tSetup
 
 func _ready() -> void:
-	_setup = tSetup.new(self, false)
+	TriggerSetup.setup(self, false)
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/Gravity.svg"))
 	_player = LevelManager.player
 

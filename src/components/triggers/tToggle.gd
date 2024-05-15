@@ -7,10 +7,9 @@ class_name tToggle extends Node2D
 		_update_texture()
 
 var _base: tBase
-var _setup: tSetup
 
 func _ready() -> void:
-	_setup = tSetup.new(self, false, false)
+	TriggerSetup.setup(self, false, false)
 	_base._sprite.texture = preload("res://assets/textures/triggers/ToggleMultipleGroups.svg")
 
 func _start(_body: Node2D) -> void:

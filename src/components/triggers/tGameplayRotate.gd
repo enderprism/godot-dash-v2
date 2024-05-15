@@ -23,16 +23,15 @@ var _player: Player # Not useful in itself, but it provides autocompletion.
 var _base: tBase
 var _easing: tEasing
 var _initial_global_rotation_degrees: float
-var _setup: tSetup
 var _indicator: tGameplayRotateIndicator
 
 func _ready() -> void:
-	_setup = tSetup.new(self, false)
+	TriggerSetup.setup(self, false)
 	if !has_node("Indicator"):
 		_indicator = tGameplayRotateIndicator.new()
 		_indicator.name = "Indicator"
 		add_child(_indicator)
-		_setup._set_child_owner(self, _indicator)
+		TriggerSetup.set_child_owner(self, _indicator)
 	else: _indicator = $Indicator
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/GameplayRotate.svg"))
 	_player = LevelManager.player

@@ -8,6 +8,8 @@ enum Mode {
 	COPY,
 }
 
+const TRIGGER_TYPE = ITC.TriggerType.MOVE
+
 @export var _mode: Mode = Mode.ADD:
 	set(value):
 		_mode = value
@@ -31,10 +33,9 @@ var _initial_positions: Array[Vector2]
 var _base: tBase
 var _easing: tEasing
 var _target_link: GDTargetLink
-var _setup: tSetup
 
 func _ready() -> void:
-	_setup = tSetup.new(self, true)
+	TriggerSetup.setup(self, true)
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/Move.svg"))
 	_targets = get_tree().get_nodes_in_group(_base._target_group)
 

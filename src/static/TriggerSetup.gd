@@ -1,10 +1,10 @@
-@tool
 extends Node
-class_name tSetup
+class_name TriggerSetup
 ## Helper class containing boilerplate code
 ## to set up triggers.
 
-func _init(_parent: Node, _add_target_link: bool, _add_easing: bool = true):
+
+static func setup(_parent: Node, _add_target_link: bool, _add_easing: bool = true):
 	# "Group" parent in Godot to avoid moving its tBase instead of it directly
 	_parent.set_meta("_edit_group_", true)
 	#region Avoid re-instancing tBase, tEasing and TargetLink if they already exist
@@ -35,11 +35,12 @@ func _init(_parent: Node, _add_target_link: bool, _add_easing: bool = true):
 	#endregion
 	#endregion
 	#region Set children owner to make them show in the scene tree
-	_set_child_owner(_parent, _parent._base)
-	if _add_easing: _set_child_owner(_parent, _parent._easing)
-	if _add_target_link: _set_child_owner(_parent, _parent._target_link)
+	set_child_owner(_parent, _parent._base)
+	if _add_easing: set_child_owner(_parent, _parent._easing)
+	if _add_target_link: set_child_owner(_parent, _parent._target_link)
 	#endregion
 	#region Signal connections
+	
 	if not _parent._base.is_connected("body_entered", _parent._start):
 		_parent._base.body_entered.connect(_parent._start)
 	if not _parent._base.is_connected("body_entered", _parent._easing._start):
@@ -47,7 +48,12 @@ func _init(_parent: Node, _add_target_link: bool, _add_easing: bool = true):
 	if _add_target_link and not _parent._base.is_connected("target_changed", _parent._update_target_link):
 		_parent._base.target_changed.connect(_parent._update_target_link)
 	#endregion
+	#region ITC Groups
+	if _parent._base._target_group != null and not Engine.is_editor_hint() or LevelManager.in_editor:
+		var _triggers_on_parent_target_group: String = _parent._base._target_group + "-triggers"
+		_parent.add_to_group(_triggers_on_parent_target_group)
+	#endregion
 
-func _set_child_owner(_parent, _child) -> void:
+static func set_child_owner(_parent: Node, _child: Node) -> void:
 	var _owner: Node = _parent.get_parent() if _parent.get_parent().get_owner() == null else _parent.get_parent().get_owner()
 	_child.set_owner(_owner)
