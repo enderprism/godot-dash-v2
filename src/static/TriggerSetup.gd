@@ -4,56 +4,56 @@ class_name TriggerSetup
 ## to set up triggers.
 
 
-static func setup(_parent: Node, _add_target_link: bool, _add_easing: bool = true):
+static func setup(caller: Node, add_target_link: bool, add_easing: bool = true):
 	# "Group" parent in Godot to avoid moving its tBase instead of it directly
-	_parent.set_meta("_edit_group_", true)
+	caller.set_meta("_edit_group_", true)
 	#region Avoid re-instancing tBase, tEasing and TargetLink if they already exist
 	#region Init TargetLink (some triggers may not need it, if their target is outside the level scene)
-	if _add_target_link:
-		if not _parent.has_node("TargetLink"):
-			_parent._target_link = load("res://scenes/components/game_components/GDTargetLink.tscn").instantiate()
-			_parent.add_child(_parent._target_link)
+	if add_target_link:
+		if not caller.has_node("TargetLink"):
+			caller._target_link = load("res://scenes/components/game_components/GDTargetLink.tscn").instantiate()
+			caller.add_child(caller._target_link)
 		else:
-			_parent._target_link = _parent.get_node("TargetLink")
+			caller._target_link = caller.get_node("TargetLink")
 	#endregion
 	#region Init tBase
-	if not _parent.has_node("tBase"):
-		_parent._base = tBase.new()
-		_parent._base.name = "tBase"
-		_parent.add_child(_parent._base)
+	if not caller.has_node("tBase"):
+		caller._base = tBase.new()
+		caller._base.name = "tBase"
+		caller.add_child(caller._base)
 	else:
-		_parent._base = _parent.get_node("tBase")
+		caller._base = caller.get_node("tBase")
 	#endregion
 	#region Init tEasing (a few triggers that are always instant might not need one, e.g. tToggle and tSong)
-	if _add_easing:
-		if not _parent.has_node("tEasing"):
-			_parent._easing = tEasing.new()
-			_parent._easing.name = "tEasing"
-			_parent.add_child(_parent._easing)
+	if add_easing:
+		if not caller.has_node("tEasing"):
+			caller._easing = tEasing.new()
+			caller._easing.name = "tEasing"
+			caller.add_child(caller._easing)
 		else:
-			_parent._easing = _parent.get_node("tEasing")
+			caller._easing = caller.get_node("tEasing")
 	#endregion
 	#endregion
 	#region Set children owner to make them show in the scene tree
-	set_child_owner(_parent, _parent._base)
-	if _add_easing: set_child_owner(_parent, _parent._easing)
-	if _add_target_link: set_child_owner(_parent, _parent._target_link)
+	set_child_owner(caller, caller._base)
+	if add_easing: set_child_owner(caller, caller._easing)
+	if add_target_link: set_child_owner(caller, caller._target_link)
 	#endregion
 	#region Signal connections
 	
-	if not _parent._base.is_connected("body_entered", _parent._start):
-		_parent._base.body_entered.connect(_parent._start)
-	if not _parent._base.is_connected("body_entered", _parent._easing._start):
-		_parent._base.body_entered.connect(_parent._easing._start)
-	if _add_target_link and not _parent._base.is_connected("target_changed", _parent._update_target_link):
-		_parent._base.target_changed.connect(_parent._update_target_link)
+	if not caller._base.is_connected("body_entered", caller._start):
+		caller._base.body_entered.connect(caller._start)
+	if not caller._base.is_connected("body_entered", caller._easing._start):
+		caller._base.body_entered.connect(caller._easing._start)
+	if add_target_link and not caller._base.is_connected("target_changed", caller._update_target_link):
+		caller._base.target_changed.connect(caller._update_target_link)
 	#endregion
 	#region ITC Groups
-	if _parent._base._target_group != null and not Engine.is_editor_hint() or LevelManager.in_editor:
-		var _triggers_on_parent_target_group: String = _parent._base._target_group + "-triggers"
-		_parent.add_to_group(_triggers_on_parent_target_group)
+	if caller._base._target_group != null and not Engine.is_editor_hint() or LevelManager.in_editor:
+		var _triggers_on_parent_target_group: String = caller._base._target_group + "-triggers"
+		caller.add_to_group(_triggers_on_parent_target_group)
 	#endregion
 
-static func set_child_owner(_parent: Node, _child: Node) -> void:
-	var _owner: Node = _parent.get_parent() if _parent.get_parent().get_owner() == null else _parent.get_parent().get_owner()
+static func set_child_owner(caller: Node, _child: Node) -> void:
+	var _owner: Node = caller.get_parent() if caller.get_parent().get_owner() == null else caller.get_parent().get_owner()
 	_child.set_owner(_owner)

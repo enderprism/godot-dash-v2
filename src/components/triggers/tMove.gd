@@ -29,7 +29,7 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 var _targets: Array[Node]
-var _initial_positions: Array[Vector2]
+var _initial_positions: Dictionary
 var _base: tBase
 var _easing: tEasing
 var _target_link: GDTargetLink
@@ -45,16 +45,16 @@ func _update_target_link() -> void:
 func _start(_body: Node2D) -> void:
 	if _easing._is_inactive():
 		if not _targets.is_empty():
-			for i in range(len(_targets)):
-				_initial_positions.resize(len(_targets))
-				_initial_positions[i] = _targets[i].global_position
+			ITC.init(self)
+			for _target in _targets:
+				_initial_positions[_target] = _target.global_position
 		else:
 			printerr("In ", name, ": _base._target is unset")
 
 func _reset() -> void:
 	if not _targets.is_empty():
-		for i in range(len(_targets)):
-			_targets[i].global_position = _initial_positions[i]
+		for _target in _targets:
+			_target.global_position = _initial_positions[_target]
 	else:
 		printerr("In ", name, ": _target is unset")
 
@@ -62,9 +62,8 @@ func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(_easing._weight):
 		if not _targets.is_empty():
 			var _weight_delta = _easing._get_weight_delta()
-			for i in range(len(_targets)):
-				var _target = _targets[i]
-				var _initial_global_position = _initial_positions[i]
+			for _target in _targets:
+				var _initial_global_position = _initial_positions[_target]
 				match _mode:
 					Mode.SET:
 						_target.global_position += (owner.to_global(_set_position) - _initial_global_position) * _weight_delta

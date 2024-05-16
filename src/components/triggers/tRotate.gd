@@ -2,6 +2,8 @@
 extends Node2D
 class_name tRotate
 
+signal rotation_delta_changed(new_delta, target)
+
 enum Mode {
 	ADD,
 	SET,
@@ -36,14 +38,15 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 var _targets: Array[Node] ## Array of all the [Node2D] in a group.
-var _initial_rotations: Array[float] ## Rotation in degrees for every [Node2D] in [member _targets]
-var _initial_distances: Array[Vector2] ## Distance from the [member _rotation_center] for every [Node2D] in [member _targets]
+var _initial_rotations: Dictionary ## Rotation in degrees for every [Node2D] in [member _targets]
+var _initial_distances: Dictionary ## Distance from the [member _rotation_center] for every [Node2D] in [member _targets]
 var _base: tBase
 var _easing: tEasing
 var _target_link: GDTargetLink
 
 func _ready() -> void:
 	TriggerSetup.setup(self, true)
+	ITC.init(self)
 	_base._sprite.set_texture(preload("res://assets/textures/triggers/Rotate.svg"))
 	_targets = get_tree().get_nodes_in_group(_base._target_group)
 
@@ -53,34 +56,31 @@ func _update_target_link() -> void:
 func _start(_body: Node2D) -> void:
 	if _easing._is_inactive():
 		if not _targets.is_empty():
-			for i in range(len(_targets)):
-				_initial_rotations.resize(len(_targets))
-				_initial_rotations[i] = _targets[i].global_rotation_degrees
-				if not _rotate_around_self: _initial_distances.insert(i, _targets[i].global_position - _rotation_center.global_position)
+			for _target in _targets:
+				_initial_rotations[_target] = _target.global_rotation_degrees
+				if not _rotate_around_self: _initial_distances[_target] = _target.global_position - _rotation_center.global_position
 		else:
 			printerr("In ", name, ": _target is unset")
 
 func _reset() -> void:
 	if not _targets.is_empty():
-		for i in range(len(_targets)):
-			_targets[i].global_rotation_degrees = _initial_rotations[i]
+		for _target in _targets:
+			_target.global_rotation_degrees = _initial_rotations[_target]
 	else:
 		printerr("In ", name, ": _target is unset")
 
-func _refresh_distance(i: int) -> void:
-	if not _targets.is_empty():
-		_initial_distances[i] = _targets[i].global_position - _rotation_center.global_position
+func _refresh_distance(_target: Node2D) -> void:
+	_initial_distances[_target] = _target.global_position - _rotation_center.global_position
 
 func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(_easing._weight):
 		if not _targets.is_empty():
 			var _weight_delta = _easing._get_weight_delta()
-			for i in range(len(_targets)):
-				var _target: Node2D = _targets[i]
-				var _initial_global_rotation_degrees: float = _initial_rotations[i]
+			for _target in _targets:
+				var _initial_global_rotation_degrees: float = _initial_rotations[_target]
 				var _initial_distance: Vector2
 				if not _rotate_around_self:
-					_initial_distance = _initial_distances[i]
+					_initial_distance = _initial_distances[_target]
 				var _rotation_delta: float
 				match _mode:
 					Mode.SET:
@@ -99,10 +99,11 @@ func _process(_delta: float) -> void:
 						continue
 				# Add the rotation delta
 				_target.global_rotation_degrees += _rotation_delta
-				ITC.set_data(self, _target, _rotation_delta)
+				# ITC.set_data(self, _target, _rotation_delta)
+				emit_signal("rotation_delta_changed", _rotation_delta, _target)
 				if not _rotate_around_self:
 					_target.global_position += _initial_distance.rotated(deg_to_rad(_rotation_delta)) - _initial_distance
-					_refresh_distance(i)
+					_refresh_distance(_target)
 		else:
 			printerr("In ", name, ": _target is unset")
 	elif Engine.is_editor_hint() or LevelManager.in_editor:
