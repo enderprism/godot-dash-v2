@@ -82,7 +82,7 @@ func _ready() -> void:
 	if not _multi_usage and not body_entered.is_connected(_disable): body_entered.connect(_disable)
 
 func _physics_process(_delta: float) -> void:
-	_sprite.visible = Engine.is_editor_hint() or (not Engine.is_editor_hint() and get_tree().is_debugging_collisions_hint())
+	_sprite.visible = _sprite_visible()
 	if not get_parent() is tGameplayRotate:
 		_sprite.global_rotation = 0.0
 	_sprite.global_scale = Vector2.ONE/4
@@ -91,3 +91,6 @@ func _disable(_body: Node2D) -> void:
 	set_deferred("monitorable", false)
 	set_deferred("monitoring", false)
 	set_deferred("process_mode", PROCESS_MODE_DISABLED)
+
+func _sprite_visible() -> bool:
+	return Engine.is_editor_hint() or (not Engine.is_editor_hint() and get_tree().is_debugging_collisions_hint())

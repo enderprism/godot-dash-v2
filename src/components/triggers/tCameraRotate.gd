@@ -49,7 +49,7 @@ func _reset() -> void:
 	else:
 		printerr("In ", name, ": _player_camera is unset")
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(_easing._weight):
 		if _player_camera != null:
 			var _weight_delta = _easing._get_weight_delta()

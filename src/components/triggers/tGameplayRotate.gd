@@ -52,7 +52,7 @@ func _reset() -> void:
 	else:
 		printerr("In ", name, ": _target is unset")
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(_easing._weight):
 		if _player != null:
 			if _easing._duration > 0.0:

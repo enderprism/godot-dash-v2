@@ -2,8 +2,6 @@
 extends Node2D
 class_name tGravity
 
-const TRIGGER_TYPE = ITC.TriggerType.GRAVITY
-
 @export_range(0.0, 1.0 , 0.01, "or_greater") var _gravity_multiplier: float = 1.0
 
 var _player: Player

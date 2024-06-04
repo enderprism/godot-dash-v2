@@ -8,8 +8,6 @@ enum Mode {
 	COPY,
 }
 
-const TRIGGER_TYPE = ITC.TriggerType.MOVE
-
 @export var _mode: Mode = Mode.ADD:
 	set(value):
 		_mode = value
@@ -45,7 +43,6 @@ func _update_target_link() -> void:
 func _start(_body: Node2D) -> void:
 	if _easing._is_inactive():
 		if not _targets.is_empty():
-			ITC.init(self)
 			for _target in _targets:
 				_initial_positions[_target] = _target.global_position
 		else:

@@ -65,7 +65,7 @@ func _update_target_link() -> void:
 			else:
 				_group.get_node("SpawnTargetLink")._target = get_node_or_null(_spawned_groups[i+1].path)
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(_easing._weight):
 		if _spawned_groups != null:
 			for _group in _spawned_groups:

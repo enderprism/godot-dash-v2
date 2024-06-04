@@ -29,6 +29,6 @@ func _update_texture() -> void:
 	else:
 		_base._sprite.texture = preload("res://assets/textures/triggers/ToggleMultipleGroups.svg")
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if visible:
 		_update_texture()

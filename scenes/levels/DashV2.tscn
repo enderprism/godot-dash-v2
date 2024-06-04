@@ -236,10 +236,10 @@ monitoring = false
 monitorable = false
 _freefly = false
 
-[node name="tRotate" type="Node2D" parent="." node_paths=PackedStringArray("_rotation_center")]
+[node name="tRotate" type="Node2D" parent="."]
 position = Vector2(1342, -960)
 script = ExtResource("16_pj4c7")
-_rotation_center = NodePath("../SpiderPortal")
+_rotate_around_self = true
 _add_rotation_degrees = 180.0
 metadata/_edit_group_ = true
 
@@ -260,6 +260,7 @@ _multi_usage = true
 [node name="tScale" type="Node2D" parent="."]
 position = Vector2(1342, -1088)
 script = ExtResource("19_vvu8j")
+_scale_around_self = true
 _mode = 3
 metadata/_edit_group_ = true
 
@@ -274,6 +275,7 @@ _easing_transition = 3
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../SpiderPortal")
+_target_group = &"spiderportal"
 _multi_usage = true
 
 [node name="TeleportalIn" parent="." instance=ExtResource("20_ocowa")]
@@ -763,17 +765,18 @@ _easing_transition = 3
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../SpiderPortal")
+_target_group = &"spiderportal"
 
 [node name="Cross2" type="Sprite2D" parent="."]
 position = Vector2(5696, -576)
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("26_ohbn7")
 
+[node name="DefaultCube12" parent="." groups=["spawnlooped_cube"] instance=ExtResource("5_g4mtk")]
+position = Vector2(6080, -576)
+
 [node name="Pivot" type="Node2D" parent="."]
 position = Vector2(5696, -576)
-
-[node name="DefaultCube7" parent="Pivot" instance=ExtResource("5_g4mtk")]
-position = Vector2(384, 0)
 
 [node name="tSpawn5" type="Node2D" parent="."]
 position = Vector2(5824, -960)
@@ -797,9 +800,10 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _multi_usage = true
 
-[node name="tRotate2" type="Node2D" parent="."]
+[node name="tRotate2" type="Node2D" parent="." node_paths=PackedStringArray("_pivot")]
 position = Vector2(5824, -832)
 script = ExtResource("16_pj4c7")
+_pivot = NodePath("../Pivot")
 _add_rotation_degrees = 90.0
 metadata/_edit_group_ = true
 
@@ -812,11 +816,11 @@ _duration = 0.4688
 _easing_type = 1
 _easing_transition = 3
 
-[node name="tBase" type="Area2D" parent="tRotate2" node_paths=PackedStringArray("_target")]
+[node name="tBase" type="Area2D" parent="tRotate2"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
-_target = NodePath("../../Pivot")
+_target_group = &"spawnlooped_cube"
 _multi_usage = true
 
 [node name="WavePortal" parent="." instance=ExtResource("31_bjlog")]

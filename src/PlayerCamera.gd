@@ -30,7 +30,7 @@ func _ready() -> void:
 	_position_offset = DEFAULT_OFFSET
 	LevelManager.player_camera = self
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# limit_bottom = DEFAULT_LIMIT_BOTTOM - int(offset.y)
 	if get_parent().has_level_started:
 		_player_distance = player.position - position

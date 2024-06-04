@@ -65,7 +65,7 @@ func _reset() -> void:
 	else:
 		printerr("In ", name, ": _player_camera is unset")
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not _easing._is_inactive():
 		if _player_camera != null:
 			match _mode:

@@ -21,7 +21,7 @@ func _start(_body: Node2D) -> void:
 func _reset() -> void:
 	Engine.time_scale = _initial_time_scale
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(_easing._weight):
 		if _easing._duration > 0.0:
 			var _weight_delta: float = _easing._get_weight_delta()

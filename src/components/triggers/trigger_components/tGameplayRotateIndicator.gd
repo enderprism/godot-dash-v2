@@ -19,8 +19,7 @@ func _process(_delta: float) -> void:
 	global_rotation = 0.0
 
 func _draw() -> void:
-	# TODO: make the indicator's angle relative to the player's gameplay rotation in-game
-	if get_parent()._base._sprite.visible:
+	if get_parent()._base._sprite_visible():
 		_angle_A = 0.0
 		if not Engine.is_editor_hint():
 			_angle_A += LevelManager.player._gameplay_rotation
