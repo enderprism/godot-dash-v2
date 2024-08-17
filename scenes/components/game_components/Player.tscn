@@ -1899,6 +1899,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_6ab5b")
 
 [node name="Spider" type="Node2D" parent="Icon"]
+visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 6
 
@@ -2023,11 +2024,10 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("18_b7ibp")
 
 [node name="Wave" type="Node2D" parent="Icon"]
-visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 4
 
-[node name="Wave" type="Sprite2D" parent="Icon/Wave"]
+[node name="Icon" type="Sprite2D" parent="Icon/Wave"]
 scale = Vector2(0.417, 0.417)
 texture = ExtResource("19_8jrwm")
 

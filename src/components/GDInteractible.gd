@@ -14,6 +14,18 @@ const SPEEDS: Dictionary = {
 	SpeedPortal.SPEED_0X: 0.0,
 	SpeedPortal.SPEED_05X: 0.807,
 }
+const DEFAULT_GROUND_DOWN_Y: float = 925.0
+const DEFAULT_GROUND_UP_Y: float = -25000.0
+const LOCKEDFLY_GAMEMODE_GRID_HEIGHTS: Dictionary = {
+	Player.Gamemode.CUBE: 10,
+	Player.Gamemode.SHIP: 10,
+	Player.Gamemode.UFO: 10,
+	Player.Gamemode.BALL: 8,
+	Player.Gamemode.WAVE: 10,
+	Player.Gamemode.ROBOT: 10,
+	Player.Gamemode.SPIDER: 9,
+	Player.Gamemode.SWING: 10,
+}
 
 #region enums
 enum Orb {
@@ -237,9 +249,16 @@ func _on_player_enter(_body: Node2D) -> void:
 		_pulse_shrink()
 		_pulse_white_start()
 		_player_camera._freefly = _freefly
+		if _player.internal_gamemode != Player.Gamemode.WAVE and _gamemode_portal_type == Player.Gamemode.WAVE:
+			_player._clear_wave_trail()
 		_player.internal_gamemode = _gamemode_portal_type
 		_player.displayed_gamemode = _gamemode_portal_type
 		_player._mini = _player._mini
+		if not _freefly:
+			GroundData.center = global_position
+			GroundData.distance = LOCKEDFLY_GAMEMODE_GRID_HEIGHTS[_gamemode_portal_type] * LevelManager.CELL_SIZE * 0.5
+			if global_position.y + GroundData.distance > LevelManager.ground_sprites[0].DEFAULT_Y:
+				GroundData.offset = (global_position.y + GroundData.distance) - LevelManager.ground_sprites[0].DEFAULT_Y
 	elif object_type == ObjectType.SPEED_PORTAL:
 		set_deferred("monitoring", _multi_usage)
 		_pulse_white_start()
@@ -351,11 +370,6 @@ func _pulse_shrink() -> void:
 			.set_ease(Tween.EASE_OUT) \
 			.set_trans(Tween.TRANS_SINE)
 
-# func _set_player_orb_collisions() -> void:
-# 	if has_overlapping_bodies():
-# 		_player._click_buffer_state = Player.ClickBufferState.JUMPING
-# 		_player._orb_collisions |= _orb_type
-# 		_player._orb_collisions_last_setters[_orb_type] = self
 
 func _set_reverse(reverse: bool) -> void:
 	if _horizontal_direction == HorizontalDirection.SET:

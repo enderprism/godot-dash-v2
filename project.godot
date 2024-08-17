@@ -63,6 +63,7 @@ buses/default_bus_layout="res://resources/default_bus_layout.tres"
 
 LevelManager="*res://src/autoloads/LevelManager.gd"
 SFXManager="*res://src/autoloads/SFXManager.gd"
+GroundData="*res://src/autoloads/GroundData.gd"
 
 [display]
 

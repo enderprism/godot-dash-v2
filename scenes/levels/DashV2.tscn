@@ -107,7 +107,6 @@ _freefly = false
 
 [node name="SpiderPortal" parent="." groups=["spiderportal"] instance=ExtResource("3_iu2ry")]
 position = Vector2(1472, -576)
-_freefly = false
 
 [node name="DefaultCube" parent="." instance=ExtResource("5_g4mtk")]
 position = Vector2(1600, -192)

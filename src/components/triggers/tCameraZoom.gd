@@ -51,11 +51,11 @@ func _physics_process(_delta: float) -> void:
 			var _weight_delta = _easing._get_weight_delta()
 			match _mode:
 				Mode.SET:
-					_player_camera.zoom += (_set_zoom - _initial_zoom) * _weight_delta
+					_player_camera.zoom += (_set_zoom - _initial_zoom) * _weight_delta * PlayerCamera.DEFAULT_ZOOM
 				Mode.MULTIPLY:
-					_player_camera.zoom -= (_initial_zoom - (_initial_zoom * _multiply_zoom)) * _weight_delta
+					_player_camera.zoom -= (_initial_zoom - (_initial_zoom * _multiply_zoom)) * _weight_delta * PlayerCamera.DEFAULT_ZOOM
 				Mode.DIVIDE:
-					_player_camera.zoom -= (_initial_zoom - (_initial_zoom / _multiply_zoom)) * _weight_delta
+					_player_camera.zoom -= (_initial_zoom - (_initial_zoom / _multiply_zoom)) * _weight_delta * PlayerCamera.DEFAULT_ZOOM
 		else:
 			printerr("In ", name, ": _player_camera is unset")
 	elif Engine.is_editor_hint():

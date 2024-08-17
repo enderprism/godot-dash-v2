@@ -10,6 +10,7 @@ func start_level() -> void:
 	_pause_manager = LevelManager.pause_manager
 	var song_player = AudioStreamPlayer.new()
 	LevelManager.level_song_player = song_player
+	LevelManager.platformer = platformer
 	add_child(song_player)
 	song_player.process_mode = Node.PROCESS_MODE_PAUSABLE
 	song_player.set_bus("Music")

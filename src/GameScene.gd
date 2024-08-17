@@ -4,8 +4,12 @@ var has_level_started: bool
 
 func _ready() -> void:
 	LevelManager.in_editor = get_parent() is EditorScene
+	LevelManager.background_sprites.clear()
 	LevelManager.background_sprites.append($Background)
 	LevelManager.background_sprites.append($Background2)
+	LevelManager.ground_sprites.clear()
+	LevelManager.ground_sprites.append($GroundDownOrigin)
+	LevelManager.ground_sprites.append($GroundUpOrigin)
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), false)
 	if not get_parent() is EditorScene:
@@ -26,3 +30,7 @@ func _start_level() -> void:
 		await get_tree().create_timer(get_physics_process_delta_time()).timeout
 		has_level_started = true
 		$Level.get_child(0).start_level()
+
+func _process(_delta: float) -> void:
+	%LineUp.scale.x = 1/LevelManager.player_camera.zoom.x * 0.2
+	%LineDown.scale.x = 1/LevelManager.player_camera.zoom.x * 0.2

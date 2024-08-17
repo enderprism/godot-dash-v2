@@ -85,7 +85,6 @@ var _rebound_velocity: float
 
 var _gameplay_trigger_gravity_multiplier: float = 1
 
-
 # Queues
 var _orb_queue: Array[GDInteractible]
 var _pad_queue: Array[GDInteractible]
@@ -117,7 +116,7 @@ func _physics_process(delta: float) -> void:
 
 func _get_direction() -> int:
 	var _direction: int
-	if $"../Level".get_child(0).platformer:
+	if LevelManager.platformer:
 		_direction = int(Input.get_axis("move_left", "move_right"))
 	else:
 		_direction = _horizontal_direction
@@ -144,8 +143,12 @@ func _get_jump_state() -> int:
 		if Input.is_action_just_released("jump"):
 			$RobotTimer.stop()
 		jump_state = 1 if Input.is_action_pressed("jump") and $RobotTimer.get_time_left() > 0 else -1
-	elif internal_gamemode == Gamemode.SHIP or internal_gamemode == Gamemode.WAVE:
+	elif internal_gamemode == Gamemode.SHIP or (internal_gamemode == Gamemode.WAVE and not LevelManager.platformer):
 		jump_state = 1 if Input.is_action_pressed("jump") else -1
+	elif internal_gamemode == Gamemode.WAVE and LevelManager.platformer:
+		jump_state = 0
+		if Input.is_action_pressed("jump"): jump_state = 1
+		if Input.is_action_pressed("platformer_wave_down"): jump_state = -1
 	elif internal_gamemode == Gamemode.UFO or internal_gamemode == Gamemode.SWING:
 		jump_state = 1 if Input.is_action_just_pressed("jump") else -1
 	elif internal_gamemode == Gamemode.BALL or internal_gamemode == Gamemode.SPIDER:
@@ -248,8 +251,10 @@ func _compute_velocity(_delta: float,
 
 	if _direction:
 		_velocity.x = _direction * _speed.x * _speed_multiplier * int(get_parent().has_level_started)
+	elif LevelManager.platformer and internal_gamemode != Gamemode.WAVE:
+		_velocity.x = lerp(_velocity.x, _speed.x * _speed_multiplier * _direction, 0.5)
 	else:
-		_velocity.x = move_toward(_velocity.x, 0, _speed.x)
+		_velocity.x = 0
 
 	#region Apply orbs velocity
 	if not _orb_queue.is_empty() and (
@@ -342,9 +347,9 @@ func _rotate_sprite_degrees(delta: float):
 	#region ship/swing
 	$Icon/Ship.scale.y = sign(_gravity_multiplier)
 	$Icon/Swing.scale.y = 1.0
-	if _horizontal_direction != 0:
-		$Icon/Ship.scale.x = _horizontal_direction
-		$Icon/Swing.scale.x = _horizontal_direction
+	if _get_direction() != 0:
+		$Icon/Ship.scale.x = sign(_get_direction())
+		$Icon/Swing.scale.x = sign(_get_direction())
 	if not _is_dashing:
 		if not is_on_floor() and not is_on_ceiling() and _speed_multiplier > 0.0:
 			$Icon/Ship.rotation_degrees = lerpf($Icon/Ship.rotation, velocity.rotated(-_gameplay_rotation).y * delta * _get_direction() * 3, 0.5)
@@ -358,26 +363,26 @@ func _rotate_sprite_degrees(delta: float):
 	#endregion
 	#region wave
 	$Icon/Wave.scale.y = 1.0
-	if _horizontal_direction != 0:
-		$Icon/Wave.scale.x = _horizontal_direction
+	if _get_direction() != 0:
+		$Icon/Wave.scale.x = sign(_get_direction())
 	if not _is_dashing:
 		if not is_on_floor() and not is_on_ceiling():
 			if velocity.rotated(-_gameplay_rotation).x != 0.0:
 				if not _mini:
-					$Icon/Wave.rotation_degrees = lerpf($Icon/Wave.rotation_degrees, 45.0 * -_get_jump_state() * sign(_gravity_multiplier), 0.25)
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 45.0 * -_get_jump_state() * sign(_gravity_multiplier), 0.25)
 				else:
-					$Icon/Wave.rotation_degrees = lerpf($Icon/Wave.rotation_degrees, 60.0 * -_get_jump_state() * sign(_gravity_multiplier), 0.25)
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 60.0 * -_get_jump_state() * sign(_gravity_multiplier), 0.25)
 			else:
-				$Icon/Wave.rotation_degrees = lerpf($Icon/Wave.rotation_degrees, 90.0 * -_get_jump_state() * sign(_gravity_multiplier), 0.25)
+				$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 90.0 * -_get_jump_state() * sign(_gravity_multiplier), 0.25)
 		else:
-			$Icon/Wave.rotation_degrees = lerpf($Icon/Wave.rotation_degrees, 0.0, 0.5)
+			$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees * _get_direction(), 0.0, 0.5)
 	else:
-		$Icon/Wave.rotation = lerpf($Icon/Wave.rotation, _dash_orb_rotation * _get_direction(), 0.5)
+		$Icon/Wave/Icon.rotation = lerpf($Icon/Wave/Icon.rotation, _dash_orb_rotation * _get_direction(), 0.5)
 	#endregion
 	#region ufo
 	$Icon/UFO.scale.y = sign(_gravity_multiplier)
-	if _horizontal_direction != 0:
-		$Icon/UFO.scale.x = _horizontal_direction
+	if _get_direction() != 0:
+		$Icon/UFO.scale.x = sign(_get_direction())
 	if not _is_dashing:
 		if not is_on_floor() and not is_on_ceiling() and _speed_multiplier > 0.0:
 			$Icon/UFO.rotation_degrees = lerpf($Icon/UFO.rotation_degrees, velocity.rotated(-_gameplay_rotation).y * delta * _get_direction() * 0.2, 0.5)
@@ -388,17 +393,15 @@ func _rotate_sprite_degrees(delta: float):
 	#endregion
 	#region ball
 	$Icon/Ball.scale.y = 1.0
-	if _horizontal_direction != 0:
-		$Icon/Ball.scale.x = _horizontal_direction
 	if _speed_multiplier > 0.0:
-		$Icon/Ball.rotation_degrees += delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * 800
+		$Icon/Ball.rotation_degrees += delta * _gravity_multiplier * 0.5 * _gameplay_trigger_gravity_multiplier * velocity.rotated(-_gameplay_rotation).x
 	#endregion
 	#region spider/robot
+	if _get_direction() != 0:
+		$Icon/Spider.scale.x = sign(_get_direction())
+		$Icon/Robot.scale.x = sign(_get_direction())
 	$Icon/Spider.scale.y = sign(_gravity_multiplier)
 	$Icon/Robot.scale.y = sign(_gravity_multiplier)
-	if _horizontal_direction != 0:
-		$Icon/Spider.scale.x = _horizontal_direction
-		$Icon/Robot.scale.x = _horizontal_direction
 	#endregion
 
 func _update_swing_fire() -> void:
@@ -416,9 +419,7 @@ func _update_wave_trail() -> void:
 	else:
 		$WaveTrail.width = lerpf($WaveTrail.width, WAVE_TRAIL_WIDTH * MINI_PLAYER_SCALE.y, 0.25)
 		$WaveTrail2.width = lerpf($WaveTrail2.width, WAVE_TRAIL_WIDTH * MINI_PLAYER_SCALE.y * 0.5, 0.25)
-	# $WaveTrail.visible = displayed_gamemode == Gamemode.WAVE
-	# $WaveTrail2.visible = displayed_gamemode == Gamemode.WAVE
-	if internal_gamemode == Gamemode.WAVE or displayed_gamemode == Gamemode.WAVE:
+	if displayed_gamemode == Gamemode.WAVE:
 		$WaveTrail.modulate.a = 1.0
 		$WaveTrail2.modulate.a = 1.0
 		$WaveTrail.length = lerpf($WaveTrail.length, WAVE_TRAIL_LENGTH, 0.2)
@@ -432,6 +433,10 @@ func _update_wave_trail() -> void:
 		# 	if $WaveTrail.get_point_count() > $WaveTrail.length:
 		# 		$WaveTrail.remove_point($WaveTrail.get_point_count() - 2)
 		# 		$WaveTrail2.remove_point($WaveTrail2.get_point_count() - 2)
+
+func _clear_wave_trail() -> void:
+	$WaveTrail.clear_points()
+	$WaveTrail2.clear_points()
 
 func _get_spider_velocity_delta() -> float:
 	var _target_position = $Icon/Spider/SpiderCast.get_collision_point(0)
@@ -449,7 +454,7 @@ func _update_spider_state_machine() -> void:
 	elif _speed_multiplier >= GDInteractible.SPEEDS[GDInteractible.SpeedPortal.SPEED_4X]:
 		_spider_animation_tree["parameters/run/PlayerSpeed/scale"] = _speed_multiplier/GDInteractible.SPEEDS[GDInteractible.SpeedPortal.SPEED_4X]
 		_spider_state_machine.travel("run")
-	elif _speed_multiplier == GDInteractible.SPEEDS[GDInteractible.SpeedPortal.SPEED_0X] or LevelManager.platformer:
+	elif _speed_multiplier == GDInteractible.SPEEDS[GDInteractible.SpeedPortal.SPEED_0X] or _get_direction() == 0:
 		_spider_state_machine.travel("idle")
 	else:
 		_spider_animation_tree["parameters/walk/PlayerSpeed/scale"] = _speed_multiplier

@@ -49,11 +49,11 @@ func _set_hitbox_shape() -> void:
 		match _hitbox_shape:
 			TriggerHitboxShape.LINE:
 				_hitbox.shape = SegmentShape2D.new()
-				_hitbox.shape.a = Vector2(0, -_hitbox_height*128)
-				_hitbox.shape.b = Vector2(0,  _hitbox_height*128)
+				_hitbox.shape.a = Vector2(0, -_hitbox_height * LevelManager.CELL_SIZE)
+				_hitbox.shape.b = Vector2(0,  _hitbox_height * LevelManager.CELL_SIZE)
 			TriggerHitboxShape.SQUARE:
 				_hitbox.shape = RectangleShape2D.new()
-				_hitbox.shape.size = Vector2.ONE * 128.0
+				_hitbox.shape.size = Vector2.ONE * LevelManager.CELL_SIZE
 			TriggerHitboxShape.DISABLED:
 				_hitbox.shape = RectangleShape2D.new()
 				_hitbox.shape.size = Vector2.ZERO

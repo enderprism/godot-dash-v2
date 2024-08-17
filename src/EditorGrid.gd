@@ -6,7 +6,7 @@ extends Node2D
 
 class_name EditorGrid
 
-@export var _grid_size := Vector2i(128, 128):
+@export var _grid_size := Vector2i(LevelManager.CELL_SIZE, LevelManager.CELL_SIZE):
 	set(value):
 		_grid_size = value
 		queue_redraw()
