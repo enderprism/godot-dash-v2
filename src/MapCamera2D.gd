@@ -200,7 +200,7 @@ func _change_zoom(factor, with_cursor = true):
 			clamp_offset(relative)
 		else:
 			_set_zoom_level(clamped_zoom)
-	emit_signal("zoom_changed")
+	zoom_changed.emit()
 
 func _set_zoom_level(value):
 	zoom = value

@@ -483,23 +483,23 @@ stream = ExtResource("7_ir7j4")
 autoplay = true
 bus = &"Music"
 
-[node name="Subscene Manager" type="Node" parent="." node_paths=PackedStringArray("_active_pcam", "_history", "_page_control_container", "_quit_game_button", "_fade_screen_layer", "_created_levels_list", "_icon_garage", "_level_selector", "_created_levels_list_camera", "_icon_garage_camera", "_quit_game_camera", "_title_screen_camera", "_title_screen_background", "_title_screen_ground", "_level_selector_page_container")]
+[node name="Subscene Manager" type="Node" parent="." node_paths=PackedStringArray("active_pcam", "history", "page_control_container", "quit_game_button", "fade_screen_layer", "created_levels_list", "icon_garage", "level_selector", "created_levels_list_camera", "icon_garage_camera", "quit_game_camera", "title_screen_camera", "title_screen_background", "title_screen_ground", "level_selector_page_container")]
 script = ExtResource("9_iy7r1")
-_active_pcam = NodePath("../TitleScreen/CameraCenterParent/TitleScreenCamera")
-_history = NodePath("PhantomCamera2DHistory")
-_page_control_container = NodePath("../LevelSelector/CanvasLayer/PageControlContainer")
-_quit_game_button = NodePath("../TitleScreen/QuitGame")
-_fade_screen_layer = NodePath("../FadeScreenLayer")
-_created_levels_list = NodePath("../CreatedLevelsList")
-_icon_garage = NodePath("../IconGarage")
-_level_selector = NodePath("../LevelSelector")
-_created_levels_list_camera = NodePath("../CreatedLevelsList/CameraCenterParent/CreatedLevelsListCamera")
-_icon_garage_camera = NodePath("../IconGarage/CameraCenterParent/IconGarageCamera")
-_quit_game_camera = NodePath("../TitleScreen/CameraCenterParent/QuitGameCamera")
-_title_screen_camera = NodePath("../TitleScreen/CameraCenterParent/TitleScreenCamera")
-_title_screen_background = NodePath("../TitleScreen/BackgroundParallax")
-_title_screen_ground = NodePath("../TitleScreen/GroundParallax")
-_level_selector_page_container = NodePath("../LevelSelector/PageContainer")
+active_pcam = NodePath("../TitleScreen/CameraCenterParent/TitleScreenCamera")
+history = NodePath("PhantomCamera2DHistory")
+page_control_container = NodePath("../LevelSelector/CanvasLayer/PageControlContainer")
+quit_game_button = NodePath("../TitleScreen/QuitGame")
+fade_screen_layer = NodePath("../FadeScreenLayer")
+created_levels_list = NodePath("../CreatedLevelsList")
+icon_garage = NodePath("../IconGarage")
+level_selector = NodePath("../LevelSelector")
+created_levels_list_camera = NodePath("../CreatedLevelsList/CameraCenterParent/CreatedLevelsListCamera")
+icon_garage_camera = NodePath("../IconGarage/CameraCenterParent/IconGarageCamera")
+quit_game_camera = NodePath("../TitleScreen/CameraCenterParent/QuitGameCamera")
+title_screen_camera = NodePath("../TitleScreen/CameraCenterParent/TitleScreenCamera")
+title_screen_background = NodePath("../TitleScreen/BackgroundParallax")
+title_screen_ground = NodePath("../TitleScreen/GroundParallax")
+level_selector_page_container = NodePath("../LevelSelector/PageContainer")
 
 [node name="PhantomCamera2DHistory" parent="Subscene Manager" instance=ExtResource("16_dgsi1")]
 

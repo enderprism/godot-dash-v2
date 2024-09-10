@@ -8,9 +8,9 @@ enum Mode {
 	COPY,
 }
 
-@export var _mode: Mode = Mode.ADD:
+@export var mode: Mode = Mode.ADD:
 	set(value):
-		_mode = value
+		mode = value
 		notify_property_list_changed()
 @export var _set_position: Vector2
 @export var _add_position: Vector2
@@ -19,34 +19,34 @@ enum Mode {
 
 # Hide unneeded elements in the inspector
 func _validate_property(property: Dictionary) -> void:
-	if property.name == "_set_position" and _mode != Mode.SET:
+	if property.name == "_set_position" and mode != Mode.SET:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name == "_add_position" and _mode != Mode.ADD:
+	if property.name == "_add_position" and mode != Mode.ADD:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name in ["_copy_target", "_copy_offset"] and _mode != Mode.COPY:
+	if property.name in ["_copy_target", "_copy_offset"] and mode != Mode.COPY:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 var _targets: Array[Node]
 var _initial_positions: Dictionary
-var _base: tBase
-var _easing: tEasing
-var _target_link: GDTargetLink
+var base: tBase
+var easing: tEasing
+var target_link: GDTargetLink
 
 func _ready() -> void:
 	TriggerSetup.setup(self, true)
-	_base._sprite.set_texture(preload("res://assets/textures/triggers/Move.svg"))
-	_targets = get_tree().get_nodes_in_group(_base._target_group)
+	base.sprite.set_texture(preload("res://assets/textures/triggers/Move.svg"))
+	_targets = get_tree().get_nodes_in_group(base.target_group)
 
 func _update_target_link() -> void:
-	_target_link._target = _targets[0]
+	target_link.target = _targets[0]
 
 func _start(_body: Node2D) -> void:
-	if _easing._is_inactive():
+	if easing._is_inactive():
 		if not _targets.is_empty():
 			for _target in _targets:
 				_initial_positions[_target] = _target.global_position
 		else:
-			printerr("In ", name, ": _base._target is unset")
+			printerr("In ", name, ": base._target is unset")
 
 func _reset() -> void:
 	if not _targets.is_empty():
@@ -56,23 +56,23 @@ func _reset() -> void:
 		printerr("In ", name, ": _target is unset")
 
 func _process(_delta: float) -> void:
-	if not Engine.is_editor_hint() and not is_zero_approx(_easing._weight):
+	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
 		if not _targets.is_empty():
-			var _weight_delta = _easing._get_weight_delta()
+			var _weight_delta = easing._get_weight_delta()
 			for _target in _targets:
 				var _initial_global_position = _initial_positions[_target]
-				match _mode:
+				match mode:
 					Mode.SET:
 						_target.global_position += (owner.to_global(_set_position) - _initial_global_position) * _weight_delta
 					Mode.ADD:
 						_target.global_position += _add_position * _weight_delta
 					Mode.COPY:
 						if _copy_target != null:
-							_target.global_position = lerp(_initial_global_position, _copy_target.global_position + _copy_offset, _easing._weight)
+							_target.global_position = lerp(_initial_global_position, _copy_target.global_position + _copy_offset, easing._weight)
 						else:
 							printerr("In ", name, ": copy_target is unset!")
 		else:
 			printerr("In ", name, ": _target is unset")
 	elif Engine.is_editor_hint() or LevelManager.in_editor:
-		_target_link.position = Vector2.ZERO
-		if Engine.is_editor_hint(): _base.position = Vector2.ZERO
+		target_link.position = Vector2.ZERO
+		if Engine.is_editor_hint(): base.position = Vector2.ZERO

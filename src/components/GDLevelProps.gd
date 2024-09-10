@@ -4,7 +4,7 @@ extends Node2D
 @export_range(0.0, 60.0, 0.01, "or_greater", "suffix:s") var song_start_time: float
 @export var platformer: bool
 
-var _pause_manager
+var _pause_manager: Node
 
 func start_level() -> void:
 	_pause_manager = LevelManager.pause_manager

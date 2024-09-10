@@ -20,8 +20,8 @@ class_name tGameplayRotate
 # 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 var _player: Player # Not useful in itself, but it provides autocompletion.
-var _base: tBase
-var _easing: tEasing
+var base: tBase
+var easing: tEasing
 var _initial_global_rotation_degrees: float
 var _indicator: tGameplayRotateIndicator
 
@@ -33,43 +33,43 @@ func _ready() -> void:
 		add_child(_indicator)
 		TriggerSetup.set_child_owner(self, _indicator)
 	else: _indicator = $Indicator
-	_base._sprite.set_texture(preload("res://assets/textures/triggers/GameplayRotate.svg"))
+	base.sprite.set_texture(preload("res://assets/textures/triggers/GameplayRotate.svg"))
 	_player = LevelManager.player
-	_indicator.visible = _base._sprite.visible
+	_indicator.visible = base.sprite.visible
 
 func _start(_body: Node2D) -> void:
-	_player._gravity_multiplier = abs(_player._gravity_multiplier) * 1 if not _flip else -1
-	_player._horizontal_direction = 1 if not _reverse else -1
-	_initial_global_rotation_degrees = _player._gameplay_rotation_degrees
-	if _easing._duration == 0.0:
-		_player._gameplay_rotation_degrees = _rotation_degrees
+	_player.gravity_multiplier = abs(_player.gravity_multiplier) * 1 if not _flip else -1
+	_player.horizontal_direction = 1 if not _reverse else -1
+	_initial_global_rotation_degrees = _player.gameplay_rotation_degrees
+	if easing._duration == 0.0:
+		_player.gameplay_rotation_degrees = _rotation_degrees
 		_player.velocity = _player.velocity.rotated(deg_to_rad(_rotation_degrees))
 		_indicator.hide()
 
 func _reset() -> void:
 	if _player != null:
-		_player._gameplay_rotation_degrees = _initial_global_rotation_degrees
+		_player.gameplay_rotation_degrees = _initial_global_rotation_degrees
 	else:
 		printerr("In ", name, ": _target is unset")
 
 func _physics_process(_delta: float) -> void:
-	if not Engine.is_editor_hint() and not is_zero_approx(_easing._weight):
+	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
 		if _player != null:
-			if _easing._duration > 0.0:
-				var _weight_delta: float = _easing._get_weight_delta()
+			if easing._duration > 0.0:
+				var _weight_delta: float = easing._get_weight_delta()
 				var _rotation_delta: float = (_rotation_degrees - _initial_global_rotation_degrees) * _weight_delta
-				_player._gameplay_rotation_degrees = lerp(_initial_global_rotation_degrees, _rotation_degrees, _easing._weight)
+				_player.gameplay_rotation_degrees = lerp(_initial_global_rotation_degrees, _rotation_degrees, easing._weight)
 				_player.get_node("DashFlame").rotation_degrees += _rotation_delta
 				_player.get_node("DashParticles").rotation_degrees += _rotation_delta
 				_player.velocity = _player.velocity.rotated(deg_to_rad(_rotation_delta))
-			if _easing._weight == 1.0:
+			if easing._weight == 1.0:
 				_indicator.hide()
 		else:
 			printerr("In ", name, ": _player is unset")
 	if Engine.is_editor_hint() or LevelManager.in_editor or get_tree().is_debugging_collisions_hint():
 		if _indicator.visible: _indicator.queue_redraw()
-		_base._sprite.global_rotation_degrees = _rotation_degrees
-		_base._sprite.scale = Vector2.ONE/4
-		_base._sprite.flip_h = _reverse
-		_base._sprite.flip_v = _flip
-		if Engine.is_editor_hint(): _base.position = Vector2.ZERO
+		base.sprite.global_rotation_degrees = _rotation_degrees
+		base.sprite.scale = Vector2.ONE/4
+		base.sprite.flip_h = _reverse
+		base.sprite.flip_v = _flip
+		if Engine.is_editor_hint(): base.position = Vector2.ZERO

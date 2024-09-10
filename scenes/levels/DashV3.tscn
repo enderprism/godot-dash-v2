@@ -174,7 +174,7 @@ _target = NodePath("../../Cross")
 [node name="tCameraStatic2" type="Node2D" parent="."]
 position = Vector2(6208, -1600)
 script = ExtResource("10_uv5o3")
-_mode = 1
+mode = 1
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tCameraStatic2" instance=ExtResource("11_cwnn2")]

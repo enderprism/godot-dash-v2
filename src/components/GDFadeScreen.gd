@@ -4,7 +4,7 @@ signal fade_finished
 
 var is_fading: bool
 
-enum FADE_TYPE {
+enum FadeType {
 	FADE_IN,
 	FADE_OUT
 }
@@ -22,7 +22,7 @@ func fade_in(fade_duration: float, ease_type: Tween.EaseType = Tween.EASE_IN_OUT
 		.set_trans(trans_type) \
 		.from(Color("00000000"))
 	await fade_tween.finished
-	emit_signal("fade_finished", FADE_TYPE.FADE_IN)
+	fade_finished.emit(FadeType.FADE_IN)
 	is_fading = false
 
 func fade_out(fade_duration: float, ease_type: Tween.EaseType, trans_type: Tween.TransitionType) -> void:
@@ -34,6 +34,6 @@ func fade_out(fade_duration: float, ease_type: Tween.EaseType, trans_type: Tween
 		.set_trans(trans_type) \
 		.from(Color("000000ff"))
 	await fade_tween.finished
-	emit_signal("fade_finished", FADE_TYPE.FADE_OUT)
+	fade_finished.emit(FadeType.FADE_OUT)
 	hide()
 	is_fading = false

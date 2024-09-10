@@ -3,7 +3,8 @@ extends Line2D
 
 class_name GDTargetLink
 
-var _target: Node2D
+var target: Node2D
+
 var _lock_position_to_parent: bool
 
 func _ready() -> void:
@@ -11,12 +12,12 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if _lock_position_to_parent: position = Vector2.ZERO
-	if _target == null:
+	if target == null:
 		clear_points()
 		return
-	if get_point_position(1) != _target.global_position:
+	if get_point_position(1) != target.global_position:
 		clear_points()
-		add_point(to_local(_target.global_position), 0)
+		add_point(to_local(target.global_position), 0)
 		add_point(Vector2.ZERO, 1)
 	elif get_point_count() > 2:
 		clear_points()

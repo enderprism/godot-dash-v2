@@ -25,31 +25,31 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 var _current_loop: int
-var _base: tBase
-var _easing: tEasing
-var _target_link: GDTargetLink
+var base: tBase
+var easing: tEasing
+var target_link: GDTargetLink
 var _player: Player
 
 func _ready() -> void:
 	TriggerSetup.setup(self, true)
-	_base._sprite.set_texture(preload("res://assets/textures/triggers/Spawn.svg"))
-	_target_link.default_color = Color.CYAN
+	base.sprite.set_texture(preload("res://assets/textures/triggers/Spawn.svg"))
+	target_link.default_color = Color.CYAN
 	_update_target_link()
 	_player = LevelManager.player
 
 func _start(_body: Node2D):
-	if _loop and not _easing._tween.is_connected("finished", _restart):
-		_easing._tween.finished.connect(_restart)
+	if _loop and not easing._tween.is_connected("finished", _restart):
+		easing._tween.finished.connect(_restart)
 	_current_loop += 1
 
 func _restart() -> void:
 	await get_tree().create_timer(_loop_delay).timeout
 	if _loop_count < 0 or _current_loop < _loop_count:
-		_base.emit_signal("body_entered", _player)
+		base.emit_signal("body_entered", _player)
 
 func _update_target_link() -> void:
 	if len(_spawned_groups) >= 1:
-		_target_link._target = get_node_or_null(_spawned_groups[0].path)
+		target_link.target = get_node_or_null(_spawned_groups[0].path)
 	if len(_spawned_groups) >= 2:
 		for i in range(len(_spawned_groups)-1):
 			# Start loop at index 1, skipping the first spawned group since it already has a 'spawn' target link
@@ -66,17 +66,17 @@ func _update_target_link() -> void:
 				_group.get_node("SpawnTargetLink")._target = get_node_or_null(_spawned_groups[i+1].path)
 
 func _physics_process(_delta: float) -> void:
-	if not Engine.is_editor_hint() and not is_zero_approx(_easing._weight):
+	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
 		if _spawned_groups != null:
 			for _group in _spawned_groups:
-				if _easing._weight >= _group.time and _group.used_in_loop != _current_loop:
-					if get_node(_group.path).has_node("tBase"): get_node(_group.path)._base.emit_signal("body_entered", _player)
+				if easing._weight >= _group.time and _group.used_in_loop != _current_loop:
+					if get_node(_group.path).has_node("tBase"): get_node(_group.path).base.emit_signal("body_entered", _player)
 					_group.used_in_loop = _current_loop
 		else:
 			printerr("In ", name, ": _target is unset")
 	elif Engine.is_editor_hint() or LevelManager.in_editor:
-		_target_link.position = Vector2.ZERO
+		target_link.position = Vector2.ZERO
 		if len(_spawned_groups) >= 1 and _spawned_groups[0].is_connected("changed", _update_target_link):
 			_spawned_groups[0].changed.connect(_update_target_link)
-		if _spawned_groups.is_empty(): _target_link._target = null
-		if Engine.is_editor_hint(): _base.position = Vector2.ZERO
+		if _spawned_groups.is_empty(): target_link.target = null
+		if Engine.is_editor_hint(): base.position = Vector2.ZERO

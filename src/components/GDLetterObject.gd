@@ -47,7 +47,7 @@ func _process(_delta: float) -> void:
 func _on_player_enter(_body: Node2D) -> void:
 	match _action:
 		Action.STOP_JUMP:
-			_player._in_j_block = true
+			_player.jump_hold_disabled = true
 		Action.STOP_DASH:
 			_player._stop_dash()
 

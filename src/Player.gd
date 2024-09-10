@@ -44,51 +44,55 @@ const DASH_BOOM: PackedScene = preload("res://scenes/components/game_components/
 			else: icon.show()
 @export var internal_gamemode: Gamemode
 
-
-@onready var _spider_animation_tree = $Icon/Spider/SpiderStateMachine as AnimationTree
-@onready var _spider_state_machine: AnimationNodeStateMachinePlayback = _spider_animation_tree["parameters/playback"]
-
+# Public
+var rebound_velocity: float
 var dash_orb_rotation: float
 var dash_orb_position: Vector2
-var gameplay_rotation: float
-var mini: bool:
+var gameplay_rotation_degrees: float = 0.0
+var gameplay_rotation: float:
+	get():
+		return deg_to_rad(gameplay_rotation_degrees)
+var player_size: bool:
 	set(value):
-		mini = value
+		player_size = value
 		var _mini_scale: Vector2
 		if value:
 			_mini_scale = MINI_PLAYER_SCALE * WAVE_PLAYER_SCALE if displayed_gamemode == Gamemode.WAVE else MINI_PLAYER_SCALE
 			create_tween().tween_property(self, "scale", _mini_scale, 0.25) \
-				.set_ease(Tween.EASE_OUT) \
-				.set_trans(Tween.TRANS_BACK)
+					.set_ease(Tween.EASE_OUT) \
+					.set_trans(Tween.TRANS_BACK)
 		else:
 			_mini_scale = Vector2.ONE * WAVE_PLAYER_SCALE if displayed_gamemode == Gamemode.WAVE else Vector2.ONE
 			create_tween().tween_property(self, "scale", _mini_scale, 0.25) \
-				.set_ease(Tween.EASE_OUT) \
-				.set_trans(Tween.TRANS_BACK)
+					.set_ease(Tween.EASE_OUT) \
+					.set_trans(Tween.TRANS_BACK)
+var can_hit_ceiling: bool
+var jump_hold_disabled: bool
+var speed_multiplier: float = 1.0
+var gravity_multiplier: float = 1.0
+var gameplay_trigger_gravity_multiplier: float = 1
+var horizontal_direction: int = 1
 
+# Queues
+var orb_queue: Array[GDInteractible]
+var pad_queue: Array[GDInteractible]
+
+# Private
 var _spider_jump_invulnerability_frames: int = 0
 var _click_buffer_state: ClickBufferState
 var _dash_orb_initial_gameplay_rotation: float
 var _is_dashing: bool
 var _dead: bool
-var _horizontal_direction: int = 1
-
-var _in_h_block: bool
-var _in_j_block: bool
 var _is_flying_gamemode: bool
-var _speed_multiplier: float = 1.0
-var _gravity_multiplier: float = 1.0
 var _dual_instance: bool
-var _gameplay_rotation_degrees: float = 0.0
 var _last_spider_trail: GDSpiderTrail
 var _last_spider_trail_height: float
-var _rebound_velocity: float
 
-var _gameplay_trigger_gravity_multiplier: float = 1
 
-# Queues
-var _orb_queue: Array[GDInteractible]
-var _pad_queue: Array[GDInteractible]
+
+
+@onready var _spider_animation_tree = $Icon/Spider/SpiderStateMachine as AnimationTree
+@onready var _spider_state_machine: AnimationNodeStateMachinePlayback = _spider_animation_tree["parameters/playback"]
 
 func _ready() -> void:
 	_stop_dash()
@@ -99,8 +103,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if get_parent().has_level_started:
-		gameplay_rotation = deg_to_rad(_gameplay_rotation_degrees)
-		up_direction = Vector2.UP.rotated(gameplay_rotation) * sign(_gravity_multiplier)
+		up_direction = Vector2.UP.rotated(gameplay_rotation) * sign(gravity_multiplier)
 		_rotate_sprite_degrees(delta)
 		_update_wave_trail()
 		if displayed_gamemode == Gamemode.SPIDER: _update_spider_state_machine()
@@ -109,10 +112,10 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		if _last_spider_trail != null:
 			add_child(_last_spider_trail)
-			_last_spider_trail._global_position = $Icon/Spider/SpiderCast/SpiderTrailSpawnPoint.global_position if _horizontal_direction > 0 \
+			_last_spider_trail.trail_global_position = $Icon/Spider/SpiderCast/SpiderTrailSpawnPoint.global_position if horizontal_direction > 0 \
 				else $Icon/Spider/SpiderCast/SpiderTrailSpawnPointReverse.global_position
-			_last_spider_trail._scale_y = abs(_last_spider_trail_height) * sign(_gravity_multiplier)
-			_last_spider_trail._scale_x = -_horizontal_direction
+			_last_spider_trail.displayed_scale_y = abs(_last_spider_trail_height) * sign(gravity_multiplier)
+			_last_spider_trail.displayed_scale_x = -horizontal_direction
 			_last_spider_trail = null
 
 func _get_direction() -> int:
@@ -120,21 +123,21 @@ func _get_direction() -> int:
 	if LevelManager.platformer:
 		_direction = int(Input.get_axis("move_left", "move_right"))
 	else:
-		_direction = _horizontal_direction
+		_direction = horizontal_direction
 	return _direction
 
 func _get_jump_state() -> int:
 	var jump_state: int
-	if Input.is_action_just_pressed("jump") and is_on_floor() and _in_j_block:
-		_in_j_block = false
+	if Input.is_action_just_pressed("jump") and is_on_floor() and jump_hold_disabled:
+		jump_hold_disabled = false
 	if _click_buffer_state == ClickBufferState.NOT_HOLDING and Input.is_action_just_pressed("jump") and not (is_on_floor() or is_on_ceiling()) \
 		and internal_gamemode != Gamemode.SHIP and internal_gamemode != Gamemode.SWING and internal_gamemode != Gamemode.WAVE:
 		_click_buffer_state = ClickBufferState.BUFFERING
-	if _click_buffer_state == ClickBufferState.BUFFERING and not _orb_queue.is_empty():
+	if _click_buffer_state == ClickBufferState.BUFFERING and not orb_queue.is_empty():
 		_click_buffer_state = ClickBufferState.JUMPING
 	if Input.is_action_just_released("jump") or (is_on_floor() or is_on_ceiling()):
 		_click_buffer_state = ClickBufferState.NOT_HOLDING
-	if _in_j_block:
+	if jump_hold_disabled:
 		jump_state = -1
 	elif internal_gamemode == Gamemode.CUBE:
 		jump_state = 1 if (Input.is_action_pressed("jump") and (is_on_floor() or is_on_ceiling())) else -1
@@ -161,40 +164,40 @@ func _compute_velocity(_delta: float,
 		_direction: int, _jump_state: int,
 		) -> Vector2:
 	var _velocity: Vector2 = _previous_velocity.rotated(-gameplay_rotation)
-	var _speed: Vector2 = SPEED if not mini else SPEED_MINI
+	var _speed: Vector2 = SPEED if not player_size else SPEED_MINI
 	_is_flying_gamemode = (internal_gamemode == Gamemode.SHIP or internal_gamemode == Gamemode.SWING or internal_gamemode == Gamemode.WAVE)
 	
 	if _spider_jump_invulnerability_frames > 0: _spider_jump_invulnerability_frames -= 1
 
-	if (internal_gamemode == Gamemode.SWING or internal_gamemode == Gamemode.BALL) and _jump_state == 1 and _orb_queue.is_empty():
-		_gravity_multiplier *= -1
+	if (internal_gamemode == Gamemode.SWING or internal_gamemode == Gamemode.BALL) and _jump_state == 1 and orb_queue.is_empty():
+		gravity_multiplier *= -1
 
 	#region Apply Gravity
 	if not _is_dashing:
 		if internal_gamemode == Gamemode.SHIP:
-			_velocity.y += GRAVITY * _delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * _jump_state * -1 * FLY_GRAVITY_MULTIPLIER
+			_velocity.y += GRAVITY * _delta * gravity_multiplier * gameplay_trigger_gravity_multiplier * _jump_state * -1 * FLY_GRAVITY_MULTIPLIER
 			_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
 		elif internal_gamemode == Gamemode.SWING:
-			_velocity.y += GRAVITY * _delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * FLY_GRAVITY_MULTIPLIER
+			_velocity.y += GRAVITY * _delta * gravity_multiplier * gameplay_trigger_gravity_multiplier * FLY_GRAVITY_MULTIPLIER
 			_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
 		elif internal_gamemode == Gamemode.WAVE:
-			_velocity.y = SPEED.x * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * _jump_state * -1
-			if _speed_multiplier > 0: _velocity.y *= _speed_multiplier
-			if mini: _velocity.y *= 2
+			_velocity.y = SPEED.x * gravity_multiplier * gameplay_trigger_gravity_multiplier * _jump_state * -1
+			if speed_multiplier > 0: _velocity.y *= speed_multiplier
+			if player_size: _velocity.y *= 2
 		elif not is_on_floor():
 			if internal_gamemode == Gamemode.UFO:
-				_velocity.y += GRAVITY * _delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier * UFO_GRAVITY_MULTIPLIER
+				_velocity.y += GRAVITY * _delta * gravity_multiplier * gameplay_trigger_gravity_multiplier * UFO_GRAVITY_MULTIPLIER
 			else:
-				_velocity.y += GRAVITY * _delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier
+				_velocity.y += GRAVITY * _delta * gravity_multiplier * gameplay_trigger_gravity_multiplier
 			_velocity.y = clamp(_velocity.y, -TERMINAL_VELOCITY.y, TERMINAL_VELOCITY.y)
 	#endregion
 
-	if is_on_floor() and _jump_state == -1 and _pad_queue.is_empty():
+	if is_on_floor() and _jump_state == -1 and pad_queue.is_empty():
 		_velocity.y = 0.0
 
 	#region Apply pads velocity
-	if not _pad_queue.is_empty():
-		var _colliding_pad: GDInteractible = _pad_queue.pop_front()
+	if not pad_queue.is_empty():
+		var _colliding_pad: GDInteractible = pad_queue.pop_front()
 		_colliding_pad._set_reverse(_colliding_pad._reverse)
 		if internal_gamemode != Gamemode.WAVE:
 			if _colliding_pad._pad_type == GDInteractible.Pad.YELLOW:
@@ -204,37 +207,37 @@ func _compute_velocity(_delta: float,
 			elif _colliding_pad._pad_type == GDInteractible.Pad.RED:
 				_velocity.y = -_speed.y * (365.0/194.0)
 			elif _colliding_pad._pad_type == GDInteractible.Pad.REBOUND:
-				_velocity.y = -_rebound_velocity
+				_velocity.y = -rebound_velocity
 			elif _colliding_pad._pad_type == GDInteractible.Pad.BLACK:
 				_velocity.y = -_speed.y * -(260.0/194.0)
 		# These pads are supposed to work with the wave
 		if _colliding_pad._pad_type == GDInteractible.Pad.SPIDER:
-			_gravity_multiplier = Vector2.UP.rotated($Icon/Spider/SpiderCast.rotation).y
+			gravity_multiplier = Vector2.UP.rotated($Icon/Spider/SpiderCast.rotation).y
 			_velocity.y = _get_spider_velocity_delta() * 1/_delta
 			# _spider_jump_invulnerability_frames = 1
 			_last_spider_trail_height = abs(_get_spider_velocity_delta()/_last_spider_trail.SPIDER_TRAIL_HEIGHT)
 		elif _colliding_pad._pad_type == GDInteractible.Pad.BLUE:
-			_gravity_multiplier *= -1
-			_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier * _gameplay_trigger_gravity_multiplier if not displayed_gamemode == Gamemode.WAVE else 0.0
+			gravity_multiplier *= -1
+			_velocity.y = _speed.y * (137.0/194.0) * gravity_multiplier * gameplay_trigger_gravity_multiplier if not displayed_gamemode == Gamemode.WAVE else 0.0
 	#endregion
 
 	#region Handle jump.
-	if _jump_state == 1 and _pad_queue.is_empty() and _orb_queue.is_empty():
+	if _jump_state == 1 and pad_queue.is_empty() and orb_queue.is_empty():
 		if _is_flying_gamemode:
 			pass
 		elif internal_gamemode == Gamemode.SPIDER:
-			_gravity_multiplier *= -1
+			gravity_multiplier *= -1
 			_velocity.y = _get_spider_velocity_delta() * 1/_delta
 			# _spider_jump_invulnerability_frames = 2
 			_last_spider_trail_height = abs(_get_spider_velocity_delta()/_last_spider_trail.SPIDER_TRAIL_HEIGHT)
 		elif internal_gamemode == Gamemode.BALL:
-			_velocity.y = _speed.y * _gravity_multiplier * 0.5
+			_velocity.y = _speed.y * gravity_multiplier * 0.5
 		elif internal_gamemode == Gamemode.ROBOT:
-			_velocity.y = SPEED.x * _gravity_multiplier * -1
+			_velocity.y = SPEED.x * gravity_multiplier * -1
 		elif internal_gamemode == Gamemode.UFO:
-			_velocity.y = -_speed.y * _gravity_multiplier * UFO_GRAVITY_MULTIPLIER
+			_velocity.y = -_speed.y * gravity_multiplier * UFO_GRAVITY_MULTIPLIER
 		else:
-			_velocity.y = -_speed.y * _gravity_multiplier
+			_velocity.y = -_speed.y * gravity_multiplier
 	#endregion
 
 	#region Dashing
@@ -251,19 +254,19 @@ func _compute_velocity(_delta: float,
 	#endregion
 
 	if _direction:
-		_velocity.x = _direction * _speed.x * _speed_multiplier * int(get_parent().has_level_started)
+		_velocity.x = _direction * _speed.x * speed_multiplier * int(get_parent().has_level_started)
 	elif LevelManager.platformer and internal_gamemode != Gamemode.WAVE:
-		_velocity.x = lerp(_velocity.x, _speed.x * _speed_multiplier * _direction, 0.5)
+		_velocity.x = lerp(_velocity.x, _speed.x * speed_multiplier * _direction, 0.5)
 	else:
 		_velocity.x = 0
 
 	#region Apply orbs velocity
-	if not _orb_queue.is_empty() and (
+	if not orb_queue.is_empty() and (
 		_click_buffer_state == ClickBufferState.JUMPING
 		or (_jump_state == 1 and not _is_flying_gamemode)
 		or (Input.is_action_just_pressed("jump") and _is_flying_gamemode)
 		):
-		var _colliding_orb: GDInteractible = _orb_queue.pop_front()
+		var _colliding_orb: GDInteractible = orb_queue.pop_front()
 		_colliding_orb._pulse_shrink()
 		_colliding_orb._set_reverse(_colliding_orb._reverse)
 		_click_buffer_state = ClickBufferState.BUFFER_USED
@@ -277,25 +280,25 @@ func _compute_velocity(_delta: float,
 			if _colliding_orb._orb_type == GDInteractible.Orb.BLACK:
 				_velocity.y = -_speed.y * -(260.0/194.0)
 			if _colliding_orb._orb_type == GDInteractible.Orb.REBOUND:
-				_velocity.y = -_rebound_velocity
+				_velocity.y = -rebound_velocity
 			if displayed_gamemode == Gamemode.SPIDER:
 				_spider_state_machine.travel("jump")
 		# These orbs are supposed to work with the wave
 		if _colliding_orb._orb_type == GDInteractible.Orb.SPIDER:
 			_colliding_orb._set_spider_props()
-			_gravity_multiplier *= -sign($Icon/Spider/SpiderCast.scale.y)
+			gravity_multiplier *= -sign($Icon/Spider/SpiderCast.scale.y)
 			_velocity.y = _get_spider_velocity_delta() * 1/_delta
 			_spider_jump_invulnerability_frames = 2
 			_last_spider_trail_height = abs(_get_spider_velocity_delta()/_last_spider_trail.SPIDER_TRAIL_HEIGHT)
-			_in_j_block = true
+			jump_hold_disabled = true
 		if _colliding_orb._orb_type == GDInteractible.Orb.BLUE:
-			_gravity_multiplier *= -1
-			_velocity.y = _speed.y * (137.0/194.0) * _gravity_multiplier * _gameplay_trigger_gravity_multiplier if not displayed_gamemode == Gamemode.WAVE else 0.0
+			gravity_multiplier *= -1
+			_velocity.y = _speed.y * (137.0/194.0) * gravity_multiplier * gameplay_trigger_gravity_multiplier if not displayed_gamemode == Gamemode.WAVE else 0.0
 		if _colliding_orb._orb_type == GDInteractible.Orb.GREEN:
 			if displayed_gamemode == Gamemode.SPIDER:
 				_spider_state_machine.travel("jump")
-			_gravity_multiplier *= -1
-			_velocity.y = -_speed.y * (191.0/194.0) * _gravity_multiplier * _gameplay_trigger_gravity_multiplier if not displayed_gamemode == Gamemode.WAVE else 0.0
+			gravity_multiplier *= -1
+			_velocity.y = -_speed.y * (191.0/194.0) * gravity_multiplier * gameplay_trigger_gravity_multiplier if not displayed_gamemode == Gamemode.WAVE else 0.0
 		if _colliding_orb._orb_type == GDInteractible.Orb.DASH_GREEN:
 			_colliding_orb._set_dash_props()
 			var _last_dash_boom = DASH_BOOM.instantiate()
@@ -311,7 +314,7 @@ func _compute_velocity(_delta: float,
 			add_child(_last_dash_boom)
 			_dash_orb_initial_gameplay_rotation = gameplay_rotation
 			$DashFlame.rotation = dash_orb_rotation * _direction
-			_gravity_multiplier *= -1
+			gravity_multiplier *= -1
 			_is_dashing = true
 		if _colliding_orb._orb_type == GDInteractible.Orb.TELEPORT:
 			var _velocity_override: Vector2 = _colliding_orb._teleport_player()
@@ -320,10 +323,10 @@ func _compute_velocity(_delta: float,
 			var toggle = GDToggle.new()
 			toggle._toggle(_colliding_orb, _colliding_orb._toggled_groups)
 			toggle.queue_free()
-			_in_j_block = true
+			jump_hold_disabled = true
 	
-		if _colliding_orb._multi_usage:
-			_orb_queue.append(_colliding_orb)
+		if _colliding_orb.multi_usage:
+			orb_queue.append(_colliding_orb)
 	#endregion
 
 	if not _dead:
@@ -335,24 +338,24 @@ func _rotate_sprite_degrees(delta: float):
 	$Icon.rotation = gameplay_rotation
 	#region cube
 	$Icon/Cube.scale.y = 1.0
-	if _horizontal_direction != 0:
-		$Icon/Cube.scale.x = _horizontal_direction
+	if horizontal_direction != 0:
+		$Icon/Cube.scale.x = horizontal_direction
 	if not _is_dashing:
-		if not is_on_floor() and not is_on_ceiling() and _speed_multiplier > 0.0:
-			$Icon/Cube.rotation_degrees += delta * _gravity_multiplier * 400 * _get_direction()
+		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
+			$Icon/Cube.rotation_degrees += delta * gravity_multiplier * 400 * _get_direction()
 		else:
 			$Icon/Cube.rotation_degrees = lerpf($Icon/Cube.rotation_degrees, snapped($Icon/Cube.rotation_degrees, 90), 0.5)
 	else:
 		$Icon/Cube.rotation_degrees += delta * 800 * _get_direction()
 	#endregion
 	#region ship/swing
-	$Icon/Ship.scale.y = sign(_gravity_multiplier)
+	$Icon/Ship.scale.y = sign(gravity_multiplier)
 	$Icon/Swing.scale.y = 1.0
 	if _get_direction() != 0:
 		$Icon/Ship.scale.x = sign(_get_direction())
 		$Icon/Swing.scale.x = sign(_get_direction())
 	if not _is_dashing:
-		if not is_on_floor() and not is_on_ceiling() and _speed_multiplier > 0.0:
+		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
 			$Icon/Ship.rotation_degrees = lerpf($Icon/Ship.rotation, velocity.rotated(-gameplay_rotation).y * delta * _get_direction() * 3, 0.5)
 			$Icon/Swing.rotation_degrees = lerpf($Icon/Swing.rotation, velocity.rotated(-gameplay_rotation).y * delta * _get_direction() * 3, 0.5)
 		else:
@@ -369,23 +372,23 @@ func _rotate_sprite_degrees(delta: float):
 	if not _is_dashing:
 		if not is_on_floor() and not is_on_ceiling():
 			if velocity.rotated(-gameplay_rotation).x != 0.0:
-				if not mini:
-					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 45.0 * -_get_jump_state() * sign(_gravity_multiplier), 0.25)
+				if not player_size:
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 45.0 * -_get_jump_state() * sign(gravity_multiplier), 0.25)
 				else:
-					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 60.0 * -_get_jump_state() * sign(_gravity_multiplier), 0.25)
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 60.0 * -_get_jump_state() * sign(gravity_multiplier), 0.25)
 			else:
-				$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 90.0 * -_get_jump_state() * sign(_gravity_multiplier), 0.25)
+				$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 90.0 * -_get_jump_state() * sign(gravity_multiplier), 0.25)
 		else:
 			$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees * _get_direction(), 0.0, 0.5)
 	else:
 		$Icon/Wave/Icon.rotation = lerpf($Icon/Wave/Icon.rotation, dash_orb_rotation * _get_direction(), 0.5)
 	#endregion
 	#region ufo
-	$Icon/UFO.scale.y = sign(_gravity_multiplier)
+	$Icon/UFO.scale.y = sign(gravity_multiplier)
 	if _get_direction() != 0:
 		$Icon/UFO.scale.x = sign(_get_direction())
 	if not _is_dashing:
-		if not is_on_floor() and not is_on_ceiling() and _speed_multiplier > 0.0:
+		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
 			$Icon/UFO.rotation_degrees = lerpf($Icon/UFO.rotation_degrees, velocity.rotated(-gameplay_rotation).y * delta * _get_direction() * 0.2, 0.5)
 		else:
 			$Icon/UFO.rotation_degrees = lerpf($Icon/UFO.rotation_degrees, 0.0, 0.5)
@@ -394,19 +397,19 @@ func _rotate_sprite_degrees(delta: float):
 	#endregion
 	#region ball
 	$Icon/Ball.scale.y = 1.0
-	if _speed_multiplier > 0.0:
-		$Icon/Ball.rotation_degrees += delta * _gravity_multiplier * 0.5 * _gameplay_trigger_gravity_multiplier * velocity.rotated(-gameplay_rotation).x
+	if speed_multiplier > 0.0:
+		$Icon/Ball.rotation_degrees += delta * gravity_multiplier * 0.5 * gameplay_trigger_gravity_multiplier * velocity.rotated(-gameplay_rotation).x
 	#endregion
 	#region spider/robot
 	if _get_direction() != 0:
 		$Icon/Spider.scale.x = sign(_get_direction())
 		$Icon/Robot.scale.x = sign(_get_direction())
-	$Icon/Spider.scale.y = sign(_gravity_multiplier)
-	$Icon/Robot.scale.y = sign(_gravity_multiplier)
+	$Icon/Spider.scale.y = sign(gravity_multiplier)
+	$Icon/Robot.scale.y = sign(gravity_multiplier)
 	#endregion
 
 func _update_swing_fire() -> void:
-	if _gravity_multiplier < 0.0:
+	if gravity_multiplier < 0.0:
 		$Icon/Swing/FireBoostTop.position = $Icon/Swing/FireBoostTop.position.lerp(Vector2.ZERO, 0.2)
 		$Icon/Swing/FireBoostBottom.position = $Icon/Swing/FireBoostBottom.position.lerp(Vector2(-54.0, 63.0), 0.2)
 	else:
@@ -414,7 +417,7 @@ func _update_swing_fire() -> void:
 		$Icon/Swing/FireBoostBottom.position = $Icon/Swing/FireBoostBottom.position.lerp(Vector2.ZERO, 0.2)
 
 func _update_wave_trail() -> void:
-	if not mini:
+	if not player_size:
 		$WaveTrail.width = lerpf($WaveTrail.width, WAVE_TRAIL_WIDTH, 0.25)
 		$WaveTrail2.width = lerpf($WaveTrail2.width, WAVE_TRAIL_WIDTH * 0.5, 0.25)
 	else:
@@ -444,21 +447,21 @@ func _get_spider_velocity_delta() -> float:
 	var _spider_velocity_delta: float = abs((_target_position - position).rotated(-gameplay_rotation).y)
 	_spider_velocity_delta -= $GroundCollider.shape.size.y/2 * scale.y
 	_last_spider_trail = SPIDER_TRAIL.instantiate()
-	_last_spider_trail._rotation = gameplay_rotation
-	return _spider_velocity_delta * _gravity_multiplier * _gameplay_trigger_gravity_multiplier
+	_last_spider_trail.trail_rotation = gameplay_rotation
+	return _spider_velocity_delta * gravity_multiplier * gameplay_trigger_gravity_multiplier
 
 func _update_spider_state_machine() -> void:
 	# `jump` was moved to _compute_velocity to only be triggered with orbs and pads
 	# _spider_state_machine.travel("jump")
 	if _is_dashing or (_get_jump_state() == -1 and not is_on_floor() and not is_on_ceiling() and not is_on_wall()):
 		_spider_state_machine.travel("fall")
-	elif _speed_multiplier >= GDInteractible.SPEEDS[GDInteractible.SpeedPortal.SPEED_4X]:
-		_spider_animation_tree["parameters/run/PlayerSpeed/scale"] = _speed_multiplier/GDInteractible.SPEEDS[GDInteractible.SpeedPortal.SPEED_4X]
+	elif speed_multiplier >= GDInteractible.SPEEDS[GDInteractible.SpeedPortal.SPEED_4X]:
+		_spider_animation_tree["parameters/run/PlayerSpeed/scale"] = speed_multiplier/GDInteractible.SPEEDS[GDInteractible.SpeedPortal.SPEED_4X]
 		_spider_state_machine.travel("run")
-	elif _speed_multiplier == GDInteractible.SPEEDS[GDInteractible.SpeedPortal.SPEED_0X] or _get_direction() == 0:
+	elif speed_multiplier == GDInteractible.SPEEDS[GDInteractible.SpeedPortal.SPEED_0X] or _get_direction() == 0:
 		_spider_state_machine.travel("idle")
 	else:
-		_spider_animation_tree["parameters/walk/PlayerSpeed/scale"] = _speed_multiplier
+		_spider_animation_tree["parameters/walk/PlayerSpeed/scale"] = speed_multiplier
 		_spider_state_machine.travel("walk")
 
 func _player_death() -> void:

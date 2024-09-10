@@ -23,17 +23,17 @@ func _on_leave_pressed() -> void:
 func _on_continue_pressed() -> void:
 	get_tree().paused = !get_tree().paused
 	if get_tree().paused:
-		emit_signal("paused")
+		paused.emit()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		get_parent().show()
 	else:
-		emit_signal("unpaused")
+		unpaused.emit()
 		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 		get_parent().hide()
 
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
 	get_tree().reload_current_scene()
-	emit_signal("unpaused")
+	unpaused.emit()
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	get_parent().hide()

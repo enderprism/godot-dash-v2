@@ -6,11 +6,11 @@ class_name tToggle extends Node2D
 		_toggled_groups = value
 		_update_texture()
 
-var _base: tBase
+var base: tBase
 
 func _ready() -> void:
 	TriggerSetup.setup(self, false, false)
-	_base._sprite.texture = preload("res://assets/textures/triggers/ToggleMultipleGroups.svg")
+	base.sprite.texture = preload("res://assets/textures/triggers/ToggleMultipleGroups.svg")
 
 func _start(_body: Node2D) -> void:
 	var toggle = GDToggle.new()
@@ -21,13 +21,13 @@ func _update_texture() -> void:
 	if _toggled_groups.size() == 1 and _toggled_groups[0] != null:
 		match _toggled_groups[0].state: 
 			GDToggle.ToggleState.ON:
-				_base._sprite.texture = preload("res://assets/textures/triggers/ToggleOn.svg")
+				base.sprite.texture = preload("res://assets/textures/triggers/ToggleOn.svg")
 			GDToggle.ToggleState.OFF:
-				_base._sprite.texture = preload("res://assets/textures/triggers/ToggleOff.svg")
+				base.sprite.texture = preload("res://assets/textures/triggers/ToggleOff.svg")
 			GDToggle.ToggleState.FLIP:
-				_base._sprite.texture = preload("res://assets/textures/triggers/ToggleFlip.svg")
+				base.sprite.texture = preload("res://assets/textures/triggers/ToggleFlip.svg")
 	else:
-		_base._sprite.texture = preload("res://assets/textures/triggers/ToggleMultipleGroups.svg")
+		base.sprite.texture = preload("res://assets/textures/triggers/ToggleMultipleGroups.svg")
 
 func _physics_process(_delta: float) -> void:
 	if visible:

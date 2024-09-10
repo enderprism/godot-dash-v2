@@ -7,8 +7,8 @@ var _weight: float
 
 # Tween controls
 @export_range(0.0, 10.0, 0.0001, "or_more") var _duration: float = 1.0
-@export var _easing_type: Tween.EaseType = Tween.EASE_IN_OUT
-@export var _easing_transition: Tween.TransitionType
+@export var easing_type: Tween.EaseType = Tween.EASE_IN_OUT
+@export var easing_transition: Tween.TransitionType
 
 var _previous_weight: float
 
@@ -18,15 +18,15 @@ func _ready() -> void:
 
 func _start(_body: Node2D) -> void:
 	_tween = get_tree().create_tween()
-	if $"../tBase"._multi_usage:
+	if $"../tBase".multi_usage:
 		_reset()
 		_tween.tween_property(self, "_weight", 1.0, _duration) \
-			.set_trans(_easing_transition) \
-			.set_ease(_easing_type).from(0.0)
+			.set_trans(easing_transition) \
+			.set_ease(easing_type).from(0.0)
 	else:
 		_tween.tween_property(self, "_weight", 1.0, _duration) \
-			.set_trans(_easing_transition) \
-			.set_ease(_easing_type)
+			.set_trans(easing_transition) \
+			.set_ease(easing_type)
 
 func _get_weight_delta() -> float:
 	var _result = _weight - _previous_weight

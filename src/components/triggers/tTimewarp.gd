@@ -5,27 +5,28 @@ class_name tTimewarp
 
 @export_range(0.0, 1.0 , 0.01, "or_greater") var _time_scale: float = 1.0
 
-var _base: tBase
-var _easing: tEasing
+var base: tBase
+var easing: tEasing
+
 var _initial_time_scale: float
 
 func _ready() -> void:
 	TriggerSetup.setup(self, false)
-	_base._sprite.set_texture(preload("res://assets/textures/triggers/Timewarp.svg"))
+	base.sprite.set_texture(preload("res://assets/textures/triggers/Timewarp.svg"))
 
 func _start(_body: Node2D) -> void:
 	_initial_time_scale = Engine.time_scale
-	if _easing._duration == 0.0:
+	if easing._duration == 0.0:
 		Engine.time_scale = _time_scale
 
 func _reset() -> void:
 	Engine.time_scale = _initial_time_scale
 
 func _physics_process(_delta: float) -> void:
-	if not Engine.is_editor_hint() and not is_zero_approx(_easing._weight):
-		if _easing._duration > 0.0:
-			var _weight_delta: float = _easing._get_weight_delta()
+	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
+		if easing._duration > 0.0:
+			var _weight_delta: float = easing._get_weight_delta()
 			var _time_scale_delta: float = (_time_scale - _initial_time_scale) * _weight_delta
 			Engine.time_scale += _time_scale_delta
 	if Engine.is_editor_hint():
-		_base.position = Vector2.ZERO
+		base.position = Vector2.ZERO

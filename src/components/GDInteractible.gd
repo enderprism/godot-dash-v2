@@ -114,12 +114,12 @@ enum HorizontalDirection {
 @export var _gravity_portal_type: GravityPortal = GravityPortal.NORMAL
 
 # @@show_if(object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.SIZE_PORTAL)
-@export var mini: bool
+@export var player_size: bool
 
 # @@show_if(object_type == ObjectType.ORB or object_type == ObjectType.PAD)
-@export var _horizontal_direction: HorizontalDirection
+@export var horizontal_direction: HorizontalDirection
 
-# @@show_if(object_type == ObjectType.ORB and _horizontal_direction == HorizontalDirection.SET or object_type == ObjectType.PAD and _horizontal_direction == HorizontalDirection.SET)
+# @@show_if(object_type == ObjectType.ORB and horizontal_direction == HorizontalDirection.SET or object_type == ObjectType.PAD and horizontal_direction == HorizontalDirection.SET)
 @export var _reverse: bool
 
 # @@show_if(object_type == ObjectType.GAMEMODE_PORTAL)
@@ -155,7 +155,7 @@ enum HorizontalDirection {
 # @@show_if(object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.DUAL_PORTAL)
 @export var _dual: bool
 
-@export var _multi_usage: bool = true
+@export var multi_usage: bool = true
 #endregion
 
 var _player: Player
@@ -182,7 +182,7 @@ func _process(delta: float) -> void:
 			$ReboundCancelArea/Hitbox.debug_color = Color("397f0033")
 		if object_type == ObjectType.ORB:
 			if _orb_type == Orb.BLUE:
-				$Sprite.scale.y = sign(_player._gravity_multiplier)/4
+				$Sprite.scale.y = sign(_player.gravity_multiplier)/4
 				$Sprite.global_rotation = _player.gameplay_rotation
 			elif _orb_type == Orb.BLACK or _orb_type == Orb.GREEN:
 				$Sprite.global_rotation += 5 * delta
@@ -210,7 +210,7 @@ func _process(delta: float) -> void:
 			$ReboundCancelArea/Hitbox.debug_color = Color("397f0000")
 		if object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT \
 				or object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.TELEPORTAL:
-			$TargetLink._target = _teleport_target
+			$TargetLink.target = _teleport_target
 		else:
 			_override_player_velocity = false
 		if has_node("Hitbox"): $Hitbox.debug_color = Color("00ff0000")
@@ -238,14 +238,14 @@ func _process(delta: float) -> void:
 func _on_player_enter(_body: Node2D) -> void:
 	_pulse_grow()
 	if object_type == ObjectType.ORB:
-		_player._orb_queue.push_front(self)
-		_queue_index = len(_player._orb_queue) - 1 if len(_player._orb_queue) - 1 > 0 else 0
+		_player.orb_queue.push_front(self)
+		_queue_index = len(_player.orb_queue) - 1 if len(_player.orb_queue) - 1 > 0 else 0
 	elif object_type == ObjectType.PAD:
-		set_deferred("monitoring", _multi_usage)
-		_player._pad_queue.push_front(self)
-		_queue_index = len(_player._pad_queue) - 1 if len(_player._pad_queue) - 1 > 0 else 0
+		set_deferred("monitoring", multi_usage)
+		_player.pad_queue.push_front(self)
+		_queue_index = len(_player.pad_queue) - 1 if len(_player.pad_queue) - 1 > 0 else 0
 	elif object_type == ObjectType.GAMEMODE_PORTAL:
-		set_deferred("monitoring", _multi_usage)
+		set_deferred("monitoring", multi_usage)
 		_pulse_shrink()
 		_pulse_white_start()
 		_player_camera._freefly = _freefly
@@ -253,33 +253,33 @@ func _on_player_enter(_body: Node2D) -> void:
 			_player._clear_wave_trail()
 		_player.internal_gamemode = _gamemode_portal_type
 		_player.displayed_gamemode = _gamemode_portal_type
-		_player.mini = _player.mini
+		_player.player_size = _player.player_size
 		if not _freefly:
 			GroundData.center = global_position
 			GroundData.distance = LOCKEDFLY_GAMEMODE_GRID_HEIGHTS[_gamemode_portal_type] * LevelManager.CELL_SIZE * 0.5
 			if global_position.y + GroundData.distance > LevelManager.ground_sprites[0].DEFAULT_Y:
 				GroundData.offset = (global_position.y + GroundData.distance) - LevelManager.ground_sprites[0].DEFAULT_Y
 	elif object_type == ObjectType.SPEED_PORTAL:
-		set_deferred("monitoring", _multi_usage)
+		set_deferred("monitoring", multi_usage)
 		_pulse_white_start()
-		_player._speed_multiplier = SPEEDS[_speed_portal_type]
+		_player.speed_multiplier = SPEEDS[_speed_portal_type]
 		if _speed_portal_type == SpeedPortal.SPEED_0X:
 			_0x_speed_centering_player = true
 	elif object_type == ObjectType.OTHER_PORTAL:
-		set_deferred("monitoring", _multi_usage)
+		set_deferred("monitoring", multi_usage)
 		_pulse_shrink()
 		_pulse_white_start()
 		match _other_portal_type:
 			OtherPortal.SIZE_PORTAL:
-				_player.mini = mini
+				_player.player_size = player_size
 			OtherPortal.GRAVITY_PORTAL:
 				match _gravity_portal_type:
 					GravityPortal.NORMAL:
-						_player._gravity_multiplier = abs(_player._gravity_multiplier)
+						_player.gravity_multiplier = abs(_player.gravity_multiplier)
 					GravityPortal.FLIPPED:
-						_player._gravity_multiplier = abs(_player._gravity_multiplier) * -1
+						_player.gravity_multiplier = abs(_player.gravity_multiplier) * -1
 					GravityPortal.TOGGLE:
-						_player._gravity_multiplier *= -1
+						_player.gravity_multiplier *= -1
 			OtherPortal.TELEPORTAL:
 				_set_reverse(_reverse)
 				_teleport_player()
@@ -303,15 +303,15 @@ func _rebound() -> void:
 		$ReboundObjectScaleOrigin.scale.y = lerpf(0.7, 1.7, _rebound_factor)
 		$Hitbox.scale.x = lerpf(0.7, 1.7, _rebound_factor)
 		$Hitbox.scale.y = lerpf(0.7, 1.7, _rebound_factor)
-	if _player.velocity.rotated(-_player.gameplay_rotation).y * sign(_player._gravity_multiplier) > 0:
-		_player._rebound_velocity = _player.velocity.rotated(-_player.gameplay_rotation).y
+	if _player.velocity.rotated(-_player.gameplay_rotation).y * sign(_player.gravity_multiplier) > 0:
+		_player.rebound_velocity = _player.velocity.rotated(-_player.gameplay_rotation).y
 	elif _player.velocity.rotated(-_player.gameplay_rotation).y == 0 and _player._get_jump_state() == -1 and _player.is_on_floor() and $ReboundCancelArea.has_overlapping_bodies():
-		_player._rebound_velocity = 0.0
+		_player.rebound_velocity = 0.0
 
 func _on_player_exit(_body: Node2D) -> void:
 	if object_type == ObjectType.ORB:
-		if self in _player._orb_queue:
-			_player._orb_queue.erase(self)
+		if self in _player.orb_queue:
+			_player.orb_queue.erase(self)
 		if _orb_type == Orb.SPIDER:
 			_player.get_node("Icon/Spider/SpiderCast").scale.y = 1
 
@@ -372,17 +372,17 @@ func _pulse_shrink() -> void:
 
 
 func _set_reverse(reverse: bool) -> void:
-	if _horizontal_direction == HorizontalDirection.SET:
-		_player._horizontal_direction = -1 if reverse else 1
-	elif _horizontal_direction == HorizontalDirection.FLIP:
-		_player._horizontal_direction *= -1
+	if horizontal_direction == HorizontalDirection.SET:
+		_player.horizontal_direction = -1 if reverse else 1
+	elif horizontal_direction == HorizontalDirection.FLIP:
+		_player.horizontal_direction *= -1
 
 func _set_dash_props() -> void:
 	_player.dash_orb_rotation = pingpong(global_rotation, PI/2) * sign(global_rotation_degrees)
 	_player.dash_orb_position = global_position
 
 func _set_spider_props() -> void:
-	var _player_gravity_to_rotation: float = 0.0 if _player._gravity_multiplier > 0 else 180.0
+	var _player_gravity_to_rotation: float = 0.0 if _player.gravity_multiplier > 0 else 180.0
 	if is_equal_approx(fmod((abs(rotation_degrees) - _player_gravity_to_rotation)/180, 2), 1):
 		_player.get_node("Icon/Spider/SpiderCast").scale.y = -1
 	else:

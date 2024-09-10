@@ -16,9 +16,9 @@ enum Mode {
 		notify_property_list_changed()
 @export var _pivot: Node2D
 @export var _change_position_only: bool
-@export var _mode: Mode = Mode.ADD:
+@export var mode: Mode = Mode.ADD:
 	set(value):
-		_mode = value
+		mode = value
 		notify_property_list_changed()
 @export var _set_scale: Vector2
 @export var _add_scale: Vector2
@@ -28,33 +28,33 @@ enum Mode {
 
 # Hide unneeded elements in the inspector
 func _validate_property(property: Dictionary) -> void:
-	if property.name == "_set_scale" and _mode != Mode.SET:
+	if property.name == "_set_scale" and mode != Mode.SET:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name == "_add_scale" and _mode != Mode.ADD:
+	if property.name == "_add_scale" and mode != Mode.ADD:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name == "_multiply_scale" and _mode != Mode.MULTIPLY and _mode != Mode.DIVIDE:
+	if property.name == "_multiply_scale" and mode != Mode.MULTIPLY and mode != Mode.DIVIDE:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name in ["_copy_target", "_copy_multiplier"] and _mode != Mode.COPY:
+	if property.name in ["_copy_target", "_copy_multiplier"] and mode != Mode.COPY:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name in ["_pivot", "_change_position_only"] and _scale_around_self:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 var _targets: Array[Node] ## Array of all the [Node2D] in a group.
 var _initial_scales: Dictionary ## Scale for every [Node2D] in [member _targets]
-var _base: tBase
-var _easing: tEasing
-var _target_link: GDTargetLink
+var base: tBase
+var easing: tEasing
+var target_link: GDTargetLink
 
 func _ready() -> void:
 	TriggerSetup.setup(self, true)
-	_base._sprite.set_texture(preload("res://assets/textures/triggers/Scale.svg"))
-	_targets = get_tree().get_nodes_in_group(_base._target_group)
+	base.sprite.set_texture(preload("res://assets/textures/triggers/Scale.svg"))
+	_targets = get_tree().get_nodes_in_group(base.target_group)
 
 func _update_target_link() -> void:
-	_target_link._target = _base._target
+	target_link.target = base._target
 
 func _start(_body: Node2D) -> void:
-	if _easing._is_inactive():
+	if easing._is_inactive():
 		if not _targets.is_empty():
 			for _target: Node2D in _targets:
 				_initial_scales[_target] = _target.global_scale
@@ -69,9 +69,9 @@ func _reset() -> void:
 		printerr("In ", name, ", _reset: _target is unset")
 
 func _physics_process(_delta: float) -> void:
-	if not Engine.is_editor_hint() and not is_zero_approx(_easing._weight):
+	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
 		if not _targets.is_empty():
-			var _weight_delta = _easing._get_weight_delta()
+			var _weight_delta = easing._get_weight_delta()
 			var _pivot_scale: Vector2
 			# Do assignment outside loop to avoid doing for every object in the group.
 			# The performance benefit is probably negligeable.
@@ -80,7 +80,7 @@ func _physics_process(_delta: float) -> void:
 			for _target: Node2D in _targets:
 				var _initial_global_scale: Vector2 = _initial_scales[_target]
 				var _scale_delta: Vector2
-				match _mode:
+				match mode:
 					Mode.SET:
 						_scale_delta = (_set_scale - _initial_global_scale) * _weight_delta
 					Mode.ADD:
@@ -91,7 +91,7 @@ func _physics_process(_delta: float) -> void:
 						_scale_delta = ((_initial_global_scale / _multiply_scale) - _initial_global_scale) * _weight_delta
 					Mode.COPY:
 						if _copy_target != null:
-							_target.global_scale = lerp(_initial_global_scale, _copy_target.global_scale * _copy_multiplier, _easing._weight)
+							_target.global_scale = lerp(_initial_global_scale, _copy_target.global_scale * _copy_multiplier, easing._weight)
 						else:
 							printerr("In ", name, ": copy_target is unset!")
 						# Escape the current loop iteration to avoid adding the rotation delta, even if it's null.
@@ -110,5 +110,5 @@ func _physics_process(_delta: float) -> void:
 		else:
 			printerr("In ", name, "_process: _target is unset")
 	elif Engine.is_editor_hint() or LevelManager.in_editor:
-		_target_link.position = Vector2.ZERO
-		if Engine.is_editor_hint(): _base.position = Vector2.ZERO
+		target_link.position = Vector2.ZERO
+		if Engine.is_editor_hint(): base.position = Vector2.ZERO

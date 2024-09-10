@@ -154,8 +154,8 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../DefaultCube7")
-_target_group = &"colon_jumpscare_wall"
-_multi_usage = true
+target_group = &"colon_jumpscare_wall"
+multi_usage = true
 
 [node name="SpawnTargetLink" parent="tMove" instance=ExtResource("6_bolvq")]
 z_index = -50
@@ -182,8 +182,8 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../FloorButton")
-_target_group = &"floorbutton1"
-_multi_usage = true
+target_group = &"floorbutton1"
+multi_usage = true
 
 [node name="DefaultCube9" parent="." instance=ExtResource("5_g4mtk")]
 visible = false
@@ -253,14 +253,14 @@ _easing_transition = 3
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../SpiderPortal")
-_target_group = &"spiderportal"
-_multi_usage = true
+target_group = &"spiderportal"
+multi_usage = true
 
 [node name="tScale" type="Node2D" parent="."]
 position = Vector2(1342, -1088)
 script = ExtResource("19_vvu8j")
 _scale_around_self = true
-_mode = 3
+mode = 3
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tScale" instance=ExtResource("6_bolvq")]
@@ -274,8 +274,8 @@ _easing_transition = 3
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../SpiderPortal")
-_target_group = &"spiderportal"
-_multi_usage = true
+target_group = &"spiderportal"
+multi_usage = true
 
 [node name="TeleportalIn" parent="." instance=ExtResource("20_ocowa")]
 visible = false
@@ -299,7 +299,7 @@ _duration = 0.0
 [node name="tBase" type="Area2D" parent="tGameplayRotate"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
-_hitbox_height = 2.0
+hitbox_height = 2.0
 
 [node name="Indicator" type="Node2D" parent="tGameplayRotate"]
 visible = false
@@ -319,8 +319,8 @@ _duration = 0.0
 [node name="tBase" type="Area2D" parent="tGameplayRotate2"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
-_hitbox_height = 1.0
-_multi_usage = true
+hitbox_height = 1.0
+multi_usage = true
 
 [node name="Indicator" type="Node2D" parent="tGameplayRotate2"]
 visible = false
@@ -353,7 +353,7 @@ _target = NodePath("../../Cross")
 [node name="tCameraStatic3" type="Node2D" parent="."]
 position = Vector2(4032, -1088)
 script = ExtResource("24_r7vme")
-_mode = 1
+mode = 1
 _ignore_x = true
 metadata/_edit_group_ = true
 
@@ -415,7 +415,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../PinkOrb")
-_target_group = &"orb1"
+target_group = &"orb1"
 
 [node name="SpawnTargetLink" parent="tMove2" instance=ExtResource("6_bolvq")]
 z_index = -50
@@ -441,7 +441,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../PinkOrb2")
-_target_group = &"orb2"
+target_group = &"orb2"
 
 [node name="tSpawn" type="Node2D" parent="."]
 position = Vector2(0, -576)
@@ -501,7 +501,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../FloorButton2")
-_target_group = &"floorbutton2"
+target_group = &"floorbutton2"
 
 [node name="LowerSpike1" type="Node2D" parent="."]
 position = Vector2(2176, -1088)
@@ -522,7 +522,7 @@ _easing_transition = 1
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
-_target_group = &"spike1"
+target_group = &"spike1"
 
 [node name="SpawnTargetLink" parent="LowerSpike1" instance=ExtResource("6_bolvq")]
 z_index = -50
@@ -548,7 +548,7 @@ _easing_transition = 1
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
-_target_group = &"spike2"
+target_group = &"spike2"
 
 [node name="SpawnTargetLink" parent="LowerSpike2" instance=ExtResource("6_bolvq")]
 z_index = -50
@@ -574,7 +574,7 @@ _easing_transition = 1
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
-_target_group = &"spike3"
+target_group = &"spike3"
 
 [node name="SpawnTargetLink" parent="LowerSpike3" instance=ExtResource("6_bolvq")]
 z_index = -50
@@ -606,7 +606,7 @@ position = Vector2(2112, -448)
 position = Vector2(1984, -320)
 rotation = 1.57079
 script = ExtResource("24_r7vme")
-_mode = 1
+mode = 1
 _ignore_y = true
 metadata/_edit_group_ = true
 
@@ -620,7 +620,7 @@ _easing_transition = 1
 [node name="tBase" type="Area2D" parent="tCameraStatic2" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
-_hitbox_height = 1.5
+hitbox_height = 1.5
 _target = NodePath("../../Cross")
 
 [node name="CubePortal" parent="." instance=ExtResource("28_vs028")]
@@ -690,8 +690,8 @@ _easing_transition = 1
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
-_target_group = &"BallPortalWithPads"
-_multi_usage = true
+target_group = &"BallPortalWithPads"
+multi_usage = true
 
 [node name="FloorButtonMove3" type="Node2D" parent="."]
 position = Vector2(2176, 192)
@@ -713,8 +713,8 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../FloorButton3")
-_target_group = &"floorbutton3"
-_multi_usage = true
+target_group = &"floorbutton3"
+multi_usage = true
 
 [node name="SpawnTargetLink" parent="FloorButtonMove3" instance=ExtResource("6_bolvq")]
 z_index = -50
@@ -764,7 +764,7 @@ _easing_transition = 3
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../SpiderPortal")
-_target_group = &"spiderportal"
+target_group = &"spiderportal"
 
 [node name="Cross2" type="Sprite2D" parent="."]
 position = Vector2(5696, -576)
@@ -797,7 +797,7 @@ _duration = 0.4688
 [node name="tBase" type="Area2D" parent="tSpawn5"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
-_multi_usage = true
+multi_usage = true
 
 [node name="tRotate2" type="Node2D" parent="." node_paths=PackedStringArray("_pivot")]
 position = Vector2(5824, -832)
@@ -819,8 +819,8 @@ _easing_transition = 3
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
-_target_group = &"spawnlooped_cube"
-_multi_usage = true
+target_group = &"spawnlooped_cube"
+multi_usage = true
 
 [node name="WavePortal" parent="." instance=ExtResource("31_bjlog")]
 position = Vector2(4416, -704)

@@ -19,9 +19,9 @@ enum TriggerHitboxShape {
 		_set_hitbox_shape()
 		notify_property_list_changed()
 
-@export var _hitbox_height: float = 64.0:
+@export var hitbox_height: float = 64.0:
 	set(value):
-		_hitbox_height = value
+		hitbox_height = value
 		_set_hitbox_shape()
 
 ## The trigger's target.
@@ -30,17 +30,17 @@ enum TriggerHitboxShape {
 		_target = value
 		emit_signal("target_changed")
 
-@export var _target_group: StringName
+@export var target_group: StringName
 
 ## If the trigger can be used multiple times.
-@export var _multi_usage: bool = false
+@export var multi_usage: bool = false
 
 func _validate_property(property: Dictionary) -> void:
-	if property.name == "_hitbox_height" and _hitbox_shape != TriggerHitboxShape.LINE:
+	if property.name == "hitbox_height" and _hitbox_shape != TriggerHitboxShape.LINE:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 ## The trigger's sprite. Hidden at runtime unless collision shapes are visible ([code]Debug → Visible Collision Shapes[/codeb]).
-var _sprite: Sprite2D
+var sprite: Sprite2D
 ## The trigger's collision shape.
 var _hitbox: CollisionShape2D
 
@@ -49,8 +49,8 @@ func _set_hitbox_shape() -> void:
 		match _hitbox_shape:
 			TriggerHitboxShape.LINE:
 				_hitbox.shape = SegmentShape2D.new()
-				_hitbox.shape.a = Vector2(0, -_hitbox_height * LevelManager.CELL_SIZE)
-				_hitbox.shape.b = Vector2(0,  _hitbox_height * LevelManager.CELL_SIZE)
+				_hitbox.shape.a = Vector2(0, -hitbox_height * LevelManager.CELL_SIZE)
+				_hitbox.shape.b = Vector2(0,  hitbox_height * LevelManager.CELL_SIZE)
 			TriggerHitboxShape.SQUARE:
 				_hitbox.shape = RectangleShape2D.new()
 				_hitbox.shape.size = Vector2.ONE * LevelManager.CELL_SIZE
@@ -71,21 +71,21 @@ func _ready() -> void:
 	else:
 		_hitbox = $Hitbox
 	if not has_node("Sprite"):
-		_sprite = Sprite2D.new()
-		_sprite.name = "Sprite"
-		add_child(_sprite)
-		_sprite.set_owner(self)
-		_sprite.scale = Vector2.ONE/4
+		sprite = Sprite2D.new()
+		sprite.name = "Sprite"
+		add_child(sprite)
+		sprite.set_owner(self)
+		sprite.scale = Vector2.ONE/4
 	else:
-		_sprite = $Sprite
-	_sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
-	if not _multi_usage and not body_entered.is_connected(_disable): body_entered.connect(_disable)
+		sprite = $Sprite
+	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
+	if not multi_usage and not body_entered.is_connected(_disable): body_entered.connect(_disable)
 
 func _physics_process(_delta: float) -> void:
-	_sprite.visible = _sprite_visible()
+	sprite.visible = _sprite_visible()
 	if not get_parent() is tGameplayRotate:
-		_sprite.global_rotation = 0.0
-	_sprite.global_scale = Vector2.ONE/4
+		sprite.global_rotation = 0.0
+	sprite.global_scale = Vector2.ONE/4
 
 func _disable(_body: Node2D) -> void:
 	set_deferred("monitorable", false)
