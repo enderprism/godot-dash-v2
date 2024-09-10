@@ -5,15 +5,15 @@ var has_level_started: bool
 func _ready() -> void:
 	LevelManager.in_editor = get_parent() is EditorScene
 	LevelManager.background_sprites.clear()
-	LevelManager.background_sprites.append($Background)
-	LevelManager.background_sprites.append($Background2)
+	LevelManager.background_sprites.append($BackgroundParallax/Background)
+	LevelManager.background_sprites.append($BackgroundParallax/Background2)
 	LevelManager.ground_sprites.clear()
-	LevelManager.ground_sprites.append($GroundDownOrigin)
-	LevelManager.ground_sprites.append($GroundUpOrigin)
+	LevelManager.ground_sprites.append($GroundDownParallax/GroundDownOrigin)
+	LevelManager.ground_sprites.append($GroundUpParallax/GroundUpOrigin)
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), false)
 	if not get_parent() is EditorScene:
-		$EditorGrid.hide()
+		$EditorGridParallax/EditorGrid.hide()
 		var current_level = ResourceLoader.load(LevelManager.current_level, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE).instantiate()
 		$Level.add_child(current_level)
 		_start_level()

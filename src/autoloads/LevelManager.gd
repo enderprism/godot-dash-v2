@@ -12,4 +12,4 @@ var player_camera: PlayerCamera
 var background_sprites: Array[GDParallaxSprite]
 var ground_sprites: Array[GroundObject]
 var level_song_player: AudioStreamPlayer
-var platformer: bool = false
+var platformer := false

@@ -46,26 +46,26 @@ func _physics_process(_delta: float) -> void:
 			if not LevelManager.platformer:
 				_position_offset.y = lerpf(
 					_position_offset.y,
-					(sign(player._gameplay_rotation_degrees) * 1.4 * DEFAULT_OFFSET.x * player._get_direction() * sign(player._speed_multiplier))/zoom.y, _offset_snap.x
+					(sign(player._gameplay_rotation_degrees) * -1.4 * 0.5 * DEFAULT_OFFSET.x * player._get_direction() * sign(player._speed_multiplier))/zoom.y, _offset_snap.x
 				)
 			else:
 				_position_offset.y = lerpf(
 					_position_offset.y,
-					(sign(player._gameplay_rotation_degrees) * -1.4 * 0.5 * -DEFAULT_OFFSET.x * player._get_direction() * sign(player._speed_multiplier))/zoom.y, _offset_snap.x * 0.5
+					(sign(player._gameplay_rotation_degrees) * -DEFAULT_OFFSET.x * player._get_direction() * sign(player._speed_multiplier))/zoom.y, _offset_snap.x * 0.5
 				)
-			if _static.x == 0 and _freefly and abs(_player_distance.x) > (MAX_DISTANCE / zoom.y):
+			if _static.x == 0 and _freefly and abs(_player_distance.x) > ((MAX_DISTANCE+200) / zoom.y):
 				position.x = lerpf(
 					position.x,
-					player.position.x - sign(_player_distance.x) * (MAX_DISTANCE / zoom.y),
-					_position_snap.x,
+					player.position.x - sign(_player_distance.x) * ((MAX_DISTANCE+200) / zoom.y),
+					_position_snap.y,
 				)
 			elif not _freefly:
 				position.x = lerpf(
 					position.x,
-					GroundData.center.rotated(-LevelManager.player._gameplay_rotation).y - GroundData.offset,
-					_position_snap.x
+					GroundData.center.rotated(-LevelManager.player.gameplay_rotation).y - GroundData.offset,
+					_position_snap.y
 				)
-			if _static.y == 0: position.y = lerpf(position.y, player.position.y, _position_snap.y)
+			if _static.y == 0: position.y = lerpf(position.y, player.position.y, _position_snap.x)
 		else:
 			if not LevelManager.platformer:
 				_position_offset.x = lerpf(
@@ -87,7 +87,7 @@ func _physics_process(_delta: float) -> void:
 			elif not _freefly:
 				position.y = lerpf(
 					position.y,
-					GroundData.center.rotated(-LevelManager.player._gameplay_rotation).y - GroundData.offset,
+					GroundData.center.rotated(-LevelManager.player.gameplay_rotation).y - GroundData.offset,
 					_position_snap.y
 				)
 			if _static.x == 0: position.x = lerpf(position.x, player.position.x, _position_snap.x)

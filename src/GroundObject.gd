@@ -5,31 +5,32 @@ class_name GroundObject
 const LERP_FACTOR: float = 0.5
 
 @export var DEFAULT_Y: float
-@export_range(-1, 1, 2) var distance_multiplier: int = 1
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	_reset_y()
+@export_enum("Up:-1", "Down:1") var ground_position: int = 1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if LevelManager.player_camera != null:
-		var global_position_rotated: Vector2 = global_position.rotated(-LevelManager.player._gameplay_rotation)
+		var zoom_factor: Vector2 = PlayerCamera.DEFAULT_ZOOM/LevelManager.player_camera.zoom
+		# var zoom_factor := Vector2.ONE
+		var global_position_rotated: Vector2 = global_position.rotated(LevelManager.player.gameplay_rotation)
 		if LevelManager.player_camera._freefly:
-			global_position_rotated.y = lerpf(
-				global_position_rotated.y,
-				DEFAULT_Y,
+			global_position_rotated = global_position_rotated.lerp(
+				Vector2(global_position_rotated.x, DEFAULT_Y),
 				LERP_FACTOR
 			)
 		else:
-			global_position_rotated.y = lerpf(
-				global_position_rotated.y,
-				(distance_multiplier * GroundData.distance) / (LevelManager.player_camera.zoom.y/PlayerCamera.DEFAULT_ZOOM.y) + GroundData.center.rotated(-LevelManager.player._gameplay_rotation).y - GroundData.offset,
+			global_position_rotated = global_position_rotated.lerp(
+				Vector2(
+					GroundData.center.x,
+					(ground_position * GroundData.distance) \
+						* zoom_factor.y \
+						+ GroundData.center.y - GroundData.offset
+				),
 				LERP_FACTOR
 			)
-		global_position = global_position_rotated.rotated(LevelManager.player._gameplay_rotation)
-		rotation = LevelManager.player._gameplay_rotation
+		global_position = global_position_rotated.rotated(-LevelManager.player.gameplay_rotation)
 
-func _reset_y() -> void:
-	rotation = 0
+## Sync the rotation with P1's [member Player.gameplay_rotation] on gamemode change.
+func _sync_rotation(new_gameplay_rotation: float) -> void:
+	rotation = new_gameplay_rotation

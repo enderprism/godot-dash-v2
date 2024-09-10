@@ -37,9 +37,14 @@ const LINE_COLOR_SECONDARY := Color("ffffff", 0.3)
 const LINE_WIDTH_PRIMARY := 4.0
 const LINE_WIDTH_SECONDARY := 2.0
 
+func _ready() -> void:
+	if get_parent() is Parallax2D:
+		get_parent().repeat_size = Vector2(_grid_size) * _cell_size * 2
+	visible = LevelManager.in_editor
+
 func _draw() -> void:
 	var _line_width: Vector2
-	for cell_x in _grid_size.x:
+	for cell_x in _grid_size.x + 1:
 		var _line_color_y: Color
 		var _line_base_y = 0.0 if not _symmetrize & 0b10 else _grid_size.y * _cell_size.y
 		if (cell_x % _primary_line_every.x) == 0:
@@ -63,7 +68,7 @@ func _draw() -> void:
 			Vector2(-cell_x * _cell_size.x, _line_base_y),
 			Vector2(-cell_x * _cell_size.x, -_grid_size.y * _cell_size.y),
 			_line_color_y, _line_width.y, )
-	for cell_y in _grid_size.y:
+	for cell_y in _grid_size.y + 1:
 		var _line_color_x: Color
 		var _line_base_x = 0.0 if not _symmetrize & 0b01 else -_grid_size.x * _cell_size.x
 		if (cell_y % _primary_line_every.y) == 0:

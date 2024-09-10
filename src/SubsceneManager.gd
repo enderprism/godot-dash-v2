@@ -25,13 +25,13 @@ enum SubScene {
 @export var _title_screen_camera: PhantomCamera2D
 
 @export_group("Title Screen Components")
-@export var _title_screen_background: Sprite2D
-@export var _title_screen_ground: Sprite2D
+@export var _title_screen_background: Parallax2D
+@export var _title_screen_ground: Parallax2D
 
 @export_group("Level Selector Components")
 @export var _level_selector_page_container: Control
 
-@onready var _base_background_color: Color = _title_screen_background.modulate
+@onready var _base_background_color: Color = _title_screen_background.get_node("Background").modulate
 
 var _current_subscene: SubScene = SubScene.TITLE_SCREEN
 var _level_selector_tab_idx: int
@@ -124,28 +124,33 @@ func _on_go_to_icon_garage_pressed() -> void:
 	_toggle_background_sprites_autoscroll(false)
 
 func _toggle_background_sprites_autoscroll(enabled: bool) -> void:
+	# HACK: autoscroll can't be interpolated
 	if enabled:
-		create_tween() \
-			.tween_property(_title_screen_background, "_autoscroll_speed:x", -300, 1.0) \
-			.set_ease(Tween.EASE_OUT) \
-			.set_trans(Tween.TRANS_EXPO)
-		create_tween() \
-			.tween_property(_title_screen_ground, "_autoscroll_speed:x", -800.0, 1.0) \
-			.set_ease(Tween.EASE_OUT) \
-			.set_trans(Tween.TRANS_EXPO)
+		# create_tween() \
+		# 	.tween_property(_title_screen_background, "autoscroll:x", -300, 1.0) \
+		# 	.set_ease(Tween.EASE_OUT) \
+		# 	.set_trans(Tween.TRANS_EXPO)
+		# create_tween() \
+		# 	.tween_property(_title_screen_ground, "autoscroll:x", -800.0, 1.0) \
+		# 	.set_ease(Tween.EASE_OUT) \
+		# 	.set_trans(Tween.TRANS_EXPO)
+		_title_screen_background.autoscroll.x = -300
+		_title_screen_ground.autoscroll.x = -800
 	else:
-		create_tween() \
-			.tween_property(_title_screen_background, "_autoscroll_speed:x", 0.0, 1.0) \
-			.set_ease(Tween.EASE_OUT) \
-			.set_trans(Tween.TRANS_EXPO)
-		create_tween() \
-			.tween_property(_title_screen_ground, "_autoscroll_speed:x", 0.0, 1.0) \
-			.set_ease(Tween.EASE_OUT) \
-			.set_trans(Tween.TRANS_EXPO)
+		# create_tween() \
+		# 	.tween_property(_title_screen_background, "autoscroll:x", 0.0, 1.0) \
+		# 	.set_ease(Tween.EASE_OUT) \
+		# 	.set_trans(Tween.TRANS_EXPO)
+		# create_tween() \
+		# 	.tween_property(_title_screen_ground, "autoscroll:x", 0.0, 1.0) \
+		# 	.set_ease(Tween.EASE_OUT) \
+		# 	.set_trans(Tween.TRANS_EXPO)
+		_title_screen_background.autoscroll.x = 0
+		_title_screen_ground.autoscroll.x = 0
 
 func _change_background_color(new_color: Color) -> void:
 	create_tween() \
-		.tween_property(_title_screen_background, "modulate", new_color, 1.0) \
+		.tween_property(_title_screen_background.get_node("Background"), "modulate", new_color, 1.0) \
 		.set_ease(Tween.EASE_OUT) \
 		.set_trans(Tween.TRANS_EXPO)
 

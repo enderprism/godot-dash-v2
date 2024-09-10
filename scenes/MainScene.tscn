@@ -1,9 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://cinyg32n0bonm"]
+[gd_scene load_steps=26 format=3 uid="uid://cinyg32n0bonm"]
 
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/GDFadeScreen.tscn" id="1_e44lk"]
 [ext_resource type="Texture2D" uid="uid://dewrklmfoeg7m" path="res://assets/textures/grounds/ground-1.png" id="2_5u8e8"]
 [ext_resource type="Texture2D" uid="uid://djstmwdco77pp" path="res://assets/textures/backgrounds/background1-3.png" id="2_dgjna"]
-[ext_resource type="Script" path="res://src/components/GDParallaxSprite.gd" id="3_0tpn8"]
 [ext_resource type="Texture2D" uid="uid://dga7nm2rjr2b0" path="res://assets/textures/ground_overlays/floorLine_001.png" id="3_skuyc"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/ButtonNoFocusColor.tres" id="4_eh0ur"]
 [ext_resource type="Texture2D" uid="uid://bjrdbga1v3vba" path="res://assets/textures/guis/title_screen/PlayButton.png" id="4_tln2n"]
@@ -58,7 +57,12 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 
-[node name="Background" type="Sprite2D" parent="TitleScreen"]
+[node name="BackgroundParallax" type="Parallax2D" parent="TitleScreen"]
+repeat_size = Vector2(12800, 0)
+autoscroll = Vector2(-300, 0)
+repeat_times = 2
+
+[node name="Background" type="Sprite2D" parent="TitleScreen/BackgroundParallax"]
 modulate = Color(0.27451, 0.627451, 1, 1)
 texture_repeat = 2
 position = Vector2(973, 3.05176e-05)
@@ -66,26 +70,27 @@ scale = Vector2(1.25, 1.25)
 texture = ExtResource("2_dgjna")
 region_enabled = true
 region_rect = Rect2(0, 0, 10240, 2048)
-script = ExtResource("3_0tpn8")
-_autoscroll_speed = Vector2(-300, 0)
 
-[node name="Ground" type="Sprite2D" parent="TitleScreen"]
+[node name="GroundParallax" type="Parallax2D" parent="TitleScreen"]
+repeat_size = Vector2(9600, 0)
+autoscroll = Vector2(-800, 0)
+repeat_times = 2
+
+[node name="Ground" type="Sprite2D" parent="TitleScreen/GroundParallax"]
 self_modulate = Color(0.290196, 0.266667, 1, 1)
 texture_repeat = 2
 position = Vector2(940, 1005)
 texture = ExtResource("2_5u8e8")
 region_enabled = true
 region_rect = Rect2(0, 0, 9600, 240)
-script = ExtResource("3_0tpn8")
-_autoscroll_speed = Vector2(-800, 0)
 
-[node name="GroundLine" type="Sprite2D" parent="TitleScreen/Ground" node_paths=PackedStringArray("target")]
+[node name="GroundLine" type="Sprite2D" parent="TitleScreen/GroundParallax/Ground" node_paths=PackedStringArray("target")]
 material = ExtResource("5_7ohp0")
 position = Vector2(10, -118.5)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_skuyc")
 script = ExtResource("5_4luv8")
-target = NodePath("../../../Camera")
+target = NodePath("../../../../Camera")
 copy_x = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen"]
@@ -492,8 +497,8 @@ _created_levels_list_camera = NodePath("../CreatedLevelsList/CameraCenterParent/
 _icon_garage_camera = NodePath("../IconGarage/CameraCenterParent/IconGarageCamera")
 _quit_game_camera = NodePath("../TitleScreen/CameraCenterParent/QuitGameCamera")
 _title_screen_camera = NodePath("../TitleScreen/CameraCenterParent/TitleScreenCamera")
-_title_screen_background = NodePath("../TitleScreen/Background")
-_title_screen_ground = NodePath("../TitleScreen/Ground")
+_title_screen_background = NodePath("../TitleScreen/BackgroundParallax")
+_title_screen_ground = NodePath("../TitleScreen/GroundParallax")
 _level_selector_page_container = NodePath("../LevelSelector/PageContainer")
 
 [node name="PhantomCamera2DHistory" parent="Subscene Manager" instance=ExtResource("16_dgsi1")]

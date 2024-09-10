@@ -12,8 +12,8 @@ enum Mode {
 	set(value):
 		_mode = value
 		notify_property_list_changed()
-@export var _set_zoom: Vector2 = Vector2.ONE
-@export var _multiply_zoom: Vector2 = Vector2.ONE
+@export var _set_zoom := Vector2.ONE
+@export var _multiply_zoom := Vector2.ONE
 
 # Hide unneeded elements in the inspector
 func _validate_property(property: Dictionary) -> void:

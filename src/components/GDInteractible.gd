@@ -114,7 +114,7 @@ enum HorizontalDirection {
 @export var _gravity_portal_type: GravityPortal = GravityPortal.NORMAL
 
 # @@show_if(object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.SIZE_PORTAL)
-@export var _mini: bool
+@export var mini: bool
 
 # @@show_if(object_type == ObjectType.ORB or object_type == ObjectType.PAD)
 @export var _horizontal_direction: HorizontalDirection
@@ -183,7 +183,7 @@ func _process(delta: float) -> void:
 		if object_type == ObjectType.ORB:
 			if _orb_type == Orb.BLUE:
 				$Sprite.scale.y = sign(_player._gravity_multiplier)/4
-				$Sprite.global_rotation = _player._gameplay_rotation
+				$Sprite.global_rotation = _player.gameplay_rotation
 			elif _orb_type == Orb.BLACK or _orb_type == Orb.GREEN:
 				$Sprite.global_rotation += 5 * delta
 
@@ -198,9 +198,9 @@ func _process(delta: float) -> void:
 		if has_node("DashOrbPreview"):
 			$DashOrbPreview.hide()
 		if _0x_speed_centering_player:
-			var _player_position_normalised = _player.global_position.rotated(-_player._gameplay_rotation)
-			var _self_position_normalised = global_position.rotated(-_player._gameplay_rotation)
-			_player.global_position = Vector2(_player_position_normalised.lerp(_self_position_normalised, 0.3).rotated(_player._gameplay_rotation).x, _player.global_position.y)
+			var _player_position_normalised = _player.global_position.rotated(-_player.gameplay_rotation)
+			var _self_position_normalised = global_position.rotated(-_player.gameplay_rotation)
+			_player.global_position = Vector2(_player_position_normalised.lerp(_self_position_normalised, 0.3).rotated(_player.gameplay_rotation).x, _player.global_position.y)
 			if is_equal_approx(_player_position_normalised.x, _self_position_normalised.x): _0x_speed_centering_player = false
 		if has_node("Hitbox"): $Hitbox.debug_color = Color("00ff0033")
 	else:
@@ -227,7 +227,7 @@ func _process(delta: float) -> void:
 		or (object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.GRAVITY_PORTAL):
 		if not Engine.is_editor_hint() and _player_camera != null:
 			if object_type == ObjectType.OTHER_PORTAL and _other_portal_type == OtherPortal.GRAVITY_PORTAL:
-				$Sprites/IndicatorIcon.global_rotation = _player._gameplay_rotation
+				$Sprites/IndicatorIcon.global_rotation = _player.gameplay_rotation
 			else:
 				$Sprites/IndicatorIcon.global_rotation = _player_camera.rotation
 		else:
@@ -253,7 +253,7 @@ func _on_player_enter(_body: Node2D) -> void:
 			_player._clear_wave_trail()
 		_player.internal_gamemode = _gamemode_portal_type
 		_player.displayed_gamemode = _gamemode_portal_type
-		_player._mini = _player._mini
+		_player.mini = _player.mini
 		if not _freefly:
 			GroundData.center = global_position
 			GroundData.distance = LOCKEDFLY_GAMEMODE_GRID_HEIGHTS[_gamemode_portal_type] * LevelManager.CELL_SIZE * 0.5
@@ -271,7 +271,7 @@ func _on_player_enter(_body: Node2D) -> void:
 		_pulse_white_start()
 		match _other_portal_type:
 			OtherPortal.SIZE_PORTAL:
-				_player._mini = _mini
+				_player.mini = mini
 			OtherPortal.GRAVITY_PORTAL:
 				match _gravity_portal_type:
 					GravityPortal.NORMAL:
@@ -285,9 +285,9 @@ func _on_player_enter(_body: Node2D) -> void:
 				_teleport_player()
 
 func _rebound() -> void:
-	if _player.position.rotated(-_player._gameplay_rotation).y < $ReboundObjectScaleOrigin.global_position.rotated(-_player._gameplay_rotation).y \
-			and _player.velocity.rotated(-_player._gameplay_rotation).y <= 0:
-		var _player_rebound_offset: float = $ReboundObjectScaleOrigin.global_position.rotated(-_player._gameplay_rotation).y - _player.position.rotated(-_player._gameplay_rotation).y
+	if _player.position.rotated(-_player.gameplay_rotation).y < $ReboundObjectScaleOrigin.global_position.rotated(-_player.gameplay_rotation).y \
+			and _player.velocity.rotated(-_player.gameplay_rotation).y <= 0:
+		var _player_rebound_offset: float = $ReboundObjectScaleOrigin.global_position.rotated(-_player.gameplay_rotation).y - _player.position.rotated(-_player.gameplay_rotation).y
 		_rebound_factor = _player_rebound_offset/(Player.TERMINAL_VELOCITY.y*0.25)
 	var _rebound_color: Color = _rebound_gradient.sample(clampf(_rebound_factor, 0.0, 1.0))
 	$ParticleEmitter.modulate = _rebound_color
@@ -303,9 +303,9 @@ func _rebound() -> void:
 		$ReboundObjectScaleOrigin.scale.y = lerpf(0.7, 1.7, _rebound_factor)
 		$Hitbox.scale.x = lerpf(0.7, 1.7, _rebound_factor)
 		$Hitbox.scale.y = lerpf(0.7, 1.7, _rebound_factor)
-	if _player.velocity.rotated(-_player._gameplay_rotation).y * sign(_player._gravity_multiplier) > 0:
-		_player._rebound_velocity = _player.velocity.rotated(-_player._gameplay_rotation).y
-	elif _player.velocity.rotated(-_player._gameplay_rotation).y == 0 and _player._get_jump_state() == -1 and _player.is_on_floor() and $ReboundCancelArea.has_overlapping_bodies():
+	if _player.velocity.rotated(-_player.gameplay_rotation).y * sign(_player._gravity_multiplier) > 0:
+		_player._rebound_velocity = _player.velocity.rotated(-_player.gameplay_rotation).y
+	elif _player.velocity.rotated(-_player.gameplay_rotation).y == 0 and _player._get_jump_state() == -1 and _player.is_on_floor() and $ReboundCancelArea.has_overlapping_bodies():
 		_player._rebound_velocity = 0.0
 
 func _on_player_exit(_body: Node2D) -> void:
@@ -378,9 +378,8 @@ func _set_reverse(reverse: bool) -> void:
 		_player._horizontal_direction *= -1
 
 func _set_dash_props() -> void:
-	_player._dash_orb_rotation = pingpong(global_rotation, PI/2) * sign(global_rotation_degrees)
-	# _player._dash_orb_rotation = global_rotation
-	_player._dash_orb_position = global_position
+	_player.dash_orb_rotation = pingpong(global_rotation, PI/2) * sign(global_rotation_degrees)
+	_player.dash_orb_position = global_position
 
 func _set_spider_props() -> void:
 	var _player_gravity_to_rotation: float = 0.0 if _player._gravity_multiplier > 0 else 180.0
@@ -396,6 +395,6 @@ func _teleport_player() -> Vector2:
 		if not _ignore_y:
 			_player.position.y = _teleport_target.global_position.y
 		if _override_player_velocity:
-			return _new_player_velocity.rotated(_player._gameplay_rotation)
+			return _new_player_velocity.rotated(_player.gameplay_rotation)
 		else: return Vector2.ZERO
 	else: return Vector2.ZERO

@@ -35,10 +35,8 @@ flat = true
 [node name="File" type="PopupMenu" parent="EditorUI/HBoxContainer/MenuBar"]
 item_count = 4
 item_0/text = "Save"
-item_0/id = 0
 item_1/text = "Save As"
 item_1/id = 1
-item_2/text = ""
 item_2/id = 2
 item_2/separator = true
 item_3/text = "Level Options"
@@ -47,13 +45,11 @@ item_3/id = 3
 [node name="Edit" type="PopupMenu" parent="EditorUI/HBoxContainer/MenuBar"]
 item_count = 1
 item_0/text = "Preferences"
-item_0/id = 0
 
 [node name="View" type="PopupMenu" parent="EditorUI/HBoxContainer/MenuBar"]
 hide_on_checkable_item_selection = false
 item_count = 1
 item_0/text = "Panel Visibility"
-item_0/id = 0
 
 [node name="PanelVisibility" type="PopupMenu" parent="EditorUI/HBoxContainer/MenuBar/View"]
 hide_on_checkable_item_selection = false
@@ -61,12 +57,10 @@ item_count = 1
 item_0/text = "Block Palette"
 item_0/checkable = 1
 item_0/checked = true
-item_0/id = 0
 
 [node name="Help" type="PopupMenu" parent="EditorUI/HBoxContainer/MenuBar"]
 item_count = 1
 item_0/text = "Manual"
-item_0/id = 0
 
 [node name="TabContainer" type="TabContainer" parent="EditorUI"]
 anchors_preset = 12
@@ -76,10 +70,12 @@ anchor_bottom = 1.0
 offset_top = -248.0
 grow_horizontal = 2
 grow_vertical = 0
+current_tab = 0
 
 [node name="Solids" type="Control" parent="EditorUI/TabContainer"]
 layout_mode = 2
 mouse_filter = 1
+metadata/_tab_index = 0
 
 [node name="ButtonContainer" type="GridContainer" parent="EditorUI/TabContainer/Solids"]
 layout_mode = 1
@@ -99,10 +95,12 @@ columns = 10
 [node name="Hazards" type="Control" parent="EditorUI/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="Interactibles" type="Control" parent="EditorUI/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="Button" type="Button" parent="EditorUI"]
 offset_left = 64.0

@@ -1,11 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://db7ebleody4s3"]
+[gd_scene load_steps=21 format=3 uid="uid://db7ebleody4s3"]
 
 [ext_resource type="Script" path="res://src/GameScene.gd" id="1_k47tp"]
 [ext_resource type="Texture2D" uid="uid://djstmwdco77pp" path="res://assets/textures/backgrounds/background1-3.png" id="2_i4f6q"]
 [ext_resource type="Texture2D" uid="uid://dewrklmfoeg7m" path="res://assets/textures/grounds/ground-1.png" id="2_ylgfk"]
 [ext_resource type="PackedScene" uid="uid://bl48psvuka73y" path="res://scenes/components/game_components/Player.tscn" id="3_22pbm"]
 [ext_resource type="Texture2D" uid="uid://dga7nm2rjr2b0" path="res://assets/textures/ground_overlays/floorLine_001.png" id="3_l4t8r"]
-[ext_resource type="Script" path="res://src/components/GDParallaxSprite.gd" id="3_my51g"]
 [ext_resource type="Script" path="res://src/EditorGrid.gd" id="5_7ssrb"]
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/GDFadeScreen.tscn" id="6_7ju4w"]
 [ext_resource type="Script" path="res://src/components/GDPositionFollow2D.gd" id="6_kvomc"]
@@ -44,7 +43,12 @@ shader_parameter/base = Color(0.952941, 0.666667, 0.364706, 1)
 script = ExtResource("1_k47tp")
 metadata/_edit_lock_ = true
 
-[node name="Background" type="Sprite2D" parent="." node_paths=PackedStringArray("_camera")]
+[node name="BackgroundParallax" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(20480, 8189)
+repeat_times = 3
+
+[node name="Background" type="Sprite2D" parent="BackgroundParallax"]
 modulate = Color(0.27451, 0.627451, 1, 1)
 z_index = -100
 texture_repeat = 2
@@ -53,40 +57,31 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_i4f6q")
 region_enabled = true
 region_rect = Rect2(0, 0, 10240, 2048)
-script = ExtResource("3_my51g")
-_parallax_factor = Vector2(0.5, 0.5)
-_camera_delta_threshold = Vector2(0, 20)
-_camera = NodePath("../PlayerCamera")
 metadata/_edit_lock_ = true
 
-[node name="BackgroundKillCollider" type="StaticBody2D" parent="Background" node_paths=PackedStringArray("target")]
+[node name="BackgroundKillCollider" type="StaticBody2D" parent="BackgroundParallax/Background" node_paths=PackedStringArray("target")]
 position = Vector2(0, -1376)
 collision_layer = 4
 script = ExtResource("6_kvomc")
-target = NodePath("../../Player")
+target = NodePath("../../../Player")
 copy_x = true
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/BackgroundKillCollider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundParallax/Background/BackgroundKillCollider"]
 position = Vector2(0, 112.5)
 shape = SubResource("RectangleShape2D_y3ubx")
 debug_color = Color(1, 0, 0, 0.419608)
 
-[node name="Background2" type="Sprite2D" parent="." node_paths=PackedStringArray("_camera")]
+[node name="Background2" type="Sprite2D" parent="BackgroundParallax"]
 modulate = Color(0.27451, 0.627451, 1, 1)
 z_index = -100
 texture_repeat = 2
 position = Vector2(640, 2972)
-rotation = -6.28318
 scale = Vector2(2, 2)
 texture = ExtResource("2_i4f6q")
 flip_v = true
 region_enabled = true
 region_rect = Rect2(0, 0, 10240, 2048)
-script = ExtResource("3_my51g")
-_parallax_factor = Vector2(0.5, 0.5)
-_camera_delta_threshold = Vector2(0, 20)
-_camera = NodePath("../PlayerCamera")
 metadata/_edit_lock_ = true
 
 [node name="Level" type="Node2D" parent="."]
@@ -96,19 +91,27 @@ position = Vector2(640, 925)
 unique_name_in_owner = true
 position = Vector2(640, 862)
 
-[node name="EditorGrid" type="Node2D" parent="."]
-visible = false
-position = Vector2(640, 925)
-script = ExtResource("5_7ssrb")
-_symmetrize = 1
+[node name="EditorGridParallax" type="Parallax2D" parent="."]
+repeat_size = Vector2(16384, 16384)
+repeat_times = 3
 
-[node name="GroundDownOrigin" type="Marker2D" parent="."]
+[node name="EditorGrid" type="Node2D" parent="EditorGridParallax"]
+position = Vector2(0, 924)
+script = ExtResource("5_7ssrb")
+_symmetrize = 3
+
+[node name="GroundDownParallax" type="Parallax2D" parent="."]
+repeat_size = Vector2(24000, 0)
+repeat_times = 3
+metadata/_edit_lock_ = true
+
+[node name="GroundDownOrigin" type="Marker2D" parent="GroundDownParallax"]
 position = Vector2(640, 925)
 gizmo_extents = 64.0
 script = ExtResource("7_fb2li")
 DEFAULT_Y = 925.0
 
-[node name="GroundDown" type="Sprite2D" parent="GroundDownOrigin" node_paths=PackedStringArray("_camera")]
+[node name="GroundDown" type="Sprite2D" parent="GroundDownParallax/GroundDownOrigin"]
 self_modulate = Color(0.290196, 0.266667, 1, 1)
 z_index = 50
 texture_repeat = 2
@@ -117,13 +120,9 @@ scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_ylgfk")
 region_enabled = true
 region_rect = Rect2(0, 0, 9600, 240)
-script = ExtResource("3_my51g")
-_enable_delta_threshold = true
-_camera_delta_threshold = Vector2(0, 20)
-_camera = NodePath("../../PlayerCamera")
 metadata/_edit_group_ = true
 
-[node name="LineDown" type="Sprite2D" parent="GroundDownOrigin/GroundDown" node_paths=PackedStringArray("target")]
+[node name="LineDown" type="Sprite2D" parent="GroundDownParallax/GroundDownOrigin/GroundDown" node_paths=PackedStringArray("target")]
 unique_name_in_owner = true
 z_index = 50
 material = SubResource("CanvasItemMaterial_vslon")
@@ -131,32 +130,38 @@ position = Vector2(4, -119.6)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_l4t8r")
 script = ExtResource("6_kvomc")
-target = NodePath("../../../PlayerCamera")
+target = NodePath("../../../../PlayerCamera")
 copy_x = true
 metadata/_edit_lock_ = true
 
-[node name="GroundColliderDown" type="StaticBody2D" parent="GroundDownOrigin/GroundDown" node_paths=PackedStringArray("target")]
+[node name="GroundColliderDown" type="StaticBody2D" parent="GroundDownParallax/GroundDownOrigin/GroundDown" node_paths=PackedStringArray("target")]
 z_index = 50
 position = Vector2(-120, -120)
 collision_layer = 32
 script = ExtResource("6_kvomc")
-target = NodePath("../../../Player")
+target = NodePath("../../../../Player")
 copy_x = true
 metadata/_edit_group_ = true
 
-[node name="GroundHitbox" type="CollisionShape2D" parent="GroundDownOrigin/GroundDown/GroundColliderDown"]
+[node name="GroundHitbox" type="CollisionShape2D" parent="GroundDownParallax/GroundDownOrigin/GroundDown/GroundColliderDown"]
 position = Vector2(0, 77.2)
 shape = SubResource("RectangleShape2D_l4i0t")
 debug_color = Color(0, 0.701961, 0.607843, 0.419608)
 
-[node name="GroundUpOrigin" type="Marker2D" parent="."]
+[node name="GroundUpParallax" type="Parallax2D" parent="."]
+scroll_offset = Vector2(130, 429)
+repeat_size = Vector2(24000, 0)
+repeat_times = 3
+metadata/_edit_lock_ = true
+
+[node name="GroundUpOrigin" type="Marker2D" parent="GroundUpParallax"]
 position = Vector2(640, -25000)
 gizmo_extents = 64.0
 script = ExtResource("7_fb2li")
 DEFAULT_Y = -25000.0
-distance_multiplier = -1
+ground_position = -1
 
-[node name="GroundUp" type="Sprite2D" parent="GroundUpOrigin" node_paths=PackedStringArray("_camera")]
+[node name="GroundUp" type="Sprite2D" parent="GroundUpParallax/GroundUpOrigin"]
 self_modulate = Color(0.290196, 0.266667, 1, 1)
 z_index = 50
 texture_repeat = 2
@@ -166,13 +171,9 @@ texture = ExtResource("2_ylgfk")
 flip_v = true
 region_enabled = true
 region_rect = Rect2(0, 0, 9600, 240)
-script = ExtResource("3_my51g")
-_enable_delta_threshold = true
-_camera_delta_threshold = Vector2(0, 20)
-_camera = NodePath("../../PlayerCamera")
 metadata/_edit_group_ = true
 
-[node name="LineUp" type="Sprite2D" parent="GroundUpOrigin/GroundUp" node_paths=PackedStringArray("target")]
+[node name="LineUp" type="Sprite2D" parent="GroundUpParallax/GroundUpOrigin/GroundUp" node_paths=PackedStringArray("target")]
 unique_name_in_owner = true
 z_index = 50
 material = SubResource("CanvasItemMaterial_vslon")
@@ -180,19 +181,19 @@ position = Vector2(4, 119.6)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_l4t8r")
 script = ExtResource("6_kvomc")
-target = NodePath("../../../PlayerCamera")
+target = NodePath("../../../../PlayerCamera")
 copy_x = true
 
-[node name="GroundColliderUp" type="StaticBody2D" parent="GroundUpOrigin/GroundUp" node_paths=PackedStringArray("target")]
+[node name="GroundColliderUp" type="StaticBody2D" parent="GroundUpParallax/GroundUpOrigin/GroundUp" node_paths=PackedStringArray("target")]
 z_index = 50
 position = Vector2(-120, 120)
 collision_layer = 32
 script = ExtResource("6_kvomc")
-target = NodePath("../../../Player")
+target = NodePath("../../../../Player")
 copy_x = true
 metadata/_edit_group_ = true
 
-[node name="GroundHitbox" type="CollisionShape2D" parent="GroundUpOrigin/GroundUp/GroundColliderUp"]
+[node name="GroundHitbox" type="CollisionShape2D" parent="GroundUpParallax/GroundUpOrigin/GroundUp/GroundColliderUp"]
 position = Vector2(0, -77.2)
 shape = SubResource("RectangleShape2D_l4i0t")
 debug_color = Color(0, 0.701961, 0.607843, 0.419608)
