@@ -27,12 +27,12 @@ var _indicator: tGameplayRotateIndicator
 
 func _ready() -> void:
 	TriggerSetup.setup(self, false)
-	if !has_node("Indicator"):
+	_indicator = get_node_or_null("Indicator")
+	if _indicator == null:
 		_indicator = tGameplayRotateIndicator.new()
 		_indicator.name = "Indicator"
 		add_child(_indicator)
 		TriggerSetup.set_child_owner(self, _indicator)
-	else: _indicator = $Indicator
 	base.sprite.set_texture(preload("res://assets/textures/triggers/GameplayRotate.svg"))
 	_player = LevelManager.player
 	_indicator.visible = base.sprite.visible

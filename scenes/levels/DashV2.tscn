@@ -1,11 +1,11 @@
 [gd_scene load_steps=43 format=3 uid="uid://2ie2uex1m8mb"]
 
-[ext_resource type="Script" path="res://src/components/GDLevelProps.gd" id="1_7ju0m"]
+[ext_resource type="Script" path="res://src/LevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_gg6c8"]
 [ext_resource type="PackedScene" uid="uid://duj3dae6qcvtm" path="res://scenes/components/level_components/portals/gamemode_portals/SpiderPortal.tscn" id="3_iu2ry"]
 [ext_resource type="PackedScene" uid="uid://c7u5r5wqi845u" path="res://scenes/components/level_components/orbs/PinkOrb.tscn" id="4_7gr6s"]
 [ext_resource type="PackedScene" uid="uid://ccdry45jmn43w" path="res://scenes/components/level_components/solids/DefaultCube.tscn" id="5_g4mtk"]
-[ext_resource type="PackedScene" uid="uid://l2ofoyvoxbr2" path="res://scenes/components/game_components/GDTargetLink.tscn" id="6_bolvq"]
+[ext_resource type="PackedScene" uid="uid://l2ofoyvoxbr2" path="res://scenes/components/game_components/TargetLink.tscn" id="6_bolvq"]
 [ext_resource type="PackedScene" uid="uid://nsvkooc5od83" path="res://scenes/components/level_components/pads/YellowPad.tscn" id="6_cufna"]
 [ext_resource type="Script" path="res://src/components/triggers/tMove.gd" id="8_ml13a"]
 [ext_resource type="Script" path="res://src/components/triggers/trigger_components/tEasing.gd" id="10_srhyw"]

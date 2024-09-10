@@ -27,7 +27,7 @@ func _validate_property(property: Dictionary) -> void:
 var _current_loop: int
 var base: tBase
 var easing: tEasing
-var target_link: GDTargetLink
+var target_link: TargetLink
 var _player: Player
 
 func _ready() -> void:
@@ -55,7 +55,7 @@ func _update_target_link() -> void:
 			# Start loop at index 1, skipping the first spawned group since it already has a 'spawn' target link
 			var _group = get_node(_spawned_groups[i].path)
 			if not _group.has_node("SpawnTargetLink"):
-				var _group_spawn_target_link: GDTargetLink = load("res://scenes/components/game_components/GDTargetLink.tscn").instantiate()
+				var _group_spawn_target_link: TargetLink = load("res://scenes/components/game_components/TargetLink.tscn").instantiate()
 				_group_spawn_target_link.default_color = Color.CYAN
 				_group_spawn_target_link.name = "SpawnTargetLink"
 				_group_spawn_target_link.z_index -= 1

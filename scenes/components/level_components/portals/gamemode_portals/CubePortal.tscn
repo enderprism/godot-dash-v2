@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://qfmv2p1wt1tn"]
 
-[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_cdsys"]
+[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_cdsys"]
 [ext_resource type="Texture2D" uid="uid://2etpothgo1kw" path="res://assets/textures/portals/gamemode_portals/cube_portal/CubePortalBack.png" id="2_n76ru"]
 [ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="3_li1qe"]
 [ext_resource type="Texture2D" uid="uid://bxjs1u44gok7c" path="res://assets/textures/portals/gamemode_portals/cube_portal/CubePortalFront.png" id="3_vk6wf"]

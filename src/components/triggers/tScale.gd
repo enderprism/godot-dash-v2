@@ -43,7 +43,7 @@ var _targets: Array[Node] ## Array of all the [Node2D] in a group.
 var _initial_scales: Dictionary ## Scale for every [Node2D] in [member _targets]
 var base: tBase
 var easing: tEasing
-var target_link: GDTargetLink
+var target_link: TargetLink
 
 func _ready() -> void:
 	TriggerSetup.setup(self, true)

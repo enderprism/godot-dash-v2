@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bsl2ssfhthw00"]
 
-[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_hmneo"]
+[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_hmneo"]
 [ext_resource type="PackedScene" uid="uid://05h0teol0odp" path="res://scenes/particle_emitter_presets/PadParticles.tscn" id="2_dpxke"]
 [ext_resource type="Texture2D" uid="uid://bvhu2o467ogw3" path="res://assets/textures/pads/BlackPad.svg" id="3_f7m6r"]
 [ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="5_8oo0e"]

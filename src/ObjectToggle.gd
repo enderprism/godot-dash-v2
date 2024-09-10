@@ -1,4 +1,4 @@
-class_name GDToggle extends Node2D
+class_name ObjectToggle extends Node
 
 enum ToggleState {
 	ON,
@@ -6,9 +6,9 @@ enum ToggleState {
 	FLIP,
 }
 
-func _toggle(instancer: Node, toggled_groups):
+func _toggle(toggled_groups: Array[gToggledGroup]):
 	for toggled_group in toggled_groups:
-		var group = instancer.get_node(toggled_group.group)
+		var group = get_parent().get_node(toggled_group.group)
 		var state = toggled_group.state
 		if state == ToggleState.FLIP:
 			if group.process_mode == PROCESS_MODE_INHERIT: # If it is toggled on

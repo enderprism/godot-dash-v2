@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://d05asiy6k2voi"]
 
-[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_ujapm"]
+[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_ujapm"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_6nd4y"]
-[ext_resource type="PackedScene" uid="uid://l2ofoyvoxbr2" path="res://scenes/components/game_components/GDTargetLink.tscn" id="2_g4fee"]
+[ext_resource type="PackedScene" uid="uid://l2ofoyvoxbr2" path="res://scenes/components/game_components/TargetLink.tscn" id="2_g4fee"]
 [ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="3_c01u1"]
 [ext_resource type="Texture2D" uid="uid://dpymoijvgn47q" path="res://assets/textures/portals/other_portals/teleportal_in/TeleportalInBack.png" id="4_62kgg"]
 [ext_resource type="Texture2D" uid="uid://bjkrqus0iq7o2" path="res://assets/textures/portals/other_portals/teleportal_in/TeleportalInFront.png" id="5_toxp5"]

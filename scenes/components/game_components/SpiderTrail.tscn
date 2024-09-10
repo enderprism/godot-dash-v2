@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dhgu2p76tg624" path="res://assets/textures/player/spider/Trail/SpiderTrail6.png" id="7_svqrm"]
 [ext_resource type="Texture2D" uid="uid://bi8lac60gcbbc" path="res://assets/textures/player/spider/Trail/SpiderTrail7.png" id="8_0cdsu"]
 [ext_resource type="Texture2D" uid="uid://bkclf7vup7slo" path="res://assets/textures/player/spider/Trail/SpiderTrail8.png" id="9_p5shq"]
-[ext_resource type="Script" path="res://src/components/GDSpiderTrail.gd" id="10_in5ua"]
+[ext_resource type="Script" path="res://src/SpiderTrail.gd" id="10_in5ua"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wkqhl"]
 animations = [{

@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dppduseecx3hw"]
 
-[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_xkid3"]
+[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_xkid3"]
 [ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="2_t3huu"]
 [ext_resource type="Texture2D" uid="uid://c6a1f4b1yq8vs" path="res://assets/textures/portals/other_portals/gravity_portal_flipped/GravityPortalFlippedBack.png" id="3_jwo70"]
 [ext_resource type="Texture2D" uid="uid://1yecdu8rxahw" path="res://assets/textures/portals/other_portals/gravity_portal_flipped/GravityPortalFlippedFront.png" id="4_d1liw"]

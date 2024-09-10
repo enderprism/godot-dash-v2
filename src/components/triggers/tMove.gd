@@ -30,7 +30,7 @@ var _targets: Array[Node]
 var _initial_positions: Dictionary
 var base: tBase
 var easing: tEasing
-var target_link: GDTargetLink
+var target_link: TargetLink
 
 func _ready() -> void:
 	TriggerSetup.setup(self, true)

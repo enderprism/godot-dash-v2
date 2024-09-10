@@ -1,7 +1,7 @@
 @tool
 extends Line2D
 
-class_name GDTargetLink
+class_name TargetLink
 
 var target: Node2D
 

@@ -11,7 +11,7 @@ static func setup(caller: Node, add_target_link: bool, add_easing: bool = true):
 	#region Init TargetLink (some triggers may not need it, if their target is outside the level scene)
 	if add_target_link:
 		if not caller.has_node("TargetLink"):
-			caller.target_link = load("res://scenes/components/game_components/GDTargetLink.tscn").instantiate()
+			caller.target_link = load("res://scenes/components/game_components/TargetLink.tscn").instantiate()
 			caller.add_child(caller.target_link)
 		else:
 			caller.target_link = caller.get_node("TargetLink")

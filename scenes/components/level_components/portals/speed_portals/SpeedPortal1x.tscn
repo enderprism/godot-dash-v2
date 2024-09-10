@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://b3wrcjp4ua15k"]
 
-[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_q1w2s"]
+[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_q1w2s"]
 [ext_resource type="PackedScene" uid="uid://dl5c5hukbve28" path="res://scenes/particle_emitter_presets/SpeedPortalParticles.tscn" id="2_amlin"]
 [ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="3_u7rch"]
 [ext_resource type="Texture2D" uid="uid://cuaoks3l1edif" path="res://assets/textures/portals/speed_portals/SpeedPortal1x.svg" id="4_y5wkx"]

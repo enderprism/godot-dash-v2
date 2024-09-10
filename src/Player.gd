@@ -32,7 +32,7 @@ const WAVE_PLAYER_SCALE := Vector2(0.6, 0.6)
 const MINI_PLAYER_SCALE := Vector2(0.6, 0.6)
 const WAVE_TRAIL_WIDTH: float = 50.0
 const WAVE_TRAIL_LENGTH: int = 250
-const SPIDER_TRAIL: PackedScene = preload("res://scenes/components/game_components/GDSpiderTrail.tscn")
+const SPIDER_TRAIL: PackedScene = preload("res://scenes/components/game_components/SpiderTrail.tscn")
 const DASH_BOOM: PackedScene = preload("res://scenes/components/game_components/GDDashBoom.tscn")
 #endregion
 
@@ -85,7 +85,7 @@ var _is_dashing: bool
 var _dead: bool
 var _is_flying_gamemode: bool
 var _dual_instance: bool
-var _last_spider_trail: GDSpiderTrail
+var _last_spider_trail: SpiderTrail
 var _last_spider_trail_height: float
 
 
@@ -320,8 +320,9 @@ func _compute_velocity(_delta: float,
 			var _velocity_override: Vector2 = _colliding_orb._teleport_player()
 			if _colliding_orb._override_player_velocity: _velocity = _velocity_override * 1/_delta
 		if _colliding_orb._orb_type == GDInteractible.Orb.TOGGLE:
-			var toggle = GDToggle.new()
-			toggle._toggle(_colliding_orb, _colliding_orb._toggled_groups)
+			var toggle = ObjectToggle.new()
+			add_child(toggle)
+			toggle._toggle(_colliding_orb.toggled_groups)
 			toggle.queue_free()
 			jump_hold_disabled = true
 	

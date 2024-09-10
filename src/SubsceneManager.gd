@@ -8,7 +8,7 @@ enum SubScene {
 }
 
 @export var active_pcam: PhantomCamera2D # Active PhantomCamera2D when the scene enters the tree
-@export var history: GDPhantomCameraHistory
+@export var history: PhantomCameraHistory
 @export var page_control_container: Control
 @export var quit_game_button: Button
 @export var fade_screen_layer: CanvasLayer
@@ -50,7 +50,7 @@ func _ready() -> void:
 	created_levels_list.hide()
 	icon_garage.hide()
 	level_selector.hide()
-	active_pcam.set_priority(GDPhantomCameraHistory.PhantomCameraStatus.CURRENT_ACTIVE)
+	active_pcam.set_priority(PhantomCameraHistory.PhantomCameraStatus.CURRENT_ACTIVE)
 
 func _return_to_title_screen() -> void:
 	history._previous_phantomcamera(active_pcam)

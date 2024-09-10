@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://b2civdkigbcth"]
 
-[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_exte2"]
+[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_exte2"]
 [ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="2_d8i43"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_nhqe7"]
 [ext_resource type="Texture2D" uid="uid://dgxusv262ihsp" path="res://assets/textures/portals/other_portals/size_portal_normal/SizePortalNormalBack.png" id="2_q1isf"]

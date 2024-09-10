@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://ckkbbbslsv0pg"]
 
-[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_ew07g"]
+[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_ew07g"]
 [ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_ndx7n"]
 [ext_resource type="Texture2D" uid="uid://bdy8wcalqbwiu" path="res://assets/textures/orbs/ReboundOrbOuterOutline.svg" id="3_s8hqh"]
 [ext_resource type="Texture2D" uid="uid://dar1nqnlymki6" path="res://assets/textures/orbs/ReboundOrbFill.svg" id="4_mkr36"]

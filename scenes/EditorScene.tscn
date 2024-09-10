@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/ButtonNoFocusColor.tres" id="3_k1q1p"]
 [ext_resource type="Texture2D" uid="uid://cffmcdyqdl686" path="res://assets/textures/guis/editor/EditorPlayPlayer.svg" id="3_qy4mu"]
-[ext_resource type="Script" path="res://src/components/GDBouncyButton.gd" id="4_gl2yd"]
+[ext_resource type="Script" path="res://src/BouncyButton.gd" id="4_gl2yd"]
 [ext_resource type="Script" path="res://src/MapCamera2D.gd" id="6_wcytj"]
 
 [node name="LevelEditor" type="Control"]

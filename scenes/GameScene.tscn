@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bl48psvuka73y" path="res://scenes/components/game_components/Player.tscn" id="3_22pbm"]
 [ext_resource type="Texture2D" uid="uid://dga7nm2rjr2b0" path="res://assets/textures/ground_overlays/floorLine_001.png" id="3_l4t8r"]
 [ext_resource type="Script" path="res://src/EditorGrid.gd" id="5_7ssrb"]
-[ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/GDFadeScreen.tscn" id="6_7ju4w"]
-[ext_resource type="Script" path="res://src/components/GDPositionFollow2D.gd" id="6_kvomc"]
+[ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/FadeScreen.tscn" id="6_7ju4w"]
+[ext_resource type="Script" path="res://src/PositionFollow2D.gd" id="6_kvomc"]
 [ext_resource type="Script" path="res://src/GroundObject.gd" id="7_fb2li"]
 [ext_resource type="Script" path="res://src/PlayerCamera.gd" id="7_vnv5l"]
 [ext_resource type="PackedScene" uid="uid://th7jwdop3hdv" path="res://scenes/components/game_components/PauseMenu.tscn" id="9_vv033"]
@@ -98,7 +98,7 @@ repeat_times = 3
 [node name="EditorGrid" type="Node2D" parent="EditorGridParallax"]
 position = Vector2(0, 924)
 script = ExtResource("5_7ssrb")
-_symmetrize = 3
+symmetrize = null
 
 [node name="GroundDownParallax" type="Parallax2D" parent="."]
 repeat_size = Vector2(24000, 0)

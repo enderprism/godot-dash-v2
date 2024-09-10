@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://ctf8cfrxbjfdk"]
 
-[ext_resource type="Script" path="res://src/components/GDInteractible.gd" id="1_n2coa"]
+[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_n2coa"]
 [ext_resource type="Texture2D" uid="uid://cilrx38i18agf" path="res://assets/textures/portals/gamemode_portals/ship_portal/ShipPortalBack.png" id="2_cs1mo"]
 [ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="2_eb732"]
 [ext_resource type="Texture2D" uid="uid://byomqjoflsnnw" path="res://assets/textures/portals/gamemode_portals/ship_portal/ShipPortalFront.png" id="3_kgeug"]

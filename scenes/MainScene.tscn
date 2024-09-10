@@ -1,16 +1,16 @@
 [gd_scene load_steps=26 format=3 uid="uid://cinyg32n0bonm"]
 
-[ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/GDFadeScreen.tscn" id="1_e44lk"]
+[ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/FadeScreen.tscn" id="1_e44lk"]
 [ext_resource type="Texture2D" uid="uid://dewrklmfoeg7m" path="res://assets/textures/grounds/ground-1.png" id="2_5u8e8"]
 [ext_resource type="Texture2D" uid="uid://djstmwdco77pp" path="res://assets/textures/backgrounds/background1-3.png" id="2_dgjna"]
 [ext_resource type="Texture2D" uid="uid://dga7nm2rjr2b0" path="res://assets/textures/ground_overlays/floorLine_001.png" id="3_skuyc"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/ButtonNoFocusColor.tres" id="4_eh0ur"]
 [ext_resource type="Texture2D" uid="uid://bjrdbga1v3vba" path="res://assets/textures/guis/title_screen/PlayButton.png" id="4_tln2n"]
 [ext_resource type="Texture2D" uid="uid://bu2hpb5owl44q" path="res://assets/textures/guis/title_screen/Title.png" id="4_yqc6o"]
-[ext_resource type="Script" path="res://src/components/GDPositionFollow2D.gd" id="5_4luv8"]
+[ext_resource type="Script" path="res://src/PositionFollow2D.gd" id="5_4luv8"]
 [ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="5_7ohp0"]
 [ext_resource type="Texture2D" uid="uid://cwoultxx6k47" path="res://assets/textures/guis/title_screen/GarageButton.png" id="5_th0n8"]
-[ext_resource type="Script" path="res://src/components/GDBouncyButton.gd" id="5_wiac2"]
+[ext_resource type="Script" path="res://src/BouncyButton.gd" id="5_wiac2"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="6_0wc6k"]
 [ext_resource type="Texture2D" uid="uid://bwxk6tcq5v31v" path="res://assets/textures/guis/title_screen/CreateButton.png" id="6_2eto3"]
 [ext_resource type="AudioStream" uid="uid://c4sjh7a6mxgv3" path="res://assets/sounds/music/game_music/MenuLoop.mp3" id="7_ir7j4"]
@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://bf00dudjlkg0q" path="res://assets/textures/guis/shared/BackButton.png" id="14_t3hvn"]
 [ext_resource type="Texture2D" uid="uid://docsh85xkmade" path="res://assets/textures/guis/level_selector/LevelSelectorPrevious.png" id="15_7mwgk"]
 [ext_resource type="Texture2D" uid="uid://bswqhh121flny" path="res://assets/textures/guis/level_selector/LevelSelectorNext.png" id="16_btcin"]
-[ext_resource type="PackedScene" uid="uid://dfde2ns6le0wd" path="res://scenes/components/game_components/GDPhantomCamera2DHistory.tscn" id="16_dgsi1"]
+[ext_resource type="PackedScene" uid="uid://dfde2ns6le0wd" path="res://scenes/components/game_components/PhantomCamera2DHistory.tscn" id="16_dgsi1"]
 
 [sub_resource type="Resource" id="Resource_assks"]
 script = ExtResource("12_ct30d")

@@ -1,6 +1,6 @@
 @tool
 extends Area2D
-class_name GDLetterObject
+class_name ActionArea
 
 enum Action {
 	STOP_JUMP,

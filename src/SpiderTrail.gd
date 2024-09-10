@@ -1,6 +1,6 @@
 extends AnimatedSprite2D
 
-class_name GDSpiderTrail
+class_name SpiderTrail
 
 const SPIDER_TRAIL_HEIGHT: float = 896.0 * 0.75
 

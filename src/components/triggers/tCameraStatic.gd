@@ -19,7 +19,7 @@ enum Mode {
 
 var _player_camera: PlayerCamera
 var _player: Player
-var target_link: GDTargetLink
+var target_link: TargetLink
 var _target: Node2D
 var base: tBase
 var easing: tEasing
