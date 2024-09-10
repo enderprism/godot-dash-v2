@@ -9,7 +9,7 @@ var in_editor: bool
 var pause_manager: Node
 var player: Player
 var player_camera: PlayerCamera
-var background_sprites: Array[GDParallaxSprite]
+var background_sprites: Array[Sprite2D]
 var ground_sprites: Array[GroundObject]
 var level_song_player: AudioStreamPlayer
 var platformer := false

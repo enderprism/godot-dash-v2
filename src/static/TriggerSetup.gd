@@ -5,9 +5,9 @@ class_name TriggerSetup
 
 
 static func setup(caller: Node, add_target_link: bool, add_easing: bool = true):
-	# "Group" parent in Godot to avoid moving its tBase instead of it directly
+	# "Group" parent in Godot to avoid moving its TriggerBase instead of it directly
 	caller.set_meta("_edit_group_", true)
-	#region Avoid re-instancing tBase, tEasing and TargetLink if they already exist
+	#region Avoid re-instancing TriggerBase, TriggerEasing and TargetLink if they already exist
 	#region Init TargetLink (some triggers may not need it, if their target is outside the level scene)
 	if add_target_link:
 		if not caller.has_node("TargetLink"):
@@ -16,22 +16,22 @@ static func setup(caller: Node, add_target_link: bool, add_easing: bool = true):
 		else:
 			caller.target_link = caller.get_node("TargetLink")
 	#endregion
-	#region Init tBase
-	if not caller.has_node("tBase"):
-		caller.base = tBase.new()
-		caller.base.name = "tBase"
+	#region Init TriggerBase
+	if not caller.has_node("TriggerBase"):
+		caller.base = TriggerBase.new()
+		caller.base.name = "TriggerBase"
 		caller.add_child(caller.base)
 	else:
-		caller.base = caller.get_node("tBase")
+		caller.base = caller.get_node("TriggerBase")
 	#endregion
-	#region Init tEasing (a few triggers that are always instant might not need one, e.g. tToggle and tSong)
+	#region Init TriggerEasing (a few triggers that are always instant might not need one, e.g. ToggleTrigger and SongTrigger)
 	if add_easing:
-		if not caller.has_node("tEasing"):
-			caller.easing = tEasing.new()
-			caller.easing.name = "tEasing"
+		if not caller.has_node("TriggerEasing"):
+			caller.easing = TriggerEasing.new()
+			caller.easing.name = "TriggerEasing"
 			caller.add_child(caller.easing)
 		else:
-			caller.easing = caller.get_node("tEasing")
+			caller.easing = caller.get_node("TriggerEasing")
 	#endregion
 	#endregion
 	#region Set children owner to make them show in the scene tree
@@ -41,12 +41,12 @@ static func setup(caller: Node, add_target_link: bool, add_easing: bool = true):
 	#endregion
 	#region Signal connections
 	
-	if not caller.base.is_connected("body_entered", caller._start):
-		caller.base.body_entered.connect(caller._start)
-	if not caller.base.is_connected("body_entered", caller.easing._start):
-		caller.base.body_entered.connect(caller.easing._start)
-	if add_target_link and not caller.base.is_connected("target_changed", caller._update_target_link):
-		caller.base.target_changed.connect(caller._update_target_link)
+	if not caller.base.is_connected("body_entered", caller.start):
+		caller.base.body_entered.connect(caller.start)
+	if not caller.base.is_connected("body_entered", caller.easing.start):
+		caller.base.body_entered.connect(caller.easing.start)
+	if add_target_link and not caller.base.is_connected("target_changed", caller.update_target_link):
+		caller.base.target_changed.connect(caller.update_target_link)
 	#endregion
 	#region ITC Groups
 	if caller.base.target_group != null and not Engine.is_editor_hint() or LevelManager.in_editor:

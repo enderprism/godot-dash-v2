@@ -1,6 +1,6 @@
 @tool
 extends Resource
-class_name gSpawnedGroup
+class_name SpawnedGroup
 
 
 @export var path: NodePath:

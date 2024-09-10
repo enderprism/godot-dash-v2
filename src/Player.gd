@@ -33,7 +33,7 @@ const MINI_PLAYER_SCALE := Vector2(0.6, 0.6)
 const WAVE_TRAIL_WIDTH: float = 50.0
 const WAVE_TRAIL_LENGTH: int = 250
 const SPIDER_TRAIL: PackedScene = preload("res://scenes/components/game_components/SpiderTrail.tscn")
-const DASH_BOOM: PackedScene = preload("res://scenes/components/game_components/GDDashBoom.tscn")
+const DASH_BOOM: PackedScene = preload("res://scenes/components/game_components/DashBoom.tscn")
 #endregion
 
 @export var displayed_gamemode: Gamemode:

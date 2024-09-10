@@ -1,4 +1,4 @@
-@tool class_name tEasing extends Node
+@tool class_name TriggerEasing extends Node
 ## Interpolates a given property of a target to a value using a
 ## trigger easing resource.
 
@@ -13,13 +13,13 @@ var _weight: float
 var _previous_weight: float
 
 func _ready() -> void:
-	if has_node("../tBase"):
-		$"../tBase".body_entered.connect(_start)
+	if has_node("../TriggerBase"):
+		$"../TriggerBase".body_entered.connect(start)
 
-func _start(_body: Node2D) -> void:
+func start(_body: Node2D) -> void:
 	_tween = get_tree().create_tween()
-	if $"../tBase".multi_usage:
-		_reset()
+	if $"../TriggerBase".multi_usage:
+		reset()
 		_tween.tween_property(self, "_weight", 1.0, _duration) \
 			.set_trans(easing_transition) \
 			.set_ease(easing_type).from(0.0)
@@ -36,6 +36,6 @@ func _get_weight_delta() -> float:
 func _is_inactive() -> bool:
 	return _weight == 0.0 or _weight == 1.0
 
-func _reset() -> void:
+func reset() -> void:
 	_weight = 0.0
 	_previous_weight = 0.0

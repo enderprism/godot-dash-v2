@@ -6,7 +6,7 @@ enum ToggleState {
 	FLIP,
 }
 
-func _toggle(toggled_groups: Array[gToggledGroup]):
+func _toggle(toggled_groups: Array[ToggledGroup]):
 	for toggled_group in toggled_groups:
 		var group = get_parent().get_node(toggled_group.group)
 		var state = toggled_group.state

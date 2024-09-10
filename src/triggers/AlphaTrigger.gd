@@ -1,6 +1,6 @@
 @tool
 extends Node2D
-class_name tAlpha
+class_name AlphaTrigger
 
 enum Mode {
 	SET,
@@ -13,32 +13,34 @@ enum Mode {
 	set(value):
 		mode = value
 		notify_property_list_changed()
-@export_range(0.0, 1.0, 0.01) var _alpha: float
-@export var _copy_target: Node2D
-@export_range(0.0, 1.0, 0.01, "or_greater") var _copy_multiplier: float
+@export_range(0.0, 1.0, 0.01) var alpha: float
+@export var copy_target: Node2D
+@export_range(0.0, 1.0, 0.01, "or_greater") var copy_multiplier: float
 
 # Hide unneeded elements in the inspector
 func _validate_property(property: Dictionary) -> void:
 	if property.name == "_set_alpha" and mode == Mode.COPY:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name in ["_copy_target", "_copy_multiplier"] and mode != Mode.COPY:
+	if property.name in ["copy_target", "copy_multiplier"] and mode != Mode.COPY:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
+
+
+var base: TriggerBase
+var easing: TriggerEasing
+var target_link: TargetLink
 
 var _targets: Array[Node] ## Array of all the [Node2D] in a group.
 var _initial_alphas: Dictionary
-var base: tBase
-var easing: tEasing
-var target_link: TargetLink
 
 func _ready() -> void:
 	TriggerSetup.setup(self, true)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Alpha.svg"))
 	_targets = get_tree().get_nodes_in_group(base.target_group)
 
-func _update_target_link() -> void:
+func update_target_link() -> void:
 	target_link.target = base._target
 
-func _start(_body: Node2D) -> void:
+func start(_body: Node2D) -> void:
 	if easing._is_inactive():
 		if not _targets.is_empty():
 			for _target: Node2D in _targets:
@@ -46,7 +48,7 @@ func _start(_body: Node2D) -> void:
 		else:
 			printerr("In ", name, ": _target is unset")
 
-func _reset() -> void:
+func reset() -> void:
 	if not _targets.is_empty():
 		for _target: Node2D in _targets:
 			_target.modulate.a = _initial_alphas[_target]
@@ -61,12 +63,12 @@ func _process(_delta: float) -> void:
 				var _initial_alpha: float = _initial_alphas[_target]
 				match mode:
 					Mode.SET:
-						_target.modulate.a += (_alpha - _initial_alpha) * _weight_delta
+						_target.modulate.a += (alpha - _initial_alpha) * _weight_delta
 					Mode.MULTIPLY:
-						_target.modulate.a += (_alpha * _initial_alpha - _initial_alpha) * _weight_delta
+						_target.modulate.a += (alpha * _initial_alpha - _initial_alpha) * _weight_delta
 					Mode.COPY:
-						if _copy_target != null:
-							_target.modulate.a = lerp(_initial_alpha, _copy_target.modulate.a * _copy_multiplier, easing._weight)
+						if copy_target != null:
+							_target.modulate.a = lerp(_initial_alpha, copy_target.modulate.a * copy_multiplier, easing._weight)
 						else:
 							printerr("In ", name, ": copy_target is unset!")
 		else:

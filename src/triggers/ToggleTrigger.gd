@@ -1,12 +1,13 @@
 @tool
-class_name tToggle extends Node2D
+extends Node2D
+class_name ToggleTrigger
 
-@export var toggled_groups: Array[gToggledGroup]:
+@export var toggled_groups: Array[ToggledGroup]:
 	set(value):
 		toggled_groups = value
-		_update_texture()
+		update_texture()
 
-var base: tBase
+var base: TriggerBase
 
 var _toggle: ObjectToggle
 
@@ -20,10 +21,14 @@ func _ready() -> void:
 		TriggerSetup.set_child_owner(self, _toggle)
 	base.sprite.texture = preload("res://assets/textures/triggers/ToggleMultipleGroups.svg")
 
-func _start(_body: Node2D) -> void:
+func _physics_process(_delta: float) -> void:
+	if visible:
+		update_texture()
+
+func start(_body: Node2D) -> void:
 	_toggle._toggle(toggled_groups)
 
-func _update_texture() -> void:
+func update_texture() -> void:
 	if toggled_groups.size() == 1 and toggled_groups[0] != null:
 		match toggled_groups[0].state: 
 			ObjectToggle.ToggleState.ON:
@@ -34,7 +39,3 @@ func _update_texture() -> void:
 				base.sprite.texture = preload("res://assets/textures/triggers/ToggleFlip.svg")
 	else:
 		base.sprite.texture = preload("res://assets/textures/triggers/ToggleMultipleGroups.svg")
-
-func _physics_process(_delta: float) -> void:
-	if visible:
-		_update_texture()

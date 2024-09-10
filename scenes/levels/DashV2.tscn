@@ -7,27 +7,27 @@
 [ext_resource type="PackedScene" uid="uid://ccdry45jmn43w" path="res://scenes/components/level_components/solids/DefaultCube.tscn" id="5_g4mtk"]
 [ext_resource type="PackedScene" uid="uid://l2ofoyvoxbr2" path="res://scenes/components/game_components/TargetLink.tscn" id="6_bolvq"]
 [ext_resource type="PackedScene" uid="uid://nsvkooc5od83" path="res://scenes/components/level_components/pads/YellowPad.tscn" id="6_cufna"]
-[ext_resource type="Script" path="res://src/components/triggers/tMove.gd" id="8_ml13a"]
-[ext_resource type="Script" path="res://src/components/triggers/trigger_components/tEasing.gd" id="10_srhyw"]
-[ext_resource type="Script" path="res://src/components/triggers/trigger_components/tBase.gd" id="11_w8j1w"]
+[ext_resource type="Script" path="res://src/triggers/MoveTrigger.gd" id="8_ml13a"]
+[ext_resource type="Script" path="res://src/triggers/trigger_components/TriggerEasing.gd" id="10_srhyw"]
+[ext_resource type="Script" path="res://src/triggers/trigger_components/TriggerBase.gd" id="11_w8j1w"]
 [ext_resource type="PackedScene" uid="uid://dh1l6k3qxgwdf" path="res://scenes/components/level_components/hazards/SpikeFlat.tscn" id="12_sa2ab"]
 [ext_resource type="PackedScene" uid="uid://calhypvupvj4m" path="res://scenes/components/level_components/hazards/Spike.tscn" id="14_kphb3"]
-[ext_resource type="Script" path="res://src/components/triggers/tGameplayRotate.gd" id="15_3ludl"]
+[ext_resource type="Script" path="res://src/triggers/GameplayRotateTrigger.gd" id="15_3ludl"]
 [ext_resource type="PackedScene" uid="uid://duu44mnb4uo8u" path="res://scenes/components/level_components/portals/gamemode_portals/BallPortal.tscn" id="15_khho3"]
-[ext_resource type="Script" path="res://src/components/triggers/tRotate.gd" id="16_pj4c7"]
-[ext_resource type="Script" path="res://src/components/triggers/trigger_components/tGameplayRotateIndicator.gd" id="17_jvq2b"]
-[ext_resource type="Script" path="res://src/components/triggers/tScale.gd" id="19_vvu8j"]
+[ext_resource type="Script" path="res://src/triggers/RotateTrigger.gd" id="16_pj4c7"]
+[ext_resource type="Script" path="res://src/triggers/trigger_components/GameplayRotateTriggerIndicator.gd" id="17_jvq2b"]
+[ext_resource type="Script" path="res://src/triggers/ScaleTrigger.gd" id="19_vvu8j"]
 [ext_resource type="PackedScene" uid="uid://d05asiy6k2voi" path="res://scenes/components/level_components/portals/other_portals/TeleportalIn.tscn" id="20_ocowa"]
-[ext_resource type="Script" path="res://src/components/triggers/tSpawn.gd" id="24_l04c6"]
-[ext_resource type="Script" path="res://src/components/triggers/tCameraStatic.gd" id="24_r7vme"]
+[ext_resource type="Script" path="res://src/triggers/SpawnTrigger.gd" id="24_l04c6"]
+[ext_resource type="Script" path="res://src/triggers/CameraStaticTrigger.gd" id="24_r7vme"]
 [ext_resource type="PackedScene" uid="uid://dtumn0qc8usca" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal3x.tscn" id="24_rf2xj"]
 [ext_resource type="PackedScene" uid="uid://dvxuhegi7klq8" path="res://scenes/components/level_components/orbs/DashOrbGreen.tscn" id="24_sifkm"]
-[ext_resource type="Script" path="res://src/resources/gSpawnedGroup.gd" id="25_jkwa2"]
+[ext_resource type="Script" path="res://src/resources/SpawnedGroup.gd" id="25_jkwa2"]
 [ext_resource type="Texture2D" uid="uid://cmcq4iubclsti" path="res://assets/textures/Cross.svg" id="26_ohbn7"]
 [ext_resource type="PackedScene" uid="uid://qfmv2p1wt1tn" path="res://scenes/components/level_components/portals/gamemode_portals/CubePortal.tscn" id="28_vs028"]
 [ext_resource type="PackedScene" uid="uid://fo7vbjwc7r60" path="res://scenes/components/level_components/letter_objects/StopJump.tscn" id="29_psv3v"]
 [ext_resource type="PackedScene" uid="uid://b3wrcjp4ua15k" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal1x.tscn" id="29_qa435"]
-[ext_resource type="Script" path="res://src/components/triggers/tAlpha.gd" id="30_4btpy"]
+[ext_resource type="Script" path="res://src/triggers/AlphaTrigger.gd" id="30_4btpy"]
 [ext_resource type="PackedScene" uid="uid://bwjxj7jcot0cn" path="res://scenes/components/level_components/letter_objects/StopDash.tscn" id="30_me5kp"]
 [ext_resource type="PackedScene" uid="uid://cct7q7sr6fwc0" path="res://scenes/components/level_components/portals/gamemode_portals/WavePortal.tscn" id="31_bjlog"]
 [ext_resource type="PackedScene" uid="uid://b2civdkigbcth" path="res://scenes/components/level_components/portals/other_portals/SizePortalSmall.tscn" id="32_k5j6h"]
@@ -64,7 +64,7 @@ time = 0.0
 
 [sub_resource type="Resource" id="Resource_ky2bc"]
 script = ExtResource("25_jkwa2")
-path = NodePath("../tMove")
+path = NodePath("../MoveTrigger")
 time = 0.0
 
 [sub_resource type="Resource" id="Resource_b3n5h"]
@@ -135,21 +135,19 @@ scale = Vector2(1, 5)
 [node name="Spike" parent="." instance=ExtResource("14_kphb3")]
 position = Vector2(2496, -192)
 
-[node name="tMove" type="Node2D" parent="."]
+[node name="MoveTrigger" type="Node2D" parent="."]
 position = Vector2(1728, -1216)
 script = ExtResource("8_ml13a")
 _add_position = Vector2(0, 512)
 metadata/_edit_group_ = true
 
-[node name="TargetLink" parent="tMove" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="MoveTrigger" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="tMove"]
+[node name="TriggerEasing" type="Node" parent="MoveTrigger"]
 script = ExtResource("10_srhyw")
-_easing_type = 1
-_easing_transition = 9
 
-[node name="tBase" type="Area2D" parent="tMove" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="MoveTrigger" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
@@ -157,9 +155,8 @@ _target = NodePath("../../DefaultCube7")
 target_group = &"colon_jumpscare_wall"
 multi_usage = true
 
-[node name="SpawnTargetLink" parent="tMove" instance=ExtResource("6_bolvq")]
+[node name="SpawnTargetLink" parent="MoveTrigger" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="FloorButtonMove" type="Node2D" parent="."]
@@ -171,13 +168,11 @@ metadata/_edit_group_ = true
 [node name="TargetLink" parent="FloorButtonMove" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="FloorButtonMove"]
+[node name="TriggerEasing" type="Node" parent="FloorButtonMove"]
 script = ExtResource("10_srhyw")
 _duration = 0.5
-_easing_type = 1
-_easing_transition = 5
 
-[node name="tBase" type="Area2D" parent="FloorButtonMove" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="FloorButtonMove" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
@@ -235,42 +230,40 @@ monitoring = false
 monitorable = false
 _freefly = false
 
-[node name="tRotate" type="Node2D" parent="."]
+[node name="RotateTrigger" type="Node2D" parent="."]
 position = Vector2(1342, -960)
 script = ExtResource("16_pj4c7")
 _rotate_around_self = true
 _add_rotation_degrees = 180.0
 metadata/_edit_group_ = true
 
-[node name="TargetLink" parent="tRotate" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="RotateTrigger" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="tRotate"]
+[node name="TriggerEasing" type="Node" parent="RotateTrigger"]
 script = ExtResource("10_srhyw")
-_easing_transition = 3
 
-[node name="tBase" type="Area2D" parent="tRotate" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="RotateTrigger" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../SpiderPortal")
 target_group = &"spiderportal"
 multi_usage = true
 
-[node name="tScale" type="Node2D" parent="."]
+[node name="ScaleTrigger" type="Node2D" parent="."]
 position = Vector2(1342, -1088)
 script = ExtResource("19_vvu8j")
 _scale_around_self = true
 mode = 3
 metadata/_edit_group_ = true
 
-[node name="TargetLink" parent="tScale" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="ScaleTrigger" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="tScale"]
+[node name="TriggerEasing" type="Node" parent="ScaleTrigger"]
 script = ExtResource("10_srhyw")
-_easing_transition = 3
 
-[node name="tBase" type="Area2D" parent="tScale" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="ScaleTrigger" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../SpiderPortal")
@@ -284,7 +277,7 @@ rotation = 1.5708
 _freefly = false
 _override_player_velocity = true
 
-[node name="tGameplayRotate" type="Node2D" parent="."]
+[node name="GameplayRotateTrigger" type="Node2D" parent="."]
 z_index = 1
 position = Vector2(2112, -640)
 script = ExtResource("15_3ludl")
@@ -292,17 +285,16 @@ _rotation_degrees = 90.0
 _flip = true
 metadata/_edit_group_ = true
 
-[node name="tEasing" type="Node" parent="tGameplayRotate"]
+[node name="TriggerEasing" type="Node" parent="GameplayRotateTrigger"]
 script = ExtResource("10_srhyw")
 _duration = 0.0
 
-[node name="tBase" type="Area2D" parent="tGameplayRotate"]
+[node name="TriggerBase" type="Area2D" parent="GameplayRotateTrigger"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 hitbox_height = 2.0
 
-[node name="Indicator" type="Node2D" parent="tGameplayRotate"]
-visible = false
+[node name="Indicator" type="Node2D" parent="GameplayRotateTrigger"]
 show_behind_parent = true
 script = ExtResource("17_jvq2b")
 
@@ -312,18 +304,17 @@ rotation = 1.57079
 script = ExtResource("15_3ludl")
 metadata/_edit_group_ = true
 
-[node name="tEasing" type="Node" parent="tGameplayRotate2"]
+[node name="TriggerEasing" type="Node" parent="tGameplayRotate2"]
 script = ExtResource("10_srhyw")
 _duration = 0.0
 
-[node name="tBase" type="Area2D" parent="tGameplayRotate2"]
+[node name="TriggerBase" type="Area2D" parent="tGameplayRotate2"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 hitbox_height = 1.0
 multi_usage = true
 
 [node name="Indicator" type="Node2D" parent="tGameplayRotate2"]
-visible = false
 show_behind_parent = true
 rotation = -1.57079
 script = ExtResource("17_jvq2b")
@@ -333,19 +324,18 @@ position = Vector2(1856, -576)
 scale = Vector2(0.125, 0.125)
 texture = ExtResource("26_ohbn7")
 
-[node name="tCameraStatic" type="Node2D" parent="."]
+[node name="CameraStaticTrigger" type="Node2D" parent="."]
 position = Vector2(960, -832)
 script = ExtResource("24_r7vme")
 metadata/_edit_group_ = true
 
-[node name="TargetLink" parent="tCameraStatic" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="CameraStaticTrigger" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="tCameraStatic"]
+[node name="TriggerEasing" type="Node" parent="CameraStaticTrigger"]
 script = ExtResource("10_srhyw")
-_easing_transition = 3
 
-[node name="tBase" type="Area2D" parent="tCameraStatic" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="CameraStaticTrigger" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../Cross")
@@ -354,18 +344,17 @@ _target = NodePath("../../Cross")
 position = Vector2(4032, -1088)
 script = ExtResource("24_r7vme")
 mode = 1
-_ignore_x = true
+ignore_x = true
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tCameraStatic3" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="tCameraStatic3"]
+[node name="TriggerEasing" type="Node" parent="tCameraStatic3"]
 script = ExtResource("10_srhyw")
 _duration = 0.2
-_easing_transition = 3
 
-[node name="tBase" type="Area2D" parent="tCameraStatic3" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="tCameraStatic3" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../Cross")
@@ -378,12 +367,10 @@ metadata/_edit_group_ = true
 [node name="TargetLink" parent="tCameraStatic4" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="tCameraStatic4"]
+[node name="TriggerEasing" type="Node" parent="tCameraStatic4"]
 script = ExtResource("10_srhyw")
-_easing_type = 1
-_easing_transition = 3
 
-[node name="tBase" type="Area2D" parent="tCameraStatic4" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="tCameraStatic4" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../Cross2")
@@ -405,12 +392,10 @@ metadata/_edit_group_ = true
 [node name="TargetLink" parent="tMove2" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="tMove2"]
+[node name="TriggerEasing" type="Node" parent="tMove2"]
 script = ExtResource("10_srhyw")
-_easing_type = 1
-_easing_transition = 5
 
-[node name="tBase" type="Area2D" parent="tMove2" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="tMove2" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
@@ -419,7 +404,6 @@ target_group = &"orb1"
 
 [node name="SpawnTargetLink" parent="tMove2" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(192, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="tMove3" type="Node2D" parent="."]
@@ -431,33 +415,31 @@ metadata/_edit_group_ = true
 [node name="TargetLink" parent="tMove3" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="tMove3"]
+[node name="TriggerEasing" type="Node" parent="tMove3"]
 script = ExtResource("10_srhyw")
-_easing_type = 1
-_easing_transition = 5
 
-[node name="tBase" type="Area2D" parent="tMove3" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="tMove3" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../PinkOrb2")
 target_group = &"orb2"
 
-[node name="tSpawn" type="Node2D" parent="."]
+[node name="SpawnTrigger" type="Node2D" parent="."]
 position = Vector2(0, -576)
 script = ExtResource("24_l04c6")
 _spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_3ps4l"), SubResource("Resource_o6xvb")])
 metadata/_edit_group_ = true
 
-[node name="TargetLink" parent="tSpawn" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="SpawnTrigger" instance=ExtResource("6_bolvq")]
 z_index = -50
 points = PackedVector2Array(0, -256, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
-[node name="tEasing" type="Node" parent="tSpawn"]
+[node name="TriggerEasing" type="Node" parent="SpawnTrigger"]
 script = ExtResource("10_srhyw")
 
-[node name="tBase" type="Area2D" parent="tSpawn"]
+[node name="TriggerBase" type="Area2D" parent="SpawnTrigger"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 
@@ -472,11 +454,11 @@ z_index = -50
 points = PackedVector2Array(0, -448, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
-[node name="tEasing" type="Node" parent="tSpawn2"]
+[node name="TriggerEasing" type="Node" parent="tSpawn2"]
 script = ExtResource("10_srhyw")
 _duration = 0.2
 
-[node name="tBase" type="Area2D" parent="tSpawn2"]
+[node name="TriggerBase" type="Area2D" parent="tSpawn2"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 1
@@ -490,13 +472,11 @@ metadata/_edit_group_ = true
 [node name="TargetLink" parent="FloorButtonMove2" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="FloorButtonMove2"]
+[node name="TriggerEasing" type="Node" parent="FloorButtonMove2"]
 script = ExtResource("10_srhyw")
 _duration = 0.5
-_easing_type = 1
-_easing_transition = 5
 
-[node name="tBase" type="Area2D" parent="FloorButtonMove2" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="FloorButtonMove2" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
@@ -512,13 +492,11 @@ metadata/_edit_group_ = true
 [node name="TargetLink" parent="LowerSpike1" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="LowerSpike1"]
+[node name="TriggerEasing" type="Node" parent="LowerSpike1"]
 script = ExtResource("10_srhyw")
 _duration = 0.5
-_easing_type = 0
-_easing_transition = 1
 
-[node name="tBase" type="Area2D" parent="LowerSpike1"]
+[node name="TriggerBase" type="Area2D" parent="LowerSpike1"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
@@ -526,7 +504,6 @@ target_group = &"spike1"
 
 [node name="SpawnTargetLink" parent="LowerSpike1" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="LowerSpike2" type="Node2D" parent="."]
@@ -538,13 +515,11 @@ metadata/_edit_group_ = true
 [node name="TargetLink" parent="LowerSpike2" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="LowerSpike2"]
+[node name="TriggerEasing" type="Node" parent="LowerSpike2"]
 script = ExtResource("10_srhyw")
 _duration = 0.5
-_easing_type = 0
-_easing_transition = 1
 
-[node name="tBase" type="Area2D" parent="LowerSpike2"]
+[node name="TriggerBase" type="Area2D" parent="LowerSpike2"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
@@ -552,7 +527,6 @@ target_group = &"spike2"
 
 [node name="SpawnTargetLink" parent="LowerSpike2" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="LowerSpike3" type="Node2D" parent="."]
@@ -564,13 +538,11 @@ metadata/_edit_group_ = true
 [node name="TargetLink" parent="LowerSpike3" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="LowerSpike3"]
+[node name="TriggerEasing" type="Node" parent="LowerSpike3"]
 script = ExtResource("10_srhyw")
 _duration = 0.5
-_easing_type = 0
-_easing_transition = 1
 
-[node name="tBase" type="Area2D" parent="LowerSpike3"]
+[node name="TriggerBase" type="Area2D" parent="LowerSpike3"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
@@ -578,7 +550,6 @@ target_group = &"spike3"
 
 [node name="SpawnTargetLink" parent="LowerSpike3" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="DefaultCube5" parent="." groups=["spike1"] instance=ExtResource("5_g4mtk")]
@@ -607,17 +578,16 @@ position = Vector2(1984, -320)
 rotation = 1.57079
 script = ExtResource("24_r7vme")
 mode = 1
-_ignore_y = true
+ignore_y = true
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tCameraStatic2" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="tCameraStatic2"]
+[node name="TriggerEasing" type="Node" parent="tCameraStatic2"]
 script = ExtResource("10_srhyw")
-_easing_transition = 1
 
-[node name="tBase" type="Area2D" parent="tCameraStatic2" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="tCameraStatic2" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 hitbox_height = 1.5
@@ -640,10 +610,10 @@ z_index = -50
 points = PackedVector2Array(0, -320, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
-[node name="tEasing" type="Node" parent="tSpawn3"]
+[node name="TriggerEasing" type="Node" parent="tSpawn3"]
 script = ExtResource("10_srhyw")
 
-[node name="tBase" type="Area2D" parent="tSpawn3"]
+[node name="TriggerBase" type="Area2D" parent="tSpawn3"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 1
@@ -680,13 +650,11 @@ metadata/_edit_group_ = true
 [node name="TargetLink" parent="MoveBallPlatform" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="MoveBallPlatform"]
+[node name="TriggerEasing" type="Node" parent="MoveBallPlatform"]
 script = ExtResource("10_srhyw")
 _duration = 0.5
-_easing_type = 1
-_easing_transition = 1
 
-[node name="tBase" type="Area2D" parent="MoveBallPlatform"]
+[node name="TriggerBase" type="Area2D" parent="MoveBallPlatform"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
@@ -702,13 +670,11 @@ metadata/_edit_group_ = true
 [node name="TargetLink" parent="FloorButtonMove3" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="FloorButtonMove3"]
+[node name="TriggerEasing" type="Node" parent="FloorButtonMove3"]
 script = ExtResource("10_srhyw")
 _duration = 0.5
-_easing_type = 1
-_easing_transition = 5
 
-[node name="tBase" type="Area2D" parent="FloorButtonMove3" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="FloorButtonMove3" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
@@ -718,7 +684,6 @@ multi_usage = true
 
 [node name="SpawnTargetLink" parent="FloorButtonMove3" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="tSpawn4" type="Node2D" parent="."]
@@ -732,10 +697,10 @@ z_index = -50
 points = PackedVector2Array(0, 320, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
-[node name="tEasing" type="Node" parent="tSpawn4"]
+[node name="TriggerEasing" type="Node" parent="tSpawn4"]
 script = ExtResource("10_srhyw")
 
-[node name="tBase" type="Area2D" parent="tSpawn4"]
+[node name="TriggerBase" type="Area2D" parent="tSpawn4"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 1
@@ -748,19 +713,18 @@ scale = Vector2(1, 3)
 position = Vector2(4160, -704)
 scale = Vector2(3, 3)
 
-[node name="tAlpha" type="Node2D" parent="."]
+[node name="AlphaTrigger" type="Node2D" parent="."]
 position = Vector2(1344, -1216)
 script = ExtResource("30_4btpy")
 metadata/_edit_group_ = true
 
-[node name="TargetLink" parent="tAlpha" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="AlphaTrigger" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="tAlpha"]
+[node name="TriggerEasing" type="Node" parent="AlphaTrigger"]
 script = ExtResource("10_srhyw")
-_easing_transition = 3
 
-[node name="tBase" type="Area2D" parent="tAlpha" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="AlphaTrigger" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../SpiderPortal")
@@ -790,11 +754,11 @@ z_index = -50
 points = PackedVector2Array(0, 128, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
-[node name="tEasing" type="Node" parent="tSpawn5"]
+[node name="TriggerEasing" type="Node" parent="tSpawn5"]
 script = ExtResource("10_srhyw")
 _duration = 0.4688
 
-[node name="tBase" type="Area2D" parent="tSpawn5"]
+[node name="TriggerBase" type="Area2D" parent="tSpawn5"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 multi_usage = true
@@ -809,13 +773,11 @@ metadata/_edit_group_ = true
 [node name="TargetLink" parent="tRotate2" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="tEasing" type="Node" parent="tRotate2"]
+[node name="TriggerEasing" type="Node" parent="tRotate2"]
 script = ExtResource("10_srhyw")
 _duration = 0.4688
-_easing_type = 1
-_easing_transition = 3
 
-[node name="tBase" type="Area2D" parent="tRotate2"]
+[node name="TriggerBase" type="Area2D" parent="tRotate2"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2

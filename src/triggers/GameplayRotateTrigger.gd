@@ -1,6 +1,6 @@
 @tool
 extends Node2D
-class_name tGameplayRotate
+class_name GameplayRotateTrigger
 
 
 @export_range(-360, 360, 0.01, "or_greater", "or_less", "degrees" ) var _rotation_degrees: float:
@@ -19,9 +19,12 @@ class_name tGameplayRotate
 # 	if property.name == "_new_velocity" and not _set_velocity:
 # 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
-var _player: Player # Not useful in itself, but it provides autocompletion.
-var base: tBase
-var easing: tEasing
+
+var base: TriggerBase
+var easing: TriggerEasing
+
+var _player: Player:
+	get(): return LevelManager.player if not Engine.is_editor_hint() else null
 var _initial_global_rotation_degrees: float
 var _indicator: tGameplayRotateIndicator
 
@@ -34,10 +37,9 @@ func _ready() -> void:
 		add_child(_indicator)
 		TriggerSetup.set_child_owner(self, _indicator)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/GameplayRotate.svg"))
-	_player = LevelManager.player
 	_indicator.visible = base.sprite.visible
 
-func _start(_body: Node2D) -> void:
+func start(_body: Node2D) -> void:
 	_player.gravity_multiplier = abs(_player.gravity_multiplier) * 1 if not _flip else -1
 	_player.horizontal_direction = 1 if not _reverse else -1
 	_initial_global_rotation_degrees = _player.gameplay_rotation_degrees
@@ -46,7 +48,7 @@ func _start(_body: Node2D) -> void:
 		_player.velocity = _player.velocity.rotated(deg_to_rad(_rotation_degrees))
 		_indicator.hide()
 
-func _reset() -> void:
+func reset() -> void:
 	if _player != null:
 		_player.gameplay_rotation_degrees = _initial_global_rotation_degrees
 	else:

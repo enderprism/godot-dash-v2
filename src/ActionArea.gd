@@ -13,7 +13,8 @@ enum Action {
 		if is_inside_tree(): _refresh_letter()
 
 var _hitbox: CollisionShape2D
-var _player: Player
+var _player: Player:
+	get(): return LevelManager.player if not Engine.is_editor_hint() else null
 var _letter: Label
 var _ninepatchrect: NinePatchRect
 
@@ -22,7 +23,6 @@ func _ready() -> void:
 	_letter = get_node_or_null("Letter")
 	_ninepatchrect = get_node_or_null("NinePatchRect")
 	_hitbox = $Hitbox
-	_player = LevelManager.player
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint() or get_tree().debug_collisions_hint:

@@ -1,6 +1,6 @@
 @tool extends Resource
 
-class_name gToggledGroup
+class_name ToggledGroup
 
 @export var group: NodePath
 @export var state: ObjectToggle.ToggleState

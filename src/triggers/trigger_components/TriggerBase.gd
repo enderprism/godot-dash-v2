@@ -1,5 +1,5 @@
 @tool
-class_name tBase
+class_name TriggerBase
 extends Area2D
 ## The base class for Godot Dash triggers.
 
@@ -83,7 +83,7 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	sprite.visible = _sprite_visible()
-	if not get_parent() is tGameplayRotate:
+	if not get_parent() is GameplayRotateTrigger:
 		sprite.global_rotation = 0.0
 	sprite.global_scale = Vector2.ONE/4
 

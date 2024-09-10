@@ -129,16 +129,16 @@ enum HorizontalDirection {
 # @export var _keep_displayed_gamemode: bool = false
 
 # @@show_if(object_type == ObjectType.ORB and _orb_type == Orb.TOGGLE)
-@export var toggled_groups: Array[gToggledGroup]
+@export var toggled_groups: Array[ToggledGroup]
 
 # @@show_if(_other_portal_type == OtherPortal.TELEPORTAL and object_type == ObjectType.OTHER_PORTAL or object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT)
 @export var _teleport_target: Node2D
 
 # @@show_if(_other_portal_type == OtherPortal.TELEPORTAL and object_type == ObjectType.OTHER_PORTAL or object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT)
-@export var _ignore_x: bool
+@export var ignore_x: bool
 
 # @@show_if(_other_portal_type == OtherPortal.TELEPORTAL and object_type == ObjectType.OTHER_PORTAL or object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT)
-@export var _ignore_y: bool
+@export var ignore_y: bool
 
 # @@show_if(_other_portal_type == OtherPortal.TELEPORTAL and object_type == ObjectType.OTHER_PORTAL or object_type == ObjectType.ORB and _orb_type == Orb.TELEPORT)
 @export var _override_player_velocity: bool
@@ -158,8 +158,10 @@ enum HorizontalDirection {
 @export var multi_usage: bool = true
 #endregion
 
-var _player: Player
-var _player_camera: PlayerCamera
+var _player: Player:
+	get(): return LevelManager.player if not Engine.is_editor_hint() else null
+var _player_camera: PlayerCamera:
+	get(): return LevelManager.player_camera if not Engine.is_editor_hint() else null
 var _rebound_factor: float
 var _pulse_white_color: Color = Color.WHITE
 var _0x_speed_centering_player: bool
@@ -167,8 +169,6 @@ var _queue_index: int
 
 func _ready() -> void:
 	_pulse_white_color.a = 0
-	_player = LevelManager.player
-	_player_camera = LevelManager.player_camera
 	body_entered.connect(_on_player_enter)
 	body_exited.connect(_on_player_exit)
 
@@ -390,9 +390,9 @@ func _set_spider_props() -> void:
 
 func _teleport_player() -> Vector2:
 	if _teleport_target != null and has_overlapping_bodies():
-		if not _ignore_x:
+		if not ignore_x:
 			_player.position.x = _teleport_target.global_position.x
-		if not _ignore_y:
+		if not ignore_y:
 			_player.position.y = _teleport_target.global_position.y
 		if _override_player_velocity:
 			return _new_player_velocity.rotated(_player.gameplay_rotation)

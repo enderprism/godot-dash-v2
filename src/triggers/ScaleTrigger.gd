@@ -1,6 +1,6 @@
 @tool
 extends Node2D
-class_name tScale
+class_name ScaleTrigger
 
 enum Mode {
 	ADD,
@@ -41,32 +41,14 @@ func _validate_property(property: Dictionary) -> void:
 
 var _targets: Array[Node] ## Array of all the [Node2D] in a group.
 var _initial_scales: Dictionary ## Scale for every [Node2D] in [member _targets]
-var base: tBase
-var easing: tEasing
+var base: TriggerBase
+var easing: TriggerEasing
 var target_link: TargetLink
 
 func _ready() -> void:
 	TriggerSetup.setup(self, true)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Scale.svg"))
 	_targets = get_tree().get_nodes_in_group(base.target_group)
-
-func _update_target_link() -> void:
-	target_link.target = base._target
-
-func _start(_body: Node2D) -> void:
-	if easing._is_inactive():
-		if not _targets.is_empty():
-			for _target: Node2D in _targets:
-				_initial_scales[_target] = _target.global_scale
-		else:
-			printerr("In ", name, ", _start: _target is unset")
-
-func _reset() -> void:
-	if not _targets.is_empty():
-		for _target in _targets:
-			_target.global_scale = _initial_scales[_target]
-	else:
-		printerr("In ", name, ", _reset: _target is unset")
 
 func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
@@ -112,3 +94,21 @@ func _physics_process(_delta: float) -> void:
 	elif Engine.is_editor_hint() or LevelManager.in_editor:
 		target_link.position = Vector2.ZERO
 		if Engine.is_editor_hint(): base.position = Vector2.ZERO
+
+func update_target_link() -> void:
+	target_link.target = base._target
+
+func start(_body: Node2D) -> void:
+	if easing._is_inactive():
+		if not _targets.is_empty():
+			for _target: Node2D in _targets:
+				_initial_scales[_target] = _target.global_scale
+		else:
+			printerr("In ", name, ", start: _target is unset")
+
+func reset() -> void:
+	if not _targets.is_empty():
+		for _target in _targets:
+			_target.global_scale = _initial_scales[_target]
+	else:
+		printerr("In ", name, ", reset: _target is unset")
