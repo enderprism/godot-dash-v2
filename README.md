@@ -5,6 +5,8 @@
 
 A Geometry Dash fangame made with Godot Engine.
 
+[Discord community](https://discord.gg/8Vn9qDDXZD)
+
 ## OS Support
 
 Godot Dash V2 is intended to work on Linux, Windows and macOS (unsigned app). **Android support is not planned.**
