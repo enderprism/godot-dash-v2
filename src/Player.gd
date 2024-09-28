@@ -43,7 +43,7 @@ const WAVE_TRAIL_WIDTH: float = 50.0
 const WAVE_TRAIL_LENGTH: int = 250
 const SPIDER_TRAIL: PackedScene = preload("res://scenes/components/game_components/SpiderTrail.tscn")
 const DASH_BOOM: PackedScene = preload("res://scenes/components/game_components/DashBoom.tscn")
-const ICON_LERP_FACTOR := 30.0
+const ICON_LERP_FACTOR := 0.5
 const PLATFORMER_ACCELERATION := 5
 #endregion
 
@@ -117,6 +117,7 @@ var _last_spider_trail_height: float
 @onready var _spider_state_machine: AnimationNodeStateMachinePlayback = _spider_animation_tree["parameters/playback"]
 
 func _ready() -> void:
+	platform_on_leave = PlatformOnLeave.PLATFORM_ON_LEAVE_ADD_UPWARD_VELOCITY if not LevelManager.platformer else PlatformOnLeave.PLATFORM_ON_LEAVE_ADD_VELOCITY
 	dash_control = null
 	Engine.time_scale = 1.0
 	displayed_gamemode = Gamemode.CUBE
@@ -218,7 +219,7 @@ func _compute_velocity(delta: float,
 				_velocity.y *= 2
 			elif player_scale == PlayerScale.BIG:
 				_velocity.y *= 0.5
-		elif not is_on_floor():
+		elif not is_on_floor() and not $GroundRaycast.is_colliding():
 			if internal_gamemode == Gamemode.UFO:
 				_velocity.y += GRAVITY * delta * gravity_multiplier * gameplay_trigger_gravity_multiplier * UFO_GRAVITY_MULTIPLIER
 			else:
@@ -321,7 +322,7 @@ func _rotate_sprite_degrees(delta: float):
 		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
 			$Icon/Cube.rotation_degrees += delta * gravity_multiplier * 400 * get_direction()
 		else:
-			$Icon/Cube.rotation_degrees = lerpf($Icon/Cube.rotation_degrees, snapped($Icon/Cube.rotation_degrees, 90), 1-exp(-delta * ICON_LERP_FACTOR))
+			$Icon/Cube.rotation_degrees = lerpf($Icon/Cube.rotation_degrees, snapped($Icon/Cube.rotation_degrees, 90), ICON_LERP_FACTOR)
 	else:
 		$Icon/Cube.rotation_degrees += delta * 800 * dash_control.initial_horizontal_direction
 	#endregion
@@ -333,14 +334,14 @@ func _rotate_sprite_degrees(delta: float):
 		$Icon/Swing.scale.x = sign(get_direction())
 	if not dash_control:
 		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
-			$Icon/Ship.rotation_degrees = lerpf($Icon/Ship.rotation, velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 3, 1-exp(-delta * ICON_LERP_FACTOR))
-			$Icon/Swing.rotation_degrees = lerpf($Icon/Swing.rotation, velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 3, 1-exp(-delta * ICON_LERP_FACTOR))
+			$Icon/Ship.rotation_degrees = lerpf($Icon/Ship.rotation, velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 3, ICON_LERP_FACTOR)
+			$Icon/Swing.rotation_degrees = lerpf($Icon/Swing.rotation, velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 3, ICON_LERP_FACTOR)
 		else:
-			$Icon/Ship.rotation_degrees = lerpf($Icon/Ship.rotation_degrees, 0.0, 1-exp(-delta * ICON_LERP_FACTOR))
-			$Icon/Swing.rotation_degrees = lerpf($Icon/Swing.rotation_degrees, 0.0, 1-exp(-delta * ICON_LERP_FACTOR))
+			$Icon/Ship.rotation_degrees = lerpf($Icon/Ship.rotation_degrees, 0.0, ICON_LERP_FACTOR)
+			$Icon/Swing.rotation_degrees = lerpf($Icon/Swing.rotation_degrees, 0.0, ICON_LERP_FACTOR)
 	else:
-		$Icon/Ship.rotation = lerpf($Icon/Ship.rotation, dash_control.angle * get_direction(), 1-exp(-delta * ICON_LERP_FACTOR))
-		$Icon/Swing.rotation = lerpf($Icon/Swing.rotation, dash_control.angle * get_direction(), 1-exp(-delta * ICON_LERP_FACTOR))
+		$Icon/Ship.rotation = lerpf($Icon/Ship.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR)
+		$Icon/Swing.rotation = lerpf($Icon/Swing.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR)
 	#endregion
 	#region wave
 	$Icon/Wave.scale.y = 1.0
@@ -350,17 +351,17 @@ func _rotate_sprite_degrees(delta: float):
 		if not is_on_floor() and not is_on_ceiling():
 			if velocity.rotated(-gameplay_rotation).x != 0.0:
 				if player_scale == PlayerScale.NORMAL:
-					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 45.0 * -_get_jump_state() * sign(gravity_multiplier), 15 * delta)
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 45.0 * -_get_jump_state() * sign(gravity_multiplier), 0.25)
 				elif player_scale == PlayerScale.MINI:
-					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 60.0 * -_get_jump_state() * sign(gravity_multiplier), 15 * delta)
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 60.0 * -_get_jump_state() * sign(gravity_multiplier), 0.25)
 				elif player_scale == PlayerScale.BIG:
-					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 30.0 * -_get_jump_state() * sign(gravity_multiplier), 15 * delta)
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 30.0 * -_get_jump_state() * sign(gravity_multiplier), 0.25)
 			else:
-				$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 90.0 * -_get_jump_state() * sign(gravity_multiplier), 15 * delta)
+				$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 90.0 * -_get_jump_state() * sign(gravity_multiplier), 0.25)
 		else:
-			$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees * get_direction(), 0.0, 1-exp(-delta * ICON_LERP_FACTOR))
+			$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees * get_direction(), 0.0, ICON_LERP_FACTOR)
 	else:
-		$Icon/Wave/Icon.rotation = lerpf($Icon/Wave/Icon.rotation, dash_control.angle * get_direction(), 1-exp(-delta * ICON_LERP_FACTOR))
+		$Icon/Wave/Icon.rotation = lerpf($Icon/Wave/Icon.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR)
 	#endregion
 	#region ufo
 	$Icon/UFO.scale.y = sign(gravity_multiplier)
@@ -368,11 +369,11 @@ func _rotate_sprite_degrees(delta: float):
 		$Icon/UFO.scale.x = sign(get_direction())
 	if not dash_control:
 		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
-			$Icon/UFO.rotation_degrees = lerpf($Icon/UFO.rotation_degrees, velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 0.2, 1-exp(-delta * ICON_LERP_FACTOR))
+			$Icon/UFO.rotation_degrees = lerpf($Icon/UFO.rotation_degrees, velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 0.2, ICON_LERP_FACTOR)
 		else:
-			$Icon/UFO.rotation_degrees = lerpf($Icon/UFO.rotation_degrees, 0.0, 1-exp(-delta * ICON_LERP_FACTOR))
+			$Icon/UFO.rotation_degrees = lerpf($Icon/UFO.rotation_degrees, 0.0, ICON_LERP_FACTOR)
 	else:
-		$Icon/UFO.rotation = lerpf($Icon/UFO.rotation, dash_control.angle * get_direction(), 1-exp(-delta * ICON_LERP_FACTOR))
+		$Icon/UFO.rotation = lerpf($Icon/UFO.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR)
 	#endregion
 	#region ball
 	$Icon/Ball.scale.y = 1.0
@@ -404,8 +405,8 @@ func _update_wave_trail(delta: float) -> void:
 		wave_trail_width *= PLAYER_SCALE_MINI.y
 	elif player_scale == PlayerScale.BIG:
 		wave_trail_width *= PLAYER_SCALE_BIG.y
-	$WaveTrail.width = lerpf($WaveTrail.width, wave_trail_width, 15 * delta)
-	$WaveTrail2.width = lerpf($WaveTrail2.width, wave_trail_width * 0.5, 15 * delta)
+	$WaveTrail.width = lerpf($WaveTrail.width, wave_trail_width, 0.25)
+	$WaveTrail2.width = lerpf($WaveTrail2.width, wave_trail_width * 0.5, 0.25)
 	if displayed_gamemode == Gamemode.WAVE:
 		$WaveTrail.modulate.a = 1.0
 		$WaveTrail2.modulate.a = 1.0

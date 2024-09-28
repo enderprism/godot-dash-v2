@@ -17,7 +17,7 @@ var _offset_snap: Vector2 = Vector2(0.125, 0.125)
 var _freefly: bool = true
 # I use a fake offset (which modifies the position) instead of a real one because
 # it makes the camera static transition weird
-var _position_offset: Vector2
+var position_offset: Vector2
 
 const DEFAULT_OFFSET: Vector2 = Vector2(400.0, 0.0)
 const DEFAULT_LIMIT_BOTTOM: int = 1080
@@ -28,10 +28,9 @@ var _tOffset_multiplier: Vector2 = Vector2.ONE
 
 func _ready() -> void:
 	position += DEFAULT_OFFSET
-	_position_offset = DEFAULT_OFFSET if not LevelManager.platformer else Vector2.ZERO
 	LevelManager.player_camera = self
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# limit_bottom = DEFAULT_LIMIT_BOTTOM - int(offset.y)
 	if get_parent().has_level_started:
 		_player_distance = player.position - position
@@ -41,68 +40,75 @@ func _physics_process(delta: float) -> void:
 		# TODO make the camera movement rotation-independant
 		# I'd love to use Vector2.rotated all over the place but it only works well with deltas, and here I change the position directly.
 		# If you find out how to use a position and offset delta instead, make sure to open a PR!
-		if abs(player.gameplay_rotation_degrees) == 90.0 or abs(player.gameplay_rotation_degrees) == 180.0:
-			_position_offset.x = lerpf(_position_offset.x, DEFAULT_OFFSET.y/zoom.x, _offset_snap.y * 60 * delta)
-			if not LevelManager.platformer:
-				if _static.y == 0:
-					position.y = lerpf(position.y, player.position.y, _position_snap.x * 60 * delta)
-				_position_offset.y = lerpf(
-					_position_offset.y,
-					(sign(player.gameplay_rotation_degrees) * -1.4 * 0.5 * DEFAULT_OFFSET.x * player.get_direction() * sign(player.speed_multiplier))/zoom.y,
-					_offset_snap.x * 60 * delta
-				)
-			elif abs(_player_distance.y) > (MAX_DISTANCE.x / zoom.y):
-				position.y = lerpf(
-					position.y,
-					player.position.y - sign(_player_distance.y) * (MAX_DISTANCE.x / zoom.y),
-					_position_snap.y * 60 * delta,
-				)
-			if _static.x == 0 and _freefly and abs(_player_distance.x) > (MAX_DISTANCE.y / zoom.y):
-				position.x = lerpf(
-					position.x,
-					player.position.x - sign(_player_distance.x) * (MAX_DISTANCE.y / zoom.y),
-					_position_snap.y * 60 * delta,
-				)
-			elif not _freefly:
-				position.x = lerpf(
-					position.x,
-					GroundData.center.rotated(-LevelManager.player.gameplay_rotation).y - GroundData.offset,
-					_position_snap.y * 60 * delta
-				)
-		else:
-			if not LevelManager.platformer:
-				if _static.x == 0:
-					position.x = lerpf(position.x, player.position.x, _position_snap.x * 60 * delta)
-				_position_offset.x = lerpf(
-					_position_offset.x,
-					(DEFAULT_OFFSET.x * player.get_direction() * sign(player.speed_multiplier))/zoom.x,
-					_offset_snap.x * 60 * delta
-				)
-			elif abs(_player_distance.x) > (MAX_DISTANCE.x / zoom.x):
-				position.x = lerpf(
-					position.x,
-					player.position.x - sign(_player_distance.x) * (MAX_DISTANCE.x / zoom.x),
-					_position_snap.x * 60 * delta,
-				)
-			_position_offset.y = lerpf(_position_offset.y, DEFAULT_OFFSET.y/zoom.y, _offset_snap.y * 60 * delta)
-			if _static.y == 0 and _freefly and abs(_player_distance.y) > (MAX_DISTANCE.y / zoom.y):
-				position.y = lerpf(
-					position.y,
-					player.position.y - sign(_player_distance.y) * (MAX_DISTANCE.y / zoom.y),
-					_position_snap.y * 60 * delta,
-				)
-			elif not _freefly:
-				position.y = lerpf(
-					position.y,
-					GroundData.center.rotated(-LevelManager.player.gameplay_rotation).y - GroundData.offset,
-					_position_snap.y * 60 * delta
-				)
+		if get_parent().has_level_started:
+			print_debug(LevelManager.platformer)
+			if abs(player.gameplay_rotation_degrees) == 90.0 or abs(player.gameplay_rotation_degrees) == 180.0:
+				position_offset.x = lerpf(position_offset.x, DEFAULT_OFFSET.y/zoom.x, _offset_snap.y)
+				if not LevelManager.platformer:
+					if _static.y == 0:
+						position.y = lerpf(position.y, player.position.y, 1.0)
+					position_offset.y = lerpf(
+						position_offset.y,
+						(sign(player.gameplay_rotation_degrees) * -1.4 * 0.5 * DEFAULT_OFFSET.x * player.get_direction() * sign(player.speed_multiplier))/zoom.y + _tOffset.x,
+						_offset_snap.x
+					)
+				elif abs(_player_distance.y) > (MAX_DISTANCE.x / zoom.y):
+					position.y = lerpf(
+						position.y,
+						player.position.y - sign(_player_distance.y) * (MAX_DISTANCE.x / zoom.y),
+						_position_snap.y,
+					)
+				position_offset.x = lerpf(position_offset.x, DEFAULT_OFFSET.x/zoom.y + _tOffset.x, _offset_snap.y)
+				if _static.x == 0 and _freefly and abs(_player_distance.x) > (MAX_DISTANCE.y / zoom.y):
+					position.x = lerpf(
+						position.x,
+						player.position.x - sign(_player_distance.x) * (MAX_DISTANCE.y / zoom.y),
+						_position_snap.y,
+					)
+				elif not _freefly:
+					position.x = lerpf(
+						position.x,
+						GroundData.center.rotated(-LevelManager.player.gameplay_rotation).y - GroundData.offset,
+						_position_snap.y
+					)
+			else:
+				if not LevelManager.platformer:
+					if _static.x == 0:
+						position.x = lerpf(position.x, player.position.x, 1.0)
+					position_offset.x = lerpf(
+						position_offset.x,
+						(DEFAULT_OFFSET.x * player.get_direction() * sign(player.speed_multiplier))/zoom.x + _tOffset.x,
+						_offset_snap.x
+					)
+				elif abs(_player_distance.x) > (MAX_DISTANCE.x / zoom.x):
+					position.x = lerpf(
+						position.x,
+						player.position.x - sign(_player_distance.x) * (MAX_DISTANCE.x / zoom.x),
+						_position_snap.x,
+					)
+					position_offset.x = lerpf(
+						position_offset.x,
+						_tOffset.x,
+						_offset_snap.x
+					)
+				position_offset.y = lerpf(position_offset.y, DEFAULT_OFFSET.y/zoom.y + _tOffset.y, _offset_snap.y)
+				if _static.y == 0 and _freefly and abs(_player_distance.y) > (MAX_DISTANCE.y / zoom.y):
+					position.y = lerpf(
+						position.y,
+						player.position.y - sign(_player_distance.y) * (MAX_DISTANCE.y / zoom.y),
+						_position_snap.y,
+					)
+				elif not _freefly:
+					position.y = lerpf(
+						position.y,
+						GroundData.center.rotated(-LevelManager.player.gameplay_rotation).y - GroundData.offset,
+						_position_snap.y
+					)
 
-		_position_offset *= _tOffset_multiplier
-		_position_offset += _tOffset
+		position_offset *= _tOffset_multiplier
 
-		if _static.x == 0: position.x += _position_offset.x
-		if _static.y == 0: position.y += _position_offset.y
+		if _static.x == 0: position.x += position_offset.x
+		if _static.y == 0: position.y += position_offset.y
 
 		position.y = clampf(
 			position.y,

@@ -1834,11 +1834,9 @@ collision_priority = 2.0
 floor_constant_speed = true
 floor_max_angle = 1.55334
 floor_snap_length = 32.0
-platform_on_leave = 1
+platform_on_leave = 2
 platform_floor_layers = 4294901802
 script = ExtResource("1_nvqsc")
-displayed_gamemode = null
-internal_gamemode = null
 
 [node name="DashParticles" type="GPUParticles2D" parent="."]
 modulate = Color(0, 1, 1, 1)
@@ -1902,6 +1900,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_6ab5b")
 
 [node name="Spider" type="Node2D" parent="Icon"]
+visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 6
 
@@ -2016,7 +2015,6 @@ parameters/walk/PlayerSpeed/scale = 1.0
 parameters/walk/TimeScale/scale = 3.0
 
 [node name="Ball" type="Node2D" parent="Icon"]
-visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 3
 
@@ -2147,6 +2145,10 @@ libraries = {
 [node name="RobotTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="GroundRaycast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 68)
+collision_mask = 32
 
 [connection signal="body_entered" from="KillColliderSolid" to="." method="_on_kill_collider_solid_body_entered"]
 [connection signal="body_entered" from="KillColliderHazard" to="." method="_on_kill_collider_hazard_body_entered"]

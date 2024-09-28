@@ -91,8 +91,6 @@ position = Vector2(640, 925)
 [node name="Player" parent="." instance=ExtResource("3_22pbm")]
 unique_name_in_owner = true
 position = Vector2(640, 862)
-displayed_gamemode = 0
-internal_gamemode = 0
 
 [node name="EditorGridParallax" type="Parallax2D" parent="."]
 repeat_size = Vector2(32768, 32768)
@@ -208,7 +206,7 @@ debug_color = Color(0, 0.701961, 0.607843, 0.419608)
 [node name="PlayerCamera" type="Camera2D" parent="."]
 process_priority = 2
 z_index = 100
-position = Vector2(640, 561)
+position = Vector2(640, 413)
 ignore_rotation = false
 zoom = Vector2(0.8, 0.8)
 limit_smoothed = true
