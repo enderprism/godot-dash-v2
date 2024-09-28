@@ -1,11 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://d05asiy6k2voi"]
+[gd_scene load_steps=13 format=3 uid="uid://d05asiy6k2voi"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_ujapm"]
+[ext_resource type="Script" path="res://src/interactables/Interactable.gd" id="1_tja0n"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_6nd4y"]
 [ext_resource type="PackedScene" uid="uid://l2ofoyvoxbr2" path="res://scenes/components/game_components/TargetLink.tscn" id="2_g4fee"]
 [ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="3_c01u1"]
 [ext_resource type="Texture2D" uid="uid://dpymoijvgn47q" path="res://assets/textures/portals/other_portals/teleportal_in/TeleportalInBack.png" id="4_62kgg"]
 [ext_resource type="Texture2D" uid="uid://bjkrqus0iq7o2" path="res://assets/textures/portals/other_portals/teleportal_in/TeleportalInFront.png" id="5_toxp5"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseWhite.gd" id="7_vbgas"]
+[ext_resource type="Script" path="res://src/interactables/public_components/TeleportComponent.gd" id="8_crgvb"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="9_rk7d5"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="10_465gw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bg8ge"]
 shader = ExtResource("3_c01u1")
@@ -13,15 +17,14 @@ shader_parameter/shine_color = Color(1, 1, 1, 0)
 shader_parameter/alpha_limit = 0.0
 shader_parameter/cycle_speed = 1.0
 shader_parameter/full_pulse_cycle = false
+shader_parameter/factor = 0.0
 shader_parameter/mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k1q4x"]
 size = Vector2(106, 384)
 
 [node name="TeleportalIn" type="Area2D"]
-script = ExtResource("1_ujapm")
-object_type = 4
-_other_portal_type = 2
+script = ExtResource("1_tja0n")
 
 [node name="TargetLink" parent="." instance=ExtResource("2_g4fee")]
 z_index = -50
@@ -46,3 +49,15 @@ texture = ExtResource("5_toxp5")
 position = Vector2(53, 0)
 shape = SubResource("RectangleShape2D_k1q4x")
 debug_color = Color(0, 1, 0, 0)
+
+[node name="PulseWhite" type="Node" parent="."]
+script = ExtResource("7_vbgas")
+
+[node name="TeleportComponent" type="Node" parent="."]
+script = ExtResource("8_crgvb")
+
+[node name="PulseCircle" type="Node2D" parent="."]
+script = ExtResource("9_rk7d5")
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("10_465gw")

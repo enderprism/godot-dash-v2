@@ -1,31 +1,35 @@
-[gd_scene load_steps=12 format=3 uid="uid://bd0j0ubumn1dc"]
+[gd_scene load_steps=16 format=3 uid="uid://bd0j0ubumn1dc"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_81exj"]
+[ext_resource type="Script" path="res://src/interactables/Interactable.gd" id="1_y1ulc"]
 [ext_resource type="Texture2D" uid="uid://n74audulsaf4" path="res://assets/textures/portals/gamemode_portals/ufo_portal/UFOPortalBack.png" id="2_ivt8v"]
 [ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="2_n6vns"]
 [ext_resource type="Texture2D" uid="uid://g17qv6d5a8iq" path="res://assets/textures/portals/gamemode_portals/ufo_portal/UFOPortalFront.png" id="3_ogdae"]
 [ext_resource type="Texture2D" uid="uid://d10ak088yudm7" path="res://assets/textures/portals/gamemode_portals/ufo_portal/UFOPortalIndicatorBG.png" id="4_b1r1t"]
 [ext_resource type="Texture2D" uid="uid://6vdlyku2u7i8" path="res://assets/textures/portals/gamemode_portals/ufo_portal/UFOPortalIndicatorIcon.png" id="5_hl8ac"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="7_p7ufc"]
-[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="8_iwdif"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="9_duc87"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="8_uesul"]
+[ext_resource type="Script" path="res://src/interactables/public_components/GamemodeChangerComponent.gd" id="9_h6xnr"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="10_doyaa"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseWhite.gd" id="11_8ibny"]
+[ext_resource type="Script" path="res://src/interactables/public_components/GroundMoverComponent.gd" id="12_gi1ek"]
+[ext_resource type="Script" path="res://src/interactables/private_components/TextureRotatePin.gd" id="13_dxq01"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
 size = Vector2(128, 384)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jgmp7"]
+resource_local_to_scene = true
 shader = ExtResource("2_n6vns")
 shader_parameter/shine_color = Color(1, 1, 1, 0)
 shader_parameter/alpha_limit = 0.0
 shader_parameter/cycle_speed = 1.0
 shader_parameter/full_pulse_cycle = false
+shader_parameter/factor = 0.0
 shader_parameter/mode = 2
 
 [node name="UFOPortal" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_81exj")
-object_type = 2
-_gamemode_portal_type = 2
+script = ExtResource("1_y1ulc")
 metadata/_edit_group_ = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
@@ -62,8 +66,21 @@ texture = ExtResource("5_hl8ac")
 [node name="ParticleEmitter" parent="." instance=ExtResource("7_p7ufc")]
 modulate = Color(1, 0.47451, 0, 1)
 
-[node name="PulseShrink" type="Sprite2D" parent="."]
-modulate = Color(1, 0.47451, 0, 1)
-material = ExtResource("8_iwdif")
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("9_duc87")
+[node name="PulseCircle" type="Node2D" parent="."]
+script = ExtResource("8_uesul")
+
+[node name="GamemodeChangerComponent" type="Node" parent="."]
+script = ExtResource("9_h6xnr")
+gamemode = 2
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("10_doyaa")
+
+[node name="PulseWhite" type="Node2D" parent="."]
+script = ExtResource("11_8ibny")
+
+[node name="GroundMoverComponent" type="Node" parent="."]
+script = ExtResource("12_gi1ek")
+
+[node name="TextureRotationPin" type="Node" parent="."]
+script = ExtResource("13_dxq01")

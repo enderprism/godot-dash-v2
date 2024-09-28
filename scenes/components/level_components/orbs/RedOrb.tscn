@@ -1,19 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://cglxf6jw4fmi"]
+[gd_scene load_steps=10 format=3 uid="uid://cglxf6jw4fmi"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_bgbxq"]
+[ext_resource type="Script" path="res://src/interactables/OrbInteractable.gd" id="1_21ksm"]
 [ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_0fxal"]
 [ext_resource type="Texture2D" uid="uid://cgq0oyg02x4d2" path="res://assets/textures/orbs/RedOrb.svg" id="2_a0m16"]
-[ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="4_y03kv"]
-[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="5_g43ff"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="6_2v746"]
+[ext_resource type="Script" path="res://src/interactables/public_components/JumpBoostComponent.gd" id="3_ivvgd"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="7_ujqtc"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseRing.gd" id="8_pd02s"]
+[ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="8_wdcdp"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="9_juv2a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jwypc"]
 size = Vector2(128, 128)
 
 [node name="RedOrb" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_bgbxq")
-_orb_type = 4
+script = ExtResource("1_21ksm")
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_0fxal")]
 modulate = Color(1, 0.2, 0.239216, 1)
@@ -27,12 +28,18 @@ scale = Vector2(1.2, 1.2)
 shape = SubResource("RectangleShape2D_jwypc")
 debug_color = Color(0, 1, 0, 0)
 
-[node name="PulseGrow" type="Sprite2D" parent="."]
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("4_y03kv")
+[node name="PulseCircle" type="Node2D" parent="."]
+script = ExtResource("9_juv2a")
 
-[node name="PulseShrink" type="Sprite2D" parent="."]
-modulate = Color(1, 0.2, 0.239216, 1)
-material = ExtResource("5_g43ff")
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("6_2v746")
+[node name="PulseRing" type="Node2D" parent="."]
+script = ExtResource("8_pd02s")
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("7_ujqtc")
+
+[node name="JumpBoostComponent" type="Node" parent="."]
+script = ExtResource("3_ivvgd")
+jump_boost = 1.381
+
+[node name="DirectionChangerComponent" type="Node" parent="."]
+script = ExtResource("8_wdcdp")

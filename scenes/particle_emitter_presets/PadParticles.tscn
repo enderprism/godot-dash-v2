@@ -27,4 +27,5 @@ amount = 30
 process_material = SubResource("ParticleProcessMaterial_ctvm8")
 texture = ExtResource("2_h5quy")
 preprocess = 5.0
+fixed_fps = 60
 local_coords = true

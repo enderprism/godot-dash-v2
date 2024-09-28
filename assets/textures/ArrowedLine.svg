@@ -24,12 +24,12 @@
      inkscape:deskcolor="#181825"
      inkscape:document-units="px"
      inkscape:zoom="0.6098633"
-     inkscape:cx="204.14411"
-     inkscape:cy="-95.10328"
-     inkscape:window-width="1900"
-     inkscape:window-height="1019"
-     inkscape:window-x="6"
-     inkscape:window-y="47"
+     inkscape:cx="-91.004"
+     inkscape:cy="5.738991"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
@@ -61,7 +61,7 @@
          inkscape:randomized="0"
          d="m 49.316034,16.933332 -23.174054,13.379547 0,-26.759093 z"
          inkscape:transform-center-x="-3.8623427"
-         transform="translate(-3.8623421)" />
+         transform="translate(18.362659)" />
       <path
          sodipodi:type="star"
          style="fill:#ffffff;stroke-width:10.5833;stroke-linecap:square;paint-order:stroke fill markers"
@@ -78,7 +78,7 @@
          inkscape:randomized="0"
          d="m 49.316034,16.933332 -23.174054,13.379547 0,-26.759093 z"
          inkscape:transform-center-x="-3.8623427"
-         transform="translate(63.870987)" />
+         transform="translate(86.095989)" />
     </g>
   </g>
 </svg>

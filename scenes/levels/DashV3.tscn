@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://pks0qdd1moi8"]
+[gd_scene load_steps=18 format=3 uid="uid://ct55i16k5vye8"]
 
 [ext_resource type="Script" path="res://src/LevelProps.gd" id="1_7ju0m"]
 [ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_8grye"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://src/triggers/trigger_components/TriggerBase.gd" id="15_0tprd"]
 [ext_resource type="Script" path="res://src/triggers/CameraZoomTrigger.gd" id="16_p1y5b"]
 [ext_resource type="Script" path="res://src/triggers/CameraRotateTrigger.gd" id="17_ga355"]
+[ext_resource type="PackedScene" uid="uid://jdhlbkky38ej" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal0x.tscn" id="17_o0hpm"]
 [ext_resource type="PackedScene" uid="uid://danxhobafrnci" path="res://scenes/components/level_components/orbs/GreenOrb.tscn" id="18_cjq8q"]
 
 [node name="Dash V2" type="Node2D"]
@@ -164,7 +165,6 @@ z_index = -50
 
 [node name="TriggerEasing" type="Node" parent="CameraStaticTrigger"]
 script = ExtResource("14_ejfuf")
-_easing_transition = 1
 
 [node name="TriggerBase" type="Area2D" parent="CameraStaticTrigger" node_paths=PackedStringArray("_target")]
 collision_layer = 16
@@ -182,7 +182,6 @@ z_index = -50
 
 [node name="TriggerEasing" type="Node" parent="tCameraStatic2"]
 script = ExtResource("14_ejfuf")
-_easing_transition = 1
 
 [node name="TriggerBase" type="Area2D" parent="tCameraStatic2" node_paths=PackedStringArray("_target")]
 collision_layer = 16
@@ -192,13 +191,11 @@ _target = NodePath("../../Cross")
 [node name="CameraZoomTrigger" type="Node2D" parent="."]
 position = Vector2(320, -1472)
 script = ExtResource("16_p1y5b")
-_set_zoom = Vector2(0.75, 0.75)
 metadata/_edit_group_ = true
 
 [node name="TriggerEasing" type="Node" parent="CameraZoomTrigger"]
 script = ExtResource("14_ejfuf")
 _duration = 2.0
-_easing_transition = 1
 
 [node name="TriggerBase" type="Area2D" parent="CameraZoomTrigger"]
 collision_layer = 16
@@ -212,8 +209,6 @@ metadata/_edit_group_ = true
 
 [node name="TriggerEasing" type="Node" parent="CameraRotateTrigger"]
 script = ExtResource("14_ejfuf")
-_easing_type = 1
-_easing_transition = 5
 
 [node name="TriggerBase" type="Area2D" parent="CameraRotateTrigger"]
 collision_layer = 16
@@ -227,8 +222,6 @@ metadata/_edit_group_ = true
 
 [node name="TriggerEasing" type="Node" parent="tCameraRotate3"]
 script = ExtResource("14_ejfuf")
-_easing_type = 1
-_easing_transition = 5
 
 [node name="TriggerBase" type="Area2D" parent="tCameraRotate3"]
 collision_layer = 16
@@ -242,8 +235,6 @@ metadata/_edit_group_ = true
 
 [node name="TriggerEasing" type="Node" parent="tCameraRotate4"]
 script = ExtResource("14_ejfuf")
-_easing_type = 1
-_easing_transition = 5
 
 [node name="TriggerBase" type="Area2D" parent="tCameraRotate4"]
 collision_layer = 16
@@ -256,8 +247,6 @@ metadata/_edit_group_ = true
 
 [node name="TriggerEasing" type="Node" parent="tCameraRotate2"]
 script = ExtResource("14_ejfuf")
-_easing_type = 1
-_easing_transition = 5
 
 [node name="TriggerBase" type="Area2D" parent="tCameraRotate2"]
 collision_layer = 16
@@ -268,3 +257,6 @@ position = Vector2(6848, -1024)
 
 [node name="BlueOrb3" parent="." instance=ExtResource("5_iahbh")]
 position = Vector2(7360, -1152)
+
+[node name="SpeedPortal0x" parent="." instance=ExtResource("17_o0hpm")]
+position = Vector2(1216, -128)

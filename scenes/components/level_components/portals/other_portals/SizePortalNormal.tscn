@@ -1,12 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://bhjfnlli5vshw"]
+[gd_scene load_steps=12 format=3 uid="uid://bhjfnlli5vshw"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_665lk"]
+[ext_resource type="Script" path="res://src/interactables/Interactable.gd" id="1_wvyrf"]
 [ext_resource type="Texture2D" uid="uid://b2epvogeak18n" path="res://assets/textures/portals/other_portals/size_portal_small/SizePortalSmallBack.png" id="2_88axh"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_o2xvl"]
 [ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="3_aaqhj"]
 [ext_resource type="Texture2D" uid="uid://ddjeyix04leys" path="res://assets/textures/portals/other_portals/size_portal_small/SizePortalSmallFront.png" id="3_wvek7"]
-[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="5_v5rvt"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="6_bob5s"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="6_lbsxs"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="7_cr5uw"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseWhite.gd" id="8_uq0n2"]
+[ext_resource type="Script" path="res://src/interactables/public_components/PlayerScaleChangerComponent.gd" id="9_ryy04"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
 size = Vector2(128, 384)
@@ -17,14 +19,12 @@ shader_parameter/shine_color = Color(1, 1, 1, 0)
 shader_parameter/alpha_limit = 0.0
 shader_parameter/cycle_speed = 1.0
 shader_parameter/full_pulse_cycle = false
+shader_parameter/factor = 0.0
 shader_parameter/mode = 2
 
 [node name="SizePortalNormal" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_665lk")
-object_type = 4
-_gamemode_portal_type = 7
-_other_portal_type = 1
+script = ExtResource("1_wvyrf")
 metadata/_edit_group_ = true
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_o2xvl")]
@@ -49,8 +49,15 @@ use_parent_material = true
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("3_wvek7")
 
-[node name="PulseShrink" type="Sprite2D" parent="."]
-modulate = Color(0, 1, 0, 1)
-material = ExtResource("5_v5rvt")
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("6_bob5s")
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("6_lbsxs")
+
+[node name="PulseCircle" type="Node2D" parent="."]
+script = ExtResource("7_cr5uw")
+
+[node name="PulseWhite" type="Node" parent="."]
+script = ExtResource("8_uq0n2")
+
+[node name="PlayerScaleChangerComponent" type="Node" parent="."]
+script = ExtResource("9_ryy04")
+player_scale = 1

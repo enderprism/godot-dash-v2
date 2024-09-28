@@ -31,12 +31,12 @@ enum SubScene {
 @export_group("Level Selector Components")
 @export var level_selector_page_container: Control
 
+@onready var _base_background_color: Color = title_screen_background.get_node("Background").modulate
+
 var _current_subscene: SubScene = SubScene.TITLE_SCREEN
 var _level_selector_tab_idx: int
 var _hide_page_control: bool = true
-
-
-@onready var _base_background_color: Color = title_screen_background.get_node("Background").modulate
+var _lerp_rate := 0.3 * 60
 
 func _ready() -> void:
 	Engine.time_scale = 1.0
@@ -64,7 +64,7 @@ func _return_to_title_screen() -> void:
 	icon_garage.hide()
 	level_selector.hide()
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if _current_subscene == SubScene.LEVEL_SELECTOR:
 		if Input.is_action_just_pressed("ui_left"): _on_previous_level_pressed()
 		if Input.is_action_just_pressed("ui_right"): _on_next_level_pressed()
@@ -74,8 +74,8 @@ func _process(_delta: float) -> void:
 		_return_to_title_screen()
 
 	if _hide_page_control:
-		page_control_container.modulate.a = lerpf(page_control_container.modulate.a, 0.0, 0.3)
-		quit_game_button.modulate.a = lerpf(quit_game_button.modulate.a, 1.0, 0.3)
+		page_control_container.modulate.a = lerpf(page_control_container.modulate.a, 0.0, 1-exp(-delta * _lerp_rate))
+		quit_game_button.modulate.a = lerpf(quit_game_button.modulate.a, 1.0, 1-exp(-delta * _lerp_rate))
 		if is_zero_approx(page_control_container.modulate.a):
 			page_control_container.hide()
 		if not is_zero_approx(quit_game_button.modulate.a):
@@ -85,8 +85,8 @@ func _process(_delta: float) -> void:
 			page_control_container.show()
 		if is_zero_approx(quit_game_button.modulate.a):
 			quit_game_button.hide()
-		page_control_container.modulate.a = lerpf(page_control_container.modulate.a, 1.0, 0.3)
-		quit_game_button.modulate.a = lerpf(quit_game_button.modulate.a, 0.0, 0.3)
+		page_control_container.modulate.a = lerpf(page_control_container.modulate.a, 1.0, 1-exp(-delta * _lerp_rate))
+		quit_game_button.modulate.a = lerpf(quit_game_button.modulate.a, 0.0, 1-exp(-delta * _lerp_rate))
 
 func _on_go_to_level_selector_pressed() -> void:
 	level_selector.show()

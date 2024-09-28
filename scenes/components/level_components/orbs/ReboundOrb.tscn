@@ -1,68 +1,43 @@
-[gd_scene load_steps=12 format=3 uid="uid://ckkbbbslsv0pg"]
+[gd_scene load_steps=10 format=3 uid="uid://ckkbbbslsv0pg"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_ew07g"]
+[ext_resource type="Script" path="res://src/interactables/OrbInteractable.gd" id="1_s7suh"]
 [ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_ndx7n"]
-[ext_resource type="Texture2D" uid="uid://bdy8wcalqbwiu" path="res://assets/textures/orbs/ReboundOrbOuterOutline.svg" id="3_s8hqh"]
-[ext_resource type="Texture2D" uid="uid://dar1nqnlymki6" path="res://assets/textures/orbs/ReboundOrbFill.svg" id="4_mkr36"]
-[ext_resource type="Texture2D" uid="uid://bjbe424vr8rtw" path="res://assets/textures/orbs/ReboundOrbInnerOutline.svg" id="4_tdstw"]
-[ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="5_jahis"]
-[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="6_c455q"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="7_w7wsg"]
-
-[sub_resource type="Gradient" id="Gradient_7adnw"]
-offsets = PackedFloat32Array(0, 0.333, 0.667, 1)
-colors = PackedColorArray(1, 0.8, 0.8, 1, 1, 1, 0, 1, 1, 0.492188, 0, 1, 1, 0, 0, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1vqf"]
-size = Vector2(128, 128)
+[ext_resource type="Script" path="res://src/interactables/private_components/ReboundOrbSprite.gd" id="5_7g4ia"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="7_17vtt"]
+[ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="8_ivhwd"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="8_lm2ku"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseRing.gd" id="8_xmpji"]
+[ext_resource type="Script" path="res://src/interactables/public_components/ReboundComponent.gd" id="11_03fns"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jwypc"]
 size = Vector2(128, 128)
 
 [node name="ReboundOrb" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_ew07g")
-_orb_type = 512
-_rebound_gradient = SubResource("Gradient_7adnw")
+script = ExtResource("1_s7suh")
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_ndx7n")]
-modulate = Color(1, 0.796078, 0.796078, 1)
+modulate = Color(1, 0.8, 0.8, 1)
 
-[node name="OuterOutline" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("3_s8hqh")
-
-[node name="ReboundObjectScaleOrigin" type="Marker2D" parent="."]
-
-[node name="Outline" type="Sprite2D" parent="ReboundObjectScaleOrigin"]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_tdstw")
-
-[node name="Fill" type="Sprite2D" parent="ReboundObjectScaleOrigin"]
-modulate = Color(1, 0.796078, 0.796078, 1)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_mkr36")
-
-[node name="ReboundCancelArea" type="Area2D" parent="."]
-editor_description = "Cancels the rebound velocity if the player isn't falling in this area."
-collision_layer = 8
-
-[node name="Hitbox" type="CollisionShape2D" parent="ReboundCancelArea"]
-scale = Vector2(2.4, 1.2)
-shape = SubResource("RectangleShape2D_c1vqf")
-debug_color = Color(0.223529, 0.498039, 0, 0)
+[node name="ReboundSprite" type="Node2D" parent="."]
+script = ExtResource("5_7g4ia")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 scale = Vector2(1.2, 1.2)
 shape = SubResource("RectangleShape2D_jwypc")
 debug_color = Color(0, 1, 0, 0)
 
-[node name="PulseGrow" type="Sprite2D" parent="."]
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("5_jahis")
+[node name="PulseCircle" type="Node2D" parent="."]
+script = ExtResource("7_17vtt")
 
-[node name="PulseShrink" type="Sprite2D" parent="."]
-modulate = Color(1, 0.796078, 0.796078, 1)
-material = ExtResource("6_c455q")
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("7_w7wsg")
+[node name="PulseRing" type="Node2D" parent="."]
+script = ExtResource("8_xmpji")
+
+[node name="ReboundComponent" type="Node" parent="."]
+script = ExtResource("11_03fns")
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("8_lm2ku")
+
+[node name="DirectionChangerComponent" type="Node" parent="."]
+script = ExtResource("8_ivhwd")

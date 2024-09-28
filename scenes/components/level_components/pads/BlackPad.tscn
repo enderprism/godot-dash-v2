@@ -1,9 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsl2ssfhthw00"]
+[gd_scene load_steps=13 format=3 uid="uid://bsl2ssfhthw00"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_hmneo"]
+[ext_resource type="Script" path="res://src/interactables/PadInteractable.gd" id="1_iomj4"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="2_20xka"]
 [ext_resource type="PackedScene" uid="uid://05h0teol0odp" path="res://scenes/particle_emitter_presets/PadParticles.tscn" id="2_dpxke"]
 [ext_resource type="Texture2D" uid="uid://bvhu2o467ogw3" path="res://assets/textures/pads/BlackPad.svg" id="3_f7m6r"]
 [ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="5_8oo0e"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="6_hs7ce"]
+[ext_resource type="Script" path="res://src/interactables/public_components/JumpBoostComponent.gd" id="7_pd1t2"]
+[ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="8_vfbbj"]
 
 [sub_resource type="Curve" id="Curve_6hqd0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -28,9 +32,12 @@ size = Vector2(98, 18)
 
 [node name="BlackPad" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_hmneo")
-object_type = 1
-_pad_type = 64
+script = ExtResource("1_iomj4")
+
+[node name="PulseCircle" type="Node2D" parent="."]
+position = Vector2(0, 57)
+script = ExtResource("2_20xka")
+no_blending = true
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_dpxke")]
 modulate = Color(0.0784314, 0.0784314, 0.0784314, 1)
@@ -52,3 +59,13 @@ z_index = 51
 position = Vector2(0, 57)
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("5_8oo0e")
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("6_hs7ce")
+
+[node name="JumpBoostComponent" type="Node" parent="."]
+script = ExtResource("7_pd1t2")
+jump_boost = -1.34
+
+[node name="DirectionChangerComponent" type="Node" parent="."]
+script = ExtResource("8_vfbbj")

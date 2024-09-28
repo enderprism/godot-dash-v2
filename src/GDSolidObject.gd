@@ -21,14 +21,18 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if has_node("Sprite"):
 		$Sprite.global_scale = Vector2.ONE/4
-		# if not Engine.is_editor_hint(): print_debug("NinePatchSprite2D: ", $Sprite.global_scale, ", self (", name ,"): ", global_scale)
 		$Sprite.size = abs(scale) * 512
 	if not Engine.is_editor_hint():
 		# $Hitbox.global_rotation = 0.0
 		# $Hitbox.global_scale = Vector2.ONE
 		_hitbox_shape.global_rotation = -abs(LevelManager.player.gameplay_rotation)
 		# _hitbox_shape.global_scale = Vector2.ONE
-		var dash_orb_rotation = (LevelManager.player.dash_orb_rotation - LevelManager.player.gameplay_rotation)
+
+		var dash_orb_rotation: float
+		if LevelManager.player.dash_control != null:
+			dash_orb_rotation = LevelManager.player.dash_control.angle - LevelManager.player.gameplay_rotation
+		else:
+			dash_orb_rotation = -LevelManager.player.gameplay_rotation
 		_hitbox_shape.scale.y = sign(LevelManager.player.gravity_multiplier) if dash_orb_rotation == 0 else sign(LevelManager.player.gravity_multiplier) * sign(dash_orb_rotation)
 		if _hitbox_shape is CollisionShape2D:
 			if _hitbox_shape.shape is RectangleShape2D:

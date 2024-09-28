@@ -19,7 +19,7 @@ func _process(_delta: float) -> void:
 	global_rotation = 0.0
 
 func _draw() -> void:
-	if get_parent().base._sprite_visible():
+	if get_parent().base.sprite_visible():
 		_angle_A = 0.0
 		if not Engine.is_editor_hint():
 			_angle_A += LevelManager.player.gameplay_rotation

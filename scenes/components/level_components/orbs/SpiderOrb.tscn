@@ -1,21 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://33mc0xa2wc8i"]
+[gd_scene load_steps=9 format=3 uid="uid://33mc0xa2wc8i"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_snna7"]
+[ext_resource type="Script" path="res://src/interactables/OrbInteractable.gd" id="1_i23mg"]
 [ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_knuwr"]
 [ext_resource type="Texture2D" uid="uid://8d3ira7ek1oc" path="res://assets/textures/orbs/SpiderOrb.svg" id="3_mfdso"]
-[ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="4_1nodv"]
-[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="5_um0ui"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="6_1n1ap"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="4_dxgrr"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseRing.gd" id="5_juhc3"]
+[ext_resource type="Script" path="res://src/interactables/public_components/SpiderDashComponent.gd" id="6_cpvky"]
+[ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="7_1nufh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jwypc"]
 size = Vector2(128, 128)
 
 [node name="SpiderOrb" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_snna7")
-_orb_type = 64
-_other_portal_type = 2
-_freefly = true
+script = ExtResource("1_i23mg")
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_knuwr")]
 modulate = Color(0.607843, 0.176471, 0.905882, 1)
@@ -29,12 +27,14 @@ scale = Vector2(1.2, 1.2)
 shape = SubResource("RectangleShape2D_jwypc")
 debug_color = Color(0, 1, 0, 0)
 
-[node name="PulseGrow" type="Sprite2D" parent="."]
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("4_1nodv")
+[node name="PulseCircle" type="Node2D" parent="."]
+script = ExtResource("4_dxgrr")
 
-[node name="PulseShrink" type="Sprite2D" parent="."]
-modulate = Color(0.607843, 0.176471, 0.905882, 1)
-material = ExtResource("5_um0ui")
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("6_1n1ap")
+[node name="PulseRing" type="Node2D" parent="."]
+script = ExtResource("5_juhc3")
+
+[node name="SpiderDashComponent" type="Node" parent="."]
+script = ExtResource("6_cpvky")
+
+[node name="DirectionChangerComponent" type="Node" parent="."]
+script = ExtResource("7_1nufh")

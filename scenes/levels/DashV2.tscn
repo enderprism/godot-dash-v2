@@ -95,15 +95,12 @@ metadata/_edit_lock_ = true
 
 [node name="PinkOrb" parent="." groups=["orb1"] instance=ExtResource("4_7gr6s")]
 position = Vector2(704, -192)
-_freefly = false
 
 [node name="PinkOrb2" parent="." groups=["orb2"] instance=ExtResource("4_7gr6s")]
 position = Vector2(1088, -320)
-_freefly = false
 
 [node name="YellowPad" parent="." instance=ExtResource("6_cufna")]
 position = Vector2(0, -64)
-_freefly = false
 
 [node name="SpiderPortal" parent="." groups=["spiderportal"] instance=ExtResource("3_iu2ry")]
 position = Vector2(1472, -576)
@@ -153,7 +150,6 @@ script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../DefaultCube7")
 target_group = &"colon_jumpscare_wall"
-multi_usage = true
 
 [node name="SpawnTargetLink" parent="MoveTrigger" instance=ExtResource("6_bolvq")]
 z_index = -50
@@ -178,7 +174,6 @@ script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../FloorButton")
 target_group = &"floorbutton1"
-multi_usage = true
 
 [node name="DefaultCube9" parent="." instance=ExtResource("5_g4mtk")]
 visible = false
@@ -191,12 +186,10 @@ visible = false
 z_index = 5
 position = Vector2(2880, -320)
 scale = Vector2(3, 1)
-_freefly = false
 
 [node name="BallPortal" parent="." groups=["BallPortalWithPads"] instance=ExtResource("15_khho3")]
 position = Vector2(2880, 192)
 rotation = 1.57079
-_freefly = false
 
 [node name="DefaultCube11" parent="." groups=["BallPortalWithPads"] instance=ExtResource("5_g4mtk")]
 z_index = 5
@@ -210,7 +203,6 @@ collision_layer = 0
 collision_mask = 0
 monitoring = false
 monitorable = false
-_freefly = false
 
 [node name="YellowPadDisplay2" parent="." groups=["BallPortalWithPads"] instance=ExtResource("6_cufna")]
 z_index = 5
@@ -219,7 +211,6 @@ collision_layer = 0
 collision_mask = 0
 monitoring = false
 monitorable = false
-_freefly = false
 
 [node name="YellowPadDisplay3" parent="." groups=["BallPortalWithPads"] instance=ExtResource("6_cufna")]
 z_index = 5
@@ -228,7 +219,6 @@ collision_layer = 0
 collision_mask = 0
 monitoring = false
 monitorable = false
-_freefly = false
 
 [node name="RotateTrigger" type="Node2D" parent="."]
 position = Vector2(1342, -960)
@@ -248,7 +238,6 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../SpiderPortal")
 target_group = &"spiderportal"
-multi_usage = true
 
 [node name="ScaleTrigger" type="Node2D" parent="."]
 position = Vector2(1342, -1088)
@@ -268,7 +257,6 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../SpiderPortal")
 target_group = &"spiderportal"
-multi_usage = true
 
 [node name="TeleportalIn" parent="." instance=ExtResource("20_ocowa")]
 visible = false
@@ -312,7 +300,6 @@ _duration = 0.0
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 hitbox_height = 1.0
-multi_usage = true
 
 [node name="Indicator" type="Node2D" parent="tGameplayRotate2"]
 show_behind_parent = true
@@ -659,7 +646,6 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 target_group = &"BallPortalWithPads"
-multi_usage = true
 
 [node name="FloorButtonMove3" type="Node2D" parent="."]
 position = Vector2(2176, 192)
@@ -680,7 +666,6 @@ script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../FloorButton3")
 target_group = &"floorbutton3"
-multi_usage = true
 
 [node name="SpawnTargetLink" parent="FloorButtonMove3" instance=ExtResource("6_bolvq")]
 z_index = -50
@@ -761,7 +746,6 @@ _duration = 0.4688
 [node name="TriggerBase" type="Area2D" parent="tSpawn5"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
-multi_usage = true
 
 [node name="tRotate2" type="Node2D" parent="." node_paths=PackedStringArray("_pivot")]
 position = Vector2(5824, -832)
@@ -782,7 +766,6 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 target_group = &"spawnlooped_cube"
-multi_usage = true
 
 [node name="WavePortal" parent="." instance=ExtResource("31_bjlog")]
 position = Vector2(4416, -704)

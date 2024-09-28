@@ -1,30 +1,35 @@
-[gd_scene load_steps=12 format=3 uid="uid://qfmv2p1wt1tn"]
+[gd_scene load_steps=16 format=3 uid="uid://qfmv2p1wt1tn"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_cdsys"]
+[ext_resource type="Script" path="res://src/interactables/Interactable.gd" id="1_5w3p6"]
 [ext_resource type="Texture2D" uid="uid://2etpothgo1kw" path="res://assets/textures/portals/gamemode_portals/cube_portal/CubePortalBack.png" id="2_n76ru"]
 [ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="3_li1qe"]
 [ext_resource type="Texture2D" uid="uid://bxjs1u44gok7c" path="res://assets/textures/portals/gamemode_portals/cube_portal/CubePortalFront.png" id="3_vk6wf"]
 [ext_resource type="Texture2D" uid="uid://b5wb53yuxv3qm" path="res://assets/textures/portals/gamemode_portals/cube_portal/CubePortalIndicatorBG.png" id="4_7vbrb"]
 [ext_resource type="Texture2D" uid="uid://3mefye2oh6jy" path="res://assets/textures/portals/gamemode_portals/cube_portal/CubePortalIndicatorIcon.png" id="5_4knf6"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="6_yjtas"]
-[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="7_tcj41"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="8_jwgcr"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="8_4wp27"]
+[ext_resource type="Script" path="res://src/interactables/public_components/GamemodeChangerComponent.gd" id="9_g22vt"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="10_8u8u8"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseWhite.gd" id="11_sjwk2"]
+[ext_resource type="Script" path="res://src/interactables/public_components/GroundMoverComponent.gd" id="12_re3iv"]
+[ext_resource type="Script" path="res://src/interactables/private_components/TextureRotatePin.gd" id="13_hwy8w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
 size = Vector2(128, 384)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wigfn"]
+resource_local_to_scene = true
 shader = ExtResource("3_li1qe")
-shader_parameter/shine_color = Color(1, 1, 1, 0)
+shader_parameter/shine_color = Color(1, 1, 1, 1)
 shader_parameter/alpha_limit = 0.0
 shader_parameter/cycle_speed = 1.0
 shader_parameter/full_pulse_cycle = false
+shader_parameter/factor = 0.0
 shader_parameter/mode = 2
 
 [node name="CubePortal" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_cdsys")
-object_type = 2
+script = ExtResource("1_5w3p6")
 metadata/_edit_group_ = true
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("6_yjtas")]
@@ -37,19 +42,19 @@ debug_color = Color(0, 1, 0, 0)
 [node name="Sprites" type="Node2D" parent="."]
 material = SubResource("ShaderMaterial_wigfn")
 
-[node name="PortalBack" type="Sprite2D" parent="Sprites"]
+[node name="CubePortalBack" type="Sprite2D" parent="Sprites"]
 z_index = -1
 use_parent_material = true
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("2_n76ru")
 
-[node name="PortalFront" type="Sprite2D" parent="Sprites"]
+[node name="CubePortalFront" type="Sprite2D" parent="Sprites"]
 z_index = 1
 use_parent_material = true
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("3_vk6wf")
 
-[node name="PortalIndicatorBg" type="Sprite2D" parent="Sprites"]
+[node name="CubePortalIndicatorBg" type="Sprite2D" parent="Sprites"]
 z_index = 1
 use_parent_material = true
 position = Vector2(48, 0)
@@ -61,8 +66,20 @@ use_parent_material = true
 position = Vector2(44, 0)
 texture = ExtResource("5_4knf6")
 
-[node name="PulseShrink" type="Sprite2D" parent="."]
-modulate = Color(0, 1, 0, 1)
-material = ExtResource("7_tcj41")
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("8_jwgcr")
+[node name="PulseCircle" type="Node2D" parent="."]
+script = ExtResource("8_4wp27")
+
+[node name="GamemodeChangerComponent" type="Node" parent="."]
+script = ExtResource("9_g22vt")
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("10_8u8u8")
+
+[node name="PulseWhite" type="Node" parent="."]
+script = ExtResource("11_sjwk2")
+
+[node name="GroundMoverComponent" type="Node" parent="."]
+script = ExtResource("12_re3iv")
+
+[node name="TextureRotationPin" type="Node" parent="."]
+script = ExtResource("13_hwy8w")

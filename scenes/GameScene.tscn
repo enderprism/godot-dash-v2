@@ -40,6 +40,7 @@ shader = ExtResource("11_yix40")
 shader_parameter/base = Color(0.952941, 0.666667, 0.364706, 1)
 
 [node name="GameScene" type="Node2D"]
+texture_filter = 4
 script = ExtResource("1_k47tp")
 metadata/_edit_lock_ = true
 
@@ -90,15 +91,21 @@ position = Vector2(640, 925)
 [node name="Player" parent="." instance=ExtResource("3_22pbm")]
 unique_name_in_owner = true
 position = Vector2(640, 862)
+displayed_gamemode = 0
+internal_gamemode = 0
 
 [node name="EditorGridParallax" type="Parallax2D" parent="."]
-repeat_size = Vector2(16384, 16384)
+repeat_size = Vector2(32768, 32768)
 repeat_times = 3
 
 [node name="EditorGrid" type="Node2D" parent="EditorGridParallax"]
+modulate = Color(0, 0, 0, 1)
 position = Vector2(0, 924)
 script = ExtResource("5_7ssrb")
-symmetrize = null
+primary_line_every = Vector2i(1, 1)
+cell_size = Vector2(128, 128)
+symmetrize = 1
+primary_line_thickness = 3.0
 
 [node name="GroundDownParallax" type="Parallax2D" parent="."]
 repeat_size = Vector2(24000, 0)
@@ -223,19 +230,12 @@ grow_vertical = 2
 [node name="LensCircle" type="ColorRect" parent="ShaderLayer"]
 visible = false
 material = SubResource("ShaderMaterial_ussf4")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1280.0
-offset_top = -638.0
-offset_right = 640.0
-offset_bottom = 1282.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2, 2)
-pivot_offset = Vector2(960, 960)
+pivot_offset = Vector2(960, 540)
 
 [node name="Sepia" type="ColorRect" parent="ShaderLayer"]
 visible = false

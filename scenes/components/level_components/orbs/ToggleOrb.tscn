@@ -1,20 +1,22 @@
-[gd_scene load_steps=9 format=3 uid="uid://43t0kgu3lhyt"]
+[gd_scene load_steps=12 format=3 uid="uid://43t0kgu3lhyt"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_xonqy"]
+[ext_resource type="Script" path="res://src/interactables/public_components/ToggleComponent.gd" id="1_dcl03"]
+[ext_resource type="Script" path="res://src/interactables/OrbInteractable.gd" id="1_klrau"]
 [ext_resource type="Texture2D" uid="uid://c2ngjixel2d42" path="res://assets/textures/orbs/ToggleOrbOutline.svg" id="2_4qwcb"]
 [ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_803s0"]
 [ext_resource type="Texture2D" uid="uid://cddn6sfd4abug" path="res://assets/textures/orbs/ToggleOrbFill.svg" id="3_2jqxi"]
-[ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="5_sef7t"]
-[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="6_832d6"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="7_gccei"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseRing.gd" id="8_8h2d8"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="9_hfjph"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="10_54lpo"]
+[ext_resource type="Script" path="res://src/interactables/private_components/VariableFillColor.gd" id="11_fi63b"]
+[ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="12_j5u27"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jwypc"]
 size = Vector2(128, 128)
 
 [node name="ToggleOrb" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_xonqy")
-_orb_type = 2048
+script = ExtResource("1_klrau")
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_803s0")]
 
@@ -31,11 +33,20 @@ scale = Vector2(1.2, 1.2)
 shape = SubResource("RectangleShape2D_jwypc")
 debug_color = Color(0, 1, 0, 0)
 
-[node name="PulseGrow" type="Sprite2D" parent="."]
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("5_sef7t")
+[node name="PulseRing" type="Node2D" parent="."]
+script = ExtResource("8_8h2d8")
 
-[node name="PulseShrink" type="Sprite2D" parent="."]
-material = ExtResource("6_832d6")
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("7_gccei")
+[node name="PulseCircle" type="Node2D" parent="."]
+script = ExtResource("9_hfjph")
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("10_54lpo")
+
+[node name="VariableFillColor" type="Node" parent="."]
+script = ExtResource("11_fi63b")
+
+[node name="DirectionChangerComponent" type="Node" parent="."]
+script = ExtResource("12_j5u27")
+
+[node name="ToggleComponent" type="Node" parent="."]
+script = ExtResource("1_dcl03")

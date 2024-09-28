@@ -130,7 +130,7 @@ toggle_hitbox_visibility={
 2d_physics/layer_1="player"
 2d_physics/layer_2="solids"
 2d_physics/layer_3="hazards"
-2d_physics/layer_4="interactibles"
+2d_physics/layer_4="interactables"
 2d_physics/layer_5="triggers"
 2d_physics/layer_6="ground"
 2d_physics/layer_7="slope_enablers"
@@ -142,3 +142,7 @@ updater/enable_updater=false
 [physics]
 
 common/physics_interpolation=true
+
+[rendering]
+
+anti_aliasing/quality/msaa_2d=3

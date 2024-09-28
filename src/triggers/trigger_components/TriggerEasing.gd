@@ -18,7 +18,7 @@ func _ready() -> void:
 
 func start(_body: Node2D) -> void:
 	_tween = get_tree().create_tween()
-	if $"../TriggerBase".multi_usage:
+	if not $"../TriggerBase".single_usage:
 		reset()
 		_tween.tween_property(self, "_weight", 1.0, _duration) \
 			.set_trans(easing_transition) \

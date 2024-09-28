@@ -31,7 +31,7 @@ func _ready() -> void:
 	_position_offset = DEFAULT_OFFSET
 	LevelManager.player_camera = self
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# limit_bottom = DEFAULT_LIMIT_BOTTOM - int(offset.y)
 	if get_parent().has_level_started:
 		_player_distance = player.position - position
@@ -42,55 +42,59 @@ func _physics_process(_delta: float) -> void:
 		# I'd love to use Vector2.rotated all over the place but it only works well with deltas, and here I change the position directly.
 		# If you find out how to use a position and offset delta instead, make sure to open a PR!
 		if abs(player.gameplay_rotation_degrees) == 90.0 or abs(player.gameplay_rotation_degrees) == 180.0:
-			_position_offset.x = lerpf(_position_offset.x, DEFAULT_OFFSET.y/zoom.x, _offset_snap.y)
+			_position_offset.x = lerpf(_position_offset.x, DEFAULT_OFFSET.y/zoom.x, _offset_snap.y * 60 * delta)
 			if not LevelManager.platformer:
 				_position_offset.y = lerpf(
 					_position_offset.y,
-					(sign(player.gameplay_rotation_degrees) * -1.4 * 0.5 * DEFAULT_OFFSET.x * player._get_direction() * sign(player.speed_multiplier))/zoom.y, _offset_snap.x
+					(sign(player.gameplay_rotation_degrees) * -1.4 * 0.5 * DEFAULT_OFFSET.x * player.get_direction() * sign(player.speed_multiplier))/zoom.y,
+					_offset_snap.x * 60 * delta
 				)
 			else:
 				_position_offset.y = lerpf(
 					_position_offset.y,
-					(sign(player.gameplay_rotation_degrees) * -DEFAULT_OFFSET.x * player._get_direction() * sign(player.speed_multiplier))/zoom.y, _offset_snap.x * 0.5
+					(sign(player.gameplay_rotation_degrees) * -DEFAULT_OFFSET.x * player.get_direction() * sign(player.speed_multiplier))/zoom.y,
+					_offset_snap.x * 60 * delta * 0.5
 				)
 			if _static.x == 0 and _freefly and abs(_player_distance.x) > ((MAX_DISTANCE+200) / zoom.y):
 				position.x = lerpf(
 					position.x,
 					player.position.x - sign(_player_distance.x) * ((MAX_DISTANCE+200) / zoom.y),
-					_position_snap.y,
+					_position_snap.y * 60 * delta,
 				)
 			elif not _freefly:
 				position.x = lerpf(
 					position.x,
 					GroundData.center.rotated(-LevelManager.player.gameplay_rotation).y - GroundData.offset,
-					_position_snap.y
+					_position_snap.y * 60 * delta
 				)
-			if _static.y == 0: position.y = lerpf(position.y, player.position.y, _position_snap.x)
+			if _static.y == 0: position.y = lerpf(position.y, player.position.y, _position_snap.x * 60 * delta)
 		else:
 			if not LevelManager.platformer:
 				_position_offset.x = lerpf(
 					_position_offset.x,
-					(DEFAULT_OFFSET.x * player._get_direction() * sign(player.speed_multiplier))/zoom.x, _offset_snap.x
+					(DEFAULT_OFFSET.x * player.get_direction() * sign(player.speed_multiplier))/zoom.x,
+					_offset_snap.x * 60 * delta
 				)
 			else:
 				_position_offset.x = lerpf(
 					_position_offset.x,
-					(-DEFAULT_OFFSET.x * 0.5 * player._get_direction() * sign(player.speed_multiplier))/zoom.x, _offset_snap.x * 0.5
+					(-DEFAULT_OFFSET.x * 0.5 * player.get_direction() * sign(player.speed_multiplier))/zoom.x,
+					_offset_snap.x * 60 * delta * 0.5
 				)
-			_position_offset.y = lerpf(_position_offset.y, DEFAULT_OFFSET.y/zoom.y, _offset_snap.y)
+			_position_offset.y = lerpf(_position_offset.y, DEFAULT_OFFSET.y/zoom.y, _offset_snap.y * 60 * delta)
 			if _static.y == 0 and _freefly and abs(_player_distance.y) > (MAX_DISTANCE / zoom.y):
 				position.y = lerpf(
 					position.y,
 					player.position.y - sign(_player_distance.y) * (MAX_DISTANCE / zoom.y),
-					_position_snap.y,
+					_position_snap.y * 60 * delta,
 				)
 			elif not _freefly:
 				position.y = lerpf(
 					position.y,
 					GroundData.center.rotated(-LevelManager.player.gameplay_rotation).y - GroundData.offset,
-					_position_snap.y
+					_position_snap.y * 60 * delta
 				)
-			if _static.x == 0: position.x = lerpf(position.x, player.position.x, _position_snap.x)
+			if _static.x == 0: position.x = lerpf(position.x, player.position.x, _position_snap.x * 60 * delta)
 
 		_position_offset *= _tOffset_multiplier
 		_position_offset += _tOffset

@@ -1,31 +1,35 @@
-[gd_scene load_steps=12 format=3 uid="uid://cct7q7sr6fwc0"]
+[gd_scene load_steps=16 format=3 uid="uid://cct7q7sr6fwc0"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_72oxc"]
+[ext_resource type="Script" path="res://src/interactables/Interactable.gd" id="1_83t0m"]
 [ext_resource type="Texture2D" uid="uid://bapxj1clamaqp" path="res://assets/textures/portals/gamemode_portals/wave_portal/WavePortalBack.png" id="2_uixlg"]
 [ext_resource type="Texture2D" uid="uid://cb1rbkb0djr36" path="res://assets/textures/portals/gamemode_portals/wave_portal/WavePortalFront.png" id="3_7str5"]
 [ext_resource type="Texture2D" uid="uid://hi7gplbmwoqd" path="res://assets/textures/portals/gamemode_portals/wave_portal/WavePortalIndicatorBG.png" id="4_c5wih"]
 [ext_resource type="Texture2D" uid="uid://pavsctvxcryh" path="res://assets/textures/portals/gamemode_portals/wave_portal/WavePortalIndicatorIcon.png" id="5_l71ex"]
 [ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="6_n8jr8"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="7_356b5"]
-[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="8_f2cra"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="9_phwxh"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="8_y4pr0"]
+[ext_resource type="Script" path="res://src/interactables/public_components/GamemodeChangerComponent.gd" id="9_bbxrl"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="10_mu6g2"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseWhite.gd" id="11_q574o"]
+[ext_resource type="Script" path="res://src/interactables/public_components/GroundMoverComponent.gd" id="12_htdl0"]
+[ext_resource type="Script" path="res://src/interactables/private_components/TextureRotatePin.gd" id="13_jgo3l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
 size = Vector2(128, 384)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r7ldh"]
+resource_local_to_scene = true
 shader = ExtResource("6_n8jr8")
 shader_parameter/shine_color = Color(1, 1, 1, 0)
 shader_parameter/alpha_limit = 0.0
 shader_parameter/cycle_speed = 1.0
 shader_parameter/full_pulse_cycle = false
+shader_parameter/factor = 0.0
 shader_parameter/mode = 2
 
 [node name="WavePortal" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_72oxc")
-object_type = 2
-_gamemode_portal_type = 4
+script = ExtResource("1_83t0m")
 metadata/_edit_group_ = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
@@ -62,8 +66,21 @@ texture = ExtResource("5_l71ex")
 [node name="ParticleEmitter" parent="." instance=ExtResource("7_356b5")]
 modulate = Color(0, 0.721569, 0.886275, 1)
 
-[node name="PulseShrink" type="Sprite2D" parent="."]
-modulate = Color(0, 0.721569, 0.886275, 1)
-material = ExtResource("8_f2cra")
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("9_phwxh")
+[node name="PulseCircle" type="Node2D" parent="."]
+script = ExtResource("8_y4pr0")
+
+[node name="GamemodeChangerComponent" type="Node" parent="."]
+script = ExtResource("9_bbxrl")
+gamemode = 4
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("10_mu6g2")
+
+[node name="PulseWhite" type="Node2D" parent="."]
+script = ExtResource("11_q574o")
+
+[node name="GroundMoverComponent" type="Node" parent="."]
+script = ExtResource("12_htdl0")
+
+[node name="TextureRotationPin" type="Node" parent="."]
+script = ExtResource("13_jgo3l")

@@ -1,21 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctw1jhwf8nsij"]
+[gd_scene load_steps=12 format=3 uid="uid://ctw1jhwf8nsij"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_0i437"]
+[ext_resource type="Script" path="res://src/interactables/OrbInteractable.gd" id="1_2lo85"]
 [ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_6mw80"]
 [ext_resource type="Texture2D" uid="uid://dus42ph1rvvjq" path="res://assets/textures/orbs/DashOrbMagenta.svg" id="3_q66dt"]
-[ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="4_mg80a"]
-[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="5_e4jhd"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="6_sk4gj"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseRing.gd" id="4_w7bt3"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="5_tgwkr"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="6_twfte"]
+[ext_resource type="Script" path="res://src/interactables/public_components/FireDashComponent.gd" id="7_35cbg"]
+[ext_resource type="Script" path="res://src/interactables/private_components/FireDashAngularPath.gd" id="8_fdxk0"]
+[ext_resource type="Script" path="res://src/interactables/public_components/GravityChangerComponent.gd" id="9_tqky4"]
+[ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="10_y60uf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jwypc"]
 size = Vector2(128, 128)
 
 [node name="DashOrbMagenta" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_0i437")
-_orb_type = 256
-_other_portal_type = 2
-_freefly = true
+script = ExtResource("1_2lo85")
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_6mw80")]
 modulate = Color(1, 0, 0.823529, 1)
@@ -35,12 +36,24 @@ scale = Vector2(1.2, 1.2)
 shape = SubResource("RectangleShape2D_jwypc")
 debug_color = Color(0, 1, 0, 0)
 
-[node name="PulseGrow" type="Sprite2D" parent="."]
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("4_mg80a")
+[node name="PulseRing" type="Node2D" parent="."]
+script = ExtResource("4_w7bt3")
 
-[node name="PulseShrink" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0.823529, 1)
-material = ExtResource("5_e4jhd")
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("6_sk4gj")
+[node name="PulseCircle" type="Node2D" parent="."]
+script = ExtResource("5_tgwkr")
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("6_twfte")
+
+[node name="FireDashComponent" type="Node" parent="."]
+script = ExtResource("7_35cbg")
+
+[node name="FireDashAngularPath" type="Node" parent="FireDashComponent"]
+script = ExtResource("8_fdxk0")
+
+[node name="GravityChangerComponent" type="Node" parent="."]
+script = ExtResource("9_tqky4")
+gravity = 2
+
+[node name="DirectionChangerComponent" type="Node" parent="."]
+script = ExtResource("10_y60uf")

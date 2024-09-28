@@ -165,7 +165,6 @@ var _player_camera: PlayerCamera:
 var _rebound_factor: float
 var _pulse_white_color: Color = Color.WHITE
 var _0x_speed_centering_player: bool
-var _queue_index: int
 
 func _ready() -> void:
 	_pulse_white_color.a = 0
@@ -239,11 +238,9 @@ func _on_player_enter(_body: Node2D) -> void:
 	_pulse_grow()
 	if object_type == ObjectType.ORB:
 		_player.orb_queue.push_front(self)
-		_queue_index = len(_player.orb_queue) - 1 if len(_player.orb_queue) - 1 > 0 else 0
 	elif object_type == ObjectType.PAD:
 		set_deferred("monitoring", multi_usage)
 		_player.pad_queue.push_front(self)
-		_queue_index = len(_player.pad_queue) - 1 if len(_player.pad_queue) - 1 > 0 else 0
 	elif object_type == ObjectType.GAMEMODE_PORTAL:
 		set_deferred("monitoring", multi_usage)
 		_pulse_shrink()

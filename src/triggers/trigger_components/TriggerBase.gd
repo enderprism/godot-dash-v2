@@ -33,7 +33,7 @@ enum TriggerHitboxShape {
 @export var target_group: StringName
 
 ## If the trigger can be used multiple times.
-@export var multi_usage: bool = false
+@export var single_usage: bool = true
 
 func _validate_property(property: Dictionary) -> void:
 	if property.name == "hitbox_height" and _hitbox_shape != TriggerHitboxShape.LINE:
@@ -43,6 +43,7 @@ func _validate_property(property: Dictionary) -> void:
 var sprite: Sprite2D
 ## The trigger's collision shape.
 var _hitbox: CollisionShape2D
+var _single_usage_component: SingleUsageComponent
 
 func _set_hitbox_shape() -> void:
 	if _hitbox != null:
@@ -61,36 +62,34 @@ func _set_hitbox_shape() -> void:
 func _ready() -> void:
 	collision_layer = 16
 	collision_mask = 1
-	if not has_node("Hitbox"):
+	_hitbox = get_node_or_null("Hitbox") as CollisionShape2D
+	if _hitbox == null:
 		_hitbox = CollisionShape2D.new()
 		_hitbox.name = "Hitbox"
 		_hitbox.debug_color = Color("fff5006b")
 		_set_hitbox_shape()
 		add_child(_hitbox)
 		_hitbox.set_owner(self)
-	else:
-		_hitbox = $Hitbox
-	if not has_node("Sprite"):
+	sprite = get_node_or_null("Sprite") as Sprite2D
+	if sprite == null:
 		sprite = Sprite2D.new()
 		sprite.name = "Sprite"
 		add_child(sprite)
 		sprite.set_owner(self)
 		sprite.scale = Vector2.ONE/4
-	else:
-		sprite = $Sprite
+	_single_usage_component = get_node_or_null("SingleUsageComponent") as SingleUsageComponent
+	if sprite == null:
+		_single_usage_component = SingleUsageComponent.new()
+		_single_usage_component.name = "SingleUsageComponent"
+		add_child(_single_usage_component)
+		_single_usage_component.set_owner(self)
 	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
-	if not multi_usage and not body_entered.is_connected(_disable): body_entered.connect(_disable)
 
 func _physics_process(_delta: float) -> void:
-	sprite.visible = _sprite_visible()
+	sprite.visible = sprite_visible()
 	if not get_parent() is GameplayRotateTrigger:
 		sprite.global_rotation = 0.0
 	sprite.global_scale = Vector2.ONE/4
 
-func _disable(_body: Node2D) -> void:
-	set_deferred("monitorable", false)
-	set_deferred("monitoring", false)
-	set_deferred("process_mode", PROCESS_MODE_DISABLED)
-
-func _sprite_visible() -> bool:
+func sprite_visible() -> bool:
 	return Engine.is_editor_hint() or (not Engine.is_editor_hint() and get_tree().is_debugging_collisions_hint())

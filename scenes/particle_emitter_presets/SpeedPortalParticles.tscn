@@ -26,4 +26,5 @@ process_material = SubResource("ParticleProcessMaterial_xnnnd")
 texture = ExtResource("1_mgydc")
 lifetime = 2.0
 preprocess = 5.0
+fixed_fps = 60
 local_coords = true

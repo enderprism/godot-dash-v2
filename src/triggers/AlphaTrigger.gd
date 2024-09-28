@@ -37,24 +37,6 @@ func _ready() -> void:
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Alpha.svg"))
 	_targets = get_tree().get_nodes_in_group(base.target_group)
 
-func update_target_link() -> void:
-	target_link.target = base._target
-
-func start(_body: Node2D) -> void:
-	if easing._is_inactive():
-		if not _targets.is_empty():
-			for _target: Node2D in _targets:
-				_initial_alphas[_target] = _target.modulate.a
-		else:
-			printerr("In ", name, ": _target is unset")
-
-func reset() -> void:
-	if not _targets.is_empty():
-		for _target: Node2D in _targets:
-			_target.modulate.a = _initial_alphas[_target]
-	else:
-		printerr("In ", name, ": _target is unset")
-
 func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
 		if not _targets.is_empty():
@@ -76,3 +58,22 @@ func _process(_delta: float) -> void:
 	elif Engine.is_editor_hint() or LevelManager.in_editor:
 		target_link.position = Vector2.ZERO
 		if Engine.is_editor_hint(): base.position = Vector2.ZERO
+
+
+func update_target_link() -> void:
+	target_link.target = base._target
+
+func start(_body: Node2D) -> void:
+	if easing._is_inactive():
+		if not _targets.is_empty():
+			for _target: Node2D in _targets:
+				_initial_alphas[_target] = _target.modulate.a
+		else:
+			printerr("In ", name, ": _target is unset")
+
+func reset() -> void:
+	if not _targets.is_empty():
+		for _target: Node2D in _targets:
+			_target.modulate.a = _initial_alphas[_target]
+	else:
+		printerr("In ", name, ": _target is unset")

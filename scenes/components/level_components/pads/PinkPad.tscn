@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cugg15j2jxyay"]
+[gd_scene load_steps=12 format=3 uid="uid://cugg15j2jxyay"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_3d3oy"]
-[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="2_dn0c5"]
+[ext_resource type="Script" path="res://src/interactables/PadInteractable.gd" id="1_g2tnf"]
 [ext_resource type="PackedScene" uid="uid://05h0teol0odp" path="res://scenes/particle_emitter_presets/PadParticles.tscn" id="2_f5acs"]
 [ext_resource type="Texture2D" uid="uid://diqogjimevxe2" path="res://assets/textures/pads/PinkPad.svg" id="4_d6hcl"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="5_qi3d5"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="4_yeqsx"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="5_b1bcn"]
+[ext_resource type="Script" path="res://src/interactables/public_components/JumpBoostComponent.gd" id="6_3udkk"]
+[ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="7_6y7nv"]
 
 [sub_resource type="Curve" id="Curve_6hqd0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -29,9 +31,7 @@ size = Vector2(98, 18)
 
 [node name="PinkPad" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_3d3oy")
-object_type = 1
-_pad_type = 2
+script = ExtResource("1_g2tnf")
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_f5acs")]
 modulate = Color(1, 0.364706, 0.945098, 1)
@@ -46,10 +46,16 @@ position = Vector2(0, 55)
 shape = SubResource("RectangleShape2D_4v8oj")
 debug_color = Color(0, 1, 0, 0)
 
-[node name="PulseGrow" type="Sprite2D" parent="."]
-modulate = Color(1, 0.364706, 0.945098, 1)
-z_index = 51
-material = ExtResource("2_dn0c5")
+[node name="PulseCircle" type="Node2D" parent="."]
 position = Vector2(0, 57)
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("5_qi3d5")
+script = ExtResource("4_yeqsx")
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("5_b1bcn")
+
+[node name="JumpBoostComponent" type="Node" parent="."]
+script = ExtResource("6_3udkk")
+jump_boost = 0.923
+
+[node name="DirectionChangerComponent" type="Node" parent="."]
+script = ExtResource("7_6y7nv")

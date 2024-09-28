@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnah6ge1p0rr3"]
+[gd_scene load_steps=13 format=3 uid="uid://dnah6ge1p0rr3"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_3t3gb"]
+[ext_resource type="Script" path="res://src/interactables/PadInteractable.gd" id="1_0aya1"]
 [ext_resource type="PackedScene" uid="uid://05h0teol0odp" path="res://scenes/particle_emitter_presets/PadParticles.tscn" id="2_hkj6m"]
-[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="2_u258l"]
 [ext_resource type="Texture2D" uid="uid://c0bsvfc1ce8wd" path="res://assets/textures/pads/BluePad.svg" id="4_8t53w"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="5_tb85p"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="4_lmapq"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="5_an2gs"]
+[ext_resource type="Script" path="res://src/interactables/public_components/JumpBoostComponent.gd" id="6_eisph"]
+[ext_resource type="Script" path="res://src/interactables/public_components/GravityChangerComponent.gd" id="7_i2245"]
+[ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="8_63mce"]
 
 [sub_resource type="Curve" id="Curve_6hqd0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -29,9 +32,7 @@ size = Vector2(98, 18)
 
 [node name="BluePad" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_3t3gb")
-object_type = 1
-_pad_type = 8
+script = ExtResource("1_0aya1")
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_hkj6m")]
 modulate = Color(0.0862745, 1, 1, 1)
@@ -46,10 +47,22 @@ position = Vector2(0, 53)
 shape = SubResource("RectangleShape2D_4v8oj")
 debug_color = Color(0, 1, 0, 0)
 
-[node name="PulseGrow" type="Sprite2D" parent="."]
-modulate = Color(0.0862745, 1, 1, 1)
-z_index = 51
-material = ExtResource("2_u258l")
-position = Vector2(0, 57)
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("5_tb85p")
+[node name="PulseCircle" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.3)
+position = Vector2(0, 55)
+scale = Vector2(1.2, 1.2)
+script = ExtResource("4_lmapq")
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("5_an2gs")
+
+[node name="JumpBoostComponent" type="Node" parent="."]
+script = ExtResource("6_eisph")
+jump_boost = -0.706
+
+[node name="GravityChangerComponent" type="Node" parent="."]
+script = ExtResource("7_i2245")
+gravity = 2
+
+[node name="DirectionChangerComponent" type="Node" parent="."]
+script = ExtResource("8_63mce")

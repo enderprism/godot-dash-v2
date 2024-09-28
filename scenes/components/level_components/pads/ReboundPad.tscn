@@ -1,15 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://cjbdfuvh8nxcn"]
+[gd_scene load_steps=14 format=3 uid="uid://cjbdfuvh8nxcn"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_46t7v"]
-[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="2_i32ug"]
+[ext_resource type="Script" path="res://src/interactables/PadInteractable.gd" id="1_6nccy"]
 [ext_resource type="PackedScene" uid="uid://05h0teol0odp" path="res://scenes/particle_emitter_presets/PadParticles.tscn" id="4_26ak1"]
 [ext_resource type="Texture2D" uid="uid://sqswuk7njswf" path="res://assets/textures/pads/ReboundPadFill.svg" id="5_h3j35"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="5_i2c3j"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="5_hg5x3"]
+[ext_resource type="Script" path="res://src/interactables/public_components/ReboundComponent.gd" id="6_actth"]
 [ext_resource type="Texture2D" uid="uid://clsveyqmgm3b1" path="res://assets/textures/pads/ReboundPadOutline.svg" id="6_qylod"]
-
-[sub_resource type="Gradient" id="Gradient_d8q38"]
-offsets = PackedFloat32Array(0, 0.333, 0.667, 1)
-colors = PackedColorArray(1, 0.8, 0.8, 1, 1, 1, 0, 1, 1, 0.492188, 0, 1, 1, 0, 0, 1)
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="7_8bjuk"]
+[ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="8_lapvy"]
+[ext_resource type="Script" path="res://src/interactables/private_components/ReboundPadSprite.gd" id="9_50uy8"]
 
 [sub_resource type="Curve" id="Curve_6hqd0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -36,18 +35,15 @@ size = Vector2(92, 24)
 process_priority = 1
 process_physics_priority = 2
 collision_layer = 8
-script = ExtResource("1_46t7v")
-object_type = 1
-_orb_type = 1
-_pad_type = 32
-_rebound_gradient = SubResource("Gradient_d8q38")
+script = ExtResource("1_6nccy")
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("4_26ak1")]
-modulate = Color(1, 0.2, 0.2, 1)
+modulate = Color(1, 0.8, 0.8, 1)
 position = Vector2(0, 57)
 process_material = SubResource("ParticleProcessMaterial_bto6p")
 
 [node name="ReboundObjectScaleOrigin" type="Marker2D" parent="."]
+visible = false
 position = Vector2(0, 64)
 gizmo_extents = 64.0
 
@@ -60,26 +56,28 @@ modulate = Color(1, 0.2, 0.2, 1)
 position = Vector2(0, -64)
 texture = ExtResource("5_h3j35")
 
-[node name="ReboundCancelArea" type="Area2D" parent="."]
-editor_description = "Cancels the rebound velocity if the player isn't falling in this area."
-position = Vector2(0, 64)
-collision_layer = 8
-
-[node name="Hitbox" type="CollisionShape2D" parent="ReboundCancelArea"]
-position = Vector2(0, -9)
-scale = Vector2(2, 1)
-shape = SubResource("RectangleShape2D_qxki2")
-debug_color = Color(0.223529, 0.498039, 0, 0)
-
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 55)
 shape = SubResource("RectangleShape2D_qxki2")
 debug_color = Color(0, 1, 0, 0)
 
-[node name="PulseGrow" type="Sprite2D" parent="."]
-modulate = Color(1, 0.2, 0.239216, 1)
-z_index = 51
-material = ExtResource("2_i32ug")
+[node name="PulseCircle" type="Node2D" parent="."]
 position = Vector2(0, 57)
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("5_i2c3j")
+script = ExtResource("5_hg5x3")
+
+[node name="ReboundComponent" type="Node" parent="."]
+script = ExtResource("6_actth")
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("7_8bjuk")
+
+[node name="DirectionChangerComponent" type="Node" parent="."]
+script = ExtResource("8_lapvy")
+
+[node name="ClippingMask" type="Polygon2D" parent="."]
+clip_children = 1
+polygon = PackedVector2Array(-64, -64, -64, 64, 64, 64, 64, -64)
+
+[node name="ReboundPadSprite" type="Node2D" parent="ClippingMask"]
+position = Vector2(0, 64)
+script = ExtResource("9_50uy8")

@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bf1l71kmqh0i0"]
+[gd_scene load_steps=12 format=3 uid="uid://bf1l71kmqh0i0"]
 
 [ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_f3ijl"]
 [ext_resource type="PackedScene" uid="uid://05h0teol0odp" path="res://scenes/particle_emitter_presets/PadParticles.tscn" id="2_287b4"]
-[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="2_yin3r"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="5_ty4n2"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="4_tujog"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="5_s7saa"]
 [ext_resource type="Texture2D" uid="uid://cbbt17ufbgqqu" path="res://assets/textures/pads/RedPad.svg" id="6_ielrm"]
+[ext_resource type="Script" path="res://src/interactables/public_components/JumpBoostComponent.gd" id="6_lk0tv"]
+[ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="7_reb52"]
 
 [sub_resource type="Curve" id="Curve_6hqd0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -46,10 +48,16 @@ position = Vector2(0, 52)
 shape = SubResource("RectangleShape2D_twl62")
 debug_color = Color(0, 1, 0, 0)
 
-[node name="PulseGrow" type="Sprite2D" parent="."]
-modulate = Color(1, 0.2, 0.239216, 1)
-z_index = 51
-material = ExtResource("2_yin3r")
+[node name="PulseCircle" type="Node2D" parent="."]
 position = Vector2(0, 57)
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("5_ty4n2")
+script = ExtResource("4_tujog")
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("5_s7saa")
+
+[node name="JumpBoostComponent" type="Node" parent="."]
+script = ExtResource("6_lk0tv")
+jump_boost = 1.881
+
+[node name="DirectionChangerComponent" type="Node" parent="."]
+script = ExtResource("7_reb52")

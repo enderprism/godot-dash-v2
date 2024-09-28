@@ -42,52 +42,56 @@ func _ready() -> void:
 	visible = LevelManager.in_editor
 
 func _draw() -> void:
-	var _line_width: Vector2
+	var line_width: Vector2
 	for cell_x in grid_size.x + 1:
-		var _line_color_y: Color
+		var line_color_y: Color
 		var _line_base_y = 0.0 if not symmetrize & 0b10 else grid_size.y * cell_size.y
 		if (cell_x % primary_line_every.x) == 0:
-			_line_color_y = LINE_COLOR_PRIMARY
-			_line_width.y = primary_line_thickness
-			if not Engine.is_editor_hint():
-				_line_width.y /= get_viewport().get_camera_2d().zoom.y
-				_line_color_y.a *= get_viewport().get_camera_2d().zoom.y
+			line_color_y = LINE_COLOR_PRIMARY
+			line_width.y = primary_line_thickness
+			# if not Engine.is_editor_hint():
+			# 	line_width.y /= get_viewport().get_camera_2d().zoom.y
+			# 	line_color_y.a *= get_viewport().get_camera_2d().zoom.y
 		else:
-			_line_color_y = LINE_COLOR_SECONDARY
-			_line_width.y = secondary_line_thickness
+			line_color_y = LINE_COLOR_SECONDARY
+			line_width.y = secondary_line_thickness
 			if not Engine.is_editor_hint():
-				_line_width.y /= get_viewport().get_camera_2d().zoom.y
-				_line_color_y.a *= get_viewport().get_camera_2d().zoom.y
+				line_width.y /= get_viewport().get_camera_2d().zoom.y
+				line_color_y.a *= get_viewport().get_camera_2d().zoom.y
 		draw_line(
 			Vector2(cell_x * cell_size.x, _line_base_y),
 			Vector2(cell_x * cell_size.x, -grid_size.y * cell_size.y),
-			_line_color_y, _line_width.y)
+			line_color_y, line_width.y
+		)
 		if symmetrize & 0b01:
 			draw_line(
-			Vector2(-cell_x * cell_size.x, _line_base_y),
-			Vector2(-cell_x * cell_size.x, -grid_size.y * cell_size.y),
-			_line_color_y, _line_width.y, )
+				Vector2(-cell_x * cell_size.x, _line_base_y),
+				Vector2(-cell_x * cell_size.x, -grid_size.y * cell_size.y),
+				line_color_y, line_width.y
+			)
 	for cell_y in grid_size.y + 1:
-		var _line_color_x: Color
-		var _line_base_x = 0.0 if not symmetrize & 0b01 else -grid_size.x * cell_size.x
+		var line_color_x: Color
+		var line_base_x = 0.0 if not symmetrize & 0b01 else -grid_size.x * cell_size.x
 		if (cell_y % primary_line_every.y) == 0:
-			_line_color_x = LINE_COLOR_PRIMARY
-			_line_width.x = primary_line_thickness
-			if not Engine.is_editor_hint():
-				_line_width.x /= get_viewport().get_camera_2d().zoom.x
-				_line_color_x.a *= get_viewport().get_camera_2d().zoom.x
+			line_color_x = LINE_COLOR_PRIMARY
+			line_width.x = primary_line_thickness
+			# if not Engine.is_editor_hint():
+			# 	line_width.x /= get_viewport().get_camera_2d().zoom.x
+			# 	line_color_x.a *= get_viewport().get_camera_2d().zoom.x
 		else:
-			_line_color_x = LINE_COLOR_SECONDARY
-			_line_width.x = secondary_line_thickness
-			if not Engine.is_editor_hint():
-				_line_width.x /= get_viewport().get_camera_2d().zoom.x
-				_line_color_x.a *= get_viewport().get_camera_2d().zoom.x
+			line_color_x = LINE_COLOR_SECONDARY
+			line_width.x = secondary_line_thickness
+			# if not Engine.is_editor_hint():
+			# 	line_width.x /= get_viewport().get_camera_2d().zoom.x
+			# 	line_color_x.a *= get_viewport().get_camera_2d().zoom.x
 		draw_line(
-			Vector2(_line_base_x, -cell_y * cell_size.y),
+			Vector2(line_base_x, -cell_y * cell_size.y),
 			Vector2(grid_size.x * cell_size.x, -cell_y * cell_size.y),
-			_line_color_x, _line_width.x)
+			line_color_x, line_width.x
+		)
 		if symmetrize & 0b10:
 			draw_line(
-			Vector2(_line_base_x, cell_y * cell_size.y),
-			Vector2(grid_size.x * cell_size.x, cell_y * cell_size.y),
-			_line_color_x, _line_width.x)
+				Vector2(line_base_x, cell_y * cell_size.y),
+				Vector2(grid_size.x * cell_size.x, cell_y * cell_size.y),
+				line_color_x, line_width.x
+			)

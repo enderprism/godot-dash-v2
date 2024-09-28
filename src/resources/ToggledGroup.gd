@@ -2,5 +2,11 @@
 
 class_name ToggledGroup
 
-@export var group: NodePath
-@export var state: ObjectToggle.ToggleState
+enum ToggleState {
+	ON,
+	OFF,
+	FLIP,
+}
+
+@export var group: StringName
+@export var state: ToggleState

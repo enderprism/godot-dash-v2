@@ -1,14 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://duj3dae6qcvtm"]
+[gd_scene load_steps=17 format=3 uid="uid://duj3dae6qcvtm"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_nse85"]
 [ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="1_r0h5n"]
+[ext_resource type="Script" path="res://src/interactables/Interactable.gd" id="2_213bg"]
 [ext_resource type="Texture2D" uid="uid://b8hgbelfp1y2t" path="res://assets/textures/portals/gamemode_portals/spider_portal/SpiderPortalBack.png" id="2_tj15i"]
 [ext_resource type="Texture2D" uid="uid://mhmstl4xjq2g" path="res://assets/textures/portals/gamemode_portals/spider_portal/SpiderPortalFront.png" id="3_tcgxp"]
 [ext_resource type="Texture2D" uid="uid://dky8o4pp8v101" path="res://assets/textures/portals/gamemode_portals/spider_portal/SpiderPortalIndicatorBG.png" id="4_3wlc5"]
 [ext_resource type="Texture2D" uid="uid://chodyk8vo6602" path="res://assets/textures/portals/gamemode_portals/spider_portal/SpiderPortalIndicatorIcon.png" id="5_vajic"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="6_8yut6"]
-[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="7_hr36f"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="8_if6qw"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="8_gktvw"]
+[ext_resource type="Script" path="res://src/interactables/public_components/GamemodeChangerComponent.gd" id="9_rdthj"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="10_go7f5"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseWhite.gd" id="11_1662a"]
+[ext_resource type="Script" path="res://src/interactables/public_components/GroundMoverComponent.gd" id="12_w6vjt"]
+[ext_resource type="Script" path="res://src/interactables/private_components/TextureRotatePin.gd" id="13_rrwyk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tll7r"]
 shader = ExtResource("1_r0h5n")
@@ -16,25 +20,26 @@ shader_parameter/shine_color = Color(1, 1, 1, 1)
 shader_parameter/alpha_limit = 0.0
 shader_parameter/cycle_speed = 1.0
 shader_parameter/full_pulse_cycle = false
+shader_parameter/factor = 0.0
 shader_parameter/mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
 size = Vector2(128, 384)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nivw4"]
+resource_local_to_scene = true
 shader = ExtResource("1_r0h5n")
 shader_parameter/shine_color = Color(1, 1, 1, 0)
 shader_parameter/alpha_limit = 0.0
 shader_parameter/cycle_speed = 1.0
 shader_parameter/full_pulse_cycle = false
+shader_parameter/factor = 0.0
 shader_parameter/mode = 2
 
 [node name="SpiderPortal" type="Area2D"]
 material = SubResource("ShaderMaterial_tll7r")
 collision_layer = 8
-script = ExtResource("1_nse85")
-object_type = 2
-_gamemode_portal_type = 6
+script = ExtResource("2_213bg")
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("6_8yut6")]
 modulate = Color(0.258824, 0.0901961, 1, 1)
@@ -71,8 +76,21 @@ position = Vector2(40, 0)
 scale = Vector2(0.909091, 0.909091)
 texture = ExtResource("5_vajic")
 
-[node name="PulseShrink" type="Sprite2D" parent="."]
-modulate = Color(0.258824, 0.0901961, 1, 1)
-material = ExtResource("7_hr36f")
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("8_if6qw")
+[node name="PulseCircle" type="Node2D" parent="."]
+script = ExtResource("8_gktvw")
+
+[node name="GamemodeChangerComponent" type="Node" parent="."]
+script = ExtResource("9_rdthj")
+gamemode = 6
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("10_go7f5")
+
+[node name="PulseWhite" type="Node2D" parent="."]
+script = ExtResource("11_1662a")
+
+[node name="GroundMoverComponent" type="Node" parent="."]
+script = ExtResource("12_w6vjt")
+
+[node name="TextureRotationPin" type="Node" parent="."]
+script = ExtResource("13_rrwyk")

@@ -1,21 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvxuhegi7klq8"]
+[gd_scene load_steps=11 format=3 uid="uid://dvxuhegi7klq8"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_lggqx"]
+[ext_resource type="Script" path="res://src/interactables/OrbInteractable.gd" id="1_xmkgn"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="2_jnww5"]
 [ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_y4jb6"]
+[ext_resource type="Script" path="res://src/interactables/public_components/FireDashComponent.gd" id="3_binks"]
 [ext_resource type="Texture2D" uid="uid://5svtduawb5vo" path="res://assets/textures/orbs/DashOrbGreen.svg" id="4_4g3sr"]
-[ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="4_21g1w"]
-[ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="5_ilt7a"]
-[ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="6_6ykkf"]
+[ext_resource type="Script" path="res://src/interactables/private_components/FireDashAngularPath.gd" id="4_rnp8a"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="7_1yihk"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseRing.gd" id="8_cm0co"]
+[ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="9_mnank"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jwypc"]
 size = Vector2(128, 128)
 
 [node name="DashOrbGreen" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_lggqx")
-_orb_type = 128
-_other_portal_type = 2
-_freefly = true
+script = ExtResource("1_xmkgn")
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_y4jb6")]
 modulate = Color(0, 1, 0, 1)
@@ -35,12 +35,20 @@ scale = Vector2(1.2, 1.2)
 shape = SubResource("RectangleShape2D_jwypc")
 debug_color = Color(0, 1, 0, 0)
 
-[node name="PulseGrow" type="Sprite2D" parent="."]
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("4_21g1w")
+[node name="PulseRing" type="Node2D" parent="."]
+script = ExtResource("8_cm0co")
 
-[node name="PulseShrink" type="Sprite2D" parent="."]
-modulate = Color(0, 1, 0, 1)
-material = ExtResource("5_ilt7a")
-scale = Vector2(1e-05, 1e-05)
-texture = ExtResource("6_6ykkf")
+[node name="PulseCircle" type="Node2D" parent="."]
+script = ExtResource("7_1yihk")
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("2_jnww5")
+
+[node name="FireDashComponent" type="Node" parent="."]
+script = ExtResource("3_binks")
+
+[node name="FireDashAngularPath" type="Node" parent="FireDashComponent"]
+script = ExtResource("4_rnp8a")
+
+[node name="DirectionChangerComponent" type="Node" parent="."]
+script = ExtResource("9_mnank")

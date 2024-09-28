@@ -1,11 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://csu7yo83ohdk3"]
+[gd_scene load_steps=15 format=3 uid="uid://csu7yo83ohdk3"]
 
-[ext_resource type="Script" path="res://src/GDInteractible.gd" id="1_vxs2c"]
+[ext_resource type="Script" path="res://src/interactables/Interactable.gd" id="1_io2ec"]
 [ext_resource type="PackedScene" uid="uid://dl5c5hukbve28" path="res://scenes/particle_emitter_presets/SpeedPortalParticles.tscn" id="2_r5axd"]
 [ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="3_61c0v"]
 [ext_resource type="Texture2D" uid="uid://ba7uh3fv4d5jq" path="res://assets/textures/portals/speed_portals/SpeedPortal2x.svg" id="4_wgo4m"]
 [ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="5_4w6u7"]
 [ext_resource type="Texture2D" uid="uid://dxweksgnsj14o" path="res://assets/textures/CircleOutline.svg" id="6_eh7dq"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="7_4xb3m"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseWhite.gd" id="8_4ebir"]
+[ext_resource type="Script" path="res://src/interactables/public_components/SpeedChangerComponent.gd" id="9_lwp6d"]
 
 [sub_resource type="Curve" id="Curve_f0tdc"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -29,6 +32,7 @@ shader_parameter/shine_color = Color(1, 1, 1, 0)
 shader_parameter/alpha_limit = 0.0
 shader_parameter/cycle_speed = 1.0
 shader_parameter/full_pulse_cycle = false
+shader_parameter/factor = 0.0
 shader_parameter/mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_udnmp"]
@@ -36,9 +40,7 @@ size = Vector2(202, 226)
 
 [node name="SpeedPortal2x" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_vxs2c")
-object_type = 3
-_speed_portal_type = 1
+script = ExtResource("1_io2ec")
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_r5axd")]
 modulate = Color(0.247059, 0.980392, 0.113725, 1)
@@ -58,3 +60,14 @@ modulate = Color(0.247059, 0.980392, 0.113725, 1)
 material = ExtResource("5_4w6u7")
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("6_eh7dq")
+
+[node name="PulseCircle" type="Node2D" parent="."]
+script = ExtResource("7_4xb3m")
+no_blending = true
+
+[node name="PulseWhite" type="Node" parent="."]
+script = ExtResource("8_4ebir")
+
+[node name="SpeedChangerComponent" type="Node" parent="."]
+script = ExtResource("9_lwp6d")
+speed = 1.243
