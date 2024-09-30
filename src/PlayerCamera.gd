@@ -41,7 +41,6 @@ func _physics_process(_delta: float) -> void:
 		# I'd love to use Vector2.rotated all over the place but it only works well with deltas, and here I change the position directly.
 		# If you find out how to use a position and offset delta instead, make sure to open a PR!
 		if get_parent().has_level_started:
-			print_debug(LevelManager.platformer)
 			if abs(player.gameplay_rotation_degrees) == 90.0 or abs(player.gameplay_rotation_degrees) == 180.0:
 				position_offset.x = lerpf(position_offset.x, DEFAULT_OFFSET.y/zoom.x, _offset_snap.y)
 				if not LevelManager.platformer:

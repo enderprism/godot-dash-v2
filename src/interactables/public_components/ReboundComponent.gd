@@ -9,7 +9,10 @@ func _physics_process(delta: float) -> void:
 			* LevelManager.player.gravity_multiplier
 	if parent.global_position.distance_to(LevelManager.player.global_position) > Player.TERMINAL_VELOCITY.y * 2 * delta:
 		_velocity = player_velocity.y
-	sprite.factor = clampf(_velocity/Player.TERMINAL_VELOCITY.y, 0, 1)
+	var player_distance := (parent.global_position.rotated(-LevelManager.player.gameplay_rotation).y) \
+			- LevelManager.player.global_position.rotated(-LevelManager.player.gameplay_rotation).y \
+			* LevelManager.player.gravity_multiplier
+	sprite.factor = clampf(player_distance/700, 0, 1)
 
 func get_velocity(player: Player) -> float:
 	# Not compatible with dual (can't choose which player to track dynamically so it'll track P1)

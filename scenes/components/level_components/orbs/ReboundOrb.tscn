@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ckkbbbslsv0pg"]
+[gd_scene load_steps=11 format=3 uid="uid://ckkbbbslsv0pg"]
 
 [ext_resource type="Script" path="res://src/interactables/OrbInteractable.gd" id="1_s7suh"]
 [ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_ndx7n"]
+[ext_resource type="Script" path="res://src/interactables/private_components/MusicScale.gd" id="3_nh7pj"]
 [ext_resource type="Script" path="res://src/interactables/private_components/ReboundOrbSprite.gd" id="5_7g4ia"]
 [ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="7_17vtt"]
 [ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="8_ivhwd"]
@@ -19,8 +20,14 @@ script = ExtResource("1_s7suh")
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_ndx7n")]
 modulate = Color(1, 0.8, 0.8, 1)
 
+[node name="MusicScale" type="Node" parent="ParticleEmitter"]
+script = ExtResource("3_nh7pj")
+
 [node name="ReboundSprite" type="Node2D" parent="."]
 script = ExtResource("5_7g4ia")
+
+[node name="MusicScale" type="Node" parent="ReboundSprite"]
+script = ExtResource("3_nh7pj")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 scale = Vector2(1.2, 1.2)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvxuhegi7klq8"]
+[gd_scene load_steps=12 format=3 uid="uid://dvxuhegi7klq8"]
 
 [ext_resource type="Script" path="res://src/interactables/OrbInteractable.gd" id="1_xmkgn"]
 [ext_resource type="Script" path="res://src/SingleUsage.gd" id="2_jnww5"]
 [ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_y4jb6"]
+[ext_resource type="Script" path="res://src/interactables/private_components/MusicScale.gd" id="3_8l25v"]
 [ext_resource type="Script" path="res://src/interactables/public_components/FireDashComponent.gd" id="3_binks"]
 [ext_resource type="Texture2D" uid="uid://5svtduawb5vo" path="res://assets/textures/orbs/DashOrbGreen.svg" id="4_4g3sr"]
 [ext_resource type="Script" path="res://src/interactables/private_components/FireDashAngularPath.gd" id="4_rnp8a"]
@@ -20,6 +21,9 @@ script = ExtResource("1_xmkgn")
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_y4jb6")]
 modulate = Color(0, 1, 0, 1)
 
+[node name="MusicScale" type="Node" parent="ParticleEmitter"]
+script = ExtResource("3_8l25v")
+
 [node name="DashOrbPreview" type="Line2D" parent="."]
 points = PackedVector2Array(64, 0, 768, 0)
 default_color = Color(0, 1, 0, 1)
@@ -29,6 +33,9 @@ end_cap_mode = 2
 position = Vector2(6, 0)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("4_4g3sr")
+
+[node name="MusicScale" type="Node" parent="Sprite"]
+script = ExtResource("3_8l25v")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 scale = Vector2(1.2, 1.2)

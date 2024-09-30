@@ -64,6 +64,7 @@ buses/default_bus_layout="res://resources/default_bus_layout.tres"
 LevelManager="*res://src/autoloads/LevelManager.gd"
 SFXManager="*res://src/autoloads/SFXManager.gd"
 GroundData="*res://src/autoloads/GroundData.gd"
+MusicVolume="*res://src/autoloads/MusicVolume.gd"
 
 [display]
 
@@ -138,6 +139,7 @@ toggle_hitbox_visibility={
 [phantom_camera]
 
 updater/enable_updater=false
+updater/show_new_release_info_on_editor_launch_in_output=false
 
 [physics]
 

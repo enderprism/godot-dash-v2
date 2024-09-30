@@ -204,6 +204,9 @@ func _compute_velocity(delta: float,
 	if (internal_gamemode == Gamemode.SWING or internal_gamemode == Gamemode.BALL) and jump_state == 1 and orb_queue.is_empty():
 		gravity_multiplier *= -1
 
+	$GroundRaycast.rotation = gameplay_rotation
+	$GroundRaycast.scale.y = gravity_multiplier
+
 	#region Apply Gravity
 	if not dash_control:
 		if internal_gamemode == Gamemode.SHIP:
@@ -382,6 +385,12 @@ func _rotate_sprite_degrees(delta: float):
 		if not dash_control:
 			rotation_delta *= gravity_multiplier
 		$Icon/Ball.rotation_degrees += rotation_delta
+	var ball_rotation_in_air: float = abs(
+		sin(
+			($Icon/Ball.rotation * TAU) / deg_to_rad(72*2)
+		)
+	)
+	$Icon/Ball.position.y = lerpf(0, 10, ball_rotation_in_air)
 	#endregion
 	#region spider/robot
 	if get_direction() != 0:

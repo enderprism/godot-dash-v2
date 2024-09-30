@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0dk4786hlokq"]
+[gd_scene load_steps=13 format=3 uid="uid://d0dk4786hlokq"]
 
 [ext_resource type="Script" path="res://src/interactables/OrbInteractable.gd" id="1_lku1r"]
 [ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_7rlbo"]
 [ext_resource type="Texture2D" uid="uid://did756jp8kche" path="res://assets/textures/orbs/BlueOrb.svg" id="2_iiq7e"]
+[ext_resource type="Script" path="res://src/interactables/private_components/MusicScale.gd" id="3_wcw6k"]
 [ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="4_bviuh"]
 [ext_resource type="Script" path="res://src/interactables/private_components/PulseRing.gd" id="5_h0l2k"]
 [ext_resource type="Script" path="res://src/SingleUsage.gd" id="6_gxrlg"]
@@ -21,9 +22,15 @@ script = ExtResource("1_lku1r")
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_7rlbo")]
 modulate = Color(0.0862745, 1, 1, 1)
 
+[node name="MusicScale" type="Node" parent="ParticleEmitter"]
+script = ExtResource("3_wcw6k")
+
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_iiq7e")
+
+[node name="MusicScale" type="Node" parent="Sprite"]
+script = ExtResource("3_wcw6k")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 scale = Vector2(1.2, 1.2)
