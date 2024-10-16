@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://db7ebleody4s3"]
+[gd_scene load_steps=23 format=3 uid="uid://db7ebleody4s3"]
 
 [ext_resource type="Script" path="res://src/GameScene.gd" id="1_k47tp"]
 [ext_resource type="Texture2D" uid="uid://djstmwdco77pp" path="res://assets/textures/backgrounds/background1-3.png" id="2_i4f6q"]
@@ -38,6 +38,10 @@ shader_parameter/outer_radius = 0.25
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yg2l0"]
 shader = ExtResource("11_yix40")
 shader_parameter/base = Color(0.952941, 0.666667, 0.364706, 1)
+
+[sub_resource type="Environment" id="Environment_4phyr"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_bwo2a"]
 
 [node name="GameScene" type="Node2D"]
 texture_filter = 4
@@ -98,7 +102,7 @@ repeat_times = 3
 
 [node name="EditorGrid" type="Node2D" parent="EditorGridParallax"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(0, 924)
+position = Vector2(64, 924)
 script = ExtResource("5_7ssrb")
 primary_line_every = Vector2i(1, 1)
 cell_size = Vector2(128, 128)
@@ -256,3 +260,7 @@ offset_top = 200.0
 offset_right = 13978.0
 offset_bottom = 696.0
 color = Color(1, 0, 0, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4phyr")
+camera_attributes = SubResource("CameraAttributesPractical_bwo2a")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=8 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cffmcdyqdl686" path="res://assets/textures/guis/editor/EditorPlayPlayer.svg" id="3_qy4mu"]
 [ext_resource type="Script" path="res://src/BouncyButton.gd" id="4_gl2yd"]
 [ext_resource type="Script" path="res://src/MapCamera2D.gd" id="6_wcytj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ac3bt"]
+radius = 2.0
 
 [node name="LevelEditor" type="Control"]
 layout_mode = 3
@@ -118,6 +121,17 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 
 [node name="MapCamera2D" type="Camera2D" parent="."]
+anchor_mode = 0
 script = ExtResource("6_wcytj")
+
+[node name="PlacedObjectsCollider" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 94
+priority = 1
+metadata/_edit_group_ = true
+
+[node name="Hitbox" type="CollisionShape2D" parent="PlacedObjectsCollider"]
+shape = SubResource("CircleShape2D_ac3bt")
+debug_color = Color(0.678125, 0.7, 0, 0.42)
 
 [connection signal="pressed" from="EditorUI/Button" to="." method="_on_button_pressed"]

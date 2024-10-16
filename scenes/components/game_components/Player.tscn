@@ -2150,5 +2150,8 @@ one_shot = true
 target_position = Vector2(0, 68)
 collision_mask = 32
 
+[node name="ParentedObjects" type="Node2D" parent="."]
+editor_description = "Anchor for any level objects that need to be parented to the player (to keep it tidy)."
+
 [connection signal="body_entered" from="KillColliderSolid" to="." method="_on_kill_collider_solid_body_entered"]
 [connection signal="body_entered" from="KillColliderHazard" to="." method="_on_kill_collider_hazard_body_entered"]

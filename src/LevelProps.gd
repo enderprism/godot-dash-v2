@@ -1,4 +1,5 @@
 extends Node2D
+class_name LevelProps
 
 @export var song: AudioStream
 @export_range(0.0, 60.0, 0.01, "or_greater", "suffix:s") var song_start_time: float

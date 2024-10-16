@@ -135,6 +135,7 @@ toggle_hitbox_visibility={
 2d_physics/layer_5="triggers"
 2d_physics/layer_6="ground"
 2d_physics/layer_7="slope_enablers"
+2d_physics/layer_8="editor"
 
 [phantom_camera]
 
