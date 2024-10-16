@@ -129,25 +129,9 @@ func _on_go_to_icon_garage_pressed() -> void:
 func _toggle_background_sprites_autoscroll(enabled: bool) -> void:
 	# HACK: autoscroll can't be interpolated
 	if enabled:
-		# create_tween() \
-		# 	.tween_property(title_screen_background, "autoscroll:x", -300, 1.0) \
-		# 	.set_ease(Tween.EASE_OUT) \
-		# 	.set_trans(Tween.TRANS_EXPO)
-		# create_tween() \
-		# 	.tween_property(title_screen_ground, "autoscroll:x", -800.0, 1.0) \
-		# 	.set_ease(Tween.EASE_OUT) \
-		# 	.set_trans(Tween.TRANS_EXPO)
 		title_screen_background.autoscroll.x = -300
 		title_screen_ground.autoscroll.x = -800
 	else:
-		# create_tween() \
-		# 	.tween_property(title_screen_background, "autoscroll:x", 0.0, 1.0) \
-		# 	.set_ease(Tween.EASE_OUT) \
-		# 	.set_trans(Tween.TRANS_EXPO)
-		# create_tween() \
-		# 	.tween_property(title_screen_ground, "autoscroll:x", 0.0, 1.0) \
-		# 	.set_ease(Tween.EASE_OUT) \
-		# 	.set_trans(Tween.TRANS_EXPO)
 		title_screen_background.autoscroll.x = 0
 		title_screen_ground.autoscroll.x = 0
 
@@ -193,7 +177,7 @@ func _on_next_level_pressed() -> void:
 func _on_quit_game_pressed() -> void:
 	var _fade_screen = fade_screen_layer.get_child(0)
 	if not _fade_screen.is_fading:
-		_fade_screen.fade_in(1.0, Tween.EASE_IN_OUT, Tween.TRANS_EXPO)
+		_fade_screen.fade_in(0.5, Tween.EASE_IN_OUT, Tween.TRANS_EXPO)
 		history._change_phantomcamera(active_pcam, quit_game_camera)
 		await _fade_screen.fade_finished
 		get_tree().quit()

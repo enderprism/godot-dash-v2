@@ -32,7 +32,7 @@ ease = 0
 
 [sub_resource type="Resource" id="Resource_vjtrj"]
 script = ExtResource("12_ct30d")
-duration = 1.0
+duration = 0.5
 transition = 5
 ease = 0
 
@@ -189,7 +189,7 @@ inactive_update_mode = 0
 script = ExtResource("8_04kr6")
 priority_override = false
 priority = 0
-zoom = Vector2(2, 2)
+zoom = Vector2(4, 4)
 follow_mode = 0
 frame_preview = true
 pixel_perfect = false
@@ -474,6 +474,7 @@ metadata/_edit_lock_ = true
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(960, 540)
+editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera"]
 script = ExtResource("6_0wc6k")
