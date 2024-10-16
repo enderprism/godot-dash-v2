@@ -26,12 +26,12 @@ func _start_level() -> void:
 		await $FadeScreenLayer/FadeScreen.fade_finished
 		await get_tree().create_timer(0.2).timeout
 		$Level.get_child(0).start_level()
-		has_level_started = true
+		LevelManager.level_playing = true
 		LevelManager.is_first_attempt = false
 	else:
 		await get_tree().create_timer(get_physics_process_delta_time()).timeout
 		$Level.get_child(0).start_level()
-		has_level_started = true
+		LevelManager.level_playing = true
 
 func _process(_delta: float) -> void:
 	%LineUp.scale.x = 1/LevelManager.player_camera.zoom.x * 0.2

@@ -125,7 +125,7 @@ func _ready() -> void:
 		LevelManager.player = self
 
 func _physics_process(delta: float) -> void:
-	if get_parent().has_level_started:
+	if LevelManager.level_playing:
 		up_direction = Vector2.UP.rotated(gameplay_rotation) * sign(gravity_multiplier)
 		_rotate_sprite_degrees(delta)
 		_update_wave_trail(delta)
@@ -264,21 +264,21 @@ func _compute_velocity(delta: float,
 
 	if not LevelManager.platformer or (LevelManager.platformer and internal_gamemode == Gamemode.WAVE):
 		if direction:
-			_velocity.x = direction * speed.x * speed_multiplier * int(get_parent().has_level_started)
+			_velocity.x = direction * speed.x * speed_multiplier * int(LevelManager.level_playing)
 		else:
 			_velocity.x = 0
 	else:
 		if direction:
 			_velocity.x = move_toward(
 					_velocity.x,
-					direction * speed.x * speed_multiplier * int(get_parent().has_level_started),
-					speed.x * PLATFORMER_ACCELERATION * delta * speed_multiplier * int(get_parent().has_level_started),
+					direction * speed.x * speed_multiplier * int(LevelManager.level_playing),
+					speed.x * PLATFORMER_ACCELERATION * delta * speed_multiplier * int(LevelManager.level_playing),
 			)
 		else:
 			_velocity.x = move_toward(
 					_velocity.x,
 					0.0,
-					speed.x * delta * speed_multiplier * PLATFORMER_ACCELERATION * int(get_parent().has_level_started),
+					speed.x * delta * speed_multiplier * PLATFORMER_ACCELERATION * int(LevelManager.level_playing),
 			)
 
 	#region Apply orbs velocity

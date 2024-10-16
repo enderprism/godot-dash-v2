@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=28 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://bncq73polqc8u" path="res://scenes/components/level_components/orbs/YellowOrb.tscn" id="16_nywui"]
 [ext_resource type="Texture2D" uid="uid://cgq0oyg02x4d2" path="res://assets/textures/orbs/RedOrb.svg" id="17_a7wr4"]
 [ext_resource type="PackedScene" uid="uid://cglxf6jw4fmi" path="res://scenes/components/level_components/orbs/RedOrb.tscn" id="18_1ww1r"]
+[ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/FadeScreen.tscn" id="26_j5fve"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac3bt"]
 radius = 2.0
@@ -366,6 +367,7 @@ script = ExtResource("4_gl2yd")
 
 [node name="EditorCamera" type="Camera2D" parent="."]
 process_priority = 1
+position = Vector2(0, 256)
 offset = Vector2(640, 413)
 zoom = Vector2(0.8, 0.8)
 script = ExtResource("6_wcytj")
@@ -382,6 +384,8 @@ metadata/_edit_group_ = true
 [node name="Hitbox" type="CollisionShape2D" parent="PlacedObjectsCollider"]
 shape = SubResource("CircleShape2D_ac3bt")
 debug_color = Color(0.678125, 0.7, 0, 0.42)
+
+[node name="FadeScreenLayer" parent="." instance=ExtResource("26_j5fve")]
 
 [connection signal="ready" from="EditorUI/EditorModes/Place" to="EditorUI/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
 [connection signal="pressed" from="EditorUI/Button" to="." method="_on_button_pressed"]

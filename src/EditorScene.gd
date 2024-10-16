@@ -16,11 +16,22 @@ enum EditorAction {
 var editor_actions: int
 
 func _ready() -> void:
+	LevelManager.level_playing = false
+	$EditorCamera.enabled = true
+	$GameScene/PlayerCamera.enabled = false
+	$GameScene/EditorGridParallax/EditorGrid.queue_redraw()
+
+	if LevelManager.entering_editor:
+		LevelManager.entering_editor = false
+		var _fade_screen = $FadeScreenLayer/FadeScreen
+		_fade_screen.fade_out(0.5, Tween.EASE_OUT, Tween.TRANS_EXPO)
+		create_tween().tween_property($EditorCamera, "zoom", Vector2.ONE * 0.8, 0.5)\
+				.set_ease(Tween.EASE_OUT) \
+				.set_trans(Tween.TRANS_EXPO) \
+				.from(Vector2.ONE * 0.4)
 	LevelManager.in_editor = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	%MenuBar/View.set_item_submenu(0, "PanelVisibility")
-	$EditorCamera.enabled = true
-	$GameScene/PlayerCamera.enabled = false
 	$EditorCamera.zoom_changed.connect($GameScene/EditorGridParallax/EditorGrid.queue_redraw)
 	$GameScene/Level.add_child(level)
 	set_process_input(false)
@@ -66,7 +77,6 @@ func _is_object_of_id_overlapping(type: EditorSelectionCollider.Type, id: int) -
 	if not placed_objects_collider.has_overlapping_areas():
 		return false
 	if placed_objects_collider.get_overlapping_areas()[-1].get_parent() is Interactable:
-		print_debug("interactable")
 		return true
 	if placed_objects_collider.get_overlapping_areas()[-1].type == type:
 		return placed_objects_collider.get_overlapping_areas()[-1].id == id

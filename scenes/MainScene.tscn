@@ -26,9 +26,9 @@
 
 [sub_resource type="Resource" id="Resource_assks"]
 script = ExtResource("12_ct30d")
-duration = 1.0
+duration = 0.5
 transition = 5
-ease = 1
+ease = 0
 
 [sub_resource type="Resource" id="Resource_vjtrj"]
 script = ExtResource("12_ct30d")
@@ -268,6 +268,35 @@ tween_parameters = SubResource("Resource_assks")
 tween_on_load = true
 inactive_update_mode = 0
 
+[node name="CameraCenterParent" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreatedLevelsListCamera" type="Node2D" parent="CameraCenterParent"]
+script = ExtResource("8_04kr6")
+priority_override = false
+priority = 0
+zoom = Vector2(2, 2)
+follow_mode = 0
+frame_preview = true
+pixel_perfect = false
+limit/draw_limits = true
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = false
+tween_parameters = SubResource("Resource_assks")
+tween_on_load = true
+inactive_update_mode = 0
+
 [node name="CreatedLevelsList" type="Control" parent="."]
 visible = false
 layout_mode = 1
@@ -302,35 +331,6 @@ icon = ExtResource("14_t3hvn")
 flat = true
 expand_icon = true
 script = ExtResource("5_wiac2")
-
-[node name="CameraCenterParent" type="Control" parent="CreatedLevelsList"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CreatedLevelsListCamera" type="Node2D" parent="CreatedLevelsList/CameraCenterParent"]
-script = ExtResource("8_04kr6")
-priority_override = false
-priority = 0
-zoom = Vector2(1, 1)
-follow_mode = 0
-frame_preview = true
-pixel_perfect = false
-limit/draw_limits = true
-limit/left = -10000000
-limit/top = -10000000
-limit/right = 10000000
-limit/bottom = 10000000
-limit/limit_node_target = NodePath("")
-limit/smoothed = false
-tween_parameters = SubResource("Resource_assks")
-tween_on_load = true
-inactive_update_mode = 0
 
 [node name="LevelSelector" type="Control" parent="."]
 visible = false
@@ -493,7 +493,7 @@ fade_screen_layer = NodePath("../FadeScreenLayer")
 created_levels_list = NodePath("../CreatedLevelsList")
 icon_garage = NodePath("../IconGarage")
 level_selector = NodePath("../LevelSelector")
-created_levels_list_camera = NodePath("../CreatedLevelsList/CameraCenterParent/CreatedLevelsListCamera")
+created_levels_list_camera = NodePath("../CameraCenterParent/CreatedLevelsListCamera")
 icon_garage_camera = NodePath("../IconGarage/CameraCenterParent/IconGarageCamera")
 quit_game_camera = NodePath("../TitleScreen/CameraCenterParent/QuitGameCamera")
 title_screen_camera = NodePath("../TitleScreen/CameraCenterParent/TitleScreenCamera")

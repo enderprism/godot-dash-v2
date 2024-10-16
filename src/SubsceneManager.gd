@@ -108,12 +108,15 @@ func _on_go_to_level_selector_pressed() -> void:
 	_toggle_background_sprites_autoscroll(false)
 
 func _on_go_to_created_levels_list_pressed() -> void:
-	level_selector.hide()
-	created_levels_list.show()
-	icon_garage.hide()
-	_current_subscene = SubScene.CREATED_LEVELS_LIST
-	history._change_phantomcamera(active_pcam, created_levels_list_camera)
-	_toggle_background_sprites_autoscroll(false)
+	var _fade_screen = fade_screen_layer.get_child(0)
+	if not _fade_screen.is_fading:
+		$"../MenuLoop".playing = false
+		SFXManager.play_sfx("res://assets/sounds/sfx/game_sfx/LevelPlay.ogg")
+		_fade_screen.fade_in(0.5, Tween.EASE_IN, Tween.TRANS_EXPO)
+		history._change_phantomcamera(active_pcam, created_levels_list_camera)
+		await _fade_screen.fade_finished
+		LevelManager.entering_editor = true
+		get_tree().change_scene_to_file("res://scenes/EditorScene.tscn")
 
 func _on_go_to_icon_garage_pressed() -> void:
 	level_selector.hide()

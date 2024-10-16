@@ -253,14 +253,6 @@ visible = false
 
 [node name="FadeScreenLayer" parent="." instance=ExtResource("6_7ju4w")]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_left = 12940.0
-offset_top = 200.0
-offset_right = 13978.0
-offset_bottom = 696.0
-color = Color(1, 0, 0, 1)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4phyr")
 camera_attributes = SubResource("CameraAttributesPractical_bwo2a")
