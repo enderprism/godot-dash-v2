@@ -3,16 +3,21 @@ extends Node2D
 var has_level_started: bool
 
 func _ready() -> void:
+	Engine.time_scale = 1
 	LevelManager.in_editor = get_parent() is EditorScene
 	LevelManager.background_sprites.clear()
 	LevelManager.background_sprites.append($BackgroundParallax/Background)
 	LevelManager.background_sprites.append($BackgroundParallax/Background2)
 	LevelManager.ground_sprites.clear()
+	LevelManager.level_playing = false
 	LevelManager.ground_sprites.append($GroundDownParallax/GroundDownOrigin)
 	LevelManager.ground_sprites.append($GroundUpParallax/GroundUpOrigin)
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), false)
 	if not get_parent() is EditorScene:
+		if LevelManager.is_first_attempt:
+			$FadeScreenLayer/FadeScreen.show()
+			$FadeScreenLayer/FadeScreen.modulate = Color("000000ff")
 		$EditorGridParallax/EditorGrid.hide()
 		var current_level = ResourceLoader.load(LevelManager.current_level, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE).instantiate()
 		LevelManager.platformer = current_level.platformer
@@ -22,16 +27,13 @@ func _ready() -> void:
 
 func _start_level() -> void:
 	if LevelManager.is_first_attempt:
-		$FadeScreenLayer/FadeScreen.fade_out(0.2, Tween.EASE_OUT, Tween.TRANS_SINE)
-		await $FadeScreenLayer/FadeScreen.fade_finished
 		await get_tree().create_timer(0.2).timeout
+		$FadeScreenLayer/FadeScreen.fade_out(0.5, Tween.EASE_OUT, Tween.TRANS_EXPO)
+		await $FadeScreenLayer/FadeScreen.fade_finished
 		$Level.get_child(0).start_level()
-		LevelManager.level_playing = true
 		LevelManager.is_first_attempt = false
 	else:
-		await get_tree().create_timer(get_physics_process_delta_time()).timeout
 		$Level.get_child(0).start_level()
-		LevelManager.level_playing = true
 
 func _process(_delta: float) -> void:
 	%LineUp.scale.x = 1/LevelManager.player_camera.zoom.x * 0.2

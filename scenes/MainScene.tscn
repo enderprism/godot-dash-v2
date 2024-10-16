@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cinyg32n0bonm"]
+[gd_scene load_steps=27 format=3 uid="uid://cinyg32n0bonm"]
 
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/FadeScreen.tscn" id="1_e44lk"]
 [ext_resource type="Texture2D" uid="uid://dewrklmfoeg7m" path="res://assets/textures/grounds/ground-1.png" id="2_5u8e8"]
@@ -26,11 +26,17 @@
 
 [sub_resource type="Resource" id="Resource_assks"]
 script = ExtResource("12_ct30d")
+duration = 1.0
+transition = 5
+ease = 1
+
+[sub_resource type="Resource" id="Resource_jse1c"]
+script = ExtResource("12_ct30d")
 duration = 0.5
 transition = 5
 ease = 0
 
-[sub_resource type="Resource" id="Resource_vjtrj"]
+[sub_resource type="Resource" id="Resource_m8p16"]
 script = ExtResource("12_ct30d")
 duration = 0.5
 transition = 5
@@ -200,7 +206,7 @@ limit/right = 10000000
 limit/bottom = 10000000
 limit/limit_node_target = NodePath("")
 limit/smoothed = false
-tween_parameters = SubResource("Resource_vjtrj")
+tween_parameters = SubResource("Resource_jse1c")
 tween_on_load = true
 inactive_update_mode = 0
 metadata/_edit_lock_ = true
@@ -293,7 +299,7 @@ limit/right = 10000000
 limit/bottom = 10000000
 limit/limit_node_target = NodePath("")
 limit/smoothed = false
-tween_parameters = SubResource("Resource_assks")
+tween_parameters = SubResource("Resource_m8p16")
 tween_on_load = true
 inactive_update_mode = 0
 

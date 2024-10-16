@@ -2,6 +2,8 @@ extends Node
 
 const CELL_SIZE: int = 128
 
+@onready var game_scene := preload("res://scenes/GameScene.tscn")
+
 var current_level: String
 var current_level_name: String
 var is_first_attempt: bool
