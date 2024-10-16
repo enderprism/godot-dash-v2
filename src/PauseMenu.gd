@@ -28,7 +28,11 @@ func _on_continue_pressed() -> void:
 		get_parent().show()
 	else:
 		unpaused.emit()
-		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+		if LevelManager.in_editor:
+			# Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 		get_parent().hide()
 
 func _on_restart_pressed() -> void:

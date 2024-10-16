@@ -30,3 +30,4 @@ func _button_unheld() -> void:
 		scale_tween.set_ease(Tween.EASE_OUT)
 		scale_tween.set_trans(Tween.TRANS_BOUNCE)
 		scale_tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.2)
+		release_focus()

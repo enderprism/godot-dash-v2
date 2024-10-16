@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://calhypvupvj4m"]
+[gd_scene load_steps=4 format=3 uid="uid://calhypvupvj4m"]
 
 [ext_resource type="Texture2D" uid="uid://djlnfy6mugjwc" path="res://assets/textures/hazards/RegularSpikeNormal.svg" id="1_yfgdv"]
+[ext_resource type="PackedScene" uid="uid://cnru264bpjwxo" path="res://scenes/components/level_components/EditorSelectionCollider.tscn" id="2_l6f50"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hu62t"]
 size = Vector2(20, 31)
@@ -15,3 +16,6 @@ texture = ExtResource("1_yfgdv")
 position = Vector2(0, 27.5)
 shape = SubResource("RectangleShape2D_hu62t")
 debug_color = Color(0.960784, 0, 0, 0)
+
+[node name="EditorSelectionCollider" parent="." instance=ExtResource("2_l6f50")]
+type = 1

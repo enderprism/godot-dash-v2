@@ -26,6 +26,9 @@ signal zoom_changed
 ## If [code]true[/code], the map can be dragged while holding the left mouse button.
 @export var drag := true
 
+## If [code]true[/code], the mouse will warp to the opposite edge when going close to an edge, like in the Godot editor.
+@export var enable_wrap := true
+
 var _tween_offset
 var _tween_zoom
 var _pan_direction: set = _set_pan_direction
@@ -45,7 +48,7 @@ func _process(delta):
 func _physics_process(delta):
 	clamp_offset(_pan_direction * pan_speed * delta / zoom)
 
-func _unhandled_input(event):
+func _input(event):
 	if event is InputEventMagnifyGesture:
 		_change_zoom(1 + ((zoom_factor if zoom_factor > 1 else 1 / zoom_factor) - 1) * (event.factor - 1) * 2.5)
 	elif event is InputEventPanGesture:
@@ -73,6 +76,9 @@ func _unhandled_input(event):
 		if _dragging:
 			if _tween_offset != null:
 				_tween_offset.kill()
+
+			if enable_wrap:
+				_wrap(event.relative)
 			
 			clamp_offset(-event.relative / zoom)
 		elif pan_margin > 0:
@@ -109,12 +115,6 @@ func _unhandled_input(event):
 					_pan_direction -= Vector2(0, 1 if event.pressed else -1)
 				KEY_DOWN:
 					_pan_direction += Vector2(0, 1 if event.pressed else -1)
-				KEY_SPACE: # delete to disable keyboard centering
-					if event.pressed:
-						if _tween_offset != null:
-							_tween_offset.kill()
-						
-						offset = Vector2.ZERO
 
 func _set_pan_direction(value):
 	_pan_direction = value
@@ -128,6 +128,16 @@ func _set_pan_direction(value):
 		
 		if _tween_offset != null:
 			_tween_offset.kill()
+
+func _wrap(relative: Vector2, margins: float = 1) -> void:
+	var screen_size := get_viewport_rect().size
+	var mouse_position := get_viewport().get_mouse_position() + relative
+	var new_position := mouse_position
+	new_position.x = wrapf(mouse_position.x, margins, screen_size.x - margins)
+	new_position.y = wrapf(mouse_position.y, margins, screen_size.y - margins)
+	if (mouse_position.x - new_position.x > screen_size.x/2) or (mouse_position.y - new_position.y > screen_size.y/2) \
+			or (mouse_position.x - new_position.x < 0) or (mouse_position.y - new_position.y < 0):
+		get_viewport().warp_mouse(new_position)
 
 ## After changing the node's global position, set [code]offset = offset[/code] then call this to stay within limits.
 func clamp_offset(relative := Vector2()):
@@ -147,7 +157,7 @@ func clamp_offset(relative := Vector2()):
 	
 	if camera_rect.position.y < limit_top:
 		relative.y += limit_top - camera_rect.position.y
-	
+
 	if relative != Vector2.ZERO:
 		offset += relative
 

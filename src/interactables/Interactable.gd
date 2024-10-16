@@ -6,6 +6,7 @@ class_name Interactable
 var components: Array[Node]
 
 func _ready() -> void:
+	add_child(preload("res://scenes/components/level_components/EditorSelectionCollider.tscn").instantiate())
 	if has_node("Hitbox"):
 		$Hitbox.debug_color = Color("00ff0033")
 
