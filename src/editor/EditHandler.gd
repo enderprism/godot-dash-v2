@@ -14,8 +14,6 @@ func _physics_process(delta: float) -> void:
 	if editor_mode.get_current_tab_control().name == "Edit":
 		_update_selection()
 	if not selection.is_empty():
-		if Input.is_action_pressed(&"editor_add"):
-			selection.map(_add_selection_highlight)
 		if Input.is_action_just_pressed(&"editor_deselect"):
 			selection.map(func(object): object.get_node("SelectionHighlight").queue_free())
 			selection.clear()
@@ -36,11 +34,11 @@ func _physics_process(delta: float) -> void:
 	if not Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down"):
 		object_move_cooldown = 0.0
 	if Input.is_action_just_released(&"editor_add"):
+		selection.map(_add_selection_highlight)
 		_reset_selection_zone()
 
 
 func _update_selection() -> void:
-	var selection_buffer := Array($SelectionZone.get_overlapping_areas().map(_get_object_parent), TYPE_OBJECT, "Node2D", null)
 	if Input.is_action_just_pressed(&"editor_add"):
 		if not Input.is_action_just_pressed(&"editor_add_swipe") and not Input.is_action_just_pressed(&"editor_selection_remove"):
 			selection.map(func(object): object.get_node("SelectionHighlight").queue_free())
@@ -48,20 +46,14 @@ func _update_selection() -> void:
 		_reset_selection_zone(false)
 		if placed_objects_collider.has_overlapping_areas() and not (Input.is_action_just_pressed(&"editor_add_swipe") or Input.is_action_just_pressed(&"editor_selection_remove")):
 			selection = [placed_objects_collider.get_overlapping_areas()[-1].get_parent()]
-	if Input.is_action_pressed(&"editor_selection_remove"):
+	if Input.is_action_pressed(&"editor_selection_remove") or Input.is_action_pressed(&"editor_add"):
 		_swipe_selection_zone()
+	var selection_buffer := Array($SelectionZone.get_overlapping_areas().map(_get_object_parent), TYPE_OBJECT, "Node2D", null)
+	if Input.is_action_just_released(&"editor_selection_remove"):
 		ArrayUtils.intersect(selection, selection_buffer, TYPE_OBJECT, "Node2D").map(func(object): object.get_node("SelectionHighlight").queue_free())
 		selection = ArrayUtils.difference(selection, selection_buffer, TYPE_OBJECT, "Node2D")
-	elif Input.is_action_pressed(&"editor_add"):
-		_swipe_selection_zone()
-		print_debug(len(selection_buffer), ">= ? to ", len(selection))
-		if len(selection_buffer) >= len(selection):
-			selection = ArrayUtils.union(selection, selection_buffer, TYPE_OBJECT, "Node2D")
-		elif len(selection_buffer) >= 1:
-			var deselected_objects := ArrayUtils.difference(selection, selection_buffer, TYPE_OBJECT, "Node2D")
-			if not deselected_objects.is_empty():
-				deselected_objects.map(func(object): object.get_node("SelectionHighlight").queue_free())
-			selection = ArrayUtils.intersect(selection, selection_buffer, TYPE_OBJECT, "Node2D")
+	elif Input.is_action_just_released(&"editor_add"):
+		selection = ArrayUtils.union(selection, selection_buffer, TYPE_OBJECT, "Node2D")
 
 
 func _get_object_parent(object: Node) -> Node2D:
