@@ -31,7 +31,15 @@ func _physics_process(delta: float) -> void:
 			move_vector.y = Input.get_axis(&"ui_up", &"ui_down")
 			selection.map(func(object): object.global_position += move_vector * LevelManager.CELL_SIZE)
 			object_move_cooldown = 0.2
-	if not Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down"):
+		if Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45") and object_move_cooldown <= 0:
+			_rotate_selection(Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45") * 45.0)
+			object_move_cooldown = 0.2
+		if Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90") and object_move_cooldown <= 0:
+			_rotate_selection(Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90") * 90.0)
+			object_move_cooldown = 0.2
+	if not (Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down")
+			or Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45")
+			or Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90")):
 		object_move_cooldown = 0.0
 	if Input.is_action_just_released(&"editor_add"):
 		selection.map(_add_selection_highlight)
@@ -111,3 +119,21 @@ func _duplicate_selection() -> void:
 	selection = Array(selection.map(_clone), TYPE_OBJECT, "Node2D", null)
 	selection.map(_add_selection_highlight)
 	selection.map(func(object): object.get_node("SelectionHighlight")._set_duplicate())
+
+func _rotate_selection(angle: float) -> void:
+	var rotation_center_position: Vector2
+	var group_parents := selection.filter(func(object): object.has_meta("group_parent"))
+	var object_parents := selection.map(func(object): return object.get_parent())
+	if not group_parents.is_empty():
+		rotation_center_position = group_parents[0].global_position
+	else:
+		# Take the median of the position of all objects
+		var object_positions := selection.duplicate().map(func(object): return object.global_position)
+		rotation_center_position = ArrayUtils.transform(object_positions, ArrayUtils.Transformation.MEAN)
+	var rotation_center = Node2D.new()
+	get_parent().add_child(rotation_center)
+	rotation_center.global_position = rotation_center_position
+	selection.map(func(object): object.reparent(rotation_center))
+	rotation_center.rotation_degrees += angle
+	for i in len(selection):
+		selection[i].reparent(object_parents[i])

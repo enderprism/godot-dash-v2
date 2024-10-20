@@ -11,7 +11,8 @@ func _ready() -> void:
 	parent.modulate = Color.GREEN if not is_duplicate else Color.CYAN
 
 func _exit_tree() -> void:
-	parent.modulate = original_modulate
+	if is_queued_for_deletion():
+		parent.modulate = original_modulate
 
 func _enter_tree() -> void:
 	name = "SelectionHighlight"
