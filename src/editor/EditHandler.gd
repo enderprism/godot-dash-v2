@@ -79,14 +79,14 @@ func _swipe_selection_zone() -> void:
 	
 	hitbox.shape.size = abs(mouse_position - $SelectionZone.position)
 	# Right Down
-	if mouse_position.x > $SelectionZone.position.x and mouse_position.y > $SelectionZone.position.y:
+	if mouse_position.x >= $SelectionZone.position.x and mouse_position.y >= $SelectionZone.position.y:
 		hitbox.position = hitbox.shape.size * 0.5
 	# Right Up
-	elif mouse_position.x > $SelectionZone.position.x and mouse_position.y < $SelectionZone.position.y:
+	elif mouse_position.x >= $SelectionZone.position.x and mouse_position.y < $SelectionZone.position.y:
 		hitbox.position.x = hitbox.shape.size.x * 0.5
 		hitbox.position.y = -hitbox.shape.size.y * 0.5
 	# Left Down
-	elif mouse_position.x < $SelectionZone.position.x and mouse_position.y > $SelectionZone.position.y:
+	elif mouse_position.x < $SelectionZone.position.x and mouse_position.y >= $SelectionZone.position.y:
 		hitbox.position.x = -hitbox.shape.size.x * 0.5
 		hitbox.position.y = hitbox.shape.size.y * 0.5
 	# Left Up
