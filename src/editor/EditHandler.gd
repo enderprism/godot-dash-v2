@@ -24,6 +24,9 @@ func _physics_process(delta: float) -> void:
 			selection.map(func(object): object.queue_free())
 			selection.clear()
 			_reset_selection_zone()
+		if Input.is_action_just_pressed(&"editor_duplicate"):
+			_duplicate_selection()
+			object_move_cooldown = 5
 		if Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down") and object_move_cooldown <= 0:
 			var move_vector: Vector2
 			move_vector.x = Input.get_axis(&"ui_left", &"ui_right")
@@ -51,7 +54,14 @@ func _update_selection() -> void:
 		selection = ArrayUtils.difference(selection, selection_buffer, TYPE_OBJECT, "Node2D")
 	elif Input.is_action_pressed(&"editor_add"):
 		_swipe_selection_zone()
-		selection = ArrayUtils.union(selection, selection_buffer, TYPE_OBJECT, "Node2D")
+		print_debug(len(selection_buffer), ">= ? to ", len(selection))
+		if len(selection_buffer) >= len(selection):
+			selection = ArrayUtils.union(selection, selection_buffer, TYPE_OBJECT, "Node2D")
+		elif len(selection_buffer) >= 1:
+			var deselected_objects := ArrayUtils.difference(selection, selection_buffer, TYPE_OBJECT, "Node2D")
+			if not deselected_objects.is_empty():
+				deselected_objects.map(func(object): object.get_node("SelectionHighlight").queue_free())
+			selection = ArrayUtils.intersect(selection, selection_buffer, TYPE_OBJECT, "Node2D")
 
 
 func _get_object_parent(object: Node) -> Node2D:
@@ -63,7 +73,8 @@ func _get_object_parent(object: Node) -> Node2D:
 
 func _add_selection_highlight(object: Node2D) -> void:
 	if not object.has_node("SelectionHighlight"):
-		object.add_child(SelectionHighlight.new())
+		var selection_highlight = SelectionHighlight.new()
+		object.add_child(selection_highlight)
 
 
 func _reset_selection_zone(unreachable: bool = true) -> void:
@@ -94,3 +105,17 @@ func _swipe_selection_zone() -> void:
 		hitbox.position = -hitbox.shape.size * 0.5
 	
 	selection_zone_changed.emit(Rect2($SelectionZone/Hitbox.position - $SelectionZone/Hitbox.shape.size * 0.5, $SelectionZone/Hitbox.shape.size))
+
+func _clone(object: Node) -> Node:
+	var packer := PackedScene.new()
+	packer.pack(object)
+	var clone := packer.instantiate()
+	object.get_parent().add_child(clone)
+	return clone
+
+func _duplicate_selection() -> void:
+	selection.map(func(object): object.modulate = object.get_node("SelectionHighlight").original_modulate)
+	selection.map(func(object): object.get_node("SelectionHighlight").queue_free())
+	selection = Array(selection.map(_clone), TYPE_OBJECT, "Node2D", null)
+	selection.map(_add_selection_highlight)
+	selection.map(func(object): object.get_node("SelectionHighlight")._set_duplicate())
