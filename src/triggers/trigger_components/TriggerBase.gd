@@ -64,6 +64,7 @@ func _ready() -> void:
 	collision_layer = 16
 	collision_mask = 1
 	_hitbox = get_node_or_null("Hitbox") as CollisionShape2D
+	_hitbox.debug_color = Color("fff5006b")
 	if _hitbox == null:
 		_hitbox = CollisionShape2D.new()
 		_hitbox.name = "Hitbox"
@@ -79,18 +80,8 @@ func _ready() -> void:
 		sprite.set_owner(self)
 		sprite.scale = Vector2.ONE * 0.2
 	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
-	_single_usage_component = get_node_or_null("SingleUsageComponent") as SingleUsageComponent
-	if _single_usage_component == null:
-		_single_usage_component = SingleUsageComponent.new()
-		_single_usage_component.name = "SingleUsageComponent"
-		add_child(_single_usage_component)
-		_single_usage_component.set_owner(self)
-	_hitbox_display = get_node_or_null("TriggerHitboxDisplay") as TriggerHitboxDisplay
-	if _hitbox_display == null:
-		_hitbox_display = TriggerHitboxDisplay.new()
-		_hitbox_display.name = "SingleUsageComponent"
-		add_child(_hitbox_display)
-		_hitbox_display.set_owner(self)
+	_single_usage_component = TriggerSetup.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"))
+	_single_usage_component = TriggerSetup.get_node_or_add(self, "TriggerHitboxDisplay", load("res://src/triggers/trigger_components/TriggerHitboxDisplay.gd"))
 	if LevelManager.in_editor:
 		var editor_selection_collider := LevelManager.editor_selection_collider.instantiate()
 		add_child(editor_selection_collider)
