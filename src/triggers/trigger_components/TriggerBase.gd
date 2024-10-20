@@ -4,6 +4,7 @@ extends Area2D
 ## The base class for Godot Dash triggers.
 
 signal target_changed
+signal hitbox_shape_changed(hitbox_shape: TriggerHitboxShape, hitbox_position: Vector2, hitbox_height: float)
 
 const DEFAULT_TRIGGER_TEXTURE: Texture2D = preload("res://assets/textures/Circle.svg")
 
@@ -46,30 +47,15 @@ var _hitbox: CollisionShape2D
 var _single_usage_component: SingleUsageComponent
 var _hitbox_display: TriggerHitboxDisplay
 
-func _set_hitbox_shape() -> void:
-	if _hitbox != null:
-		match _hitbox_shape:
-			TriggerHitboxShape.LINE:
-				_hitbox.shape = SegmentShape2D.new()
-				_hitbox.shape.a = Vector2(0, -hitbox_height * LevelManager.CELL_SIZE)
-				_hitbox.shape.b = Vector2(0,  hitbox_height * LevelManager.CELL_SIZE)
-			TriggerHitboxShape.SQUARE:
-				_hitbox.shape = RectangleShape2D.new()
-				_hitbox.shape.size = Vector2.ONE * LevelManager.CELL_SIZE
-			TriggerHitboxShape.DISABLED:
-				_hitbox.shape = RectangleShape2D.new()
-				_hitbox.shape.size = Vector2.ZERO
-
 func _ready() -> void:
 	collision_layer = 16
 	collision_mask = 1
+	_hitbox_display = TriggerSetup.get_node_or_add(self, "TriggerHitboxDisplay", load("res://src/triggers/trigger_components/TriggerHitboxDisplay.gd"))
 	_hitbox = get_node_or_null("Hitbox") as CollisionShape2D
-	_hitbox.debug_color = Color("fff5006b")
 	if _hitbox == null:
 		_hitbox = CollisionShape2D.new()
 		_hitbox.name = "Hitbox"
 		_hitbox.debug_color = Color("fff5006b")
-		_set_hitbox_shape()
 		add_child(_hitbox)
 		_hitbox.set_owner(self)
 	sprite = get_node_or_null("Sprite") as Sprite2D
@@ -81,10 +67,11 @@ func _ready() -> void:
 		sprite.scale = Vector2.ONE * 0.2
 	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
 	_single_usage_component = TriggerSetup.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"))
-	_single_usage_component = TriggerSetup.get_node_or_add(self, "TriggerHitboxDisplay", load("res://src/triggers/trigger_components/TriggerHitboxDisplay.gd"))
+	TriggerSetup.connect_new(hitbox_shape_changed, _hitbox_display.update_shape)
 	if LevelManager.in_editor:
 		var editor_selection_collider := LevelManager.editor_selection_collider.instantiate()
 		add_child(editor_selection_collider)
+	_set_hitbox_shape()
 
 func _physics_process(_delta: float) -> void:
 	sprite.visible = sprite_visible()
@@ -93,4 +80,19 @@ func _physics_process(_delta: float) -> void:
 	sprite.global_scale = Vector2.ONE * 0.2
 
 func sprite_visible() -> bool:
-	return Engine.is_editor_hint() or (not Engine.is_editor_hint() and get_tree().is_debugging_collisions_hint())
+	return Engine.is_editor_hint() or (not Engine.is_editor_hint() and get_tree().is_debugging_collisions_hint()) or LevelManager.in_editor
+
+func _set_hitbox_shape() -> void:
+	if _hitbox != null:
+		hitbox_shape_changed.emit(_hitbox_shape, _hitbox.position, hitbox_height)
+		match _hitbox_shape:
+			TriggerHitboxShape.LINE:
+				_hitbox.shape = SegmentShape2D.new()
+				_hitbox.shape.a = Vector2(0, -hitbox_height * LevelManager.CELL_SIZE)
+				_hitbox.shape.b = Vector2(0,  hitbox_height * LevelManager.CELL_SIZE)
+			TriggerHitboxShape.SQUARE:
+				_hitbox.shape = RectangleShape2D.new()
+				_hitbox.shape.size = Vector2.ONE * LevelManager.CELL_SIZE
+			TriggerHitboxShape.DISABLED:
+				_hitbox.shape = RectangleShape2D.new()
+				_hitbox.shape.size = Vector2.ZERO

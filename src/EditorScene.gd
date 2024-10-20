@@ -14,7 +14,6 @@ enum EditorAction {
 @onready var block_palette_button_group := %RegularBlock01.button_group as ButtonGroup
 
 var editor_actions: int
-var object_move_cooldown: float
 
 func _ready() -> void:
 	if LevelManager.entering_editor:
@@ -42,10 +41,12 @@ func _ready() -> void:
 	set_process_input(false)
 	set_process_unhandled_input(true)
 
-func _physics_process(delta: float) -> void:
-	placed_objects_collider.global_position = get_local_mouse_position()
-	object_move_cooldown -= delta
+	$EditHandler.placed_objects_collider = placed_objects_collider
+	$EditHandler.editor_mode = %EditorModes
 
+
+func _physics_process(_delta: float) -> void:
+	placed_objects_collider.global_position = get_local_mouse_position()
 	if Input.is_action_just_pressed(&"editor_place_mode"):
 		%EditorModes.current_tab = 0
 	elif Input.is_action_just_pressed(&"editor_edit_mode"):
@@ -53,26 +54,11 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_pressed(&"editor_selection_filters_mode"):
 		%EditorModes.current_tab = 2
 
-	if Input.is_action_just_pressed(&"editor_add") or Input.is_action_just_pressed(&"editor_remove") \
-			or Input.is_action_pressed(&"editor_add_swipe") or Input.is_action_pressed(&"editor_remove_swipe") \
-			or (editor_actions & EditorAction.SWIPE and (Input.is_action_pressed(&"editor_add") or Input.is_action_pressed(&"editor_remove"))):
-		match %EditorModes.get_current_tab_control().name:
-			"Place":
-				$PlaceHandler.handle_place(block_palette_button_group, placed_objects_collider, level)
-			"Edit":
-				$EditHandler.handle_edit(placed_objects_collider)
-	if not $EditHandler.selection.is_empty():
-		if Input.is_action_just_pressed(&"editor_delete"):
-			$EditHandler.selection.map(func(object): object.queue_free())
-			$EditHandler.selection.clear()
-		if Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down") and object_move_cooldown <= 0:
-			var move_vector: Vector2
-			move_vector.x = Input.get_axis(&"ui_left", &"ui_right")
-			move_vector.y = Input.get_axis(&"ui_up", &"ui_down")
-			$EditHandler.selection.map(func(object): object.position += Vector2(move_vector.x * LevelManager.CELL_SIZE, move_vector.y * LevelManager.CELL_SIZE))
-			object_move_cooldown = 0.2
-		elif not Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down"):
-			object_move_cooldown = 0.0
+	if %EditorModes.get_current_tab_control().name == "Place" \
+			and (Input.is_action_just_pressed(&"editor_add") or Input.is_action_just_pressed(&"editor_remove") \
+			or Input.is_action_pressed(&"editor_add_swipe") or Input.is_action_pressed(&"editor_remove_swipe")):
+		$PlaceHandler.handle_place(block_palette_button_group, placed_objects_collider, level)
+
 
 func texture_variation_overlapping(type: EditorSelectionCollider.Type, id: int) -> bool:
 	if not placed_objects_collider.has_overlapping_areas():

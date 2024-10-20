@@ -36,7 +36,6 @@ static func set_child_owner(caller: Node, child: Node) -> void:
 	child.set_owner(_owner)
 
 static func get_node_or_add(caller: Node, path: NodePath, script: Script) -> Node:
-	print_debug(path)
 	var node := caller.get_node_or_null(path)
 	if node == null:
 		node = script.new()
