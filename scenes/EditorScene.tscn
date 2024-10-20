@@ -489,6 +489,7 @@ debug_color = Color(0.284375, 0, 0.7, 0.42)
 z_index = 100
 script = ExtResource("35_xjepn")
 
+[connection signal="tab_selected" from="EditorUI/EditorModes" to="." method="_on_editor_modes_tab_selected"]
 [connection signal="ready" from="EditorUI/EditorModes/Place" to="EditorUI/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
 [connection signal="pressed" from="EditorUI/Button" to="." method="_on_button_pressed"]
 [connection signal="selection_zone_changed" from="EditHandler" to="EditHandler/SelectionZone/SelectionZoneDisplay" method="_on_edit_handler_selection_zone_changed"]
