@@ -28,7 +28,6 @@ func _physics_process(delta: float) -> void:
 			var move_vector: Vector2
 			move_vector.x = Input.get_axis(&"ui_left", &"ui_right")
 			move_vector.y = Input.get_axis(&"ui_up", &"ui_down")
-			print_debug(move_vector)
 			selection.map(func(object): object.global_position += move_vector * LevelManager.CELL_SIZE)
 			object_move_cooldown = 0.2
 	if not Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down"):
@@ -38,6 +37,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _update_selection() -> void:
+	var selection_buffer := Array($SelectionZone.get_overlapping_areas().map(_get_object_parent), TYPE_OBJECT, "Node2D", null)
 	if Input.is_action_just_pressed(&"editor_add"):
 		if not Input.is_action_just_pressed(&"editor_add_swipe") and not Input.is_action_just_pressed(&"editor_selection_remove"):
 			selection.map(func(object): object.get_node("SelectionHighlight").queue_free())
@@ -47,11 +47,11 @@ func _update_selection() -> void:
 			selection = [placed_objects_collider.get_overlapping_areas()[-1].get_parent()]
 	if Input.is_action_pressed(&"editor_selection_remove"):
 		_swipe_selection_zone()
-		var selection_buffer := Array($SelectionZone.get_overlapping_areas().map(_get_object_parent), TYPE_OBJECT, "Node2D", null)
-		selection.filter(func(object): return object not in selection_buffer)
+		ArrayUtils.intersect(selection, selection_buffer, TYPE_OBJECT, "Node2D").map(func(object): object.get_node("SelectionHighlight").queue_free())
+		selection = ArrayUtils.difference(selection, selection_buffer, TYPE_OBJECT, "Node2D")
 	elif Input.is_action_pressed(&"editor_add"):
 		_swipe_selection_zone()
-		selection.append_array(Array($SelectionZone.get_overlapping_areas().map(_get_object_parent), TYPE_OBJECT, "Node2D", null))
+		selection = ArrayUtils.union(selection, selection_buffer, TYPE_OBJECT, "Node2D")
 
 
 func _get_object_parent(object: Node) -> Node2D:
