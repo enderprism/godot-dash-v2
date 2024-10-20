@@ -75,3 +75,6 @@ func _on_button_pressed() -> void:
 	$GameScene._start_level()
 	$EditorCamera.enabled = not $EditorCamera.enabled
 	$GameScene/PlayerCamera.enabled = not $GameScene/PlayerCamera.enabled
+
+func _on_editor_modes_tab_selected(_tab: int) -> void:
+	%EditorModes.release_focus()
