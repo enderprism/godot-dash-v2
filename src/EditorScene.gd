@@ -66,7 +66,9 @@ func _physics_process(delta: float) -> void:
 			$EditHandler.selection.map(func(object): object.queue_free())
 			$EditHandler.selection.clear()
 		if Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down") and object_move_cooldown <= 0:
-			var move_vector := Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down")
+			var move_vector: Vector2
+			move_vector.x = Input.get_axis(&"ui_left", &"ui_right")
+			move_vector.y = Input.get_axis(&"ui_up", &"ui_down")
 			$EditHandler.selection.map(func(object): object.position += Vector2(move_vector.x * LevelManager.CELL_SIZE, move_vector.y * LevelManager.CELL_SIZE))
 			object_move_cooldown = 0.2
 		elif not Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down"):
