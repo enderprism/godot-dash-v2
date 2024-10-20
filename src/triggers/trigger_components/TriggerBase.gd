@@ -44,6 +44,7 @@ var sprite: Sprite2D
 ## The trigger's collision shape.
 var _hitbox: CollisionShape2D
 var _single_usage_component: SingleUsageComponent
+var _hitbox_display: TriggerHitboxDisplay
 
 func _set_hitbox_shape() -> void:
 	if _hitbox != null:
@@ -77,13 +78,19 @@ func _ready() -> void:
 		add_child(sprite)
 		sprite.set_owner(self)
 		sprite.scale = Vector2.ONE * 0.2
+	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
 	_single_usage_component = get_node_or_null("SingleUsageComponent") as SingleUsageComponent
-	if sprite == null:
+	if _single_usage_component == null:
 		_single_usage_component = SingleUsageComponent.new()
 		_single_usage_component.name = "SingleUsageComponent"
 		add_child(_single_usage_component)
 		_single_usage_component.set_owner(self)
-	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
+	_hitbox_display = get_node_or_null("TriggerHitboxDisplay") as TriggerHitboxDisplay
+	if _hitbox_display == null:
+		_hitbox_display = TriggerHitboxDisplay.new()
+		_hitbox_display.name = "SingleUsageComponent"
+		add_child(_hitbox_display)
+		_hitbox_display.set_owner(self)
 	if LevelManager.in_editor:
 		var editor_selection_collider := LevelManager.editor_selection_collider.instantiate()
 		add_child(editor_selection_collider)

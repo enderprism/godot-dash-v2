@@ -10,29 +10,14 @@ static func setup(caller: Node, add_target_link: bool, add_easing: bool = true):
 	#region Avoid re-instancing TriggerBase, TriggerEasing and TargetLink if they already exist
 	#region Init TargetLink (some triggers may not need it, if their target is outside the level scene)
 	if add_target_link:
-		if not caller.has_node("TargetLink"):
-			caller.target_link = load("res://scenes/components/game_components/TargetLink.tscn").instantiate()
-			caller.add_child(caller.target_link)
-		else:
-			caller.target_link = caller.get_node("TargetLink")
+		caller.target_link = get_node_or_add(caller, "TargetLink", load("res://src/TargetLink.gd"))
 	#endregion
 	#region Init TriggerBase
-	if not caller.has_node("TriggerBase"):
-		caller.base = TriggerBase.new()
-		caller.base.name = "TriggerBase"
-		caller.add_child(caller.base)
-	else:
-		caller.base = caller.get_node("TriggerBase")
+	caller.base = get_node_or_add(caller, "TriggerBase", load("res://src/triggers/trigger_components/TriggerBase.gd"))
 	#endregion
 	#region Init TriggerEasing (a few triggers that are always instant might not need one, e.g. ToggleTrigger and SongTrigger)
 	if add_easing:
-		if not caller.has_node("TriggerEasing"):
-			caller.easing = TriggerEasing.new()
-			caller.easing.name = "TriggerEasing"
-			caller.add_child(caller.easing)
-		else:
-			caller.easing = caller.get_node("TriggerEasing")
-	#endregion
+		caller.easing = get_node_or_add(caller, "TriggerEasing", load("res://src/triggers/trigger_components/TriggerEasing.gd"))
 	#endregion
 	#region Set children owner to make them show in the scene tree
 	set_child_owner(caller, caller.base)
@@ -40,20 +25,26 @@ static func setup(caller: Node, add_target_link: bool, add_easing: bool = true):
 	if add_target_link: set_child_owner(caller, caller.target_link)
 	#endregion
 	#region Signal connections
-	
-	if not caller.base.is_connected("body_entered", caller.start):
-		caller.base.body_entered.connect(caller.start)
-	if not caller.base.is_connected("body_entered", caller.easing.start):
-		caller.base.body_entered.connect(caller.easing.start)
-	if add_target_link and not caller.base.is_connected("target_changed", caller.update_target_link):
-		caller.base.target_changed.connect(caller.update_target_link)
-	#endregion
-	#region ITC Groups
-	if caller.base.target_group != null and not Engine.is_editor_hint() or LevelManager.in_editor:
-		var _triggers_on_parent_target_group: String = caller.base.target_group + "-triggers"
-		caller.add_to_group(_triggers_on_parent_target_group)
+	connect_new(caller.base.body_entered, caller.start)
+	connect_new(caller.base.body_entered, caller.easing.start)
+	if add_target_link:
+		connect_new(caller.base.target_changed, caller.update_target_link)
 	#endregion
 
-static func set_child_owner(caller: Node, _child: Node) -> void:
+static func set_child_owner(caller: Node, child: Node) -> void:
 	var _owner: Node = caller.get_parent() if caller.get_parent().get_owner() == null else caller.get_parent().get_owner()
-	_child.set_owner(_owner)
+	child.set_owner(_owner)
+
+static func get_node_or_add(caller: Node, path: NodePath, script: Script) -> Node:
+	print_debug(path)
+	var node := caller.get_node_or_null(path)
+	if node == null:
+		node = script.new()
+		node.name = str(path)
+		caller.add_child(node)
+		set_child_owner(caller, node)
+	return node
+
+static func connect_new(_signal: Signal, callable: Callable) -> void:
+	if not _signal.is_connected(callable):
+		_signal.connect(callable)
