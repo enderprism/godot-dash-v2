@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=37 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -33,9 +33,13 @@
 [ext_resource type="Texture2D" uid="uid://cnonwwvnfl3ca" path="res://assets/textures/triggers/CameraRotate.svg" id="24_ji6ug"]
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/FadeScreen.tscn" id="26_j5fve"]
 [ext_resource type="Script" path="res://src/editor/PlaceHandler.gd" id="33_uwrsc"]
+[ext_resource type="Script" path="res://src/editor/EditHandler.gd" id="34_7dx3o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac3bt"]
 radius = 2.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aju4o"]
+size = Vector2(2, 2)
 
 [node name="LevelEditor" type="Control"]
 layout_mode = 3
@@ -468,6 +472,19 @@ debug_color = Color(0.678125, 0.7, 0, 0.42)
 
 [node name="PlaceHandler" type="Node" parent="."]
 script = ExtResource("33_uwrsc")
+
+[node name="EditHandler" type="Node" parent="."]
+script = ExtResource("34_7dx3o")
+
+[node name="SelectionZone" type="Area2D" parent="EditHandler"]
+collision_layer = 128
+collision_mask = 256
+
+[node name="Hitbox" type="CollisionShape2D" parent="EditHandler/SelectionZone"]
+shape = SubResource("RectangleShape2D_aju4o")
+debug_color = Color(0.284375, 0, 0.7, 0.42)
+
+[node name="Node2D" type="Node2D" parent="EditHandler/SelectionZone"]
 
 [connection signal="ready" from="EditorUI/EditorModes/Place" to="EditorUI/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
 [connection signal="pressed" from="EditorUI/Button" to="." method="_on_button_pressed"]
