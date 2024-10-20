@@ -76,7 +76,7 @@ func _ready() -> void:
 		sprite.name = "Sprite"
 		add_child(sprite)
 		sprite.set_owner(self)
-		sprite.scale = Vector2.ONE/4
+		sprite.scale = Vector2.ONE * 0.2
 	_single_usage_component = get_node_or_null("SingleUsageComponent") as SingleUsageComponent
 	if sprite == null:
 		_single_usage_component = SingleUsageComponent.new()
@@ -84,12 +84,15 @@ func _ready() -> void:
 		add_child(_single_usage_component)
 		_single_usage_component.set_owner(self)
 	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
+	if LevelManager.in_editor:
+		var editor_selection_collider := LevelManager.editor_selection_collider.instantiate()
+		add_child(editor_selection_collider)
 
 func _physics_process(_delta: float) -> void:
 	sprite.visible = sprite_visible()
 	if not get_parent() is GameplayRotateTrigger:
 		sprite.global_rotation = 0.0
-	sprite.global_scale = Vector2.ONE/4
+	sprite.global_scale = Vector2.ONE * 0.2
 
 func sprite_visible() -> bool:
 	return Engine.is_editor_hint() or (not Engine.is_editor_hint() and get_tree().is_debugging_collisions_hint())

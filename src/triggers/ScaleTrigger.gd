@@ -74,7 +74,7 @@ func _physics_process(_delta: float) -> void:
 					Mode.COPY:
 						if _copy_target != null:
 							_target.global_scale = lerp(_initial_global_scale, _copy_target.global_scale * _copy_multiplier, easing._weight)
-						else:
+						elif LevelManager.in_editor and LevelManager.level_playing:
 							printerr("In ", name, ": copy_target is unset!")
 						# Escape the current loop iteration to avoid adding the rotation delta, even if it's null.
 						continue
@@ -89,7 +89,7 @@ func _physics_process(_delta: float) -> void:
 					_pivot.global_scale = _pivot_scale
 					if _change_position_only:
 						_target.global_scale = _initial_global_scale
-		else:
+		elif LevelManager.in_editor and LevelManager.level_playing:
 			printerr("In ", name, "_process: _target is unset")
 	elif Engine.is_editor_hint() or LevelManager.in_editor:
 		target_link.position = Vector2.ZERO
@@ -103,12 +103,12 @@ func start(_body: Node2D) -> void:
 		if not _targets.is_empty():
 			for _target: Node2D in _targets:
 				_initial_scales[_target] = _target.global_scale
-		else:
+		elif LevelManager.in_editor and LevelManager.level_playing:
 			printerr("In ", name, ", start: _target is unset")
 
 func reset() -> void:
 	if not _targets.is_empty():
 		for _target in _targets:
 			_target.global_scale = _initial_scales[_target]
-	else:
+	elif LevelManager.in_editor and LevelManager.level_playing:
 		printerr("In ", name, ", reset: _target is unset")

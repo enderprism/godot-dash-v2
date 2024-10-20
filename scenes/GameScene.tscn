@@ -106,7 +106,7 @@ position = Vector2(64, 924)
 script = ExtResource("5_7ssrb")
 primary_line_every = Vector2i(1, 1)
 cell_size = Vector2(128, 128)
-symmetrize = 1
+symmetrize = 3
 primary_line_thickness = 3.0
 
 [node name="GroundDownParallax" type="Parallax2D" parent="."]

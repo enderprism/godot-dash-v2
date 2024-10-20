@@ -46,7 +46,7 @@ func _physics_process(_delta: float) -> void:
 				if easing._weight >= _group.time and _group.used_in_loop != _current_loop:
 					if get_node(_group.path).has_node("TriggerBase"): get_node(_group.path).base.emit_signal("body_entered", _player)
 					_group.used_in_loop = _current_loop
-		else:
+		elif LevelManager.in_editor and LevelManager.level_playing:
 			printerr("In ", name, ": _target is unset")
 	elif Engine.is_editor_hint() or LevelManager.in_editor:
 		target_link.position = Vector2.ZERO

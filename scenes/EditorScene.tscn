@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=35 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -25,7 +25,14 @@
 [ext_resource type="PackedScene" uid="uid://bncq73polqc8u" path="res://scenes/components/level_components/orbs/YellowOrb.tscn" id="16_nywui"]
 [ext_resource type="Texture2D" uid="uid://cgq0oyg02x4d2" path="res://assets/textures/orbs/RedOrb.svg" id="17_a7wr4"]
 [ext_resource type="PackedScene" uid="uid://cglxf6jw4fmi" path="res://scenes/components/level_components/orbs/RedOrb.tscn" id="18_1ww1r"]
+[ext_resource type="Texture2D" uid="uid://cihka00vqqj3m" path="res://assets/textures/triggers/Alpha.svg" id="19_lbtum"]
+[ext_resource type="Script" path="res://src/triggers/AlphaTrigger.gd" id="20_bqqbv"]
+[ext_resource type="Script" path="res://src/triggers/CameraOffsetTrigger.gd" id="21_o7rvp"]
+[ext_resource type="Texture2D" uid="uid://6tc6g218qrva" path="res://assets/textures/triggers/CameraOffset.svg" id="22_2am2m"]
+[ext_resource type="Script" path="res://src/triggers/CameraRotateTrigger.gd" id="23_6k40u"]
+[ext_resource type="Texture2D" uid="uid://cnonwwvnfl3ca" path="res://assets/textures/triggers/CameraRotate.svg" id="24_ji6ug"]
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/FadeScreen.tscn" id="26_j5fve"]
+[ext_resource type="Script" path="res://src/editor/PlaceHandler.gd" id="33_uwrsc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac3bt"]
 radius = 2.0
@@ -41,16 +48,18 @@ metadata/_edit_lock_ = true
 [node name="EditorUI" type="CanvasLayer" parent="."]
 layer = 100
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EditorUI"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="MenuBar" type="MenuBar" parent="EditorUI/HBoxContainer"]
+[node name="MenuBar" type="MenuBar" parent="EditorUI"]
 unique_name_in_owner = true
-layout_mode = 2
-flat = true
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
 
-[node name="File" type="PopupMenu" parent="EditorUI/HBoxContainer/MenuBar"]
+[node name="File" type="PopupMenu" parent="EditorUI/MenuBar"]
+position = Vector2i(0, 32)
+size = Vector2i(126, 93)
+system_menu_id = 3
+prefer_native_menu = true
 item_count = 4
 item_0/text = "Save"
 item_1/text = "Save As"
@@ -60,28 +69,39 @@ item_2/separator = true
 item_3/text = "Level Options"
 item_3/id = 3
 
-[node name="Edit" type="PopupMenu" parent="EditorUI/HBoxContainer/MenuBar"]
+[node name="Edit" type="PopupMenu" parent="EditorUI/MenuBar"]
 item_count = 1
 item_0/text = "Preferences"
 
-[node name="View" type="PopupMenu" parent="EditorUI/HBoxContainer/MenuBar"]
+[node name="View" type="PopupMenu" parent="EditorUI/MenuBar"]
 hide_on_checkable_item_selection = false
 item_count = 1
 item_0/text = "Panel Visibility"
 
-[node name="PanelVisibility" type="PopupMenu" parent="EditorUI/HBoxContainer/MenuBar/View"]
+[node name="PanelVisibility" type="PopupMenu" parent="EditorUI/MenuBar/View"]
 hide_on_checkable_item_selection = false
 item_count = 1
 item_0/text = "Block Palette"
 item_0/checkable = 1
 item_0/checked = true
 
-[node name="Help" type="PopupMenu" parent="EditorUI/HBoxContainer/MenuBar"]
+[node name="Help" type="PopupMenu" parent="EditorUI/MenuBar"]
 item_count = 1
 item_0/text = "Manual"
 
+[node name="ColorRect" type="ColorRect" parent="EditorUI"]
+visible = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+color = Color(0.15625, 0.15625, 0.15625, 1)
+
 [node name="EditorModes" type="TabContainer" parent="EditorUI"]
 unique_name_in_owner = true
+texture_filter = 4
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -97,7 +117,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
 theme = ExtResource("3_k1q1p")
-current_tab = 2
+current_tab = 3
 metadata/_tab_index = 0
 
 [node name="Solids" type="Control" parent="EditorUI/EditorModes/Place"]
@@ -155,8 +175,8 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Solids/MarginContainer/ButtonContainer/OutlineBlock01"]
 script = ExtResource("7_f0stj")
-object = ExtResource("7_ii36d")
 id = 1
+object = ExtResource("7_ii36d")
 
 [node name="BlockPaletteTextureSwap" type="Node" parent="EditorUI/EditorModes/Place/Solids/MarginContainer/ButtonContainer/OutlineBlock01"]
 script = ExtResource("10_ledqp")
@@ -200,8 +220,8 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Hazards/MarginContainer/ButtonContainer/RegularSpikeNormal"]
 script = ExtResource("7_f0stj")
-object = ExtResource("12_18txt")
 type = 1
+object = ExtResource("12_18txt")
 
 [node name="OutlineBlock01" type="Button" parent="EditorUI/EditorModes/Place/Hazards/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -217,10 +237,11 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Hazards/MarginContainer/ButtonContainer/OutlineBlock01"]
 script = ExtResource("7_f0stj")
-object = ExtResource("14_wyjb2")
 type = 2
+object = ExtResource("14_wyjb2")
 
 [node name="Interactables" type="Control" parent="EditorUI/EditorModes/Place"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 metadata/_tab_name = ""
@@ -277,7 +298,6 @@ script = ExtResource("7_f0stj")
 object = ExtResource("18_1ww1r")
 
 [node name="Triggers" type="Control" parent="EditorUI/EditorModes/Place"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 metadata/_tab_name = ""
@@ -299,42 +319,101 @@ layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 
-[node name="RegularBlock01" type="Button" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+[node name="PaletteButton" type="Button" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
-icon = ExtResource("4_u8igg")
 flat = true
+icon_alignment = 1
 expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/RegularBlock01"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton"]
 script = ExtResource("7_f0stj")
+type = 8
 object = ExtResource("7_ii36d")
+trigger_script = ExtResource("20_bqqbv")
 
-[node name="OutlineBlock01" type="Button" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton/CenterAnchor"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("19_lbtum")
+
+[node name="PaletteButton2" type="Button" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
-icon = ExtResource("6_2nlu4")
 flat = true
+icon_alignment = 1
 expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/OutlineBlock01"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton2"]
 script = ExtResource("7_f0stj")
+type = 8
 object = ExtResource("7_ii36d")
+trigger_script = ExtResource("21_o7rvp")
 
-[node name="BlockPaletteTextureSwap" type="Node" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/OutlineBlock01"]
-script = ExtResource("10_ledqp")
-texture_override = ExtResource("6_2nlu4")
-texture_owner = NodePath("Sprite")
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton2/CenterAnchor"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("22_2am2m")
+
+[node name="PaletteButton3" type="Button" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton3"]
+script = ExtResource("7_f0stj")
+type = 8
+object = ExtResource("7_ii36d")
+trigger_script = ExtResource("23_6k40u")
+
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton3/CenterAnchor"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("24_ji6ug")
 
 [node name="BlockPaletteIcons" type="Node" parent="EditorUI/EditorModes/Place"]
 script = ExtResource("3_d5qub")
@@ -386,6 +465,9 @@ shape = SubResource("CircleShape2D_ac3bt")
 debug_color = Color(0.678125, 0.7, 0, 0.42)
 
 [node name="FadeScreenLayer" parent="." instance=ExtResource("26_j5fve")]
+
+[node name="PlaceHandler" type="Node" parent="."]
+script = ExtResource("33_uwrsc")
 
 [connection signal="ready" from="EditorUI/EditorModes/Place" to="EditorUI/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
 [connection signal="pressed" from="EditorUI/Button" to="." method="_on_button_pressed"]

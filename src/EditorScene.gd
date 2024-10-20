@@ -55,32 +55,15 @@ func _physics_process(_delta: float) -> void:
 		if Input.is_action_just_pressed(&"editor_add") or Input.is_action_just_pressed(&"editor_remove") \
 				or Input.is_action_pressed(&"editor_add_swipe") or Input.is_action_pressed(&"editor_remove_swipe") \
 				or (editor_actions & EditorAction.SWIPE and (Input.is_action_pressed(&"editor_add") or Input.is_action_pressed(&"editor_remove"))):
-			# Handle object placement
-			var pressed_button := block_palette_button_group.get_pressed_button()
-			var block_palette_ref: BlockPaletteRef
-			if pressed_button != null:
-				block_palette_ref = pressed_button.get_node_or_null("BlockPaletteRef") as BlockPaletteRef
-			if block_palette_ref != null and not _is_object_of_id_overlapping(block_palette_ref.type, block_palette_ref.id) \
-					and Input.is_action_pressed(&"editor_add"):
-				if pressed_button != null:
-					var object: Node2D = pressed_button.get_node_or_null("BlockPaletteRef").object.instantiate()
-					if pressed_button.has_node("BlockPaletteTextureSwap"):
-						var block_palette_texture_swap := pressed_button.get_node("BlockPaletteTextureSwap") as BlockPaletteTextureSwap
-						var texture_owner: NodePath = block_palette_texture_swap.texture_owner
-						var texture_override: Texture = block_palette_texture_swap.texture_override
-						object.get_node(block_palette_texture_swap.texture_owner).texture = texture_override
-						object.get_node("EditorSelectionCollider").id = block_palette_ref.id
-					object.position = (level.get_local_mouse_position() + Vector2(0, 64)).snapped(Vector2.ONE*128) - Vector2(0, 64)
-					level.add_child(object)
-			# Handle object deletion
-			elif Input.is_action_pressed(&"editor_remove") and placed_objects_collider.has_overlapping_areas():
-				if len(placed_objects_collider.get_overlapping_areas()) > 0:
-					placed_objects_collider.get_overlapping_areas()[-1].get_parent().queue_free()
+			match %EditorModes.get_current_tab_control().name:
+				"Place":
+					$PlaceHandler.handle_place(block_palette_button_group, placed_objects_collider, level)
 
-func _is_object_of_id_overlapping(type: EditorSelectionCollider.Type, id: int) -> bool:
+func texture_variation_overlapping(type: EditorSelectionCollider.Type, id: int) -> bool:
 	if not placed_objects_collider.has_overlapping_areas():
 		return false
-	if placed_objects_collider.get_overlapping_areas()[-1].get_parent() is Interactable:
+	if placed_objects_collider.get_overlapping_areas()[-1].get_parent() is Interactable \
+			or placed_objects_collider.get_overlapping_areas()[-1].get_parent() is TriggerBase:
 		return true
 	if placed_objects_collider.get_overlapping_areas()[-1].type == type:
 		return placed_objects_collider.get_overlapping_areas()[-1].id == id
@@ -91,3 +74,5 @@ func _on_button_pressed() -> void:
 	$GameScene._start_level()
 	$EditorCamera.enabled = not $EditorCamera.enabled
 	$GameScene/PlayerCamera.enabled = not $GameScene/PlayerCamera.enabled
+
+# func _handle_edit() -> void:

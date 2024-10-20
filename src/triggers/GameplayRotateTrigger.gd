@@ -51,7 +51,7 @@ func start(_body: Node2D) -> void:
 func reset() -> void:
 	if _player != null:
 		_player.gameplay_rotation_degrees = _initial_global_rotation_degrees
-	else:
+	elif LevelManager.in_editor and LevelManager.level_playing:
 		printerr("In ", name, ": _target is unset")
 
 func _physics_process(_delta: float) -> void:

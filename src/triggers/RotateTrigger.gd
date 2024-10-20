@@ -65,7 +65,7 @@ func _physics_process(_delta: float) -> void:
 								_initial_global_rotation_degrees,
 								_copy_target.global_rotation_degrees + _copy_offset,
 								easing._weight)
-						else:
+						elif LevelManager.in_editor and LevelManager.level_playing:
 							printerr("In ", name, ": copy_target is unset!")
 						# Escape the current loop iteration to avoid adding the rotation delta, even if it's null.
 						continue
@@ -78,7 +78,7 @@ func _physics_process(_delta: float) -> void:
 					_pivot.global_rotation_degrees += _rotation_delta
 					_target.reparent(_target_parent)
 					_pivot.global_rotation_degrees -= _rotation_delta
-		else:
+		elif LevelManager.in_editor and LevelManager.level_playing:
 			printerr("In ", name, ": _target is unset")
 	elif Engine.is_editor_hint() or LevelManager.in_editor:
 		target_link.position = Vector2.ZERO
@@ -92,12 +92,12 @@ func start(_body: Node2D) -> void:
 		if not _targets.is_empty():
 			for _target in _targets:
 				_initial_rotations[_target] = _target.global_rotation_degrees
-		else:
+		elif LevelManager.in_editor and LevelManager.level_playing:
 			printerr("In ", name, ": _target is unset")
 
 func reset() -> void:
 	if not _targets.is_empty():
 		for _target in _targets:
 			_target.global_rotation_degrees = _initial_rotations[_target]
-	else:
+	elif LevelManager.in_editor and LevelManager.level_playing:
 		printerr("In ", name, ": _target is unset")

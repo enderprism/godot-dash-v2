@@ -17,3 +17,4 @@ var background_sprites: Array[Sprite2D]
 var ground_sprites: Array[GroundObject]
 var level_song_player: AudioStreamPlayer
 var platformer := false
+var editor_selection_collider := preload("res://scenes/components/level_components/EditorSelectionCollider.tscn")

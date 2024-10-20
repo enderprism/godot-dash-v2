@@ -51,10 +51,10 @@ func _process(_delta: float) -> void:
 					Mode.COPY:
 						if copy_target != null:
 							_target.modulate.a = lerp(_initial_alpha, copy_target.modulate.a * copy_multiplier, easing._weight)
-						else:
+						elif LevelManager.in_editor and LevelManager.level_playing:
 							printerr("In ", name, ": copy_target is unset!")
-		else:
-			printerr("In ", name, ": _target is unset")
+		elif LevelManager.in_editor and LevelManager.level_playing:
+			printerr("In ", name, ": _target is unset! ")
 	elif Engine.is_editor_hint() or LevelManager.in_editor:
 		target_link.position = Vector2.ZERO
 		if Engine.is_editor_hint(): base.position = Vector2.ZERO
@@ -68,12 +68,12 @@ func start(_body: Node2D) -> void:
 		if not _targets.is_empty():
 			for _target: Node2D in _targets:
 				_initial_alphas[_target] = _target.modulate.a
-		else:
+		elif LevelManager.in_editor and LevelManager.level_playing:
 			printerr("In ", name, ": _target is unset")
 
 func reset() -> void:
 	if not _targets.is_empty():
 		for _target: Node2D in _targets:
 			_target.modulate.a = _initial_alphas[_target]
-	else:
+	elif LevelManager.in_editor and LevelManager.level_playing:
 		printerr("In ", name, ": _target is unset")

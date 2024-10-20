@@ -32,7 +32,7 @@ enum SubScene {
 @export var level_selector_page_container: Control
 
 @onready var _base_background_color: Color = title_screen_background.get_node("Background").modulate
-@onready var level_editor := preload("res://scenes/EditorScene.tscn")
+@onready var level_editor := ResourceLoader.load("res://scenes/EditorScene.tscn", "PackedScene", ResourceLoader.CACHE_MODE_IGNORE_DEEP)
 
 var _current_subscene: SubScene = SubScene.TITLE_SCREEN
 var _level_selector_tab_idx: int
@@ -117,7 +117,8 @@ func _on_go_to_created_levels_list_pressed() -> void:
 		history._change_phantomcamera(active_pcam, created_levels_list_camera)
 		await _fade_screen.fade_finished
 		LevelManager.entering_editor = true
-		get_tree().change_scene_to_packed(level_editor)
+		# get_tree().change_scene_to_packed(level_editor)
+		get_tree().change_scene_to_file("res://scenes/EditorScene.tscn")
 
 func _on_go_to_icon_garage_pressed() -> void:
 	level_selector.hide()
