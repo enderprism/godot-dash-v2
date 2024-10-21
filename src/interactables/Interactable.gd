@@ -6,7 +6,11 @@ class_name Interactable
 var components: Array[Node]
 
 func _ready() -> void:
-	add_child(preload("res://scenes/components/level_components/EditorSelectionCollider.tscn").instantiate())
+	if LevelManager.in_editor:
+		var editor_selection_collider := preload("res://scenes/components/level_components/EditorSelectionCollider.tscn").instantiate() as EditorSelectionCollider
+		editor_selection_collider.type = EditorSelectionCollider.Type.INTERACTABLE
+		add_child(editor_selection_collider)
+		editor_selection_collider.set_owner(self)
 	if has_node("Hitbox"):
 		$Hitbox.debug_color = Color("00ff0033")
 

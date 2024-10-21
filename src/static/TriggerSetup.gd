@@ -31,7 +31,9 @@ static func setup(caller: Node, add_target_link: bool, add_easing: bool = true):
 		connect_new(caller.base.target_changed, caller.update_target_link)
 	#endregion
 	if LevelManager.in_editor:
-		var editor_selection_collider := LevelManager.editor_selection_collider.instantiate()
+		var editor_selection_collider := preload("res://scenes/components/level_components/EditorSelectionCollider.tscn").instantiate() as EditorSelectionCollider
+		editor_selection_collider.type = EditorSelectionCollider.Type.TRIGGER
+		editor_selection_collider.id = hash(caller.get_script())
 		caller.add_child(editor_selection_collider)
 		set_child_owner(caller, editor_selection_collider)
 

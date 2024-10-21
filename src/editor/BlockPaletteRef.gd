@@ -14,3 +14,7 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name == "trigger_script" and type != EditorSelectionCollider.Type.TRIGGER:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
+
+func _ready() -> void:
+	if type == EditorSelectionCollider.Type.TRIGGER:
+		id = hash(trigger_script)
