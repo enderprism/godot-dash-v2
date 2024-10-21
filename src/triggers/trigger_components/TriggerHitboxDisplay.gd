@@ -21,8 +21,8 @@ func update_shape(hitbox_shape: TriggerBase.TriggerHitboxShape, hitbox_position:
 
 
 func _draw() -> void:
-	var hitbox_color: Color = Config.editor_config.get_value("colors", "triggers", Color.CYAN)
+	var hitbox_color: Color = Config.editor.get_value("colors", "triggers", Color.CYAN)
 	var hitbox_fill = hitbox_color
-	hitbox_fill.a = Config.editor_config.get_value("colors", "hitbox_fill_alpha", 0.2)
+	hitbox_fill.a = Config.editor.get_value("colors", "hitbox_fill_alpha", 0.2)
 	draw_rect(shape, hitbox_fill, true, -1.0)
 	draw_rect(shape, hitbox_color, false, 2)
