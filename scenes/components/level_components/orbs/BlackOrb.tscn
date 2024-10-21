@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmb3bpsvcre7y"]
+[gd_scene load_steps=13 format=3 uid="uid://dmb3bpsvcre7y"]
 
 [ext_resource type="Script" path="res://src/interactables/OrbInteractable.gd" id="1_0mkth"]
 [ext_resource type="Script" path="res://src/SingleUsage.gd" id="2_d4873"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://fw4dir7i5dm1" path="res://assets/textures/orbs/BlackOrb.svg" id="3_eu14b"]
 [ext_resource type="Script" path="res://src/interactables/private_components/MusicScale.gd" id="4_vuepe"]
 [ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="5_7wk6a"]
+[ext_resource type="Script" path="res://src/interactables/private_components/RemoveMaterial.gd" id="5_r8bs4"]
 [ext_resource type="Script" path="res://src/interactables/private_components/PulseRing.gd" id="6_5y7xc"]
 [ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="8_0hmq7"]
 [ext_resource type="Script" path="res://src/interactables/private_components/TextureRotate.gd" id="8_pj4c0"]
@@ -28,6 +29,9 @@ material = null
 
 [node name="MusicScale" type="Node" parent="ParticleEmitter"]
 script = ExtResource("4_vuepe")
+
+[node name="RemoveMaterial" type="Node" parent="ParticleEmitter"]
+script = ExtResource("5_r8bs4")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
