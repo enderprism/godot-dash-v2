@@ -20,7 +20,6 @@ func _physics_process(delta: float) -> void:
 			selection.clear()
 			_reset_selection_zone()
 		if Input.is_action_just_pressed(&"editor_delete"):
-			selection.map(func(object): print_debug(object))
 			selection.map(func(object): object.queue_free())
 			selection.clear()
 			_reset_selection_zone()
