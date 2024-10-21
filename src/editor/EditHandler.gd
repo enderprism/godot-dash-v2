@@ -13,6 +13,7 @@ func _physics_process(delta: float) -> void:
 		object_move_cooldown -= delta
 	if editor_mode.get_current_tab_control().name == "Edit":
 		_update_selection()
+		get_viewport().gui_release_focus()
 	if not selection.is_empty():
 		if Input.is_action_just_pressed(&"editor_deselect"):
 			selection.map(func(object): object.get_node("SelectionHighlight").queue_free())

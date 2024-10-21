@@ -104,7 +104,7 @@ size_flags_horizontal = 6
 size_flags_vertical = 3
 color = Color(0.15625, 0.15625, 0.15625, 1)
 
-[node name="EditorModes" type="TabContainer" parent="EditorUI"]
+[node name="EditorModes" type="TabContainer" parent="EditorUI" node_paths=PackedStringArray("shortcut_context")]
 unique_name_in_owner = true
 texture_filter = 4
 anchors_preset = 12
@@ -114,6 +114,7 @@ anchor_bottom = 1.0
 offset_top = -312.0
 grow_horizontal = 2
 grow_vertical = 0
+shortcut_context = NodePath("../../FocusGrabber")
 theme = ExtResource("3_k1q1p")
 current_tab = 0
 
@@ -489,7 +490,10 @@ debug_color = Color(0.284375, 0, 0.7, 0.42)
 z_index = 100
 script = ExtResource("35_xjepn")
 
-[connection signal="tab_selected" from="EditorUI/EditorModes" to="." method="_on_editor_modes_tab_selected"]
+[node name="FocusGrabber" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+
 [connection signal="ready" from="EditorUI/EditorModes/Place" to="EditorUI/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
 [connection signal="pressed" from="EditorUI/Button" to="." method="_on_button_pressed"]
 [connection signal="selection_zone_changed" from="EditHandler" to="EditHandler/SelectionZone/SelectionZoneDisplay" method="_on_edit_handler_selection_zone_changed"]
