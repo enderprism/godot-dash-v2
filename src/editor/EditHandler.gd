@@ -6,7 +6,7 @@ var selection: Array[Node2D]
 var object_move_cooldown: float
 var placed_objects_collider: Area2D
 var editor_mode: TabContainer
-
+var rotation_lock := false ## Lock variable to ensure 2 rotations aren't happening at the same time.
 
 func _physics_process(delta: float) -> void:
 	if object_move_cooldown > 0:
@@ -19,6 +19,7 @@ func _physics_process(delta: float) -> void:
 			selection.clear()
 			_reset_selection_zone()
 		if Input.is_action_just_pressed(&"editor_delete"):
+			selection.map(func(object): print_debug(object))
 			selection.map(func(object): object.queue_free())
 			selection.clear()
 			_reset_selection_zone()
@@ -31,12 +32,13 @@ func _physics_process(delta: float) -> void:
 			move_vector.y = Input.get_axis(&"ui_up", &"ui_down")
 			selection.map(func(object): object.global_position += move_vector * LevelManager.CELL_SIZE)
 			object_move_cooldown = 0.2
-		if Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45") and object_move_cooldown <= 0:
-			_rotate_selection(Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45") * 45.0)
-			object_move_cooldown = 0.2
-		if Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90") and object_move_cooldown <= 0:
-			_rotate_selection(Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90") * 90.0)
-			object_move_cooldown = 0.2
+		if not rotation_lock:
+			if Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45") and object_move_cooldown <= 0:
+				_rotate_selection(Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45") * 45.0)
+				object_move_cooldown = 0.2
+			if Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90") and object_move_cooldown <= 0:
+				_rotate_selection(Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90") * 90.0)
+				object_move_cooldown = 0.2
 	if not (Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down")
 			or Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45")
 			or Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90")):
@@ -107,11 +109,19 @@ func _swipe_selection_zone() -> void:
 	selection_zone_changed.emit(Rect2($SelectionZone/Hitbox.position - $SelectionZone/Hitbox.shape.size * 0.5, $SelectionZone/Hitbox.shape.size))
 
 func _clone(object: Node) -> Node:
-	var packer := PackedScene.new()
-	packer.pack(object)
-	var clone := packer.instantiate()
-	object.get_parent().add_child(clone)
-	return clone
+	if object.has_node("TriggerBase"):
+		var clone = object.get_script().new()
+		object.get_parent().add_child(clone)
+		clone.global_transform = object.global_transform
+		clone.owner = object.owner
+		return clone
+	else:
+		var packer := PackedScene.new()
+		packer.pack(object)
+		var clone := packer.instantiate()
+		object.get_parent().add_child(clone)
+		clone.owner = object.owner
+		return clone
 
 func _duplicate_selection() -> void:
 	selection.map(func(object): object.modulate = object.get_node("SelectionHighlight").original_modulate)
@@ -121,6 +131,7 @@ func _duplicate_selection() -> void:
 	selection.map(func(object): object.get_node("SelectionHighlight")._set_duplicate())
 
 func _rotate_selection(angle: float) -> void:
+	rotation_lock = true
 	var rotation_center_position: Vector2
 	var group_parents := selection.filter(func(object): object.has_meta("group_parent"))
 	var object_parents := selection.map(func(object): return object.get_parent())
@@ -137,3 +148,4 @@ func _rotate_selection(angle: float) -> void:
 	rotation_center.rotation_degrees += angle
 	for i in len(selection):
 		selection[i].reparent(object_parents[i])
+	rotation_lock = false

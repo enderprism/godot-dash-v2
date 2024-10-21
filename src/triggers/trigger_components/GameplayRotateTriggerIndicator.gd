@@ -1,6 +1,6 @@
 @tool
 extends Node2D
-class_name tGameplayRotateIndicator
+class_name GameplayRotateTriggerIndicator
 
 const THICKNESS: float = 8.0
 const POINT_COUNT: int = 50

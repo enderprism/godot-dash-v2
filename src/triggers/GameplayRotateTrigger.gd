@@ -26,16 +26,11 @@ var easing: TriggerEasing
 var _player: Player:
 	get(): return LevelManager.player if not Engine.is_editor_hint() else null
 var _initial_global_rotation_degrees: float
-var _indicator: tGameplayRotateIndicator
+var _indicator: GameplayRotateTriggerIndicator
 
 func _ready() -> void:
 	TriggerSetup.setup(self, false)
-	_indicator = get_node_or_null("Indicator")
-	if _indicator == null:
-		_indicator = tGameplayRotateIndicator.new()
-		_indicator.name = "Indicator"
-		add_child(_indicator)
-		TriggerSetup.set_child_owner(self, _indicator)
+	_indicator = TriggerSetup.get_node_or_add(self, "Indicator", load("res://src/triggers/trigger_components/GameplayRotateTriggerIndicator.gd"))
 	base.sprite.set_texture(preload("res://assets/textures/triggers/GameplayRotate.svg"))
 	_indicator.visible = base.sprite.visible
 

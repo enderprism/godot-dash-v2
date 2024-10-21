@@ -9,7 +9,7 @@ func _ready() -> void:
 	$VBoxContainer/LevelName.text = LevelManager.current_level_name
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("restart_level"):
+	if LevelManager.level_playing and Input.is_action_just_pressed("restart_level"):
 		_on_restart_pressed()
 	if Input.is_action_just_pressed("pause_level"):
 		_on_continue_pressed()

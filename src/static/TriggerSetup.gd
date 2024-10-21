@@ -30,6 +30,10 @@ static func setup(caller: Node, add_target_link: bool, add_easing: bool = true):
 	if add_target_link:
 		connect_new(caller.base.target_changed, caller.update_target_link)
 	#endregion
+	if LevelManager.in_editor:
+		var editor_selection_collider := LevelManager.editor_selection_collider.instantiate()
+		caller.add_child(editor_selection_collider)
+		set_child_owner(caller, editor_selection_collider)
 
 static func set_child_owner(caller: Node, child: Node) -> void:
 	var _owner: Node = caller.get_parent() if caller.get_parent().get_owner() == null else caller.get_parent().get_owner()

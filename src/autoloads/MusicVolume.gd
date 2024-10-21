@@ -4,5 +4,5 @@ var _spectrum := AudioServer.get_bus_effect_instance(AudioServer.get_bus_index(&
 
 func get_volume() -> float:
 	if LevelManager.in_editor and not LevelManager.level_playing:
-		return 0
+		return 0.15
 	return clamp(_spectrum.get_magnitude_for_frequency_range(0, 10000).length() * 3, 0, 0.4)

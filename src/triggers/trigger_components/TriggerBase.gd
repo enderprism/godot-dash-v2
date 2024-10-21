@@ -68,9 +68,6 @@ func _ready() -> void:
 	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
 	_single_usage_component = TriggerSetup.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"))
 	TriggerSetup.connect_new(hitbox_shape_changed, _hitbox_display.update_shape)
-	if LevelManager.in_editor:
-		var editor_selection_collider := LevelManager.editor_selection_collider.instantiate()
-		add_child(editor_selection_collider)
 	_set_hitbox_shape()
 
 func _physics_process(_delta: float) -> void:
@@ -94,5 +91,4 @@ func _set_hitbox_shape() -> void:
 				_hitbox.shape = RectangleShape2D.new()
 				_hitbox.shape.size = Vector2.ONE * LevelManager.CELL_SIZE
 			TriggerHitboxShape.DISABLED:
-				_hitbox.shape = RectangleShape2D.new()
-				_hitbox.shape.size = Vector2.ZERO
+				_hitbox.shape = null
