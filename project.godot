@@ -66,6 +66,7 @@ LevelManager="*res://src/autoloads/LevelManager.gd"
 SFXManager="*res://src/autoloads/SFXManager.gd"
 GroundData="*res://src/autoloads/GroundData.gd"
 MusicVolume="*res://src/autoloads/MusicVolume.gd"
+Config="*res://src/autoloads/Config.gd"
 
 [display]
 

@@ -3,12 +3,8 @@ class_name TriggerHitboxDisplay
 
 @onready var parent := get_parent() as TriggerBase
 
-const EDITOR_CONFIG_PATH := "user://editor_config.ini"
-var editor_config := ConfigFile.new()
 var shape: Rect2
 
-func _ready() -> void:
-	editor_config.load(EDITOR_CONFIG_PATH)
 
 func update_shape(hitbox_shape: TriggerBase.TriggerHitboxShape, hitbox_position: Vector2, hitbox_height: float) -> void:
 	match hitbox_shape:
@@ -23,9 +19,10 @@ func update_shape(hitbox_shape: TriggerBase.TriggerHitboxShape, hitbox_position:
 	shape.position = hitbox_position - shape.size * 0.5
 	queue_redraw()
 
+
 func _draw() -> void:
-	var hitbox_color: Color = editor_config.get_value("colors", "triggers", Color.CYAN)
+	var hitbox_color: Color = Config.editor_config.get_value("colors", "triggers", Color.CYAN)
 	var hitbox_fill = hitbox_color
-	hitbox_fill.a = editor_config.get_value("colors", "hitbox_fill_alpha", 0.2)
+	hitbox_fill.a = Config.editor_config.get_value("colors", "hitbox_fill_alpha", 0.2)
 	draw_rect(shape, hitbox_fill, true, -1.0)
 	draw_rect(shape, hitbox_color, false, 2)
