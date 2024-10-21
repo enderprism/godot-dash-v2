@@ -572,4 +572,5 @@ anchors_preset = 0
 
 [connection signal="ready" from="EditorUI/EditorModes/Place" to="EditorUI/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
 [connection signal="pressed" from="EditorUI/Button" to="." method="_on_button_pressed"]
+[connection signal="object_deleted" from="PlaceHandler" to="EditHandler" method="_on_place_handler_object_deleted"]
 [connection signal="selection_zone_changed" from="EditHandler" to="EditHandler/SelectionZone/SelectionZoneDisplay" method="_on_edit_handler_selection_zone_changed"]

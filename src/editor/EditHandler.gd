@@ -7,6 +7,7 @@ var object_move_cooldown: float
 var placed_objects_collider: Area2D
 var editor_mode: TabContainer
 var rotation_lock := false ## Lock variable to ensure 2 rotations aren't happening at the same time.
+var selection_index := -1
 
 func _physics_process(delta: float) -> void:
 	if object_move_cooldown > 0:
@@ -15,6 +16,8 @@ func _physics_process(delta: float) -> void:
 		_update_selection()
 		get_viewport().gui_release_focus()
 	if not selection.is_empty():
+		if Input.is_action_just_pressed(&"editor_single_selection_cycle"):
+			selection_index -= 1
 		if Input.is_action_just_pressed(&"editor_deselect"):
 			selection.map(func(object): object.get_node("SelectionHighlight").queue_free())
 			selection.clear()
@@ -50,19 +53,21 @@ func _physics_process(delta: float) -> void:
 
 func _update_selection() -> void:
 	if Input.is_action_just_pressed(&"editor_add"):
-		if not Input.is_action_just_pressed(&"editor_add_swipe") and not Input.is_action_just_pressed(&"editor_selection_remove"):
+		if not Input.is_action_just_pressed(&"editor_add_swipe") and not Input.is_action_just_pressed(&"editor_selection_remove") \
+				and not Input.is_action_just_pressed(&"editor_single_selection_cycle"):
 			selection.map(func(object): object.get_node("SelectionHighlight").queue_free())
 			selection.clear()
+			selection_index = -1
 		_reset_selection_zone(false)
 		if placed_objects_collider.has_overlapping_areas() and not (Input.is_action_just_pressed(&"editor_add_swipe") or Input.is_action_just_pressed(&"editor_selection_remove")):
-			selection = [placed_objects_collider.get_overlapping_areas()[-1].get_parent()]
+			selection = [placed_objects_collider.get_overlapping_areas()[selection_index%len(placed_objects_collider.get_overlapping_areas())].get_parent()]
 	if Input.is_action_pressed(&"editor_selection_remove") or Input.is_action_pressed(&"editor_add"):
 		_swipe_selection_zone()
 	var selection_buffer := Array($SelectionZone.get_overlapping_areas().map(_get_object_parent), TYPE_OBJECT, "Node2D", null)
 	if Input.is_action_just_released(&"editor_selection_remove"):
 		ArrayUtils.intersect(selection, selection_buffer, TYPE_OBJECT, "Node2D").map(func(object): object.get_node("SelectionHighlight").queue_free())
 		selection = ArrayUtils.difference(selection, selection_buffer, TYPE_OBJECT, "Node2D")
-	elif Input.is_action_just_released(&"editor_add"):
+	elif Input.is_action_just_released(&"editor_add") and $SelectionZone/Hitbox.shape.size > Vector2.ONE * 2:
 		selection = ArrayUtils.union(selection, selection_buffer, TYPE_OBJECT, "Node2D")
 
 
@@ -108,6 +113,7 @@ func _swipe_selection_zone() -> void:
 	
 	selection_zone_changed.emit(Rect2($SelectionZone/Hitbox.position - $SelectionZone/Hitbox.shape.size * 0.5, $SelectionZone/Hitbox.shape.size))
 
+
 func _clone(object: Node) -> Node:
 	if object.has_node("TriggerBase"):
 		var clone = object.get_script().new()
@@ -123,12 +129,14 @@ func _clone(object: Node) -> Node:
 		clone.owner = object.owner
 		return clone
 
+
 func _duplicate_selection() -> void:
 	selection.map(func(object): object.modulate = object.get_node("SelectionHighlight").original_modulate)
 	selection.map(func(object): object.get_node("SelectionHighlight").queue_free())
 	selection = Array(selection.map(_clone), TYPE_OBJECT, "Node2D", null)
 	selection.map(_add_selection_highlight)
 	selection.map(func(object): object.get_node("SelectionHighlight")._set_duplicate())
+
 
 func _rotate_selection(angle: float) -> void:
 	rotation_lock = true
@@ -149,3 +157,7 @@ func _rotate_selection(angle: float) -> void:
 	for i in len(selection):
 		selection[i].reparent(object_parents[i])
 	rotation_lock = false
+
+
+func _on_place_handler_object_deleted(object:Node) -> void:
+	selection.erase(object)

@@ -1,5 +1,7 @@
 extends Node
 
+signal object_deleted(object: Node)
+
 func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collider: Area2D, level: LevelProps) -> void:
 	if get_viewport().gui_get_hovered_control() == null:
 		# Handle object placement
@@ -27,6 +29,7 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 		# Handle object deletion
 		elif Input.is_action_pressed(&"editor_remove") and placed_objects_collider.has_overlapping_areas():
 			if len(placed_objects_collider.get_overlapping_areas()) > 0:
+				object_deleted.emit(placed_objects_collider.get_overlapping_areas()[-1])
 				placed_objects_collider.get_overlapping_areas()[-1].get_parent().queue_free()
 
 func texture_variation_overlapping(placed_objects_collider: Area2D, type: EditorSelectionCollider.Type, id: int) -> bool:
