@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=44 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -25,10 +25,16 @@
 [ext_resource type="PackedScene" uid="uid://bncq73polqc8u" path="res://scenes/components/level_components/orbs/YellowOrb.tscn" id="16_nywui"]
 [ext_resource type="Texture2D" uid="uid://cgq0oyg02x4d2" path="res://assets/textures/orbs/RedOrb.svg" id="17_a7wr4"]
 [ext_resource type="PackedScene" uid="uid://cglxf6jw4fmi" path="res://scenes/components/level_components/orbs/RedOrb.tscn" id="18_1ww1r"]
+[ext_resource type="PackedScene" uid="uid://c7u5r5wqi845u" path="res://scenes/components/level_components/orbs/PinkOrb.tscn" id="19_jb5ft"]
+[ext_resource type="Texture2D" uid="uid://cnuxa4cqkiika" path="res://assets/textures/orbs/PinkOrb.svg" id="19_kancb"]
 [ext_resource type="Texture2D" uid="uid://cihka00vqqj3m" path="res://assets/textures/triggers/Alpha.svg" id="19_lbtum"]
 [ext_resource type="Script" path="res://src/triggers/AlphaTrigger.gd" id="20_bqqbv"]
+[ext_resource type="Texture2D" uid="uid://fw4dir7i5dm1" path="res://assets/textures/orbs/BlackOrb.svg" id="21_hu5g3"]
 [ext_resource type="Script" path="res://src/triggers/CameraOffsetTrigger.gd" id="21_o7rvp"]
 [ext_resource type="Texture2D" uid="uid://6tc6g218qrva" path="res://assets/textures/triggers/CameraOffset.svg" id="22_2am2m"]
+[ext_resource type="PackedScene" uid="uid://dmb3bpsvcre7y" path="res://scenes/components/level_components/orbs/BlackOrb.tscn" id="22_62rc5"]
+[ext_resource type="PackedScene" uid="uid://ckkbbbslsv0pg" path="res://scenes/components/level_components/orbs/ReboundOrb.tscn" id="22_cb37e"]
+[ext_resource type="Script" path="res://src/interactables/private_components/ReboundOrbSprite.gd" id="22_him86"]
 [ext_resource type="Script" path="res://src/triggers/CameraRotateTrigger.gd" id="23_6k40u"]
 [ext_resource type="Texture2D" uid="uid://cnonwwvnfl3ca" path="res://assets/textures/triggers/CameraRotate.svg" id="24_ji6ug"]
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/FadeScreen.tscn" id="26_j5fve"]
@@ -123,7 +129,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
 theme = ExtResource("3_k1q1p")
-current_tab = 3
+current_tab = 2
 metadata/_tab_index = 0
 
 [node name="Solids" type="Control" parent="EditorUI/EditorModes/Place"]
@@ -247,7 +253,6 @@ type = 2
 object = ExtResource("14_wyjb2")
 
 [node name="Interactables" type="Control" parent="EditorUI/EditorModes/Place"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 metadata/_tab_name = ""
@@ -284,6 +289,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Interactable"]
 script = ExtResource("7_f0stj")
+type = 7
 object = ExtResource("16_nywui")
 
 [node name="Interactable2" type="Button" parent="EditorUI/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
@@ -301,9 +307,78 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Interactable2"]
 script = ExtResource("7_f0stj")
+type = 7
 object = ExtResource("18_1ww1r")
 
+[node name="Interactable3" type="Button" parent="EditorUI/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("19_kancb")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Interactable3"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("19_jb5ft")
+
+[node name="Interactable4" type="Button" parent="EditorUI/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Interactable4"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("22_cb37e")
+
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Interactable4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ReboundOrbSprite" type="Node2D" parent="EditorUI/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Interactable4/CenterAnchor"]
+scale = Vector2(0.4, 0.4)
+script = ExtResource("22_him86")
+
+[node name="Interactable5" type="Button" parent="EditorUI/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("21_hu5g3")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Interactable5"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("22_62rc5")
+
 [node name="Triggers" type="Control" parent="EditorUI/EditorModes/Place"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 metadata/_tab_name = ""
@@ -481,6 +556,7 @@ script = ExtResource("34_7dx3o")
 [node name="SelectionZone" type="Area2D" parent="EditHandler"]
 collision_layer = 128
 collision_mask = 256
+metadata/_edit_group_ = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="EditHandler/SelectionZone"]
 shape = SubResource("RectangleShape2D_aju4o")

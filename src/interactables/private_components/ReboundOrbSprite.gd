@@ -12,7 +12,8 @@ var factor: float:
 var _factor_smoothed: float
 
 func _ready() -> void:
-	$"../ReboundComponent".sprite = self
+	if has_node("../ReboundComponent"):
+		$"../ReboundComponent".sprite = self
 
 func _draw() -> void:
 	_factor_smoothed = lerpf(_factor_smoothed, factor, 1-exp(-get_physics_process_delta_time() * 20))
@@ -25,4 +26,5 @@ func _draw() -> void:
 	# Interior circle
 	draw_circle(Vector2.ZERO, inner_radius-3-3, color, true, -1, true)
 	# Set particle emitter color
-	$"../ParticleEmitter".modulate = color
+	if has_node("../ParticleEmitter"):
+		$"../ParticleEmitter".modulate = color
