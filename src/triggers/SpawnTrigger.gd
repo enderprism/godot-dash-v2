@@ -47,7 +47,7 @@ func _physics_process(_delta: float) -> void:
 					if get_node(_group.path).has_node("TriggerBase"): get_node(_group.path).base.emit_signal("body_entered", _player)
 					_group.used_in_loop = _current_loop
 		elif LevelManager.in_editor and LevelManager.level_playing:
-			printerr("In ", name, ": _target is unset")
+			printerr("In ", name, ": there aren't any groups to spawn.")
 	elif Engine.is_editor_hint() or LevelManager.in_editor:
 		target_link.position = Vector2.ZERO
 		if len(_spawned_groups) >= 1 and _spawned_groups[0].is_connected("changed", update_target_link):
