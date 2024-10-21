@@ -14,10 +14,10 @@ func update_shape(hitbox_shape: TriggerBase.TriggerHitboxShape, hitbox_position:
 	match hitbox_shape:
 		TriggerBase.TriggerHitboxShape.LINE:
 			show()
-			shape.size = Vector2(2.0, -hitbox_height * LevelManager.CELL_SIZE)
+			shape.size = Vector2(2.0, -hitbox_height * LevelManager.CELL_SIZE * 2)
 		TriggerBase.TriggerHitboxShape.SQUARE:
 			show()
-			shape.size = Vector2.ONE * LevelManager.CELL_SIZE
+			shape.size = Vector2.ONE * LevelManager.CELL_SIZE * 2
 		TriggerBase.TriggerHitboxShape.DISABLED:
 			hide()
 	shape.position = hitbox_position - shape.size * 0.5
