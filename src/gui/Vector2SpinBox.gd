@@ -12,9 +12,9 @@ var value: Vector2:
 	set(new_value):
 		value = new_value
 		if spinbox_x == null:
-			spinbox_x = TriggerSetup.get_node_or_add(self, "SpinBoxX", SpinBox, true)
+			spinbox_x = NodeUtils.get_node_or_add(self, "SpinBoxX", SpinBox, true)
 		if spinbox_y == null:
-			spinbox_y = TriggerSetup.get_node_or_add(self, "SpinBoxY", SpinBox, true)
+			spinbox_y = NodeUtils.get_node_or_add(self, "SpinBoxY", SpinBox, true)
 		if not Engine.is_editor_hint():
 			spinbox_x.set_value_no_signal(new_value.x)
 			spinbox_y.set_value_no_signal(new_value.y)
@@ -22,8 +22,8 @@ var value: Vector2:
 
 
 func _ready() -> void:
-	spinbox_x = TriggerSetup.get_node_or_add(self, "SpinBoxX", SpinBox, true, false)
-	spinbox_y = TriggerSetup.get_node_or_add(self, "SpinBoxY", SpinBox, true, false)
+	spinbox_x = NodeUtils.get_node_or_add(self, "SpinBoxX", SpinBox, true, false)
+	spinbox_y = NodeUtils.get_node_or_add(self, "SpinBoxY", SpinBox, true, false)
 	for spinbox in [spinbox_x, spinbox_y]:
 		spinbox.allow_greater = true
 		spinbox.suffix = "px"

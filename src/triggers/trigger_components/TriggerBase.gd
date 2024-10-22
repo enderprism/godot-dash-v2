@@ -50,7 +50,7 @@ var _hitbox_display: TriggerHitboxDisplay
 func _ready() -> void:
 	collision_layer = 16
 	collision_mask = 1
-	_hitbox_display = TriggerSetup.get_node_or_add(self, "TriggerHitboxDisplay", load("res://src/triggers/trigger_components/TriggerHitboxDisplay.gd"))
+	_hitbox_display = NodeUtils.get_node_or_add(self, "TriggerHitboxDisplay", load("res://src/triggers/trigger_components/TriggerHitboxDisplay.gd"))
 	_hitbox = get_node_or_null("Hitbox") as CollisionShape2D
 	if _hitbox == null:
 		_hitbox = CollisionShape2D.new()
@@ -66,8 +66,8 @@ func _ready() -> void:
 		sprite.set_owner(self)
 		sprite.scale = Vector2.ONE * 0.2
 	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
-	_single_usage_component = TriggerSetup.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"))
-	TriggerSetup.connect_new(hitbox_shape_changed, _hitbox_display.update_shape)
+	_single_usage_component = NodeUtils.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"))
+	NodeUtils.connect_new(hitbox_shape_changed, _hitbox_display.update_shape)
 	_set_hitbox_shape()
 
 func _physics_process(_delta: float) -> void:
