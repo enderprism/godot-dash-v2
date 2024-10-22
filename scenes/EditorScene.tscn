@@ -415,7 +415,6 @@ block_palette_button = true
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton"]
 script = ExtResource("7_f0stj")
 type = 8
-id = 1329488718
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("20_bqqbv")
 
@@ -448,7 +447,6 @@ block_palette_button = true
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton2"]
 script = ExtResource("7_f0stj")
 type = 8
-id = 3615439835
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("21_o7rvp")
 
@@ -481,7 +479,6 @@ block_palette_button = true
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton3"]
 script = ExtResource("7_f0stj")
 type = 8
-id = 3259797802
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("23_6k40u")
 

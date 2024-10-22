@@ -16,5 +16,5 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 func _ready() -> void:
-	if type == EditorSelectionCollider.Type.TRIGGER:
+	if type == EditorSelectionCollider.Type.TRIGGER and not Engine.is_editor_hint():
 		id = hash(trigger_script)
