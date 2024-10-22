@@ -12,7 +12,7 @@
 resource_local_to_scene = true
 shader = ExtResource("2_ss55f")
 shader_parameter/lod = 3.0
-shader_parameter/gui_color = Color(0, 0, 0, 1)
+shader_parameter/gui_color = Color(0.27451, 0.627451, 1, 1)
 shader_parameter/mix_factor = 0.1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bfpn3"]
