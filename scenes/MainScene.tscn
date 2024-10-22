@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cinyg32n0bonm"]
+[gd_scene load_steps=31 format=3 uid="uid://cinyg32n0bonm"]
 
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/FadeScreen.tscn" id="1_e44lk"]
 [ext_resource type="Texture2D" uid="uid://dewrklmfoeg7m" path="res://assets/textures/grounds/ground-1.png" id="2_5u8e8"]
@@ -16,13 +16,17 @@
 [ext_resource type="AudioStream" uid="uid://c4sjh7a6mxgv3" path="res://assets/sounds/music/game_music/MenuLoop.mp3" id="7_ir7j4"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="8_04kr6"]
 [ext_resource type="Script" path="res://src/SubsceneManager.gd" id="9_iy7r1"]
-[ext_resource type="Texture2D" uid="uid://bylba27vuavv5" path="res://assets/textures/guis/shared/CloseButton.png" id="10_fqvm0"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="12_ct30d"]
+[ext_resource type="Texture2D" uid="uid://dorpaiw1p6bw0" path="res://assets/textures/guis/shared/CircleButtonBase.svg" id="13_edrxn"]
 [ext_resource type="PackedScene" uid="uid://kwe5xtryavgg" path="res://scenes/components/game_components/LevelSelectorTab.tscn" id="14_ade78"]
+[ext_resource type="Texture2D" uid="uid://bcjmav8hpm0qx" path="res://assets/textures/guis/shared/CloseButton.svg" id="14_qnf4f"]
 [ext_resource type="Texture2D" uid="uid://bf00dudjlkg0q" path="res://assets/textures/guis/shared/BackButton.png" id="14_t3hvn"]
+[ext_resource type="Texture2D" uid="uid://ca7kg07rmvxyl" path="res://assets/textures/guis/shared/SettingsButton.svg" id="15_6brpo"]
 [ext_resource type="Texture2D" uid="uid://docsh85xkmade" path="res://assets/textures/guis/level_selector/LevelSelectorPrevious.png" id="15_7mwgk"]
 [ext_resource type="Texture2D" uid="uid://bswqhh121flny" path="res://assets/textures/guis/level_selector/LevelSelectorNext.png" id="16_btcin"]
 [ext_resource type="PackedScene" uid="uid://dfde2ns6le0wd" path="res://scenes/components/game_components/PhantomCamera2DHistory.tscn" id="16_dgsi1"]
+[ext_resource type="Script" path="res://src/SettingsLayer.gd" id="26_g1t25"]
+[ext_resource type="PackedScene" uid="uid://b6gonom0s5k1n" path="res://scenes/components/game_components/SettingsMenu.tscn" id="27_iydcr"]
 
 [sub_resource type="Resource" id="Resource_assks"]
 script = ExtResource("12_ct30d")
@@ -153,14 +157,71 @@ script = ExtResource("5_wiac2")
 layout_mode = 1
 offset_left = 32.0
 offset_top = 32.0
-offset_right = 100.0
-offset_bottom = 101.0
-pivot_offset = Vector2(34, 34.5)
+offset_right = 102.0
+offset_bottom = 102.0
+pivot_offset = Vector2(35, 35)
 theme = ExtResource("4_eh0ur")
-icon = ExtResource("10_fqvm0")
 flat = true
+icon_alignment = 1
 expand_icon = true
 script = ExtResource("5_wiac2")
+
+[node name="Base" type="TextureRect" parent="TitleScreen/QuitGame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_edrxn")
+expand_mode = 1
+
+[node name="Close" type="TextureRect" parent="TitleScreen/QuitGame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_qnf4f")
+expand_mode = 1
+
+[node name="Settings" type="Button" parent="TitleScreen"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -192.0
+offset_right = 192.0
+offset_bottom = -64.0
+grow_vertical = 0
+pivot_offset = Vector2(64, 64)
+theme = ExtResource("4_eh0ur")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("5_wiac2")
+
+[node name="Base" type="TextureRect" parent="TitleScreen/Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_edrxn")
+expand_mode = 1
+
+[node name="Settings" type="TextureRect" parent="TitleScreen/Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_6brpo")
+expand_mode = 1
 
 [node name="CameraCenterParent" type="Control" parent="TitleScreen"]
 layout_mode = 1
@@ -490,13 +551,14 @@ stream = ExtResource("7_ir7j4")
 autoplay = true
 bus = &"Music"
 
-[node name="Subscene Manager" type="Node" parent="." node_paths=PackedStringArray("active_pcam", "history", "page_control_container", "quit_game_button", "fade_screen_layer", "created_levels_list", "icon_garage", "level_selector", "created_levels_list_camera", "icon_garage_camera", "quit_game_camera", "title_screen_camera", "title_screen_background", "title_screen_ground", "level_selector_page_container")]
+[node name="Subscene Manager" type="Node" parent="." node_paths=PackedStringArray("active_pcam", "history", "page_control_container", "quit_game_button", "fade_screen_layer", "settings_layer", "created_levels_list", "icon_garage", "level_selector", "created_levels_list_camera", "icon_garage_camera", "quit_game_camera", "title_screen_camera", "title_screen_background", "title_screen_ground", "level_selector_page_container")]
 script = ExtResource("9_iy7r1")
 active_pcam = NodePath("../TitleScreen/CameraCenterParent/TitleScreenCamera")
 history = NodePath("PhantomCamera2DHistory")
 page_control_container = NodePath("../LevelSelector/CanvasLayer/PageControlContainer")
 quit_game_button = NodePath("../TitleScreen/QuitGame")
 fade_screen_layer = NodePath("../FadeScreenLayer")
+settings_layer = NodePath("../SettingsLayer")
 created_levels_list = NodePath("../CreatedLevelsList")
 icon_garage = NodePath("../IconGarage")
 level_selector = NodePath("../LevelSelector")
@@ -510,10 +572,42 @@ level_selector_page_container = NodePath("../LevelSelector/PageContainer")
 
 [node name="PhantomCamera2DHistory" parent="Subscene Manager" instance=ExtResource("16_dgsi1")]
 
+[node name="SettingsLayer" type="CanvasLayer" parent="."]
+layer = 102
+script = ExtResource("26_g1t25")
+
+[node name="SettingsContainer" type="Control" parent="SettingsLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1080.0
+offset_bottom = -1080.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsContainerInner" type="Control" parent="SettingsLayer/SettingsContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -364.0
+offset_right = 600.0
+offset_bottom = 364.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsMenu" parent="SettingsLayer/SettingsContainer/SettingsContainerInner" instance=ExtResource("27_iydcr")]
+layout_mode = 1
+
 [connection signal="pressed" from="TitleScreen/VBoxContainer/HBoxContainer/GoToIconGarage" to="Subscene Manager" method="_on_go_to_icon_garage_pressed"]
 [connection signal="pressed" from="TitleScreen/VBoxContainer/HBoxContainer/GoToLevelSelector" to="Subscene Manager" method="_on_go_to_level_selector_pressed"]
 [connection signal="pressed" from="TitleScreen/VBoxContainer/HBoxContainer/GoToCreatedLevelsList" to="Subscene Manager" method="_on_go_to_created_levels_list_pressed"]
 [connection signal="pressed" from="TitleScreen/QuitGame" to="Subscene Manager" method="_on_quit_game_pressed"]
+[connection signal="pressed" from="TitleScreen/Settings" to="SettingsLayer" method="_on_settings_pressed"]
 [connection signal="pressed" from="IconGarage/BackButton" to="Subscene Manager" method="_on_back_button_pressed"]
 [connection signal="pressed" from="CreatedLevelsList/BackButton" to="Subscene Manager" method="_on_back_button_pressed"]
 [connection signal="pressed" from="LevelSelector/CanvasLayer/PageControlContainer/PagePreviousNext/PreviousLevel" to="Subscene Manager" method="_on_previous_level_pressed"]
