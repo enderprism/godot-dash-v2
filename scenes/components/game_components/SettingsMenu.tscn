@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6gonom0s5k1n"]
+[gd_scene load_steps=9 format=3 uid="uid://b6gonom0s5k1n"]
 
-[ext_resource type="Script" path="res://src/GUIInputValueReset.gd" id="1_kwnn5"]
+[ext_resource type="Script" path="res://src/gui/GUIInputValueReset.gd" id="1_kwnn5"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/ButtonNoFocusColor.tres" id="1_r47on"]
 [ext_resource type="Shader" path="res://resources/shaders/BackgroundBlur.gdshader" id="1_yyawl"]
-[ext_resource type="Script" path="res://src/SliderSpinboxCombo.gd" id="3_1fi1f"]
+[ext_resource type="Script" path="res://src/gui/SliderSpinboxCombo.gd" id="3_1fi1f"]
+[ext_resource type="Script" path="res://src/gui/Vector2SpinBox.gd" id="4_cc0ww"]
+[ext_resource type="Script" path="res://src/gui/ViewportSizeValue.gd" id="6_eri16"]
+[ext_resource type="Script" path="res://src/SaveLoadConfigValue.gd" id="6_p6jor"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gfqej"]
 shader = ExtResource("1_yyawl")
@@ -21,11 +24,10 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_r47on")
-current_tab = 1
+current_tab = 0
 metadata/_edit_group_ = true
 
 [node name="Graphics" type="ScrollContainer" parent="."]
-visible = false
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
@@ -62,6 +64,7 @@ max_value = 60.0
 value = 60.0
 rounded = true
 allow_greater = true
+alignment = 3
 suffix = "fps"
 
 [node name="GUIInputValueReset" type="Node" parent="Graphics/MarginContainer/VBoxContainer/FPS/FPSSpinBox"]
@@ -71,7 +74,81 @@ property = &"value"
 [node name="HSeparator" type="HSeparator" parent="Graphics/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
+[node name="GameResolution" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Graphics/MarginContainer/VBoxContainer/GameResolution"]
+layout_mode = 2
+text = "Game resolution"
+
+[node name="Control" type="Control" parent="Graphics/MarginContainer/VBoxContainer/GameResolution"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Vector2SpinBox" type="VBoxContainer" parent="Graphics/MarginContainer/VBoxContainer/GameResolution"]
+layout_mode = 2
+script = ExtResource("4_cc0ww")
+keep_aspect = true
+
+[node name="ViewportSizeValue" type="Node" parent="Graphics/MarginContainer/VBoxContainer/GameResolution/Vector2SpinBox"]
+script = ExtResource("6_eri16")
+
+[node name="SaveLoadConfigValue" type="Node" parent="Graphics/MarginContainer/VBoxContainer/GameResolution/Vector2SpinBox"]
+script = ExtResource("6_p6jor")
+config_property = &"game_resolution"
+property = &"value"
+save_signal = &"value_changed"
+
+[node name="GUIInputValueReset" type="Node" parent="Graphics/MarginContainer/VBoxContainer/GameResolution/Vector2SpinBox"]
+script = ExtResource("1_kwnn5")
+property = &"value"
+
+[node name="SpinBoxX" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/GameResolution/Vector2SpinBox"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+allow_greater = true
+alignment = 3
+prefix = "x: "
+suffix = "px"
+
+[node name="SpinBoxY" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/GameResolution/Vector2SpinBox"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+allow_greater = true
+alignment = 3
+prefix = "y: "
+suffix = "px"
+
+[node name="HSeparator2" type="HSeparator" parent="Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Fullscreen" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Graphics/MarginContainer/VBoxContainer/Fullscreen"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="Control" type="Control" parent="Graphics/MarginContainer/VBoxContainer/Fullscreen"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CheckBox" type="CheckBox" parent="Graphics/MarginContainer/VBoxContainer/Fullscreen"]
+layout_mode = 2
+button_pressed = true
+
+[node name="SaveLoadConfigValue" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Fullscreen/CheckBox"]
+script = ExtResource("6_p6jor")
+config_property = &"fullscreen"
+property = &"button_pressed"
+save_signal = &"toggled"
+
+[node name="GUIInputValueReset" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Fullscreen/CheckBox"]
+script = ExtResource("1_kwnn5")
+property = &"button_pressed"
+
 [node name="Audio" type="ScrollContainer" parent="."]
+visible = false
 layout_mode = 2
 focus_mode = 1
 metadata/_tab_index = 1
@@ -265,6 +342,12 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 color = Color(0, 1, 0, 1)
+
+[node name="SaveLoadConfigValue" type="Node" parent="Editor/MarginContainer/VBoxContainer/SelectionZoneColor/SelectionZoneColorPicker"]
+script = ExtResource("6_p6jor")
+config_property = &"selection_zone_color"
+property = &"color"
+save_signal = &"color_changed"
 
 [node name="GUIInputValueReset" type="Node" parent="Editor/MarginContainer/VBoxContainer/SelectionZoneColor/SelectionZoneColorPicker"]
 script = ExtResource("1_kwnn5")
