@@ -7,6 +7,7 @@
 func _ready() -> void:
 	$"Button/Label".text = name
 	$Button.self_modulate = self_modulate
+	$Button.material.set_shader_parameter("gui_color", self_modulate)
 
 func _process(_delta: float) -> void:
 	$TabCenter.position = Vector2(size.x/2, size.y/2)

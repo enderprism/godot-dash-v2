@@ -1,9 +1,10 @@
-[gd_scene load_steps=44 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=46 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
 [ext_resource type="ButtonGroup" uid="uid://glg4m2ke0qn2" path="res://resources/BlockPaletteButtonGroup.tres" id="3_0vcbd"]
 [ext_resource type="Script" path="res://src/editor/BlockPaletteIcons.gd" id="3_d5qub"]
+[ext_resource type="Shader" path="res://resources/shaders/BackgroundBlur.gdshader" id="3_eu43l"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/ButtonNoFocusColor.tres" id="3_k1q1p"]
 [ext_resource type="Texture2D" uid="uid://cffmcdyqdl686" path="res://assets/textures/guis/editor/EditorPlayPlayer.svg" id="3_qy4mu"]
 [ext_resource type="Texture2D" uid="uid://c3d7se3g1r25n" path="res://assets/textures/guis/editor/block_palette/Solids.svg" id="4_7or8s"]
@@ -41,6 +42,12 @@
 [ext_resource type="Script" path="res://src/editor/PlaceHandler.gd" id="33_uwrsc"]
 [ext_resource type="Script" path="res://src/editor/EditHandler.gd" id="34_7dx3o"]
 [ext_resource type="Script" path="res://src/editor/SelectionZoneDisplay.gd" id="35_xjepn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7lsbn"]
+shader = ExtResource("3_eu43l")
+shader_parameter/lod = 3.0
+shader_parameter/gui_color = null
+shader_parameter/mix_factor = 0.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac3bt"]
 radius = 2.0
@@ -113,6 +120,7 @@ color = Color(0.15625, 0.15625, 0.15625, 1)
 [node name="EditorModes" type="TabContainer" parent="EditorUI" node_paths=PackedStringArray("shortcut_context")]
 unique_name_in_owner = true
 texture_filter = 4
+material = SubResource("ShaderMaterial_7lsbn")
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
