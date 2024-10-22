@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6gonom0s5k1n"]
+[gd_scene load_steps=9 format=3 uid="uid://b6gonom0s5k1n"]
 
 [ext_resource type="Script" path="res://src/gui/GUIInputValueReset.gd" id="1_kwnn5"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/ButtonNoFocusColor.tres" id="1_r47on"]
 [ext_resource type="Shader" path="res://resources/shaders/BackgroundBlur.gdshader" id="1_yyawl"]
 [ext_resource type="Script" path="res://src/gui/SliderSpinboxCombo.gd" id="3_1fi1f"]
 [ext_resource type="Script" path="res://src/SettingsMenu.gd" id="3_rvg0e"]
+[ext_resource type="Script" path="res://src/gui/IDOptionButton.gd" id="6_awsok"]
 [ext_resource type="Script" path="res://src/SaveLoadConfigValue.gd" id="6_p6jor"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gfqej"]
@@ -74,33 +75,75 @@ property = &"value"
 [node name="HSeparator" type="HSeparator" parent="Graphics/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Fullscreen" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer"]
+[node name="VSync" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Graphics/MarginContainer/VBoxContainer/Fullscreen"]
+[node name="Label" type="Label" parent="Graphics/MarginContainer/VBoxContainer/VSync"]
 layout_mode = 2
-text = "Fullscreen"
+text = "VSync"
 
-[node name="Control" type="Control" parent="Graphics/MarginContainer/VBoxContainer/Fullscreen"]
+[node name="Control" type="Control" parent="Graphics/MarginContainer/VBoxContainer/VSync"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CheckBox" type="CheckBox" parent="Graphics/MarginContainer/VBoxContainer/Fullscreen"]
+[node name="IDOptionButton" type="OptionButton" parent="Graphics/MarginContainer/VBoxContainer/VSync"]
 layout_mode = 2
-button_pressed = true
+selected = 1
+item_count = 4
+popup/item_0/text = "Disabled"
+popup/item_1/text = "Enabled"
+popup/item_1/id = 1
+popup/item_2/text = "Adaptive"
+popup/item_2/id = 2
+popup/item_3/text = "Mailbox"
+popup/item_3/id = 3
+script = ExtResource("6_awsok")
 
-[node name="SaveLoadConfigValue" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Fullscreen/CheckBox"]
+[node name="SaveLoadConfigValue" type="Node" parent="Graphics/MarginContainer/VBoxContainer/VSync/IDOptionButton"]
 script = ExtResource("6_p6jor")
-config_property = &"fullscreen"
-property = &"button_pressed"
-save_signal = &"toggled"
+config_property = &"vsync"
+property = &"selected"
+save_signal = &"item_selected"
 
-[node name="GUIInputValueReset" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Fullscreen/CheckBox"]
+[node name="GUIInputValueReset" type="Node" parent="Graphics/MarginContainer/VBoxContainer/VSync/IDOptionButton"]
 script = ExtResource("1_kwnn5")
-property = &"button_pressed"
+property = &"selected"
 
 [node name="HSeparator2" type="HSeparator" parent="Graphics/MarginContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="WindowMode" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Graphics/MarginContainer/VBoxContainer/WindowMode"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="Control" type="Control" parent="Graphics/MarginContainer/VBoxContainer/WindowMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WindowModePicker" type="OptionButton" parent="Graphics/MarginContainer/VBoxContainer/WindowMode"]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 1
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_1/text = "Borderless Fullscreen"
+popup/item_1/id = 3
+popup/item_2/text = "Exclusive Fullscreen"
+popup/item_2/id = 4
+script = ExtResource("6_awsok")
+
+[node name="SaveLoadConfigValue" type="Node" parent="Graphics/MarginContainer/VBoxContainer/WindowMode/WindowModePicker"]
+script = ExtResource("6_p6jor")
+config_property = &"window_mode"
+property = &"selected"
+save_signal = &"item_selected"
+
+[node name="GUIInputValueReset" type="Node" parent="Graphics/MarginContainer/VBoxContainer/WindowMode/WindowModePicker"]
+script = ExtResource("1_kwnn5")
+property = &"selected"
 
 [node name="Audio" type="ScrollContainer" parent="."]
 visible = false
@@ -317,3 +360,7 @@ layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
 metadata/_tab_index = 3
+
+[connection signal="value_changed" from="Graphics/MarginContainer/VBoxContainer/FPS/FPSSpinBox" to="." method="_on_max_fps_value_changed"]
+[connection signal="id_selected" from="Graphics/MarginContainer/VBoxContainer/VSync/IDOptionButton" to="." method="_on_vsync_value_changed"]
+[connection signal="id_selected" from="Graphics/MarginContainer/VBoxContainer/WindowMode/WindowModePicker" to="." method="_on_window_mode_value_changed"]

@@ -2,7 +2,8 @@ class_name UserPreferences extends Resource
 
 @export_group("Graphics")
 @export_range(0, 60, 1, "or_greater") var max_fps: int = 60
-@export var fullscreen: bool
+@export var vsync: int
+@export var window_mode: int
 
 @export_group("Audio")
 @export_range(0, 1, .05) var music_audio_level: float = 1.0
