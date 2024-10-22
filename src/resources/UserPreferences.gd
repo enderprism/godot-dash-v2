@@ -3,6 +3,7 @@ class_name UserPreferences extends Resource
 @export_group("Graphics")
 @export_range(0, 60, 1, "or_greater") var max_fps: int = 60
 @export var game_resolution: Vector2
+@export_storage var game_scale_factor := 1.0
 @export var fullscreen: bool
 
 @export_group("Audio")

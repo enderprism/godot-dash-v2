@@ -5,6 +5,7 @@ class_name Vector2SpinBox
 signal value_changed(new_value: Vector2)
 
 @export var keep_aspect: bool
+@export var rounded: bool
 @onready var spinbox_x: SpinBox
 @onready var spinbox_y: SpinBox
 var aspect_ratio: float
@@ -29,6 +30,7 @@ func _ready() -> void:
 		spinbox.suffix = "px"
 		spinbox.custom_minimum_size.x = 128
 		spinbox.alignment = HORIZONTAL_ALIGNMENT_FILL
+		spinbox.rounded = rounded
 	spinbox_x.prefix = "x: "
 	spinbox_y.prefix = "y: "
 	if not Engine.is_editor_hint():
