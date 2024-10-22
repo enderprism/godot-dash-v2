@@ -81,39 +81,109 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GameVolume" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer"]
+[node name="MusicVolume" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/GameVolume"]
+[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/MusicVolume"]
 layout_mode = 2
-text = "Game volume"
+text = "Music volume"
 
-[node name="Control" type="Control" parent="Audio/MarginContainer/VBoxContainer/GameVolume"]
+[node name="Control" type="Control" parent="Audio/MarginContainer/VBoxContainer/MusicVolume"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GameVolumeSliderSpinboxCombo" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/GameVolume"]
+[node name="GameVolumeSliderSpinboxCombo" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/MusicVolume"]
 layout_mode = 2
 alignment = 1
 script = ExtResource("3_1fi1f")
 
-[node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/GameVolume/GameVolumeSliderSpinboxCombo"]
+[node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/MusicVolume/GameVolumeSliderSpinboxCombo"]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 size_flags_vertical = 1
 value = 100.0
 
-[node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/GameVolume/GameVolumeSliderSpinboxCombo"]
+[node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/MusicVolume/GameVolumeSliderSpinboxCombo"]
 layout_mode = 2
 value = 100.0
 allow_greater = true
 suffix = "%"
 
-[node name="GUIInputValueReset" type="Node" parent="Audio/MarginContainer/VBoxContainer/GameVolume/GameVolumeSliderSpinboxCombo"]
+[node name="GUIInputValueReset" type="Node" parent="Audio/MarginContainer/VBoxContainer/MusicVolume/GameVolumeSliderSpinboxCombo"]
 script = ExtResource("1_kwnn5")
 property = &"value"
 
 [node name="HSeparator" type="HSeparator" parent="Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GameSFXVolume" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/GameSFXVolume"]
+layout_mode = 2
+text = "Game SFX volume"
+
+[node name="Control" type="Control" parent="Audio/MarginContainer/VBoxContainer/GameSFXVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GameVolumeSliderSpinboxCombo" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/GameSFXVolume"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("3_1fi1f")
+
+[node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/GameSFXVolume/GameVolumeSliderSpinboxCombo"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_vertical = 1
+value = 100.0
+
+[node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/GameSFXVolume/GameVolumeSliderSpinboxCombo"]
+layout_mode = 2
+value = 100.0
+allow_greater = true
+suffix = "%"
+
+[node name="GUIInputValueReset" type="Node" parent="Audio/MarginContainer/VBoxContainer/GameSFXVolume/GameVolumeSliderSpinboxCombo"]
+script = ExtResource("1_kwnn5")
+property = &"value"
+
+[node name="HSeparator2" type="HSeparator" parent="Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="InLevelSFXVolume" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/InLevelSFXVolume"]
+layout_mode = 2
+text = "In level SFX volume"
+
+[node name="Control" type="Control" parent="Audio/MarginContainer/VBoxContainer/InLevelSFXVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GameVolumeSliderSpinboxCombo" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/InLevelSFXVolume"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("3_1fi1f")
+
+[node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/InLevelSFXVolume/GameVolumeSliderSpinboxCombo"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_vertical = 1
+value = 100.0
+
+[node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/InLevelSFXVolume/GameVolumeSliderSpinboxCombo"]
+layout_mode = 2
+value = 100.0
+allow_greater = true
+suffix = "%"
+
+[node name="GUIInputValueReset" type="Node" parent="Audio/MarginContainer/VBoxContainer/InLevelSFXVolume/GameVolumeSliderSpinboxCombo"]
+script = ExtResource("1_kwnn5")
+property = &"value"
+
+[node name="HSeparator3" type="HSeparator" parent="Audio/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Editor" type="ScrollContainer" parent="."]
