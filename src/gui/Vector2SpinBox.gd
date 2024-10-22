@@ -22,8 +22,8 @@ var value: Vector2:
 
 
 func _ready() -> void:
-	spinbox_x = TriggerSetup.get_node_or_add(self, "SpinBoxX", SpinBox, true)
-	spinbox_y = TriggerSetup.get_node_or_add(self, "SpinBoxY", SpinBox, true)
+	spinbox_x = TriggerSetup.get_node_or_add(self, "SpinBoxX", SpinBox, true, false)
+	spinbox_y = TriggerSetup.get_node_or_add(self, "SpinBoxY", SpinBox, true, false)
 	for spinbox in [spinbox_x, spinbox_y]:
 		spinbox.allow_greater = true
 		spinbox.suffix = "px"

@@ -41,13 +41,14 @@ static func set_child_owner(caller: Node, child: Node) -> void:
 	var _owner: Node = caller.get_parent() if caller.get_parent().get_owner() == null else caller.get_parent().get_owner()
 	child.set_owner(_owner)
 
-static func get_node_or_add(caller: Node, path: NodePath, script, internal: bool = false) -> Node:
+static func get_node_or_add(caller: Node, path: NodePath, script, internal := false, set_owner := true, force_readable_name := false) -> Node:
 	var node := caller.get_node_or_null(path)
 	if node == null:
 		node = script.new()
 		node.name = str(path)
-		caller.add_child(node, internal)
-		set_child_owner(caller, node)
+		caller.add_child(node, force_readable_name, int(internal))
+		if set_owner:
+			set_child_owner(caller, node)
 	return node
 
 static func connect_new(_signal: Signal, callable: Callable) -> void:

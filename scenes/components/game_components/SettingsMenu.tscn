@@ -103,22 +103,6 @@ save_signal = &"value_changed"
 script = ExtResource("1_kwnn5")
 property = &"value"
 
-[node name="SpinBoxX" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/GameResolution/Vector2SpinBox"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-allow_greater = true
-alignment = 3
-prefix = "x: "
-suffix = "px"
-
-[node name="SpinBoxY" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/GameResolution/Vector2SpinBox"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-allow_greater = true
-alignment = 3
-prefix = "y: "
-suffix = "px"
-
 [node name="HSeparator2" type="HSeparator" parent="Graphics/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
