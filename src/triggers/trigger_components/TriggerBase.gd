@@ -51,20 +51,10 @@ func _ready() -> void:
 	collision_layer = 16
 	collision_mask = 1
 	_hitbox_display = NodeUtils.get_node_or_add(self, "TriggerHitboxDisplay", load("res://src/triggers/trigger_components/TriggerHitboxDisplay.gd"))
-	_hitbox = get_node_or_null("Hitbox") as CollisionShape2D
-	if _hitbox == null:
-		_hitbox = CollisionShape2D.new()
-		_hitbox.name = "Hitbox"
-		_hitbox.debug_color = Color("fff5006b")
-		add_child(_hitbox)
-		_hitbox.set_owner(self)
-	sprite = get_node_or_null("Sprite") as Sprite2D
-	if sprite == null:
-		sprite = Sprite2D.new()
-		sprite.name = "Sprite"
-		add_child(sprite)
-		sprite.set_owner(self)
-		sprite.scale = Vector2.ONE * 0.2
+	_hitbox = NodeUtils.get_node_or_add(self, "Hitbox", CollisionShape2D)
+	sprite = NodeUtils.get_node_or_add(self, "Sprite", Sprite2D)
+	_hitbox.debug_color = Color("fff5006b")
+	sprite.scale = Vector2.ONE * 0.2
 	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
 	_single_usage_component = NodeUtils.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"))
 	NodeUtils.connect_new(hitbox_shape_changed, _hitbox_display.update_shape)
