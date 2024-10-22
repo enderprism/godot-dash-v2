@@ -24,11 +24,12 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_r47on")
-current_tab = 0
+current_tab = 2
 script = ExtResource("3_rvg0e")
 metadata/_edit_group_ = true
 
 [node name="Graphics" type="ScrollContainer" parent="."]
+visible = false
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
@@ -68,12 +69,15 @@ allow_greater = true
 alignment = 3
 suffix = "fps"
 
+[node name="SaveLoadConfigValue" type="Node" parent="Graphics/MarginContainer/VBoxContainer/FPS/FPSSpinBox"]
+script = ExtResource("6_p6jor")
+config_property = &"max_fps"
+property = &"value"
+save_signal = &"value_changed"
+
 [node name="GUIInputValueReset" type="Node" parent="Graphics/MarginContainer/VBoxContainer/FPS/FPSSpinBox"]
 script = ExtResource("1_kwnn5")
 property = &"value"
-
-[node name="HSeparator" type="HSeparator" parent="Graphics/MarginContainer/VBoxContainer"]
-layout_mode = 2
 
 [node name="VSync" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -108,9 +112,6 @@ save_signal = &"item_selected"
 [node name="GUIInputValueReset" type="Node" parent="Graphics/MarginContainer/VBoxContainer/VSync/IDOptionButton"]
 script = ExtResource("1_kwnn5")
 property = &"selected"
-
-[node name="HSeparator2" type="HSeparator" parent="Graphics/MarginContainer/VBoxContainer"]
-layout_mode = 2
 
 [node name="WindowMode" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -305,7 +306,6 @@ property = &"value"
 layout_mode = 2
 
 [node name="Editor" type="ScrollContainer" parent="."]
-visible = false
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
@@ -351,8 +351,34 @@ save_signal = &"color_changed"
 script = ExtResource("1_kwnn5")
 property = &"color"
 
-[node name="HSeparator" type="HSeparator" parent="Editor/MarginContainer/VBoxContainer"]
+[node name="SelectionZoneFillAlpha" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/SelectionZoneFillAlpha"]
+layout_mode = 2
+text = "Selection zone fill alpha"
+
+[node name="Control" type="Control" parent="Editor/MarginContainer/VBoxContainer/SelectionZoneFillAlpha"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpinBox" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/SelectionZoneFillAlpha"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.2
+alignment = 3
+
+[node name="SaveLoadConfigValue" type="Node" parent="Editor/MarginContainer/VBoxContainer/SelectionZoneFillAlpha/SpinBox"]
+script = ExtResource("6_p6jor")
+config_property = &"selection_zone_fill_alpha"
+property = &"value"
+save_signal = &"value_changed"
+
+[node name="GUIInputValueReset" type="Node" parent="Editor/MarginContainer/VBoxContainer/SelectionZoneFillAlpha/SpinBox"]
+script = ExtResource("1_kwnn5")
+property = &"value"
 
 [node name="Keys" type="ScrollContainer" parent="."]
 visible = false
@@ -364,3 +390,4 @@ metadata/_tab_index = 3
 [connection signal="value_changed" from="Graphics/MarginContainer/VBoxContainer/FPS/FPSSpinBox" to="." method="_on_max_fps_value_changed"]
 [connection signal="id_selected" from="Graphics/MarginContainer/VBoxContainer/VSync/IDOptionButton" to="." method="_on_vsync_value_changed"]
 [connection signal="id_selected" from="Graphics/MarginContainer/VBoxContainer/WindowMode/WindowModePicker" to="." method="_on_window_mode_value_changed"]
+[connection signal="value_changed" from="Editor/MarginContainer/VBoxContainer/SelectionZoneFillAlpha/SpinBox" to="." method="_on_max_fps_value_changed"]
