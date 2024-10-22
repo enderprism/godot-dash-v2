@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6gonom0s5k1n"]
+[gd_scene load_steps=11 format=3 uid="uid://b6gonom0s5k1n"]
 
 [ext_resource type="Script" path="res://src/gui/GUIInputValueReset.gd" id="1_kwnn5"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/ButtonNoFocusColor.tres" id="1_r47on"]
@@ -13,6 +13,12 @@ shader = ExtResource("1_yyawl")
 shader_parameter/lod = 3.0
 shader_parameter/gui_color = null
 shader_parameter/mix_factor = 0.5
+
+[sub_resource type="LabelSettings" id="LabelSettings_v4j54"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_ib2vd"]
+font_size = 20
 
 [node name="SettingsMenu" type="TabContainer"]
 material = SubResource("ShaderMaterial_gfqej")
@@ -197,9 +203,6 @@ suffix = "%"
 script = ExtResource("1_kwnn5")
 property = &"value"
 
-[node name="HSeparator" type="HSeparator" parent="Audio/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
 [node name="MusicVolume" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -231,9 +234,6 @@ suffix = "%"
 [node name="GUIInputValueReset" type="Node" parent="Audio/MarginContainer/VBoxContainer/MusicVolume/GameVolumeSliderSpinboxCombo"]
 script = ExtResource("1_kwnn5")
 property = &"value"
-
-[node name="HSeparator1" type="HSeparator" parent="Audio/MarginContainer/VBoxContainer"]
-layout_mode = 2
 
 [node name="GameSFXVolume" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -267,9 +267,6 @@ suffix = "%"
 script = ExtResource("1_kwnn5")
 property = &"value"
 
-[node name="HSeparator2" type="HSeparator" parent="Audio/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
 [node name="InLevelSFXVolume" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -302,9 +299,6 @@ suffix = "%"
 script = ExtResource("1_kwnn5")
 property = &"value"
 
-[node name="HSeparator3" type="HSeparator" parent="Audio/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
 [node name="Editor" type="ScrollContainer" parent="."]
 layout_mode = 2
 focus_mode = 1
@@ -323,6 +317,25 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="Editor/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Colors" type="PanelContainer" parent="Editor/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/Colors"]
+layout_mode = 2
+text = "Colors"
+label_settings = SubResource("LabelSettings_v4j54")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Selection zone" type="PanelContainer" parent="Editor/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/Selection zone"]
+layout_mode = 2
+text = " Selection zone"
+label_settings = SubResource("LabelSettings_ib2vd")
+vertical_alignment = 1
 
 [node name="SelectionZoneColor" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer"]
 layout_mode = 2
