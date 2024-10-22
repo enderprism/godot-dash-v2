@@ -1,12 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6gonom0s5k1n"]
+[gd_scene load_steps=8 format=3 uid="uid://b6gonom0s5k1n"]
 
 [ext_resource type="Script" path="res://src/gui/GUIInputValueReset.gd" id="1_kwnn5"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/ButtonNoFocusColor.tres" id="1_r47on"]
 [ext_resource type="Shader" path="res://resources/shaders/BackgroundBlur.gdshader" id="1_yyawl"]
 [ext_resource type="Script" path="res://src/gui/SliderSpinboxCombo.gd" id="3_1fi1f"]
 [ext_resource type="Script" path="res://src/SettingsMenu.gd" id="3_rvg0e"]
-[ext_resource type="Script" path="res://src/gui/Vector2SpinBox.gd" id="4_cc0ww"]
-[ext_resource type="Script" path="res://src/gui/ViewportSizeValue.gd" id="6_eri16"]
 [ext_resource type="Script" path="res://src/SaveLoadConfigValue.gd" id="6_p6jor"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gfqej"]
@@ -25,12 +23,11 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_r47on")
-current_tab = 1
+current_tab = 0
 script = ExtResource("3_rvg0e")
 metadata/_edit_group_ = true
 
 [node name="Graphics" type="ScrollContainer" parent="."]
-visible = false
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
@@ -77,40 +74,6 @@ property = &"value"
 [node name="HSeparator" type="HSeparator" parent="Graphics/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="GameResolution" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Graphics/MarginContainer/VBoxContainer/GameResolution"]
-layout_mode = 2
-text = "Game resolution"
-
-[node name="Control" type="Control" parent="Graphics/MarginContainer/VBoxContainer/GameResolution"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Vector2SpinBox" type="VBoxContainer" parent="Graphics/MarginContainer/VBoxContainer/GameResolution"]
-layout_mode = 2
-script = ExtResource("4_cc0ww")
-keep_aspect = true
-rounded = null
-
-[node name="ViewportSizeValue" type="Node" parent="Graphics/MarginContainer/VBoxContainer/GameResolution/Vector2SpinBox"]
-script = ExtResource("6_eri16")
-property = &"value"
-
-[node name="SaveLoadConfigValue" type="Node" parent="Graphics/MarginContainer/VBoxContainer/GameResolution/Vector2SpinBox"]
-script = ExtResource("6_p6jor")
-config_property = &"game_resolution"
-property = &"value"
-save_signal = &"value_changed"
-
-[node name="GUIInputValueReset" type="Node" parent="Graphics/MarginContainer/VBoxContainer/GameResolution/Vector2SpinBox"]
-script = ExtResource("1_kwnn5")
-property = &"value"
-
-[node name="HSeparator2" type="HSeparator" parent="Graphics/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
 [node name="Fullscreen" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -136,7 +99,11 @@ save_signal = &"toggled"
 script = ExtResource("1_kwnn5")
 property = &"button_pressed"
 
+[node name="HSeparator2" type="HSeparator" parent="Graphics/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="Audio" type="ScrollContainer" parent="."]
+visible = false
 layout_mode = 2
 focus_mode = 1
 metadata/_tab_index = 1
@@ -350,9 +317,3 @@ layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
 metadata/_tab_index = 3
-
-[node name="ViewportSizeValue" type="Node" parent="."]
-script = ExtResource("6_eri16")
-property = &"viewport_size"
-
-[connection signal="value_changed" from="Graphics/MarginContainer/VBoxContainer/GameResolution/Vector2SpinBox" to="." method="_on_game_resolution_value_changed"]
