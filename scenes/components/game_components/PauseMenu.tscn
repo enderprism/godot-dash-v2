@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://th7jwdop3hdv"]
+[gd_scene load_steps=11 format=3 uid="uid://th7jwdop3hdv"]
 
 [ext_resource type="Script" path="res://src/PauseMenu.gd" id="1_aoxbt"]
 [ext_resource type="Theme" uid="uid://ctubgkgi0wilt" path="res://resources/PusabLabels.tres" id="2_ju4y8"]
@@ -7,6 +7,9 @@
 [ext_resource type="Script" path="res://src/BouncyButton.gd" id="4_wmjiq"]
 [ext_resource type="Texture2D" uid="uid://dugf8kgdm6i8g" path="res://assets/textures/guis/pause_menu/Continue.png" id="5_h5uf6"]
 [ext_resource type="Texture2D" uid="uid://pf8fudglemps" path="res://assets/textures/guis/pause_menu/Restart.png" id="6_k3ys4"]
+[ext_resource type="PackedScene" uid="uid://bq6rd80p2817w" path="res://scenes/components/game_components/SettingsLayer.tscn" id="8_63kaq"]
+[ext_resource type="Texture2D" uid="uid://dorpaiw1p6bw0" path="res://assets/textures/guis/shared/CircleButtonBase.svg" id="8_orfdw"]
+[ext_resource type="Texture2D" uid="uid://ca7kg07rmvxyl" path="res://assets/textures/guis/shared/SettingsButton.svg" id="9_s0yil"]
 
 [node name="PauseMenuLayer" type="CanvasLayer"]
 layer = 101
@@ -79,6 +82,46 @@ icon = ExtResource("3_uyf84")
 flat = true
 script = ExtResource("4_wmjiq")
 
+[node name="Settings" type="Button" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -192.0
+offset_right = 192.0
+offset_bottom = -64.0
+grow_vertical = 0
+pivot_offset = Vector2(64, 64)
+theme = ExtResource("3_nyvmt")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_wmjiq")
+
+[node name="Base" type="TextureRect" parent="PauseMenu/Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_orfdw")
+expand_mode = 1
+
+[node name="Settings" type="TextureRect" parent="PauseMenu/Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_s0yil")
+expand_mode = 1
+
+[node name="SettingsLayer" parent="." instance=ExtResource("8_63kaq")]
+
 [connection signal="pressed" from="PauseMenu/VBoxContainer/PauseButtonsContainer/Restart" to="PauseMenu" method="_on_restart_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/PauseButtonsContainer/Continue" to="PauseMenu" method="_on_continue_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/PauseButtonsContainer/Leave" to="PauseMenu" method="_on_leave_pressed"]
+[connection signal="pressed" from="PauseMenu/Settings" to="SettingsLayer" method="_on_settings_pressed"]

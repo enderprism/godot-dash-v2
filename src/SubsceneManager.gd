@@ -70,7 +70,9 @@ func _process(delta: float) -> void:
 	if _current_subscene == SubScene.LEVEL_SELECTOR:
 		if Input.is_action_just_pressed("ui_left"): _on_previous_level_pressed()
 		if Input.is_action_just_pressed("ui_right"): _on_next_level_pressed()
-	if _current_subscene == SubScene.TITLE_SCREEN && settings_layer.get_node("SettingsContainer").position.y == -1080 && Input.is_action_just_pressed("ui_cancel"):
+	if _current_subscene == SubScene.TITLE_SCREEN \
+			&& settings_layer.get_node("SettingsContainer").position.y == -settings_layer.get_node("SettingsContainer").get_viewport_rect().size.y \
+			&& Input.is_action_just_pressed("ui_cancel"):
 		_on_quit_game_pressed()
 	if _current_subscene != SubScene.TITLE_SCREEN && Input.is_action_just_pressed("ui_cancel"):
 		_return_to_title_screen()

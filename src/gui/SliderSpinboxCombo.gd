@@ -1,6 +1,8 @@
 @tool
 extends HBoxContainer
 
+signal value_changed(value: float)
+
 @onready var hslider: HSlider = NodeUtils.get_child_of_type(self, HSlider)
 @onready var spinbox: SpinBox = NodeUtils.get_child_of_type(self, SpinBox)
 
@@ -11,8 +13,9 @@ var value: float:
 		elif spinbox != null:
 			return spinbox.value
 		else:
-			return 100 # Default value
+			return 1.0 # Default value
 	set(value):
+		value_changed.emit(value)
 		_update_value(value)
 
 func _get_configuration_warnings() -> PackedStringArray:
@@ -32,5 +35,10 @@ func _ready() -> void:
 
 
 func _update_value(new_value: float) -> void:
+	if hslider == null:
+		hslider = NodeUtils.get_child_of_type(self, HSlider)
+	if spinbox == null:
+		spinbox = NodeUtils.get_child_of_type(self, SpinBox)
 	hslider.value = new_value
 	spinbox.value = new_value
+	value_changed.emit(value)

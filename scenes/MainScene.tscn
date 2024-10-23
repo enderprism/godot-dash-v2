@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cinyg32n0bonm"]
+[gd_scene load_steps=30 format=3 uid="uid://cinyg32n0bonm"]
 
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/FadeScreen.tscn" id="1_e44lk"]
 [ext_resource type="Texture2D" uid="uid://dewrklmfoeg7m" path="res://assets/textures/grounds/ground-1.png" id="2_5u8e8"]
@@ -25,8 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://docsh85xkmade" path="res://assets/textures/guis/level_selector/LevelSelectorPrevious.png" id="15_7mwgk"]
 [ext_resource type="Texture2D" uid="uid://bswqhh121flny" path="res://assets/textures/guis/level_selector/LevelSelectorNext.png" id="16_btcin"]
 [ext_resource type="PackedScene" uid="uid://dfde2ns6le0wd" path="res://scenes/components/game_components/PhantomCamera2DHistory.tscn" id="16_dgsi1"]
-[ext_resource type="Script" path="res://src/SettingsLayer.gd" id="26_g1t25"]
-[ext_resource type="PackedScene" uid="uid://b6gonom0s5k1n" path="res://scenes/components/game_components/SettingsMenu.tscn" id="27_iydcr"]
+[ext_resource type="PackedScene" uid="uid://bq6rd80p2817w" path="res://scenes/components/game_components/SettingsLayer.tscn" id="26_nre0g"]
 
 [sub_resource type="Resource" id="Resource_assks"]
 script = ExtResource("12_ct30d")
@@ -572,36 +571,7 @@ level_selector_page_container = NodePath("../LevelSelector/PageContainer")
 
 [node name="PhantomCamera2DHistory" parent="Subscene Manager" instance=ExtResource("16_dgsi1")]
 
-[node name="SettingsLayer" type="CanvasLayer" parent="."]
-layer = 102
-script = ExtResource("26_g1t25")
-
-[node name="SettingsContainer" type="Control" parent="SettingsLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -1080.0
-offset_bottom = -1080.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SettingsContainerInner" type="Control" parent="SettingsLayer/SettingsContainer"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -600.0
-offset_top = -364.0
-offset_right = 600.0
-offset_bottom = 364.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SettingsMenu" parent="SettingsLayer/SettingsContainer/SettingsContainerInner" instance=ExtResource("27_iydcr")]
-layout_mode = 1
+[node name="SettingsLayer" parent="." instance=ExtResource("26_nre0g")]
 
 [connection signal="pressed" from="TitleScreen/VBoxContainer/HBoxContainer/GoToIconGarage" to="Subscene Manager" method="_on_go_to_icon_garage_pressed"]
 [connection signal="pressed" from="TitleScreen/VBoxContainer/HBoxContainer/GoToLevelSelector" to="Subscene Manager" method="_on_go_to_level_selector_pressed"]

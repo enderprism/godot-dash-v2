@@ -21,19 +21,20 @@ func _on_leave_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/MainScene.tscn")
 
 func _on_continue_pressed() -> void:
-	get_tree().paused = !get_tree().paused
-	if get_tree().paused:
-		paused.emit()
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		get_parent().show()
-	else:
-		unpaused.emit()
-		if LevelManager.in_editor:
-			# Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+	if $"../SettingsLayer/SettingsContainer".position.y == -$"../SettingsLayer/SettingsContainer".get_viewport_rect().size.y:
+		get_tree().paused = !get_tree().paused
+		if get_tree().paused:
+			paused.emit()
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			get_parent().show()
 		else:
-			Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
-		get_parent().hide()
+			unpaused.emit()
+			if LevelManager.in_editor:
+				# Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			else:
+				Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+			get_parent().hide()
 
 func _on_restart_pressed() -> void:
 	get_tree().paused = false

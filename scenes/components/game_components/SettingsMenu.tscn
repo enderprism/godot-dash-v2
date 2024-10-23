@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://src/SettingsMenu.gd" id="3_rvg0e"]
 [ext_resource type="Script" path="res://src/gui/IDOptionButton.gd" id="6_awsok"]
 [ext_resource type="Script" path="res://src/SaveLoadConfigValue.gd" id="6_p6jor"]
+[ext_resource type="Script" path="res://src/gui/SectionHeader.gd" id="8_eb8rq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gfqej"]
 shader = ExtResource("1_yyawl")
@@ -14,11 +15,7 @@ shader_parameter/lod = 3.0
 shader_parameter/gui_color = null
 shader_parameter/mix_factor = 0.5
 
-[sub_resource type="LabelSettings" id="LabelSettings_v4j54"]
-font_size = 24
-
 [sub_resource type="LabelSettings" id="LabelSettings_ib2vd"]
-font_size = 20
 
 [node name="SettingsMenu" type="TabContainer"]
 material = SubResource("ShaderMaterial_gfqej")
@@ -30,12 +27,11 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_r47on")
-current_tab = 2
+current_tab = 0
 script = ExtResource("3_rvg0e")
 metadata/_edit_group_ = true
 
 [node name="Graphics" type="ScrollContainer" parent="."]
-visible = false
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
@@ -54,16 +50,24 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="Framerate" type="PanelContainer" parent="Graphics/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+script = ExtResource("8_eb8rq")
+label_settings = SubResource("LabelSettings_ib2vd")
+
 [node name="FPS" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Graphics/MarginContainer/VBoxContainer/FPS"]
 layout_mode = 2
+focus_mode = 1
 text = "Max FPS"
 
 [node name="Control" type="Control" parent="Graphics/MarginContainer/VBoxContainer/FPS"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 1
 
 [node name="FPSSpinBox" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/FPS"]
 custom_minimum_size = Vector2(0, 32)
@@ -90,11 +94,13 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Graphics/MarginContainer/VBoxContainer/VSync"]
 layout_mode = 2
+focus_mode = 1
 text = "VSync"
 
 [node name="Control" type="Control" parent="Graphics/MarginContainer/VBoxContainer/VSync"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 1
 
 [node name="IDOptionButton" type="OptionButton" parent="Graphics/MarginContainer/VBoxContainer/VSync"]
 layout_mode = 2
@@ -119,16 +125,24 @@ save_signal = &"item_selected"
 script = ExtResource("1_kwnn5")
 property = &"selected"
 
+[node name="Window" type="PanelContainer" parent="Graphics/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+script = ExtResource("8_eb8rq")
+label_settings = SubResource("LabelSettings_ib2vd")
+
 [node name="WindowMode" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Graphics/MarginContainer/VBoxContainer/WindowMode"]
 layout_mode = 2
-text = "Fullscreen"
+focus_mode = 1
+text = "Window mode"
 
 [node name="Control" type="Control" parent="Graphics/MarginContainer/VBoxContainer/WindowMode"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 1
 
 [node name="WindowModePicker" type="OptionButton" parent="Graphics/MarginContainer/VBoxContainer/WindowMode"]
 unique_name_in_owner = true
@@ -171,16 +185,30 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="Volume" type="PanelContainer" parent="Audio/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+focus_mode = 1
+
+[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/Volume"]
+layout_mode = 2
+text = "Volume"
+label_settings = SubResource("LabelSettings_ib2vd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MasterVolume" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/MasterVolume"]
 layout_mode = 2
+focus_mode = 1
 text = "Master volume"
 
 [node name="Control" type="Control" parent="Audio/MarginContainer/VBoxContainer/MasterVolume"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 1
 
 [node name="GameVolumeSliderSpinboxCombo" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/MasterVolume"]
 layout_mode = 2
@@ -191,13 +219,21 @@ script = ExtResource("3_1fi1f")
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 size_flags_vertical = 1
-value = 100.0
+max_value = 1.0
+step = 0.05
+value = 1.0
 
 [node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/MasterVolume/GameVolumeSliderSpinboxCombo"]
 layout_mode = 2
-value = 100.0
-allow_greater = true
-suffix = "%"
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SaveLoadConfigValue" type="Node" parent="Audio/MarginContainer/VBoxContainer/MasterVolume/GameVolumeSliderSpinboxCombo"]
+script = ExtResource("6_p6jor")
+config_property = &"master_audio_level"
+property = &"value"
+save_signal = &"value_changed"
 
 [node name="GUIInputValueReset" type="Node" parent="Audio/MarginContainer/VBoxContainer/MasterVolume/GameVolumeSliderSpinboxCombo"]
 script = ExtResource("1_kwnn5")
@@ -208,11 +244,13 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/MusicVolume"]
 layout_mode = 2
+focus_mode = 1
 text = "Music volume"
 
 [node name="Control" type="Control" parent="Audio/MarginContainer/VBoxContainer/MusicVolume"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 1
 
 [node name="GameVolumeSliderSpinboxCombo" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/MusicVolume"]
 layout_mode = 2
@@ -223,13 +261,21 @@ script = ExtResource("3_1fi1f")
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 size_flags_vertical = 1
-value = 100.0
+max_value = 1.0
+step = 0.05
+value = 1.0
 
 [node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/MusicVolume/GameVolumeSliderSpinboxCombo"]
 layout_mode = 2
-value = 100.0
-allow_greater = true
-suffix = "%"
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SaveLoadConfigValue" type="Node" parent="Audio/MarginContainer/VBoxContainer/MusicVolume/GameVolumeSliderSpinboxCombo"]
+script = ExtResource("6_p6jor")
+config_property = &"music_audio_level"
+property = &"value"
+save_signal = &"value_changed"
 
 [node name="GUIInputValueReset" type="Node" parent="Audio/MarginContainer/VBoxContainer/MusicVolume/GameVolumeSliderSpinboxCombo"]
 script = ExtResource("1_kwnn5")
@@ -240,11 +286,13 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/GameSFXVolume"]
 layout_mode = 2
+focus_mode = 1
 text = "Game SFX volume"
 
 [node name="Control" type="Control" parent="Audio/MarginContainer/VBoxContainer/GameSFXVolume"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 1
 
 [node name="GameVolumeSliderSpinboxCombo" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/GameSFXVolume"]
 layout_mode = 2
@@ -255,13 +303,21 @@ script = ExtResource("3_1fi1f")
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 size_flags_vertical = 1
-value = 100.0
+max_value = 1.0
+step = 0.05
+value = 1.0
 
 [node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/GameSFXVolume/GameVolumeSliderSpinboxCombo"]
 layout_mode = 2
-value = 100.0
-allow_greater = true
-suffix = "%"
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SaveLoadConfigValue" type="Node" parent="Audio/MarginContainer/VBoxContainer/GameSFXVolume/GameVolumeSliderSpinboxCombo"]
+script = ExtResource("6_p6jor")
+config_property = &"game_sfx_audio_level"
+property = &"value"
+save_signal = &"value_changed"
 
 [node name="GUIInputValueReset" type="Node" parent="Audio/MarginContainer/VBoxContainer/GameSFXVolume/GameVolumeSliderSpinboxCombo"]
 script = ExtResource("1_kwnn5")
@@ -272,11 +328,13 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/InLevelSFXVolume"]
 layout_mode = 2
+focus_mode = 1
 text = "In level SFX volume"
 
 [node name="Control" type="Control" parent="Audio/MarginContainer/VBoxContainer/InLevelSFXVolume"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 1
 
 [node name="GameVolumeSliderSpinboxCombo" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/InLevelSFXVolume"]
 layout_mode = 2
@@ -287,19 +345,28 @@ script = ExtResource("3_1fi1f")
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 size_flags_vertical = 1
-value = 100.0
+max_value = 1.0
+step = 0.05
+value = 1.0
 
 [node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/InLevelSFXVolume/GameVolumeSliderSpinboxCombo"]
 layout_mode = 2
-value = 100.0
-allow_greater = true
-suffix = "%"
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SaveLoadConfigValue" type="Node" parent="Audio/MarginContainer/VBoxContainer/InLevelSFXVolume/GameVolumeSliderSpinboxCombo"]
+script = ExtResource("6_p6jor")
+config_property = &"in_level_sfx_audio_level"
+property = &"value"
+save_signal = &"value_changed"
 
 [node name="GUIInputValueReset" type="Node" parent="Audio/MarginContainer/VBoxContainer/InLevelSFXVolume/GameVolumeSliderSpinboxCombo"]
 script = ExtResource("1_kwnn5")
 property = &"value"
 
 [node name="Editor" type="ScrollContainer" parent="."]
+visible = false
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
@@ -319,35 +386,32 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Colors" type="PanelContainer" parent="Editor/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-
-[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/Colors"]
-layout_mode = 2
-text = "Colors"
-label_settings = SubResource("LabelSettings_v4j54")
-horizontal_alignment = 1
-vertical_alignment = 1
+focus_mode = 1
+script = ExtResource("8_eb8rq")
+label_settings = SubResource("LabelSettings_ib2vd")
 
 [node name="Selection zone" type="PanelContainer" parent="Editor/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-
-[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/Selection zone"]
-layout_mode = 2
-text = " Selection zone"
+script = ExtResource("8_eb8rq")
 label_settings = SubResource("LabelSettings_ib2vd")
-vertical_alignment = 1
+alignment = 0
 
 [node name="SelectionZoneColor" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/SelectionZoneColor"]
 layout_mode = 2
+focus_mode = 1
 text = "Selection zone color
 "
 
 [node name="Control" type="Control" parent="Editor/MarginContainer/VBoxContainer/SelectionZoneColor"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 1
 
 [node name="SelectionZoneColorPicker" type="ColorPickerButton" parent="Editor/MarginContainer/VBoxContainer/SelectionZoneColor"]
 custom_minimum_size = Vector2(64, 32)
@@ -369,11 +433,13 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/SelectionZoneFillAlpha"]
 layout_mode = 2
+focus_mode = 1
 text = "Selection zone fill alpha"
 
 [node name="Control" type="Control" parent="Editor/MarginContainer/VBoxContainer/SelectionZoneFillAlpha"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 1
 
 [node name="SpinBox" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/SelectionZoneFillAlpha"]
 custom_minimum_size = Vector2(0, 32)
@@ -393,6 +459,73 @@ save_signal = &"value_changed"
 script = ExtResource("1_kwnn5")
 property = &"value"
 
+[node name="Trigger hitboxes" type="PanelContainer" parent="Editor/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+script = ExtResource("8_eb8rq")
+label_settings = SubResource("LabelSettings_ib2vd")
+alignment = 0
+
+[node name="TriggerHitboxesColor" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/TriggerHitboxesColor"]
+layout_mode = 2
+focus_mode = 1
+text = "Trigger hitboxes color
+"
+
+[node name="Control" type="Control" parent="Editor/MarginContainer/VBoxContainer/TriggerHitboxesColor"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 1
+
+[node name="SelectionZoneColorPicker" type="ColorPickerButton" parent="Editor/MarginContainer/VBoxContainer/TriggerHitboxesColor"]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+color = Color(0, 1, 1, 1)
+
+[node name="SaveLoadConfigValue" type="Node" parent="Editor/MarginContainer/VBoxContainer/TriggerHitboxesColor/SelectionZoneColorPicker"]
+script = ExtResource("6_p6jor")
+config_property = &"trigger_hitbox_color"
+property = &"color"
+save_signal = &"color_changed"
+
+[node name="GUIInputValueReset" type="Node" parent="Editor/MarginContainer/VBoxContainer/TriggerHitboxesColor/SelectionZoneColorPicker"]
+script = ExtResource("1_kwnn5")
+property = &"color"
+
+[node name="TriggerHitboxesFillAlpha" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/TriggerHitboxesFillAlpha"]
+layout_mode = 2
+focus_mode = 1
+text = "Trigger hitboxes fill alpha"
+
+[node name="Control" type="Control" parent="Editor/MarginContainer/VBoxContainer/TriggerHitboxesFillAlpha"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 1
+
+[node name="SpinBox" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/TriggerHitboxesFillAlpha"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.2
+alignment = 3
+
+[node name="SaveLoadConfigValue" type="Node" parent="Editor/MarginContainer/VBoxContainer/TriggerHitboxesFillAlpha/SpinBox"]
+script = ExtResource("6_p6jor")
+config_property = &"trigger_hitbox_fill_alpha"
+property = &"value"
+save_signal = &"value_changed"
+
+[node name="GUIInputValueReset" type="Node" parent="Editor/MarginContainer/VBoxContainer/TriggerHitboxesFillAlpha/SpinBox"]
+script = ExtResource("1_kwnn5")
+property = &"value"
+
 [node name="Keys" type="ScrollContainer" parent="."]
 visible = false
 layout_mode = 2
@@ -403,4 +536,9 @@ metadata/_tab_index = 3
 [connection signal="value_changed" from="Graphics/MarginContainer/VBoxContainer/FPS/FPSSpinBox" to="." method="_on_max_fps_value_changed"]
 [connection signal="id_selected" from="Graphics/MarginContainer/VBoxContainer/VSync/IDOptionButton" to="." method="_on_vsync_value_changed"]
 [connection signal="id_selected" from="Graphics/MarginContainer/VBoxContainer/WindowMode/WindowModePicker" to="." method="_on_window_mode_value_changed"]
+[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/MasterVolume/GameVolumeSliderSpinboxCombo" to="." method="_on_game_volume_value_changed"]
+[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/MusicVolume/GameVolumeSliderSpinboxCombo" to="." method="_on_music_volume_value_changed"]
+[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/GameSFXVolume/GameVolumeSliderSpinboxCombo" to="." method="_on_game_sfx_volume_value_changed"]
+[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/InLevelSFXVolume/GameVolumeSliderSpinboxCombo" to="." method="_on_in_level_sfx_volume_value_changed"]
 [connection signal="value_changed" from="Editor/MarginContainer/VBoxContainer/SelectionZoneFillAlpha/SpinBox" to="." method="_on_max_fps_value_changed"]
+[connection signal="value_changed" from="Editor/MarginContainer/VBoxContainer/TriggerHitboxesFillAlpha/SpinBox" to="." method="_on_max_fps_value_changed"]

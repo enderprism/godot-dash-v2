@@ -6,6 +6,7 @@ class_name UserPreferences extends Resource
 @export var window_mode: int
 
 @export_group("Audio")
+@export_range(0, 1, .05) var master_audio_level: float = 1.0
 @export_range(0, 1, .05) var music_audio_level: float = 1.0
 @export_range(0, 1, .05) var game_sfx_audio_level: float = 1.0
 @export_range(0, 1, .05) var in_level_sfx_audio_level: float = 1.0
