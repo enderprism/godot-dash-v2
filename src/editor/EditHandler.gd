@@ -115,19 +115,12 @@ func _swipe_selection_zone() -> void:
 
 
 func _clone(object: Node) -> Node:
-	if object.has_node("TriggerBase"):
-		var clone = object.get_script().new()
-		object.get_parent().add_child(clone)
-		clone.global_transform = object.global_transform
-		clone.owner = object.owner
-		return clone
-	else:
-		var packer := PackedScene.new()
-		packer.pack(object)
-		var clone := packer.instantiate()
-		object.get_parent().add_child(clone)
-		clone.owner = object.owner
-		return clone
+	var packer := PackedScene.new()
+	packer.pack(object)
+	var clone := packer.instantiate()
+	object.get_parent().add_child(clone)
+	clone.owner = object.owner
+	return clone
 
 
 func _duplicate_selection() -> void:
