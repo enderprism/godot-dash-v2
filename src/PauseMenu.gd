@@ -4,6 +4,7 @@ signal paused
 signal unpaused
 
 func _ready() -> void:
+	$"../SettingsLayer".visible = visible
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	LevelManager.pause_manager = self
 	$VBoxContainer/LevelName.text = LevelManager.current_level_name
@@ -27,6 +28,7 @@ func _on_continue_pressed() -> void:
 			paused.emit()
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 			get_parent().show()
+			$"../SettingsLayer".show()
 		else:
 			unpaused.emit()
 			if LevelManager.in_editor:
@@ -35,6 +37,7 @@ func _on_continue_pressed() -> void:
 			else:
 				Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 			get_parent().hide()
+			$"../SettingsLayer".hide()
 
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
