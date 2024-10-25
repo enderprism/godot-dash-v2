@@ -1,11 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://cjbdfuvh8nxcn"]
+[gd_scene load_steps=12 format=3 uid="uid://cjbdfuvh8nxcn"]
 
 [ext_resource type="Script" path="res://src/interactables/PadInteractable.gd" id="1_6nccy"]
 [ext_resource type="PackedScene" uid="uid://05h0teol0odp" path="res://scenes/particle_emitter_presets/PadParticles.tscn" id="4_26ak1"]
-[ext_resource type="Texture2D" uid="uid://sqswuk7njswf" path="res://assets/textures/pads/ReboundPadFill.svg" id="5_h3j35"]
 [ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="5_hg5x3"]
 [ext_resource type="Script" path="res://src/interactables/public_components/ReboundComponent.gd" id="6_actth"]
-[ext_resource type="Texture2D" uid="uid://clsveyqmgm3b1" path="res://assets/textures/pads/ReboundPadOutline.svg" id="6_qylod"]
 [ext_resource type="Script" path="res://src/SingleUsage.gd" id="7_8bjuk"]
 [ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="8_lapvy"]
 [ext_resource type="Script" path="res://src/interactables/private_components/ReboundPadSprite.gd" id="9_50uy8"]
@@ -41,20 +39,6 @@ script = ExtResource("1_6nccy")
 modulate = Color(1, 0.8, 0.8, 1)
 position = Vector2(0, 57)
 process_material = SubResource("ParticleProcessMaterial_bto6p")
-
-[node name="ReboundObjectScaleOrigin" type="Marker2D" parent="."]
-visible = false
-position = Vector2(0, 64)
-gizmo_extents = 64.0
-
-[node name="Outline" type="Sprite2D" parent="ReboundObjectScaleOrigin"]
-position = Vector2(0, -64)
-texture = ExtResource("6_qylod")
-
-[node name="Fill" type="Sprite2D" parent="ReboundObjectScaleOrigin"]
-modulate = Color(1, 0.2, 0.2, 1)
-position = Vector2(0, -64)
-texture = ExtResource("5_h3j35")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 55)
