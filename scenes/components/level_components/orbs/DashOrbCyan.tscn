@@ -1,0 +1,61 @@
+[gd_scene load_steps=12 format=3 uid="uid://bpmqq5a3or2k5"]
+
+[ext_resource type="Script" path="res://src/interactables/OrbInteractable.gd" id="1_5lo1k"]
+[ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_2cnvh"]
+[ext_resource type="Script" path="res://src/interactables/private_components/MusicScale.gd" id="3_f5wh2"]
+[ext_resource type="Texture2D" uid="uid://d28pf7aqf5nj4" path="res://assets/textures/orbs/DashOrbCyan.svg" id="4_bux5k"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseRing.gd" id="5_ndqdo"]
+[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="6_kltjm"]
+[ext_resource type="Script" path="res://src/SingleUsage.gd" id="7_14ggb"]
+[ext_resource type="Script" path="res://src/interactables/public_components/FireDashComponent.gd" id="8_1gryp"]
+[ext_resource type="Script" path="res://src/interactables/private_components/FireDashAngularPath.gd" id="9_vwh0w"]
+[ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="10_5fmuc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwypc"]
+size = Vector2(128, 128)
+
+[node name="DashOrbCyan" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_5lo1k")
+
+[node name="ParticleEmitter" parent="." instance=ExtResource("2_2cnvh")]
+modulate = Color(0, 1, 1, 1)
+
+[node name="MusicScale" type="Node" parent="ParticleEmitter"]
+script = ExtResource("3_f5wh2")
+
+[node name="DashOrbPreview" type="Line2D" parent="."]
+points = PackedVector2Array(64, 0, 768, 0)
+default_color = Color(0, 1, 1, 1)
+end_cap_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(6, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_bux5k")
+
+[node name="MusicScale" type="Node" parent="Sprite"]
+script = ExtResource("3_f5wh2")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+scale = Vector2(1.2, 1.2)
+shape = SubResource("RectangleShape2D_jwypc")
+debug_color = Color(0, 1, 0, 0)
+
+[node name="PulseRing" type="Node2D" parent="."]
+script = ExtResource("5_ndqdo")
+
+[node name="PulseCircle" type="Node2D" parent="."]
+script = ExtResource("6_kltjm")
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("7_14ggb")
+
+[node name="FireDashComponent" type="Node" parent="."]
+script = ExtResource("8_1gryp")
+
+[node name="FireDashAngularPath" type="Node" parent="FireDashComponent"]
+script = ExtResource("9_vwh0w")
+
+[node name="DirectionChangerComponent" type="Node" parent="."]
+script = ExtResource("10_5fmuc")
