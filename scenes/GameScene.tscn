@@ -97,6 +97,7 @@ unique_name_in_owner = true
 position = Vector2(640, 862)
 
 [node name="EditorGridParallax" type="Parallax2D" parent="."]
+z_index = -10
 repeat_size = Vector2(32768, 32768)
 repeat_times = 3
 
