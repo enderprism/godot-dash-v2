@@ -141,7 +141,7 @@ func _rotate_selection(angle: float) -> void:
 	else:
 		# Take the median of the position of all objects
 		var object_positions := selection.duplicate().map(func(object): return object.global_position)
-		rotation_center_position = ArrayUtils.transform(object_positions, ArrayUtils.Transformation.MEAN)
+		rotation_center_position = ArrayUtils.transform(object_positions, ArrayUtils.Transformation.MEAN, true)
 	var rotation_center = Node2D.new()
 	get_parent().add_child(rotation_center)
 	rotation_center.global_position = rotation_center_position
