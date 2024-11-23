@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dvxuhegi7klq8"]
+[gd_scene load_steps=13 format=3 uid="uid://dvxuhegi7klq8"]
 
 [ext_resource type="Script" path="res://src/interactables/OrbInteractable.gd" id="1_xmkgn"]
 [ext_resource type="Script" path="res://src/SingleUsage.gd" id="2_jnww5"]
@@ -6,10 +6,11 @@
 [ext_resource type="Script" path="res://src/interactables/private_components/MusicScale.gd" id="3_8l25v"]
 [ext_resource type="Script" path="res://src/interactables/public_components/FireDashComponent.gd" id="3_binks"]
 [ext_resource type="Texture2D" uid="uid://5svtduawb5vo" path="res://assets/textures/orbs/DashOrbGreen.svg" id="4_4g3sr"]
-[ext_resource type="Script" path="res://src/interactables/private_components/FireDashAngularPath.gd" id="4_rnp8a"]
+[ext_resource type="Script" path="res://src/interactables/private_components/FireDashTangentSpeed.gd" id="4_rnp8a"]
 [ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="7_1yihk"]
 [ext_resource type="Script" path="res://src/interactables/private_components/PulseRing.gd" id="8_cm0co"]
 [ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="9_mnank"]
+[ext_resource type="Script" path="res://src/interactables/private_components/FireDashRotatedSpeed.gd" id="10_vjlqm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jwypc"]
 size = Vector2(128, 128)
@@ -54,8 +55,11 @@ script = ExtResource("2_jnww5")
 [node name="FireDashComponent" type="Node" parent="."]
 script = ExtResource("3_binks")
 
-[node name="FireDashAngularPath" type="Node" parent="FireDashComponent"]
+[node name="FireDashTangentSpeed" type="Node" parent="FireDashComponent"]
 script = ExtResource("4_rnp8a")
+
+[node name="FireDashRotatedSpeed" type="Node" parent="FireDashComponent"]
+script = ExtResource("10_vjlqm")
 
 [node name="DirectionChangerComponent" type="Node" parent="."]
 script = ExtResource("9_mnank")

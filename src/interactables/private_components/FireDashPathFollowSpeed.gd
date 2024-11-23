@@ -1,5 +1,5 @@
 extends Node
-class_name FireDashCurvePath
+class_name PathFollowSpeed
 
 func _ready() -> void:
 	var parent := get_parent() as FireDashComponent

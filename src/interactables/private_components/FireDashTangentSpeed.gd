@@ -1,5 +1,5 @@
 extends Node
-class_name FireDashAngularPath
+class_name TangentSpeed
 
 @onready var parent := get_parent() as FireDashComponent
 
