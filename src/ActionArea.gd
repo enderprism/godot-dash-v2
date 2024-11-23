@@ -49,7 +49,7 @@ func _on_player_enter(_body: Node2D) -> void:
 		Action.STOP_JUMP:
 			_player.jump_hold_disabled = true
 		Action.STOP_DASH:
-			_player._stop_dash()
+			_player.stop_dash()
 
 func _refresh_letter() -> void:
 	match _action:

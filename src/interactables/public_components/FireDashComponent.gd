@@ -28,8 +28,3 @@ func start(player: Player) -> void:
 	var dash_boom = player.DASH_BOOM.instantiate()
 	dash_boom.position = player.to_local(parent.global_position)
 	player.add_child(dash_boom)
-
-func stop(player: Player) -> void:
-	player.get_node("DashParticles").emitting = false
-	player.get_node("DashFlame").hide()
-	player.dash_control = null

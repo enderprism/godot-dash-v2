@@ -307,7 +307,7 @@ func _compute_velocity(delta: float,
 	if dash_control:
 		_velocity = dash_control.path.get_velocity(self)
 		if Input.is_action_just_released("jump"):
-			dash_control.stop(self)
+			stop_dash()
 	#endregion
 
 	if not _dead:
@@ -475,3 +475,8 @@ func _on_kill_collider_solid_body_entered(_body:Node2D) -> void:
 func _on_kill_collider_hazard_body_entered(_body:Node2D) -> void:
 	if _spider_jump_invulnerability_frames == 0:
 		$DeathAnimator.play("DeathAnimation")
+
+func stop_dash() -> void:
+	get_node("DashParticles").emitting = false
+	get_node("DashFlame").hide()
+	dash_control = null
