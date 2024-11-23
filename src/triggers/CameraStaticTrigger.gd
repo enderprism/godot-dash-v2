@@ -86,12 +86,12 @@ func _physics_process(_delta: float) -> void:
 					if not ignore_x:
 						_player_camera.global_position.x = lerp(
 							_player_camera.global_position.x,
-							_player.global_position.x + _player_camera._position_offset.x,
+							_player.global_position.x + _player_camera.position_offset.x,
 							easing._weight)
 					# if not ignore_y:
 					# 	_player_camera.global_position.y = lerp(
 					# 		_player_camera.global_position.y,
-					# 		_player.global_position.y + _player_camera._position_offset.y,
+					# 		_player.global_position.y + _player_camera.position_offset.y,
 					# 		easing._weight)
 		else:
 			printerr("In ", name, ": _player_camera is unset")
