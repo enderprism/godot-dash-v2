@@ -34,7 +34,13 @@ enum TriggerHitboxShape {
 @export var target_group: StringName
 
 ## If the trigger can be used multiple times.
-@export var single_usage: bool = true
+@export var single_usage: bool = true:
+	set(value):
+		single_usage = value
+		if is_inside_tree() and _single_usage_component == null and value:
+			_single_usage_component = NodeUtils.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"), false)
+		if _single_usage_component != null and not value:
+			_single_usage_component.queue_free()
 
 func _validate_property(property: Dictionary) -> void:
 	if property.name == "hitbox_height" and _hitbox_shape != TriggerHitboxShape.LINE:
@@ -50,13 +56,14 @@ var _hitbox_display: TriggerHitboxDisplay
 func _ready() -> void:
 	collision_layer = 16
 	collision_mask = 1
-	_hitbox_display = NodeUtils.get_node_or_add(self, "TriggerHitboxDisplay", load("res://src/triggers/trigger_components/TriggerHitboxDisplay.gd"))
-	_hitbox = NodeUtils.get_node_or_add(self, "Hitbox", CollisionShape2D)
-	sprite = NodeUtils.get_node_or_add(self, "Sprite", Sprite2D)
+	_hitbox_display = NodeUtils.get_node_or_add(self, "TriggerHitboxDisplay", load("res://src/triggers/trigger_components/TriggerHitboxDisplay.gd"), false)
+	_hitbox = NodeUtils.get_node_or_add(self, "Hitbox", CollisionShape2D, false)
+	sprite = NodeUtils.get_node_or_add(self, "Sprite", Sprite2D, false)
 	_hitbox.debug_color = Color("fff5006b")
 	sprite.scale = Vector2.ONE * 0.2
 	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
-	_single_usage_component = NodeUtils.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"))
+	if single_usage:
+		_single_usage_component = NodeUtils.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"), false)
 	NodeUtils.connect_new(hitbox_shape_changed, _hitbox_display.update_shape)
 	_set_hitbox_shape()
 
