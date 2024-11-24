@@ -81,14 +81,19 @@ func _physics_process(_delta: float) -> void:
 				if _scale_around_self:
 					_target.global_scale += _scale_delta
 				else:
-					var _target_parent: Node = _target.get_parent()
-					_pivot.global_scale = _initial_global_scale
-					_target.reparent(_pivot)
-					_pivot.global_scale += _scale_delta
-					_target.reparent(_target_parent)
-					_pivot.global_scale = _pivot_scale
-					if _change_position_only:
-						_target.global_scale = _initial_global_scale
+					# var _target_parent: Node = _target.get_parent()
+					# _pivot.global_scale = _initial_global_scale
+					# _target.reparent(_pivot)
+					# _pivot.global_scale += _scale_delta
+					# _target.reparent(_target_parent)
+					# _pivot.global_scale = _pivot_scale
+					# if _change_position_only:
+					# 	_target.global_scale = _initial_global_scale
+					var position_relative_to_pivot: Vector2 = _target.global_position - _pivot.global_position
+					var position_delta := position_relative_to_pivot * ((_target.global_scale + _scale_delta) / _target.global_scale) - position_relative_to_pivot
+					_target.global_position += position_delta
+					if not _change_position_only:
+						_target.global_scale += _scale_delta
 		elif LevelManager.in_editor and LevelManager.level_playing:
 			printerr("In ", name, "_process: _target is unset")
 	elif Engine.is_editor_hint() or LevelManager.in_editor:
