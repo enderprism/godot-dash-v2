@@ -16,6 +16,15 @@ enum EditorAction {
 var editor_actions: int
 
 func _ready() -> void:
+	if LevelManager.editor_level_backup.can_instantiate():
+		$GameScene/Level.add_child(LevelManager.editor_level_backup.instantiate())
+		print_debug("instantiated edited level")
+		level = $GameScene/Level.get_child(0)
+	elif $GameScene/Level.get_child(0) == null:
+		print_debug('man shut yo bitch ass up')
+		$GameScene/Level.add_child(level)
+		level.owner = self
+
 	if LevelManager.entering_editor:
 		LevelManager.entering_editor = false
 		var _fade_screen = $FadeScreenLayer/FadeScreen
@@ -37,10 +46,6 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	%MenuBar/View.set_item_submenu(0, "PanelVisibility")
 	$EditorCamera.zoom_changed.connect($GameScene/EditorGridParallax/EditorGrid.queue_redraw)
-	$GameScene/Level.add_child(level)
-	set_process_input(false)
-	set_process_unhandled_input(true)
-
 	$EditHandler.placed_objects_collider = placed_objects_collider
 	$EditHandler.editor_mode = %EditorModes
 
@@ -72,6 +77,13 @@ func texture_variation_overlapping(type: EditorSelectionCollider.Type, id: int) 
 
 
 func _on_button_pressed() -> void:
-	$GameScene._start_level()
 	$EditorCamera.enabled = not $EditorCamera.enabled
 	$GameScene/PlayerCamera.enabled = not $GameScene/PlayerCamera.enabled
+	if $GameScene/PlayerCamera.enabled:
+		LevelManager.editor_level_backup.pack(level)
+		print_debug("packed level", LevelManager.editor_level_backup.can_instantiate())
+		LevelManager.editor_backup.pack(self)
+		$GameScene._start_level()
+	else:
+		get_tree().change_scene_to_packed(LevelManager.editor_backup)
+
