@@ -12,43 +12,44 @@ var selection_index := -1
 func _physics_process(delta: float) -> void:
 	if object_move_cooldown > 0:
 		object_move_cooldown -= delta
-	if editor_mode.get_current_tab_control().name == "Edit":
-		_update_selection()
-		get_viewport().gui_release_focus()
-	if not selection.is_empty():
-		if Input.is_action_just_pressed(&"editor_single_selection_cycle"):
-			selection_index -= 1
-		if Input.is_action_just_pressed(&"editor_deselect"):
-			selection.map(func(object): object.get_node("SelectionHighlight").queue_free())
-			selection.clear()
-			_reset_selection_zone()
-		if Input.is_action_just_pressed(&"editor_delete"):
-			selection.map(func(object): object.queue_free())
-			selection.clear()
-			_reset_selection_zone()
-		if Input.is_action_just_pressed(&"editor_duplicate"):
-			_duplicate_selection()
-			object_move_cooldown = 5
-		if Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down") and object_move_cooldown <= 0:
-			var move_vector: Vector2
-			move_vector.x = Input.get_axis(&"ui_left", &"ui_right")
-			move_vector.y = Input.get_axis(&"ui_up", &"ui_down")
-			selection.map(func(object): object.global_position += move_vector * LevelManager.CELL_SIZE)
-			object_move_cooldown = 0.2
-		if not rotation_lock:
-			if Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45") and object_move_cooldown <= 0:
-				_rotate_selection(Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45") * 45.0)
+	if get_viewport().gui_get_hovered_control() == null:
+		if editor_mode.get_current_tab_control().name == "Edit":
+			_update_selection()
+			get_viewport().gui_release_focus()
+		if not selection.is_empty():
+			if Input.is_action_just_pressed(&"editor_single_selection_cycle"):
+				selection_index -= 1
+			if Input.is_action_just_pressed(&"editor_deselect"):
+				selection.map(func(object): object.get_node("SelectionHighlight").queue_free())
+				selection.clear()
+				_reset_selection_zone()
+			if Input.is_action_just_pressed(&"editor_delete"):
+				selection.map(func(object): object.queue_free())
+				selection.clear()
+				_reset_selection_zone()
+			if Input.is_action_just_pressed(&"editor_duplicate"):
+				_duplicate_selection()
+				object_move_cooldown = 5
+			if Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down") and object_move_cooldown <= 0:
+				var move_vector: Vector2
+				move_vector.x = Input.get_axis(&"ui_left", &"ui_right")
+				move_vector.y = Input.get_axis(&"ui_up", &"ui_down")
+				selection.map(func(object): object.global_position += move_vector * LevelManager.CELL_SIZE)
 				object_move_cooldown = 0.2
-			if Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90") and object_move_cooldown <= 0:
-				_rotate_selection(Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90") * 90.0)
-				object_move_cooldown = 0.2
-	if not (Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down")
-			or Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45")
-			or Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90")):
-		object_move_cooldown = 0.0
-	if Input.is_action_just_released(&"editor_add"):
-		selection.map(_add_selection_highlight)
-		_reset_selection_zone()
+			if not rotation_lock:
+				if Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45") and object_move_cooldown <= 0:
+					_rotate_selection(Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45") * 45.0)
+					object_move_cooldown = 0.2
+				if Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90") and object_move_cooldown <= 0:
+					_rotate_selection(Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90") * 90.0)
+					object_move_cooldown = 0.2
+		if not (Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down")
+				or Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45")
+				or Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90")):
+			object_move_cooldown = 0.0
+		if Input.is_action_just_released(&"editor_add"):
+			selection.map(_add_selection_highlight)
+			_reset_selection_zone()
 
 
 func _update_selection() -> void:
