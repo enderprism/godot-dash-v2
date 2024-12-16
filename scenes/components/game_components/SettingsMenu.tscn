@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6gonom0s5k1n"]
+[gd_scene load_steps=12 format=3 uid="uid://b6gonom0s5k1n"]
 
 [ext_resource type="Script" path="res://src/gui/GUIInputValueReset.gd" id="1_kwnn5"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/ButtonNoFocusColor.tres" id="1_r47on"]
 [ext_resource type="Shader" path="res://resources/shaders/BackgroundBlur.gdshader" id="1_yyawl"]
 [ext_resource type="Script" path="res://src/gui/SliderSpinboxCombo.gd" id="3_1fi1f"]
 [ext_resource type="Script" path="res://src/SettingsMenu.gd" id="3_rvg0e"]
+[ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="4_fiwkk"]
 [ext_resource type="Script" path="res://src/gui/IDOptionButton.gd" id="6_awsok"]
 [ext_resource type="Script" path="res://src/SaveLoadConfigValue.gd" id="6_p6jor"]
 [ext_resource type="Script" path="res://src/gui/SectionHeader.gd" id="8_eb8rq"]
@@ -41,10 +42,7 @@ metadata/_tab_index = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme = ExtResource("4_fiwkk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Graphics/MarginContainer"]
 layout_mode = 2
@@ -176,10 +174,7 @@ metadata/_tab_index = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme = ExtResource("4_fiwkk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Audio/MarginContainer"]
 layout_mode = 2
@@ -376,10 +371,7 @@ metadata/_tab_index = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme = ExtResource("4_fiwkk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Editor/MarginContainer"]
 layout_mode = 2
