@@ -18,10 +18,8 @@ var editor_actions: int
 func _ready() -> void:
 	if LevelManager.editor_level_backup.can_instantiate():
 		$GameScene/Level.add_child(LevelManager.editor_level_backup.instantiate())
-		print_debug("instantiated edited level")
 		level = $GameScene/Level.get_child(0)
 	elif $GameScene/Level.get_child(0) == null:
-		print_debug('man shut yo bitch ass up')
 		$GameScene/Level.add_child(level)
 		level.owner = self
 
