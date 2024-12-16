@@ -9,6 +9,9 @@ var editor_mode: TabContainer
 var rotation_lock := false ## Lock variable to ensure 2 rotations aren't happening at the same time.
 var selection_index := -1
 
+func _ready() -> void:
+	_reset_selection_zone(true)
+
 func _physics_process(delta: float) -> void:
 	if object_move_cooldown > 0:
 		object_move_cooldown -= delta
