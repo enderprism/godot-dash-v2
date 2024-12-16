@@ -21,7 +21,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if has_node("Sprite"):
 		$Sprite.global_scale = Vector2.ONE/4
-		$Sprite.size = abs(scale) * 512
+		$Sprite.size = abs(global_scale) * 512
 	if not Engine.is_editor_hint():
 		# $Hitbox.global_rotation = 0.0
 		# $Hitbox.global_scale = Vector2.ONE
