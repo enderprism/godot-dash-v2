@@ -36,6 +36,9 @@ func _ready() -> void:
 	
 	LevelManager.level_playing = false
 	$EditorCamera.enabled = true
+	%EditorModes.show()
+	$EditorCamera.wrap_inset.y = %EditorModes.custom_minimum_size.y
+	%EditorViewport.mouse_filter = MOUSE_FILTER_IGNORE
 	$GameScene/PlayerCamera.enabled = false
 	$GameScene/EditorGridParallax/EditorGrid.show()
 	$GameScene/EditorGridParallax/EditorGrid.queue_redraw()
@@ -74,10 +77,12 @@ func texture_variation_overlapping(type: EditorSelectionCollider.Type, id: int) 
 	return false
 
 
-func _on_button_pressed() -> void:
+func _on_playtest_pressed() -> void:
 	$EditorCamera.enabled = not $EditorCamera.enabled
 	$GameScene/PlayerCamera.enabled = not $GameScene/PlayerCamera.enabled
 	if $GameScene/PlayerCamera.enabled:
+		%EditorModes.hide()
+		%EditorViewport.mouse_filter = MOUSE_FILTER_STOP
 		LevelManager.editor_level_backup.pack(level)
 		print_debug("packed level", LevelManager.editor_level_backup.can_instantiate())
 		LevelManager.editor_backup.pack(self)
