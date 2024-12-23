@@ -3,18 +3,19 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://8e1lxpyo40t5"
-path="res://.godot/imported/PUSAB.otf-12cc1fc3a1e94c09d282503baee20aa6.fontdata"
+path="res://.godot/imported/Pusab.otf-e1ee537982a9b2f68445c574177e6b7c.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/PUSAB.otf"
-dest_files=["res://.godot/imported/PUSAB.otf-12cc1fc3a1e94c09d282503baee20aa6.fontdata"]
+source_file="res://assets/fonts/Pusab.otf"
+dest_files=["res://.godot/imported/Pusab.otf-e1ee537982a9b2f68445c574177e6b7c.fontdata"]
 
 [params]
 
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
