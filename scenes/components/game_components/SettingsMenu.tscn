@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6gonom0s5k1n"]
+[gd_scene load_steps=12 format=3 uid="uid://b6gonom0s5k1n"]
 
 [ext_resource type="Script" path="res://src/gui/GUIInputValueReset.gd" id="1_kwnn5"]
 [ext_resource type="Material" uid="uid://dmfwkx1hhpd5x" path="res://resources/SimpleBlurMaterial.tres" id="1_olkne"]
@@ -7,8 +7,9 @@
 [ext_resource type="Script" path="res://src/SettingsMenu.gd" id="3_rvg0e"]
 [ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="4_fiwkk"]
 [ext_resource type="Script" path="res://src/gui/IDOptionButton.gd" id="6_awsok"]
+[ext_resource type="LabelSettings" uid="uid://b1kjn67ym2n4g" path="res://resources/SectionHeadings.tres" id="6_p3l0s"]
 [ext_resource type="Script" path="res://src/SaveLoadConfigValue.gd" id="6_p6jor"]
-[ext_resource type="Script" path="res://src/gui/SectionHeader.gd" id="8_eb8rq"]
+[ext_resource type="Script" path="res://src/gui/SectionHeading.gd" id="8_eb8rq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ib2vd"]
 
@@ -46,7 +47,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 script = ExtResource("8_eb8rq")
-label_settings = SubResource("LabelSettings_ib2vd")
+label_settings = ExtResource("6_p3l0s")
 
 [node name="FPS" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -121,7 +122,7 @@ property = &"selected"
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 script = ExtResource("8_eb8rq")
-label_settings = SubResource("LabelSettings_ib2vd")
+label_settings = ExtResource("6_p3l0s")
 
 [node name="WindowMode" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer"]
 layout_mode = 2

@@ -1,6 +1,6 @@
 @tool
 extends PanelContainer
-class_name SectionHeader
+class_name SectionHeading
 
 @export var label_settings: LabelSettings
 @export var alignment := HORIZONTAL_ALIGNMENT_CENTER:
