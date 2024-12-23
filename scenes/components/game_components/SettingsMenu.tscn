@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6gonom0s5k1n"]
+[gd_scene load_steps=11 format=3 uid="uid://b6gonom0s5k1n"]
 
 [ext_resource type="Script" path="res://src/gui/GUIInputValueReset.gd" id="1_kwnn5"]
+[ext_resource type="Material" uid="uid://dmfwkx1hhpd5x" path="res://resources/SimpleBlurMaterial.tres" id="1_olkne"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_r47on"]
-[ext_resource type="Shader" path="res://resources/shaders/BackgroundBlur.gdshader" id="1_yyawl"]
 [ext_resource type="Script" path="res://src/gui/SliderSpinboxCombo.gd" id="3_1fi1f"]
 [ext_resource type="Script" path="res://src/SettingsMenu.gd" id="3_rvg0e"]
 [ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="4_fiwkk"]
@@ -10,16 +10,10 @@
 [ext_resource type="Script" path="res://src/SaveLoadConfigValue.gd" id="6_p6jor"]
 [ext_resource type="Script" path="res://src/gui/SectionHeader.gd" id="8_eb8rq"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gfqej"]
-shader = ExtResource("1_yyawl")
-shader_parameter/lod = 3.0
-shader_parameter/gui_color = null
-shader_parameter/mix_factor = 0.5
-
 [sub_resource type="LabelSettings" id="LabelSettings_ib2vd"]
 
 [node name="SettingsMenu" type="TabContainer"]
-material = SubResource("ShaderMaterial_gfqej")
+material = ExtResource("1_olkne")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

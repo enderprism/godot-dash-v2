@@ -1,11 +1,11 @@
-[gd_scene load_steps=63 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=62 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
 [ext_resource type="ButtonGroup" uid="uid://glg4m2ke0qn2" path="res://resources/BlockPaletteButtonGroup.tres" id="3_0vcbd"]
 [ext_resource type="Script" path="res://src/editor/BlockPaletteIcons.gd" id="3_d5qub"]
-[ext_resource type="Shader" path="res://resources/shaders/BackgroundBlur.gdshader" id="3_eu43l"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="3_k1q1p"]
+[ext_resource type="Material" uid="uid://dmfwkx1hhpd5x" path="res://resources/SimpleBlurMaterial.tres" id="3_m55bu"]
 [ext_resource type="Texture2D" uid="uid://cffmcdyqdl686" path="res://assets/textures/guis/editor/EditorPlayPlayer.svg" id="3_qy4mu"]
 [ext_resource type="Texture2D" uid="uid://c3d7se3g1r25n" path="res://assets/textures/guis/editor/block_palette/Solids.svg" id="4_7or8s"]
 [ext_resource type="Script" path="res://src/BouncyButton.gd" id="4_gl2yd"]
@@ -68,12 +68,6 @@ extends Control
 		_scale = value
 		scale = value
 "
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7lsbn"]
-shader = ExtResource("3_eu43l")
-shader_parameter/lod = 3.0
-shader_parameter/gui_color = null
-shader_parameter/mix_factor = 0.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac3bt"]
 radius = 2.0
@@ -144,24 +138,25 @@ size_flags_horizontal = 6
 size_flags_vertical = 3
 color = Color(0.15625, 0.15625, 0.15625, 1)
 
-[node name="EditorContainer" type="HBoxContainer" parent="EditorUI"]
+[node name="EditorContainer" type="HSplitContainer" parent="EditorUI"]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
+split_offset = 1920
+dragger_visibility = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EditorUI/EditorContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 mouse_filter = 2
 
 [node name="EditorViewport" type="Control" parent="EditorUI/EditorContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(1520, 764)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
@@ -170,7 +165,7 @@ script = SubResource("GDScript_fl515")
 [node name="EditorModes" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer" node_paths=PackedStringArray("shortcut_context")]
 unique_name_in_owner = true
 texture_filter = 4
-material = SubResource("ShaderMaterial_7lsbn")
+material = ExtResource("3_m55bu")
 custom_minimum_size = Vector2(0, 312)
 layout_mode = 2
 shortcut_context = NodePath("../../../../FocusGrabber")
@@ -693,11 +688,13 @@ metadata/_tab_index = 2
 
 [node name="SidePanel" type="PanelContainer" parent="EditorUI/EditorContainer"]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_7lsbn")
+visible = false
+material = ExtResource("3_m55bu")
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="EditorUI/EditorContainer/SidePanel"]
+visible = false
 layout_mode = 2
 theme = ExtResource("51_rnq45")
 
@@ -709,11 +706,25 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SidePanelTree" type="Tree" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="EditorUI/EditorContainer"]
+material = ExtResource("3_m55bu")
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("3_k1q1p")
+current_tab = 0
+
+[node name="Control" type="Control" parent="EditorUI/EditorContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Control2" type="Control" parent="EditorUI/EditorContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Control3" type="Control" parent="EditorUI/EditorContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="Playtest" type="Button" parent="EditorUI"]
 offset_left = 64.0
@@ -776,9 +787,8 @@ script = ExtResource("35_xjepn")
 layout_mode = 1
 anchors_preset = 0
 
-[node name="SidePanelManager" type="Node" parent="." node_paths=PackedStringArray("tree")]
+[node name="SidePanelManager" type="Node" parent="."]
 script = ExtResource("58_hnsxj")
-tree = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/SidePanelTree")
 
 [connection signal="ready" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place" to="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
 [connection signal="pressed" from="EditorUI/Playtest" to="." method="_on_playtest_pressed"]

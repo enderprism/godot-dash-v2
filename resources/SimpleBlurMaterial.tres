@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dmfwkx1hhpd5x"]
+
+[ext_resource type="Shader" path="res://resources/shaders/BackgroundBlur.gdshader" id="1_72leu"]
+
+[resource]
+shader = ExtResource("1_72leu")
+shader_parameter/lod = 3.0
+shader_parameter/gui_color = null
+shader_parameter/mix_factor = 0.5
