@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=64 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -57,6 +57,8 @@
 [ext_resource type="Texture2D" uid="uid://c2ngjixel2d42" path="res://assets/textures/orbs/ToggleOrbOutline.svg" id="36_402hc"]
 [ext_resource type="PackedScene" uid="uid://bpmqq5a3or2k5" path="res://scenes/components/level_components/orbs/DashOrbCyan.tscn" id="37_rlt4b"]
 [ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="51_rnq45"]
+[ext_resource type="Script" path="res://src/gui/SectionHeading.gd" id="52_3jb55"]
+[ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="53_jrbqn"]
 [ext_resource type="Script" path="res://src/editor/SidePanelManager.gd" id="58_hnsxj"]
 
 [sub_resource type="GDScript" id="GDScript_fl515"]
@@ -143,7 +145,6 @@ unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -154,6 +155,7 @@ dragger_visibility = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="EditorUI/EditorContainer"]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 0
 
 [node name="EditorViewport" type="Control" parent="EditorUI/EditorContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -688,13 +690,11 @@ metadata/_tab_index = 2
 
 [node name="SidePanel" type="PanelContainer" parent="EditorUI/EditorContainer"]
 unique_name_in_owner = true
-visible = false
 material = ExtResource("3_m55bu")
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="EditorUI/EditorContainer/SidePanel"]
-visible = false
 layout_mode = 2
 theme = ExtResource("51_rnq45")
 
@@ -706,25 +706,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TabContainer" type="TabContainer" parent="EditorUI/EditorContainer"]
-material = ExtResource("3_m55bu")
-custom_minimum_size = Vector2(400, 0)
+[node name="Groups" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-current_tab = 0
+alignment = 1
+script = ExtResource("52_3jb55")
+label_settings = ExtResource("53_jrbqn")
+label_alignment = 1
 
-[node name="Control" type="Control" parent="EditorUI/EditorContainer/TabContainer"]
+[node name="GroupsSection" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="Control2" type="Control" parent="EditorUI/EditorContainer/TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 1
-
-[node name="Control3" type="Control" parent="EditorUI/EditorContainer/TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 2
 
 [node name="Playtest" type="Button" parent="EditorUI"]
 offset_left = 64.0
