@@ -37,7 +37,7 @@ func _ready() -> void:
 	LevelManager.level_playing = false
 	$EditorCamera.enabled = true
 	%EditorModes.show()
-	$EditorCamera.wrap_inset.y = %EditorModes.custom_minimum_size.y
+	%SidePanel.show()
 	%EditorViewport.mouse_filter = MOUSE_FILTER_IGNORE
 	$GameScene/PlayerCamera.enabled = false
 	$GameScene/EditorGridParallax/EditorGrid.show()
@@ -60,6 +60,7 @@ func _physics_process(_delta: float) -> void:
 	elif Input.is_action_just_pressed(&"editor_selection_filters_mode"):
 		%EditorModes.current_tab = 2
 
+	$EditorCamera.wrap_inset = get_viewport_rect().size - %EditorViewport.size
 	if %EditorModes.get_current_tab_control().name == "Place" \
 			and (Input.is_action_just_pressed(&"editor_add") or Input.is_action_just_pressed(&"editor_remove") \
 			or Input.is_action_pressed(&"editor_add_swipe") or Input.is_action_pressed(&"editor_remove_swipe")):
@@ -82,9 +83,9 @@ func _on_playtest_pressed() -> void:
 	$GameScene/PlayerCamera.enabled = not $GameScene/PlayerCamera.enabled
 	if $GameScene/PlayerCamera.enabled:
 		%EditorModes.hide()
+		%SidePanel.hide()
 		%EditorViewport.mouse_filter = MOUSE_FILTER_STOP
 		LevelManager.editor_level_backup.pack(level)
-		print_debug("packed level", LevelManager.editor_level_backup.can_instantiate())
 		LevelManager.editor_backup.pack(self)
 		$GameScene._start_level()
 	else:
