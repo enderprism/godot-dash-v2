@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cntfsyilhn2ic"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://cntfsyilhn2ic"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_521vp"]
 
@@ -8,6 +8,8 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o1vdk"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qg2e3"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2g2l"]
 
 [resource]
@@ -15,4 +17,5 @@ Button/styles/focus = SubResource("StyleBoxEmpty_521vp")
 HSeparator/styles/separator = SubResource("StyleBoxEmpty_1wseb")
 TabBar/styles/tab_focus = SubResource("StyleBoxEmpty_8t62t")
 TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_o1vdk")
+Tree/styles/focus = SubResource("StyleBoxEmpty_qg2e3")
 VSeparator/styles/separator = SubResource("StyleBoxEmpty_h2g2l")
