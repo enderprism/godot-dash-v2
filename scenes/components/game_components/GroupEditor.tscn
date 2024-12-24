@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://da4xswy05y0ve"]
+
+[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_b71ym"]
+[ext_resource type="Script" path="res://src/editor/GroupEditor.gd" id="1_laiw3"]
+[ext_resource type="Texture2D" uid="uid://bnuunm3nj6gcg" path="res://assets/textures/guis/shared/AddItem.svg" id="2_scenm"]
+
+[node name="GroupEditor" type="PanelContainer" node_paths=PackedStringArray("line_edit", "confirm_button", "group_container")]
+custom_minimum_size = Vector2(0, 200)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_b71ym")
+script = ExtResource("1_laiw3")
+line_edit = NodePath("MarginContainer/VBoxContainer/HBoxContainer/LineEdit")
+confirm_button = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Button")
+group_container = NodePath("MarginContainer/VBoxContainer/ScrollContainer/GroupContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_b71ym")
+placeholder_text = "Group name"
+clear_button_enabled = true
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+texture_filter = 4
+custom_minimum_size = Vector2(31, 31)
+layout_mode = 2
+icon = ExtResource("2_scenm")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GroupContainer" type="HFlowContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="text_submitted" from="MarginContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]

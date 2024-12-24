@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=66 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -59,6 +59,8 @@
 [ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="51_rnq45"]
 [ext_resource type="Script" path="res://src/gui/SectionHeading.gd" id="52_3jb55"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="53_jrbqn"]
+[ext_resource type="Script" path="res://src/gui/Property.gd" id="54_7ildb"]
+[ext_resource type="PackedScene" uid="uid://da4xswy05y0ve" path="res://scenes/components/game_components/GroupEditor.tscn" id="55_5vu0v"]
 [ext_resource type="Script" path="res://src/editor/SidePanelManager.gd" id="58_hnsxj"]
 
 [sub_resource type="GDScript" id="GDScript_fl515"]
@@ -714,7 +716,14 @@ script = ExtResource("52_3jb55")
 label_settings = ExtResource("53_jrbqn")
 label_alignment = 1
 
-[node name="GroupsSection" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Group Parent" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Groups"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+alignment = 1
+script = ExtResource("54_7ildb")
+type = 2
+
+[node name="GroupEditor" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Groups" instance=ExtResource("55_5vu0v")]
 layout_mode = 2
 
 [node name="Playtest" type="Button" parent="EditorUI"]

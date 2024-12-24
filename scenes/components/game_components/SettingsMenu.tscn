@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/gui/GUIInputValueReset.gd" id="1_kwnn5"]
 [ext_resource type="Material" uid="uid://dmfwkx1hhpd5x" path="res://resources/SimpleBlurMaterial.tres" id="1_olkne"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_r47on"]
-[ext_resource type="Script" path="res://src/gui/SliderSpinboxCombo.gd" id="3_1fi1f"]
+[ext_resource type="Script" path="res://src/gui/HSliderSpinBoxCombo.gd" id="3_1fi1f"]
 [ext_resource type="Script" path="res://src/SettingsMenu.gd" id="3_rvg0e"]
 [ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="4_fiwkk"]
 [ext_resource type="Script" path="res://src/gui/IDOptionButton.gd" id="6_awsok"]
@@ -22,7 +22,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_r47on")
-current_tab = 2
+current_tab = 1
 script = ExtResource("3_rvg0e")
 metadata/_edit_group_ = true
 
@@ -162,7 +162,6 @@ script = ExtResource("1_kwnn5")
 property = &"selected"
 
 [node name="Audio" type="ScrollContainer" parent="."]
-visible = false
 layout_mode = 2
 focus_mode = 1
 metadata/_tab_index = 1
@@ -353,6 +352,7 @@ script = ExtResource("1_kwnn5")
 property = &"value"
 
 [node name="Editor" type="ScrollContainer" parent="."]
+visible = false
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
