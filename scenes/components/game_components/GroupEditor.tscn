@@ -30,7 +30,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_b71ym")
-placeholder_text = "Group name"
+placeholder_text = "Add a group to the selected objects…"
 clear_button_enabled = true
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
