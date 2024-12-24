@@ -22,7 +22,7 @@ func _ready() -> void:
 	heading.label_settings = label_settings
 	heading.alignment = label_alignment
 	add_child(heading, false, INTERNAL_MODE_FRONT)
-
+	move_child(heading, 0)
 	if get_child_count() > 0:
 		fold_button = NodeUtils.get_node_or_add(heading, "FoldButton", Button, true, false)
 		fold_button.icon = icon_open
