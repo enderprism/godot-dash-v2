@@ -1,6 +1,7 @@
 extends Node
 
 signal selection_zone_changed(new_zone: Rect2)
+signal selection_changed(selection: Array[Node2D])
 
 var selection: Array[Node2D]
 var object_move_cooldown: float
@@ -31,6 +32,7 @@ func _physics_process(delta: float) -> void:
 				selection.map(func(object): object.queue_free())
 				selection.clear()
 				_reset_selection_zone()
+				selection_changed.emit(selection)
 			if Input.is_action_just_pressed(&"editor_duplicate"):
 				_duplicate_selection()
 				object_move_cooldown = 5
@@ -74,6 +76,7 @@ func _update_selection() -> void:
 		selection = ArrayUtils.difference(selection, selection_buffer, TYPE_OBJECT, "Node2D")
 	elif Input.is_action_just_released(&"editor_add") and $SelectionZone/Hitbox.shape.size > Vector2.ONE * 2:
 		selection = ArrayUtils.union(selection, selection_buffer, TYPE_OBJECT, "Node2D")
+	selection_changed.emit(selection)
 
 
 func _get_object_parent(object: Node) -> Node2D:
@@ -159,3 +162,4 @@ func _rotate_selection(angle: float) -> void:
 
 func _on_place_handler_object_deleted(object:Node) -> void:
 	selection.erase(object)
+	selection_changed.emit(selection)
