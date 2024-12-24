@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 	if object_move_cooldown > 0:
 		object_move_cooldown -= delta
 	if get_viewport().gui_get_hovered_control() == null \
-			or (get_viewport().gui_get_hovered_control() != null and get_viewport().gui_get_hovered_control().name != "Playtest"):
+			or (get_viewport().gui_get_hovered_control() != null and get_viewport().gui_get_hovered_control().name != "Playtest" and get_viewport().gui_get_hovered_control() is not LineEdit):
 		if editor_mode.get_current_tab_control().name == "Edit":
 			_update_selection()
 			get_viewport().gui_release_focus()

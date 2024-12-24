@@ -709,6 +709,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Groups" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 alignment = 1
@@ -787,10 +788,14 @@ script = ExtResource("35_xjepn")
 layout_mode = 1
 anchors_preset = 0
 
-[node name="SidePanelManager" type="Node" parent="."]
+[node name="SidePanelManager" type="Node" parent="." node_paths=PackedStringArray("side_panel", "group_section", "group_editor")]
 script = ExtResource("58_hnsxj")
+side_panel = NodePath("../EditorUI/EditorContainer/SidePanel")
+group_section = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Groups")
+group_editor = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Groups/GroupEditor")
 
 [connection signal="ready" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place" to="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
 [connection signal="pressed" from="EditorUI/Playtest" to="." method="_on_playtest_pressed"]
 [connection signal="object_deleted" from="PlaceHandler" to="EditHandler" method="_on_place_handler_object_deleted"]
+[connection signal="selection_changed" from="EditHandler" to="SidePanelManager" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_zone_changed" from="EditHandler" to="EditHandler/SelectionZone/SelectionZoneDisplay" method="_on_edit_handler_selection_zone_changed"]
