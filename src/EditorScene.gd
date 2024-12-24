@@ -86,6 +86,10 @@ func _on_playtest_pressed() -> void:
 		%EditorModes.hide()
 		%SidePanel.hide()
 		%EditorViewport.mouse_filter = MOUSE_FILTER_STOP
+		if not $EditHandler.selection.is_empty():
+			$EditHandler.selection.map(func(object): object.get_node("SelectionHighlight").queue_free())
+			await $EditHandler.selection[-1].get_node("SelectionHighlight").tree_exited
+			$EditHandler.selection.clear()
 		LevelManager.editor_level_backup.pack(level)
 		LevelManager.editor_backup.pack(self)
 		$GameScene._start_level()
