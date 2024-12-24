@@ -34,6 +34,8 @@ signal zoom_changed
 ## If [code]true[/code], the map can be dragged even when GUI is hovered.
 @export var passthrough_gui := false
 
+@export var editor_viewport: Control
+
 var _tween_offset
 var _tween_zoom
 var _pan_direction: set = _set_pan_direction
@@ -62,20 +64,22 @@ func _input(event):
 		if event.pressed:
 			match event.button_index:
 				MOUSE_BUTTON_WHEEL_UP:
-					if (get_viewport().gui_get_hovered_control() == null and not passthrough_gui) or passthrough_gui:
+					if (get_viewport().gui_get_hovered_control() == editor_viewport and not passthrough_gui) or passthrough_gui:
 						_change_zoom(zoom_factor)
 				MOUSE_BUTTON_WHEEL_DOWN:
-					if (get_viewport().gui_get_hovered_control() == null and not passthrough_gui) or passthrough_gui:
+					if (get_viewport().gui_get_hovered_control() == editor_viewport and not passthrough_gui) or passthrough_gui:
 						_change_zoom(1 / zoom_factor)
 				MOUSE_BUTTON_MIDDLE:
-					if drag and ((get_viewport().gui_get_hovered_control() == null and not passthrough_gui) or passthrough_gui):
+					if drag and ((get_viewport().gui_get_hovered_control() == editor_viewport and not passthrough_gui) or passthrough_gui):
 						_dragging = true
 						
-						Input.set_default_cursor_shape(Input.CURSOR_DRAG) # delete to disable drag cursor
+						# Input.set_default_cursor_shape(Input.CURSOR_DRAG) # delete to disable drag cursor
+						editor_viewport.mouse_default_cursor_shape = Control.CURSOR_DRAG
 		elif event.button_index == MOUSE_BUTTON_MIDDLE:
 			_dragging = false
 			
-			Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+			# Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+			editor_viewport.mouse_default_cursor_shape = Control.CURSOR_ARROW
 	elif event is InputEventMouseMotion:
 		_pan_direction -= _pan_direction_mouse
 		_pan_direction_mouse = Vector2()
