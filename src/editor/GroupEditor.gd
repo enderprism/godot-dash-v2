@@ -23,11 +23,15 @@ func _update_groups(selection: Array[Node2D], group: String, add: bool) -> void:
 
 func _on_line_edit_text_submitted(new_text:String) -> void:
 	_update_groups(selected_objects, new_text, true)
+	# TODO "keep focus" doesn't work
+	if not Input.is_action_pressed(&"ui_accept_keep_focus"):
+		get_viewport().gui_release_focus()
 	line_edit.clear()
 
 
 func _on_button_pressed() -> void:
 	_update_groups(selected_objects, line_edit.get_text(), true)
+	get_viewport().gui_release_focus()
 	line_edit.clear()
 
 func _remove_group() -> void:
