@@ -55,12 +55,11 @@ static func transform(array: Array[Variant], transformation: Transformation, at_
 		var result: Vector2
 		var array_x = array.map(func(element): return round(element.x))
 		var array_y = array.map(func(element): return round(element.y))
+		array_x = to_set(array_x)
+		array_y = to_set(array_y)
 		if at_edges:
 			array_x = [array_x[0], array_x[-1]]
 			array_y = [array_y[0], array_y[-1]]
-		else:
-			array_x = to_set(array_x)
-			array_y = to_set(array_y)
 		match transformation:
 			Transformation.MEAN:
 				result.x = _mean_float(array_x)
