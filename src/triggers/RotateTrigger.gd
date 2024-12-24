@@ -73,11 +73,6 @@ func _physics_process(_delta: float) -> void:
 				if _rotate_around_self:
 					_target.global_rotation_degrees += _rotation_delta
 				else:
-					# var _target_parent: Node = _target.get_parent()
-					# _target.reparent(_pivot)
-					# _pivot.global_rotation_degrees += _rotation_delta
-					# _target.reparent(_target_parent)
-					# _pivot.global_rotation_degrees -= _rotation_delta
 					_target.global_rotation_degrees += _rotation_delta
 					var position_relative_to_pivot: Vector2 = _target.global_position - _pivot.global_position
 					var position_delta := position_relative_to_pivot.rotated(deg_to_rad(_rotation_delta)) - position_relative_to_pivot
