@@ -143,20 +143,17 @@ func _rotate_selection(angle: float) -> void:
 	rotation_lock = true
 	var rotation_center_position: Vector2
 	var group_parents := selection.filter(func(object): object.has_meta("group_parent"))
-	var object_parents := selection.map(func(object): return object.get_parent())
 	if not group_parents.is_empty():
 		rotation_center_position = group_parents[0].global_position
 	else:
-		# Take the median of the position of all objects
+		# Take the mean of the position of all objects
 		var object_positions := selection.duplicate().map(func(object): return object.global_position)
 		rotation_center_position = ArrayUtils.transform(object_positions, ArrayUtils.Transformation.MEAN, true)
-	var rotation_center = Node2D.new()
-	get_parent().add_child(rotation_center)
-	rotation_center.global_position = rotation_center_position
-	selection.map(func(object): object.reparent(rotation_center))
-	rotation_center.rotation_degrees += angle
-	for i in len(selection):
-		selection[i].reparent(object_parents[i])
+	for object in selection:
+		object.global_rotation_degrees += angle
+		var position_relative_to_pivot: Vector2 = object.global_position - rotation_center_position
+		var position_delta := position_relative_to_pivot.rotated(deg_to_rad(angle)) - position_relative_to_pivot
+		object.global_position += position_delta
 	rotation_lock = false
 
 
