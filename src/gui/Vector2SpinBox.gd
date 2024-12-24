@@ -4,6 +4,11 @@ class_name Vector2SpinBox
 
 signal value_changed(new_value: Vector2)
 
+@export var suffix: String:
+	set(value):
+		suffix = value
+		for spinbox in [spinbox_x, spinbox_y]:
+			spinbox.suffix = value
 @export var keep_aspect: bool
 @export var rounded: bool
 @onready var spinbox_x: SpinBox
@@ -27,7 +32,7 @@ func _ready() -> void:
 	spinbox_y = NodeUtils.get_node_or_add(self, "SpinBoxY", SpinBox, true, false)
 	for spinbox in [spinbox_x, spinbox_y]:
 		spinbox.allow_greater = true
-		spinbox.suffix = "px"
+		spinbox.suffix = suffix
 		spinbox.custom_minimum_size.x = 128
 		spinbox.alignment = HORIZONTAL_ALIGNMENT_FILL
 		spinbox.rounded = rounded
