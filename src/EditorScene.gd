@@ -38,7 +38,6 @@ func _ready() -> void:
 	$EditorCamera.enabled = true
 	%EditorModes.show()
 	%SidePanel.show()
-	%EditorViewport.mouse_filter = MOUSE_FILTER_IGNORE
 	$GameScene/PlayerCamera.enabled = false
 	$GameScene/EditorGridParallax/EditorGrid.show()
 	$GameScene/EditorGridParallax/EditorGrid.queue_redraw()
@@ -53,12 +52,13 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	placed_objects_collider.global_position = get_local_mouse_position()
-	if Input.is_action_just_pressed(&"editor_place_mode"):
-		%EditorModes.current_tab = 0
-	elif Input.is_action_just_pressed(&"editor_edit_mode"):
-		%EditorModes.current_tab = 1
-	elif Input.is_action_just_pressed(&"editor_selection_filters_mode"):
-		%EditorModes.current_tab = 2
+	if get_viewport().gui_get_focus_owner() is not LineEdit:
+		if Input.is_action_just_pressed(&"editor_place_mode"):
+			%EditorModes.current_tab = 0
+		elif Input.is_action_just_pressed(&"editor_edit_mode"):
+			%EditorModes.current_tab = 1
+		elif Input.is_action_just_pressed(&"editor_selection_filters_mode"):
+			%EditorModes.current_tab = 2
 
 	$EditorCamera.wrap_inset = get_viewport_rect().size - %EditorViewport.size
 	if %EditorModes.get_current_tab_control().name == "Place" \

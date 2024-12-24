@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=65 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -62,16 +62,6 @@
 [ext_resource type="Script" path="res://src/gui/Property.gd" id="54_7ildb"]
 [ext_resource type="PackedScene" uid="uid://da4xswy05y0ve" path="res://scenes/components/game_components/GroupEditor.tscn" id="55_5vu0v"]
 [ext_resource type="Script" path="res://src/editor/SidePanelManager.gd" id="58_hnsxj"]
-
-[sub_resource type="GDScript" id="GDScript_fl515"]
-script/source = "@tool
-extends Control
-
-@export var _scale: Vector2:
-	set(value):
-		_scale = value
-		scale = value
-"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac3bt"]
 radius = 2.0
@@ -163,8 +153,7 @@ theme_override_constants/separation = 0
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-mouse_filter = 2
-script = SubResource("GDScript_fl515")
+mouse_filter = 1
 
 [node name="EditorModes" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer" node_paths=PackedStringArray("shortcut_context")]
 unique_name_in_owner = true
@@ -765,11 +754,13 @@ debug_color = Color(0.678125, 0.7, 0, 0.42)
 
 [node name="FadeScreenLayer" parent="." instance=ExtResource("26_j5fve")]
 
-[node name="PlaceHandler" type="Node" parent="."]
+[node name="PlaceHandler" type="Node" parent="." node_paths=PackedStringArray("editor_viewport")]
 script = ExtResource("33_uwrsc")
+editor_viewport = NodePath("../EditorUI/EditorContainer/VBoxContainer/EditorViewport")
 
-[node name="EditHandler" type="Node" parent="."]
+[node name="EditHandler" type="Node" parent="." node_paths=PackedStringArray("editor_viewport")]
 script = ExtResource("34_7dx3o")
+editor_viewport = NodePath("../EditorUI/EditorContainer/VBoxContainer/EditorViewport")
 
 [node name="SelectionZone" type="Area2D" parent="EditHandler"]
 collision_layer = 128

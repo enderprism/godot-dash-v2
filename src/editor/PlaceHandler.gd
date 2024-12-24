@@ -2,8 +2,10 @@ extends Node
 
 signal object_deleted(object: Node)
 
+@export var editor_viewport: Control
+
 func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collider: Area2D, level: LevelProps) -> void:
-	if get_viewport().gui_get_hovered_control() == null:
+	if get_viewport().gui_get_hovered_control() == editor_viewport:
 		# Handle object placement
 		var pressed_button := block_palette_button_group.get_pressed_button()
 		var block_palette_ref: BlockPaletteRef

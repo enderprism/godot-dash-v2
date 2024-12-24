@@ -3,6 +3,8 @@ extends Node
 signal selection_zone_changed(new_zone: Rect2)
 signal selection_changed(selection: Array[Node2D])
 
+@export var editor_viewport: Control
+
 var selection: Array[Node2D]
 var object_move_cooldown: float
 var placed_objects_collider: Area2D
@@ -16,11 +18,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if object_move_cooldown > 0:
 		object_move_cooldown -= delta
-	if get_viewport().gui_get_focus_owner() is not LineEdit and (get_viewport().gui_get_hovered_control() == null
-			or (get_viewport().gui_get_hovered_control() != null and get_viewport().gui_get_hovered_control().name != "Playtest")):
+	if get_viewport().gui_get_hovered_control() == editor_viewport:
 		if editor_mode.get_current_tab_control().name == "Edit":
 			_update_selection()
-			get_viewport().gui_release_focus()
 		if not selection.is_empty():
 			if Input.is_action_just_pressed(&"editor_single_selection_cycle"):
 				selection_index -= 1
@@ -59,7 +59,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _update_selection() -> void:
-	if get_viewport().gui_get_hovered_control() == null and Input.is_action_just_pressed(&"editor_add"):
+	if get_viewport().gui_get_hovered_control() == editor_viewport and Input.is_action_just_pressed(&"editor_add"):
 		if not Input.is_action_just_pressed(&"editor_add_swipe") and not Input.is_action_just_pressed(&"editor_selection_remove") \
 				and not Input.is_action_just_pressed(&"editor_single_selection_cycle"):
 			selection.map(func(object): object.get_node("SelectionHighlight").queue_free())

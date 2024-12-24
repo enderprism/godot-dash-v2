@@ -31,7 +31,6 @@ func _on_line_edit_text_submitted(new_text:String) -> void:
 
 func _on_button_pressed() -> void:
 	_update_groups(selected_objects, line_edit.get_text(), true)
-	get_viewport().gui_release_focus()
 	line_edit.clear()
 
 func _remove_group() -> void:
