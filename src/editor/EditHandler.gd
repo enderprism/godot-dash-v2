@@ -5,12 +5,15 @@ signal selection_changed(selection: Array[Node2D])
 
 @export var editor_viewport: Control
 
+var level: LevelProps
 var selection: Array[Node2D]
 var object_move_cooldown: float
 var placed_objects_collider: Area2D
 var editor_mode: TabContainer
 var rotation_lock := false ## Lock variable to ensure 2 rotations aren't happening at the same time.
-var selection_index := -1
+var selection_index := 0
+var cursor_position_snapped: Vector2
+var previous_cursor_position_snapped: Vector2
 
 func _ready() -> void:
 	_reset_selection_zone(true)
@@ -18,6 +21,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if object_move_cooldown > 0:
 		object_move_cooldown -= delta
+	cursor_position_snapped = level.get_local_mouse_position().snapped(Vector2.ONE*128)
+	if cursor_position_snapped != previous_cursor_position_snapped:
+		selection_index = 0
 	if get_viewport().gui_get_hovered_control() == editor_viewport:
 		if editor_mode.get_current_tab_control().name == "Edit":
 			_update_selection()
@@ -56,6 +62,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_released(&"editor_add"):
 			selection.map(_add_selection_highlight)
 			_reset_selection_zone()
+	previous_cursor_position_snapped = cursor_position_snapped
 
 
 func _update_selection() -> void:
@@ -64,8 +71,9 @@ func _update_selection() -> void:
 				and not Input.is_action_just_pressed(&"editor_single_selection_cycle"):
 			selection.map(func(object): object.get_node("SelectionHighlight").queue_free())
 			selection.clear()
-			selection_index = -1
+			selection_index += 1
 		_reset_selection_zone(false)
+		print_debug(selection_index)
 		if placed_objects_collider.has_overlapping_areas() and not (Input.is_action_just_pressed(&"editor_add_swipe") or Input.is_action_just_pressed(&"editor_selection_remove")):
 			selection = [placed_objects_collider.get_overlapping_areas()[selection_index%len(placed_objects_collider.get_overlapping_areas())].get_parent()]
 	if Input.is_action_pressed(&"editor_selection_remove") or Input.is_action_pressed(&"editor_add"):

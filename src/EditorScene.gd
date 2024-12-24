@@ -48,6 +48,7 @@ func _ready() -> void:
 	$EditorCamera.zoom_changed.connect($GameScene/EditorGridParallax/EditorGrid.queue_redraw)
 	$EditHandler.placed_objects_collider = placed_objects_collider
 	$EditHandler.editor_mode = %EditorModes
+	$EditHandler.level = level
 
 
 func _physics_process(_delta: float) -> void:
