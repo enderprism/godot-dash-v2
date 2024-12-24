@@ -17,7 +17,7 @@ const NONSHARED_GROUP_COLOR := Color("#8dffcc")
 func _update_groups(selection: Array[Node2D], group: String, add: bool) -> void:
 	if add:
 		if group not in group_buttons.keys():
-			if _is_reserved(group):
+			if _is_reserved(group) or group == "":
 				return
 			selection.map(func(object): object.add_to_group(group, true))
 			var group_button := Button.new()
