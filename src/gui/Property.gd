@@ -26,6 +26,7 @@ enum Type {
 @export var or_less: bool
 
 # LineEdit type exports
+@export var lineedit_width: float = 100.0
 @export var placeholder_text: String
 
 var _label: Label
@@ -60,7 +61,7 @@ func _ready() -> void:
 	_input[Type.VECTOR2].vertical = true
 	# STRING
 	_input.insert(Type.STRING, NodeUtils.get_node_or_add(self, "STRING", LineEdit, true, false))
-	_input[Type.STRING].custom_minimum_size.x = 100
+	_input[Type.STRING].custom_minimum_size.x = lineedit_width
 	# COLOR
 	_input.insert(Type.COLOR, NodeUtils.get_node_or_add(self, "COLOR", ColorPickerButton, true, false))
 	_input[Type.COLOR].custom_minimum_size.x = 100
@@ -70,13 +71,14 @@ func _ready() -> void:
 		child.theme = preload("res://resources/NoFocusColor.tres")
 	# Refresh
 	_refresh()
+	hidden.connect(_refresh)
 	renamed.connect(_refresh)
 
 func _validate_property(property: Dictionary) -> void:
 	if property.name in ["_min", "_max", "step", "rounded", "or_greater", "or_less"] \
 			and type not in [Type.FLOAT, Type.FLOAT_SLIDER]:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name == "placeholder_text" and type != Type.STRING:
+	if property.name in ["placeholder_text", "lineedit_width"] and type != Type.STRING:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 func _refresh() -> void:
@@ -86,3 +88,6 @@ func _refresh() -> void:
 	# Input type refresh
 	for i in range(len(_input)):
 		_input[i].visible = i == int(type)
+	if type == Type.STRING and len(_input) > Type.STRING:
+		_input[Type.STRING].placeholder_text = placeholder_text
+		_input[Type.STRING].custom_minimum_size.x = lineedit_width
