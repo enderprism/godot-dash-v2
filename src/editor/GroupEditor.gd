@@ -64,9 +64,9 @@ func _populate_group_list(selection: Array[Node2D]) -> void:
 		if new_groups.is_empty():
 			new_groups = object.get_groups() if not object.get_groups().is_empty() else [null]
 			shared_groups = object.get_groups()
-		else:
-			new_groups = ArrayUtils.union(new_groups, object.get_groups(), TYPE_STRING_NAME, "StringName")
-			shared_groups = ArrayUtils.intersect(shared_groups, object.get_groups(), TYPE_STRING_NAME, "StringName")
+		elif not object.get_groups().is_empty():
+			new_groups = ArrayUtils.union(new_groups, object.get_groups(), TYPE_STRING_NAME, "")
+			shared_groups = ArrayUtils.intersect(shared_groups, object.get_groups(), TYPE_STRING_NAME, "")
 	# Additive pass
 	for new_group in new_groups:
 		if new_group not in group_buttons.keys() and new_group != null:
