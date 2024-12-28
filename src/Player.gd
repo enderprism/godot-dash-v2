@@ -44,7 +44,7 @@ const WAVE_TRAIL_LENGTH: int = 250
 const SPIDER_TRAIL: PackedScene = preload("res://scenes/components/game_components/SpiderTrail.tscn")
 const DASH_BOOM: PackedScene = preload("res://scenes/components/game_components/DashBoom.tscn")
 const ICON_LERP_FACTOR := 0.5
-const PLATFORMER_ACCELERATION := 5
+const PLATFORMER_ACCELERATION := 5.0
 #endregion
 
 @export var displayed_gamemode: Gamemode:
@@ -57,10 +57,18 @@ const PLATFORMER_ACCELERATION := 5
 
 # Public
 var rebound_velocity: float
-var gameplay_rotation_degrees: float = 0.0
+var gameplay_rotation_degrees: float = 0.0:
+	set(value):
+		gameplay_rotation_degrees = value
+		if LevelManager.platformer:
+			$BaseGameplayRotationTimer.start()
 var gameplay_rotation: float:
 	get():
 		return deg_to_rad(gameplay_rotation_degrees)
+	set(value):
+		gameplay_rotation_degrees = rad_to_deg(value)
+		if LevelManager.platformer:
+			$BaseGameplayRotationTimer.start()
 var player_scale: PlayerScale = PlayerScale.NORMAL:
 	set(value):
 		player_scale = value
@@ -109,7 +117,6 @@ var _is_flying_gamemode: bool
 var _dual_instance: bool
 var _last_spider_trail: SpiderTrail
 var _last_spider_trail_height: float
-
 
 
 
@@ -164,7 +171,7 @@ func _get_jump_state() -> int:
 	if Input.is_action_just_pressed("jump") and is_on_floor() and jump_hold_disabled:
 		jump_hold_disabled = false
 	if _click_buffer_state == ClickBufferState.NOT_HOLDING and Input.is_action_just_pressed("jump") and not (is_on_floor() or is_on_ceiling()) \
-		and internal_gamemode != Gamemode.SHIP and internal_gamemode != Gamemode.SWING and internal_gamemode != Gamemode.WAVE:
+			and internal_gamemode != Gamemode.SHIP and internal_gamemode != Gamemode.SWING and internal_gamemode != Gamemode.WAVE:
 		_click_buffer_state = ClickBufferState.BUFFERING
 	if _click_buffer_state == ClickBufferState.BUFFERING and not orb_queue.is_empty():
 		_click_buffer_state = ClickBufferState.JUMPING
@@ -270,17 +277,26 @@ func _compute_velocity(delta: float,
 	else:
 		if direction:
 			_velocity.x = move_toward(
-					_velocity.x,
-					direction * speed.x * speed_multiplier * int(LevelManager.level_playing),
-					speed.x * PLATFORMER_ACCELERATION * delta * speed_multiplier * int(LevelManager.level_playing),
+				_velocity.x,
+				direction * speed.x * speed_multiplier * int(LevelManager.level_playing),
+				speed.x * PLATFORMER_ACCELERATION * delta * speed_multiplier * int(LevelManager.level_playing),
 			)
 		else:
 			_velocity.x = move_toward(
-					_velocity.x,
-					0.0,
-					speed.x * delta * speed_multiplier * PLATFORMER_ACCELERATION * int(LevelManager.level_playing),
+				_velocity.x,
+				0.0,
+				speed.x * delta * speed_multiplier * PLATFORMER_ACCELERATION * int(LevelManager.level_playing),
 			)
 
+	
+	var visual_gameplay_rotation_degrees: float = round(gameplay_rotation_degrees - LevelManager.player_camera.global_rotation_degrees)
+	var gameplay_rotation_in_180_quadrant: bool = abs(visual_gameplay_rotation_degrees) > 135.0 and abs(visual_gameplay_rotation_degrees) < 225.0
+	var flipped_controls_in_90_quadrant: bool = gravity_multiplier < 0 and abs(visual_gameplay_rotation_degrees) > 45.0 and abs(visual_gameplay_rotation_degrees) < 135.0
+
+	if LevelManager.platformer and abs(_velocity.x) < 10.0 and (gameplay_rotation_in_180_quadrant or flipped_controls_in_90_quadrant):
+		gameplay_rotation_degrees = wrapf((abs(gameplay_rotation_degrees) - 180.0) * signf(gameplay_rotation_degrees), -180.0, 180.0)
+		gravity_multiplier *= -1
+	
 	#region Apply orbs velocity
 	if not orb_queue.is_empty() and (
 			_click_buffer_state == ClickBufferState.JUMPING
@@ -316,7 +332,6 @@ func _compute_velocity(delta: float,
 		return Vector2.ZERO
 
 func _rotate_sprite_degrees(delta: float):
-	$Icon.rotation = gameplay_rotation
 	#region cube
 	$Icon/Cube.scale.y = 1.0
 	if horizontal_direction != 0:
@@ -330,6 +345,8 @@ func _rotate_sprite_degrees(delta: float):
 		$Icon/Cube.rotation_degrees += delta * 800 * dash_control.initial_horizontal_direction
 	#endregion
 	#region ship/swing
+	$Icon/Ship.rotation = gameplay_rotation
+	$Icon/Swing.rotation = gameplay_rotation
 	$Icon/Ship.scale.y = sign(gravity_multiplier)
 	$Icon/Swing.scale.y = 1.0
 	if get_direction() != 0:
@@ -347,6 +364,7 @@ func _rotate_sprite_degrees(delta: float):
 		$Icon/Swing.rotation = lerpf($Icon/Swing.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR)
 	#endregion
 	#region wave
+	$Icon/Wave.rotation = gameplay_rotation
 	$Icon/Wave.scale.y = 1.0
 	if get_direction() != 0:
 		$Icon/Wave.scale.x = sign(get_direction())
@@ -367,6 +385,7 @@ func _rotate_sprite_degrees(delta: float):
 		$Icon/Wave/Icon.rotation = lerpf($Icon/Wave/Icon.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR)
 	#endregion
 	#region ufo
+	$Icon/UFO.rotation = gameplay_rotation
 	$Icon/UFO.scale.y = sign(gravity_multiplier)
 	if get_direction() != 0:
 		$Icon/UFO.scale.x = sign(get_direction())
@@ -393,6 +412,8 @@ func _rotate_sprite_degrees(delta: float):
 	$Icon/Ball.position.y = lerpf(0, 10, ball_rotation_in_air)
 	#endregion
 	#region spider/robot
+	$Icon/Spider.rotation = gameplay_rotation
+	$Icon/Robot.rotation = gameplay_rotation
 	if get_direction() != 0:
 		$Icon/Spider.scale.x = sign(get_direction())
 		$Icon/Robot.scale.x = sign(get_direction())
