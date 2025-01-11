@@ -57,18 +57,12 @@ const PLATFORMER_ACCELERATION := 5.0
 
 # Public
 var rebound_velocity: float
-var gameplay_rotation_degrees: float = 0.0:
-	set(value):
-		gameplay_rotation_degrees = value
-		if LevelManager.platformer:
-			$BaseGameplayRotationTimer.start()
+var gameplay_rotation_degrees: float = 0.0
 var gameplay_rotation: float:
 	get():
 		return deg_to_rad(gameplay_rotation_degrees)
 	set(value):
 		gameplay_rotation_degrees = rad_to_deg(value)
-		if LevelManager.platformer:
-			$BaseGameplayRotationTimer.start()
 var player_scale: PlayerScale = PlayerScale.NORMAL:
 	set(value):
 		player_scale = value
