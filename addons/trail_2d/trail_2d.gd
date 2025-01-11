@@ -14,7 +14,8 @@ func _physics_process(_delta: float) -> void:
 	global_position = Vector2.ZERO
 
 	var point : = parent.global_position + offset
-	add_point(point, 0)
+	if points.is_empty() or point != points[0]:
+		add_point(point, 0)
 	
 	if get_point_count() > length:
 		remove_point(get_point_count() - 1)
