@@ -56,21 +56,24 @@ var _hitbox_display: TriggerHitboxDisplay
 func _ready() -> void:
 	collision_layer = 16
 	collision_mask = 1
-	_hitbox_display = NodeUtils.get_node_or_add(self, "TriggerHitboxDisplay", load("res://src/triggers/trigger_components/TriggerHitboxDisplay.gd"), false)
-	_hitbox = NodeUtils.get_node_or_add(self, "Hitbox", CollisionShape2D, false)
-	sprite = NodeUtils.get_node_or_add(self, "Sprite", Sprite2D, false)
+	_hitbox_display = NodeUtils.get_node_or_add(self, "TriggerHitboxDisplay", load("res://src/triggers/trigger_components/TriggerHitboxDisplay.gd"), true, false)
+	_hitbox = NodeUtils.get_node_or_add(self, "Hitbox", CollisionShape2D, true, false)
+	sprite = NodeUtils.get_node_or_add(self, "Sprite", Sprite2D, true, false)
 	_hitbox.debug_color = Color("fff5006b")
 	sprite.scale = Vector2.ONE * 0.2
 	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
 	if single_usage:
-		_single_usage_component = NodeUtils.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"), false)
+		_single_usage_component = NodeUtils.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"), true, false)
 	NodeUtils.connect_new(hitbox_shape_changed, _hitbox_display.update_shape)
 	_set_hitbox_shape()
 
 func _physics_process(_delta: float) -> void:
 	sprite.visible = sprite_visible()
 	if not get_parent() is GameplayRotateTrigger:
-		sprite.global_rotation = 0.0
+		if Engine.is_editor_hint() or LevelManager.player_camera == null:
+			sprite.global_rotation = 0.0
+		else:
+			sprite.global_rotation = LevelManager.player_camera.global_rotation
 	sprite.global_scale = Vector2.ONE * 0.2
 
 func sprite_visible() -> bool:

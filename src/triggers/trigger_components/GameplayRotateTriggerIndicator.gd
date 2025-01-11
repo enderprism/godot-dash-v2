@@ -17,6 +17,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	global_rotation = 0.0
+	global_scale = get_parent().base.sprite.global_scale * 4
 
 func _draw() -> void:
 	if get_parent().base.sprite_visible():

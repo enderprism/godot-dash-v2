@@ -5,6 +5,8 @@
 var _tween: Tween
 var _weight: float
 
+signal finished
+
 # Tween controls
 @export_range(0.0, 10.0, 0.0001, "or_more") var _duration: float = 1.0
 @export var easing_type: Tween.EaseType = Tween.EASE_IN_OUT
@@ -27,6 +29,7 @@ func start(_body: Node2D) -> void:
 		_tween.tween_property(self, "_weight", 1.0, _duration) \
 			.set_trans(easing_transition) \
 			.set_ease(easing_type)
+	_tween.finished.connect(func(): finished.emit())
 
 func _get_weight_delta() -> float:
 	var _result = _weight - _previous_weight
