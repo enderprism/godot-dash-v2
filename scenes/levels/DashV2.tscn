@@ -427,8 +427,8 @@ script = ExtResource("14_2jira")
 z_index = 1
 position = Vector2(2112, -640)
 script = ExtResource("15_3ludl")
-_rotation_degrees = 90.0
-_flip = true
+_rotation_degrees = -90.0
+_reverse = true
 metadata/_edit_group_ = true
 
 [node name="TriggerEasing" type="Node" parent="GameplayRotateTrigger"]
@@ -448,10 +448,10 @@ shape = SubResource("SegmentShape2D_vp2m2")
 debug_color = Color(1, 0.960784, 0, 0.419608)
 
 [node name="Sprite" type="Sprite2D" parent="GameplayRotateTrigger/TriggerBase"]
-rotation = 1.5708
+rotation = -1.5708
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("22_78ocd")
-flip_v = true
+flip_h = true
 
 [node name="SingleUsageComponent" type="Node" parent="GameplayRotateTrigger/TriggerBase"]
 script = ExtResource("14_2jira")
