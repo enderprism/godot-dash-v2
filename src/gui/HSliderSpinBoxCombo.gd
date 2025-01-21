@@ -53,3 +53,7 @@ func _update_value(new_value: float) -> void:
 	hslider.value = new_value
 	spinbox.value = new_value
 	value_changed.emit(value)
+
+func set_value_no_signal(new_value: float) -> void:
+	hslider.value = new_value
+	spinbox.value = new_value

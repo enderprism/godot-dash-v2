@@ -58,3 +58,8 @@ func _set_y(new_value: float) -> void:
 	if keep_aspect:
 		value.x = new_value * aspect_ratio
 		spinbox_x.set_value_no_signal(value.x)
+
+func set_value_no_signal(new_value: Vector2):
+	spinbox_x.set_value_no_signal(new_value.x)
+	spinbox_y.set_value_no_signal(new_value.y)
+
