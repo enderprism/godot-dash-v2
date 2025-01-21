@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1wkjpnilh50a"]
+
+[ext_resource type="Script" path="res://src/editor/ColorChannelItem.gd" id="1_2ntyf"]
+[ext_resource type="Texture2D" uid="uid://cuqy5kedacfwe" path="res://assets/textures/guis/shared/RemoveItem.svg" id="1_8ueuv"]
+[ext_resource type="ButtonGroup" uid="uid://cev0xn2madcx2" path="res://resources/ColorChannelItemButtonGroup.tres" id="2_t5ace"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1h1sw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avq3m"]
+resource_local_to_scene = true
+bg_color = Color(0, 0, 0, 0.5)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_6fayn"]
+font_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_cj6jc"]
+line_spacing = -5.0
+
+[node name="ColorChannelItem" type="PanelContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 33.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1h1sw")
+script = ExtResource("1_2ntyf")
+
+[node name="EditButton" type="Button" parent="."]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_t5ace")
+icon_alignment = 2
+expand_icon = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ColorPreview" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(23, 23)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_avq3m")
+
+[node name="ColorPreviewText" type="Label" parent="MarginContainer/HBoxContainer/ColorPreview"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "BG"
+label_settings = SubResource("LabelSettings_6fayn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChannelName" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name"
+label_settings = SubResource("LabelSettings_cj6jc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer"]
+texture_filter = 4
+layout_mode = 2
+theme_override_constants/icon_max_width = 15
+icon = ExtResource("1_8ueuv")
+icon_alignment = 2
+
+[connection signal="toggled" from="EditButton" to="." method="_on_edit_button_toggled"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]

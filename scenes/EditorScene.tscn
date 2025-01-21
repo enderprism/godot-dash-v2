@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=66 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -60,6 +60,8 @@
 [ext_resource type="Script" path="res://src/gui/SectionHeading.gd" id="52_3jb55"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="53_jrbqn"]
 [ext_resource type="PackedScene" uid="uid://da4xswy05y0ve" path="res://scenes/components/game_components/GroupEditor.tscn" id="55_5vu0v"]
+[ext_resource type="PackedScene" uid="uid://cw15476n2m4we" path="res://scenes/components/game_components/ColorChannelEditor.tscn" id="55_wey7f"]
+[ext_resource type="Script" path="res://src/gui/Property.gd" id="55_x15b8"]
 [ext_resource type="Script" path="res://src/editor/SidePanelManager.gd" id="58_hnsxj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac3bt"]
@@ -152,6 +154,7 @@ theme_override_constants/separation = 0
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+focus_mode = 1
 mouse_filter = 1
 
 [node name="EditorModes" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer" node_paths=PackedStringArray("shortcut_context")]
@@ -697,8 +700,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Groups" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 script = ExtResource("52_3jb55")
 label_settings = ExtResource("53_jrbqn")
@@ -706,6 +707,37 @@ label_alignment = 1
 
 [node name="GroupEditor" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Groups" instance=ExtResource("55_5vu0v")]
 layout_mode = 2
+
+[node name="Colors" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("52_3jb55")
+label_settings = ExtResource("53_jrbqn")
+label_alignment = 1
+
+[node name="Channel Editor" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors"]
+layout_mode = 2
+script = ExtResource("52_3jb55")
+label_settings = ExtResource("53_jrbqn")
+
+[node name="ColorChannelEditor" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Channel Editor" instance=ExtResource("55_wey7f")]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="Base Color" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("55_x15b8")
+type = 4
+lineedit_width = 200.0
+placeholder_text = "Pick a color channel…"
+
+[node name="Detail Color" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("55_x15b8")
+type = 4
+lineedit_width = 200.0
+placeholder_text = "Pick a color channel…"
 
 [node name="Playtest" type="Button" parent="EditorUI"]
 offset_left = 64.0
@@ -722,7 +754,7 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("4_gl2yd")
 
-[node name="EditorCamera" type="Camera2D" parent="."]
+[node name="EditorCamera" type="Camera2D" parent="." node_paths=PackedStringArray("editor_viewport")]
 process_priority = 1
 position = Vector2(0, 256)
 offset = Vector2(640, 413)
@@ -731,6 +763,7 @@ script = ExtResource("6_wcytj")
 pan_margin = 0.0
 pan_keyboard = false
 wrap_inset = Vector2(0, 312)
+editor_viewport = NodePath("../EditorUI/EditorContainer/VBoxContainer/EditorViewport")
 
 [node name="PlacedObjectsCollider" type="Area2D" parent="."]
 physics_interpolation_mode = 2
@@ -770,11 +803,13 @@ script = ExtResource("35_xjepn")
 layout_mode = 1
 anchors_preset = 0
 
-[node name="SidePanelManager" type="Node" parent="." node_paths=PackedStringArray("side_panel", "group_section", "group_editor")]
+[node name="SidePanelManager" type="Node" parent="." node_paths=PackedStringArray("side_panel", "group_section", "group_editor", "color_section", "color_editor")]
 script = ExtResource("58_hnsxj")
 side_panel = NodePath("../EditorUI/EditorContainer/SidePanel")
 group_section = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Groups")
 group_editor = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Groups/GroupEditor")
+color_section = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors")
+color_editor = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Channel Editor/ColorChannelEditor")
 
 [connection signal="ready" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place" to="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
 [connection signal="pressed" from="EditorUI/Playtest" to="." method="_on_playtest_pressed"]

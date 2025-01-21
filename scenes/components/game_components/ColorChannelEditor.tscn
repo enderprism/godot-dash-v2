@@ -1,0 +1,110 @@
+[gd_scene load_steps=7 format=3 uid="uid://cw15476n2m4we"]
+
+[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_orc32"]
+[ext_resource type="Script" path="res://src/editor/ColorChannelEditor.gd" id="2_cnty4"]
+[ext_resource type="Texture2D" uid="uid://bnuunm3nj6gcg" path="res://assets/textures/guis/shared/AddItem.svg" id="3_quqpo"]
+[ext_resource type="ButtonGroup" uid="uid://cev0xn2madcx2" path="res://resources/ColorChannelItemButtonGroup.tres" id="3_u8i2y"]
+[ext_resource type="Script" path="res://src/gui/Property.gd" id="6_w4jfe"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_xqmy5"]
+color = Color(1, 1, 1, 0.25)
+grow_begin = 0.0
+grow_end = 0.0
+
+[node name="ColorChannelEditor" type="PanelContainer" node_paths=PackedStringArray("separator", "properties_container")]
+custom_minimum_size = Vector2(0, 200)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_orc32")
+script = ExtResource("2_cnty4")
+button_group = ExtResource("3_u8i2y")
+separator = NodePath("MarginContainer/VBoxContainer/HSeparator")
+properties_container = NodePath("MarginContainer/VBoxContainer/VBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_orc32")
+placeholder_text = "Find a color channel or create one…"
+clear_button_enabled = true
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+texture_filter = 4
+custom_minimum_size = Vector2(31, 31)
+layout_mode = 2
+icon = ExtResource("3_quqpo")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorChannelContainer" type="HFlowContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_xqmy5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Copy channel" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("6_w4jfe")
+type = 2
+
+[node name="Color" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("6_w4jfe")
+type = 5
+
+[node name="Channel" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("6_w4jfe")
+type = 6
+
+[node name="HSV shift" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("6_w4jfe")
+type = 5
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+auto_translate_mode = 1
+title = "Please confirm..."
+initial_position = 2
+size = Vector2i(355, 106)
+ok_button_text = "Delete"
+dialog_text = "There are 4 objects using this color channel.
+Are you sure you want to delete it?"
+
+[connection signal="text_submitted" from="MarginContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Copy channel" to="." method="_on_copy_channel_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Color" to="." method="_on_color_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Channel" to="." method="_on_channel_value_changed"]
