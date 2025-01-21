@@ -2,6 +2,8 @@
 extends HBoxContainer
 class_name Property
 
+signal value_changed(value: Variant)
+
 enum Type {
 	FLOAT,
 	FLOAT_SLIDER,
@@ -9,6 +11,7 @@ enum Type {
 	VECTOR2,
 	STRING,
 	COLOR,
+	ENUM,
 }
 
 @export var type: Type:
@@ -47,6 +50,7 @@ func _ready() -> void:
 	_input[Type.FLOAT].max_value = _max
 	_input[Type.FLOAT].step = step
 	_input[Type.FLOAT].rounded = rounded
+	_input[Type.FLOAT].changed.connect(func(new_value): value_changed.emit(new_value))
 	# FLOAT_SLIDER
 	_input.insert(Type.FLOAT_SLIDER, NodeUtils.get_node_or_add(self, "FLOAT_SLIDER", HSliderSpinBoxCombo, true, false))
 	_input[Type.FLOAT_SLIDER]._min = _min
@@ -54,17 +58,25 @@ func _ready() -> void:
 	_input[Type.FLOAT_SLIDER].step = step
 	_input[Type.FLOAT_SLIDER].rounded = rounded
 	_input[Type.FLOAT_SLIDER].slider_width = 100
+	_input[Type.FLOAT_SLIDER].value_changed.connect(func(new_value): value_changed.emit(new_value))
 	# BOOL
 	_input.insert(Type.BOOL, NodeUtils.get_node_or_add(self, "BOOL", CheckBox, true, false))
+	_input[Type.BOOL].toggled.connect(func(toggled_on): value_changed.emit(toggled_on))
 	# VECTOR2
 	_input.insert(Type.VECTOR2, NodeUtils.get_node_or_add(self, "VECTOR2", Vector2SpinBox, true, false))
 	_input[Type.VECTOR2].vertical = true
+	_input[Type.VECTOR2].value_changed.connect(func(new_value): value_changed.emit(new_value))
 	# STRING
 	_input.insert(Type.STRING, NodeUtils.get_node_or_add(self, "STRING", LineEdit, true, false))
 	_input[Type.STRING].custom_minimum_size.x = lineedit_width
+	_input[Type.STRING].text_changed.connect(func(new_text): value_changed.emit(new_text))
 	# COLOR
 	_input.insert(Type.COLOR, NodeUtils.get_node_or_add(self, "COLOR", ColorPickerButton, true, false))
 	_input[Type.COLOR].custom_minimum_size.x = 100
+	_input[Type.COLOR].color_changed.connect(func(new_color): value_changed.emit(new_color))
+	# ENUM
+	_input.insert(Type.ENUM, NodeUtils.get_node_or_add(self, "ENUM", OptionButton, true, false))
+	_input[Type.ENUM].item_selected.connect(func(new_index): value_changed.emit(new_index))
 
 	for child in _input:
 		child.hide()
@@ -80,6 +92,43 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name in ["placeholder_text", "lineedit_width"] and type != Type.STRING:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
+
+func set_value(new_value: Variant, value_type: Type) -> void:
+	# TODO add error handling when type of new_value and the value type don't match and result in invalid assignments
+	match value_type:
+		Type.FLOAT:
+			_input[Type.FLOAT].set_value_no_signal(new_value)
+		Type.FLOAT_SLIDER:
+			_input[Type.FLOAT_SLIDER].set_value_no_signal(new_value)
+		Type.BOOL:
+			_input[Type.BOOL].set_pressed_no_signal(new_value)
+		Type.VECTOR2:
+			_input[Type.VECTOR2].set_value_no_signal(new_value)
+		Type.STRING:
+			_input[Type.STRING].set_text(new_value)
+		Type.COLOR:
+			_input[Type.COLOR].set_pick_color(new_value) # ColorPickerButton doesn't have a no-signal method
+		Type.ENUM:
+			_input[Type.ENUM].select(new_value)
+
+func get_value(value_type: Type) -> Variant:
+	match value_type:
+		Type.FLOAT, Type.FLOAT_SLIDER, Type.VECTOR2:
+			return _input[value_type].value
+		Type.BOOL:
+			return _input[Type.BOOL].pressed
+		Type.STRING:
+			return _input[Type.STRING].get_text()
+		Type.COLOR:
+			return _input[Type.COLOR].color
+		Type.ENUM:
+			return _input[Type.ENUM].get_selected()
+		_:
+			return null
+
+func setup_enum(fields: PackedStringArray) -> void:
+	for field in fields:
+		_input[Type.ENUM].add_item(field)
 
 func _refresh() -> void:
 	# Label refresh
