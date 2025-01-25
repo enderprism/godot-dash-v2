@@ -163,6 +163,7 @@ texture_filter = 4
 material = ExtResource("3_m55bu")
 custom_minimum_size = Vector2(0, 312)
 layout_mode = 2
+focus_mode = 1
 shortcut_context = NodePath("../../../../FocusGrabber")
 theme = ExtResource("3_k1q1p")
 current_tab = 0
@@ -686,6 +687,7 @@ unique_name_in_owner = true
 material = ExtResource("3_m55bu")
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+focus_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="EditorUI/EditorContainer/SidePanel"]
 layout_mode = 2

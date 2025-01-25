@@ -12,16 +12,17 @@ var selected_objects: Array[Node2D]:
 var group_buttons: Dictionary
 
 const NONSHARED_GROUP_COLOR := Color("#8dffcc")
+const GROUP_PREFIX := "g_"
 
 
 func _update_groups(selection: Array[Node2D], group: String, add: bool) -> void:
 	if add:
 		if group not in group_buttons.keys():
-			if _is_reserved(group) or group == "":
+			if group == "":
 				return
 			selection.map(func(object): object.add_to_group(group, true))
 			var group_button := Button.new()
-			group_button.text = group
+			group_button.text = group.lstrip(GROUP_PREFIX)
 			group_button.pressed.connect(_remove_group)
 			group_container.add_child(group_button)
 			group_buttons[group] = group_button
@@ -34,7 +35,7 @@ func _update_groups(selection: Array[Node2D], group: String, add: bool) -> void:
 
 
 func _on_line_edit_text_submitted(new_text:String) -> void:
-	_update_groups(selected_objects, new_text, true)
+	_update_groups(selected_objects, GROUP_PREFIX + new_text, true)
 	# TODO "keep focus" doesn't work
 	if not Input.is_action_pressed(&"ui_accept_keep_focus"):
 		get_viewport().gui_release_focus()
@@ -42,13 +43,13 @@ func _on_line_edit_text_submitted(new_text:String) -> void:
 
 
 func _on_button_pressed() -> void:
-	_update_groups(selected_objects, line_edit.get_text(), true)
+	_update_groups(selected_objects, GROUP_PREFIX + line_edit.get_text(), true)
 	line_edit.clear()
 
 
 func _remove_group() -> void:
 	var selected_group_button := get_viewport().gui_get_focus_owner() as Button
-	var group := selected_group_button.text
+	var group := GROUP_PREFIX + selected_group_button.text
 	_update_groups(selected_objects, group, false)
 	get_viewport().gui_release_focus()
 	selected_group_button.queue_free()
@@ -71,7 +72,7 @@ func _populate_group_list(selection: Array[Node2D]) -> void:
 	for new_group in new_groups:
 		if new_group not in group_buttons.keys() and new_group != null:
 			group_buttons[new_group] = Button.new()
-			group_buttons[new_group].text = new_group
+			group_buttons[new_group].text = new_group.lstrip(GROUP_PREFIX)
 			group_buttons[new_group].pressed.connect(_remove_group)
 			group_container.add_child(group_buttons[new_group])
 	# Substractive pass
@@ -83,7 +84,3 @@ func _populate_group_list(selection: Array[Node2D]) -> void:
 	for group in group_buttons.keys():
 		group_buttons[group].modulate = Color.WHITE if group in shared_groups else NONSHARED_GROUP_COLOR
 
-
-func _is_reserved(group: StringName) -> bool:
-	var is_color_channel := group.match("c_*")
-	return is_color_channel
