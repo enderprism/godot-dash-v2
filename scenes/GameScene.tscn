@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://db7ebleody4s3"]
+[gd_scene load_steps=22 format=3 uid="uid://db7ebleody4s3"]
 
 [ext_resource type="Script" path="res://src/GameScene.gd" id="1_k47tp"]
 [ext_resource type="Texture2D" uid="uid://djstmwdco77pp" path="res://assets/textures/backgrounds/background1-3.png" id="2_i4f6q"]
@@ -17,9 +17,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y3ubx"]
 size = Vector2(4096, 20)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vslon"]
-blend_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4i0t"]
 size = Vector2(194.4, 154.4)
@@ -40,6 +37,9 @@ shader = ExtResource("11_yix40")
 shader_parameter/base = Color(0.952941, 0.666667, 0.364706, 1)
 
 [sub_resource type="Environment" id="Environment_4phyr"]
+background_mode = 3
+background_canvas_max_layer = 50
+glow_enabled = true
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_bwo2a"]
 
@@ -134,7 +134,6 @@ metadata/_edit_group_ = true
 
 [node name="Line" type="Sprite2D" parent="GroundDownParallax/GroundDownOrigin/Ground" node_paths=PackedStringArray("target")]
 z_index = 50
-material = SubResource("CanvasItemMaterial_vslon")
 position = Vector2(4, -119.6)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_l4t8r")
@@ -184,7 +183,6 @@ metadata/_edit_group_ = true
 
 [node name="Line" type="Sprite2D" parent="GroundUpParallax/GroundUpOrigin/Ground" node_paths=PackedStringArray("target")]
 z_index = 50
-material = SubResource("CanvasItemMaterial_vslon")
 position = Vector2(4, 119.6)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_l4t8r")
