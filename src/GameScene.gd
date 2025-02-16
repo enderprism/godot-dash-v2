@@ -36,5 +36,5 @@ func _start_level() -> void:
 		$Level.get_child(0).start_level()
 
 func _process(_delta: float) -> void:
-	%LineUp.scale.x = 1/LevelManager.player_camera.zoom.x * 0.2
-	%LineDown.scale.x = 1/LevelManager.player_camera.zoom.x * 0.2
+	for ground_sprite in LevelManager.ground_sprites:
+		ground_sprite.get_node("Ground/Line").scale.x = 1/LevelManager.player_camera.zoom.x * 0.2
