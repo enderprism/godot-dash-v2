@@ -15,8 +15,9 @@ enum CopyColor {
 @export var copy: bool
 @export var color: Color
 @export var copied_channel: CopyColor
-@export var hsv_shift: Color
+@export var hsv_shift: PackedFloat64Array = PackedFloat64Array([0.0, 0.0, 0.0])
 @export var associated_group: String
+
 
 func set_copy(should_copy: bool = false) -> ColorChannelData:
 	changed.emit()
@@ -33,7 +34,7 @@ func set_copied_channel(new_copied_channel: CopyColor) -> ColorChannelData:
 	copied_channel = new_copied_channel
 	return self
 
-func set_hsv_shift(new_hsv_shift: Color) -> ColorChannelData:
+func set_hsv_shift(new_hsv_shift: PackedFloat64Array) -> ColorChannelData:
 	changed.emit()
 	hsv_shift = new_hsv_shift
 	return self

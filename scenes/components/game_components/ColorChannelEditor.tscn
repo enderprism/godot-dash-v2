@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cw15476n2m4we"]
+[gd_scene load_steps=9 format=3 uid="uid://cw15476n2m4we"]
 
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_orc32"]
 [ext_resource type="Script" path="res://src/editor/ColorChannelEditor.gd" id="2_cnty4"]
 [ext_resource type="Texture2D" uid="uid://bnuunm3nj6gcg" path="res://assets/textures/guis/shared/AddItem.svg" id="3_quqpo"]
 [ext_resource type="ButtonGroup" uid="uid://cev0xn2madcx2" path="res://resources/ColorChannelItemButtonGroup.tres" id="3_u8i2y"]
+[ext_resource type="Script" path="res://src/gui/SectionHeading.gd" id="6_l2xjh"]
 [ext_resource type="Script" path="res://src/gui/Property.gd" id="6_w4jfe"]
+[ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="7_vl4eh"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_xqmy5"]
 color = Color(1, 1, 1, 0.25)
@@ -88,12 +90,32 @@ layout_mode = 2
 script = ExtResource("6_w4jfe")
 type = 6
 
-[node name="HSV shift" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="HSV shift" type="VBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("6_l2xjh")
+label_settings = ExtResource("7_vl4eh")
+
+[node name="Hue" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("6_w4jfe")
-type = 5
+_min = -1.0
+
+[node name="Saturation" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("6_w4jfe")
+_min = -1.0
+
+[node name="Value" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("6_w4jfe")
+_min = -1.0
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
 auto_translate_mode = 1
@@ -109,4 +131,6 @@ Are you sure you want to delete it?"
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Copy channel" to="." method="_on_copy_channel_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Color" to="." method="_on_color_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Channel" to="." method="_on_channel_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/HSV shift" to="." method="_on_hsv_shift_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Hue" to="." method="_on_hue_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Saturation" to="." method="_on_saturation_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Value" to="." method="_on_value_value_changed"]

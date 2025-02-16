@@ -722,7 +722,7 @@ script = ExtResource("52_3jb55")
 label_settings = ExtResource("53_jrbqn")
 
 [node name="ColorChannelEditor" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Channel Editor" instance=ExtResource("55_wey7f")]
-custom_minimum_size = Vector2(0, 300)
+custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 
 [node name="Base Color" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors"]

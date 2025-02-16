@@ -50,7 +50,9 @@ func _show_properties() -> void:
 	%"Copy channel".set_value(channel_item.data.copy, Property.Type.BOOL)
 	%Channel.set_value(channel_item.data.copied_channel, Property.Type.ENUM)
 	%Color.set_value(channel_item.data.color, Property.Type.COLOR)
-	%"HSV shift".set_value(channel_item.data.hsv_shift, Property.Type.COLOR)
+	%Hue.set_value(channel_item.data.hsv_shift[0], Property.Type.FLOAT)
+	%Saturation.set_value(channel_item.data.hsv_shift[1], Property.Type.FLOAT)
+	%Value.set_value(channel_item.data.hsv_shift[2], Property.Type.FLOAT)
 	%Channel.visible = channel_item.data.copy
 	%Color.visible = not channel_item.data.copy
 
@@ -80,13 +82,37 @@ func _on_channel_value_changed(value:Variant) -> void:
 	var channel_item := button_group.get_pressed_button().get_parent() as ColorChannelItem
 	channel_item.data.set_copied_channel(new_channel)
 	channel_item.update()
-	
 
-func _on_hsv_shift_value_changed(value:Variant) -> void:
-	var new_hsv_shift := value as Color
+
+func _on_hue_value_changed(value:Variant) -> void:
+	var new_hue := value as float
 	if button_group.get_pressed_button() == null:
 		return
 	var channel_item := button_group.get_pressed_button().get_parent() as ColorChannelItem
+	var new_hsv_shift := channel_item.data.hsv_shift.duplicate()
+	new_hsv_shift[0] += new_hue
+	channel_item.data.set_hsv_shift(new_hsv_shift)
+	channel_item.update()
+
+
+func _on_value_value_changed(value:Variant) -> void:
+	var new_saturation := value as float
+	if button_group.get_pressed_button() == null:
+		return
+	var channel_item := button_group.get_pressed_button().get_parent() as ColorChannelItem
+	var new_hsv_shift := channel_item.data.hsv_shift.duplicate()
+	new_hsv_shift[1] += new_saturation
+	channel_item.data.set_hsv_shift(new_hsv_shift)
+	channel_item.update()
+
+
+func _on_saturation_value_changed(value:Variant) -> void:
+	var new_value := value as float
+	if button_group.get_pressed_button() == null:
+		return
+	var channel_item := button_group.get_pressed_button().get_parent() as ColorChannelItem
+	var new_hsv_shift := channel_item.data.hsv_shift.duplicate()
+	new_hsv_shift[2] += new_value
 	channel_item.data.set_hsv_shift(new_hsv_shift)
 	channel_item.update()
 
