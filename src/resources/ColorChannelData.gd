@@ -20,21 +20,21 @@ enum CopyColor {
 
 
 func set_copy(should_copy: bool = false) -> ColorChannelData:
-	changed.emit()
 	copy = should_copy
+	changed.emit()
 	return self
 
 func set_color(new_color: Color) -> ColorChannelData:
-	changed.emit()
 	color = new_color
+	changed.emit()
 	return self
 
 func set_copied_channel(new_copied_channel: CopyColor) -> ColorChannelData:
-	changed.emit()
 	copied_channel = new_copied_channel
+	changed.emit()
 	return self
 
 func set_hsv_shift(new_hsv_shift: PackedFloat64Array) -> ColorChannelData:
-	changed.emit()
 	hsv_shift = new_hsv_shift
+	changed.emit()
 	return self
