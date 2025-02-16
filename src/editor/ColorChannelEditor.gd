@@ -34,6 +34,7 @@ func _add_channel(channel_name: String) -> void:
 	channel_item.selected.connect(_show_properties)
 	channel_item.unselected.connect(_hide_properties)
 	channel_item.update()
+	channel_item.register()
 	%ColorChannelContainer.add_child(channel_item)
 
 func _hide_properties() -> void:

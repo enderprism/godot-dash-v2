@@ -49,6 +49,7 @@ func _ready() -> void:
 	$EditHandler.placed_objects_collider = placed_objects_collider
 	$EditHandler.editor_mode = %EditorModes
 	$EditHandler.level = level
+	LevelManager.editor_edited_level = level
 
 
 func _physics_process(_delta: float) -> void:

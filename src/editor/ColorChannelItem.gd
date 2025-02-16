@@ -2,6 +2,7 @@ extends PanelContainer
 class_name ColorChannelItem
 
 const COLOR_PREVIEW_DISABLED := Color("#00000080")
+const COLOR_CHANNEL_GROUP_PREFIX := "c_"
 
 
 signal selected
@@ -13,13 +14,15 @@ var data: ColorChannelData
 
 
 func _ready() -> void:
-	data = ColorChannelData.new()
 	update()
 
 
 func update() -> void:
 	var channel_name_label := %ChannelName as Label
 	channel_name_label.text = channel_name
+	if data == null:
+		data = ColorChannelData.new()
+	data.associated_group = COLOR_CHANNEL_GROUP_PREFIX + channel_name
 	if not data.copy:
 		_set_color_preview_color(data.color)._hide_color_preview_text()
 	else:
@@ -36,6 +39,17 @@ func update() -> void:
 				_disable_color_preview()._show_color_preview_text("P2")
 			ColorChannelData.CopyColor.GLOW:
 				_disable_color_preview()._show_color_preview_text("GL")
+
+
+func register():
+	var level := LevelManager.editor_edited_level
+	if data not in level.color_channels:
+		level.color_channels.append(data)
+
+
+func unregister():
+	var level := LevelManager.editor_edited_level
+	level.color_channels.erase(data)
 
 
 func _set_color_preview_color(_color: Color) -> ColorChannelItem:
@@ -68,6 +82,7 @@ func _hide_color_preview_text() -> ColorChannelItem:
 func _on_button_pressed() -> void:
 	if $EditButton.button_pressed:
 		unselected.emit()
+	unregister()
 	queue_free()
 
 
