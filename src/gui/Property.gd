@@ -50,7 +50,8 @@ func _ready() -> void:
 	_input[Type.FLOAT].max_value = _max
 	_input[Type.FLOAT].step = step
 	_input[Type.FLOAT].rounded = rounded
-	_input[Type.FLOAT].changed.connect(func(new_value): value_changed.emit(new_value))
+	_input[Type.FLOAT].value_changed.connect(func(new_value): value_changed.emit(new_value))
+	_input[Type.FLOAT].get_line_edit().text_submitted.connect(func(_new_value): get_viewport().gui_release_focus())
 	# FLOAT_SLIDER
 	_input.insert(Type.FLOAT_SLIDER, NodeUtils.get_node_or_add(self, "FLOAT_SLIDER", HSliderSpinBoxCombo, true, false))
 	_input[Type.FLOAT_SLIDER]._min = _min
@@ -59,6 +60,7 @@ func _ready() -> void:
 	_input[Type.FLOAT_SLIDER].rounded = rounded
 	_input[Type.FLOAT_SLIDER].slider_width = 100
 	_input[Type.FLOAT_SLIDER].value_changed.connect(func(new_value): value_changed.emit(new_value))
+	_input[Type.FLOAT_SLIDER].spinbox.get_line_edit().text_submitted.connect(func(_new_value): get_viewport().gui_release_focus())
 	# BOOL
 	_input.insert(Type.BOOL, NodeUtils.get_node_or_add(self, "BOOL", CheckBox, true, false))
 	_input[Type.BOOL].toggled.connect(func(toggled_on): value_changed.emit(toggled_on))
