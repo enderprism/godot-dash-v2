@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=67 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -63,6 +63,7 @@
 [ext_resource type="PackedScene" uid="uid://cw15476n2m4we" path="res://scenes/components/game_components/ColorChannelEditor.tscn" id="55_wey7f"]
 [ext_resource type="Script" path="res://src/gui/Property.gd" id="55_x15b8"]
 [ext_resource type="Script" path="res://src/editor/SidePanelManager.gd" id="58_hnsxj"]
+[ext_resource type="Script" path="res://src/editor/BaseDetailHandler.gd" id="64_ycx04"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac3bt"]
 radius = 2.0
@@ -813,7 +814,12 @@ group_editor = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/S
 color_section = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors")
 color_editor = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Channel Editor/ColorChannelEditor")
 
+[node name="BaseDetailHandler" type="Node" parent="."]
+script = ExtResource("64_ycx04")
+
 [connection signal="ready" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place" to="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
+[connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color" to="BaseDetailHandler" method="_on_base_color_value_changed"]
+[connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color" to="BaseDetailHandler" method="_on_detail_color_value_changed"]
 [connection signal="pressed" from="EditorUI/Playtest" to="." method="_on_playtest_pressed"]
 [connection signal="object_deleted" from="PlaceHandler" to="EditHandler" method="_on_place_handler_object_deleted"]
 [connection signal="selection_changed" from="EditHandler" to="SidePanelManager" method="_on_edit_handler_selection_changed"]

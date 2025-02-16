@@ -1,4 +1,5 @@
 extends PanelContainer
+class_name ColorChannelEditor
 
 @export var button_group: ButtonGroup
 @export var separator: HSeparator

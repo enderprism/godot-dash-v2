@@ -7,7 +7,7 @@ extends Node
 @export var group_editor: GroupEditor
 @export_group("Colors")
 @export var color_section: SectionHeading
-@export var color_editor: GroupEditor
+@export var color_editor: ColorChannelEditor
 
 func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 	group_section.visible = not selection.is_empty()
