@@ -1,18 +1,18 @@
 extends Node
 class_name SelectionHighlight
 
-var original_modulate: Color
+var modulate: Color
 var is_duplicate: bool
 
 @onready var parent := get_parent() as CanvasItem
 
 func _ready() -> void:
-	original_modulate = parent.modulate
+	modulate = parent.modulate
 	parent.modulate = Color.GREEN if not is_duplicate else Color.CYAN
 
 func _exit_tree() -> void:
 	if is_queued_for_deletion():
-		parent.modulate = original_modulate
+		parent.modulate = modulate
 
 func _enter_tree() -> void:
 	name = "SelectionHighlight"

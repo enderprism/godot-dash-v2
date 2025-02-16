@@ -45,6 +45,7 @@ func register():
 	var level := LevelManager.editor_edited_level
 	if data not in level.color_channels:
 		level.color_channels.append(data)
+		level.add_child(ColorChannelWatcher.new(data))
 
 
 func unregister():
