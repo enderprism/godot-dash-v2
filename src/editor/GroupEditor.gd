@@ -85,5 +85,8 @@ func _populate_group_list(selection: Array[Node2D]) -> void:
 	for group in group_buttons.keys():
 		group_buttons[group].modulate = Color.WHITE if group in shared_groups else NONSHARED_GROUP_COLOR
 
-func _godot_group_is_trigger_group(group: String) -> bool:
+func _godot_group_is_trigger_group(group) -> bool:
+	if group == null:
+		return false
+	group = group as String
 	return group.begins_with(GROUP_PREFIX)
