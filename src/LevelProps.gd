@@ -7,6 +7,7 @@ class_name LevelProps
 
 @onready var song_player := AudioStreamPlayer.new()
 
+@export var color_channels: Array[ColorChannelData]
 var _pause_manager: Node
 
 func _ready() -> void:
@@ -16,9 +17,17 @@ func _ready() -> void:
 	song_player.process_mode = Node.PROCESS_MODE_PAUSABLE
 	song_player.set_bus("Music")
 	song_player.stream = song
+	setup_color_channel_watchers()
+
 
 func start_level() -> void:
 	if get_tree().paused:
 		await _pause_manager.unpaused
 	song_player.play(song_start_time)
 	LevelManager.level_playing = true
+
+
+func setup_color_channel_watchers() -> void:
+	for color_channel in color_channels:
+		var watcher := ColorChannelWatcher.new(color_channel)
+		add_child(watcher)
