@@ -68,6 +68,7 @@ func _populate_group_list(selection: Array[Node2D]) -> void:
 		elif not object.get_groups().is_empty():
 			new_groups = ArrayUtils.union(new_groups, object.get_groups(), TYPE_STRING_NAME, "")
 			shared_groups = ArrayUtils.intersect(shared_groups, object.get_groups(), TYPE_STRING_NAME, "")
+	new_groups = new_groups.filter(_godot_group_is_trigger_group)
 	# Additive pass
 	for new_group in new_groups:
 		if new_group not in group_buttons.keys() and new_group != null:
@@ -84,3 +85,5 @@ func _populate_group_list(selection: Array[Node2D]) -> void:
 	for group in group_buttons.keys():
 		group_buttons[group].modulate = Color.WHITE if group in shared_groups else NONSHARED_GROUP_COLOR
 
+func _godot_group_is_trigger_group(group: String) -> bool:
+	return group.begins_with(GROUP_PREFIX)
