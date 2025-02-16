@@ -81,7 +81,7 @@ func _update_selection() -> void:
 	if Input.is_action_just_released(&"editor_selection_remove"):
 		ArrayUtils.intersect(selection, selection_buffer, TYPE_OBJECT, "Node2D").map(func(object): object.get_node("SelectionHighlight").queue_free())
 		selection = ArrayUtils.difference(selection, selection_buffer, TYPE_OBJECT, "Node2D")
-	elif Input.is_action_just_released(&"editor_add") and $SelectionZone/Hitbox.shape.size > Vector2.ONE * 2:
+	elif (Input.is_action_just_released(&"editor_add") and $SelectionZone/Hitbox.shape.size > Vector2.ONE * 2) or Input.is_action_just_released(&"editor_add_swipe"):
 		selection = ArrayUtils.union(selection, selection_buffer, TYPE_OBJECT, "Node2D")
 	selection_changed.emit(selection)
 
