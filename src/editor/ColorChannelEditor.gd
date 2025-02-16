@@ -91,18 +91,7 @@ func _on_hue_value_changed(value:Variant) -> void:
 		return
 	var channel_item := button_group.get_pressed_button().get_parent() as ColorChannelItem
 	var new_hsv_shift := channel_item.data.hsv_shift.duplicate()
-	new_hsv_shift[0] += new_hue
-	channel_item.data.set_hsv_shift(new_hsv_shift)
-	channel_item.update()
-
-
-func _on_value_value_changed(value:Variant) -> void:
-	var new_saturation := value as float
-	if button_group.get_pressed_button() == null:
-		return
-	var channel_item := button_group.get_pressed_button().get_parent() as ColorChannelItem
-	var new_hsv_shift := channel_item.data.hsv_shift.duplicate()
-	new_hsv_shift[1] += new_saturation
+	new_hsv_shift[0] = new_hue
 	channel_item.data.set_hsv_shift(new_hsv_shift)
 	channel_item.update()
 
@@ -113,7 +102,18 @@ func _on_saturation_value_changed(value:Variant) -> void:
 		return
 	var channel_item := button_group.get_pressed_button().get_parent() as ColorChannelItem
 	var new_hsv_shift := channel_item.data.hsv_shift.duplicate()
-	new_hsv_shift[2] += new_value
+	new_hsv_shift[1] = new_value
+	channel_item.data.set_hsv_shift(new_hsv_shift)
+	channel_item.update()
+
+
+func _on_value_value_changed(value:Variant) -> void:
+	var new_saturation := value as float
+	if button_group.get_pressed_button() == null:
+		return
+	var channel_item := button_group.get_pressed_button().get_parent() as ColorChannelItem
+	var new_hsv_shift := channel_item.data.hsv_shift.duplicate()
+	new_hsv_shift[2] = new_saturation
 	channel_item.data.set_hsv_shift(new_hsv_shift)
 	channel_item.update()
 
