@@ -139,7 +139,7 @@ func _clone(object: Node) -> Node:
 
 
 func _duplicate_selection() -> void:
-	selection.map(func(object): object.modulate = object.get_node("SelectionHighlight").original_modulate)
+	selection.map(func(object): object.modulate = object.get_node("SelectionHighlight").modulate)
 	selection.map(func(object): object.get_node("SelectionHighlight").queue_free())
 	selection = Array(selection.map(_clone), TYPE_OBJECT, "Node2D", null)
 	selection.map(_add_selection_highlight)
