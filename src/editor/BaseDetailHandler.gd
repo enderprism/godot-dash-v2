@@ -11,7 +11,10 @@ func _on_base_color_value_changed(value:Variant) -> void:
 	for object in $"../EditHandler".selection:
 		objects_base.append(object.get_node("Base") if object.has_node("Base") else object)
 	clear_color_channels(objects_base)
-	objects_base.map(func(object): object.add_to_group(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX + base_channel))
+	if base_channel == "":
+		objects_base.map(_reset_color)
+		return
+	objects_base.map(func(object): object.add_to_group(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX + base_channel, true))
 	var watcher = get_tree().get_first_node_in_group(ColorChannelWatcher.WATCHER_GROUP_PREFIX + ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX + base_channel) as ColorChannelWatcher
 	watcher.refresh_objects_color(objects_base)
 
@@ -25,7 +28,10 @@ func _on_detail_color_value_changed(value:Variant) -> void:
 			.filter(func(object): return object != null)
 	)
 	clear_color_channels(objects_detail)
-	objects_detail.map(func(object): object.add_to_group(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX + detail_channel))
+	if detail_channel == "":
+		objects_detail.map(_reset_color)
+		return
+	objects_detail.map(func(object): object.add_to_group(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX + detail_channel, true))
 	var watcher = get_tree().get_first_node_in_group(ColorChannelWatcher.WATCHER_GROUP_PREFIX + ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX + detail_channel) as ColorChannelWatcher
 	watcher.refresh_objects_color(objects_detail)
 	
@@ -45,7 +51,7 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 	var base_channel: String
 	if not base_channel_array.is_empty():
 		base_channel = base_channel_array[0]
-	base_channel.rstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX)
+	base_channel = base_channel.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX)
 	if base_channel != null or base_channel != "":
 		base.set_value(base_channel, Property.Type.STRING)
 	else:
@@ -62,8 +68,14 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 	var detail_channel: String
 	if not detail_channel_array.is_empty():
 		detail_channel = detail_channel_array[0]
-	detail_channel.rstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX)
+	detail_channel = detail_channel.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX)
 	if detail_channel != null or base_channel != "":
 		detail.set_value(detail_channel, Property.Type.STRING)
 	else:
 		detail.set_value("", Property.Type.STRING)
+
+
+func _reset_color(object: Node) -> void:
+	if object.has_node("SelectionHighlight"):
+		object = object.get_node("SelectionHighlight")
+	object.modulate = Color.WHITE
