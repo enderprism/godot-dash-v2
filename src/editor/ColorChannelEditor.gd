@@ -33,6 +33,7 @@ func _add_channel(channel_name: String) -> void:
 	channel_item.channel_name = channel_name
 	channel_item.selected.connect(_show_properties)
 	channel_item.unselected.connect(_hide_properties)
+	channel_item.update()
 	%ColorChannelContainer.add_child(channel_item)
 
 func _hide_properties() -> void:
@@ -48,6 +49,7 @@ func _show_properties() -> void:
 	%"Copy channel".set_value(channel_item.data.copy, Property.Type.BOOL)
 	%Channel.set_value(channel_item.data.copied_channel, Property.Type.ENUM)
 	%Color.set_value(channel_item.data.color, Property.Type.COLOR)
+	%"HSV shift".set_value(channel_item.data.hsv_shift, Property.Type.COLOR)
 	%Channel.visible = channel_item.data.copy
 	%Color.visible = not channel_item.data.copy
 
@@ -56,7 +58,7 @@ func _on_color_value_changed(value:Variant) -> void:
 	if button_group.get_pressed_button() == null:
 		return
 	var channel_item := button_group.get_pressed_button().get_parent() as ColorChannelItem
-	channel_item.data.color = new_color
+	channel_item.data.set_color(new_color)
 	channel_item.update()
 
 func _on_copy_channel_value_changed(value:Variant) -> void:
@@ -75,6 +77,15 @@ func _on_channel_value_changed(value:Variant) -> void:
 	if button_group.get_pressed_button() == null:
 		return
 	var channel_item := button_group.get_pressed_button().get_parent() as ColorChannelItem
-	channel_item.data.copied_channel = new_channel
+	channel_item.data.set_copied_channel(new_channel)
 	channel_item.update()
 	
+
+func _on_hsv_shift_value_changed(value:Variant) -> void:
+	var new_hsv_shift := value as Color
+	if button_group.get_pressed_button() == null:
+		return
+	var channel_item := button_group.get_pressed_button().get_parent() as ColorChannelItem
+	channel_item.data.set_hsv_shift(new_hsv_shift)
+	channel_item.update()
+

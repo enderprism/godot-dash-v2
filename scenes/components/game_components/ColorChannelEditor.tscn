@@ -89,6 +89,7 @@ script = ExtResource("6_w4jfe")
 type = 6
 
 [node name="HSV shift" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("6_w4jfe")
@@ -108,3 +109,4 @@ Are you sure you want to delete it?"
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Copy channel" to="." method="_on_copy_channel_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Color" to="." method="_on_color_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/Channel" to="." method="_on_channel_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/HSV shift" to="." method="_on_hsv_shift_value_changed"]
