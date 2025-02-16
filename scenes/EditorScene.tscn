@@ -703,6 +703,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Groups" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("52_3jb55")
 label_settings = ExtResource("53_jrbqn")
@@ -727,6 +728,7 @@ custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 
 [node name="Base Color" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors"]
+visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("55_x15b8")
@@ -735,6 +737,7 @@ lineedit_width = 200.0
 placeholder_text = "Pick a color channel…"
 
 [node name="Detail Color" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors"]
+visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("55_x15b8")
@@ -806,16 +809,18 @@ script = ExtResource("35_xjepn")
 layout_mode = 1
 anchors_preset = 0
 
-[node name="SidePanelManager" type="Node" parent="." node_paths=PackedStringArray("side_panel", "group_section", "group_editor", "color_section", "color_editor")]
+[node name="SidePanelManager" type="Node" parent="." node_paths=PackedStringArray("side_panel", "group_section", "group_editor", "base", "detail")]
 script = ExtResource("58_hnsxj")
 side_panel = NodePath("../EditorUI/EditorContainer/SidePanel")
 group_section = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Groups")
 group_editor = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Groups/GroupEditor")
-color_section = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors")
-color_editor = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Channel Editor/ColorChannelEditor")
+base = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color")
+detail = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color")
 
-[node name="BaseDetailHandler" type="Node" parent="."]
+[node name="BaseDetailHandler" type="Node" parent="." node_paths=PackedStringArray("base", "detail")]
 script = ExtResource("64_ycx04")
+base = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color")
+detail = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color")
 
 [connection signal="ready" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place" to="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
 [connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color" to="BaseDetailHandler" method="_on_base_color_value_changed"]
@@ -823,4 +828,5 @@ script = ExtResource("64_ycx04")
 [connection signal="pressed" from="EditorUI/Playtest" to="." method="_on_playtest_pressed"]
 [connection signal="object_deleted" from="PlaceHandler" to="EditHandler" method="_on_place_handler_object_deleted"]
 [connection signal="selection_changed" from="EditHandler" to="SidePanelManager" method="_on_edit_handler_selection_changed"]
+[connection signal="selection_changed" from="EditHandler" to="BaseDetailHandler" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_zone_changed" from="EditHandler" to="EditHandler/SelectionZone/SelectionZoneDisplay" method="_on_edit_handler_selection_zone_changed"]

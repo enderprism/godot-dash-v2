@@ -20,6 +20,8 @@ func refresh_objects_color(objects: Array = []) -> void:
 	if objects.is_empty():
 		objects = get_tree().get_nodes_in_group(data.associated_group)
 	for object in objects:
+		if object.has_node("SelectionHighlight"):
+			object = object.get_node("SelectionHighlight")
 		if data.copy:
 			match data.copied_channel:
 				ColorChannelData.CopyColor.BACKGROUND:
