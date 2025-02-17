@@ -6,7 +6,7 @@ extends Node2D
 @export var copy_y: bool
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if target is not Camera2D:
 		if copy_x:
 			global_position.x = target.position.x
