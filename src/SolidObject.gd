@@ -31,7 +31,9 @@ func _physics_process(_delta: float) -> void:
 			dash_orb_rotation = LevelManager.player.dash_control.angle - LevelManager.player.gameplay_rotation
 		else:
 			dash_orb_rotation = -LevelManager.player.gameplay_rotation
-		_hitbox_shape.global_scale.y = sign(LevelManager.player.gravity_multiplier) if dash_orb_rotation == 0 else sign(LevelManager.player.gravity_multiplier) * sign(dash_orb_rotation)
+		_hitbox_shape.global_scale.y = sign(LevelManager.player.gravity_multiplier)
+		if dash_orb_rotation != 0:
+			_hitbox_shape.global_scale.y *= sign(dash_orb_rotation)
 		if _hitbox_shape is CollisionShape2D:
 			if _hitbox_shape.shape is RectangleShape2D:
 				_hitbox_shape.shape.size = _transform_rectangle_shape(sign(LevelManager.player.gravity_multiplier), LevelManager.player.gameplay_rotation)

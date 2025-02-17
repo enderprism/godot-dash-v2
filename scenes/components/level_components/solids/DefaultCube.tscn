@@ -1,18 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://ccdry45jmn43w"]
 
-[ext_resource type="Script" path="res://src/SolidObject.gd" id="1_8i826"]
 [ext_resource type="Texture2D" uid="uid://buwtqcrkk8knn" path="res://assets/textures/solids/RegularBlock01.svg" id="2_yn5k1"]
 [ext_resource type="Script" path="res://addons/nine_patch_sprite_2d/nine_patch_sprite_2d.gd" id="3_5g55o"]
 [ext_resource type="PackedScene" uid="uid://cnru264bpjwxo" path="res://scenes/components/level_components/EditorSelectionCollider.tscn" id="4_a151s"]
+[ext_resource type="Script" path="res://src/NinePatchSprite2DAbsoluteSize.gd" id="4_cpky5"]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_tn7hg"]
-resource_local_to_scene = true
-points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4sak"]
+size = Vector2(128, 128)
 
-[node name="DefaultCube" type="AnimatableBody2D"]
+[node name="DefaultCube" type="StaticBody2D"]
 collision_layer = 2
-sync_to_physics = false
-script = ExtResource("1_8i826")
 
 [node name="Sprite" type="Node2D" parent="."]
 scale = Vector2(0.25, 0.25)
@@ -25,8 +22,11 @@ patch_margin_right = 35.0
 patch_margin_bottom = 35.0
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-shape = SubResource("ConvexPolygonShape2D_tn7hg")
-one_way_collision = true
+shape = SubResource("RectangleShape2D_s4sak")
 debug_color = Color(0, 0.071, 0.702, 0.25)
 
 [node name="EditorSelectionCollider" parent="." instance=ExtResource("4_a151s")]
+
+[node name="NinePatchSprite2DAbsoluteSize" type="Node" parent="." node_paths=PackedStringArray("nine_patch_sprite")]
+script = ExtResource("4_cpky5")
+nine_patch_sprite = NodePath("../Sprite")

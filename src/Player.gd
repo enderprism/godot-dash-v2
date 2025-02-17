@@ -128,11 +128,15 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if LevelManager.level_playing:
 		up_direction = Vector2.UP.rotated(gameplay_rotation) * sign(gravity_multiplier)
+		$SolidOverlapCheck/SolidOverlapCheckCollider.shape = $GroundCollider.shape
 		_rotate_sprite_degrees(delta)
 		_update_wave_trail(delta)
 		if displayed_gamemode == Gamemode.SPIDER: _update_spider_state_machine()
 		if displayed_gamemode == Gamemode.SWING: _update_swing_fire(delta)
 		velocity = _compute_velocity(delta, velocity, get_direction(), _get_jump_state())
+		var collision = move_and_collide(velocity * delta, true)
+		_handle_collision(collision)
+		print_debug(velocity)
 		move_and_slide()
 		if _last_spider_trail != null:
 			add_child(_last_spider_trail)
@@ -149,6 +153,19 @@ func _physics_process(delta: float) -> void:
 			if is_equal_approx(global_position_normalized.x, portal_global_position_normalized.x):
 				speed_0_portal_control = null
 		#endregion
+
+
+func _handle_collision(collision: KinematicCollision2D) -> void:
+	if collision:
+		var collision_angle: float = collision.get_angle() - gameplay_rotation
+		var restricted_collision_angle: float = pingpong(collision_angle, PI/2) * sign(collision_angle)
+		var is_floor: bool = restricted_collision_angle <= floor_max_angle
+		var is_ceiling: bool = restricted_collision_angle >= -floor_max_angle
+		if (not LevelManager.platformer and not is_floor) or (LevelManager.platformer and not (is_floor or is_ceiling)):
+			if collision.get_collider().collision_layer == 1 << 1:
+				collision.get_collider().collision_layer = 1 << 9
+				collision.get_collider().get_node("Hitbox").debug_color.s = 0.0 # DEBUG: Hardcoded name for hitbox color
+
 
 func get_direction() -> int:
 	var direction: int
@@ -495,3 +512,10 @@ func stop_dash() -> void:
 	get_node("DashParticles").emitting = false
 	get_node("DashFlame").hide()
 	dash_control = null
+
+
+func _on_solid_overlap_check_body_exited(body:Node2D) -> void:
+	body = body as CollisionObject2D
+	body.collision_layer = 1 << 1
+	body.get_node("Hitbox").debug_color = Color("#0012b340") # DEBUG: Hardcoded name for hitbox color
+

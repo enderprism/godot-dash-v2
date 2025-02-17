@@ -2088,7 +2088,7 @@ debug_color = Color(0.701961, 0, 0, 0.168627)
 metadata/_edit_lock_ = true
 
 [node name="KillColliderSolid" type="Area2D" parent="."]
-collision_mask = 2
+collision_mask = 512
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
@@ -2105,6 +2105,15 @@ collision_mask = 4
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_t218l")
 debug_color = Color(0.701961, 0, 0, 0.419608)
+
+[node name="SolidOverlapCheck" type="Area2D" parent="."]
+collision_mask = 512
+
+[node name="SolidOverlapCheckCollider" type="CollisionShape2D" parent="SolidOverlapCheck"]
+editor_description = "Detects collisions with the local gravity's ground."
+shape = SubResource("RectangleShape2D_p8d76")
+debug_color = Color(0, 0.0700001, 0.7, 0)
+metadata/_edit_lock_ = true
 
 [node name="DeathEffect" type="AnimatedSprite2D" parent="."]
 z_index = 100
@@ -2155,3 +2164,4 @@ editor_description = "Anchor for any level objects that need to be parented to t
 
 [connection signal="body_entered" from="KillColliderSolid" to="." method="_on_kill_collider_solid_body_entered"]
 [connection signal="body_entered" from="KillColliderHazard" to="." method="_on_kill_collider_hazard_body_entered"]
+[connection signal="body_exited" from="SolidOverlapCheck" to="." method="_on_solid_overlap_check_body_exited"]

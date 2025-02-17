@@ -94,7 +94,7 @@ position = Vector2(640, 925)
 
 [node name="Player" parent="." instance=ExtResource("3_22pbm")]
 unique_name_in_owner = true
-position = Vector2(640, 862)
+position = Vector2(640, 860)
 
 [node name="EditorGridParallax" type="Parallax2D" parent="."]
 z_index = -10
