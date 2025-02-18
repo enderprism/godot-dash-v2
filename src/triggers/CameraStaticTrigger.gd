@@ -38,7 +38,8 @@ func update_target_link() -> void:
 	target_link.target = base._target
 
 func start(_body: Node2D) -> void:
-	easing._tween.disconnect("finished", _exit_static_end)
+	if easing._tween.finished.is_connected(_exit_static_end):
+		easing._tween.finished.disconnect(_exit_static_end)
 	if mode == Mode.EXIT: easing._tween.finished.connect(_exit_static_end)
 	if easing._is_inactive():
 		if _player_camera != null:
