@@ -19,7 +19,7 @@
 size = Vector2(4096, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4i0t"]
-size = Vector2(194.4, 154.4)
+size = Vector2(534.4, 154.4)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fr71x"]
 shader = ExtResource("10_tgbxk")

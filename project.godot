@@ -68,10 +68,6 @@ GroundData="*res://src/autoloads/GroundData.gd"
 MusicVolume="*res://src/autoloads/MusicVolume.gd"
 Config="*res://src/autoloads/Config.gd"
 
-[debug]
-
-shapes/layer_10="solid_overlap_check"
-
 [display]
 
 window/size/viewport_width=1920

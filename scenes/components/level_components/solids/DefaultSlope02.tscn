@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bs82trmwlnsmy"]
+
+[ext_resource type="Texture2D" uid="uid://chtrj70jj3qlf" path="res://assets/textures/solids/RegularSlope02.svg" id="1_8v7oy"]
+[ext_resource type="PackedScene" uid="uid://cnru264bpjwxo" path="res://scenes/components/level_components/EditorSelectionCollider.tscn" id="2_07kje"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_onp7b"]
+points = PackedVector2Array(-128, 64, 128, -64, 128, 64)
+
+[node name="DefaultSlope02" type="StaticBody2D"]
+collision_layer = 66
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_8v7oy")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_onp7b")
+debug_color = Color(0, 0.071, 0.702, 0.25)
+
+[node name="EditorSelectionCollider" parent="." instance=ExtResource("2_07kje")]
+scale = Vector2(2, 1)
+type = 6

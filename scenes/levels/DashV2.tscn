@@ -21,7 +21,7 @@
 [ext_resource type="Script" path="res://src/triggers/trigger_components/GameplayRotateTriggerIndicator.gd" id="17_jvq2b"]
 [ext_resource type="Texture2D" uid="uid://dvi6pd8pnm7k2" path="res://assets/textures/triggers/Rotate.svg" id="17_wblj1"]
 [ext_resource type="Script" path="res://src/triggers/ScaleTrigger.gd" id="19_vvu8j"]
-[ext_resource type="Texture2D" uid="uid://bba5v7yjggwa" path="res://assets/textures/triggers/Scale.svg" id="19_xpd5j"]
+[ext_resource type="Texture2D" uid="uid://bba5v7yjggwa" path="res://assets/textures/triggers/Scale.svg" id="21_jw8px"]
 [ext_resource type="Texture2D" uid="uid://4totkksq1aty" path="res://assets/textures/triggers/GameplayRotate.svg" id="22_78ocd"]
 [ext_resource type="Script" path="res://src/triggers/SpawnTrigger.gd" id="24_l04c6"]
 [ext_resource type="Script" path="res://src/triggers/CameraStaticTrigger.gd" id="24_r7vme"]
@@ -36,7 +36,7 @@
 [ext_resource type="Script" path="res://src/triggers/AlphaTrigger.gd" id="30_4btpy"]
 [ext_resource type="PackedScene" uid="uid://bwjxj7jcot0cn" path="res://scenes/components/level_components/letter_objects/StopDash.tscn" id="30_me5kp"]
 [ext_resource type="PackedScene" uid="uid://cct7q7sr6fwc0" path="res://scenes/components/level_components/portals/gamemode_portals/WavePortal.tscn" id="31_bjlog"]
-[ext_resource type="Texture2D" uid="uid://b6eeefnqgnv52" path="res://assets/textures/triggers/Spawn.svg" id="31_v7nmk"]
+[ext_resource type="Texture2D" uid="uid://b6eeefnqgnv52" path="res://assets/textures/triggers/Spawn.svg" id="32_eh181"]
 [ext_resource type="PackedScene" uid="uid://b2civdkigbcth" path="res://scenes/components/level_components/portals/other_portals/SizePortalSmall.tscn" id="32_k5j6h"]
 [ext_resource type="Texture2D" uid="uid://cihka00vqqj3m" path="res://assets/textures/triggers/Alpha.svg" id="38_tkw8r"]
 [ext_resource type="Script" path="res://src/TargetLink.gd" id="39_yr81y"]
@@ -167,7 +167,7 @@ position = Vector2(704, -192)
 position = Vector2(1088, -320)
 
 [node name="YellowPad" parent="." instance=ExtResource("6_cufna")]
-position = Vector2(0, -64)
+position = Vector2(64, -64)
 
 [node name="SpiderPortal" parent="." groups=["spiderportal"] instance=ExtResource("3_iu2ry")]
 position = Vector2(1472, -576)
@@ -185,6 +185,10 @@ position = Vector2(2176, -64)
 scale = Vector2(6, 1)
 
 [node name="DefaultCube6" parent="." instance=ExtResource("5_g4mtk")]
+position = Vector2(2176, -960)
+scale = Vector2(10, 1)
+
+[node name="DefaultCube14" parent="." instance=ExtResource("5_g4mtk")]
 position = Vector2(2176, -960)
 scale = Vector2(10, 1)
 
@@ -418,7 +422,7 @@ debug_color = Color(1, 0.960784, 0, 0.419608)
 
 [node name="Sprite" type="Sprite2D" parent="ScaleTrigger/TriggerBase"]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("19_xpd5j")
+texture = ExtResource("21_jw8px")
 
 [node name="SingleUsageComponent" type="Node" parent="ScaleTrigger/TriggerBase"]
 script = ExtResource("14_2jira")
@@ -458,39 +462,41 @@ script = ExtResource("14_2jira")
 
 [node name="Indicator" type="Node2D" parent="GameplayRotateTrigger"]
 show_behind_parent = true
+scale = Vector2(0.8, 0.8)
 script = ExtResource("17_jvq2b")
 
-[node name="tGameplayRotate2" type="Node2D" parent="."]
+[node name="GameplayRotateTrigger2" type="Node2D" parent="."]
 position = Vector2(1664, -448)
 rotation = 1.57079
 script = ExtResource("15_3ludl")
 metadata/_edit_group_ = true
 
-[node name="TriggerEasing" type="Node" parent="tGameplayRotate2"]
+[node name="TriggerEasing" type="Node" parent="GameplayRotateTrigger2"]
 script = ExtResource("10_srhyw")
 _duration = 0.0
 
-[node name="TriggerBase" type="Area2D" parent="tGameplayRotate2"]
+[node name="TriggerBase" type="Area2D" parent="GameplayRotateTrigger2"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 hitbox_height = 1.0
 single_usage = false
 
-[node name="TriggerHitboxDisplay" type="Node2D" parent="tGameplayRotate2/TriggerBase"]
+[node name="TriggerHitboxDisplay" type="Node2D" parent="GameplayRotateTrigger2/TriggerBase"]
 script = ExtResource("12_bmhr7")
 
-[node name="Hitbox" type="CollisionShape2D" parent="tGameplayRotate2/TriggerBase"]
+[node name="Hitbox" type="CollisionShape2D" parent="GameplayRotateTrigger2/TriggerBase"]
 shape = SubResource("SegmentShape2D_axt8e")
 debug_color = Color(1, 0.960784, 0, 0.419608)
 
-[node name="Sprite" type="Sprite2D" parent="tGameplayRotate2/TriggerBase"]
+[node name="Sprite" type="Sprite2D" parent="GameplayRotateTrigger2/TriggerBase"]
 rotation = -1.57079
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("22_78ocd")
 
-[node name="Indicator" type="Node2D" parent="tGameplayRotate2"]
+[node name="Indicator" type="Node2D" parent="GameplayRotateTrigger2"]
 show_behind_parent = true
 rotation = -1.57079
+scale = Vector2(0.8, 0.8)
 script = ExtResource("17_jvq2b")
 
 [node name="Cross" type="Sprite2D" parent="."]
@@ -702,7 +708,7 @@ debug_color = Color(1, 0.960784, 0, 0.419608)
 
 [node name="Sprite" type="Sprite2D" parent="SpawnTrigger/TriggerBase"]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("31_v7nmk")
+texture = ExtResource("32_eh181")
 
 [node name="SingleUsageComponent" type="Node" parent="SpawnTrigger/TriggerBase"]
 script = ExtResource("14_2jira")
@@ -736,7 +742,7 @@ debug_color = Color(1, 0.960784, 0, 0.419608)
 
 [node name="Sprite" type="Sprite2D" parent="SpawnTrigger2/TriggerBase"]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("31_v7nmk")
+texture = ExtResource("32_eh181")
 
 [node name="SingleUsageComponent" type="Node" parent="SpawnTrigger2/TriggerBase"]
 script = ExtResource("14_2jira")
@@ -991,7 +997,7 @@ debug_color = Color(1, 0.960784, 0, 0.419608)
 
 [node name="Sprite" type="Sprite2D" parent="tSpawn3/TriggerBase"]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("31_v7nmk")
+texture = ExtResource("32_eh181")
 
 [node name="SingleUsageComponent" type="Node" parent="tSpawn3/TriggerBase"]
 script = ExtResource("14_2jira")
@@ -1121,7 +1127,7 @@ debug_color = Color(1, 0.960784, 0, 0.419608)
 
 [node name="Sprite" type="Sprite2D" parent="tSpawn4/TriggerBase"]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("31_v7nmk")
+texture = ExtResource("32_eh181")
 
 [node name="SingleUsageComponent" type="Node" parent="tSpawn4/TriggerBase"]
 script = ExtResource("14_2jira")
@@ -1179,7 +1185,7 @@ debug_color = Color(1, 0.960784, 0, 0.419608)
 
 [node name="Sprite" type="Sprite2D" parent="tSpawn5/TriggerBase"]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("31_v7nmk")
+texture = ExtResource("32_eh181")
 
 [node name="SingleUsageComponent" type="Node" parent="tSpawn5/TriggerBase"]
 script = ExtResource("14_2jira")
@@ -1253,7 +1259,7 @@ debug_color = Color(1, 0.960784, 0, 0.419608)
 
 [node name="Sprite" type="Sprite2D" parent="ScaleTrigger2/TriggerBase"]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("19_xpd5j")
+texture = ExtResource("21_jw8px")
 
 [node name="TriggerEasing" type="Node" parent="ScaleTrigger2"]
 script = ExtResource("10_srhyw")
