@@ -30,8 +30,9 @@ func _ready() -> void:
 	position += DEFAULT_OFFSET
 	LevelManager.player_camera = self
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# limit_bottom = DEFAULT_LIMIT_BOTTOM - int(offset.y)
+	var framerate_compensation := delta * 60
 	if LevelManager.level_playing:
 		_player_distance = player.position - position
 		_delta_position = get_screen_center_position() - _previous_position
@@ -47,53 +48,53 @@ func _physics_process(_delta: float) -> void:
 					if _static.y == 0:
 						position.y = lerpf(position.y, player.position.y, 1.0)
 					position_offset.y = lerpf(
-						position_offset.y,
-						(sign(player.gameplay_rotation_degrees) * -1.4 * 0.5 * DEFAULT_OFFSET.x * player.get_direction() * sign(player.speed_multiplier))/zoom.y + additional_offset.x,
-						_offset_snap.x)
+							position_offset.y,
+							(sign(player.gameplay_rotation_degrees) * -1.4 * 0.5 * DEFAULT_OFFSET.x * player.get_direction() * sign(player.speed_multiplier))/zoom.y + additional_offset.x,
+							_offset_snap.x * framerate_compensation)
 				elif abs(_player_distance.y) > (MAX_DISTANCE.x / zoom.y):
 					position.y = lerpf(
-						position.y,
-						player.position.y - sign(_player_distance.y) * (MAX_DISTANCE.x / zoom.y),
-						_position_snap.y)
+							position.y,
+							player.position.y - sign(_player_distance.y) * (MAX_DISTANCE.x / zoom.y),
+							_position_snap.y * framerate_compensation)
 				position_offset.x = lerpf(position_offset.x, DEFAULT_OFFSET.x/zoom.y + additional_offset.x, _offset_snap.y)
 				if _static.x == 0 and _freefly and abs(_player_distance.x) > (MAX_DISTANCE.y / zoom.y):
 					position.x = lerpf(
-						position.x,
-						player.position.x - sign(_player_distance.x) * (MAX_DISTANCE.y / zoom.y),
-						_position_snap.y)
+							position.x,
+							player.position.x - sign(_player_distance.x) * (MAX_DISTANCE.y / zoom.y),
+							_position_snap.y * framerate_compensation)
 				elif not _freefly:
 					position.x = lerpf(
-						position.x,
-						GroundData.center.rotated(-LevelManager.player.gameplay_rotation).y - GroundData.offset,
-						_position_snap.y)
+							position.x,
+							GroundData.center.rotated(-LevelManager.player.gameplay_rotation).y - GroundData.offset,
+							_position_snap.y * framerate_compensation)
 			else:
 				if not LevelManager.platformer:
 					if _static.x == 0:
 						position.x = lerpf(position.x, player.position.x, 1.0)
 					position_offset.x = lerpf(
-						position_offset.x,
-						(DEFAULT_OFFSET.x * player.get_direction() * sign(player.speed_multiplier))/zoom.x + additional_offset.x,
-						_offset_snap.x)
+							position_offset.x,
+							(DEFAULT_OFFSET.x * player.get_direction() * sign(player.speed_multiplier))/zoom.x + additional_offset.x,
+							_offset_snap.x * framerate_compensation)
 				elif abs(_player_distance.x) > (MAX_DISTANCE.x / zoom.x):
 					position.x = lerpf(
-						position.x,
-						player.position.x - sign(_player_distance.x) * (MAX_DISTANCE.x / zoom.x),
-						_position_snap.x)
+							position.x,
+							player.position.x - sign(_player_distance.x) * (MAX_DISTANCE.x / zoom.x),
+							_position_snap.x * framerate_compensation)
 					position_offset.x = lerpf(
-						position_offset.x,
-						additional_offset.x,
-						_offset_snap.x)
+							position_offset.x,
+							additional_offset.x,
+							_offset_snap.x * framerate_compensation)
 				position_offset.y = lerpf(position_offset.y, DEFAULT_OFFSET.y/zoom.y + additional_offset.y, _offset_snap.y)
 				if _static.y == 0 and _freefly and abs(_player_distance.y) > (MAX_DISTANCE.y / zoom.y):
 					position.y = lerpf(
-						position.y,
-						player.position.y - sign(_player_distance.y) * (MAX_DISTANCE.y / zoom.y),
-						_position_snap.y,)
+							position.y,
+							player.position.y - sign(_player_distance.y) * (MAX_DISTANCE.y / zoom.y),
+							_position_snap.y * framerate_compensation)
 				elif not _freefly:
 					position.y = lerpf(
-						position.y,
-						GroundData.center.rotated(-LevelManager.player.gameplay_rotation).y - GroundData.offset,
-						_position_snap.y)
+							position.y,
+							GroundData.center.rotated(-LevelManager.player.gameplay_rotation).y - GroundData.offset,
+							_position_snap.y * framerate_compensation)
 
 		position_offset *= additional_offset_multiplier
 
@@ -101,8 +102,7 @@ func _physics_process(_delta: float) -> void:
 		if _static.y == 0: position.y += position_offset.y
 
 		position.y = clampf(
-			position.y,
-			MIN_HEIGHT,
-			MAX_HEIGHT,
-		)
+				position.y,
+				MIN_HEIGHT,
+				MAX_HEIGHT)
 
