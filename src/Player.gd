@@ -145,8 +145,6 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		_rotate_sprite_degrees(delta)
 		_update_wave_trail(delta)
-		if displayed_gamemode == Gamemode.SPIDER: _update_spider_state_machine()
-		if displayed_gamemode == Gamemode.SWING: _update_swing_fire(delta)
 		if _last_spider_trail != null:
 			add_child(_last_spider_trail)
 			_last_spider_trail.trail_global_position = $Icon/Spider/SpiderCast/SpiderTrailSpawnPoint.global_position if horizontal_direction > 0 \
@@ -162,6 +160,8 @@ func _physics_process(delta: float) -> void:
 			if is_equal_approx(global_position_normalized.x, portal_global_position_normalized.x):
 				speed_0_portal_control = null
 		#endregion
+	if displayed_gamemode == Gamemode.SPIDER: _update_spider_state_machine()
+	if displayed_gamemode == Gamemode.SWING: _update_swing_fire(delta)
 
 
 func _handle_collision(collision: KinematicCollision2D) -> void:
@@ -171,7 +171,7 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
 		var is_floor: bool = restricted_collision_angle <= floor_max_angle
 		var is_ceiling: bool = restricted_collision_angle >= -floor_max_angle
 		if (not LevelManager.platformer and not is_floor) or (LevelManager.platformer and not (is_floor or is_ceiling)):
-			if collision.get_collider().collision_layer == 1 << 1: # Will not enable on slopes // TODO fix slopes and crash colisions on the flat side
+			if collision.get_collider().collision_layer & 1 << 1:
 				collision.get_collider().collision_layer = 1 << 9
 				collision.get_collider().get_node("Hitbox").debug_color.s = 0.0 # DEBUG: Hardcoded name for hitbox color
 		if collision.get_collider().collision_layer & 1 << 6:
