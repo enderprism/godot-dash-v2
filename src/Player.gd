@@ -510,18 +510,18 @@ func _update_wave_trail(delta: float) -> void:
 		wave_trail_width *= PLAYER_SCALE_MINI.y
 	elif player_scale == PlayerScale.BIG:
 		wave_trail_width *= PLAYER_SCALE_BIG.y
-	$WaveTrail.width = lerpf($WaveTrail.width, wave_trail_width, 0.25)
-	$WaveTrail2.width = lerpf($WaveTrail2.width, wave_trail_width * 0.5, 0.25)
+	$WaveTrail.width = lerpf($WaveTrail.width, wave_trail_width, 0.25 * delta * 60)
+	$WaveTrail2.width = lerpf($WaveTrail2.width, wave_trail_width * 0.5, 0.25 * delta * 60)
 	if displayed_gamemode == Gamemode.WAVE:
 		$WaveTrail.modulate.a = 1.0
 		$WaveTrail2.modulate.a = 1.0
-		$WaveTrail.length = lerpf($WaveTrail.length, WAVE_TRAIL_LENGTH, 1-exp(-delta * 12))
-		$WaveTrail2.length = lerpf($WaveTrail.length, WAVE_TRAIL_LENGTH, 1-exp(-delta * 12))
+		$WaveTrail.length = lerpf($WaveTrail.length, WAVE_TRAIL_LENGTH, delta * 60 * 0.2)
+		$WaveTrail2.length = lerpf($WaveTrail.length, WAVE_TRAIL_LENGTH, delta * 60 * 0.2)
 	else:
 		$WaveTrail.length = 0
 		$WaveTrail2.length = 0
-		$WaveTrail.modulate.a = move_toward($WaveTrail.modulate.a, 0.0, delta * 12)
-		$WaveTrail2.modulate.a = move_toward($WaveTrail2.modulate.a, 0.0, delta * 12)
+		$WaveTrail.modulate.a = move_toward($WaveTrail.modulate.a, 0.0, delta * 60 * 0.2)
+		$WaveTrail2.modulate.a = move_toward($WaveTrail2.modulate.a, 0.0, delta * 60 * 0.2)
 		if is_zero_approx($WaveTrail.modulate.a):
 			$WaveTrail.clear_points()
 		if is_zero_approx($WaveTrail2.modulate.a):
