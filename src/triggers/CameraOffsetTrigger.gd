@@ -38,14 +38,14 @@ func _physics_process(_delta: float) -> void:
 		if _player_camera != null:
 			var _weight_delta = easing._get_weight_delta()
 			if from_center:
-				_player_camera._tOffset_multiplier = _player_camera._tOffset_multiplier.lerp(Vector2.ZERO, easing._weight)
+				_player_camera.additional_offset_multiplier = _player_camera.additional_offset_multiplier.lerp(Vector2.ZERO, easing._weight)
 			else:
-				_player_camera._tOffset_multiplier = _player_camera._tOffset_multiplier.lerp(Vector2.ONE, easing._weight)
+				_player_camera.additional_offset_multiplier = _player_camera.additional_offset_multiplier.lerp(Vector2.ONE, easing._weight)
 			match mode:
 				Mode.SET:
-					_player_camera._tOffset += (set_offset - _initial_offset) * _weight_delta
+					_player_camera.additional_offset += (set_offset - _initial_offset) * _weight_delta
 				Mode.ADD:
-					_player_camera._tOffset += add_offset * _weight_delta
+					_player_camera.additional_offset += add_offset * _weight_delta
 		else:
 			printerr("In ", name, ": _player_camera is unset")
 	elif Engine.is_editor_hint():
@@ -54,7 +54,7 @@ func _physics_process(_delta: float) -> void:
 func start(_body: Node2D) -> void:
 	if easing._is_inactive():
 		if _player_camera != null:
-			_initial_offset = _player_camera._tOffset
+			_initial_offset = _player_camera.additional_offset
 		else:
 			printerr("In ", name, ": base._player_camera is unset")
 
