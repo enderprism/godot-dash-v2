@@ -16,10 +16,10 @@ scale = Vector2(0.25, 0.25)
 script = ExtResource("3_5g55o")
 texture = ExtResource("2_yn5k1")
 size = Vector2(512, 512)
-patch_margin_left = 35.0
-patch_margin_top = 35.0
-patch_margin_right = 35.0
-patch_margin_bottom = 35.0
+patch_margin_left = 40.0
+patch_margin_top = 40.0
+patch_margin_right = 40.0
+patch_margin_bottom = 40.0
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_s4sak")
