@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://bl48psvuka73y"]
+[gd_scene load_steps=106 format=3 uid="uid://bl48psvuka73y"]
 
 [ext_resource type="Script" path="res://src/Player.gd" id="1_nvqsc"]
 [ext_resource type="Texture2D" uid="uid://omcvgcf1uk5p" path="res://assets/textures/player/cube/Cube.svg" id="2_6ab5b"]
@@ -1739,6 +1739,9 @@ states/walk/position = Vector2(256, 100)
 transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_j87l4"), "fall", "jump", SubResource("AnimationNodeStateMachineTransition_ux6am"), "idle", "idle-alt", SubResource("AnimationNodeStateMachineTransition_xjiwe"), "idle-alt", "idle", SubResource("AnimationNodeStateMachineTransition_3ow27"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_oqq0p"), "idle-alt", "jump", SubResource("AnimationNodeStateMachineTransition_102cw"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_f8c6o"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_ti1vy"), "Start", "walk", SubResource("AnimationNodeStateMachineTransition_333xh"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_y725x"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_d8wj8"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_hfsl1"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_cnpoe"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_w0b68"), "fall", "run", SubResource("AnimationNodeStateMachineTransition_w21ie"), "fall", "walk", SubResource("AnimationNodeStateMachineTransition_36kv4"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_b4v22"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_87vic"), "run", "fall", SubResource("AnimationNodeStateMachineTransition_i1yrl"), "walk", "fall", SubResource("AnimationNodeStateMachineTransition_eidpu"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_vccgf")]
 graph_offset = Vector2(-109, 42)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_o2txy"]
+radius = 64.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mg1a"]
 size = Vector2(48, 48)
 
@@ -1837,9 +1840,9 @@ _data = {
 process_mode = 1
 collision_mask = 122
 collision_priority = 2.0
-floor_constant_speed = true
+slide_on_ceiling = false
 floor_max_angle = 1.39626
-floor_snap_length = 32.0
+floor_snap_length = 128.0
 platform_on_leave = 2
 platform_floor_layers = 4294901802
 script = ExtResource("1_nvqsc")
@@ -1908,7 +1911,6 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_6ab5b")
 
 [node name="Spider" type="Node2D" parent="Icon"]
-visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 6
 
@@ -2023,6 +2025,7 @@ parameters/walk/PlayerSpeed/scale = 1.0
 parameters/walk/TimeScale/scale = 3.0
 
 [node name="Ball" type="Node2D" parent="Icon"]
+visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 3
 
@@ -2088,6 +2091,12 @@ texture = ExtResource("5_34x12")
 [node name="Swing-NoGlow" type="Sprite2D" parent="Icon/Swing"]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("7_qd53y")
+
+[node name="SlopeShapecast" type="ShapeCast2D" parent="."]
+modulate = Color(1, 1, 1, 0.313726)
+shape = SubResource("CircleShape2D_o2txy")
+target_position = Vector2(0, 128)
+collision_mask = 64
 
 [node name="GroundCollider" type="CollisionShape2D" parent="."]
 editor_description = "Detects collisions with the local gravity's ground."
@@ -2166,10 +2175,6 @@ one_shot = true
 [node name="GroundRaycast" type="RayCast2D" parent="."]
 target_position = Vector2(0, 128)
 collision_mask = 32
-
-[node name="SlopeRaycast" type="RayCast2D" parent="."]
-target_position = Vector2(0, 68)
-collision_mask = 64
 
 [node name="ParentedObjects" type="Node2D" parent="."]
 editor_description = "Anchor for any level objects that need to be parented to the player (to keep it tidy)."

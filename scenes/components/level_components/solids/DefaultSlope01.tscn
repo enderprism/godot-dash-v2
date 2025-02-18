@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cnru264bpjwxo" path="res://scenes/components/level_components/EditorSelectionCollider.tscn" id="3_ubt82"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_onp7b"]
-points = PackedVector2Array(-64, 64, 64, -64, 64, 64)
+points = PackedVector2Array(-65, 65, 65, -65, 65, 65)
 
 [node name="DefaultSlope01" type="StaticBody2D"]
 collision_layer = 66
