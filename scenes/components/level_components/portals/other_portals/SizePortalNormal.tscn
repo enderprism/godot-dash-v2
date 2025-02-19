@@ -14,6 +14,7 @@
 size = Vector2(128, 384)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_60mar"]
+resource_local_to_scene = true
 shader = ExtResource("3_aaqhj")
 shader_parameter/shine_color = Color(1, 1, 1, 0)
 shader_parameter/alpha_limit = 0.0

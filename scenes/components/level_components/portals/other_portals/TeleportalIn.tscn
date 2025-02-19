@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://src/SingleUsage.gd" id="10_465gw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bg8ge"]
+resource_local_to_scene = true
 shader = ExtResource("3_c01u1")
 shader_parameter/shine_color = Color(1, 1, 1, 0)
 shader_parameter/alpha_limit = 0.0

@@ -25,6 +25,7 @@ scale_max = 0.5
 scale_curve = SubResource("CurveTexture_0y2x4")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3k1gh"]
+resource_local_to_scene = true
 shader = ExtResource("3_q7yot")
 shader_parameter/shine_color = Color(1, 1, 1, 0)
 shader_parameter/alpha_limit = 0.0
