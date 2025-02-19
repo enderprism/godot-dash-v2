@@ -31,7 +31,8 @@ func _ready() -> void:
 	LevelManager.player_camera = self
 
 func _physics_process(delta: float) -> void:
-	# limit_bottom = DEFAULT_LIMIT_BOTTOM - int(offset.y)
+	if zoom.y > 1.0:
+		limit_bottom = int(DEFAULT_LIMIT_BOTTOM * zoom.y)
 	var framerate_compensation := delta * 60
 	if LevelManager.level_playing:
 		_player_distance = player.position - position
