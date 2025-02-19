@@ -1923,10 +1923,10 @@ collision_mask = 102
 collide_with_areas = true
 
 [node name="SpiderTrailSpawnPoint" type="Marker2D" parent="Icon/Spider/SpiderCast"]
-position = Vector2(64, -64)
+position = Vector2(64, 64)
 
 [node name="SpiderTrailSpawnPointReverse" type="Marker2D" parent="Icon/Spider/SpiderCast"]
-position = Vector2(64, -64)
+position = Vector2(-64, 64)
 
 [node name="SpiderSprites" type="Node2D" parent="Icon/Spider"]
 metadata/_edit_lock_ = true
