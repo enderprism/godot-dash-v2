@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://c0yd5dehfdmfb" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame3.png" id="4_lmais"]
 [ext_resource type="Texture2D" uid="uid://b54ubk48x1iu1" path="res://assets/textures/player/ship/Ship.svg" id="4_mqpwg"]
 [ext_resource type="Texture2D" uid="uid://bqtjw0dj4adi0" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame4.png" id="5_5qxcb"]
-[ext_resource type="Texture2D" uid="uid://dc6xv64ap0xqk" path="res://assets/textures/player/FireBoost.png" id="5_34x12"]
 [ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="5_dvha5"]
 [ext_resource type="Texture2D" uid="uid://cvrhuk7gkomp1" path="res://assets/textures/particles/Square.png" id="5_qm8k0"]
 [ext_resource type="Texture2D" uid="uid://c4eickhp3v3uy" path="res://assets/textures/player/swing/SwingGlow.svg" id="6_6vub1"]
@@ -41,6 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://bxf2eny7xic88" path="res://assets/textures/player/spider/Spider.svg" id="20_bb8qe"]
 [ext_resource type="Texture2D" uid="uid://dnl23vymdbygl" path="res://assets/textures/player/spider/Parts/Spider_Leg-glow.svg" id="21_fajhm"]
 [ext_resource type="Texture2D" uid="uid://dyu6awwvh1u7c" path="res://assets/textures/player/spider/Parts/Spider_Leg.svg" id="22_2ro0i"]
+[ext_resource type="Texture2D" uid="uid://cclfd4gmsd4a0" path="res://assets/textures/player/FireBoost.svg" id="29_475ha"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_14y25"]
 size = Vector2(128, 128)
@@ -122,6 +122,9 @@ animations = [{
 "name": &"default",
 "speed": 30.0
 }]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o2txy"]
+radius = 64.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8d76"]
 size = Vector2(128, 128)
@@ -544,6 +547,7 @@ tracks/9/keys = {
 [sub_resource type="Animation" id="Animation_f364n"]
 resource_name = "idle"
 loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -807,10 +811,10 @@ tracks/2/path = NodePath("Leg-Front-Left:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5, -2),
 "update": 0,
-"values": [0.751096, 0.633555, 0.751096, 0.805643]
+"values": [0.751096, 0.633555, 0.751096, 0.805643, 0.751096]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -819,10 +823,10 @@ tracks/3/path = NodePath("Leg-Front-Left:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5, -2),
 "update": 0,
-"values": [Vector2(0.25, 0.305), Vector2(0.25, 0.33), Vector2(0.25, 0.305), Vector2(0.25, 0.305)]
+"values": [Vector2(0.25, 0.305), Vector2(0.25, 0.33), Vector2(0.25, 0.305), Vector2(0.25, 0.305), Vector2(0.25, 0.305)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -855,10 +859,10 @@ tracks/6/path = NodePath("Leg-Back-Left:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(-2),
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(-2, -2, -2),
 "update": 0,
-"values": [0.0330985]
+"values": [0.0330985, 0.0330985, 0.0330985]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -867,10 +871,10 @@ tracks/7/path = NodePath("Leg-Back-Left:scale")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(-2),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5, -2),
 "update": 0,
-"values": [Vector2(0.25, 0.25)]
+"values": [Vector2(0.25, 0.25), Vector2(0.25, 0.264), Vector2(0.25, 0.25), Vector2(0.25, 0.264), Vector2(0.25, 0.25)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -879,10 +883,10 @@ tracks/8/path = NodePath("Head:position:x")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5, -2),
 "update": 0,
-"values": [8.0, 8.0, 8.0, 8.0]
+"values": [8.0, 8.0, 8.0, 8.0, 8.0]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -903,10 +907,10 @@ tracks/10/path = NodePath("Leg-Front-Left:position:x")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5, -2),
 "update": 0,
-"values": [-30.0, -32.0, -30.0, -28.0]
+"values": [-30.0, -32.0, -30.0, -28.0, -30.0]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
@@ -927,10 +931,10 @@ tracks/12/path = NodePath("Leg-Back-Left:position:x")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(-2),
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(-2, -2, -2),
 "update": 0,
-"values": [21.0]
+"values": [21.0, 21.0, 21.0]
 }
 tracks/13/type = "value"
 tracks/13/imported = false
@@ -939,10 +943,10 @@ tracks/13/path = NodePath("Head:position:y")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5, -2),
 "update": 0,
-"values": [-14.0, -18.0, -14.0, -18.0]
+"values": [-14.0, -18.0, -14.0, -18.0, -14.0]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
@@ -963,10 +967,10 @@ tracks/15/path = NodePath("Leg-Front-Left:position:y")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5, -2),
 "update": 0,
-"values": [12.0, 4.0, 12.0, 15.0]
+"values": [12.0, 4.0, 12.0, 15.0, 12.0]
 }
 tracks/16/type = "value"
 tracks/16/imported = false
@@ -987,10 +991,10 @@ tracks/17/path = NodePath("Leg-Back-Left:position:y")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(-2),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5, -2),
 "update": 0,
-"values": [8.0]
+"values": [8.0, 5.0, 8.0, 5.0, 8.0]
 }
 tracks/18/type = "value"
 tracks/18/imported = false
@@ -999,10 +1003,10 @@ tracks/18/path = NodePath("Head:rotation")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(-2, 0.5, -2, 0.5, -2),
 "update": 0,
-"values": [0.0, 0.0872665, 0.0, -0.0872665]
+"values": [0.0, 0.0872665, 0.0, -0.0872665, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_13wkl"]
@@ -1739,9 +1743,6 @@ states/walk/position = Vector2(256, 100)
 transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_j87l4"), "fall", "jump", SubResource("AnimationNodeStateMachineTransition_ux6am"), "idle", "idle-alt", SubResource("AnimationNodeStateMachineTransition_xjiwe"), "idle-alt", "idle", SubResource("AnimationNodeStateMachineTransition_3ow27"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_oqq0p"), "idle-alt", "jump", SubResource("AnimationNodeStateMachineTransition_102cw"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_f8c6o"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_ti1vy"), "Start", "walk", SubResource("AnimationNodeStateMachineTransition_333xh"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_y725x"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_d8wj8"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_hfsl1"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_cnpoe"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_w0b68"), "fall", "run", SubResource("AnimationNodeStateMachineTransition_w21ie"), "fall", "walk", SubResource("AnimationNodeStateMachineTransition_36kv4"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_b4v22"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_87vic"), "run", "fall", SubResource("AnimationNodeStateMachineTransition_i1yrl"), "walk", "fall", SubResource("AnimationNodeStateMachineTransition_eidpu"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_vccgf")]
 graph_offset = Vector2(-109, 42)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_o2txy"]
-radius = 64.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mg1a"]
 size = Vector2(48, 48)
 
@@ -1845,6 +1846,7 @@ floor_max_angle = 1.39626
 floor_snap_length = 128.0
 platform_on_leave = 2
 platform_floor_layers = 4294901802
+safe_margin = 2.0
 script = ExtResource("1_nvqsc")
 default_collider = SubResource("RectangleShape2D_14y25")
 slope_collider = SubResource("CircleShape2D_xclbr")
@@ -1891,6 +1893,12 @@ antialiased = true
 script = ExtResource("2_s0etf")
 length = 0
 
+[node name="SlopeShapecast" type="ShapeCast2D" parent="."]
+modulate = Color(1, 1, 1, 0.313726)
+shape = SubResource("CircleShape2D_o2txy")
+target_position = Vector2(0, 128)
+collision_mask = 64
+
 [node name="Icon" type="Node2D" parent="."]
 
 [node name="Cube" type="Node2D" parent="Icon"]
@@ -1911,6 +1919,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_6ab5b")
 
 [node name="Spider" type="Node2D" parent="Icon"]
+visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 6
 
@@ -2062,7 +2071,6 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("4_mqpwg")
 
 [node name="Swing" type="Node2D" parent="Icon"]
-visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 7
 
@@ -2073,30 +2081,24 @@ texture = ExtResource("6_6vub1")
 [node name="FireBoostTop" type="Sprite2D" parent="Icon/Swing"]
 position = Vector2(-24, -33)
 rotation = 2.35619
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("5_34x12")
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("29_475ha")
 
 [node name="FireBoostMiddle" type="Sprite2D" parent="Icon/Swing"]
 position = Vector2(-82, 0)
 rotation = 1.57079
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("5_34x12")
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("29_475ha")
 
 [node name="FireBoostBottom" type="Sprite2D" parent="Icon/Swing"]
 position = Vector2(-54, 63)
 rotation = 0.785397
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("5_34x12")
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("29_475ha")
 
 [node name="Swing-NoGlow" type="Sprite2D" parent="Icon/Swing"]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("7_qd53y")
-
-[node name="SlopeShapecast" type="ShapeCast2D" parent="."]
-modulate = Color(1, 1, 1, 0.313726)
-shape = SubResource("CircleShape2D_o2txy")
-target_position = Vector2(0, 128)
-collision_mask = 64
 
 [node name="GroundCollider" type="CollisionShape2D" parent="."]
 editor_description = "Detects collisions with the local gravity's ground."
