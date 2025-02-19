@@ -135,6 +135,8 @@ func _physics_process(delta: float) -> void:
 	if LevelManager.level_playing:
 		up_direction = Vector2.UP.rotated(gameplay_rotation) * sign(gravity_multiplier)
 		velocity = _compute_velocity(delta, velocity, get_direction(), _get_jump_state())
+		if internal_gamemode == Gamemode.SHIP and velocity.rotated(-gameplay_rotation).y * gravity_multiplier< 0:
+			up_direction = Vector2.DOWN.rotated(gameplay_rotation) * sign(gravity_multiplier)
 		if not $SlopeShapecast.is_colliding() and $GroundCollider.shape is CircleShape2D:
 			$GroundCollider.shape = default_collider
 			$SolidOverlapCheck/SolidOverlapCheckCollider.shape = default_collider
@@ -395,9 +397,9 @@ func _rotate_sprite_degrees(delta: float):
 	if $GroundCollider.shape is CircleShape2D:
 		if get_floor_normal() != Vector2.ZERO:
 			if not is_zero_approx(rad_to_deg(get_floor_angle_signed(false))):
-				sprite_floor_angle = lerpf(sprite_floor_angle, rad_to_deg(get_floor_angle_signed(false)), delta * 60 * ICON_LERP_FACTOR)
+				sprite_floor_angle = lerpf(sprite_floor_angle, rad_to_deg(wrapf(get_floor_angle_signed(false), -PI/2, PI/2)), delta * 60 * ICON_LERP_FACTOR)
 		elif last_collision != null and last_collision.get_normal() != Vector2.ZERO:
-			sprite_floor_angle = lerpf(sprite_floor_angle, rad_to_deg(last_collision.get_normal().angle_to(up_direction)), delta * 60 * ICON_LERP_FACTOR)
+			sprite_floor_angle = lerpf(sprite_floor_angle, rad_to_deg(wrapf(last_collision.get_normal().angle_to(up_direction), -PI/2, PI/2)), delta * 60 * ICON_LERP_FACTOR)
 	else:
 		sprite_floor_angle = lerpf(sprite_floor_angle, 0.0, delta * 60 * ICON_LERP_FACTOR)
 	#region cube
@@ -416,8 +418,6 @@ func _rotate_sprite_degrees(delta: float):
 		$Icon/Cube.rotation_degrees += delta * 800 * dash_control.initial_horizontal_direction
 	#endregion
 	#region ship/swing
-	$Icon/Ship.rotation = gameplay_rotation
-	$Icon/Swing.rotation = gameplay_rotation
 	$Icon/Ship.scale.y = sign(gravity_multiplier)
 	$Icon/Swing.scale.y = 1.0
 	if get_direction() != 0:
@@ -425,8 +425,8 @@ func _rotate_sprite_degrees(delta: float):
 		$Icon/Swing.scale.x = sign(get_direction())
 	if not dash_control:
 		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
-			$Icon/Ship.rotation_degrees = lerpf($Icon/Ship.rotation, velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 3, ICON_LERP_FACTOR * delta * 60)
-			$Icon/Swing.rotation_degrees = lerpf($Icon/Swing.rotation, velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 3, ICON_LERP_FACTOR * delta * 60)
+			$Icon/Ship.rotation_degrees = lerpf($Icon/Ship.rotation_degrees, velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 5, ICON_LERP_FACTOR * delta * 60)
+			$Icon/Swing.rotation_degrees = lerpf($Icon/Swing.rotation_degrees, velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 5, ICON_LERP_FACTOR * delta * 60)
 		else:
 			$Icon/Ship.rotation_degrees = lerpf($Icon/Ship.rotation_degrees, -sprite_floor_angle, ICON_LERP_FACTOR * delta * 60)
 			$Icon/Swing.rotation_degrees = lerpf($Icon/Swing.rotation_degrees, -sprite_floor_angle, ICON_LERP_FACTOR * delta * 60)
@@ -456,7 +456,6 @@ func _rotate_sprite_degrees(delta: float):
 		$Icon/Wave/Icon.rotation = lerpf($Icon/Wave/Icon.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR * delta * 60)
 	#endregion
 	#region ufo
-	$Icon/UFO.rotation = gameplay_rotation
 	$Icon/UFO.scale.y = sign(gravity_multiplier)
 	if get_direction() != 0:
 		$Icon/UFO.scale.x = sign(get_direction())
