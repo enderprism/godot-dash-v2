@@ -135,8 +135,6 @@ func _physics_process(delta: float) -> void:
 	if LevelManager.level_playing:
 		up_direction = Vector2.UP.rotated(gameplay_rotation) * sign(gravity_multiplier)
 		velocity = _compute_velocity(delta, velocity, get_direction(), _get_jump_state())
-		if internal_gamemode == Gamemode.SHIP and velocity.rotated(-gameplay_rotation).y * gravity_multiplier< 0:
-			up_direction = Vector2.DOWN.rotated(gameplay_rotation) * sign(gravity_multiplier)
 		if not $SlopeShapecast.is_colliding() and $GroundCollider.shape is CircleShape2D:
 			$GroundCollider.shape = default_collider
 			$SolidOverlapCheck/SolidOverlapCheckCollider.shape = default_collider
@@ -188,7 +186,12 @@ func get_floor_angle_signed(last_slide: bool) -> float:
 		floor_normal = get_last_slide_collision().get_normal().rotated(-gameplay_rotation)
 	else:
 		floor_normal = get_floor_normal().rotated(-gameplay_rotation)
-	var floor_angle: float = snappedf(rad_to_deg(floor_normal.angle_to(up_direction)), 0.01)
+	var floor_angle: float
+	if _is_flying_gamemode and is_on_ceiling() and _get_jump_state() == 1:
+		var local_up_direction: Vector2 = Vector2.DOWN.rotated(gameplay_rotation) * sign(gravity_multiplier)
+		floor_angle = snappedf(rad_to_deg(floor_normal.angle_to(local_up_direction)), 0.01)
+	else:
+		floor_angle = snappedf(rad_to_deg(floor_normal.angle_to(up_direction)), 0.01)
 	# Iron out jittery angles
 	if abs(floor_angle - floor_angle_average) > 0.5:
 		floor_angle_history.clear()
@@ -252,6 +255,15 @@ func _compute_velocity(delta: float,
 	_is_flying_gamemode = (internal_gamemode == Gamemode.SHIP or internal_gamemode == Gamemode.SWING or internal_gamemode == Gamemode.WAVE)
 	
 	if _spider_jump_invulnerability_frames > 0: _spider_jump_invulnerability_frames -= 1
+	
+	#region Slope physics
+	var slope_velocity: Vector2
+	if $GroundCollider.shape is CircleShape2D and get_last_slide_collision() != null:
+		var floor_angle := get_floor_angle_signed(true)
+		# 90° collision warp prevention
+		if pingpong(floor_angle, PI/2) < floor_max_angle:
+			slope_velocity.y = tan(-floor_angle) * abs(_velocity.x) * direction
+	#endregion
 
 	if (internal_gamemode == Gamemode.SWING or internal_gamemode == Gamemode.BALL) and jump_state == 1 and orb_queue.is_empty():
 		gravity_multiplier *= -1
@@ -283,18 +295,12 @@ func _compute_velocity(delta: float,
 				_velocity.y += GRAVITY * delta * gravity_multiplier * gameplay_trigger_gravity_multiplier
 			_velocity.y = clamp(_velocity.y, -TERMINAL_VELOCITY.y, TERMINAL_VELOCITY.y)
 	#endregion
+
 	
-	#region Slope physics
-	var slope_velocity: Vector2
-	if $GroundCollider.shape is CircleShape2D and get_last_slide_collision() != null:
-		var floor_angle := get_floor_angle_signed(true)
-		# 90° collision warp prevention
-		if pingpong(floor_angle, PI/2) < floor_max_angle:
-			slope_velocity.y = tan(-floor_angle) * abs(_velocity.x) * direction
-	#endregion
-
-
-	if is_on_floor() and jump_state == -1 and pad_queue.is_empty():
+	var flying_gamemode_slope_boost: bool = _is_flying_gamemode and (
+		(is_on_ceiling() and jump_state >= 0) or
+		(is_on_floor() and get_last_slide_collision() != null and get_floor_angle_signed(true) != 0.0 and jump_state == 1))
+	if ((is_on_floor() and jump_state <= 0) or flying_gamemode_slope_boost) and pad_queue.is_empty():
 		_velocity.y = slope_velocity.y
 
 	#region Apply pads velocity
