@@ -40,7 +40,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
 		if _player_camera != null:
-			var _weight_delta = easing._get_weight_delta()
+			var _weight_delta = easing.get_weight_delta()
 			match mode:
 				Mode.SET:
 					_player_camera.global_rotation_degrees += (_set_rotation_degrees - _initial_global_rotation_degrees) * _weight_delta
@@ -57,7 +57,7 @@ func _physics_process(_delta: float) -> void:
 		base.position = Vector2.ZERO
 
 func start(_body: Node2D) -> void:
-	if easing._is_inactive():
+	if easing.is_inactive():
 		if _player_camera != null:
 			_initial_global_rotation_degrees = _player_camera.global_rotation_degrees
 		else:

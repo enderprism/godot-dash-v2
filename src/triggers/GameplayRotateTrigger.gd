@@ -63,7 +63,7 @@ func _physics_process(_delta: float) -> void:
 		if not _players.is_empty():
 			if not is_zero_approx(easing._duration):
 				_indicator.show()
-				var _weight_delta: float = easing._get_weight_delta()
+				var _weight_delta: float = easing.get_weight_delta()
 				for _player in _players:
 					var _rotation_delta: float = (_rotation_degrees - _initial_global_rotation_degrees[_player]) * _weight_delta
 					_player.gameplay_rotation_degrees = lerp(_initial_global_rotation_degrees, _rotation_degrees, easing._weight)

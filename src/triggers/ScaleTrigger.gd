@@ -53,7 +53,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
 		if not _targets.is_empty():
-			var _weight_delta = easing._get_weight_delta()
+			var _weight_delta = easing.get_weight_delta()
 			var _pivot_scale: Vector2
 			# Do assignment outside loop to avoid doing for every object in the group.
 			# The performance benefit is probably negligeable.
@@ -104,7 +104,7 @@ func update_target_link() -> void:
 	target_link.target = base._target
 
 func start(_body: Node2D) -> void:
-	if easing._is_inactive():
+	if easing.is_inactive():
 		if not _targets.is_empty():
 			for _target: Node2D in _targets:
 				_initial_scales[_target] = _target.global_scale

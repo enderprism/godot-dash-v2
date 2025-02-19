@@ -20,3 +20,4 @@ var platformer := false
 var editor_backup := PackedScene.new()
 var editor_level_backup := PackedScene.new()
 var editor_edited_level: LevelProps
+var active_camera_static: CameraStaticTrigger

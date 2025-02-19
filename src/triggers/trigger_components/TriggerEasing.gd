@@ -31,12 +31,12 @@ func start(_body: Node2D) -> void:
 			.set_ease(easing_type)
 	_tween.finished.connect(func(): finished.emit())
 
-func _get_weight_delta() -> float:
+func get_weight_delta() -> float:
 	var _result = _weight - _previous_weight
 	_previous_weight = _weight
 	return _result
 
-func _is_inactive() -> bool:
+func is_inactive() -> bool:
 	return _weight == 0.0 or _weight == 1.0
 
 func reset() -> void:

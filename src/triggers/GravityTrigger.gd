@@ -18,7 +18,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
 		if easing._duration > 0.0:
-			var _weight_delta: float = easing._get_weight_delta()
+			var _weight_delta: float = easing.get_weight_delta()
 			var _gravity_multiplier_delta: float = (gravity_multiplier - _initial_gravity_multiplier) * _weight_delta
 			_player.gameplay_trigger_gravity_multiplier += _gravity_multiplier_delta
 	if Engine.is_editor_hint():

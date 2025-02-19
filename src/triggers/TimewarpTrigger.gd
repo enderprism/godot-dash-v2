@@ -17,7 +17,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
 		if easing._duration > 0.0:
-			var _weight_delta: float = easing._get_weight_delta()
+			var _weight_delta: float = easing.get_weight_delta()
 			var _time_scale_delta: float = (_time_scale - _initial_time_scale) * _weight_delta
 			Engine.time_scale += _time_scale_delta
 	if Engine.is_editor_hint():

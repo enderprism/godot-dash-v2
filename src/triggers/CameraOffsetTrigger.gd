@@ -36,7 +36,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
 		if _player_camera != null:
-			var _weight_delta = easing._get_weight_delta()
+			var _weight_delta = easing.get_weight_delta()
 			if from_center:
 				_player_camera.additional_offset_multiplier = _player_camera.additional_offset_multiplier.lerp(Vector2.ZERO, easing._weight)
 			else:
@@ -52,7 +52,7 @@ func _physics_process(_delta: float) -> void:
 		base.position = Vector2.ZERO
 
 func start(_body: Node2D) -> void:
-	if easing._is_inactive():
+	if easing.is_inactive():
 		if _player_camera != null:
 			_initial_offset = _player_camera.additional_offset
 		else:

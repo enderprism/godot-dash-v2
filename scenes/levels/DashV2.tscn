@@ -514,6 +514,9 @@ z_index = -50
 
 [node name="TriggerEasing" type="Node" parent="CameraStaticTrigger"]
 script = ExtResource("10_srhyw")
+_duration = 2.0
+easing_type = 1
+easing_transition = 1
 
 [node name="TriggerBase" type="Area2D" parent="CameraStaticTrigger" node_paths=PackedStringArray("_target")]
 collision_layer = 16
@@ -577,6 +580,7 @@ z_index = -50
 
 [node name="TriggerEasing" type="Node" parent="tCameraStatic4"]
 script = ExtResource("10_srhyw")
+easing_transition = 1
 
 [node name="TriggerBase" type="Area2D" parent="tCameraStatic4" node_paths=PackedStringArray("_target")]
 collision_layer = 16
@@ -941,6 +945,8 @@ z_index = -50
 
 [node name="TriggerEasing" type="Node" parent="tCameraStatic2"]
 script = ExtResource("10_srhyw")
+_duration = 2.0
+easing_transition = 4
 
 [node name="TriggerBase" type="Area2D" parent="tCameraStatic2" node_paths=PackedStringArray("_target")]
 collision_layer = 16
@@ -1271,4 +1277,4 @@ easing_transition = 5
 position = Vector2(4416, -832)
 
 [node name="SizePortalSmall" parent="." instance=ExtResource("32_k5j6h")]
-position = Vector2(6976, -1088)
+position = Vector2(6784, -384)

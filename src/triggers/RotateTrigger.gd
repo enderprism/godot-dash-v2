@@ -50,7 +50,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
 		if not _targets.is_empty():
-			var _weight_delta = easing._get_weight_delta()
+			var _weight_delta = easing.get_weight_delta()
 			for _target in _targets:
 				var _initial_global_rotation_degrees: float = _initial_rotations[_target]
 				var _rotation_delta: float
@@ -87,7 +87,7 @@ func update_target_link() -> void:
 	target_link.target = base._target
 
 func start(_body: Node2D) -> void:
-	if easing._is_inactive():
+	if easing.is_inactive():
 		if not _targets.is_empty():
 			for _target in _targets:
 				_initial_rotations[_target] = _target.global_rotation_degrees
