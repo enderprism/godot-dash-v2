@@ -126,6 +126,7 @@ var _last_spider_trail_height: float
 func _ready() -> void:
 	platform_on_leave = PlatformOnLeave.PLATFORM_ON_LEAVE_ADD_UPWARD_VELOCITY if not LevelManager.platformer else PlatformOnLeave.PLATFORM_ON_LEAVE_ADD_VELOCITY
 	dash_control = null
+	internal_gamemode = Gamemode.CUBE
 	displayed_gamemode = Gamemode.CUBE
 	if not _dual_instance:
 		LevelManager.player = self
@@ -299,7 +300,7 @@ func _compute_velocity(delta: float,
 	
 	var flying_gamemode_slope_boost: bool = _is_flying_gamemode and (
 		(is_on_ceiling() and jump_state >= 0) or
-		(is_on_floor() and get_last_slide_collision() != null and get_floor_angle_signed(true) != 0.0 and jump_state == 1))
+		(is_on_floor() and get_last_slide_collision() != null and get_floor_angle_signed(true) != 0.0 and get_direction() != 0 and jump_state == 1))
 	if ((is_on_floor() and jump_state <= 0) or flying_gamemode_slope_boost) and pad_queue.is_empty():
 		_velocity.y = slope_velocity.y
 
@@ -443,21 +444,24 @@ func _rotate_sprite_degrees(delta: float):
 	#region wave
 	$Icon/Wave.rotation = gameplay_rotation
 	$Icon/Wave.scale.y = 1.0
-	if false or get_direction() != 0:
+	if get_direction() != 0 or _get_jump_state() != 0:
+		$Icon/Wave.set_meta("last_8_direction", Vector2(get_direction(), _get_jump_state()))
+	var wave_8_direction = $Icon/Wave.get_meta("last_8_direction", Vector2(0, -1))
+	if get_direction() != 0:
 		$Icon/Wave.scale.x = sign(get_direction())
 	if not dash_control:
 		if not is_on_floor() and not is_on_ceiling():
-			if velocity.rotated(-gameplay_rotation).x != 0.0:
+			if wave_8_direction == Vector2.UP or wave_8_direction == Vector2.DOWN:
+				$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 90.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25)
+			elif wave_8_direction:
 				if player_scale == PlayerScale.NORMAL:
-					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 45.0 * -_get_jump_state() * sign(gravity_multiplier), 0.25)
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 45.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25)
 				elif player_scale == PlayerScale.MINI:
-					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 60.0 * -_get_jump_state() * sign(gravity_multiplier), 0.25)
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 60.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25)
 				elif player_scale == PlayerScale.BIG:
-					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 30.0 * -_get_jump_state() * sign(gravity_multiplier), 0.25)
-			else:
-				$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 90.0 * -_get_jump_state() * sign(gravity_multiplier), 0.25)
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 30.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25)
 		else:
-			$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees * get_direction(), -sprite_floor_angle * sign(gravity_multiplier), ICON_LERP_FACTOR * delta * 60)
+			$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, -sprite_floor_angle * sign(gravity_multiplier) * $Icon/Wave.scale.x, ICON_LERP_FACTOR * delta * 60)
 	else:
 		$Icon/Wave/Icon.rotation = lerpf($Icon/Wave/Icon.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR * delta * 60)
 	#endregion
@@ -511,22 +515,22 @@ func _update_wave_trail(delta: float) -> void:
 		wave_trail_width *= PLAYER_SCALE_MINI.y
 	elif player_scale == PlayerScale.BIG:
 		wave_trail_width *= PLAYER_SCALE_BIG.y
-	$WaveTrail.width = lerpf($WaveTrail.width, wave_trail_width, 0.25 * delta * 60)
-	$WaveTrail2.width = lerpf($WaveTrail2.width, wave_trail_width * 0.5, 0.25 * delta * 60)
+	%WaveTrail.width = lerpf(%WaveTrail.width, wave_trail_width, 0.25 * delta * 60)
+	%WaveTrailInner.width = lerpf(%WaveTrailInner.width, wave_trail_width * 0.5, 0.25 * delta * 60)
 	if displayed_gamemode == Gamemode.WAVE:
-		$WaveTrail.modulate.a = 1.0
-		$WaveTrail2.modulate.a = 1.0
-		$WaveTrail.length = lerpf($WaveTrail.length, WAVE_TRAIL_LENGTH, delta * 60 * 0.2)
-		$WaveTrail2.length = lerpf($WaveTrail.length, WAVE_TRAIL_LENGTH, delta * 60 * 0.2)
+		%WaveTrail.modulate.a = 1.0
+		%WaveTrailInner.modulate.a = 1.0
+		%WaveTrail.length = lerpf(%WaveTrail.length, WAVE_TRAIL_LENGTH, delta * 60 * 0.2)
+		%WaveTrailInner.length = lerpf(%WaveTrail.length, WAVE_TRAIL_LENGTH, delta * 60 * 0.2)
 	else:
-		$WaveTrail.length = 0
-		$WaveTrail2.length = 0
-		$WaveTrail.modulate.a = move_toward($WaveTrail.modulate.a, 0.0, delta * 60 * 0.2)
-		$WaveTrail2.modulate.a = move_toward($WaveTrail2.modulate.a, 0.0, delta * 60 * 0.2)
-		if is_zero_approx($WaveTrail.modulate.a):
-			$WaveTrail.clear_points()
-		if is_zero_approx($WaveTrail2.modulate.a):
-			$WaveTrail2.clear_points()
+		%WaveTrail.length = 0
+		%WaveTrailInner.length = 0
+		%WaveTrail.modulate.a = move_toward(%WaveTrail.modulate.a, 0.0, delta * 60 * 0.2)
+		%WaveTrailInner.modulate.a = move_toward(%WaveTrailInner.modulate.a, 0.0, delta * 60 * 0.2)
+		if is_zero_approx(%WaveTrail.modulate.a):
+			%WaveTrail.clear_points()
+		if is_zero_approx(%WaveTrailInner.modulate.a):
+			%WaveTrailInner.clear_points()
 
 func _get_spider_velocity_delta() -> float:
 	var _target_position = $Icon/Spider/SpiderCast.get_collision_point(0)
