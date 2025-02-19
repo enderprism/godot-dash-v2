@@ -277,6 +277,7 @@ updater/show_new_release_info_on_editor_launch_in_output=false
 
 [physics]
 
+common/physics_ticks_per_second=240
 common/physics_interpolation=true
 
 [rendering]
