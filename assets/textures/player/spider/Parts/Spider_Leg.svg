@@ -7,7 +7,7 @@
    viewBox="0 0 149.22502 149.22502"
    version="1.1"
    id="svg1"
-   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
    sodipodi:docname="Spider_Leg.svg"
    inkscape:export-filename="cube.png"
    inkscape:export-xdpi="96"
@@ -28,12 +28,12 @@
      inkscape:deskcolor="#181825"
      inkscape:document-units="px"
      inkscape:zoom="1.7652595"
-     inkscape:cx="268.51577"
+     inkscape:cx="268.51576"
      inkscape:cy="314.40137"
-     inkscape:window-width="944"
-     inkscape:window-height="1019"
-     inkscape:window-x="962"
-     inkscape:window-y="47"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="g36"
      showgrid="false"><inkscape:page
@@ -49,7 +49,7 @@
        effect="offset"
        id="path-effect40"
        is_visible="true"
-       lpeversion="1.2"
+       lpeversion="1.3"
        linejoin_type="round"
        unit="px"
        offset="25"
@@ -79,7 +79,7 @@
        id="g36"
        transform="translate(327.22017,-32.126712)"><path
          d="m 65.841797,73.939453 a 6.6145842,6.6145842 0 0 0 -4.806641,2.070313 l -17.875,18.90039 a 6.6145842,6.6145842 0 0 0 -1.027344,7.660154 l 17.875,33.46875 a 6.6145842,6.6145842 0 0 0 11.667969,0.002 L 89.552734,102.57227 A 6.6145842,6.6145842 0 0 0 88.523437,94.910156 L 70.646484,76.009766 a 6.6145842,6.6145842 0 0 0 -4.804687,-2.070313 z"
-         style="fill:#000000;stroke:none;stroke-width:0;stroke-linecap:square;paint-order:stroke fill markers"
+         style="fill:#280732;stroke:none;stroke-width:0;stroke-linecap:square;paint-order:stroke fill markers;fill-opacity:1"
          id="path40"
          inkscape:transform-center-y="26.183936"
          inkscape:transform-center-x="-2.4999999e-06"
@@ -93,9 +93,9 @@
          inkscape:transform-center-x="-2.4999999e-06" /><g
          id="g38"
          clip-path="none"><path
-           style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:2.64583;stroke-linecap:square;stroke-dasharray:none;paint-order:stroke fill markers"
+           style="fill:none;fill-opacity:1;stroke:#280732;stroke-width:2.64583;stroke-linecap:square;stroke-dasharray:none;paint-order:stroke fill markers;stroke-opacity:1"
            d="m 47.96652,99.454912 17.875864,7.284308 17.875864,-7.284308"
            id="path34" /><path
-           style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:2.64583;stroke-linecap:square;stroke-dasharray:none;paint-order:stroke fill markers"
+           style="fill:none;fill-opacity:1;stroke:#280732;stroke-width:2.64583;stroke-linecap:square;stroke-dasharray:none;paint-order:stroke fill markers;stroke-opacity:1"
            d="m 65.842384,106.73922 -3e-6,26.18394"
            id="path35" /></g></g></g></svg>
