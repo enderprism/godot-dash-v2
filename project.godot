@@ -77,6 +77,10 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 display_server/driver.linuxbsd="wayland"
 
+[editor]
+
+naming/script_name_casing=1
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/inspector_extender/plugin.cfg", "res://addons/nine_patch_sprite_2d/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/tabby_explorer/plugin.cfg", "res://addons/trail_2d/plugin.cfg")
@@ -282,5 +286,6 @@ common/physics_interpolation=true
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=2
 anti_aliasing/quality/msaa_2d=3
 viewport/hdr_2d=true

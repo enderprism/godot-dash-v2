@@ -44,7 +44,6 @@ glow_enabled = true
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_bwo2a"]
 
 [node name="GameScene" type="Node2D"]
-texture_filter = 4
 script = ExtResource("1_k47tp")
 metadata/_edit_lock_ = true
 
