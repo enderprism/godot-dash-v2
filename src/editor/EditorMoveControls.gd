@@ -25,13 +25,22 @@ enum StepVariant {
 	set(value):
 		step_variant = value
 		if not is_node_ready():
-			set_icon(value)
+			return
+		set_icon(value)
+
+@export var label: String:
+	set(value):
+		label = value
+		if not is_node_ready():
+			return
+		$Label.text = label
 
 
 func _ready() -> void:
 	for direction_button in [%Up, %Down, %Left, %Right]:
 		direction_button.pressed.connect(on_pressed)
 	set_icon(step_variant)
+	$Label.text = label
 
 
 func _process(_delta: float) -> void:

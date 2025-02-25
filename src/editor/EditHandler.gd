@@ -49,7 +49,10 @@ func _physics_process(delta: float) -> void:
 				var move_vector: Vector2
 				move_vector.x = Input.get_axis(&"ui_left", &"ui_right")
 				move_vector.y = Input.get_axis(&"ui_up", &"ui_down")
-				selection.map(func(object): object.global_position += move_vector * LevelManager.CELL_SIZE)
+				var move_multiplier := 1.0
+				if Input.is_key_pressed(KEY_SHIFT):
+					move_multiplier = 0.5
+				selection.map(func(object): object.global_position += move_vector * LevelManager.CELL_SIZE * move_multiplier)
 				object_move_cooldown = 0.2
 			if not rotation_lock:
 				if Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45") and object_move_cooldown <= 0:
@@ -75,13 +78,13 @@ func _update_selection() -> void:
 			selection.map(func(object): object.get_node("SelectionHighlight").queue_free())
 			selection.clear()
 			selection_index += 1
+			selection_changed.emit(selection)
 		_reset_selection_zone(false)
 		if placed_objects_collider.has_overlapping_areas() and not (Input.is_action_just_pressed(&"editor_add_swipe") or Input.is_action_just_pressed(&"editor_selection_remove")):
 			selection = [placed_objects_collider.get_overlapping_areas()[selection_index%len(placed_objects_collider.get_overlapping_areas())].get_parent()]
-		selection_changed.emit(selection)
+			selection_changed.emit(selection)
 	if Input.is_action_pressed(&"editor_selection_remove") or Input.is_action_pressed(&"editor_add"):
 		_swipe_selection_zone()
-		selection_changed.emit(selection)
 	var selection_buffer := Array($SelectionZone.get_overlapping_areas().map(_get_object_parent), TYPE_OBJECT, "Node2D", null)
 	if Input.is_action_just_released(&"editor_selection_remove"):
 		ArrayUtils.intersect(selection, selection_buffer, TYPE_OBJECT, "Node2D").map(func(object): object.get_node("SelectionHighlight").queue_free())
@@ -154,6 +157,8 @@ func _duplicate_selection() -> void:
 
 
 func _rotate_selection(angle: float) -> void:
+	if selection.is_empty():
+		return
 	rotation_lock = true
 	var group_parents := selection.filter(func(object): object.has_meta("group_parent"))
 	if selection_pivot == Vector2.INF:
@@ -183,5 +188,21 @@ func _on_move_controls_direction_pressed(direction: Vector2, step: float) -> voi
 
 
 func _reset_selection_pivot(_selection: Array[Node2D]) -> void:
-	print_debug("pivot reset")
 	selection_pivot = Vector2.INF
+
+
+func _on_rotate_left_90_pressed() -> void:
+	_rotate_selection(-90)
+
+
+func _on_rotate_right_90_pressed() -> void:
+	_rotate_selection(90)
+
+
+func _on_rotate_left_45_pressed() -> void:
+	_rotate_selection(-45)
+
+
+func _on_rotate_right_45_pressed() -> void:
+	_rotate_selection(45)
+

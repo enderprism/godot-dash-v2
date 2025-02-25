@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="false"
      inkscape:deskcolor="#181825"
      inkscape:document-units="px"
-     inkscape:zoom="3.0429689"
-     inkscape:cx="-27.275994"
-     inkscape:cy="31.548137"
+     inkscape:zoom="17.213632"
+     inkscape:cx="35.495125"
+     inkscape:cy="30.499084"
      inkscape:window-width="1920"
      inkscape:window-height="1080"
      inkscape:window-x="0"
@@ -66,7 +66,7 @@
        random_rotate="false"
        random_gap_y="false"
        random_gap_x="false"
-       transformorigin="" />
+       transformorigin="translate(0,5.0200669)" />
     <inkscape:path-effect
        effect="fillet_chamfer"
        id="path-effect8"
@@ -188,10 +188,11 @@
      id="layer1">
     <path
        style="fill:none;fill-opacity:0.6;stroke:#ffffff;stroke-width:1.32292;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       d="M 4.3323721,10.580975 8.3723138,6.3523289 12.60096,10.580975 M 4.3323721,13.486704 8.3723138,9.2580584 12.60096,13.486704 m -8.2685879,2.90573 4.0399417,-4.228646 4.2286462,4.228646"
+       d="M 4.1389807,10.585662 8.3723136,6.3523287 12.605646,10.585662 M 4.1389807,13.496079 8.3723136,9.2627454 12.605646,13.496079 m -8.4666653,2.910416 4.2333329,-4.233333 4.2333324,4.233333"
        id="path8"
        inkscape:path-effect="#path-effect3"
-       inkscape:original-d="M 4.3323721,10.580975 8.3723138,6.3523289 12.60096,10.580975"
-       transform="translate(0.09435242,-2.9057296)" />
+       inkscape:original-d="M 4.1389807,10.585662 8.3723136,6.3523287 12.605646,10.585662"
+       transform="translate(0.09435242,-2.9127595)"
+       sodipodi:nodetypes="ccc" />
   </g>
 </svg>
