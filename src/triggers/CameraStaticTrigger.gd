@@ -62,7 +62,6 @@ func start(_body: Node2D) -> void:
 						_player_camera.global_position.y = _target.global_position.y
 			elif mode == Mode.EXIT:
 				# We want to have the vertical camera aligment during the transition
-				prints(ignore_x, _player_camera._static.x)
 				if not ignore_y:
 					_player_camera._static.y = 0
 					_player_camera.limit_bottom = _player_camera.DEFAULT_LIMIT_BOTTOM
