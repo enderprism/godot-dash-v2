@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1lfp5vqcpgiw"]
+
+[ext_resource type="Script" path="res://src/editor/EditorMoveControls.gd" id="1_yr1dp"]
+[ext_resource type="Texture2D" uid="uid://72ylie72lec3" path="res://assets/textures/guis/editor/edit_panel/MoveObjectFullStep.svg" id="2_1yjs2"]
+
+[node name="MoveControls" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_yr1dp")
+button_size = 64.0
+
+[node name="UpContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Up" type="Button" parent="UpContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("2_1yjs2")
+expand_icon = true
+
+[node name="LeftRightContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Left" type="Button" parent="LeftRightContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("2_1yjs2")
+expand_icon = true
+
+[node name="CenterPadding" type="Control" parent="LeftRightContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Right" type="Button" parent="LeftRightContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("2_1yjs2")
+expand_icon = true
+
+[node name="DownContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Down" type="Button" parent="DownContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("2_1yjs2")
+expand_icon = true

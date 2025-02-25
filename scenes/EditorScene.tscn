@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=68 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -57,6 +57,7 @@
 [ext_resource type="Texture2D" uid="uid://c2ngjixel2d42" path="res://assets/textures/orbs/ToggleOrbOutline.svg" id="36_402hc"]
 [ext_resource type="PackedScene" uid="uid://bpmqq5a3or2k5" path="res://scenes/components/level_components/orbs/DashOrbCyan.tscn" id="37_rlt4b"]
 [ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="51_rnq45"]
+[ext_resource type="PackedScene" uid="uid://c1lfp5vqcpgiw" path="res://scenes/components/game_components/EditorMoveControls.tscn" id="51_w2i7q"]
 [ext_resource type="Script" path="res://src/gui/SectionHeading.gd" id="52_3jb55"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="53_jrbqn"]
 [ext_resource type="PackedScene" uid="uid://da4xswy05y0ve" path="res://scenes/components/game_components/GroupEditor.tscn" id="55_5vu0v"]
@@ -167,15 +168,16 @@ layout_mode = 2
 focus_mode = 1
 shortcut_context = NodePath("../../../../FocusGrabber")
 theme = ExtResource("3_k1q1p")
-current_tab = 0
+current_tab = 1
 metadata/_edit_group_ = true
 
 [node name="Place" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
 theme = ExtResource("3_k1q1p")
-current_tab = 2
+current_tab = 1
 metadata/_tab_index = 0
 
 [node name="Solids" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
@@ -192,10 +194,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme = ExtResource("51_rnq45")
 
 [node name="ButtonContainer" type="HFlowContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Solids/MarginContainer"]
 layout_mode = 2
@@ -242,7 +241,6 @@ texture_override = ExtResource("6_2nlu4")
 texture_owner = NodePath("Sprite")
 
 [node name="Hazards" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 metadata/_tab_name = ""
@@ -299,6 +297,7 @@ type = 2
 object = ExtResource("14_wyjb2")
 
 [node name="Interactables" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 metadata/_tab_name = ""
@@ -673,10 +672,112 @@ texture = ExtResource("24_ji6ug")
 script = ExtResource("3_d5qub")
 icons = Array[Texture2D]([ExtResource("4_7or8s"), ExtResource("5_gyl57"), ExtResource("6_gh5m2"), ExtResource("7_m16em")])
 
-[node name="Edit" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes"]
+[node name="Edit" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes"]
+layout_mode = 2
+current_tab = 0
+metadata/_tab_index = 1
+
+[node name="Integer Steps" type="MarginContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit"]
+layout_mode = 2
+theme = ExtResource("51_rnq45")
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/VBoxContainer"]
+layout_mode = 2
+
+[node name="MoveControlsFull" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/VBoxContainer/HBoxContainer" instance=ExtResource("51_w2i7q")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveControlsFive" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/VBoxContainer/HBoxContainer" instance=ExtResource("51_w2i7q")]
+layout_mode = 2
+size_flags_horizontal = 3
+step_variant = 1
+
+[node name="MoveControlsTen" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/VBoxContainer/HBoxContainer" instance=ExtResource("51_w2i7q")]
+layout_mode = 2
+size_flags_horizontal = 3
+step_variant = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1 step"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "5 steps"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "10 steps"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fractional Steps" type="MarginContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit"]
 visible = false
 layout_mode = 2
+theme = ExtResource("51_rnq45")
 metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/VBoxContainer"]
+layout_mode = 2
+
+[node name="MoveControlsHalf" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/VBoxContainer/HBoxContainer" instance=ExtResource("51_w2i7q")]
+layout_mode = 2
+size_flags_horizontal = 3
+step_variant = 3
+
+[node name="MoveControlsQuarter" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/VBoxContainer/HBoxContainer" instance=ExtResource("51_w2i7q")]
+layout_mode = 2
+size_flags_horizontal = 3
+step_variant = 4
+
+[node name="MoveControlsEight" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/VBoxContainer/HBoxContainer" instance=ExtResource("51_w2i7q")]
+layout_mode = 2
+size_flags_horizontal = 3
+step_variant = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1/2 step"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1/4 step"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1/8 step"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Selection Filters" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes"]
 visible = false
@@ -823,6 +924,12 @@ base = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollCon
 detail = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color")
 
 [connection signal="ready" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place" to="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
+[connection signal="direction_pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/VBoxContainer/HBoxContainer/MoveControlsFull" to="EditHandler" method="_on_move_controls_direction_pressed"]
+[connection signal="direction_pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/VBoxContainer/HBoxContainer/MoveControlsFive" to="EditHandler" method="_on_move_controls_direction_pressed"]
+[connection signal="direction_pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/VBoxContainer/HBoxContainer/MoveControlsTen" to="EditHandler" method="_on_move_controls_direction_pressed"]
+[connection signal="direction_pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/VBoxContainer/HBoxContainer/MoveControlsHalf" to="EditHandler" method="_on_move_controls_direction_pressed"]
+[connection signal="direction_pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/VBoxContainer/HBoxContainer/MoveControlsQuarter" to="EditHandler" method="_on_move_controls_direction_pressed"]
+[connection signal="direction_pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/VBoxContainer/HBoxContainer/MoveControlsEight" to="EditHandler" method="_on_move_controls_direction_pressed"]
 [connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color" to="BaseDetailHandler" method="_on_base_color_value_changed"]
 [connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color" to="BaseDetailHandler" method="_on_detail_color_value_changed"]
 [connection signal="pressed" from="EditorUI/Playtest" to="." method="_on_playtest_pressed"]

@@ -24,7 +24,8 @@ func _physics_process(delta: float) -> void:
 	cursor_position_snapped = level.get_local_mouse_position().snapped(Vector2.ONE*128)
 	if cursor_position_snapped != previous_cursor_position_snapped:
 		selection_index = 0
-	if get_viewport().gui_get_hovered_control() == editor_viewport:
+	var is_already_swiping_selection: bool = $SelectionZone/Hitbox.shape.size != Vector2.ZERO
+	if is_already_swiping_selection or get_viewport().gui_get_hovered_control() == editor_viewport:
 		if editor_mode.get_current_tab_control().name == "Edit":
 			_update_selection()
 		if not selection.is_empty():
@@ -167,3 +168,10 @@ func _rotate_selection(angle: float) -> void:
 func _on_place_handler_object_deleted(object:Node) -> void:
 	selection.erase(object)
 	selection_changed.emit(selection)
+
+
+func _on_move_controls_direction_pressed(direction: Vector2, step: float) -> void:
+	if selection.is_empty():
+		return
+	selection.map(func(object): object.position += LevelManager.CELL_SIZE * direction * step)
+
