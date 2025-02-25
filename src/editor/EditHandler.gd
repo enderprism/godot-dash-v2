@@ -14,9 +14,11 @@ var rotation_lock := false ## Lock variable to ensure 2 rotations aren't happeni
 var selection_index := 0
 var cursor_position_snapped: Vector2
 var previous_cursor_position_snapped: Vector2
+var selection_pivot := Vector2.INF
 
 func _ready() -> void:
 	_reset_selection_zone(true)
+	selection_changed.connect(_reset_selection_pivot)
 
 func _physics_process(delta: float) -> void:
 	if object_move_cooldown > 0:
@@ -76,15 +78,18 @@ func _update_selection() -> void:
 		_reset_selection_zone(false)
 		if placed_objects_collider.has_overlapping_areas() and not (Input.is_action_just_pressed(&"editor_add_swipe") or Input.is_action_just_pressed(&"editor_selection_remove")):
 			selection = [placed_objects_collider.get_overlapping_areas()[selection_index%len(placed_objects_collider.get_overlapping_areas())].get_parent()]
+		selection_changed.emit(selection)
 	if Input.is_action_pressed(&"editor_selection_remove") or Input.is_action_pressed(&"editor_add"):
 		_swipe_selection_zone()
+		selection_changed.emit(selection)
 	var selection_buffer := Array($SelectionZone.get_overlapping_areas().map(_get_object_parent), TYPE_OBJECT, "Node2D", null)
 	if Input.is_action_just_released(&"editor_selection_remove"):
 		ArrayUtils.intersect(selection, selection_buffer, TYPE_OBJECT, "Node2D").map(func(object): object.get_node("SelectionHighlight").queue_free())
 		selection = ArrayUtils.difference(selection, selection_buffer, TYPE_OBJECT, "Node2D")
+		selection_changed.emit(selection)
 	elif (Input.is_action_just_released(&"editor_add") and $SelectionZone/Hitbox.shape.size > Vector2.ONE * 2) or Input.is_action_just_released(&"editor_add_swipe"):
 		selection = ArrayUtils.union(selection, selection_buffer, TYPE_OBJECT, "Node2D")
-	selection_changed.emit(selection)
+		selection_changed.emit(selection)
 
 
 func _get_object_parent(object: Node) -> Node2D:
@@ -145,21 +150,22 @@ func _duplicate_selection() -> void:
 	selection = Array(selection.map(_clone), TYPE_OBJECT, "Node2D", null)
 	selection.map(_add_selection_highlight)
 	selection.map(func(object): object.get_node("SelectionHighlight")._set_duplicate())
+	selection_changed.emit(selection)
 
 
 func _rotate_selection(angle: float) -> void:
 	rotation_lock = true
-	var rotation_center_position: Vector2
 	var group_parents := selection.filter(func(object): object.has_meta("group_parent"))
-	if not group_parents.is_empty():
-		rotation_center_position = group_parents[0].global_position
-	else:
-		# Take the mean of the position of all objects
-		var object_positions := selection.duplicate().map(func(object): return object.global_position)
-		rotation_center_position = ArrayUtils.transform(object_positions, ArrayUtils.Transformation.MEAN, true)
+	if selection_pivot == Vector2.INF:
+		if not group_parents.is_empty():
+			selection_pivot = group_parents[0].global_position
+		else:
+			# Take the mean of the position of all objects
+			var object_positions := selection.duplicate().map(func(object): return object.global_position)
+			selection_pivot = ArrayUtils.transform(object_positions, ArrayUtils.Transformation.MEAN, true)
 	for object in selection:
 		object.global_rotation_degrees += angle
-		var position_relative_to_pivot: Vector2 = object.global_position - rotation_center_position
+		var position_relative_to_pivot: Vector2 = object.global_position - selection_pivot
 		var position_delta := position_relative_to_pivot.rotated(deg_to_rad(angle)) - position_relative_to_pivot
 		object.global_position += position_delta
 	rotation_lock = false
@@ -175,3 +181,7 @@ func _on_move_controls_direction_pressed(direction: Vector2, step: float) -> voi
 		return
 	selection.map(func(object): object.position += LevelManager.CELL_SIZE * direction * step)
 
+
+func _reset_selection_pivot(_selection: Array[Node2D]) -> void:
+	print_debug("pivot reset")
+	selection_pivot = Vector2.INF
