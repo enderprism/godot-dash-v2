@@ -42,6 +42,7 @@ static func transform(array: Array[Variant], transformation: Transformation, at_
 	if array[0] is float or array[0] is int:
 		var result: float
 		if at_edges:
+			array.sort()
 			array = [array[0], array[-1]]
 		else:
 			array = to_set(array)
@@ -58,6 +59,8 @@ static func transform(array: Array[Variant], transformation: Transformation, at_
 		array_x = to_set(array_x)
 		array_y = to_set(array_y)
 		if at_edges:
+			array_x.sort()
+			array_y.sort()
 			array_x = [array_x[0], array_x[-1]]
 			array_y = [array_y[0], array_y[-1]]
 		match transformation:
