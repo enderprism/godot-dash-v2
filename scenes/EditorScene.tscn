@@ -157,6 +157,7 @@ dragger_visibility = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EditorUI/EditorContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/separation = 0
 
@@ -781,6 +782,37 @@ metadata/_tab_index = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps"]
 layout_mode = 2
 
+[node name="AdditionalControlsLeft" type="VBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RotateLeft90" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsLeft"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("52_jpmdx")
+expand_icon = true
+
+[node name="RotateRight90" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsLeft"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("53_mgdr6")
+text_overrun_behavior = 1
+expand_icon = true
+
+[node name="RotateLeft45" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsLeft"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("54_0gg2o")
+text_overrun_behavior = 1
+expand_icon = true
+
+[node name="RotateRight45" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsLeft"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("55_4de2s")
+text_overrun_behavior = 1
+expand_icon = true
+
 [node name="MoveControlsHalf" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer" instance=ExtResource("51_w2i7q")]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -798,6 +830,37 @@ layout_mode = 2
 size_flags_horizontal = 3
 step_variant = 5
 label = "1/8 step"
+
+[node name="AdditionalControlsRight" type="VBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="FlipH" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsRight"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("57_tt0di")
+expand_icon = true
+
+[node name="FlipV" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsRight"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("58_q5hg5")
+text_overrun_behavior = 1
+expand_icon = true
+
+[node name="RotateFree" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsRight"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("59_1fu1b")
+text_overrun_behavior = 1
+expand_icon = true
+
+[node name="ScaleFree" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsRight"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+icon = ExtResource("60_46ckf")
+text_overrun_behavior = 1
+expand_icon = true
 
 [node name="Selection Filters" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes"]
 visible = false
@@ -951,13 +1014,17 @@ detail = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollC
 [connection signal="direction_pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/MoveControlsFull" to="EditHandler" method="_on_move_controls_direction_pressed"]
 [connection signal="direction_pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/MoveControlsFive" to="EditHandler" method="_on_move_controls_direction_pressed"]
 [connection signal="direction_pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/MoveControlsTen" to="EditHandler" method="_on_move_controls_direction_pressed"]
-[connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsRight/FlipH" to="EditHandler" method="_on_rotate_left_90_pressed"]
-[connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsRight/FlipV" to="EditHandler" method="_on_rotate_right_90_pressed"]
-[connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsRight/RotateFree" to="EditHandler" method="_on_rotate_left_45_pressed"]
-[connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsRight/ScaleFree" to="EditHandler" method="_on_rotate_right_45_pressed"]
+[connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsRight/FlipH" to="EditHandler" method="_on_flip_h_pressed"]
+[connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsRight/FlipV" to="EditHandler" method="_on_flip_v_pressed"]
+[connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsLeft/RotateLeft90" to="EditHandler" method="_on_rotate_left_90_pressed"]
+[connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsLeft/RotateRight90" to="EditHandler" method="_on_rotate_right_90_pressed"]
+[connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsLeft/RotateLeft45" to="EditHandler" method="_on_rotate_left_45_pressed"]
+[connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsLeft/RotateRight45" to="EditHandler" method="_on_rotate_right_45_pressed"]
 [connection signal="direction_pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/MoveControlsHalf" to="EditHandler" method="_on_move_controls_direction_pressed"]
 [connection signal="direction_pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/MoveControlsQuarter" to="EditHandler" method="_on_move_controls_direction_pressed"]
 [connection signal="direction_pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/MoveControlsEight" to="EditHandler" method="_on_move_controls_direction_pressed"]
+[connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsRight/FlipH" to="EditHandler" method="_on_flip_h_pressed"]
+[connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsRight/FlipV" to="EditHandler" method="_on_flip_v_pressed"]
 [connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color" to="BaseDetailHandler" method="_on_base_color_value_changed"]
 [connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color" to="BaseDetailHandler" method="_on_detail_color_value_changed"]
 [connection signal="pressed" from="EditorUI/Playtest" to="." method="_on_playtest_pressed"]

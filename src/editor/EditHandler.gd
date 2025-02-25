@@ -61,6 +61,10 @@ func _physics_process(delta: float) -> void:
 				if Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90") and object_move_cooldown <= 0:
 					_rotate_selection(Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90") * 90.0)
 					object_move_cooldown = 0.2
+			if Input.is_action_just_pressed(&"editor_flip_h"):
+				_flip_selection(Vector2.AXIS_X)
+			if Input.is_action_just_pressed(&"editor_flip_v"):
+				_flip_selection(Vector2.AXIS_Y)
 		if not (Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down")
 				or Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45")
 				or Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90")):
@@ -160,6 +164,18 @@ func _rotate_selection(angle: float) -> void:
 	if selection.is_empty():
 		return
 	rotation_lock = true
+	_update_pivot()
+	for object in selection:
+		object.global_rotation_degrees += angle
+		var position_relative_to_pivot: Vector2 = object.global_position - selection_pivot
+		var position_delta := position_relative_to_pivot.rotated(deg_to_rad(angle)) - position_relative_to_pivot
+		object.global_position += position_delta
+	rotation_lock = false
+
+
+func _update_pivot() -> void:
+	if selection.is_empty():
+		return
 	var group_parents := selection.filter(func(object): object.has_meta("group_parent"))
 	if selection_pivot == Vector2.INF:
 		if not group_parents.is_empty():
@@ -168,12 +184,26 @@ func _rotate_selection(angle: float) -> void:
 			# Take the mean of the position of all objects
 			var object_positions := selection.duplicate().map(func(object): return object.global_position)
 			selection_pivot = ArrayUtils.transform(object_positions, ArrayUtils.Transformation.MEAN, true)
-	for object in selection:
-		object.global_rotation_degrees += angle
-		var position_relative_to_pivot: Vector2 = object.global_position - selection_pivot
-		var position_delta := position_relative_to_pivot.rotated(deg_to_rad(angle)) - position_relative_to_pivot
-		object.global_position += position_delta
-	rotation_lock = false
+
+
+func _flip_selection(axis: int):
+	if selection.is_empty():
+		return
+	_update_pivot()
+	match axis:
+		Vector2.AXIS_X:
+			for object in selection:
+				object.scale.x *= -1
+				var position_relative_to_pivot: Vector2 = object.global_position - selection_pivot
+				var x_delta := position_relative_to_pivot.x * -1 - position_relative_to_pivot.x
+				object.global_position.x += x_delta
+		Vector2.AXIS_Y:
+			for object in selection:
+				object.scale.y *= -1
+				var position_relative_to_pivot: Vector2 = object.global_position - selection_pivot
+				var y_delta := position_relative_to_pivot.y * -1 - position_relative_to_pivot.y
+				object.global_position.y += y_delta
+
 
 
 func _on_place_handler_object_deleted(object:Node) -> void:
@@ -205,4 +235,12 @@ func _on_rotate_left_45_pressed() -> void:
 
 func _on_rotate_right_45_pressed() -> void:
 	_rotate_selection(45)
+
+
+func _on_flip_h_pressed() -> void:
+	_flip_selection(Vector2.AXIS_X)
+
+
+func _on_flip_v_pressed() -> void:
+	_flip_selection(Vector2.AXIS_Y)
 
