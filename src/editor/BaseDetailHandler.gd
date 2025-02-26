@@ -7,6 +7,10 @@ class_name ColorChannelSetter
 
 func _on_base_color_value_changed(value:Variant) -> void:
 	var base_channel := value as String
+	var existing_color_channels := LevelManager.editor_edited_level.color_channels.map(func(channel): return channel.associated_group.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX))
+	if not base_channel in existing_color_channels:
+		base.set_value("", Property.Type.STRING)
+		return
 	var objects_base: Array
 	for object in $"../EditHandler".selection:
 		objects_base.append(object.get_node("Base") if object.has_node("Base") else object)
@@ -22,6 +26,10 @@ func _on_base_color_value_changed(value:Variant) -> void:
 
 func _on_detail_color_value_changed(value:Variant) -> void:
 	var detail_channel := value as String
+	var existing_color_channels := LevelManager.editor_edited_level.color_channels.map(func(channel): return channel.associated_group.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX))
+	if not detail_channel in existing_color_channels:
+		detail.set_value("", Property.Type.STRING)
+		return
 	var objects_detail: Array = (
 		$"../EditHandler".selection
 			.map(func(object): return object.get_node_or_null("Detail") as Node2D)
