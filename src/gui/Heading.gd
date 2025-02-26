@@ -14,6 +14,7 @@ var margin_container: MarginContainer
 var label: Label
 
 func _ready() -> void:
+	focus_mode = Control.FOCUS_NONE
 	margin_container = NodeUtils.get_node_or_add(self, "MarginContainer", MarginContainer, NodeUtils.INTERNAL)
 	label = NodeUtils.get_node_or_add(margin_container, "Label", Label, NodeUtils.INTERNAL)
 	_refresh_text()

@@ -20,10 +20,14 @@ func _ready() -> void:
 func _on_button_pressed() -> void:
 	_add_channel(%LineEdit.get_text())
 	%LineEdit.clear()
+	# TODO "keep focus" doesn't work
+	if not Input.is_action_pressed(&"ui_accept_keep_focus"):
+		get_viewport().gui_release_focus()
 
 func _on_line_edit_text_submitted(new_text:String) -> void:
 	_add_channel(new_text)
 	%LineEdit.clear()
+	get_viewport().gui_release_focus()
 
 
 func _add_channel(channel_name: String) -> void:

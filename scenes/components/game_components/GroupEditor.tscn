@@ -29,6 +29,7 @@ layout_mode = 2
 [node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 1
 theme = ExtResource("1_b71ym")
 placeholder_text = "Add a group to the selected objects…"
 clear_button_enabled = true
@@ -37,6 +38,7 @@ clear_button_enabled = true
 texture_filter = 4
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("2_scenm")
 icon_alignment = 1
 expand_icon = true

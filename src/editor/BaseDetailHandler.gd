@@ -3,6 +3,17 @@ class_name ColorChannelSetter
 
 @export var base: Property
 @export var detail: Property
+@export var color_channel_editor: ColorChannelEditor
+
+
+func _ready() -> void:
+	base._input[Property.Type.STRING].focus_entered.connect(_on_property_focus_entered)
+	detail._input[Property.Type.STRING].focus_entered.connect(_on_property_focus_entered)
+
+
+func _on_property_focus_entered() -> void:
+	if color_channel_editor.button_group.get_pressed_button():
+		color_channel_editor.button_group.get_pressed_button().set_pressed(false)
 
 
 func _on_base_color_value_changed(value:Variant) -> void:

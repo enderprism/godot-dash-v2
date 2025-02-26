@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=78 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="3_k1q1p"]
 [ext_resource type="Material" uid="uid://dmfwkx1hhpd5x" path="res://resources/SimpleBlurMaterial.tres" id="3_m55bu"]
 [ext_resource type="Texture2D" uid="uid://cffmcdyqdl686" path="res://assets/textures/guis/editor/EditorPlayPlayer.svg" id="3_qy4mu"]
+[ext_resource type="Script" path="res://src/editor/NoFocusTabContainer.gd" id="4_2at5j"]
 [ext_resource type="Texture2D" uid="uid://c3d7se3g1r25n" path="res://assets/textures/guis/editor/block_palette/Solids.svg" id="4_7or8s"]
 [ext_resource type="Script" path="res://src/BouncyButton.gd" id="4_gl2yd"]
 [ext_resource type="Texture2D" uid="uid://buwtqcrkk8knn" path="res://assets/textures/solids/RegularBlock01.svg" id="4_u8igg"]
@@ -169,24 +170,24 @@ size_flags_vertical = 3
 focus_mode = 1
 mouse_filter = 1
 
-[node name="EditorModes" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer" node_paths=PackedStringArray("shortcut_context")]
+[node name="EditorModes" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer"]
 unique_name_in_owner = true
 texture_filter = 4
 material = ExtResource("3_m55bu")
 custom_minimum_size = Vector2(0, 312)
 layout_mode = 2
-focus_mode = 1
-shortcut_context = NodePath("../../../../FocusGrabber")
-theme = ExtResource("3_k1q1p")
-current_tab = 0
+current_tab = 1
+script = ExtResource("4_2at5j")
 metadata/_edit_group_ = true
 
 [node name="Place" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
 theme = ExtResource("3_k1q1p")
-current_tab = 2
+current_tab = 1
+script = ExtResource("4_2at5j")
 metadata/_tab_index = 0
 
 [node name="Solids" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
@@ -214,6 +215,7 @@ theme_override_constants/v_separation = 10
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -230,6 +232,7 @@ object = ExtResource("7_ii36d")
 [node name="OutlineBlock01" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Solids/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -250,7 +253,6 @@ texture_override = ExtResource("6_2nlu4")
 texture_owner = NodePath("Sprite")
 
 [node name="Hazards" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 metadata/_tab_name = ""
@@ -275,6 +277,7 @@ theme_override_constants/v_separation = 10
 [node name="RegularSpikeNormal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Hazards/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -292,6 +295,7 @@ object = ExtResource("12_18txt")
 [node name="OutlineBlock01" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Hazards/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -307,6 +311,7 @@ type = 2
 object = ExtResource("14_wyjb2")
 
 [node name="Interactables" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 metadata/_tab_name = ""
@@ -331,6 +336,7 @@ theme_override_constants/v_separation = 10
 [node name="YellowOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -349,6 +355,7 @@ object = ExtResource("16_nywui")
 [node name="RedOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -367,6 +374,7 @@ object = ExtResource("18_1ww1r")
 [node name="PinkOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -385,6 +393,7 @@ object = ExtResource("19_jb5ft")
 [node name="ReboundOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -403,6 +412,7 @@ object = ExtResource("22_cb37e")
 [node name="BlackOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -421,6 +431,7 @@ object = ExtResource("22_62rc5")
 [node name="BlueOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -439,6 +450,7 @@ object = ExtResource("26_ay76u")
 [node name="GreenOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -457,6 +469,7 @@ object = ExtResource("27_wpv76")
 [node name="SpiderOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -475,6 +488,7 @@ object = ExtResource("28_qxx6w")
 [node name="DashOrbGreen" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -493,6 +507,7 @@ object = ExtResource("29_lmspt")
 [node name="DashOrbMagenta" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -511,6 +526,7 @@ object = ExtResource("30_5hb38")
 [node name="DashOrbCyan" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -529,6 +545,7 @@ object = ExtResource("37_rlt4b")
 [node name="ToggleOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -570,6 +587,7 @@ theme_override_constants/v_separation = 10
 [node name="PaletteButton" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -602,6 +620,7 @@ texture = ExtResource("19_lbtum")
 [node name="PaletteButton2" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -634,6 +653,7 @@ texture = ExtResource("22_2am2m")
 [node name="PaletteButton3" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
@@ -668,9 +688,9 @@ script = ExtResource("3_d5qub")
 icons = Array[Texture2D]([ExtResource("4_7or8s"), ExtResource("5_gyl57"), ExtResource("6_gh5m2"), ExtResource("7_m16em")])
 
 [node name="Edit" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes"]
-visible = false
 layout_mode = 2
 current_tab = 0
+script = ExtResource("4_2at5j")
 metadata/_tab_index = 1
 
 [node name="Integer Steps" type="MarginContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit"]
@@ -688,12 +708,14 @@ alignment = 1
 [node name="RotateLeft90" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsLeft"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("52_jpmdx")
 expand_icon = true
 
 [node name="RotateRight90" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsLeft"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("53_mgdr6")
 text_overrun_behavior = 1
 expand_icon = true
@@ -701,6 +723,7 @@ expand_icon = true
 [node name="RotateLeft45" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsLeft"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("54_0gg2o")
 text_overrun_behavior = 1
 expand_icon = true
@@ -708,6 +731,7 @@ expand_icon = true
 [node name="RotateRight45" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsLeft"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("55_4de2s")
 text_overrun_behavior = 1
 expand_icon = true
@@ -736,12 +760,14 @@ alignment = 1
 [node name="FlipH" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsRight"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("57_tt0di")
 expand_icon = true
 
 [node name="FlipV" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsRight"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("58_q5hg5")
 text_overrun_behavior = 1
 expand_icon = true
@@ -749,6 +775,7 @@ expand_icon = true
 [node name="RotateFree" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsRight"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("59_1fu1b")
 text_overrun_behavior = 1
 expand_icon = true
@@ -756,6 +783,7 @@ expand_icon = true
 [node name="ScaleFree" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsRight"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("60_46ckf")
 text_overrun_behavior = 1
 expand_icon = true
@@ -776,12 +804,14 @@ alignment = 1
 [node name="RotateLeft90" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsLeft"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("52_jpmdx")
 expand_icon = true
 
 [node name="RotateRight90" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsLeft"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("53_mgdr6")
 text_overrun_behavior = 1
 expand_icon = true
@@ -789,6 +819,7 @@ expand_icon = true
 [node name="RotateLeft45" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsLeft"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("54_0gg2o")
 text_overrun_behavior = 1
 expand_icon = true
@@ -796,6 +827,7 @@ expand_icon = true
 [node name="RotateRight45" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsLeft"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("55_4de2s")
 text_overrun_behavior = 1
 expand_icon = true
@@ -825,12 +857,14 @@ alignment = 1
 [node name="FlipH" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsRight"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("57_tt0di")
 expand_icon = true
 
 [node name="FlipV" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsRight"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("58_q5hg5")
 text_overrun_behavior = 1
 expand_icon = true
@@ -838,6 +872,7 @@ expand_icon = true
 [node name="RotateFree" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsRight"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("59_1fu1b")
 text_overrun_behavior = 1
 expand_icon = true
@@ -845,6 +880,7 @@ expand_icon = true
 [node name="ScaleFree" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsRight"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+focus_mode = 0
 icon = ExtResource("60_46ckf")
 text_overrun_behavior = 1
 expand_icon = true
@@ -1003,10 +1039,6 @@ debug_color = Color(0.284375, 0, 0.7, 0.42)
 z_index = 100
 script = ExtResource("35_xjepn")
 
-[node name="FocusGrabber" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 0
-
 [node name="SidePanelManager" type="Node" parent="." node_paths=PackedStringArray("side_panel", "group_section", "group_editor", "base", "detail", "hsv_shift")]
 script = ExtResource("58_hnsxj")
 side_panel = NodePath("../EditorUI/EditorContainer/SidePanel")
@@ -1023,10 +1055,11 @@ saturation = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/Scr
 value = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value")
 editor_viewport = NodePath("../EditorUI/EditorContainer/VBoxContainer/EditorViewport")
 
-[node name="BaseDetailHandler" type="Node" parent="." node_paths=PackedStringArray("base", "detail")]
+[node name="BaseDetailHandler" type="Node" parent="." node_paths=PackedStringArray("base", "detail", "color_channel_editor")]
 script = ExtResource("64_ycx04")
 base = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color")
 detail = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color")
+color_channel_editor = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Channel Editor/ColorChannelEditor")
 
 [connection signal="ready" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place" to="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
 [connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsLeft/RotateLeft90" to="EditHandler" method="_on_rotate_left_90_pressed"]

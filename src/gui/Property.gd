@@ -71,6 +71,7 @@ func _ready() -> void:
 	# STRING
 	_input.insert(Type.STRING, NodeUtils.get_node_or_add(self, "STRING", LineEdit, NodeUtils.INTERNAL))
 	_input[Type.STRING].custom_minimum_size.x = lineedit_width
+	_input[Type.STRING].focus_mode = Control.FOCUS_CLICK
 	_input[Type.STRING].text_submitted.connect(func(new_text): value_changed.emit(new_text); get_viewport().gui_release_focus())
 	# COLOR
 	_input.insert(Type.COLOR, NodeUtils.get_node_or_add(self, "COLOR", ColorPickerButton, NodeUtils.INTERNAL))

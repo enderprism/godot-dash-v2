@@ -18,7 +18,7 @@ const GROUP_PREFIX := "g_"
 func _update_groups(selection: Array[Node2D], group: String, add: bool) -> void:
 	if add:
 		if group not in group_buttons.keys():
-			if group == "":
+			if group == GROUP_PREFIX:
 				return
 			selection.map(func(object): object.add_to_group(group, true))
 			var group_button := Button.new()
@@ -44,6 +44,7 @@ func _on_line_edit_text_submitted(new_text:String) -> void:
 
 func _on_button_pressed() -> void:
 	_update_groups(selected_objects, GROUP_PREFIX + line_edit.get_text(), true)
+	get_viewport().gui_release_focus()
 	line_edit.clear()
 
 
