@@ -51,6 +51,8 @@ func register():
 func unregister():
 	var level := LevelManager.editor_edited_level
 	level.color_channels.erase(data)
+	var watcher := get_tree().get_first_node_in_group(ColorChannelWatcher.WATCHER_GROUP_PREFIX + data.associated_group) as ColorChannelWatcher
+	watcher.queue_free()
 
 
 func _set_color_preview_color(_color: Color) -> ColorChannelItem:

@@ -1,4 +1,5 @@
 extends Node
+class_name EditHandler
 
 signal selection_zone_changed(new_zone: Rect2)
 signal selection_changed(selection: Array[Node2D])
@@ -79,7 +80,10 @@ func _update_selection() -> void:
 	if get_viewport().gui_get_hovered_control() == editor_viewport and Input.is_action_just_pressed(&"editor_add"):
 		if not Input.is_action_just_pressed(&"editor_add_swipe") and not Input.is_action_just_pressed(&"editor_selection_remove") \
 				and not Input.is_action_just_pressed(&"editor_single_selection_cycle"):
-			selection.map(func(object): object.get_node("SelectionHighlight").queue_free())
+			for object in selection:
+				if object.has_node("HSVWatcher"):
+					object = object.get_node("HSVWatcher")
+				object.get_node("SelectionHighlight").queue_free()
 			selection.clear()
 			selection_index += 1
 			selection_changed.emit(selection)
@@ -107,6 +111,8 @@ func _get_object_parent(object: Node) -> Node2D:
 
 
 func _add_selection_highlight(object: Node2D) -> void:
+	if object.has_node("HSVWatcher"):
+		object = object.get_node("HSVWatcher")
 	if not object.has_node("SelectionHighlight"):
 		var selection_highlight = SelectionHighlight.new()
 		object.add_child(selection_highlight)

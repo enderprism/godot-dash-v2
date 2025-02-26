@@ -12,6 +12,16 @@ func _init(new_data: ColorChannelData) -> void:
 	data.changed.connect(refresh_objects_color)
 
 
+func _exit_tree() -> void:
+	if is_queued_for_deletion():
+		data.set_color(Color.WHITE)
+		data.set_copy(false)
+		data.set_hsv_shift(PackedFloat64Array([0.0, 0.0, 0.0]))
+		refresh_objects_color()
+		# Remove from group
+		get_tree().get_nodes_in_group(data.associated_group).map(func(object): object.remove_from_group(data.associated_group))
+
+
 func _ready() -> void:
 	refresh_objects_color()
 
@@ -20,6 +30,9 @@ func refresh_objects_color(objects: Array = []) -> void:
 	if objects.is_empty():
 		objects = get_tree().get_nodes_in_group(data.associated_group)
 	for object in objects:
+		if object.has_node("HSVWatcher"):
+			object = object.get_node("HSVWatcher")
+		# If the object has an HSVWatcher, the SelectionHighlight will be parented to it to work correctly.
 		if object.has_node("SelectionHighlight"):
 			object = object.get_node("SelectionHighlight")
 		if data.copy:
