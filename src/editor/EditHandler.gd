@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed(&"editor_single_selection_cycle"):
 				selection_index -= 1
 			if Input.is_action_just_pressed(&"editor_deselect"):
-				selection.map(func(object): object.get_node("SelectionHighlight").queue_free())
+				selection.map(_remove_selection_highlight)
 				selection.clear()
 				_reset_selection_zone()
 			if Input.is_action_just_pressed(&"editor_delete"):
@@ -83,7 +83,7 @@ func _update_selection() -> void:
 			for object in selection:
 				if object.has_node("HSVWatcher"):
 					object = object.get_node("HSVWatcher")
-				object.get_node("SelectionHighlight").queue_free()
+				_remove_selection_highlight(object)
 			selection.clear()
 			selection_index += 1
 			selection_changed.emit(selection)
@@ -116,6 +116,18 @@ func _add_selection_highlight(object: Node2D) -> void:
 	if not object.has_node("SelectionHighlight"):
 		var selection_highlight = SelectionHighlight.new()
 		object.add_child(selection_highlight)
+
+
+func _remove_selection_highlight(object: Node2D) -> void:
+	if object.has_node("HSVWatcher"):
+		object = object.get_node("HSVWatcher")
+	if not object.has_node("SelectionHighlight"):
+		return
+	object.modulate = object.get_node("SelectionHighlight").modulate
+	if object is HSVWatcher:
+		object.get_parent().modulate = object.modulate
+	object.get_node("SelectionHighlight").queue_free()
+
 
 
 func _reset_selection_zone(unreachable: bool = true) -> void:
@@ -154,14 +166,13 @@ func _clone(object: Node) -> Node:
 	var clone := packer.instantiate()
 	object.get_parent().add_child(clone)
 	clone.owner = object.owner
+	if object.has_node("HSVWatcher"):
+		clone.get_node("HSVWatcher").hsv_shift = object.get_node("HSVWatcher").hsv_shift
 	return clone
 
 
 func _duplicate_selection() -> void:
-	for object in selection:
-		if object.has_node("HSVWatcher"):
-			object = object.get_node("HSVWatcher")
-		object.get_node("SelectionHighlight").queue_free()
+	selection.map(_remove_selection_highlight)
 	selection = Array(selection.map(_clone), TYPE_OBJECT, "Node2D", null)
 	selection.map(_add_selection_highlight)
 	for object in selection:

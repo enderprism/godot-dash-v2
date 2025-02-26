@@ -2,11 +2,12 @@ extends Node2D
 class_name HSVWatcher
 
 
-var hsv_shift: PackedFloat64Array = PackedFloat64Array([0.0, 0.0, 0.0])
+var hsv_shift: Array[float]
 
 
 func _ready() -> void:
 	modulate = get_parent().modulate
+	hsv_shift.resize(3)
 
 
 func _process(_delta: float) -> void:

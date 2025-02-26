@@ -28,7 +28,10 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 				object.position = (level.get_local_mouse_position() + Vector2(0, 64)).snapped(Vector2.ONE*128) - Vector2(0, 64)
 				level.add_child(object)
 				object.owner = level
-				NodeUtils.get_node_or_add(object, "HSVWatcher", HSVWatcher)
+				var hsv_watcher := HSVWatcher.new()
+				hsv_watcher.name = "HSVWatcher"
+				object.add_child(hsv_watcher)
+				hsv_watcher.set_owner(object)
 		# Handle object deletion
 		elif Input.is_action_pressed(&"editor_remove") and placed_objects_collider.has_overlapping_areas():
 			if len(placed_objects_collider.get_overlapping_areas()) > 0:

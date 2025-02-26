@@ -16,7 +16,8 @@ func _exit_tree() -> void:
 	if is_queued_for_deletion():
 		data.set_color(Color.WHITE)
 		data.set_copy(false)
-		data.set_hsv_shift(PackedFloat64Array([0.0, 0.0, 0.0]))
+		var hsv_shift_default: Array[float] = [0.0, 0.0, 0.0]
+		data.set_hsv_shift(hsv_shift_default)
 		refresh_objects_color()
 		# Remove from group
 		get_tree().get_nodes_in_group(data.associated_group).map(func(object): object.remove_from_group(data.associated_group))
