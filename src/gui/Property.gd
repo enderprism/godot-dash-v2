@@ -40,12 +40,12 @@ var _input: Array[Control]
 func _ready() -> void:
 	# Setup
 	custom_minimum_size.y = 32
-	_label = NodeUtils.get_node_or_add(self, "Label", Label, true, false)
-	_spacer = NodeUtils.get_node_or_add(self, "Spacer", Control, true, false)
+	_label = NodeUtils.get_node_or_add(self, "Label", Label, NodeUtils.INTERNAL)
+	_spacer = NodeUtils.get_node_or_add(self, "Spacer", Control, NodeUtils.INTERNAL)
 	_spacer.size_flags_horizontal = SIZE_FILL | SIZE_EXPAND
 	# Input types
 	# FLOAT
-	_input.insert(Type.FLOAT, NodeUtils.get_node_or_add(self, "FLOAT", SpinBox, true, false))
+	_input.insert(Type.FLOAT, NodeUtils.get_node_or_add(self, "FLOAT", SpinBox, NodeUtils.INTERNAL))
 	_input[Type.FLOAT].min_value = _min
 	_input[Type.FLOAT].max_value = _max
 	_input[Type.FLOAT].step = step
@@ -53,7 +53,7 @@ func _ready() -> void:
 	_input[Type.FLOAT].value_changed.connect(func(new_value): value_changed.emit(new_value))
 	_input[Type.FLOAT].get_line_edit().text_submitted.connect(func(_new_value): get_viewport().gui_release_focus())
 	# FLOAT_SLIDER
-	_input.insert(Type.FLOAT_SLIDER, NodeUtils.get_node_or_add(self, "FLOAT_SLIDER", HSliderSpinBoxCombo, true, false))
+	_input.insert(Type.FLOAT_SLIDER, NodeUtils.get_node_or_add(self, "FLOAT_SLIDER", HSliderSpinBoxCombo, NodeUtils.INTERNAL))
 	_input[Type.FLOAT_SLIDER]._min = _min
 	_input[Type.FLOAT_SLIDER]._max = _max
 	_input[Type.FLOAT_SLIDER].step = step
@@ -62,22 +62,22 @@ func _ready() -> void:
 	_input[Type.FLOAT_SLIDER].value_changed.connect(func(new_value): value_changed.emit(new_value))
 	_input[Type.FLOAT_SLIDER].spinbox.get_line_edit().text_submitted.connect(func(_new_value): get_viewport().gui_release_focus())
 	# BOOL
-	_input.insert(Type.BOOL, NodeUtils.get_node_or_add(self, "BOOL", CheckBox, true, false))
+	_input.insert(Type.BOOL, NodeUtils.get_node_or_add(self, "BOOL", CheckBox, NodeUtils.INTERNAL))
 	_input[Type.BOOL].toggled.connect(func(toggled_on): value_changed.emit(toggled_on))
 	# VECTOR2
-	_input.insert(Type.VECTOR2, NodeUtils.get_node_or_add(self, "VECTOR2", Vector2SpinBox, true, false))
+	_input.insert(Type.VECTOR2, NodeUtils.get_node_or_add(self, "VECTOR2", Vector2SpinBox, NodeUtils.INTERNAL))
 	_input[Type.VECTOR2].vertical = true
 	_input[Type.VECTOR2].value_changed.connect(func(new_value): value_changed.emit(new_value))
 	# STRING
-	_input.insert(Type.STRING, NodeUtils.get_node_or_add(self, "STRING", LineEdit, true, false))
+	_input.insert(Type.STRING, NodeUtils.get_node_or_add(self, "STRING", LineEdit, NodeUtils.INTERNAL))
 	_input[Type.STRING].custom_minimum_size.x = lineedit_width
 	_input[Type.STRING].text_submitted.connect(func(new_text): value_changed.emit(new_text); get_viewport().gui_release_focus())
 	# COLOR
-	_input.insert(Type.COLOR, NodeUtils.get_node_or_add(self, "COLOR", ColorPickerButton, true, false))
+	_input.insert(Type.COLOR, NodeUtils.get_node_or_add(self, "COLOR", ColorPickerButton, NodeUtils.INTERNAL))
 	_input[Type.COLOR].custom_minimum_size.x = 100
 	_input[Type.COLOR].color_changed.connect(func(new_color): value_changed.emit(new_color))
 	# ENUM
-	_input.insert(Type.ENUM, NodeUtils.get_node_or_add(self, "ENUM", OptionButton, true, false))
+	_input.insert(Type.ENUM, NodeUtils.get_node_or_add(self, "ENUM", OptionButton, NodeUtils.INTERNAL))
 	_input[Type.ENUM].item_selected.connect(func(new_index): value_changed.emit(new_index))
 
 	for child in _input:

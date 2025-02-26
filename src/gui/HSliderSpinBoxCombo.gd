@@ -34,10 +34,10 @@ var value: float:
 
 func _ready() -> void:
 	alignment = ALIGNMENT_CENTER
-	hslider = NodeUtils.get_node_or_add(self, "HSlider", HSlider, true, false)
+	hslider = NodeUtils.get_node_or_add(self, "HSlider", HSlider, NodeUtils.INTERNAL)
 	hslider.custom_minimum_size.x = slider_width
 	hslider.size_flags_vertical = SIZE_FILL
-	spinbox = NodeUtils.get_node_or_add(self, "SpinBox", SpinBox, true, false)
+	spinbox = NodeUtils.get_node_or_add(self, "SpinBox", SpinBox, NodeUtils.INTERNAL)
 	for _range in [hslider, spinbox]:
 		_range.min_value = _min
 		_range.max_value = _max

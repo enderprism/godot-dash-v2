@@ -24,7 +24,7 @@ func _ready() -> void:
 	add_child(heading, false, INTERNAL_MODE_FRONT)
 	move_child(heading, 0)
 	if get_child_count() > 0:
-		fold_button = NodeUtils.get_node_or_add(heading, "FoldButton", Button, true, false)
+		fold_button = NodeUtils.get_node_or_add(heading, "FoldButton", Button, NodeUtils.INTERNAL)
 		fold_button.icon = icon_open
 		fold_button.icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		fold_button.flat = true

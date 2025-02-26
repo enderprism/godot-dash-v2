@@ -1,6 +1,10 @@
 extends Object
 class_name NodeUtils
 
+const INTERNAL := 1 << 0
+const SET_OWNER := 1 << 1
+const FORCE_READABLE_NAME := 1 << 2
+
 
 # Note: passing a value for the type parameter causes a crash
 static func get_child_of_type(node: Node, child_type):
@@ -25,13 +29,13 @@ static func set_child_owner(caller: Node, child: Node) -> void:
 	child.set_owner(_owner)
 
 
-static func get_node_or_add(caller: Node, path: NodePath, script, internal := false, _set_owner := true, force_readable_name := false) -> Node:
+static func get_node_or_add(caller: Node, path: NodePath, script, options: int = SET_OWNER) -> Node:
 	var node := caller.get_node_or_null(path)
 	if node == null:
 		node = script.new()
 		node.name = str(path)
-		caller.add_child(node, force_readable_name, int(internal))
-		if _set_owner:
+		caller.add_child(node, options & FORCE_READABLE_NAME == FORCE_READABLE_NAME, options & INTERNAL)
+		if options & SET_OWNER:
 			set_child_owner(caller, node)
 	return node
 

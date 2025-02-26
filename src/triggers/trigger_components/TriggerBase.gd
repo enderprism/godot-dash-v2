@@ -38,7 +38,7 @@ enum TriggerHitboxShape {
 	set(value):
 		single_usage = value
 		if is_inside_tree() and _single_usage_component == null and value:
-			_single_usage_component = NodeUtils.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"), false)
+			_single_usage_component = NodeUtils.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"))
 		if _single_usage_component != null and not value:
 			_single_usage_component.queue_free()
 
@@ -56,14 +56,14 @@ var _hitbox_display: TriggerHitboxDisplay
 func _ready() -> void:
 	collision_layer = 16
 	collision_mask = 1
-	_hitbox_display = NodeUtils.get_node_or_add(self, "TriggerHitboxDisplay", load("res://src/triggers/trigger_components/TriggerHitboxDisplay.gd"), true, false)
-	_hitbox = NodeUtils.get_node_or_add(self, "Hitbox", CollisionShape2D, true, false)
-	sprite = NodeUtils.get_node_or_add(self, "Sprite", Sprite2D, true, false)
+	_hitbox_display = NodeUtils.get_node_or_add(self, "TriggerHitboxDisplay", load("res://src/triggers/trigger_components/TriggerHitboxDisplay.gd"), NodeUtils.INTERNAL)
+	_hitbox = NodeUtils.get_node_or_add(self, "Hitbox", CollisionShape2D, NodeUtils.INTERNAL)
+	sprite = NodeUtils.get_node_or_add(self, "Sprite", Sprite2D, NodeUtils.INTERNAL)
 	_hitbox.debug_color = Color("fff5006b")
 	sprite.scale = Vector2.ONE * 0.2
 	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
 	if single_usage:
-		_single_usage_component = NodeUtils.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"), true, false)
+		_single_usage_component = NodeUtils.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"), NodeUtils.INTERNAL)
 	NodeUtils.connect_new(hitbox_shape_changed, _hitbox_display.update_shape)
 	_set_hitbox_shape()
 
