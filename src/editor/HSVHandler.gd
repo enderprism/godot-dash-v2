@@ -5,7 +5,14 @@ class_name HSVHandler
 @export var hue: Property
 @export var saturation: Property
 @export var value: Property
+@export var editor_viewport: Control
 
+
+func _process(_delta: float) -> void:
+	if get_viewport().gui_get_focus_owner():
+		var focused_property := get_viewport().gui_get_focus_owner().get_parent().get_parent() 
+		if focused_property in [hue, saturation, value] and get_viewport().gui_get_hovered_control() == editor_viewport:
+			editor_viewport.grab_focus()
 
 func _on_hue_value_changed(new_value: Variant) -> void:
 	$"../EditHandler".selection.map(func(object): object.get_node("HSVWatcher").hsv_shift[0] = new_value)

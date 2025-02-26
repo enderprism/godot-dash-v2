@@ -1016,11 +1016,12 @@ base = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollCon
 detail = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color")
 hsv_shift = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift")
 
-[node name="HSVHandler" type="Node" parent="." node_paths=PackedStringArray("hue", "saturation", "value")]
+[node name="HSVHandler" type="Node" parent="." node_paths=PackedStringArray("hue", "saturation", "value", "editor_viewport")]
 script = ExtResource("73_s77jp")
 hue = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue")
 saturation = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation")
 value = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value")
+editor_viewport = NodePath("../EditorUI/EditorContainer/VBoxContainer/EditorViewport")
 
 [node name="BaseDetailHandler" type="Node" parent="." node_paths=PackedStringArray("base", "detail")]
 script = ExtResource("64_ycx04")
