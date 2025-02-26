@@ -100,12 +100,12 @@ time = 0.0
 [sub_resource type="Resource" id="Resource_mk6wh"]
 script = ExtResource("25_jkwa2")
 path = NodePath("../LowerSpike2")
-time = 0.5
+time = 0.05
 
 [sub_resource type="Resource" id="Resource_i3pvv"]
 script = ExtResource("25_jkwa2")
 path = NodePath("../LowerSpike3")
-time = 1.0
+time = 0.1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m67k2"]
 size = Vector2(128, 128)
@@ -696,9 +696,6 @@ z_index = -50
 points = PackedVector2Array(0, -320, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
-[node name="TriggerEasing" type="Node" parent="SpawnTrigger"]
-script = ExtResource("10_srhyw")
-
 [node name="TriggerBase" type="Area2D" parent="SpawnTrigger"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
@@ -717,6 +714,11 @@ texture = ExtResource("32_eh181")
 [node name="SingleUsageComponent" type="Node" parent="SpawnTrigger/TriggerBase"]
 script = ExtResource("14_2jira")
 
+[node name="Timer" type="Timer" parent="SpawnTrigger"]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
 [node name="SpawnTrigger2" type="Node2D" parent="."]
 position = Vector2(2176, -640)
 script = ExtResource("24_l04c6")
@@ -727,10 +729,6 @@ metadata/_edit_group_ = true
 z_index = -50
 points = PackedVector2Array(0, -448, 0, 0)
 default_color = Color(0, 1, 1, 1)
-
-[node name="TriggerEasing" type="Node" parent="SpawnTrigger2"]
-script = ExtResource("10_srhyw")
-_duration = 0.1
 
 [node name="TriggerBase" type="Area2D" parent="SpawnTrigger2"]
 collision_layer = 16
@@ -750,6 +748,11 @@ texture = ExtResource("32_eh181")
 
 [node name="SingleUsageComponent" type="Node" parent="SpawnTrigger2/TriggerBase"]
 script = ExtResource("14_2jira")
+
+[node name="Timer" type="Timer" parent="SpawnTrigger2"]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
 
 [node name="FloorButtonMove2" type="Node2D" parent="."]
 position = Vector2(2176, -1088)
@@ -975,38 +978,39 @@ position = Vector2(4032, -832)
 [node name="SpeedPortal1x" parent="." instance=ExtResource("29_qa435")]
 position = Vector2(4032, -832)
 
-[node name="tSpawn3" type="Node2D" parent="."]
+[node name="SpawnTrigger3" type="Node2D" parent="."]
 position = Vector2(1728, -896)
 script = ExtResource("24_l04c6")
 spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_3cdoe"), SubResource("Resource_5r4w8")])
 metadata/_edit_group_ = true
 
-[node name="TargetLink" parent="tSpawn3" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="SpawnTrigger3" instance=ExtResource("6_bolvq")]
 z_index = -50
 points = PackedVector2Array(0, -320, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
-[node name="TriggerEasing" type="Node" parent="tSpawn3"]
-script = ExtResource("10_srhyw")
-
-[node name="TriggerBase" type="Area2D" parent="tSpawn3"]
+[node name="TriggerBase" type="Area2D" parent="SpawnTrigger3"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 1
 
-[node name="TriggerHitboxDisplay" type="Node2D" parent="tSpawn3/TriggerBase"]
+[node name="TriggerHitboxDisplay" type="Node2D" parent="SpawnTrigger3/TriggerBase"]
 script = ExtResource("12_bmhr7")
 
-[node name="Hitbox" type="CollisionShape2D" parent="tSpawn3/TriggerBase"]
+[node name="Hitbox" type="CollisionShape2D" parent="SpawnTrigger3/TriggerBase"]
 shape = SubResource("RectangleShape2D_r5f36")
 debug_color = Color(1, 0.960784, 0, 0.419608)
 
-[node name="Sprite" type="Sprite2D" parent="tSpawn3/TriggerBase"]
+[node name="Sprite" type="Sprite2D" parent="SpawnTrigger3/TriggerBase"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("32_eh181")
 
-[node name="SingleUsageComponent" type="Node" parent="tSpawn3/TriggerBase"]
+[node name="SingleUsageComponent" type="Node" parent="SpawnTrigger3/TriggerBase"]
 script = ExtResource("14_2jira")
+
+[node name="Timer" type="Timer" parent="SpawnTrigger3"]
+process_callback = 0
+one_shot = true
 
 [node name="FloorButton" parent="." groups=["floorbutton1"] instance=ExtResource("5_g4mtk")]
 modulate = Color(0, 0.419608, 1, 1)
@@ -1105,38 +1109,42 @@ z_index = -50
 points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
-[node name="tSpawn4" type="Node2D" parent="."]
+[node name="SpawnTrigger4" type="Node2D" parent="."]
 position = Vector2(2176, -128)
 script = ExtResource("24_l04c6")
 spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_16fgi"), SubResource("Resource_utucu")])
 metadata/_edit_group_ = true
 
-[node name="TargetLink" parent="tSpawn4" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="SpawnTrigger4" instance=ExtResource("6_bolvq")]
 z_index = -50
 points = PackedVector2Array(0, 320, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
-[node name="TriggerEasing" type="Node" parent="tSpawn4"]
+[node name="TriggerEasing" type="Node" parent="SpawnTrigger4"]
 script = ExtResource("10_srhyw")
 
-[node name="TriggerBase" type="Area2D" parent="tSpawn4"]
+[node name="TriggerBase" type="Area2D" parent="SpawnTrigger4"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 1
 
-[node name="TriggerHitboxDisplay" type="Node2D" parent="tSpawn4/TriggerBase"]
+[node name="TriggerHitboxDisplay" type="Node2D" parent="SpawnTrigger4/TriggerBase"]
 script = ExtResource("12_bmhr7")
 
-[node name="Hitbox" type="CollisionShape2D" parent="tSpawn4/TriggerBase"]
+[node name="Hitbox" type="CollisionShape2D" parent="SpawnTrigger4/TriggerBase"]
 shape = SubResource("RectangleShape2D_ruj8y")
 debug_color = Color(1, 0.960784, 0, 0.419608)
 
-[node name="Sprite" type="Sprite2D" parent="tSpawn4/TriggerBase"]
+[node name="Sprite" type="Sprite2D" parent="SpawnTrigger4/TriggerBase"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("32_eh181")
 
-[node name="SingleUsageComponent" type="Node" parent="tSpawn4/TriggerBase"]
+[node name="SingleUsageComponent" type="Node" parent="SpawnTrigger4/TriggerBase"]
 script = ExtResource("14_2jira")
+
+[node name="Timer" type="Timer" parent="SpawnTrigger4"]
+process_callback = 0
+one_shot = true
 
 [node name="StopDash" parent="." instance=ExtResource("30_me5kp")]
 position = Vector2(4032, -832)
@@ -1195,6 +1203,10 @@ texture = ExtResource("32_eh181")
 
 [node name="SingleUsageComponent" type="Node" parent="tSpawn5/TriggerBase"]
 script = ExtResource("14_2jira")
+
+[node name="Timer" type="Timer" parent="tSpawn5"]
+process_callback = 0
+one_shot = true
 
 [node name="RotateTrigger2" type="Node2D" parent="." node_paths=PackedStringArray("_pivot")]
 position = Vector2(5952, -960)

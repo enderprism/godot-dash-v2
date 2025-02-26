@@ -32,7 +32,8 @@ static func setup(caller: Node, options: int = ADD_EASING):
 	#endregion
 	#region Signal connections
 	NodeUtils.connect_new(caller.base.body_entered, caller.start)
-	NodeUtils.connect_new(caller.base.body_entered, caller.easing.start)
+	if options & ADD_EASING:
+		NodeUtils.connect_new(caller.base.body_entered, caller.easing.start)
 	if options & ADD_TARGET_LINK:
 		NodeUtils.connect_new(caller.base.target_changed, caller.update_target_link)
 	#endregion

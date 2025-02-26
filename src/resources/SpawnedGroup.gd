@@ -9,4 +9,4 @@ class_name SpawnedGroup
 		emit_changed()
 @export_range(0.0, 1.0, 0.01) var time: float
 
-var used_in_loop: int
+var loop_idx: int
