@@ -35,8 +35,8 @@
 [ext_resource type="Texture2D" uid="uid://6tc6g218qrva" path="res://assets/textures/triggers/CameraOffset.svg" id="22_2am2m"]
 [ext_resource type="PackedScene" uid="uid://dmb3bpsvcre7y" path="res://scenes/components/level_components/orbs/BlackOrb.tscn" id="22_62rc5"]
 [ext_resource type="PackedScene" uid="uid://ckkbbbslsv0pg" path="res://scenes/components/level_components/orbs/ReboundOrb.tscn" id="22_cb37e"]
-[ext_resource type="Script" path="res://src/interactables/private_components/ReboundOrbSprite.gd" id="22_him86"]
 [ext_resource type="Script" path="res://src/triggers/CameraRotateTrigger.gd" id="23_6k40u"]
+[ext_resource type="Texture2D" uid="uid://bw4wk20u6n4rx" path="res://assets/textures/guis/editor/block_palette/ReboundOrbPreview.svg" id="23_jc35a"]
 [ext_resource type="Texture2D" uid="uid://cnonwwvnfl3ca" path="res://assets/textures/triggers/CameraRotate.svg" id="24_ji6ug"]
 [ext_resource type="PackedScene" uid="uid://d0dk4786hlokq" path="res://scenes/components/level_components/orbs/BlueOrb.tscn" id="26_ay76u"]
 [ext_resource type="Texture2D" uid="uid://did756jp8kche" path="res://assets/textures/orbs/BlueOrb.svg" id="26_guceq"]
@@ -177,16 +177,15 @@ layout_mode = 2
 focus_mode = 1
 shortcut_context = NodePath("../../../../FocusGrabber")
 theme = ExtResource("3_k1q1p")
-current_tab = 1
+current_tab = 0
 metadata/_edit_group_ = true
 
 [node name="Place" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
 theme = ExtResource("3_k1q1p")
-current_tab = 1
+current_tab = 2
 metadata/_tab_index = 0
 
 [node name="Solids" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
@@ -250,6 +249,7 @@ texture_override = ExtResource("6_2nlu4")
 texture_owner = NodePath("Sprite")
 
 [node name="Hazards" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 metadata/_tab_name = ""
@@ -306,7 +306,6 @@ type = 2
 object = ExtResource("14_wyjb2")
 
 [node name="Interactables" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 metadata/_tab_name = ""
@@ -388,6 +387,7 @@ layout_mode = 2
 theme = ExtResource("3_k1q1p")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
+icon = ExtResource("23_jc35a")
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -399,20 +399,6 @@ metadata/_edit_group_ = true
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("22_cb37e")
-
-[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/ReboundOrb"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ReboundOrbSprite" type="Node2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/ReboundOrb/CenterAnchor"]
-scale = Vector2(0.4, 0.4)
-script = ExtResource("22_him86")
 
 [node name="BlackOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -682,6 +668,7 @@ script = ExtResource("3_d5qub")
 icons = Array[Texture2D]([ExtResource("4_7or8s"), ExtResource("5_gyl57"), ExtResource("6_gh5m2"), ExtResource("7_m16em")])
 
 [node name="Edit" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes"]
+visible = false
 layout_mode = 2
 current_tab = 0
 metadata/_tab_index = 1
