@@ -34,7 +34,7 @@ var _player: Player:
 var _current_loop: int
 
 func _ready() -> void:
-	TriggerSetup.setup(self, true)
+	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK | TriggerSetup.ADD_EASING)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Spawn.svg"))
 	target_link.default_color = Color.CYAN
 	update_target_link()

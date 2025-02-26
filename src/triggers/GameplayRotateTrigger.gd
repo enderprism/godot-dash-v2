@@ -27,7 +27,7 @@ var _initial_global_rotation_degrees: Dictionary
 var _indicator: GameplayRotateTriggerIndicator
 
 func _ready() -> void:
-	TriggerSetup.setup(self, false)
+	TriggerSetup.setup(self)
 	_indicator = NodeUtils.get_node_or_add(self, "Indicator", load("res://src/triggers/trigger_components/GameplayRotateTriggerIndicator.gd"))
 	base.sprite.set_texture(preload("res://assets/textures/triggers/GameplayRotate.svg"))
 	_indicator.visible = base.sprite.visible

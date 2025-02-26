@@ -12,7 +12,7 @@ var _player: Player:
 var _initial_gravity_multiplier: float
 
 func _ready() -> void:
-	TriggerSetup.setup(self, false)
+	TriggerSetup.setup(self)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Gravity.svg"))
 
 func _process(_delta: float) -> void:

@@ -11,7 +11,7 @@ var easing: TriggerEasing
 var _initial_time_scale: float
 
 func _ready() -> void:
-	TriggerSetup.setup(self, false)
+	TriggerSetup.setup(self)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Timewarp.svg"))
 
 func _physics_process(_delta: float) -> void:

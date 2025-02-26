@@ -46,7 +46,7 @@ var easing: TriggerEasing
 var target_link: TargetLink
 
 func _ready() -> void:
-	TriggerSetup.setup(self, true)
+	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK | TriggerSetup.ADD_EASING)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Scale.svg"))
 	_targets = get_tree().get_nodes_in_group(base.target_group)
 

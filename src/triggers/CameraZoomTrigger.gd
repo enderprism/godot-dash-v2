@@ -30,7 +30,7 @@ var easing: TriggerEasing
 var _initial_zoom: Vector2
 
 func _ready() -> void:
-	TriggerSetup.setup(self, false)
+	TriggerSetup.setup(self)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/CameraZoom.svg"))
 
 func _physics_process(_delta: float) -> void:

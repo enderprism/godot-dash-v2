@@ -34,7 +34,7 @@ var _targets: Array[Node]
 var _initial_positions: Dictionary
 
 func _ready() -> void:
-	TriggerSetup.setup(self, true)
+	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK | TriggerSetup.ADD_EASING)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Move.svg"))
 	_targets = get_tree().get_nodes_in_group(base.target_group)
 

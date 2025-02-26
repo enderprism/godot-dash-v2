@@ -7,7 +7,7 @@ var base: TriggerBase
 var _toggle: ToggleComponent
 
 func _ready() -> void:
-	TriggerSetup.setup(self, false, false)
+	TriggerSetup.setup(self, TriggerSetup.NONE)
 	_toggle = get_node_or_null("ToggleComponent")
 	if _toggle == null:
 		_toggle = ToggleComponent.new()

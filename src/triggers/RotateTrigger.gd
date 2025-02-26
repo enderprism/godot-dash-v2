@@ -43,7 +43,7 @@ var _targets: Array[Node] ## Array of all the [Node2D] in a group.
 var _initial_rotations: Dictionary ## Rotation in degrees for every [Node2D] in [member _targets]
 
 func _ready() -> void:
-	TriggerSetup.setup(self, true)
+	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK | TriggerSetup.ADD_EASING)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Rotate.svg"))
 	_targets = get_tree().get_nodes_in_group(base.target_group)
 

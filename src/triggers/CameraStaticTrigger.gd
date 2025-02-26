@@ -30,7 +30,7 @@ var _target: Node2D
 var _initial_global_position: Vector2
 
 func _ready() -> void:
-	TriggerSetup.setup(self, true)
+	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK | TriggerSetup.ADD_EASING)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/CameraStatic.svg"))
 	_target = base._target
 

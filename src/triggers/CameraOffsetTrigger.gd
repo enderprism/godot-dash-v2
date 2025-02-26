@@ -30,7 +30,7 @@ var _player_camera: PlayerCamera:
 var _initial_offset: Vector2
 
 func _ready() -> void:
-	TriggerSetup.setup(self, false)
+	TriggerSetup.setup(self)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/CameraOffset.svg"))
 
 func _physics_process(_delta: float) -> void:
