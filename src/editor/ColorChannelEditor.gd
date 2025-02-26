@@ -39,10 +39,12 @@ func _add_channel(channel_name: String) -> void:
 	%ColorChannelContainer.add_child(channel_item)
 
 func _hide_properties() -> void:
+	custom_minimum_size.y = 250
 	separator.hide()
 	properties_container.hide()
 
 func _show_properties() -> void:
+	custom_minimum_size.y = 500
 	separator.show()
 	properties_container.show()
 	if button_group.get_pressed_button() == null:
