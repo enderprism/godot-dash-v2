@@ -895,10 +895,11 @@ script = ExtResource("52_3jb55")
 label_settings = ExtResource("53_jrbqn")
 
 [node name="ColorChannelEditor" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Channel Editor" instance=ExtResource("55_wey7f")]
-custom_minimum_size = Vector2(0, 500)
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 
 [node name="Base Color" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors"]
+visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("55_x15b8")
@@ -907,6 +908,7 @@ lineedit_width = 200.0
 placeholder_text = "Pick a color channel…"
 
 [node name="Detail Color" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors"]
+visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("55_x15b8")
@@ -915,6 +917,7 @@ lineedit_width = 200.0
 placeholder_text = "Pick a color channel…"
 
 [node name="HSV Shift" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors"]
+visible = false
 layout_mode = 2
 script = ExtResource("52_3jb55")
 label_settings = ExtResource("53_jrbqn")

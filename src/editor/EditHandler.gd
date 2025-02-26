@@ -161,7 +161,6 @@ func _duplicate_selection() -> void:
 	for object in selection:
 		if object.has_node("HSVWatcher"):
 			object = object.get_node("HSVWatcher")
-		object.modulate = object.get_node("SelectionHighlight").modulate
 		object.get_node("SelectionHighlight").queue_free()
 	selection = Array(selection.map(_clone), TYPE_OBJECT, "Node2D", null)
 	selection.map(_add_selection_highlight)

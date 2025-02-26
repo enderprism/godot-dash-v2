@@ -8,15 +8,15 @@ class_name HSVHandler
 
 
 func _on_hue_value_changed(new_value: Variant) -> void:
-	$"../EditHandler".selection.map(func(object): NodeUtils.get_node_or_add(object, "HSVWatcher", HSVWatcher).hsv_shift[0] = new_value)
+	$"../EditHandler".selection.map(func(object): object.get_node("HSVWatcher").hsv_shift[0] = new_value)
 
 
 func _on_saturation_value_changed(new_value: Variant) -> void:
-	$"../EditHandler".selection.map(func(object): NodeUtils.get_node_or_add(object, "HSVWatcher", HSVWatcher).hsv_shift[1] = new_value)
+	$"../EditHandler".selection.map(func(object): object.get_node("HSVWatcher").hsv_shift[1] = new_value)
 
 
 func _on_value_value_changed(new_value: Variant) -> void:
-	$"../EditHandler".selection.map(func(object): NodeUtils.get_node_or_add(object, "HSVWatcher", HSVWatcher).hsv_shift[2] = new_value)
+	$"../EditHandler".selection.map(func(object): object.get_node("HSVWatcher").hsv_shift[2] = new_value)
 
 
 func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
