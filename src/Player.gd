@@ -484,8 +484,9 @@ func _rotate_sprite_degrees(delta: float):
 		if not dash_control:
 			rotation_delta *= gravity_multiplier
 		$Icon/Ball.rotation_degrees += rotation_delta
-	var ball_rotation_in_air: float = abs(sin(($Icon/Ball.rotation * TAU) / deg_to_rad(72*2)))
-	$Icon/Ball.position.y = lerpf(0, 10, ball_rotation_in_air)
+	if not dash_control:
+		var ball_rotation_in_air: float = abs(sin(($Icon/Ball.rotation * TAU) / deg_to_rad(72*2)))
+		$Icon/Ball.position.y = lerpf(0, 10, ball_rotation_in_air)
 	#endregion
 	#region spider/robot
 	$Icon/Spider.rotation_degrees = gameplay_rotation_degrees
