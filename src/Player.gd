@@ -312,7 +312,6 @@ func _compute_velocity(delta: float,
 	#region Apply pads velocity
 	if not pad_queue.is_empty():
 		var colliding_pad: PadInteractable = pad_queue.pop_front()
-		var has_spider_dash: bool
 		for component in colliding_pad.components:
 			if internal_gamemode != Gamemode.WAVE and (component is JumpBoostComponent or component is ReboundComponent):
 				_velocity.y = component.get_velocity(self)
@@ -323,9 +322,6 @@ func _compute_velocity(delta: float,
 				gravity_multiplier *= -1
 				position += Vector2.DOWN.rotated(gameplay_rotation) * _get_spider_velocity_delta()
 				jump_hold_disabled = true
-				has_spider_dash = true
-		if not colliding_pad.single_usage and not has_spider_dash:
-			pad_queue.append(colliding_pad)
 	#endregion
 
 	#region Handle jump.
