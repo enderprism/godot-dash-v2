@@ -139,7 +139,7 @@ func _ready() -> void:
 	apply_floor_snap()
 
 func _physics_process(delta: float) -> void:
-	if LevelManager.level_playing:
+	if LevelManager.level_playing and not _dead:
 		up_direction = Vector2.UP.rotated(gameplay_rotation) * sign(gravity_multiplier)
 		velocity = _compute_velocity(delta, velocity, get_direction(), _get_jump_state(EVALUATE_CLICK_BUFFER))
 		if not $SlopeShapecast.is_colliding() and $GroundCollider.shape is CircleShape2D:
@@ -399,10 +399,7 @@ func _compute_velocity(delta: float,
 
 	_deferred_velocity_redirect = _ensure_velocity_redirect(delta, _velocity.rotated(gameplay_rotation))
 
-	if not _dead:
-		return _velocity.rotated(gameplay_rotation)
-	else:
-		return Vector2.ZERO
+	return _velocity.rotated(gameplay_rotation)
 
 
 ## Ensure velocity redirection can happen and the vertical velocity isn't reset by hitting the floor.
