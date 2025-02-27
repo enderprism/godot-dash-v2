@@ -45,6 +45,7 @@ const SPIDER_TRAIL: PackedScene = preload("res://scenes/components/game_componen
 const DASH_BOOM: PackedScene = preload("res://scenes/components/game_components/DashBoom.tscn")
 const ICON_LERP_FACTOR := 0.5
 const PLATFORMER_ACCELERATION := 5.0
+const ENSURE_VELOCITY_REDIRECT_SAFE_MARGIN := 2.0
 #endregion
 
 #region Bit Flags
@@ -121,6 +122,7 @@ var _is_flying_gamemode: bool
 var _dual_instance: bool
 var _last_spider_trail: SpiderTrail
 var _last_spider_trail_height: float
+var _deferred_velocity_redirect: bool
 
 
 
@@ -299,21 +301,20 @@ func _compute_velocity(delta: float,
 				_velocity.y += GRAVITY * delta * gravity_multiplier * gameplay_trigger_gravity_multiplier * UFO_GRAVITY_MULTIPLIER
 			else:
 				_velocity.y += GRAVITY * delta * gravity_multiplier * gameplay_trigger_gravity_multiplier
-			_velocity.y = clamp(_velocity.y, -TERMINAL_VELOCITY.y, TERMINAL_VELOCITY.y)
+			# _velocity.y = clamp(_velocity.y, -TERMINAL_VELOCITY.y, TERMINAL_VELOCITY.y)
 	#endregion
-
 	
 	var flying_gamemode_slope_boost: bool = _is_flying_gamemode and (
 		(is_on_ceiling() and jump_state >= 0) or
 		(is_on_floor() and get_last_slide_collision() != null and get_floor_angle_signed(true) != 0.0 and get_direction() != 0 and jump_state == 1))
-	if ((is_on_floor() and jump_state <= 0) or flying_gamemode_slope_boost) and pad_queue.is_empty():
+	if ((is_on_floor() and jump_state <= 0 and not _deferred_velocity_redirect) or flying_gamemode_slope_boost) and pad_queue.is_empty():
 		_velocity.y = slope_velocity.y
 
 	#region Apply pads velocity
 	if not pad_queue.is_empty():
 		var colliding_pad: PadInteractable = pad_queue.pop_front()
 		for component in colliding_pad.components:
-			if internal_gamemode != Gamemode.WAVE and (component is JumpBoostComponent or component is ReboundComponent):
+			if internal_gamemode != Gamemode.WAVE and (component is JumpBoostComponent or (component is ReboundComponent and (not is_on_floor() or _deferred_velocity_redirect))):
 				_velocity.y = component.get_velocity(self)
 				if displayed_gamemode == Gamemode.SPIDER:
 					_spider_state_machine.travel("jump")
@@ -396,10 +397,30 @@ func _compute_velocity(delta: float,
 			stop_dash()
 	#endregion
 
+	_deferred_velocity_redirect = _ensure_velocity_redirect(delta, _velocity.rotated(gameplay_rotation))
+
 	if not _dead:
 		return _velocity.rotated(gameplay_rotation)
 	else:
 		return Vector2.ZERO
+
+
+## Ensure velocity redirection can happen and the vertical velocity isn't reset by hitting the floor.
+func _ensure_velocity_redirect(delta: float, global_velocity: Vector2) -> bool:
+	print_debug(rad_to_deg(global_velocity.angle_to(up_direction.rotated(PI))))
+	var down_direction_snapped_velocity := global_velocity.rotated(global_velocity.angle_to(up_direction.rotated(PI)))
+	$EnsureVelocityRedirect.shape = $GroundCollider.shape
+	$EnsureVelocityRedirect.target_position = down_direction_snapped_velocity * delta * ENSURE_VELOCITY_REDIRECT_SAFE_MARGIN
+	$EnsureVelocityRedirect.force_shapecast_update()
+	if not $EnsureVelocityRedirect.is_colliding():
+		return false
+	for i in $EnsureVelocityRedirect.get_collision_count():
+		var collided_area := $EnsureVelocityRedirect.get_collider(i) as Area2D
+		if not collided_area is Interactable:
+			return false
+		for component in collided_area.components:
+			return (component is ReboundComponent and not is_on_floor()) or (component is TeleportComponent and component.redirect_velocity)
+	return false
 
 func _rotate_sprite_degrees(delta: float):
 	if $GroundCollider.shape is CircleShape2D:

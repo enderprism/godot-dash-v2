@@ -32,6 +32,7 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 func _ready() -> void:
+	super()
 	if parent is OrbInteractable:
 		parent.pressed.connect(teleport)
 	else:

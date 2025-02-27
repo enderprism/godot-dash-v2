@@ -283,6 +283,7 @@ editor_flip_v={
 2d_physics/layer_8="editor"
 2d_physics/layer_9="editor_selection_colliders"
 2d_physics/layer_10="solid_overlap_check"
+2d_physics/layer_11="velocity_redirectors"
 
 [phantom_camera]
 

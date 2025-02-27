@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=3 uid="uid://bl48psvuka73y"]
+[gd_scene load_steps=107 format=3 uid="uid://bl48psvuka73y"]
 
 [ext_resource type="Script" path="res://src/Player.gd" id="1_nvqsc"]
 [ext_resource type="Texture2D" uid="uid://omcvgcf1uk5p" path="res://assets/textures/player/cube/Cube.svg" id="2_6ab5b"]
@@ -1837,6 +1837,9 @@ _data = {
 "DeathAnimation": SubResource("Animation_yov85")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u3hrq"]
+size = Vector2(128, 128)
+
 [node name="Player" type="CharacterBody2D"]
 process_mode = 1
 collision_mask = 122
@@ -1895,6 +1898,7 @@ script = ExtResource("2_s0etf")
 length = 0
 
 [node name="SlopeShapecast" type="ShapeCast2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.313726)
 shape = SubResource("CircleShape2D_o2txy")
 target_position = Vector2(0, 128)
@@ -2176,11 +2180,18 @@ wait_time = 0.5
 one_shot = true
 
 [node name="GroundRaycast" type="RayCast2D" parent="."]
+visible = false
 target_position = Vector2(0, 128)
 collision_mask = 32
 
 [node name="ParentedObjects" type="Node2D" parent="."]
 editor_description = "Anchor for any level objects that need to be parented to the player (to keep it tidy)."
+
+[node name="EnsureVelocityRedirect" type="ShapeCast2D" parent="."]
+shape = SubResource("RectangleShape2D_u3hrq")
+collision_mask = 1024
+collide_with_areas = true
+collide_with_bodies = false
 
 [connection signal="body_entered" from="KillColliderSolid" to="." method="_on_kill_collider_solid_body_entered"]
 [connection signal="body_entered" from="KillColliderHazard" to="." method="_on_kill_collider_hazard_body_entered"]
