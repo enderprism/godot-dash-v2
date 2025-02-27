@@ -29,13 +29,14 @@ var base: TriggerBase
 var easing: TriggerEasing
 var target_link: TargetLink
 
-var _targets: Array[Node] ## Array of all the [Node2D] in a group.
+var _targets: Array ## Array of all the [Node2D] in a group.
 var _initial_alphas: Dictionary
 
 func _ready() -> void:
 	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK | TriggerSetup.ADD_EASING)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Alpha.svg"))
 	_targets = get_tree().get_nodes_in_group(base.target_group)
+	_targets = _targets.map(_substitute_with_hsv_watcher)
 
 func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
@@ -77,3 +78,9 @@ func reset() -> void:
 			_target.modulate.a = _initial_alphas[_target]
 	elif LevelManager.in_editor and LevelManager.level_playing:
 		printerr("In ", name, ": _target is unset")
+
+func _substitute_with_hsv_watcher(object: Node2D) -> Node2D:
+	if object.has_node("HSVWatcher"):
+		return object.get_node("HSVWatcher")
+	else:
+		return object

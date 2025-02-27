@@ -2188,6 +2188,7 @@ collision_mask = 32
 editor_description = "Anchor for any level objects that need to be parented to the player (to keep it tidy)."
 
 [node name="EnsureVelocityRedirect" type="ShapeCast2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_u3hrq")
 collision_mask = 1024
 collide_with_areas = true
