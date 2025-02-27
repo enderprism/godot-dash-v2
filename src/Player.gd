@@ -407,7 +407,6 @@ func _compute_velocity(delta: float,
 
 ## Ensure velocity redirection can happen and the vertical velocity isn't reset by hitting the floor.
 func _ensure_velocity_redirect(delta: float, global_velocity: Vector2) -> bool:
-	print_debug(rad_to_deg(global_velocity.angle_to(up_direction.rotated(PI))))
 	var down_direction_snapped_velocity := global_velocity.rotated(global_velocity.angle_to(up_direction.rotated(PI)))
 	$EnsureVelocityRedirect.shape = $GroundCollider.shape
 	$EnsureVelocityRedirect.target_position = down_direction_snapped_velocity * delta * ENSURE_VELOCITY_REDIRECT_SAFE_MARGIN
