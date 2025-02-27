@@ -19,6 +19,12 @@ enum NewVelocityAxes {
 		target = value
 		$"../TargetLink".target = value
 @export var ignore_axis: IgnoreAxis
+@export var redirect_velocity: bool:
+	set(value):
+		redirect_velocity = value
+		notify_property_list_changed()
+## Multiplier for the redirected velocity.
+@export var redirect_multiplier: float = 1.0
 @export var override_velocity: bool:
 	set(value):
 		override_velocity = value
@@ -28,11 +34,19 @@ enum NewVelocityAxes {
 
 
 func _validate_property(property: Dictionary) -> void:
+	if property.name == "override_velocity" and redirect_velocity:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+	if property.name == "redirect_multiplier" and not redirect_velocity:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+	if property.name == "redirect_velocity" and override_velocity:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name in ["new_velocity", "new_velocity_axes"] and override_velocity == false:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 func _ready() -> void:
 	super()
+	if redirect_velocity:
+		parent.collision_layer |= 1 << 10 # Velocity redirectors
 	if parent is OrbInteractable:
 		parent.pressed.connect(teleport)
 	else:
@@ -48,7 +62,12 @@ func teleport(player: Player):
 				player.global_position.x = target.global_position.x
 			IgnoreAxis.Y:
 				player.global_position.y = target.global_position.y
-	if override_velocity:
+	if redirect_velocity:
+		var local_velocity_to_entrance := player.velocity.rotated(-parent.global_rotation)
+		local_velocity_to_entrance.y *= -1
+		var local_velocity_to_exit := local_velocity_to_entrance.rotated(target.global_rotation)
+		player.velocity = local_velocity_to_exit
+	elif override_velocity:
 		match new_velocity_axes:
 			NewVelocityAxes.BOTH:
 				player.velocity = new_velocity.rotated(player.gameplay_rotation)
