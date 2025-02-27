@@ -53,13 +53,13 @@ func _physics_process(_delta: float) -> void:
 			var _weight_delta = easing.get_weight_delta()
 			for _target in _targets:
 				var _initial_global_position = _initial_positions[_target]
-				var _initial_distance = _initial_distances[_target]
 				match mode:
 					Mode.SET:
 						_target.global_position += (owner.to_global(_set_position) - _initial_global_position) * _weight_delta
 					Mode.ADD:
 						_target.global_position += _add_position * _weight_delta
 					Mode.MOVE_TOWARDS:
+						var _initial_distance = _initial_distances[_target]
 						if _move_towards_target != null:
 							_target.global_position = lerp(
 									_initial_global_position,
