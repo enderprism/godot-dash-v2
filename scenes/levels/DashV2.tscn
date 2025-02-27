@@ -207,6 +207,8 @@ position = Vector2(2496, -192)
 position = Vector2(1856, -1216)
 script = ExtResource("8_ml13a")
 _add_position = Vector2(0, 512)
+_move_towards_distance_multiplier = null
+_move_towards_offset = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="MoveTrigger" instance=ExtResource("6_bolvq")]
@@ -242,6 +244,8 @@ script = ExtResource("14_2jira")
 position = Vector2(1728, -1216)
 script = ExtResource("8_ml13a")
 _add_position = Vector2(0, -64)
+_move_towards_distance_multiplier = null
+_move_towards_offset = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="FloorButtonMove" instance=ExtResource("6_bolvq")]
@@ -612,6 +616,8 @@ position = Vector2(3264, -832)
 position = Vector2(0, -832)
 script = ExtResource("8_ml13a")
 _add_position = Vector2(0, -128)
+_move_towards_distance_multiplier = null
+_move_towards_offset = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tMove2" instance=ExtResource("6_bolvq")]
@@ -653,6 +659,8 @@ default_color = Color(0, 1, 1, 1)
 position = Vector2(192, -832)
 script = ExtResource("8_ml13a")
 _add_position = Vector2(0, -128)
+_move_towards_distance_multiplier = null
+_move_towards_offset = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tMove3" instance=ExtResource("6_bolvq")]
@@ -758,6 +766,8 @@ one_shot = true
 position = Vector2(2176, -1088)
 script = ExtResource("8_ml13a")
 _add_position = Vector2(64, 0)
+_move_towards_distance_multiplier = null
+_move_towards_offset = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="FloorButtonMove2" instance=ExtResource("6_bolvq")]
@@ -799,6 +809,8 @@ default_color = Color(0, 1, 1, 1)
 position = Vector2(2304, -1088)
 script = ExtResource("8_ml13a")
 _add_position = Vector2(0, 512)
+_move_towards_distance_multiplier = null
+_move_towards_offset = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="LowerSpike1" instance=ExtResource("6_bolvq")]
@@ -839,6 +851,8 @@ default_color = Color(0, 1, 1, 1)
 position = Vector2(2432, -1088)
 script = ExtResource("8_ml13a")
 _add_position = Vector2(0, 512)
+_move_towards_distance_multiplier = null
+_move_towards_offset = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="LowerSpike2" instance=ExtResource("6_bolvq")]
@@ -879,6 +893,8 @@ default_color = Color(0, 1, 1, 1)
 position = Vector2(2560, -1088)
 script = ExtResource("8_ml13a")
 _add_position = Vector2(0, 512)
+_move_towards_distance_multiplier = null
+_move_towards_offset = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="LowerSpike3" instance=ExtResource("6_bolvq")]
@@ -1039,6 +1055,8 @@ collision_mask = 0
 position = Vector2(2304, 192)
 script = ExtResource("8_ml13a")
 _add_position = Vector2(0, -512)
+_move_towards_distance_multiplier = null
+_move_towards_offset = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="MoveBallPlatform" instance=ExtResource("6_bolvq")]
@@ -1072,6 +1090,8 @@ script = ExtResource("14_2jira")
 position = Vector2(2176, 192)
 script = ExtResource("8_ml13a")
 _add_position = Vector2(0, 64)
+_move_towards_distance_multiplier = null
+_move_towards_offset = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="FloorButtonMove3" instance=ExtResource("6_bolvq")]
