@@ -47,6 +47,10 @@ const ICON_LERP_FACTOR := 0.5
 const PLATFORMER_ACCELERATION := 5.0
 #endregion
 
+#region Bit Flags
+const EVALUATE_CLICK_BUFFER := 1
+#endregion
+
 @export var displayed_gamemode: Gamemode:
 	set(value):
 		displayed_gamemode = value
@@ -135,7 +139,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if LevelManager.level_playing:
 		up_direction = Vector2.UP.rotated(gameplay_rotation) * sign(gravity_multiplier)
-		velocity = _compute_velocity(delta, velocity, get_direction(), _get_jump_state())
+		velocity = _compute_velocity(delta, velocity, get_direction(), _get_jump_state(EVALUATE_CLICK_BUFFER))
 		if not $SlopeShapecast.is_colliding() and $GroundCollider.shape is CircleShape2D:
 			$GroundCollider.shape = default_collider
 			$SolidOverlapCheck/SolidOverlapCheckCollider.shape = default_collider
@@ -216,17 +220,18 @@ func get_direction() -> int:
 		direction = horizontal_direction
 	return direction
 
-func _get_jump_state() -> int:
+func _get_jump_state(options: int = 0) -> int:
 	var jump_state: int
 	if Input.is_action_just_pressed("jump") and is_on_floor() and jump_hold_disabled:
 		jump_hold_disabled = false
-	if _click_buffer_state == ClickBufferState.NOT_HOLDING and Input.is_action_just_pressed("jump") and not (is_on_floor() or is_on_ceiling()) \
-			and internal_gamemode != Gamemode.SHIP and internal_gamemode != Gamemode.SWING and internal_gamemode != Gamemode.WAVE:
-		_click_buffer_state = ClickBufferState.BUFFERING
-	if _click_buffer_state == ClickBufferState.BUFFERING and not orb_queue.is_empty():
-		_click_buffer_state = ClickBufferState.JUMPING
-	if Input.is_action_just_released("jump") or ((is_on_floor() or is_on_ceiling()) and not Input.is_action_pressed("jump")):
-		_click_buffer_state = ClickBufferState.NOT_HOLDING
+	if options & EVALUATE_CLICK_BUFFER:
+		if _click_buffer_state == ClickBufferState.NOT_HOLDING and Input.is_action_just_pressed("jump") and not (is_on_floor() or is_on_ceiling()) \
+				and internal_gamemode != Gamemode.SHIP and internal_gamemode != Gamemode.SWING and internal_gamemode != Gamemode.WAVE:
+			_click_buffer_state = ClickBufferState.BUFFERING
+		if _click_buffer_state == ClickBufferState.BUFFERING and not orb_queue.is_empty():
+			_click_buffer_state = ClickBufferState.JUMPING
+		if Input.is_action_just_released("jump") or ((is_on_floor() or is_on_ceiling()) and not Input.is_action_pressed("jump")):
+			_click_buffer_state = ClickBufferState.NOT_HOLDING
 	if jump_hold_disabled:
 		jump_state = -1
 	elif internal_gamemode == Gamemode.CUBE:
