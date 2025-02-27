@@ -83,4 +83,4 @@ func on_pressed() -> void:
 			step = 0.25
 		StepVariant.EIGTH:
 			step = 0.125
-	direction_pressed.emit(Vector2.UP.rotated(get_viewport().gui_get_focus_owner().rotation), step)
+	direction_pressed.emit(Vector2.UP.rotated(get_viewport().gui_get_hovered_control().rotation), step)
