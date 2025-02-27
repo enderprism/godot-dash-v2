@@ -11,8 +11,8 @@ func _physics_process(delta: float) -> void:
 	if parent.global_position.distance_to(LevelManager.player.global_position) > Player.TERMINAL_VELOCITY.y * 2 * delta:
 		_velocity = player_velocity.y
 	if player_velocity.y <= 0:
-		player_distance = (parent.global_position.rotated(-LevelManager.player.gameplay_rotation).y) \
-			- LevelManager.player.global_position.rotated(-LevelManager.player.gameplay_rotation).y \
+		player_distance = (parent.global_position.rotated(-LevelManager.player.gameplay_rotation).y \
+			- LevelManager.player.global_position.rotated(-LevelManager.player.gameplay_rotation).y) \
 			* LevelManager.player.gravity_multiplier
 	sprite.factor = clampf(player_distance/700, 0, 1)
 
