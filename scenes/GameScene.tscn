@@ -209,6 +209,7 @@ z_index = 100
 position = Vector2(640, 413)
 ignore_rotation = false
 zoom = Vector2(0.8, 0.8)
+process_callback = 0
 limit_smoothed = true
 editor_draw_limits = true
 script = ExtResource("7_vnv5l")
