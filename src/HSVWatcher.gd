@@ -2,7 +2,7 @@ extends Node2D
 class_name HSVWatcher
 
 
-var hsv_shift: Array[float]
+@export_storage var hsv_shift: Array[float]
 
 
 func _ready() -> void:
