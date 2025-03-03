@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed(&"editor_single_selection_cycle"):
 				selection_index -= 1
 			if Input.is_action_just_pressed(&"editor_deselect"):
-				selection.map(_remove_selection_highlight)
+				selection.map(remove_selection_highlight)
 				selection.clear()
 				_reset_selection_zone()
 			if Input.is_action_just_pressed(&"editor_delete"):
@@ -71,7 +71,7 @@ func _physics_process(delta: float) -> void:
 				or Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90")):
 			object_move_cooldown = 0.0
 		if Input.is_action_just_released(&"editor_add"):
-			selection.map(_add_selection_highlight)
+			selection.map(add_selection_highlight)
 			_reset_selection_zone()
 	previous_cursor_position_snapped = cursor_position_snapped
 
@@ -83,7 +83,7 @@ func _update_selection() -> void:
 			for object in selection:
 				if object.has_node("HSVWatcher"):
 					object = object.get_node("HSVWatcher")
-				_remove_selection_highlight(object)
+				remove_selection_highlight(object)
 			selection.clear()
 			selection_index += 1
 			selection_changed.emit(selection)
@@ -110,7 +110,7 @@ func _get_object_parent(object: Node) -> Node2D:
 		return object.get_parent()
 
 
-func _add_selection_highlight(object: Node2D) -> void:
+static func add_selection_highlight(object: Node2D) -> void:
 	if object.has_node("HSVWatcher"):
 		object = object.get_node("HSVWatcher")
 	if not object.has_node("SelectionHighlight"):
@@ -118,7 +118,7 @@ func _add_selection_highlight(object: Node2D) -> void:
 		object.add_child(selection_highlight)
 
 
-func _remove_selection_highlight(object: Node2D) -> void:
+static func remove_selection_highlight(object: Node2D) -> void:
 	if object.has_node("HSVWatcher"):
 		object = object.get_node("HSVWatcher")
 	if not object.has_node("SelectionHighlight"):
@@ -166,15 +166,13 @@ func _clone(object: Node) -> Node:
 	var clone := packer.instantiate()
 	object.get_parent().add_child(clone)
 	clone.owner = object.owner
-	if object.has_node("HSVWatcher"):
-		clone.get_node("HSVWatcher").hsv_shift = object.get_node("HSVWatcher").hsv_shift
 	return clone
 
 
 func _duplicate_selection() -> void:
-	selection.map(_remove_selection_highlight)
+	selection.map(remove_selection_highlight)
 	selection = Array(selection.map(_clone), TYPE_OBJECT, "Node2D", null)
-	selection.map(_add_selection_highlight)
+	selection.map(add_selection_highlight)
 	for object in selection:
 		if object.has_node("HSVWatcher"):
 			object = object.get_node("HSVWatcher")

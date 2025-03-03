@@ -31,7 +31,7 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 				var hsv_watcher := HSVWatcher.new()
 				hsv_watcher.name = "HSVWatcher"
 				object.add_child(hsv_watcher)
-				hsv_watcher.set_owner(object)
+				hsv_watcher.set_owner(LevelManager.editor_edited_level)
 		# Handle object deletion
 		elif Input.is_action_pressed(&"editor_remove") and placed_objects_collider.has_overlapping_areas():
 			if len(placed_objects_collider.get_overlapping_areas()) > 0:
