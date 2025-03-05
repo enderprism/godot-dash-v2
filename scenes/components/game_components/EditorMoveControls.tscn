@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c1lfp5vqcpgiw"]
 
-[ext_resource type="Script" path="res://src/editor/EditorMoveControls.gd" id="1_yr1dp"]
+[ext_resource type="Script" uid="uid://bw6kprkso6l1i" path="res://src/editor/EditorMoveControls.gd" id="1_yr1dp"]
 [ext_resource type="Texture2D" uid="uid://72ylie72lec3" path="res://assets/textures/guis/editor/edit_panel/MoveObjectFullStep.svg" id="2_1yjs2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xo6ai"]

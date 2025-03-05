@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ckrakyci0r2eg"]
 
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="3_4gkp4"]
-[ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="4_8crq8"]
+[ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="4_8crq8"]
 [ext_resource type="Texture2D" uid="uid://co0lkhp85o332" path="res://assets/textures/portals/other_portals/teleportal_out/TeleportalOutBack.png" id="5_wyoah"]
 [ext_resource type="Texture2D" uid="uid://cjen3j6at6ei" path="res://assets/textures/portals/other_portals/teleportal_out/TeleportalOutFront.png" id="6_p5kb6"]
 
@@ -11,6 +11,7 @@ shader_parameter/shine_color = Color(1, 1, 1, 0)
 shader_parameter/alpha_limit = 0.0
 shader_parameter/cycle_speed = 1.0
 shader_parameter/full_pulse_cycle = false
+shader_parameter/factor = 0.0
 shader_parameter/mode = 2
 
 [node name="TeleportalOut" type="Node2D"]

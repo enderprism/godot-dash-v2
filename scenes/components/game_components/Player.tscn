@@ -1,10 +1,10 @@
 [gd_scene load_steps=107 format=3 uid="uid://bl48psvuka73y"]
 
-[ext_resource type="Script" path="res://src/Player.gd" id="1_nvqsc"]
+[ext_resource type="Script" uid="uid://dlfmgrvw7q01y" path="res://src/Player.gd" id="1_nvqsc"]
 [ext_resource type="Texture2D" uid="uid://omcvgcf1uk5p" path="res://assets/textures/player/cube/Cube.svg" id="2_6ab5b"]
 [ext_resource type="Texture2D" uid="uid://1mnqmwellt2q" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame1.png" id="2_mjacn"]
-[ext_resource type="Script" path="res://addons/trail_2d/trail_2d.gd" id="2_s0etf"]
-[ext_resource type="Script" path="res://src/IconGamemodeProp.gd" id="2_sxyn3"]
+[ext_resource type="Script" uid="uid://b81c0tveqh8i8" path="res://addons/trail_2d/trail_2d.gd" id="2_s0etf"]
+[ext_resource type="Script" uid="uid://kyj1mtwpgw26" path="res://src/IconGamemodeProp.gd" id="2_sxyn3"]
 [ext_resource type="Texture2D" uid="uid://da262ssovimq3" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame2.png" id="3_go6vy"]
 [ext_resource type="Texture2D" uid="uid://c0yd5dehfdmfb" path="res://assets/textures/player/dash_orb/dash_orb_flame/DashFlame3.png" id="4_lmais"]
 [ext_resource type="Texture2D" uid="uid://b54ubk48x1iu1" path="res://assets/textures/player/ship/Ship.svg" id="4_mqpwg"]
@@ -1576,13 +1576,13 @@ tracks/17/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mtow1"]
 _data = {
-"RESET": SubResource("Animation_h4ye8"),
-"fall": SubResource("Animation_2hime"),
-"idle": SubResource("Animation_f364n"),
-"idle-alt": SubResource("Animation_qs6mc"),
-"jump": SubResource("Animation_13wkl"),
-"run": SubResource("Animation_jhpwd"),
-"walk": SubResource("Animation_h0nmx")
+&"RESET": SubResource("Animation_h4ye8"),
+&"fall": SubResource("Animation_2hime"),
+&"idle": SubResource("Animation_f364n"),
+&"idle-alt": SubResource("Animation_qs6mc"),
+&"jump": SubResource("Animation_13wkl"),
+&"run": SubResource("Animation_jhpwd"),
+&"walk": SubResource("Animation_h0nmx")
 }
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_g4xb6"]
@@ -1834,7 +1834,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sr0vc"]
 _data = {
-"DeathAnimation": SubResource("Animation_yov85")
+&"DeathAnimation": SubResource("Animation_yov85")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u3hrq"]

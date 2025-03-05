@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://d1wkjpnilh50a"]
 
-[ext_resource type="Script" path="res://src/editor/ColorChannelItem.gd" id="1_2ntyf"]
+[ext_resource type="Script" uid="uid://c74ll20dwcp1l" path="res://src/editor/ColorChannelItem.gd" id="1_2ntyf"]
 [ext_resource type="Texture2D" uid="uid://cuqy5kedacfwe" path="res://assets/textures/guis/shared/RemoveItem.svg" id="1_8ueuv"]
 [ext_resource type="ButtonGroup" uid="uid://cev0xn2madcx2" path="res://resources/ColorChannelItemButtonGroup.tres" id="2_t5ace"]
 

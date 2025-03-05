@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://l2ofoyvoxbr2"]
 
 [ext_resource type="Texture2D" uid="uid://nycdkrteceqa" path="res://assets/textures/ArrowedLine.svg" id="1_ab8x7"]
-[ext_resource type="Script" path="res://src/TargetLink.gd" id="2_h3omo"]
+[ext_resource type="Script" uid="uid://78e8oeq1vi6k" path="res://src/TargetLink.gd" id="2_h3omo"]
 
 [node name="TargetLink" type="Line2D"]
 show_behind_parent = true

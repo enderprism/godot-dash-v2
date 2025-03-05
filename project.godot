@@ -49,11 +49,11 @@ config/name="godot-dash-v2"
 config/version="0.0.1"
 run/main_scene="res://scenes/MainScene.tscn"
 config/use_custom_user_dir=true
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=60
 boot_splash/bg_color=Color(0.117647, 0.117647, 0.180392, 1)
-boot_splash/image="res://assets/logo/NewIcon.png"
 boot_splash/fullsize=false
+boot_splash/image="res://assets/logo/NewIcon.png"
 config/icon="res://assets/logo/NewIcon.svg"
 
 [audio]
@@ -298,5 +298,5 @@ common/physics_interpolation=true
 [rendering]
 
 textures/canvas_textures/default_texture_filter=2
-anti_aliasing/quality/msaa_2d=3
 viewport/hdr_2d=true
+anti_aliasing/quality/msaa_2d=3

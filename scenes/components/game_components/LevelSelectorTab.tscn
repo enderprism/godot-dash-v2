@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://kwe5xtryavgg"]
 
-[ext_resource type="Script" path="res://src/LevelSelectorTab.gd" id="1_byc33"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="1_m8x5r"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_25fwn"]
-[ext_resource type="Shader" path="res://resources/shaders/BackgroundBlur.gdshader" id="2_ss55f"]
+[ext_resource type="Script" uid="uid://b27syg81d3s4s" path="res://src/LevelSelectorTab.gd" id="1_byc33"]
+[ext_resource type="Script" uid="uid://buyaynlr8a8ag" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="1_m8x5r"]
+[ext_resource type="Script" uid="uid://b3rfkvqn2ekop" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_25fwn"]
+[ext_resource type="Shader" uid="uid://dl46t6e3kvfa0" path="res://resources/shaders/BackgroundBlur.gdshader" id="2_ss55f"]
 [ext_resource type="FontFile" uid="uid://8e1lxpyo40t5" path="res://assets/fonts/Pusab.otf" id="4_3yq55"]
-[ext_resource type="Script" path="res://src/BouncyButton.gd" id="5_pa43o"]
+[ext_resource type="Script" uid="uid://doei3yc3rs41t" path="res://src/BouncyButton.gd" id="5_pa43o"]
 [ext_resource type="Theme" uid="uid://ctubgkgi0wilt" path="res://resources/PusabLabels.tres" id="6_l3bfk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8fxol"]

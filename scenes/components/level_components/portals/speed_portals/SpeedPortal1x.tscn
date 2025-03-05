@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=3 uid="uid://b3wrcjp4ua15k"]
 
-[ext_resource type="Script" path="res://src/interactables/Interactable.gd" id="1_lsrul"]
+[ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_lsrul"]
 [ext_resource type="PackedScene" uid="uid://dl5c5hukbve28" path="res://scenes/particle_emitter_presets/SpeedPortalParticles.tscn" id="2_amlin"]
-[ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="3_u7rch"]
+[ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="3_u7rch"]
 [ext_resource type="Texture2D" uid="uid://cuaoks3l1edif" path="res://assets/textures/portals/speed_portals/SpeedPortal1x.svg" id="4_y5wkx"]
-[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="5_82hq5"]
-[ext_resource type="Script" path="res://src/interactables/private_components/PulseWhite.gd" id="6_cdp8q"]
-[ext_resource type="Script" path="res://src/interactables/public_components/SpeedChangerComponent.gd" id="7_ideyt"]
+[ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="5_82hq5"]
+[ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="6_cdp8q"]
+[ext_resource type="Script" uid="uid://2x4qudx4pood" path="res://src/interactables/public_components/SpeedChangerComponent.gd" id="7_ideyt"]
 
 [sub_resource type="Curve" id="Curve_f0tdc"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

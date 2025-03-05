@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://5olmpni5o7wv"]
 
 [ext_resource type="Texture2D" uid="uid://djstmwdco77pp" path="res://assets/textures/backgrounds/background1-3.png" id="1_am0nv"]
-[ext_resource type="Script" path="res://src/components/GDParallaxSprite.gd" id="2_up5od"]
+
+[sub_resource type="Resource" id="Resource_vy27a"]
+metadata/__load_path__ = "res://src/components/GDParallaxSprite.gd"
 
 [node name="GDParallaxSprite" type="Sprite2D"]
 modulate = Color(0.27451, 0.627451, 1, 1)
@@ -10,7 +12,7 @@ position = Vector2(950, 530)
 texture = ExtResource("1_am0nv")
 region_enabled = true
 region_rect = Rect2(0, 0, 10240, 2048)
-script = ExtResource("2_up5od")
+script = SubResource("Resource_vy27a")
 
 [node name="NotifierLeft" type="VisibleOnScreenNotifier2D" parent="."]
 modulate = Color(0, 0, 0, 1)

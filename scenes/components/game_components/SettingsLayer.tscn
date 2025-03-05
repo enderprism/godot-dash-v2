@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bq6rd80p2817w"]
 
-[ext_resource type="Script" path="res://src/SettingsLayer.gd" id="1_dualp"]
+[ext_resource type="Script" uid="uid://bxn83phy52gqk" path="res://src/SettingsLayer.gd" id="1_dualp"]
 [ext_resource type="PackedScene" uid="uid://b6gonom0s5k1n" path="res://scenes/components/game_components/SettingsMenu.tscn" id="2_v1s6v"]
 
 [node name="SettingsLayer" type="CanvasLayer"]

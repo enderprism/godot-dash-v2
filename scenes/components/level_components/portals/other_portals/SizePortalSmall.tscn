@@ -1,16 +1,16 @@
 [gd_scene load_steps=14 format=3 uid="uid://b2civdkigbcth"]
 
-[ext_resource type="Script" path="res://src/interactables/Interactable.gd" id="1_yfaxq"]
+[ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_yfaxq"]
 [ext_resource type="Material" uid="uid://urnhm06n6ar4" path="res://resources/AdditiveBlendingMaterial.tres" id="2_d8i43"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_nhqe7"]
 [ext_resource type="Texture2D" uid="uid://dgxusv262ihsp" path="res://assets/textures/portals/other_portals/size_portal_normal/SizePortalNormalBack.png" id="2_q1isf"]
-[ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="2_u1bij"]
+[ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="2_u1bij"]
 [ext_resource type="Texture2D" uid="uid://cgh6cf5sa4uce" path="res://assets/textures/portals/other_portals/size_portal_normal/SizePortalNormalFront.png" id="3_rtfwu"]
 [ext_resource type="Texture2D" uid="uid://clkd6k2ybkqv5" path="res://assets/textures/Circle.svg" id="5_npd1j"]
-[ext_resource type="Script" path="res://src/SingleUsage.gd" id="8_31f5c"]
-[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="9_64nrp"]
-[ext_resource type="Script" path="res://src/interactables/private_components/PulseWhite.gd" id="10_jwown"]
-[ext_resource type="Script" path="res://src/interactables/public_components/PlayerScaleChangerComponent.gd" id="11_gnuak"]
+[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/SingleUsage.gd" id="8_31f5c"]
+[ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="9_64nrp"]
+[ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="10_jwown"]
+[ext_resource type="Script" uid="uid://wg4jv4tqb5nq" path="res://src/interactables/public_components/PlayerScaleChangerComponent.gd" id="11_gnuak"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
 size = Vector2(128, 384)

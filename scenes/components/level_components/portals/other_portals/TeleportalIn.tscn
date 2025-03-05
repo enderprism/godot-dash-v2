@@ -1,15 +1,15 @@
 [gd_scene load_steps=13 format=3 uid="uid://d05asiy6k2voi"]
 
-[ext_resource type="Script" path="res://src/interactables/Interactable.gd" id="1_tja0n"]
+[ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_tja0n"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_6nd4y"]
 [ext_resource type="PackedScene" uid="uid://l2ofoyvoxbr2" path="res://scenes/components/game_components/TargetLink.tscn" id="2_g4fee"]
-[ext_resource type="Shader" path="res://resources/shaders/ColorPulse.gdshader" id="3_c01u1"]
+[ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="3_c01u1"]
 [ext_resource type="Texture2D" uid="uid://dpymoijvgn47q" path="res://assets/textures/portals/other_portals/teleportal_in/TeleportalInBack.png" id="4_62kgg"]
 [ext_resource type="Texture2D" uid="uid://bjkrqus0iq7o2" path="res://assets/textures/portals/other_portals/teleportal_in/TeleportalInFront.png" id="5_toxp5"]
-[ext_resource type="Script" path="res://src/interactables/private_components/PulseWhite.gd" id="7_vbgas"]
-[ext_resource type="Script" path="res://src/interactables/public_components/TeleportComponent.gd" id="8_crgvb"]
-[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="9_rk7d5"]
-[ext_resource type="Script" path="res://src/SingleUsage.gd" id="10_465gw"]
+[ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="7_vbgas"]
+[ext_resource type="Script" uid="uid://i73oidoqs007" path="res://src/interactables/public_components/TeleportComponent.gd" id="8_crgvb"]
+[ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="9_rk7d5"]
+[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/SingleUsage.gd" id="10_465gw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bg8ge"]
 resource_local_to_scene = true

@@ -24,7 +24,7 @@ As of right now, the game doesn't have any releases. **This is normal.** I will 
 
 ## Compilation
 
-**⚠️ Make sure to use Godot 4.0. ⚠️**
+**⚠️ Make sure to use Godot 4.4. ⚠️**
 
 - Clone the repo locally or download the source code as a zip from the releases.
 - Import the project.godot file (if you cloned the repo) or the source code zip (if you downloaded it from the releases).

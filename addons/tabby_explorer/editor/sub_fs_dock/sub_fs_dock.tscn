@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://vpt16j3wambx"]
 
-[ext_resource type="Script" path="res://addons/tabby_explorer/editor/sub_fs_dock/sub_fs_dock.gd" id="1_132to"]
+[ext_resource type="Script" uid="uid://yn6po15labrw" path="res://addons/tabby_explorer/editor/sub_fs_dock/sub_fs_dock.gd" id="1_132to"]
 [ext_resource type="PackedScene" uid="uid://dnrd5u6usdt5j" path="res://addons/tabby_explorer/editor/sub_fs_dock/sub_fs_dock_main.tscn" id="2_hwacf"]
 
 [node name="Sub FileSystem" type="MarginContainer"]

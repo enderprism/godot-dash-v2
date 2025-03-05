@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cxncrqn6oy2uo" path="res://assets/textures/player/dash_orb/dash_orb_boom/DashBoom7.png" id="7_c4wnh"]
 [ext_resource type="Texture2D" uid="uid://dx0vu56ian3tw" path="res://assets/textures/player/dash_orb/dash_orb_boom/DashBoom8.png" id="8_oeh4o"]
 [ext_resource type="Texture2D" uid="uid://cdq7c26ac45d3" path="res://assets/textures/player/dash_orb/dash_orb_boom/DashBoom9.png" id="9_hivtv"]
-[ext_resource type="Script" path="res://src/ChildPositionLock.gd" id="11_f68mf"]
+[ext_resource type="Script" uid="uid://dvaty35nib015" path="res://src/ChildPositionLock.gd" id="11_f68mf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5xf5y"]
 animations = [{

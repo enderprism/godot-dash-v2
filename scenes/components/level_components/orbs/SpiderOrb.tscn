@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://33mc0xa2wc8i"]
 
-[ext_resource type="Script" path="res://src/interactables/OrbInteractable.gd" id="1_i23mg"]
+[ext_resource type="Script" uid="uid://f5fvarclvwxg" path="res://src/interactables/OrbInteractable.gd" id="1_i23mg"]
 [ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_knuwr"]
 [ext_resource type="Texture2D" uid="uid://8d3ira7ek1oc" path="res://assets/textures/orbs/SpiderOrb.svg" id="3_mfdso"]
-[ext_resource type="Script" path="res://src/interactables/private_components/MusicScale.gd" id="3_phfll"]
-[ext_resource type="Script" path="res://src/interactables/private_components/PulseCircle.gd" id="4_dxgrr"]
-[ext_resource type="Script" path="res://src/interactables/private_components/PulseRing.gd" id="5_juhc3"]
-[ext_resource type="Script" path="res://src/interactables/public_components/SpiderDashComponent.gd" id="6_cpvky"]
-[ext_resource type="Script" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="7_1nufh"]
+[ext_resource type="Script" uid="uid://cx0n1qip15t20" path="res://src/interactables/private_components/MusicScale.gd" id="3_phfll"]
+[ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="4_dxgrr"]
+[ext_resource type="Script" uid="uid://blkbj1no2k35m" path="res://src/interactables/private_components/PulseRing.gd" id="5_juhc3"]
+[ext_resource type="Script" uid="uid://bc0koikb5w121" path="res://src/interactables/public_components/SpiderDashComponent.gd" id="6_cpvky"]
+[ext_resource type="Script" uid="uid://crvw7wonis42n" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="7_1nufh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jwypc"]
 size = Vector2(128, 128)

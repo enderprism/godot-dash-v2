@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cnru264bpjwxo"]
 
-[ext_resource type="Script" path="res://src/editor/EditorSelectionCollider.gd" id="1_f8tha"]
+[ext_resource type="Script" uid="uid://n8jt8c5qd8b8" path="res://src/editor/EditorSelectionCollider.gd" id="1_f8tha"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jsb18"]
 size = Vector2(128, 128)

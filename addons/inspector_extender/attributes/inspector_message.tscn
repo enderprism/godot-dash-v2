@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://by27pef1gw04u"]
 
-[ext_resource type="Script" path="res://addons/inspector_extender/attributes/inspector_message.gd" id="1_k5js6"]
+[ext_resource type="Script" uid="uid://b74hn3r5ovp0q" path="res://addons/inspector_extender/attributes/inspector_message.gd" id="1_k5js6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ok6kn"]
 content_margin_left = 4.0
