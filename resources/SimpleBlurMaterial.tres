@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dmfwkx1hhpd5x"]
 
-[ext_resource type="Shader" path="res://resources/shaders/BackgroundBlur.gdshader" id="1_72leu"]
+[ext_resource type="Shader" uid="uid://dl46t6e3kvfa0" path="res://resources/shaders/BackgroundBlur.gdshader" id="1_72leu"]
 
 [resource]
 shader = ExtResource("1_72leu")
