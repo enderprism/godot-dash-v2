@@ -20,7 +20,8 @@ func _ready() -> void:
 			$FadeScreenLayer/FadeScreen.show()
 			$FadeScreenLayer/FadeScreen.modulate = Color("000000ff")
 		$EditorGridParallax/EditorGrid.hide()
-		var current_level = ResourceLoader.load(LevelManager.current_level, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE_DEEP).instantiate()
+		ResourceLoader.load_threaded_request(LevelManager.current_level, "PackedScene", false, ResourceLoader.CACHE_MODE_IGNORE_DEEP)
+		var current_level: Node = ResourceLoader.load_threaded_get(LevelManager.current_level).instantiate()
 		LevelManager.platformer = current_level.platformer
 		$PlayerCamera.position_offset = PlayerCamera.DEFAULT_OFFSET if not LevelManager.platformer else Vector2.ZERO
 		$Level.add_child(current_level)
