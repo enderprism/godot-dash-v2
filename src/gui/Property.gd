@@ -129,6 +129,16 @@ func get_value(value_type: Type) -> Variant:
 		_:
 			return null
 
+
+func set_input_state(enabled: bool) -> void:
+	_label.modulate.a = lerpf(0.3, 1.0, enabled)
+	match type:
+		Type.FLOAT, Type.FLOAT_SLIDER, Type.VECTOR2, Type.STRING: # LineEdit-inheriting types
+			_input[type].editable = enabled
+		Type.BOOL, Type.COLOR, Type.ENUM: # Button-inheriting types
+			_input[type].disabled = not enabled
+
+
 func setup_enum(fields: PackedStringArray) -> void:
 	for field in fields:
 		_input[Type.ENUM].add_item(field)
