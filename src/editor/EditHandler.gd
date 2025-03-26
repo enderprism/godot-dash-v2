@@ -95,7 +95,7 @@ func _update_selection() -> void:
 		_swipe_selection_zone()
 	var selection_buffer := Array($SelectionZone.get_overlapping_areas().map(_get_object_parent), TYPE_OBJECT, "Node2D", null)
 	if Input.is_action_just_released(&"editor_selection_remove"):
-		ArrayUtils.intersect(selection, selection_buffer, TYPE_OBJECT, "Node2D").map(func(object): object.get_node("SelectionHighlight").queue_free())
+		ArrayUtils.intersect(selection, selection_buffer, TYPE_OBJECT, "Node2D").map(remove_selection_highlight)
 		selection = ArrayUtils.difference(selection, selection_buffer, TYPE_OBJECT, "Node2D")
 		selection_changed.emit(selection)
 	elif (Input.is_action_just_released(&"editor_add") and $SelectionZone/Hitbox.shape.size > Vector2.ONE * 2) or Input.is_action_just_released(&"editor_add_swipe"):
