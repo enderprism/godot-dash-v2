@@ -15,6 +15,7 @@ class_name SectionHeading
 
 var heading: Heading
 var fold_button: Button
+var folded: bool
 
 
 func _ready() -> void:
@@ -30,7 +31,7 @@ func _ready() -> void:
 		fold_button.flat = true
 		fold_button.toggle_mode = true
 		fold_button.expand_icon = true
-		fold_button.toggled.connect(_fold)
+		fold_button.toggled.connect(fold)
 		fold_button.texture_filter = TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 		fold_button.theme = preload("res://resources/NoFocusColor.tres")
 
@@ -43,6 +44,7 @@ func _refresh_text() -> void:
 	heading.label_settings = label_settings
 	heading._refresh_text()
 
-func _fold(folded: bool) -> void:
-	fold_button.icon = icon_closed if folded else icon_open
-	get_children().map(func(child): child.visible = not folded)
+func fold(_folded: bool) -> void:
+	fold_button.icon = icon_closed if _folded else icon_open
+	folded = _folded
+	get_children().map(func(child): child.visible = not _folded)

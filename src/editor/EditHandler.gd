@@ -129,7 +129,6 @@ static func remove_selection_highlight(object: Node2D) -> void:
 	object.get_node("SelectionHighlight").queue_free()
 
 
-
 func _reset_selection_zone(unreachable: bool = true) -> void:
 	$SelectionZone.position = Vector2.ONE * INF if unreachable else get_parent().get_local_mouse_position()
 	$SelectionZone/Hitbox.shape.size = Vector2.ZERO
