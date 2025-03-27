@@ -4,8 +4,8 @@ class_name HSliderSpinBoxCombo
 
 signal value_changed(value: float)
 
-@export var _min: float
-@export var _max: float = 1.0
+@export var min_value: float
+@export var max_value: float = 1.0
 @export var step: float = 0.05
 @export var rounded: bool
 @export var or_greater: bool
@@ -39,8 +39,8 @@ func _ready() -> void:
 	hslider.size_flags_vertical = SIZE_FILL
 	spinbox = NodeUtils.get_node_or_add(self, "SpinBox", SpinBox, NodeUtils.INTERNAL)
 	for _range in [hslider, spinbox]:
-		_range.min_value = _min
-		_range.max_value = _max
+		_range.min_value = min_value
+		_range.max_value = max_value
 		_range.step = step
 		_range.rounded = rounded
 		_range.allow_greater = or_greater
