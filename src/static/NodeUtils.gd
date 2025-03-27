@@ -28,7 +28,11 @@ static func set_child_owner(caller: Node, child: Node) -> void:
 	var _owner: Node = caller.get_parent() if caller.get_parent().get_owner() == null else caller.get_parent().get_owner()
 	child.set_owner(_owner)
 
-
+## Return a reference to a node. If it doesn't exist, create it.
+## Options:
+##   - INTERNAL
+##   - SET_OWNER
+##   - FORCE_READABLE_NAME
 static func get_node_or_add(caller: Node, path: NodePath, script, options: int = SET_OWNER) -> Node:
 	var node := caller.get_node_or_null(path)
 	if node == null:
