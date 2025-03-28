@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3gwf8y0ft0my"]
+
+[ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="1_yndxv"]
+
+[node name="AlphaTriggerUi" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Mode" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("1_yndxv")
+type = 6
+enum_fields = PackedStringArray("Set", "Multiply", "Divide", "Copy")
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+
+[node name="Alpha" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("1_yndxv")
+step = 0.01
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"

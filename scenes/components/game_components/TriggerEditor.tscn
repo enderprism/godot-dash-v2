@@ -14,3 +14,7 @@ script = ExtResource("1_sfmnd")
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 theme = ExtResource("1_hh718")
+
+[node name="UIRoot" type="VBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
