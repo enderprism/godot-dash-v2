@@ -48,6 +48,8 @@ func _validate_property(property: Dictionary) -> void:
 
 ## The trigger's sprite. Hidden at runtime unless collision shapes are visible ([code]Debug → Visible Collision Shapes[/codeb]).
 var sprite: Sprite2D
+## The trigger's UI. [TriggerEditor] will instantiate it.
+var ui_path: String
 ## The trigger's collision shape.
 var _hitbox: CollisionShape2D
 var _single_usage_component: SingleUsageComponent
@@ -78,6 +80,7 @@ func _physics_process(_delta: float) -> void:
 
 func sprite_visible() -> bool:
 	return Engine.is_editor_hint() or (not Engine.is_editor_hint() and get_tree().is_debugging_collisions_hint()) or LevelManager.in_editor
+
 
 func _set_hitbox_shape() -> void:
 	if _hitbox != null:

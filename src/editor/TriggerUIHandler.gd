@@ -1,13 +1,16 @@
 extends Node
 class_name TriggerUIHandler
 
+@export var trigger_editor: TriggerEditor
 @export var multi_activate: Property
 @export var spawn_triggered: Property
 @export var touch_triggered: Property
 
 func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
-	if not is_selection_trigger_only(selection):
+	if not (len(selection) == 1 and is_selection_trigger_only(selection)):
 		return
+	var trigger_ui_path: String = selection[0].get_node("TriggerBase").ui_path
+	trigger_editor.build_ui(trigger_ui_path)
 
 
 func _on_spawn_triggered_value_changed(value: bool) -> void:
