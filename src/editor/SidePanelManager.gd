@@ -15,7 +15,6 @@ extends Node
 @export var detail: Property
 @export var hsv_shift: SectionHeading
 
-var _previous_color_section_fold_state: Variant = null
 
 func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 	#section Groups
@@ -30,13 +29,8 @@ func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 			property.visible = TriggerUIHandler.is_selection_trigger_only(selection)
 	#endsection
 	#section Colors
-	if trigger_section.visible:
-		_previous_color_section_fold_state = color_section.folded
-		color_section.fold(true)
-	elif _previous_color_section_fold_state != null:
-		color_section.fold(_previous_color_section_fold_state)
-		_previous_color_section_fold_state = null
-	if not color_section.folded:
+	color_section.visible = not trigger_section.visible
+	if not trigger_section.visible and not color_section.folded:
 		for element in [base, detail, hsv_shift]:
 			element.visible = not selection.is_empty()
 	#endsection
