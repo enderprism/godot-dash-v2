@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=80 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -75,7 +75,6 @@
 [ext_resource type="Texture2D" uid="uid://cwm251i41arye" path="res://assets/textures/guis/editor/edit_panel/ScaleObjectFree.svg" id="60_46ckf"]
 [ext_resource type="Script" uid="uid://bvvp2bquxkha5" path="res://src/editor/BaseDetailHandler.gd" id="64_ycx04"]
 [ext_resource type="PackedScene" uid="uid://qgdkpydyjs5f" path="res://scenes/components/game_components/TriggerEditor.tscn" id="65_1n4fp"]
-[ext_resource type="Script" uid="uid://cpcfmtwkbjwep" path="res://src/editor/TriggerEditor.gd" id="66_p41vo"]
 [ext_resource type="Script" uid="uid://ga3j0304hroi" path="res://src/editor/HSVHandler.gd" id="73_s77jp"]
 [ext_resource type="Script" uid="uid://ctvwysparury5" path="res://src/editor/TriggerUIHandler.gd" id="76_n8dkx"]
 
@@ -937,7 +936,6 @@ metadata/_custom_type_script = "uid://cuih47milvqcs"
 
 [node name="TriggerEditor" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger" instance=ExtResource("65_1n4fp")]
 layout_mode = 2
-script = ExtResource("66_p41vo")
 
 [node name="Multi-activate" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger"]
 custom_minimum_size = Vector2(0, 32)
@@ -1106,8 +1104,9 @@ base = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollCon
 detail = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color")
 color_channel_editor = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Channel Editor/ColorChannelEditor")
 
-[node name="TriggerUIHandler" type="Node" parent="." node_paths=PackedStringArray("multi_activate", "spawn_triggered", "touch_triggered")]
+[node name="TriggerUIHandler" type="Node" parent="." node_paths=PackedStringArray("trigger_editor", "multi_activate", "spawn_triggered", "touch_triggered")]
 script = ExtResource("76_n8dkx")
+trigger_editor = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/TriggerEditor")
 multi_activate = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Multi-activate")
 spawn_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered")
 touch_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered")

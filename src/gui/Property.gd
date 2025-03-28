@@ -32,6 +32,9 @@ enum Type {
 @export var lineedit_width: float = 100.0
 @export var placeholder_text: String
 
+# Enum type exports
+@export var enum_fields: PackedStringArray
+
 var _label: Label
 var _spacer: Control
 var _input: Array[Control]
@@ -54,8 +57,8 @@ func _ready() -> void:
 	_input[Type.FLOAT].get_line_edit().text_submitted.connect(func(_new_value): get_viewport().gui_release_focus())
 	# FLOAT_SLIDER
 	_input.insert(Type.FLOAT_SLIDER, NodeUtils.get_node_or_add(self, "FLOAT_SLIDER", HSliderSpinBoxCombo, NodeUtils.INTERNAL))
-	_input[Type.FLOAT_SLIDER]._min = _min
-	_input[Type.FLOAT_SLIDER]._max = _max
+	_input[Type.FLOAT_SLIDER].min_value = _min
+	_input[Type.FLOAT_SLIDER].max_value = _max
 	_input[Type.FLOAT_SLIDER].step = step
 	_input[Type.FLOAT_SLIDER].rounded = rounded
 	_input[Type.FLOAT_SLIDER].slider_width = 100
@@ -80,6 +83,8 @@ func _ready() -> void:
 	# ENUM
 	_input.insert(Type.ENUM, NodeUtils.get_node_or_add(self, "ENUM", OptionButton, NodeUtils.INTERNAL))
 	_input[Type.ENUM].item_selected.connect(func(new_index): value_changed.emit(new_index))
+	if enum_fields != null:
+		setup_enum(enum_fields)
 
 	for child in _input:
 		child.hide()
@@ -94,6 +99,8 @@ func _validate_property(property: Dictionary) -> void:
 			and type not in [Type.FLOAT, Type.FLOAT_SLIDER]:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name in ["placeholder_text", "lineedit_width"] and type != Type.STRING:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+	if property.name in ["enum_fields"] and type != Type.ENUM:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 func set_value(new_value: Variant, value_type: Type) -> void:
@@ -137,6 +144,20 @@ func set_input_state(enabled: bool) -> void:
 			_input[type].editable = enabled
 		Type.BOOL, Type.COLOR, Type.ENUM: # Button-inheriting types
 			_input[type].disabled = not enabled
+
+
+func set_minimum(minimum: float) -> Property:
+	_min = minimum
+	_input[Type.FLOAT].min_value = minimum
+	_input[Type.FLOAT_SLIDER].min_value = minimum
+	return self
+
+
+func set_maximum(maximum: float) -> Property:
+	_max = maximum
+	_input[Type.FLOAT].max_value = maximum
+	_input[Type.FLOAT_SLIDER].max_value = maximum
+	return self
 
 
 func setup_enum(fields: PackedStringArray) -> void:

@@ -91,6 +91,7 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("6_w4jfe")
 type = 6
+enum_fields = PackedStringArray("Background", "Ground", "Line", "P1", "P2", "Glow")
 
 [node name="HSV shift" type="VBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2

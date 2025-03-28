@@ -7,16 +7,6 @@ class_name ColorChannelEditor
 @onready var color_channel_item := preload("res://scenes/components/game_components/ColorChannelItem.tscn")
 
 
-func _ready() -> void:
-	%Channel.setup_enum(PackedStringArray([
-		"Background",
-		"Ground",
-		"Line",
-		"P1",
-		"P2",
-		"Glow",
-	]))
-
 func _on_button_pressed() -> void:
 	_add_channel(%LineEdit.get_text())
 	%LineEdit.clear()
