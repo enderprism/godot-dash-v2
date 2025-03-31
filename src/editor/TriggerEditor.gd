@@ -57,6 +57,8 @@ func connect_ui(trigger: TriggerBase) -> void:
 
 
 func save_property(value: Variant, property: String, property_owner: Node) -> void:
+	if property == "target_group":
+		value = GroupEditor.GROUP_PREFIX + value
 	property_owner.set(property, value)
 
 
@@ -86,4 +88,7 @@ func load_property(trigger: TriggerBase) -> void:
 			if property_owner.get(property_name) == null:
 				printerr("Can't load_property property ", property_name, " on ", property_owner)
 				continue
-			property.set_value(property_owner.get(property_name), property.type)
+			var value = property_owner.get(property_name)
+			if property_name == "target_group":
+				value = GroupEditor.GROUP_PREFIX + value
+			property.set_value(value , property.type)
