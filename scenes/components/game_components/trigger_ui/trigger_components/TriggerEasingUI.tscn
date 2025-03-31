@@ -14,23 +14,27 @@ script = ExtResource("1_pdn8j")
 label_settings = ExtResource("2_076yy")
 metadata/_custom_type_script = "uid://cuih47milvqcs"
 
-[node name="Duration" type="HBoxContainer" parent="."]
+[node name="Duration" type="HBoxContainer" parent="." groups=["trigger_easing_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("3_7o0da")
+_max = 10.0
+step = 0.01
 or_greater = true
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
-[node name="Easing" type="HBoxContainer" parent="."]
+[node name="Easing" type="HBoxContainer" parent="." groups=["trigger_easing_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("3_7o0da")
 type = 6
+enum_fields = PackedStringArray("Ease In", "Ease Out", "Ease In-Out", "Ease Out-In")
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
-[node name="Transition" type="HBoxContainer" parent="."]
+[node name="Transition" type="HBoxContainer" parent="." groups=["trigger_easing_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("3_7o0da")
 type = 6
+enum_fields = PackedStringArray("Linear", "Sine", "Quint", "Quart", "Quad", "Expo", "Elastic", "Cubic", "Circ", "Bounce", "Back", "Sprink")
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"

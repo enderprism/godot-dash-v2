@@ -9,7 +9,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Mode" type="HBoxContainer" parent="."]
+[node name="Group" type="HBoxContainer" parent="." groups=["trigger_base_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("1_yndxv")
+type = 4
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+
+[node name="Mode" type="HBoxContainer" parent="." groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("1_yndxv")
@@ -17,7 +24,7 @@ type = 6
 enum_fields = PackedStringArray("Set", "Multiply", "Divide", "Copy")
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
-[node name="Alpha" type="HBoxContainer" parent="."]
+[node name="Alpha" type="HBoxContainer" parent="." groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("1_yndxv")
