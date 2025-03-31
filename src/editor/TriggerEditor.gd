@@ -90,5 +90,6 @@ func load_property(trigger: TriggerBase) -> void:
 				continue
 			var value = property_owner.get(property_name)
 			if property_name == "target_group":
-				value = GroupEditor.GROUP_PREFIX + value
+				value = value as String
+				value = value.trim_prefix(GroupEditor.GROUP_PREFIX)
 			property.set_value(value , property.type)
