@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=124 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -57,26 +57,70 @@
 [ext_resource type="Texture2D" uid="uid://d28pf7aqf5nj4" path="res://assets/textures/orbs/DashOrbCyan.svg" id="36_3frkf"]
 [ext_resource type="Texture2D" uid="uid://c2ngjixel2d42" path="res://assets/textures/orbs/ToggleOrbOutline.svg" id="36_402hc"]
 [ext_resource type="PackedScene" uid="uid://bpmqq5a3or2k5" path="res://scenes/components/level_components/orbs/DashOrbCyan.tscn" id="37_rlt4b"]
+[ext_resource type="Texture2D" uid="uid://bxjs1u44gok7c" path="res://assets/textures/portals/gamemode_portals/cube_portal/CubePortalFront.png" id="42_rq471"]
+[ext_resource type="PackedScene" uid="uid://qfmv2p1wt1tn" path="res://scenes/components/level_components/portals/gamemode_portals/CubePortal.tscn" id="43_ow5kt"]
+[ext_resource type="Texture2D" uid="uid://bcdstukpupgb5" path="res://assets/textures/portals/gamemode_portals/robot_portal/RobotPortalFront.png" id="44_5nc47"]
+[ext_resource type="PackedScene" uid="uid://bxutnqoa41uso" path="res://scenes/components/level_components/portals/gamemode_portals/RobotPortal.tscn" id="44_jb677"]
+[ext_resource type="Texture2D" uid="uid://byomqjoflsnnw" path="res://assets/textures/portals/gamemode_portals/ship_portal/ShipPortalFront.png" id="44_ll2xx"]
+[ext_resource type="PackedScene" uid="uid://ctf8cfrxbjfdk" path="res://scenes/components/level_components/portals/gamemode_portals/ShipPortal.tscn" id="45_d4tqp"]
+[ext_resource type="Texture2D" uid="uid://g17qv6d5a8iq" path="res://assets/textures/portals/gamemode_portals/ufo_portal/UFOPortalFront.png" id="46_ll2xx"]
+[ext_resource type="PackedScene" uid="uid://bd0j0ubumn1dc" path="res://scenes/components/level_components/portals/gamemode_portals/UFOPortal.tscn" id="47_d4tqp"]
+[ext_resource type="Texture2D" uid="uid://cb1rbkb0djr36" path="res://assets/textures/portals/gamemode_portals/wave_portal/WavePortalFront.png" id="48_d48k0"]
+[ext_resource type="PackedScene" uid="uid://cct7q7sr6fwc0" path="res://scenes/components/level_components/portals/gamemode_portals/WavePortal.tscn" id="49_aico2"]
+[ext_resource type="Texture2D" uid="uid://bp6ukusnk6ufx" path="res://assets/textures/portals/gamemode_portals/swing_portal/SwingPortalFront.png" id="50_j5nlm"]
+[ext_resource type="Texture2D" uid="uid://mhmstl4xjq2g" path="res://assets/textures/portals/gamemode_portals/spider_portal/SpiderPortalFront.png" id="51_fn488"]
 [ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="51_rnq45"]
+[ext_resource type="PackedScene" uid="uid://dspnvt3u8uhqy" path="res://scenes/components/level_components/portals/gamemode_portals/SwingPortal.tscn" id="51_vkyby"]
+[ext_resource type="Texture2D" uid="uid://dd1s2apollksy" path="res://assets/textures/portals/gamemode_portals/ball_portal/BallPortalFront.png" id="51_vpsba"]
 [ext_resource type="PackedScene" uid="uid://c1lfp5vqcpgiw" path="res://scenes/components/game_components/EditorMoveControls.tscn" id="51_w2i7q"]
 [ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="52_3jb55"]
 [ext_resource type="Texture2D" uid="uid://c0krnicwnskr8" path="res://assets/textures/guis/editor/edit_panel/RotateObjectLeft90.svg" id="52_jpmdx"]
+[ext_resource type="PackedScene" uid="uid://duu44mnb4uo8u" path="res://scenes/components/level_components/portals/gamemode_portals/BallPortal.tscn" id="53_jb677"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="53_jrbqn"]
 [ext_resource type="Texture2D" uid="uid://dapmy33vj7qi7" path="res://assets/textures/guis/editor/edit_panel/RotateObjectRight90.svg" id="53_mgdr6"]
 [ext_resource type="Texture2D" uid="uid://c52yyuk8wf0pr" path="res://assets/textures/guis/editor/edit_panel/RotateObjectLeft45.svg" id="54_0gg2o"]
 [ext_resource type="Texture2D" uid="uid://cfmq0ydjokwp5" path="res://assets/textures/guis/editor/edit_panel/RotateObjectRight45.svg" id="55_4de2s"]
+[ext_resource type="PackedScene" uid="uid://duj3dae6qcvtm" path="res://scenes/components/level_components/portals/gamemode_portals/SpiderPortal.tscn" id="55_5nc47"]
 [ext_resource type="PackedScene" uid="uid://da4xswy05y0ve" path="res://scenes/components/game_components/GroupEditor.tscn" id="55_5vu0v"]
 [ext_resource type="PackedScene" uid="uid://cw15476n2m4we" path="res://scenes/components/game_components/ColorChannelEditor.tscn" id="55_wey7f"]
 [ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="55_x15b8"]
 [ext_resource type="Texture2D" uid="uid://djvb6aor51lsu" path="res://assets/textures/guis/editor/edit_panel/FlipObjectH.svg" id="57_tt0di"]
+[ext_resource type="PackedScene" uid="uid://jdhlbkky38ej" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal0x.tscn" id="58_20xqs"]
+[ext_resource type="PackedScene" uid="uid://cd4end0ruw2y3" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal05x.tscn" id="58_a0ef7"]
 [ext_resource type="Script" uid="uid://csdb54xplbtd2" path="res://src/editor/SidePanelManager.gd" id="58_hnsxj"]
 [ext_resource type="Texture2D" uid="uid://b4kmc5iqyscr1" path="res://assets/textures/guis/editor/edit_panel/FlipObjectV.svg" id="58_q5hg5"]
+[ext_resource type="Texture2D" uid="uid://bm4o6qn8mdapu" path="res://assets/textures/portals/speed_portals/SpeedPortal0x.svg" id="58_w5vw8"]
 [ext_resource type="Texture2D" uid="uid://dskce326io828" path="res://assets/textures/guis/editor/edit_panel/RotateObjectFree.svg" id="59_1fu1b"]
+[ext_resource type="Texture2D" uid="uid://bh5xvhek8i1m6" path="res://assets/textures/portals/speed_portals/SpeedPortal05x.svg" id="60_32shx"]
 [ext_resource type="Texture2D" uid="uid://cwm251i41arye" path="res://assets/textures/guis/editor/edit_panel/ScaleObjectFree.svg" id="60_46ckf"]
+[ext_resource type="PackedScene" uid="uid://b3wrcjp4ua15k" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal1x.tscn" id="60_kbsrm"]
+[ext_resource type="PackedScene" uid="uid://csu7yo83ohdk3" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal2x.tscn" id="61_l48od"]
+[ext_resource type="PackedScene" uid="uid://dtumn0qc8usca" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal3x.tscn" id="62_n03i7"]
+[ext_resource type="Texture2D" uid="uid://cuaoks3l1edif" path="res://assets/textures/portals/speed_portals/SpeedPortal1x.svg" id="62_n6cnt"]
+[ext_resource type="PackedScene" uid="uid://cf2ads3atrx78" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal4x.tscn" id="63_itagw"]
+[ext_resource type="Texture2D" uid="uid://ba7uh3fv4d5jq" path="res://assets/textures/portals/speed_portals/SpeedPortal2x.svg" id="64_pd34h"]
 [ext_resource type="Script" uid="uid://bvvp2bquxkha5" path="res://src/editor/BaseDetailHandler.gd" id="64_ycx04"]
+[ext_resource type="PackedScene" uid="uid://bvu6th40mvb3q" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal5x.tscn" id="64_yuboy"]
 [ext_resource type="PackedScene" uid="uid://qgdkpydyjs5f" path="res://scenes/components/game_components/TriggerEditor.tscn" id="65_1n4fp"]
+[ext_resource type="Texture2D" uid="uid://bxkysp21y32lm" path="res://assets/textures/portals/speed_portals/SpeedPortal3x.svg" id="66_wdba8"]
+[ext_resource type="Texture2D" uid="uid://crgfornwvgker" path="res://assets/textures/portals/speed_portals/SpeedPortal4x.svg" id="68_107fg"]
+[ext_resource type="Texture2D" uid="uid://b8gagycaqj5bl" path="res://assets/textures/portals/speed_portals/SpeedPortal5x.svg" id="70_av0ti"]
+[ext_resource type="Texture2D" uid="uid://dsq6xk2pblqrm" path="res://assets/textures/portals/other_portals/gravity_portal_normal/GravityPortalNormalFront.png" id="72_av0ti"]
+[ext_resource type="PackedScene" uid="uid://bwqcjqk3as34v" path="res://scenes/components/level_components/portals/other_portals/GravityPortalNormal.tscn" id="72_pd34h"]
 [ext_resource type="Script" uid="uid://ga3j0304hroi" path="res://src/editor/HSVHandler.gd" id="73_s77jp"]
+[ext_resource type="PackedScene" uid="uid://dppduseecx3hw" path="res://scenes/components/level_components/portals/other_portals/GravityPortalFlipped.tscn" id="73_wdba8"]
+[ext_resource type="PackedScene" uid="uid://kr20govtffs" path="res://scenes/components/level_components/portals/other_portals/GravityPortalToggle.tscn" id="74_107fg"]
+[ext_resource type="Texture2D" uid="uid://1yecdu8rxahw" path="res://assets/textures/portals/other_portals/gravity_portal_flipped/GravityPortalFlippedFront.png" id="74_3268m"]
 [ext_resource type="Script" uid="uid://ctvwysparury5" path="res://src/editor/TriggerUIHandler.gd" id="76_n8dkx"]
+[ext_resource type="Texture2D" uid="uid://wm08ibe0gx8q" path="res://assets/textures/portals/other_portals/gravity_portal_toggle/GravityPortalToggleFront.png" id="76_qkade"]
+[ext_resource type="PackedScene" uid="uid://bhjfnlli5vshw" path="res://scenes/components/level_components/portals/other_portals/SizePortalNormal.tscn" id="78_qkade"]
+[ext_resource type="Texture2D" uid="uid://ddjeyix04leys" path="res://assets/textures/portals/other_portals/size_portal_small/SizePortalSmallFront.png" id="78_tu7bm"]
+[ext_resource type="PackedScene" uid="uid://b2civdkigbcth" path="res://scenes/components/level_components/portals/other_portals/SizePortalSmall.tscn" id="79_k1w38"]
+[ext_resource type="Texture2D" uid="uid://cgh6cf5sa4uce" path="res://assets/textures/portals/other_portals/size_portal_normal/SizePortalNormalFront.png" id="80_yflip"]
+[ext_resource type="Texture2D" uid="uid://bjkrqus0iq7o2" path="res://assets/textures/portals/other_portals/teleportal_in/TeleportalInFront.png" id="82_hx3pm"]
+[ext_resource type="PackedScene" uid="uid://d05asiy6k2voi" path="res://scenes/components/level_components/portals/other_portals/TeleportalIn.tscn" id="82_n18q3"]
+[ext_resource type="PackedScene" uid="uid://ckrakyci0r2eg" path="res://scenes/components/level_components/portals/other_portals/TeleportalOut.tscn" id="83_gaibe"]
+[ext_resource type="Texture2D" uid="uid://cjen3j6at6ei" path="res://assets/textures/portals/other_portals/teleportal_out/TeleportalOutFront.png" id="84_glhus"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac3bt"]
 radius = 2.0
@@ -192,7 +236,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
 theme = ExtResource("3_k1q1p")
-current_tab = 1
+current_tab = 2
 script = ExtResource("4_2at5j")
 metadata/_tab_index = 0
 
@@ -259,6 +303,7 @@ texture_override = ExtResource("6_2nlu4")
 texture_owner = NodePath("Sprite")
 
 [node name="Hazards" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 metadata/_tab_name = ""
@@ -317,7 +362,6 @@ type = 2
 object = ExtResource("14_wyjb2")
 
 [node name="Interactables" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 metadata/_tab_name = ""
@@ -566,6 +610,424 @@ block_palette_button = true
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("31_q754w")
+
+[node name="CubePortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("42_rq471")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/CubePortal"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("43_ow5kt")
+
+[node name="RobotPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("44_5nc47")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/RobotPortal"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("44_jb677")
+
+[node name="ShipPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("44_ll2xx")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/ShipPortal"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("45_d4tqp")
+
+[node name="UFOPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("46_ll2xx")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/UFOPortal"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("47_d4tqp")
+
+[node name="WavePortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("48_d48k0")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/WavePortal"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("49_aico2")
+
+[node name="SwingPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("50_j5nlm")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SwingPortal"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("51_vkyby")
+
+[node name="BallPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("51_vpsba")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/BallPortal"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("53_jb677")
+
+[node name="SpiderPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("51_fn488")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpiderPortal"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("55_5nc47")
+
+[node name="SpeedPortal0x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("58_w5vw8")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortal0x"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("58_20xqs")
+
+[node name="SpeedPortal05x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("60_32shx")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortal05x"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("58_a0ef7")
+
+[node name="SpeedPortal1x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("62_n6cnt")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortal1x"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("60_kbsrm")
+
+[node name="SpeedPortal2x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("64_pd34h")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortal2x"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("61_l48od")
+
+[node name="SpeedPortal3x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("66_wdba8")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortal3x"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("62_n03i7")
+
+[node name="SpeedPortal4x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("68_107fg")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortal4x"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("63_itagw")
+
+[node name="SpeedPortal5x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("70_av0ti")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortal5x"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("64_yuboy")
+
+[node name="GravityPortalNormal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("72_av0ti")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GravityPortalNormal"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("72_pd34h")
+
+[node name="GravityPortalFlipped" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("74_3268m")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GravityPortalFlipped"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("73_wdba8")
+
+[node name="GravityPortalToggle" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("76_qkade")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GravityPortalToggle"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("74_107fg")
+
+[node name="SizePortalNormal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("78_tu7bm")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SizePortalNormal"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("78_qkade")
+
+[node name="SizePortalSmall" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("80_yflip")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SizePortalSmall"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("79_k1w38")
+
+[node name="TeleportalIn" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("82_hx3pm")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/TeleportalIn"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("82_n18q3")
+
+[node name="TeleportalOut" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("84_glhus")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/TeleportalOut"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("83_gaibe")
 
 [node name="Triggers" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
 visible = false
