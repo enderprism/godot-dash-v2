@@ -47,7 +47,6 @@ func connect_ui(trigger: TriggerBase) -> void:
 				match property.name:
 					"Duration":
 						property.value_changed.connect(save_property.bind("_duration", property_owner))
-						print_debug(property_owner._duration)
 					"Easing":
 						property.value_changed.connect(save_property.bind("easing_type", property_owner))
 					"Transition":
@@ -80,7 +79,6 @@ func load_property(trigger: TriggerBase) -> void:
 				match property.name:
 					"Duration":
 						property_name = "_duration"
-						print_debug("duration")
 					"Easing":
 						property_name = "easing_type"
 					"Transition":
