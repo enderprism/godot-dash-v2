@@ -1509,7 +1509,7 @@ editor_viewport = NodePath("../EditorUI/EditorContainer/VBoxContainer/EditorView
 [node name="PlacedObjectsCollider" type="Area2D" parent="."]
 physics_interpolation_mode = 2
 collision_layer = 128
-collision_mask = 256
+collision_mask = 264
 priority = 1
 metadata/_edit_group_ = true
 
@@ -1529,7 +1529,7 @@ editor_viewport = NodePath("../EditorUI/EditorContainer/VBoxContainer/EditorView
 
 [node name="SelectionZone" type="Area2D" parent="EditHandler"]
 collision_layer = 128
-collision_mask = 256
+collision_mask = 264
 metadata/_edit_group_ = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="EditHandler/SelectionZone"]
