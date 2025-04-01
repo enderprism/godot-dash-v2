@@ -34,7 +34,6 @@ func connect_ui(triggers: Array[TriggerBase]) -> void:
 		if properties.is_empty():
 			printerr("Empty properties in ", group)
 			return
-		print_debug(triggers)
 		for property in properties as Array[Property]:
 			property.value_changed.get_connections().map(func(connection): property.value_changed.disconnect(connection.callable))
 			if group == TRIGGER_BASE_PROPERTY_GROUP:
@@ -60,12 +59,10 @@ func connect_ui(triggers: Array[TriggerBase]) -> void:
 func save_property(value: Variant, property: String, triggers: Array, group: String) -> void:
 	if property == "target_group":
 		value = GroupEditor.GROUP_PREFIX + value
-	print_debug(triggers)
 	var to_property_owner := func(trigger):
 		var property_owner: Node = trigger.get_parent() if group == TRIGGER_PROPERTY_GROUP else trigger.get_node("../TriggerEasing") if group == TRIGGER_EASING_PROPERTY_GROUP else trigger
 		return property_owner
 	var property_owners := triggers.map(to_property_owner)
-	print_debug(property_owners)
 	property_owners.map(func(property_owner): property_owner.set(property, value))
 
 
