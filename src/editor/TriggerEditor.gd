@@ -7,7 +7,8 @@ const TRIGGER_EASING_PROPERTY_GROUP := "trigger_easing_property"
 const TRIGGER_BASE_PROPERTY_GROUP := "trigger_base_property"
 
 
-func build_ui(trigger: TriggerBase) -> void:
+func build_ui(triggers: Array[TriggerBase]) -> void:
+	var trigger := triggers[0]
 	if not ResourceLoader.exists(trigger.ui_path, "PackedScene"):
 		printerr("Trigger UI doesn't exist for path: ", trigger.ui_path)
 		return
@@ -22,46 +23,51 @@ func build_ui(trigger: TriggerBase) -> void:
 		var trigger_easing_ui := EASING_UI.instantiate() as SectionHeading
 		%UIRoot.add_child(trigger_easing_ui, true, INTERNAL_MODE_BACK)
 		trigger_easing_ui.set_deferred("name", "Tweening")
-	connect_ui(trigger)
-	load_property(trigger)
+	connect_ui(triggers)
+	load_properties(trigger)
 
 # TODO handle hiding properties depending on others (analog to _validate_property_list)
 
-func connect_ui(trigger: TriggerBase) -> void:
+func connect_ui(triggers: Array[TriggerBase]) -> void:
 	for group in [TRIGGER_PROPERTY_GROUP, TRIGGER_EASING_PROPERTY_GROUP, TRIGGER_BASE_PROPERTY_GROUP]:
 		var properties := get_tree().get_nodes_in_group(group)
 		if properties.is_empty():
 			printerr("Empty properties in ", group)
 			return
-		var property_owner := trigger.get_parent() if group == TRIGGER_PROPERTY_GROUP else trigger.get_node("../TriggerEasing") if group == TRIGGER_EASING_PROPERTY_GROUP else trigger
+		var to_property_owner := func(trigger):
+			var property_owner: Node = trigger.get_parent() if group == TRIGGER_PROPERTY_GROUP else trigger.get_node("../TriggerEasing") if group == TRIGGER_EASING_PROPERTY_GROUP else trigger
+			return property_owner
+		var property_owners: Array[Node]
+		property_owners.assign(triggers.map(to_property_owner))
 		for property in properties as Array[Property]:
 			if group == TRIGGER_BASE_PROPERTY_GROUP:
 				match property.name:
 					"Group":
-						property.value_changed.connect(save_property.bind("target_group", property_owner))
+						property.value_changed.connect(save_property.bind("target_group", property_owners))
 					"Target":
-						property.value_changed.connect(save_property.bind("_target", property_owner))
+						property.value_changed.connect(save_property.bind("_target", property_owners))
 					_:
-						property.value_changed.connect(save_property.bind(property.name.to_camel_case(), property_owner))
+						property.value_changed.connect(save_property.bind(property.name.to_camel_case(), property_owners))
 			elif group == TRIGGER_EASING_PROPERTY_GROUP:
 				match property.name:
 					"Duration":
-						property.value_changed.connect(save_property.bind("_duration", property_owner))
+						property.value_changed.connect(save_property.bind("_duration", property_owners))
 					"Easing":
-						property.value_changed.connect(save_property.bind("easing_type", property_owner))
+						property.value_changed.connect(save_property.bind("easing_type", property_owners))
 					"Transition":
-						property.value_changed.connect(save_property.bind("easing_transition", property_owner))
+						property.value_changed.connect(save_property.bind("easing_transition", property_owners))
 			else:
-				property.value_changed.connect(save_property.bind(property.name.to_camel_case(), property_owner))
+				property.value_changed.connect(save_property.bind(property.name.to_camel_case(), property_owners))
 
 
-func save_property(value: Variant, property: String, property_owner: Node) -> void:
+func save_property(value: Variant, property: String, property_owners: Array[Node]) -> void:
 	if property == "target_group":
 		value = GroupEditor.GROUP_PREFIX + value
-	property_owner.set(property, value)
+	print_debug(property)
+	property_owners.map(func(property_owner): property_owner.set(property, value))
 
 
-func load_property(trigger: TriggerBase) -> void:
+func load_properties(trigger: TriggerBase) -> void:
 	for group in [TRIGGER_PROPERTY_GROUP, TRIGGER_EASING_PROPERTY_GROUP, TRIGGER_BASE_PROPERTY_GROUP]:
 		var properties := get_tree().get_nodes_in_group(group)
 		if properties.is_empty():

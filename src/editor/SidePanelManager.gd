@@ -24,7 +24,7 @@ func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 	#section Trigger
 	trigger_section.visible = TriggerUIHandler.is_selection_trigger_only(selection)
 	if not trigger_section.folded:
-		trigger_editor.visible = TriggerUIHandler.is_selection_trigger_only(selection) and len(selection) == 1
+		trigger_editor.visible = TriggerUIHandler.is_selection_trigger_only(selection) and TriggerUIHandler.is_selection_same_trigger_type(selection)
 		for property in trigger_properties:
 			property.visible = TriggerUIHandler.is_selection_trigger_only(selection)
 	#endsection

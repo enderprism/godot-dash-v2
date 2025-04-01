@@ -21,9 +21,12 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 	single_usage.value_changed.connect(_on_single_usage_value_changed.bind(trigger_bases))
 	spawn_triggered.value_changed.connect(_on_spawn_triggered_value_changed.bind(trigger_bases))
 	touch_triggered.value_changed.connect(_on_touch_triggered_value_changed.bind(trigger_bases))
-	if len(selection) != 1:
+	if not is_selection_same_trigger_type(selection):
+		print_debug(selection)
 		return
-	trigger_editor.build_ui(trigger_base)
+	var trigger_bases_typed: Array[TriggerBase]
+	trigger_bases_typed.assign(trigger_bases)
+	trigger_editor.build_ui(trigger_bases_typed)
 
 
 func _on_single_usage_value_changed(value: bool, trigger_bases: Array) -> void:
@@ -53,3 +56,10 @@ static func is_selection_trigger_only(selection: Array[Node2D]) -> bool:
 		return false
 	var has_trigger := func(object: Node2D): return object.has_node("TriggerBase")
 	return selection.filter(has_trigger) == selection
+
+static func is_selection_same_trigger_type(selection: Array[Node2D]) -> bool:
+	if selection.is_empty():
+		return false
+	var trigger_type = selection[0].get_script()
+	var unmatching_trigger_types := selection.filter(func(trigger): return trigger.get_script() != trigger_type)
+	return unmatching_trigger_types.is_empty()
