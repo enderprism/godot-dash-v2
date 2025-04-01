@@ -1592,8 +1592,6 @@ touch_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContaine
 [connection signal="direction_pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/MoveControlsEight" to="EditHandler" method="_on_move_controls_direction_pressed"]
 [connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsRight/FlipH" to="EditHandler" method="_on_flip_h_pressed"]
 [connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsRight/FlipV" to="EditHandler" method="_on_flip_v_pressed"]
-[connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered" to="TriggerUIHandler" method="_on_spawn_triggered_value_changed"]
-[connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered" to="TriggerUIHandler" method="_on_touch_triggered_value_changed"]
 [connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color" to="BaseDetailHandler" method="_on_base_color_value_changed"]
 [connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color" to="BaseDetailHandler" method="_on_detail_color_value_changed"]
 [connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue" to="HSVHandler" method="_on_hue_value_changed"]
