@@ -1399,7 +1399,7 @@ metadata/_custom_type_script = "uid://cuih47milvqcs"
 [node name="TriggerEditor" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger" instance=ExtResource("65_1n4fp")]
 layout_mode = 2
 
-[node name="Multi-activate" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger"]
+[node name="Single usage" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("55_x15b8")
@@ -1547,7 +1547,7 @@ group_section = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/
 group_editor = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Groups/GroupEditor")
 trigger_section = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger")
 trigger_editor = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/TriggerEditor")
-trigger_properties = [NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Multi-activate"), NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"), NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered")]
+trigger_properties = [NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage"), NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"), NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered")]
 color_section = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors")
 base = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color")
 detail = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color")
@@ -1566,10 +1566,10 @@ base = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollCon
 detail = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color")
 color_channel_editor = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Channel Editor/ColorChannelEditor")
 
-[node name="TriggerUIHandler" type="Node" parent="." node_paths=PackedStringArray("trigger_editor", "multi_activate", "spawn_triggered", "touch_triggered")]
+[node name="TriggerUIHandler" type="Node" parent="." node_paths=PackedStringArray("trigger_editor", "single_usage", "spawn_triggered", "touch_triggered")]
 script = ExtResource("76_n8dkx")
 trigger_editor = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/TriggerEditor")
-multi_activate = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Multi-activate")
+single_usage = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage")
 spawn_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered")
 touch_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered")
 
