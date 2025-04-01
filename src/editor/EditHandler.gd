@@ -22,6 +22,8 @@ func _ready() -> void:
 	selection_changed.connect(_reset_selection_pivot)
 
 func _physics_process(delta: float) -> void:
+	if LevelManager.level_playing:
+		return
 	if object_move_cooldown > 0:
 		object_move_cooldown -= delta
 	cursor_position_snapped = level.get_local_mouse_position().snapped(Vector2.ONE*128)
@@ -101,6 +103,7 @@ func _update_selection() -> void:
 	elif (Input.is_action_just_released(&"editor_add") and $SelectionZone/Hitbox.shape.size > Vector2.ONE * 2) or Input.is_action_just_released(&"editor_add_swipe"):
 		selection = ArrayUtils.union(selection, selection_buffer, TYPE_OBJECT, "Node2D")
 		selection_changed.emit(selection)
+	selection.erase(level)
 
 
 func _get_object_parent(object: Node) -> Node2D:
