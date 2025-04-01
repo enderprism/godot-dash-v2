@@ -34,36 +34,38 @@ func connect_ui(triggers: Array[TriggerBase]) -> void:
 		if properties.is_empty():
 			printerr("Empty properties in ", group)
 			return
-		var to_property_owner := func(trigger):
-			var property_owner: Node = trigger.get_parent() if group == TRIGGER_PROPERTY_GROUP else trigger.get_node("../TriggerEasing") if group == TRIGGER_EASING_PROPERTY_GROUP else trigger
-			return property_owner
-		var property_owners: Array[Node]
-		property_owners.assign(triggers.map(to_property_owner))
+		print_debug(triggers)
 		for property in properties as Array[Property]:
+			property.value_changed.get_connections().map(func(connection): property.value_changed.disconnect(connection.callable))
 			if group == TRIGGER_BASE_PROPERTY_GROUP:
 				match property.name:
 					"Group":
-						property.value_changed.connect(save_property.bind("target_group", property_owners))
+						property.value_changed.connect(save_property.bind("target_group", triggers, group))
 					"Target":
-						property.value_changed.connect(save_property.bind("_target", property_owners))
+						property.value_changed.connect(save_property.bind("_target", triggers, group))
 					_:
-						property.value_changed.connect(save_property.bind(property.name.to_camel_case(), property_owners))
+						property.value_changed.connect(save_property.bind(property.name.to_camel_case(), triggers, group))
 			elif group == TRIGGER_EASING_PROPERTY_GROUP:
 				match property.name:
 					"Duration":
-						property.value_changed.connect(save_property.bind("_duration", property_owners))
+						property.value_changed.connect(save_property.bind("_duration", triggers, group))
 					"Easing":
-						property.value_changed.connect(save_property.bind("easing_type", property_owners))
+						property.value_changed.connect(save_property.bind("easing_type", triggers, group))
 					"Transition":
-						property.value_changed.connect(save_property.bind("easing_transition", property_owners))
+						property.value_changed.connect(save_property.bind("easing_transition", triggers, group))
 			else:
-				property.value_changed.connect(save_property.bind(property.name.to_camel_case(), property_owners))
+				property.value_changed.connect(save_property.bind(property.name.to_camel_case(), triggers, group))
 
 
-func save_property(value: Variant, property: String, property_owners: Array[Node]) -> void:
+func save_property(value: Variant, property: String, triggers: Array, group: String) -> void:
 	if property == "target_group":
 		value = GroupEditor.GROUP_PREFIX + value
-	print_debug(property)
+	print_debug(triggers)
+	var to_property_owner := func(trigger):
+		var property_owner: Node = trigger.get_parent() if group == TRIGGER_PROPERTY_GROUP else trigger.get_node("../TriggerEasing") if group == TRIGGER_EASING_PROPERTY_GROUP else trigger
+		return property_owner
+	var property_owners := triggers.map(to_property_owner)
+	print_debug(property_owners)
 	property_owners.map(func(property_owner): property_owner.set(property, value))
 
 
