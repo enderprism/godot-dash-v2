@@ -45,7 +45,6 @@ var _initial_rotations: Dictionary ## Rotation in degrees for every [Node2D] in 
 func _ready() -> void:
 	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK | TriggerSetup.ADD_EASING)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Rotate.svg"))
-	_targets = get_tree().get_nodes_in_group(base.target_group)
 
 func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
@@ -87,6 +86,7 @@ func update_target_link() -> void:
 	target_link.target = base._target
 
 func start(_body: Node2D) -> void:
+	_targets = get_tree().get_nodes_in_group(base.target_group)
 	if easing.is_inactive():
 		if not _targets.is_empty():
 			for _target in _targets:
