@@ -67,6 +67,7 @@ SFXManager="*res://src/autoloads/SFXManager.gd"
 GroundData="*res://src/autoloads/GroundData.gd"
 MusicVolume="*res://src/autoloads/MusicVolume.gd"
 Config="*res://src/autoloads/Config.gd"
+SignalLens="*res://addons/signal_lens/autoload/signal_lens_autoload.gd"
 
 [display]
 
@@ -83,7 +84,7 @@ naming/script_name_casing=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/inspector_extender/plugin.cfg", "res://addons/nine_patch_sprite_2d/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/tabby_explorer/plugin.cfg", "res://addons/trail_2d/plugin.cfg")
+enabled=PackedStringArray("res://addons/inspector_extender/plugin.cfg", "res://addons/nine_patch_sprite_2d/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/signal_lens/plugin.cfg", "res://addons/tabby_explorer/plugin.cfg", "res://addons/trail_2d/plugin.cfg")
 
 [filesystem]
 
