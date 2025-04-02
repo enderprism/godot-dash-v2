@@ -49,23 +49,10 @@ func _ready() -> void:
 	# Input types
 	# FLOAT
 	_input.insert(Type.FLOAT, NodeUtils.get_node_or_add(self, "FLOAT", SpinBox, NodeUtils.INTERNAL))
-	_input[Type.FLOAT].min_value = _min
-	_input[Type.FLOAT].max_value = _max
-	_input[Type.FLOAT].step = step
-	_input[Type.FLOAT].rounded = rounded
-	_input[Type.FLOAT].allow_greater = or_greater
-	_input[Type.FLOAT].allow_lesser = or_less
 	_input[Type.FLOAT].value_changed.connect(func(new_value): value_changed.emit(new_value))
 	_input[Type.FLOAT].get_line_edit().text_submitted.connect(func(_new_value): get_viewport().gui_release_focus())
 	# FLOAT_SLIDER
 	_input.insert(Type.FLOAT_SLIDER, NodeUtils.get_node_or_add(self, "FLOAT_SLIDER", HSliderSpinBoxCombo, NodeUtils.INTERNAL))
-	_input[Type.FLOAT_SLIDER].min_value = _min
-	_input[Type.FLOAT_SLIDER].max_value = _max
-	_input[Type.FLOAT_SLIDER].step = step
-	_input[Type.FLOAT_SLIDER].rounded = rounded
-	_input[Type.FLOAT_SLIDER].or_greater = or_greater
-	_input[Type.FLOAT_SLIDER].or_less = or_less
-	_input[Type.FLOAT_SLIDER].slider_width = 100
 	_input[Type.FLOAT_SLIDER].value_changed.connect(func(new_value): value_changed.emit(new_value))
 	_input[Type.FLOAT_SLIDER].spinbox.get_line_edit().text_submitted.connect(func(_new_value): get_viewport().gui_release_focus())
 	# BOOL
@@ -73,23 +60,17 @@ func _ready() -> void:
 	_input[Type.BOOL].toggled.connect(func(toggled_on): value_changed.emit(toggled_on))
 	# VECTOR2
 	_input.insert(Type.VECTOR2, NodeUtils.get_node_or_add(self, "VECTOR2", Vector2SpinBox, NodeUtils.INTERNAL))
-	_input[Type.VECTOR2].vertical = true
 	_input[Type.VECTOR2].value_changed.connect(func(new_value): value_changed.emit(new_value))
 	# STRING
 	_input.insert(Type.STRING, NodeUtils.get_node_or_add(self, "STRING", LineEdit, NodeUtils.INTERNAL))
-	_input[Type.STRING].custom_minimum_size.x = lineedit_width
-	_input[Type.STRING].focus_mode = Control.FOCUS_CLICK
 	_input[Type.STRING].text_submitted.connect(func(new_text): value_changed.emit(new_text); get_viewport().gui_release_focus())
 	# COLOR
 	_input.insert(Type.COLOR, NodeUtils.get_node_or_add(self, "COLOR", ColorPickerButton, NodeUtils.INTERNAL))
-	_input[Type.COLOR].custom_minimum_size.x = 100
 	_input[Type.COLOR].color_changed.connect(func(new_color): value_changed.emit(new_color))
 	# ENUM
 	_input.insert(Type.ENUM, NodeUtils.get_node_or_add(self, "ENUM", OptionButton, NodeUtils.INTERNAL))
 	_input[Type.ENUM].item_selected.connect(func(new_index): value_changed.emit(new_index))
-	if enum_fields != null:
-		setup_enum(enum_fields)
-
+	update_internals()
 	for child in _input:
 		child.hide()
 		child.theme = preload("res://resources/NoFocusColor.tres")
@@ -150,21 +131,25 @@ func set_input_state(enabled: bool) -> void:
 			_input[type].disabled = not enabled
 
 
-func set_minimum(minimum: float) -> Property:
-	_min = minimum
-	_input[Type.FLOAT].min_value = minimum
-	_input[Type.FLOAT_SLIDER].min_value = minimum
-	return self
-
-
-func set_maximum(maximum: float) -> Property:
-	_max = maximum
-	_input[Type.FLOAT].max_value = maximum
-	_input[Type.FLOAT_SLIDER].max_value = maximum
-	return self
+func update_internals() -> void:
+	for input in [_input[Type.FLOAT], _input[Type.FLOAT_SLIDER]]:
+		input.min_value = _min
+		input.max_value = _max
+		input.step = step
+		input.rounded = rounded
+		input.allow_greater = or_greater
+		input.allow_lesser = or_less
+	_input[Type.FLOAT_SLIDER].slider_width = 100
+	_input[Type.VECTOR2].vertical = true
+	_input[Type.STRING].custom_minimum_size.x = lineedit_width
+	_input[Type.STRING].focus_mode = Control.FOCUS_CLICK
+	_input[Type.COLOR].custom_minimum_size.x = 100
+	if enum_fields != null:
+		setup_enum(enum_fields)
 
 
 func setup_enum(fields: PackedStringArray) -> void:
+	_input[Type.ENUM].clear()
 	for field in fields:
 		_input[Type.ENUM].add_item(field)
 

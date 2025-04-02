@@ -8,8 +8,8 @@ signal value_changed(value: float)
 @export var max_value: float = 1.0
 @export var step: float = 0.05
 @export var rounded: bool
-@export var or_greater: bool
-@export var or_less: bool
+@export var allow_greater: bool
+@export var allow_lesser: bool
 @export var slider_width: float = 256.0:
 	set(value):
 		slider_width = value
@@ -43,8 +43,8 @@ func _ready() -> void:
 		_range.max_value = max_value
 		_range.step = step
 		_range.rounded = rounded
-		_range.allow_greater = or_greater
-		_range.allow_lesser = or_less
+		_range.allow_greater = allow_greater
+		_range.allow_lesser = allow_lesser
 	hslider.value_changed.connect(_update_value)
 	spinbox.value_changed.connect(_update_value)
 
