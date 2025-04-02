@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3gwf8y0ft0my"]
+[gd_scene load_steps=3 format=3 uid="uid://d3gwf8y0ft0my"]
 
 [ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="1_yndxv"]
+[ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/editor/TriggerPropertyWatcher.gd" id="2_bofn2"]
 
 [node name="AlphaTriggerUi" type="VBoxContainer"]
 anchors_preset = 15
@@ -23,6 +24,14 @@ script = ExtResource("1_yndxv")
 type = 6
 enum_fields = PackedStringArray("Set", "Multiply", "Divide", "Copy")
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+
+[node name="TriggerPropertyWatcher" type="Node" parent="Mode" node_paths=PackedStringArray("target")]
+script = ExtResource("2_bofn2")
+target = NodePath("../../Alpha")
+condition = "value != 0"
+property = &"or_greater"
+if_false = "false"
+if_true = "true"
 
 [node name="Alpha" type="HBoxContainer" parent="." groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)

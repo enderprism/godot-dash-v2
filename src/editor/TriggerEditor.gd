@@ -35,7 +35,10 @@ func connect_ui(triggers: Array[TriggerBase]) -> void:
 			printerr("Empty properties in ", group)
 			return
 		for property in properties as Array[Property]:
-			property.value_changed.get_connections().map(func(connection): property.value_changed.disconnect(connection.callable))
+			var remove_connections := func(connection):
+				if not "watcher" in connection.callable.get_method():
+					property.value_changed.disconnect(connection.callable)
+			property.value_changed.get_connections().map(remove_connections)
 			if group == TRIGGER_BASE_PROPERTY_GROUP:
 				match property.name:
 					"Group":
