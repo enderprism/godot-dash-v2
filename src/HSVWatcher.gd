@@ -3,7 +3,8 @@ class_name HSVWatcher
 
 
 @export_storage var hsv_shift: Array[float]
-@export_storage var strength: float
+@export_storage var strength: float = 1.0
+@export_storage var alpha: float = 1.0
 
 
 func _ready() -> void:
@@ -24,3 +25,4 @@ func _process(_delta: float) -> void:
 	shifted_modulate.s += hsv_shift[1]
 	shifted_modulate.v += hsv_shift[2]
 	get_parent().modulate = shifted_modulate * strength
+	get_parent().modulate.a = alpha

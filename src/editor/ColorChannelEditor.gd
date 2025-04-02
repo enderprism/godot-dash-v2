@@ -50,6 +50,8 @@ func _show_properties() -> void:
 	%Hue.set_value(channel_item.data.hsv_shift[0], Property.Type.FLOAT)
 	%Saturation.set_value(channel_item.data.hsv_shift[1], Property.Type.FLOAT)
 	%Value.set_value(channel_item.data.hsv_shift[2], Property.Type.FLOAT)
+	%Strength.set_value(channel_item.data.strength, Property.Type.FLOAT)
+	%Alpha.set_value(channel_item.data.strength, Property.Type.FLOAT)
 	%Channel.visible = channel_item.data.copy
 	%Color.visible = not channel_item.data.copy
 
@@ -111,5 +113,23 @@ func _on_value_value_changed(value:Variant) -> void:
 	var new_hsv_shift := channel_item.data.hsv_shift.duplicate()
 	new_hsv_shift[2] = new_saturation
 	channel_item.data.set_hsv_shift(new_hsv_shift)
+	channel_item.update()
+
+
+func _on_strength_value_changed(value:Variant) -> void:
+	var new_strength := value as float
+	if button_group.get_pressed_button() == null:
+		return
+	var channel_item := button_group.get_pressed_button().get_parent() as ColorChannelItem
+	channel_item.data.set_strength(new_strength)
+	channel_item.update()
+
+
+func _on_alpha_value_changed(value:Variant) -> void:
+	var new_alpha := value as float
+	if button_group.get_pressed_button() == null:
+		return
+	var channel_item := button_group.get_pressed_button().get_parent() as ColorChannelItem
+	channel_item.data.set_alpha(new_alpha)
 	channel_item.update()
 

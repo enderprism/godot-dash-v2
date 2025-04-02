@@ -5,6 +5,8 @@ class_name HSVHandler
 @export var hue: Property
 @export var saturation: Property
 @export var value: Property
+@export var strength: Property
+@export var alpha: Property
 @export var editor_viewport: Control
 
 
@@ -26,6 +28,14 @@ func _on_value_value_changed(new_value: Variant) -> void:
 	$"../EditHandler".selection.map(func(object): object.get_node("HSVWatcher").hsv_shift[2] = new_value)
 
 
+func _on_strength_value_changed(new_value: Variant) -> void:
+	$"../EditHandler".selection.map(func(object): object.get_node("HSVWatcher").strength = new_value)
+
+
+func _on_alpha_value_changed(new_value: Variant) -> void:
+	$"../EditHandler".selection.map(func(object): object.get_node("HSVWatcher").alpha = new_value)
+
+
 func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 	if selection.is_empty():
 		return
@@ -33,8 +43,11 @@ func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 	if objects_with_hsv_watcher.is_empty():
 		for property in [hue, saturation, value]:
 			property.set_value(0.0, Property.Type.FLOAT)
+		strength.set_value(1.0, Property.Type.FLOAT)
+		alpha.set_value(1.0, Property.Type.FLOAT)
 	else:
 		hue.set_value(objects_with_hsv_watcher[-1].get_node("HSVWatcher").hsv_shift[0], Property.Type.FLOAT)
 		saturation.set_value(objects_with_hsv_watcher[-1].get_node("HSVWatcher").hsv_shift[1], Property.Type.FLOAT)
 		value.set_value(objects_with_hsv_watcher[-1].get_node("HSVWatcher").hsv_shift[2], Property.Type.FLOAT)
-
+		strength.set_value(objects_with_hsv_watcher[-1].get_node("HSVWatcher").strength, Property.Type.FLOAT)
+		alpha.set_value(objects_with_hsv_watcher[-1].get_node("HSVWatcher").alpha, Property.Type.FLOAT)

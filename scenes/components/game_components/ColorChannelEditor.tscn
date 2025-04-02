@@ -120,6 +120,19 @@ layout_mode = 2
 script = ExtResource("6_w4jfe")
 _min = -1.0
 
+[node name="Strength" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("6_w4jfe")
+or_greater = true
+
+[node name="Alpha" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("6_w4jfe")
+
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
 auto_translate_mode = 1
 title = "Please confirm..."
@@ -137,3 +150,5 @@ Are you sure you want to delete it?"
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Hue" to="." method="_on_hue_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Saturation" to="." method="_on_saturation_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Value" to="." method="_on_value_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Strength" to="." method="_on_strength_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Alpha" to="." method="_on_alpha_value_changed"]

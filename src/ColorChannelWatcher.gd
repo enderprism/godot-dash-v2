@@ -18,6 +18,8 @@ func _exit_tree() -> void:
 		data.set_copy(false)
 		var hsv_shift_default: Array[float] = [0.0, 0.0, 0.0]
 		data.set_hsv_shift(hsv_shift_default)
+		data.set_strength(1.0)
+		data.set_alpha(1.0)
 		refresh_objects_color()
 		# Remove from group
 		get_tree().get_nodes_in_group(data.associated_group).map(func(object): object.remove_from_group(data.associated_group))
@@ -55,3 +57,9 @@ func refresh_objects_color(objects: Array = []) -> void:
 		object.modulate.h += data.hsv_shift[0]
 		object.modulate.s += data.hsv_shift[1]
 		object.modulate.v += data.hsv_shift[2]
+		if object is HSVWatcher:
+			object.strength = data.strength
+			object.alpha = data.alpha
+		else:
+			object.modulate *= data.strength
+			object.modulate.a = data.alpha
