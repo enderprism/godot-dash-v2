@@ -33,6 +33,14 @@ property = &"or_greater"
 if_false = "false"
 if_true = "true"
 
+[node name="TriggerPropertyWatcher2" type="Node" parent="Mode" node_paths=PackedStringArray("target")]
+script = ExtResource("2_bofn2")
+target = NodePath("../../Copy")
+condition = "value == 3"
+property = &"visible"
+if_false = "false"
+if_true = "true"
+
 [node name="Alpha" type="HBoxContainer" parent="." groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
@@ -41,6 +49,7 @@ step = 0.01
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
 [node name="Copy" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 script = ExtResource("4_c7461")
 label_settings = ExtResource("5_fyygt")
@@ -57,3 +66,15 @@ metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 [node name="TriggerPropertyInternalName" type="Node" parent="Copy/Target"]
 script = ExtResource("2_rkb0o")
 property_name = "copy_target"
+
+[node name="Alpha Multiplier" type="HBoxContainer" parent="Copy" groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("1_yndxv")
+step = 0.01
+or_greater = true
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Copy/Alpha Multiplier"]
+script = ExtResource("2_rkb0o")
+property_name = "copy_multiplier"
