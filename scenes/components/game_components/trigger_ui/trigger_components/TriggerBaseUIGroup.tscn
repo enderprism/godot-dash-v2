@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dibiibymus6dt"]
+
+[ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="1_bq44t"]
+[ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="2_rh1g4"]
+
+[node name="Group" type="HBoxContainer" groups=["trigger_base_property"]]
+custom_minimum_size = Vector2(0, 32)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bq44t")
+type = 4
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="."]
+script = ExtResource("2_rh1g4")
+property_name = "target_group"

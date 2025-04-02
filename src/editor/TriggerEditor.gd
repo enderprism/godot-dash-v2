@@ -39,24 +39,10 @@ func connect_ui(triggers: Array[TriggerBase]) -> void:
 				if not "watcher" in connection.callable.get_method():
 					property.value_changed.disconnect(connection.callable)
 			property.value_changed.get_connections().map(remove_connections)
-			if group == TRIGGER_BASE_PROPERTY_GROUP:
-				match property.name:
-					"Group":
-						property.value_changed.connect(save_property.bind("target_group", triggers, group))
-					"Target":
-						property.value_changed.connect(save_property.bind("_target", triggers, group))
-					_:
-						property.value_changed.connect(save_property.bind(property.name.to_camel_case(), triggers, group))
-			elif group == TRIGGER_EASING_PROPERTY_GROUP:
-				match property.name:
-					"Duration":
-						property.value_changed.connect(save_property.bind("_duration", triggers, group))
-					"Easing":
-						property.value_changed.connect(save_property.bind("easing_type", triggers, group))
-					"Transition":
-						property.value_changed.connect(save_property.bind("easing_transition", triggers, group))
-			else:
-				property.value_changed.connect(save_property.bind(property.name.to_camel_case(), triggers, group))
+			var property_name := property.name.to_camel_case()
+			if property.has_node("TriggerPropertyInternalName"):
+				property_name = property.get_node("TriggerPropertyInternalName").property_name
+			property.value_changed.connect(save_property.bind(property_name, triggers, group))
 
 
 func save_property(value: Variant, property: String, triggers: Array, group: String) -> void:
@@ -77,20 +63,8 @@ func load_properties(trigger: TriggerBase) -> void:
 		var property_owner := trigger.get_parent() if group == TRIGGER_PROPERTY_GROUP else trigger.get_node("../TriggerEasing") if group == TRIGGER_EASING_PROPERTY_GROUP else trigger
 		for property in properties as Array[Property]:
 			var property_name := property.name.to_camel_case()
-			if group == TRIGGER_BASE_PROPERTY_GROUP:
-				match property.name:
-					"Group":
-						property_name = "target_group"
-					"Target":
-						property_name = "_target"
-			elif group == TRIGGER_EASING_PROPERTY_GROUP:
-				match property.name:
-					"Duration":
-						property_name = "_duration"
-					"Easing":
-						property_name = "easing_type"
-					"Transition":
-						property_name = "easing_transition"
+			if property.has_node("TriggerPropertyInternalName"):
+				property_name = property.get_node("TriggerPropertyInternalName").property_name
 			if property_owner.get(property_name) == null:
 				printerr("Can't load_property property ", property_name, " on ", property_owner)
 				continue

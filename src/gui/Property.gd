@@ -12,6 +12,7 @@ enum Type {
 	STRING,
 	COLOR,
 	ENUM,
+	NODE2D,
 }
 
 @export var type: Type:

@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3gwf8y0ft0my"]
+[gd_scene load_steps=7 format=3 uid="uid://d3gwf8y0ft0my"]
 
+[ext_resource type="PackedScene" uid="uid://dibiibymus6dt" path="res://scenes/components/game_components/trigger_ui/trigger_components/TriggerBaseUIGroup.tscn" id="1_c7461"]
 [ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="1_yndxv"]
 [ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/editor/TriggerPropertyWatcher.gd" id="2_bofn2"]
+[ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="2_rkb0o"]
+[ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="4_c7461"]
+[ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="5_fyygt"]
 
 [node name="AlphaTriggerUi" type="VBoxContainer"]
 anchors_preset = 15
@@ -10,12 +14,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Group" type="HBoxContainer" parent="." groups=["trigger_base_property"]]
-custom_minimum_size = Vector2(0, 32)
+[node name="Group" parent="." instance=ExtResource("1_c7461")]
 layout_mode = 2
-script = ExtResource("1_yndxv")
-type = 4
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
 [node name="Mode" type="HBoxContainer" parent="." groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
@@ -39,3 +39,21 @@ layout_mode = 2
 script = ExtResource("1_yndxv")
 step = 0.01
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+
+[node name="Copy" type="VBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("4_c7461")
+label_settings = ExtResource("5_fyygt")
+metadata/_custom_type_script = "uid://cuih47milvqcs"
+
+[node name="Target" type="HBoxContainer" parent="Copy" groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("1_yndxv")
+type = 7
+step = 0.01
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Copy/Target"]
+script = ExtResource("2_rkb0o")
+property_name = "copy_target"
