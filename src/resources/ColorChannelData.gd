@@ -13,7 +13,7 @@ enum CopyColor {
 }
 
 @export var copy: bool
-@export var color: Color
+@export var color := Color.WHITE
 @export var copied_channel: CopyColor
 @export var hsv_shift: Array[float] = [0.0, 0.0, 0.0]
 @export var strength: float = 1.0
