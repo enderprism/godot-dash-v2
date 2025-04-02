@@ -19,7 +19,7 @@ enum Mode {
 
 # Hide unneeded elements in the inspector
 func _validate_property(property: Dictionary) -> void:
-	if property.name == "_set_alpha" and mode == Mode.COPY:
+	if property.name == "alpha" and mode == Mode.COPY:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name in ["copy_target", "copy_multiplier"] and mode != Mode.COPY:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
