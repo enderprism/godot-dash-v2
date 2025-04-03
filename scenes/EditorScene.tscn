@@ -1510,7 +1510,7 @@ script = ExtResource("4_gl2yd")
 
 [node name="EditorCamera" type="Camera2D" parent="." node_paths=PackedStringArray("editor_viewport")]
 process_priority = 1
-position = Vector2(0, 256)
+position = Vector2(640, 256)
 offset = Vector2(640, 413)
 zoom = Vector2(0.8, 0.8)
 script = ExtResource("6_wcytj")
