@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctc3ynyextvpj"]
+
+[ext_resource type="Material" uid="uid://dmfwkx1hhpd5x" path="res://resources/SimpleBlurMaterial.tres" id="1_4cufj"]
+[ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="2_j3oen"]
+[ext_resource type="LabelSettings" uid="uid://cdbv8jpu4j57v" path="res://resources/Toast.tres" id="3_vg06y"]
+
+[node name="Toast" type="PanelContainer"]
+material = ExtResource("1_4cufj")
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -57.5
+offset_top = 64.0
+offset_right = 57.5
+offset_bottom = 107.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("2_j3oen")
+
+[node name="Label" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Default Toast text"
+label_settings = ExtResource("3_vg06y")
+horizontal_alignment = 1

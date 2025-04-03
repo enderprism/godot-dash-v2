@@ -68,6 +68,7 @@ GroundData="*res://src/autoloads/GroundData.gd"
 MusicVolume="*res://src/autoloads/MusicVolume.gd"
 Config="*res://src/autoloads/Config.gd"
 SignalLens="*res://addons/signal_lens/autoload/signal_lens_autoload.gd"
+Toasts="*res://src/autoloads/Toasts.gd"
 
 [display]
 
