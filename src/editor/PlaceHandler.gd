@@ -41,8 +41,11 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 func texture_variation_overlapping(placed_objects_collider: Area2D, type: EditorSelectionCollider.Type, id: int) -> bool:
 	if not placed_objects_collider.has_overlapping_areas():
 		return false
-	if placed_objects_collider.get_overlapping_areas()[-1].get_parent() is Interactable \
-			or placed_objects_collider.get_overlapping_areas()[-1].get_parent() is TriggerBase:
+	var overlapping_areas := placed_objects_collider.get_overlapping_areas()
+	var get_area_parent := func(area): return area.get_parent()
+	if Interactable in overlapping_areas.map(get_area_parent) \
+			or TriggerBase in overlapping_areas.map(get_area_parent):
+		print_debug("is Interactable")
 		return true
 	if placed_objects_collider.get_overlapping_areas()[-1].type == type:
 		return placed_objects_collider.get_overlapping_areas()[-1].id == id
