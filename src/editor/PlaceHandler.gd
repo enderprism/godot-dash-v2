@@ -34,18 +34,22 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 				hsv_watcher.set_owner(LevelManager.editor_edited_level)
 		# Handle object deletion
 		elif Input.is_action_pressed(&"editor_remove") and placed_objects_collider.has_overlapping_areas():
-			if len(placed_objects_collider.get_overlapping_areas()) > 0:
-				object_deleted.emit(placed_objects_collider.get_overlapping_areas()[-1])
-				placed_objects_collider.get_overlapping_areas()[-1].get_parent().queue_free()
+			if len(placed_objects_collider.get_overlapping_areas()) > 0 and placed_objects_collider.get_overlapping_areas()[-1].get_parent() is not LevelProps:
+				var overlapping_areas := placed_objects_collider.get_overlapping_areas()
+				object_deleted.emit(overlapping_areas[-1])
+				get_area(overlapping_areas[-1]).queue_free()
+
+
+func get_area(area: Area2D) -> Node:
+	return area if area is Interactable else area.get_parent()
+
 
 func texture_variation_overlapping(placed_objects_collider: Area2D, type: EditorSelectionCollider.Type, id: int) -> bool:
 	if not placed_objects_collider.has_overlapping_areas():
 		return false
 	var overlapping_areas := placed_objects_collider.get_overlapping_areas()
-	var get_area_parent := func(area): return area.get_parent()
-	if Interactable in overlapping_areas.map(get_area_parent) \
-			or TriggerBase in overlapping_areas.map(get_area_parent):
-		print_debug("is Interactable")
+	var is_interactable_or_trigger_base := func(area_parent): return area_parent is Interactable or area_parent is TriggerBase
+	if not overlapping_areas.map(get_area).filter(is_interactable_or_trigger_base).is_empty():
 		return true
 	if placed_objects_collider.get_overlapping_areas()[-1].type == type:
 		return placed_objects_collider.get_overlapping_areas()[-1].id == id
