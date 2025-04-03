@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=138 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -57,17 +57,28 @@
 [ext_resource type="Texture2D" uid="uid://d28pf7aqf5nj4" path="res://assets/textures/orbs/DashOrbCyan.svg" id="36_3frkf"]
 [ext_resource type="Texture2D" uid="uid://c2ngjixel2d42" path="res://assets/textures/orbs/ToggleOrbOutline.svg" id="36_402hc"]
 [ext_resource type="PackedScene" uid="uid://bpmqq5a3or2k5" path="res://scenes/components/level_components/orbs/DashOrbCyan.tscn" id="37_rlt4b"]
+[ext_resource type="Texture2D" uid="uid://dwu2fxe16epee" path="res://assets/textures/pads/YellowPad.svg" id="42_lu10t"]
 [ext_resource type="Texture2D" uid="uid://bxjs1u44gok7c" path="res://assets/textures/portals/gamemode_portals/cube_portal/CubePortalFront.png" id="42_rq471"]
 [ext_resource type="PackedScene" uid="uid://qfmv2p1wt1tn" path="res://scenes/components/level_components/portals/gamemode_portals/CubePortal.tscn" id="43_ow5kt"]
+[ext_resource type="PackedScene" uid="uid://nsvkooc5od83" path="res://scenes/components/level_components/pads/YellowPad.tscn" id="43_t67qq"]
 [ext_resource type="Texture2D" uid="uid://bcdstukpupgb5" path="res://assets/textures/portals/gamemode_portals/robot_portal/RobotPortalFront.png" id="44_5nc47"]
+[ext_resource type="Texture2D" uid="uid://cbbt17ufbgqqu" path="res://assets/textures/pads/RedPad.svg" id="44_iptn6"]
 [ext_resource type="PackedScene" uid="uid://bxutnqoa41uso" path="res://scenes/components/level_components/portals/gamemode_portals/RobotPortal.tscn" id="44_jb677"]
 [ext_resource type="Texture2D" uid="uid://byomqjoflsnnw" path="res://assets/textures/portals/gamemode_portals/ship_portal/ShipPortalFront.png" id="44_ll2xx"]
 [ext_resource type="PackedScene" uid="uid://ctf8cfrxbjfdk" path="res://scenes/components/level_components/portals/gamemode_portals/ShipPortal.tscn" id="45_d4tqp"]
+[ext_resource type="PackedScene" uid="uid://bf1l71kmqh0i0" path="res://scenes/components/level_components/pads/RedPad.tscn" id="45_x850y"]
+[ext_resource type="Texture2D" uid="uid://diqogjimevxe2" path="res://assets/textures/pads/PinkPad.svg" id="46_6sar2"]
 [ext_resource type="Texture2D" uid="uid://g17qv6d5a8iq" path="res://assets/textures/portals/gamemode_portals/ufo_portal/UFOPortalFront.png" id="46_ll2xx"]
 [ext_resource type="PackedScene" uid="uid://bd0j0ubumn1dc" path="res://scenes/components/level_components/portals/gamemode_portals/UFOPortal.tscn" id="47_d4tqp"]
+[ext_resource type="PackedScene" uid="uid://cugg15j2jxyay" path="res://scenes/components/level_components/pads/PinkPad.tscn" id="47_ik2f6"]
+[ext_resource type="PackedScene" uid="uid://cjbdfuvh8nxcn" path="res://scenes/components/level_components/pads/ReboundPad.tscn" id="48_cxib2"]
 [ext_resource type="Texture2D" uid="uid://cb1rbkb0djr36" path="res://assets/textures/portals/gamemode_portals/wave_portal/WavePortalFront.png" id="48_d48k0"]
+[ext_resource type="Texture2D" uid="uid://nw150on8bl8d" path="res://assets/textures/guis/editor/block_palette/ReboundPadPreview.svg" id="48_x850y"]
 [ext_resource type="PackedScene" uid="uid://cct7q7sr6fwc0" path="res://scenes/components/level_components/portals/gamemode_portals/WavePortal.tscn" id="49_aico2"]
+[ext_resource type="Texture2D" uid="uid://bvhu2o467ogw3" path="res://assets/textures/pads/BlackPad.svg" id="49_ksayh"]
+[ext_resource type="PackedScene" uid="uid://bsl2ssfhthw00" path="res://scenes/components/level_components/pads/BlackPad.tscn" id="50_0xs65"]
 [ext_resource type="Texture2D" uid="uid://bp6ukusnk6ufx" path="res://assets/textures/portals/gamemode_portals/swing_portal/SwingPortalFront.png" id="50_j5nlm"]
+[ext_resource type="Texture2D" uid="uid://c0bsvfc1ce8wd" path="res://assets/textures/pads/BluePad.svg" id="51_1i48y"]
 [ext_resource type="Texture2D" uid="uid://mhmstl4xjq2g" path="res://assets/textures/portals/gamemode_portals/spider_portal/SpiderPortalFront.png" id="51_fn488"]
 [ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="51_rnq45"]
 [ext_resource type="PackedScene" uid="uid://dspnvt3u8uhqy" path="res://scenes/components/level_components/portals/gamemode_portals/SwingPortal.tscn" id="51_vkyby"]
@@ -75,10 +86,13 @@
 [ext_resource type="PackedScene" uid="uid://c1lfp5vqcpgiw" path="res://scenes/components/game_components/EditorMoveControls.tscn" id="51_w2i7q"]
 [ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="52_3jb55"]
 [ext_resource type="Texture2D" uid="uid://c0krnicwnskr8" path="res://assets/textures/guis/editor/edit_panel/RotateObjectLeft90.svg" id="52_jpmdx"]
+[ext_resource type="PackedScene" uid="uid://dnah6ge1p0rr3" path="res://scenes/components/level_components/pads/BluePad.tscn" id="52_xvtum"]
 [ext_resource type="PackedScene" uid="uid://duu44mnb4uo8u" path="res://scenes/components/level_components/portals/gamemode_portals/BallPortal.tscn" id="53_jb677"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="53_jrbqn"]
 [ext_resource type="Texture2D" uid="uid://dapmy33vj7qi7" path="res://assets/textures/guis/editor/edit_panel/RotateObjectRight90.svg" id="53_mgdr6"]
+[ext_resource type="Texture2D" uid="uid://bmyejgekcl17a" path="res://assets/textures/pads/SpiderPad.svg" id="53_nlcfe"]
 [ext_resource type="Texture2D" uid="uid://c52yyuk8wf0pr" path="res://assets/textures/guis/editor/edit_panel/RotateObjectLeft45.svg" id="54_0gg2o"]
+[ext_resource type="PackedScene" uid="uid://ht60eohfg08" path="res://scenes/components/level_components/pads/SpiderPad.tscn" id="54_lv6tf"]
 [ext_resource type="Texture2D" uid="uid://cfmq0ydjokwp5" path="res://assets/textures/guis/editor/edit_panel/RotateObjectRight45.svg" id="55_4de2s"]
 [ext_resource type="PackedScene" uid="uid://duj3dae6qcvtm" path="res://scenes/components/level_components/portals/gamemode_portals/SpiderPortal.tscn" id="55_5nc47"]
 [ext_resource type="PackedScene" uid="uid://da4xswy05y0ve" path="res://scenes/components/game_components/GroupEditor.tscn" id="55_5vu0v"]
@@ -380,10 +394,11 @@ theme_override_constants/margin_bottom = 10
 
 [node name="ButtonContainer" type="HFlowContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer"]
 layout_mode = 2
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
 
-[node name="YellowOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="Orbs" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+layout_mode = 2
+
+[node name="YellowOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -397,12 +412,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/YellowOrb"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/YellowOrb"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("16_nywui")
 
-[node name="RedOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="RedOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -416,12 +431,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/RedOrb"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/RedOrb"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("18_1ww1r")
 
-[node name="PinkOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="PinkOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -435,12 +450,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/PinkOrb"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/PinkOrb"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("19_jb5ft")
 
-[node name="ReboundOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="ReboundOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -454,12 +469,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/ReboundOrb"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/ReboundOrb"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("22_cb37e")
 
-[node name="BlackOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="BlackOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -473,12 +488,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/BlackOrb"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/BlackOrb"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("22_62rc5")
 
-[node name="BlueOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="BlueOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -492,12 +507,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/BlueOrb"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/BlueOrb"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("26_ay76u")
 
-[node name="GreenOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="GreenOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -511,12 +526,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GreenOrb"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/GreenOrb"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("27_wpv76")
 
-[node name="SpiderOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="SpiderOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -530,12 +545,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpiderOrb"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/SpiderOrb"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("28_qxx6w")
 
-[node name="DashOrbGreen" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="DashOrbGreen" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -549,12 +564,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/DashOrbGreen"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/DashOrbGreen"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("29_lmspt")
 
-[node name="DashOrbMagenta" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="DashOrbMagenta" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -568,12 +583,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/DashOrbMagenta"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/DashOrbMagenta"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("30_5hb38")
 
-[node name="DashOrbCyan" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="DashOrbCyan" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -587,12 +602,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/DashOrbCyan"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/DashOrbCyan"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("37_rlt4b")
 
-[node name="ToggleOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="ToggleOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -606,12 +621,151 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/ToggleOrb"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/ToggleOrb"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("31_q754w")
 
-[node name="CubePortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="Pads" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+layout_mode = 2
+
+[node name="YellowPad" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("42_lu10t")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads/YellowPad"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("43_t67qq")
+
+[node name="RedPad" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("44_iptn6")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads/RedPad"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("45_x850y")
+
+[node name="PinkPad" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("46_6sar2")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads/PinkPad"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("47_ik2f6")
+
+[node name="ReboundPad" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("48_x850y")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads/ReboundPad"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("48_cxib2")
+
+[node name="BlackPad" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("49_ksayh")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads/BlackPad"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("50_0xs65")
+
+[node name="BluePad" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("51_1i48y")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads/BluePad"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("52_xvtum")
+
+[node name="SpiderPad" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("53_nlcfe")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads/SpiderPad"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("54_lv6tf")
+
+[node name="Portals" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+layout_mode = 2
+
+[node name="CubePortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -625,12 +779,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/CubePortal"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/CubePortal"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("43_ow5kt")
 
-[node name="RobotPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="RobotPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -644,12 +798,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/RobotPortal"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/RobotPortal"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("44_jb677")
 
-[node name="ShipPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="ShipPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -663,12 +817,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/ShipPortal"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/ShipPortal"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("45_d4tqp")
 
-[node name="UFOPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="UFOPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -682,12 +836,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/UFOPortal"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/UFOPortal"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("47_d4tqp")
 
-[node name="WavePortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="WavePortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -701,12 +855,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/WavePortal"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/WavePortal"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("49_aico2")
 
-[node name="SwingPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="SwingPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -720,12 +874,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SwingPortal"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/SwingPortal"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("51_vkyby")
 
-[node name="BallPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="BallPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -739,12 +893,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/BallPortal"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/BallPortal"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("53_jb677")
 
-[node name="SpiderPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="SpiderPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -758,12 +912,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpiderPortal"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/SpiderPortal"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("55_5nc47")
 
-[node name="SpeedPortal0x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="SpeedPortal0x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -777,12 +931,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortal0x"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/SpeedPortal0x"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("58_20xqs")
 
-[node name="SpeedPortal05x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="SpeedPortal05x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -796,12 +950,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortal05x"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/SpeedPortal05x"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("58_a0ef7")
 
-[node name="SpeedPortal1x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="SpeedPortal1x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -815,12 +969,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortal1x"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/SpeedPortal1x"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("60_kbsrm")
 
-[node name="SpeedPortal2x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="SpeedPortal2x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -834,12 +988,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortal2x"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/SpeedPortal2x"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("61_l48od")
 
-[node name="SpeedPortal3x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="SpeedPortal3x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -853,12 +1007,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortal3x"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/SpeedPortal3x"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("62_n03i7")
 
-[node name="SpeedPortal4x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="SpeedPortal4x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -872,12 +1026,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortal4x"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/SpeedPortal4x"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("63_itagw")
 
-[node name="SpeedPortal5x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="SpeedPortal5x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -891,12 +1045,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortal5x"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/SpeedPortal5x"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("64_yuboy")
 
-[node name="GravityPortalNormal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="GravityPortalNormal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -910,12 +1064,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GravityPortalNormal"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/GravityPortalNormal"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("72_pd34h")
 
-[node name="GravityPortalFlipped" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="GravityPortalFlipped" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -929,12 +1083,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GravityPortalFlipped"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/GravityPortalFlipped"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("73_wdba8")
 
-[node name="GravityPortalToggle" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="GravityPortalToggle" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -948,12 +1102,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GravityPortalToggle"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/GravityPortalToggle"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("74_107fg")
 
-[node name="SizePortalNormal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="SizePortalNormal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -967,12 +1121,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SizePortalNormal"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/SizePortalNormal"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("78_qkade")
 
-[node name="SizePortalSmall" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="SizePortalSmall" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -986,12 +1140,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SizePortalSmall"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/SizePortalSmall"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("79_k1w38")
 
-[node name="TeleportalIn" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="TeleportalIn" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -1005,12 +1159,12 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/TeleportalIn"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/TeleportalIn"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("82_n18q3")
 
-[node name="TeleportalOut" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
+[node name="TeleportalOut" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -1024,7 +1178,7 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/TeleportalOut"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Portals/TeleportalOut"]
 script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("83_gaibe")
