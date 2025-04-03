@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ht60eohfg08"]
+[gd_scene load_steps=8 format=3 uid="uid://ht60eohfg08"]
 
 [ext_resource type="Script" uid="uid://bccihwc0pstxx" path="res://src/interactables/PadInteractable.gd" id="1_waji3"]
 [ext_resource type="PackedScene" uid="uid://05h0teol0odp" path="res://scenes/particle_emitter_presets/PadParticles.tscn" id="2_tu38l"]
@@ -6,24 +6,6 @@
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="6_6xrik"]
 [ext_resource type="Script" uid="uid://bc0koikb5w121" path="res://src/interactables/public_components/SpiderDashComponent.gd" id="7_0buu6"]
 [ext_resource type="Script" uid="uid://crvw7wonis42n" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="8_dhbbb"]
-
-[sub_resource type="Curve" id="Curve_6hqd0"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_gy0q0"]
-curve = SubResource("Curve_6hqd0")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vun0q"]
-resource_local_to_scene = true
-particle_flag_align_y = true
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(40, 0, 0)
-gravity = Vector3(0, -128, 0)
-scale_min = 0.25
-scale_max = 0.25
-scale_curve = SubResource("CurveTexture_gy0q0")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dmxk1"]
 size = Vector2(106, 20)
@@ -35,7 +17,6 @@ script = ExtResource("1_waji3")
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_tu38l")]
 modulate = Color(0.694118, 0.180392, 0.980392, 1)
 position = Vector2(0, 52)
-process_material = SubResource("ParticleProcessMaterial_vun0q")
 
 [node name="SpiderPad" type="Sprite2D" parent="."]
 texture = ExtResource("4_kj2v3")

@@ -12,11 +12,12 @@ curve = SubResource("Curve_6hqd0")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ctvm8"]
 resource_local_to_scene = true
+lifetime_randomness = 0.1
 particle_flag_align_y = true
 particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(40, 0, 0)
-gravity = Vector3(0, -128, 0)
+gravity = Vector3(0, -256, 0)
 scale_min = 0.25
 scale_max = 0.25
 scale_curve = SubResource("CurveTexture_dol5j")
@@ -24,8 +25,8 @@ scale_curve = SubResource("CurveTexture_dol5j")
 [node name="ParticleEmitter" type="GPUParticles2D"]
 material = ExtResource("1_sylsc")
 amount = 30
-process_material = SubResource("ParticleProcessMaterial_ctvm8")
 texture = ExtResource("2_h5quy")
 preprocess = 5.0
 fixed_fps = 60
 local_coords = true
+process_material = SubResource("ParticleProcessMaterial_ctvm8")

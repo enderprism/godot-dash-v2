@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cugg15j2jxyay"]
+[gd_scene load_steps=9 format=3 uid="uid://cugg15j2jxyay"]
 
 [ext_resource type="Script" uid="uid://bccihwc0pstxx" path="res://src/interactables/PadInteractable.gd" id="1_g2tnf"]
 [ext_resource type="PackedScene" uid="uid://05h0teol0odp" path="res://scenes/particle_emitter_presets/PadParticles.tscn" id="2_f5acs"]
@@ -7,24 +7,6 @@
 [ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/SingleUsage.gd" id="5_b1bcn"]
 [ext_resource type="Script" uid="uid://cqkay7r3kwd6f" path="res://src/interactables/public_components/JumpBoostComponent.gd" id="6_3udkk"]
 [ext_resource type="Script" uid="uid://crvw7wonis42n" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="7_6y7nv"]
-
-[sub_resource type="Curve" id="Curve_6hqd0"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_dol5j"]
-curve = SubResource("Curve_6hqd0")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xq534"]
-resource_local_to_scene = true
-particle_flag_align_y = true
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(40, 0, 0)
-gravity = Vector3(0, -128, 0)
-scale_min = 0.25
-scale_max = 0.25
-scale_curve = SubResource("CurveTexture_dol5j")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4v8oj"]
 size = Vector2(98, 18)
@@ -36,7 +18,6 @@ script = ExtResource("1_g2tnf")
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_f5acs")]
 modulate = Color(1, 0.364706, 0.945098, 1)
 position = Vector2(0, 57)
-process_material = SubResource("ParticleProcessMaterial_xq534")
 
 [node name="PinkPad" type="Sprite2D" parent="."]
 texture = ExtResource("4_d6hcl")
