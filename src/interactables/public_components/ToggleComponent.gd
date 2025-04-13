@@ -9,10 +9,10 @@ signal toggled_groups_changed
 		toggled_groups_changed.emit()
 
 func _ready() -> void:
-	if parent is OrbInteractable:
+	if get_parent() is OrbInteractable:
 		parent.pressed.connect(toggle)
-	else:
-		parent.body_entered.connect(toggle)
+	elif get_parent().has_node("TriggerBase"):
+		get_parent().base.body_entered.connect(toggle)
 
 func toggle(_player: Node):
 	for toggled_group in toggled_groups:
