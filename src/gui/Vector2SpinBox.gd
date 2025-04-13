@@ -11,6 +11,12 @@ signal value_changed(new_value: Vector2)
 			spinbox.suffix = value
 @export var keep_aspect: bool
 @export var rounded: bool
+@export var step: float
+@export var min_value: float
+@export var max_value: float
+@export var allow_greater: bool
+@export var allow_lesser: bool
+
 @onready var spinbox_x: SpinBox
 @onready var spinbox_y: SpinBox
 var aspect_ratio: float
@@ -31,8 +37,12 @@ func _ready() -> void:
 	spinbox_x = NodeUtils.get_node_or_add(self, "SpinBoxX", SpinBox, NodeUtils.INTERNAL)
 	spinbox_y = NodeUtils.get_node_or_add(self, "SpinBoxY", SpinBox, NodeUtils.INTERNAL)
 	for spinbox in [spinbox_x, spinbox_y]:
-		spinbox.allow_greater = true
+		spinbox.min_value = min_value
+		spinbox.max_value = max_value
+		spinbox.allow_greater = allow_greater
+		spinbox.allow_lesser = allow_lesser
 		spinbox.suffix = suffix
+		spinbox.step = step
 		spinbox.custom_minimum_size.x = 128
 		spinbox.alignment = HORIZONTAL_ALIGNMENT_FILL
 		spinbox.rounded = rounded

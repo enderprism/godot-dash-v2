@@ -82,7 +82,7 @@ func _ready() -> void:
 
 func _validate_property(property: Dictionary) -> void:
 	if property.name in ["_min", "_max", "step", "rounded", "or_greater", "or_less"] \
-			and type not in [Type.FLOAT, Type.FLOAT_SLIDER]:
+			and type not in [Type.FLOAT, Type.FLOAT_SLIDER, Type.VECTOR2]:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name in ["placeholder_text", "lineedit_width"] and type != Type.STRING:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
@@ -133,7 +133,7 @@ func set_input_state(enabled: bool) -> void:
 
 
 func update_internals() -> void:
-	for input in [_input[Type.FLOAT], _input[Type.FLOAT_SLIDER]]:
+	for input in [_input[Type.FLOAT], _input[Type.FLOAT_SLIDER], _input[Type.VECTOR2]]:
 		input.min_value = _min
 		input.max_value = _max
 		input.step = step
