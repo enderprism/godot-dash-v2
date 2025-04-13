@@ -11,7 +11,10 @@ func build_ui(triggers: Array[TriggerBase]) -> void:
 	var trigger := triggers[0]
 	if not ResourceLoader.exists(trigger.ui_path, "PackedScene"):
 		printerr("Trigger UI doesn't exist for path: ", trigger.ui_path)
+		hide()
 		return
+	else:
+		show()
 	var ui := load(trigger.ui_path) as PackedScene
 	var instanced_ui := ui.instantiate()
 	if %UIRoot.get_child(0) != null:
