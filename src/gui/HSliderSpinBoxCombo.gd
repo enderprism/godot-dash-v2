@@ -12,6 +12,7 @@ signal value_changed(value: float)
 @export var allow_lesser: bool
 @export var prefix: String
 @export var suffix: String
+@export var select_all_on_focus: bool
 @export var slider_width: float = 256.0:
 	set(value):
 		slider_width = value
@@ -55,6 +56,7 @@ func update_internals() -> void:
 		_range.allow_lesser = allow_lesser
 	spinbox.prefix = prefix
 	spinbox.suffix = suffix
+	spinbox.select_all_on_focus = select_all_on_focus
 
 
 func _update_value(new_value: float) -> void:
