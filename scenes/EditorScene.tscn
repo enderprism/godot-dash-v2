@@ -2071,8 +2071,9 @@ debug_color = Color(0.678125, 0.7, 0, 0.42)
 
 [node name="FadeScreenLayer" parent="." instance=ExtResource("26_j5fve")]
 
-[node name="PlaceHandler" type="Node" parent="." node_paths=PackedStringArray("editor_viewport")]
+[node name="PlaceHandler" type="Node" parent="." node_paths=PackedStringArray("game_scene", "editor_viewport")]
 script = ExtResource("33_uwrsc")
+game_scene = NodePath("../GameScene")
 editor_viewport = NodePath("../EditorUI/EditorContainer/VBoxContainer/EditorViewport")
 
 [node name="EditHandler" type="Node" parent="." node_paths=PackedStringArray("editor_viewport")]

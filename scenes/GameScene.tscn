@@ -101,11 +101,11 @@ repeat_size = Vector2(32768, 32768)
 repeat_times = 3
 
 [node name="EditorGrid" type="Node2D" parent="EditorGridParallax"]
+unique_name_in_owner = true
 modulate = Color(0, 0, 0, 1)
-position = Vector2(64, 924)
+position = Vector2(64, 925)
 script = ExtResource("5_7ssrb")
 primary_line_every = Vector2i(1, 1)
-cell_size = Vector2(128, 128)
 symmetrize = 3
 primary_line_thickness = 3.0
 

@@ -2,6 +2,7 @@ extends Node
 
 signal object_deleted(object: Node)
 
+@export var game_scene: Node2D
 @export var editor_viewport: Control
 
 func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collider: Area2D, level: LevelProps) -> void:
@@ -25,7 +26,9 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 					var texture_override: Texture = block_palette_texture_swap.texture_override
 					object.get_node(block_palette_texture_swap.texture_owner).texture = texture_override
 					object.get_node("EditorSelectionCollider").id = block_palette_ref.id
-				object.position = (level.get_local_mouse_position() + Vector2(0, 64)).snapped(Vector2.ONE*128) - Vector2(0, 64)
+				var editor_grid := game_scene.get_node("%EditorGrid") as EditorGrid
+				var grid_offset_to_level_origin := Vector2(0, 64)
+				object.position = (level.get_local_mouse_position() + grid_offset_to_level_origin).snapped(editor_grid.cell_size) - grid_offset_to_level_origin
 				level.add_child(object)
 				object.owner = level
 				var hsv_watcher := HSVWatcher.new()
