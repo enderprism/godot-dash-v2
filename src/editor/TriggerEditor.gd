@@ -26,7 +26,6 @@ func build_ui(triggers: Array[TriggerBase]) -> void:
 	connect_ui(triggers)
 	call_deferred("load_properties", trigger)
 
-# TODO handle hiding properties depending on others (analog to _validate_property_list)
 
 func connect_ui(triggers: Array[TriggerBase]) -> void:
 	for group in [TRIGGER_PROPERTY_GROUP, TRIGGER_EASING_PROPERTY_GROUP, TRIGGER_BASE_PROPERTY_GROUP]:
@@ -72,4 +71,7 @@ func load_properties(trigger: TriggerBase) -> void:
 			if property_name == "target_group":
 				value = value as String
 				value = value.trim_prefix(GroupEditor.GROUP_PREFIX)
+			var refresh_watchers := func(property_child): property_child.call_deferred("_watcher_update_value", value)
+			var watchers: Array = NodeUtils.get_children_of_type(property, TriggerPropertyWatcher)
+			watchers.map(refresh_watchers)
 			property.set_value(value)

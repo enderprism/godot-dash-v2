@@ -88,5 +88,4 @@ func _set_y(new_value: float) -> void:
 func set_value_no_signal(new_value: Vector2):
 	spinbox_x.set_value_no_signal(new_value.x)
 	spinbox_y.set_value_no_signal(new_value.y)
-	print_debug(new_value, ": ", spinbox_x.value, ", ", spinbox_y.value)
 
