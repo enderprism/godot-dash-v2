@@ -24,7 +24,7 @@ func build_ui(triggers: Array[TriggerBase]) -> void:
 		%UIRoot.add_child(trigger_easing_ui, true, INTERNAL_MODE_BACK)
 		trigger_easing_ui.set_deferred("name", "Tweening")
 	connect_ui(triggers)
-	load_properties(trigger)
+	call_deferred("load_properties", trigger)
 
 # TODO handle hiding properties depending on others (analog to _validate_property_list)
 
@@ -72,4 +72,4 @@ func load_properties(trigger: TriggerBase) -> void:
 			if property_name == "target_group":
 				value = value as String
 				value = value.trim_prefix(GroupEditor.GROUP_PREFIX)
-			property.set_value(value, property.type)
+			property.set_value(value)
