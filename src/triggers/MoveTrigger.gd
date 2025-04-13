@@ -24,7 +24,7 @@ const UNIT := 128.0
 ## - [code]1.0[/code]: the group's objects will follow the target object but [b]keep[/b] their relative distance to it. [br]
 ## - [code]2.0[/code]: the group's objects will follow the target object but [b]double[/b] their relative distance to it. [br]
 ## - [code]-1.0[/code]: the group's objects will follow the target object but [b]invert[/b] their relative distance to it.
-@export_range(0.0, 2.0, 0.05, "or_greater", "or_less") var _move_towards_distance_multiplier: float
+@export_range(0.0, 2.0, 0.05, "or_greater", "or_less") var _move_towards_distance_multiplier: float = 1.0
 @export var _move_towards_offset: Vector2 ## Offset in global coordinates in units from the move target.
 
 # Hide unneeded elements in the inspector
