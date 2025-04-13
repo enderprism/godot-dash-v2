@@ -9,10 +9,10 @@ func _ready() -> void:
 	LevelManager.pause_manager = self
 	$VBoxContainer/LevelName.text = LevelManager.current_level_name
 
-func _process(_delta: float) -> void:
-	if LevelManager.level_playing and Input.is_action_just_pressed("restart_level"):
+func _unhandled_input(event: InputEvent) -> void:
+	if LevelManager.level_playing and event.is_action_pressed("restart_level"):
 		_on_restart_pressed()
-	if Input.is_action_just_pressed("pause_level"):
+	if event.is_action_pressed("pause_level"):
 		_on_continue_pressed()
 
 func _on_leave_pressed() -> void:

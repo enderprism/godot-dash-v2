@@ -73,30 +73,36 @@ func _ready() -> void:
 	_label = NodeUtils.get_node_or_add(self, "Label", Label, NodeUtils.INTERNAL)
 	_spacer = NodeUtils.get_node_or_add(self, "Spacer", Control, NodeUtils.INTERNAL)
 	_spacer.size_flags_horizontal = SIZE_FILL | SIZE_EXPAND
+	var emit_value_changed := func(new_value): value_changed.emit(new_value)
+	var submitted_release_focus := func(_new_value): get_viewport().gui_release_focus()
+	var unedit_release_focus := func(toggled_on): if not toggled_on: get_viewport().gui_release_focus()
 	# Input types
 	# FLOAT
 	gui_inputs.insert(Type.FLOAT, NodeUtils.get_node_or_add(self, "FLOAT", SpinBox, NodeUtils.INTERNAL))
-	gui_inputs[Type.FLOAT].value_changed.connect(func(new_value): value_changed.emit(new_value))
-	gui_inputs[Type.FLOAT].get_line_edit().text_submitted.connect(func(_new_value): get_viewport().gui_release_focus())
+	gui_inputs[Type.FLOAT].value_changed.connect(emit_value_changed)
+	gui_inputs[Type.FLOAT].get_line_edit().text_submitted.connect(submitted_release_focus)
+	gui_inputs[Type.FLOAT].get_line_edit().editing_toggled.connect(unedit_release_focus)
 	# FLOAT_SLIDER
 	gui_inputs.insert(Type.FLOAT_SLIDER, NodeUtils.get_node_or_add(self, "FLOAT_SLIDER", HSliderSpinBoxCombo, NodeUtils.INTERNAL))
 	gui_inputs[Type.FLOAT_SLIDER].value_changed.connect(func(new_value): value_changed.emit(new_value))
-	gui_inputs[Type.FLOAT_SLIDER].spinbox.get_line_edit().text_submitted.connect(func(_new_value): get_viewport().gui_release_focus())
+	gui_inputs[Type.FLOAT_SLIDER].spinbox.get_line_edit().text_submitted.connect(submitted_release_focus)
+	gui_inputs[Type.FLOAT_SLIDER].spinbox.get_line_edit().editing_toggled.connect(unedit_release_focus)
 	# BOOL
 	gui_inputs.insert(Type.BOOL, NodeUtils.get_node_or_add(self, "BOOL", CheckBox, NodeUtils.INTERNAL))
-	gui_inputs[Type.BOOL].toggled.connect(func(toggled_on): value_changed.emit(toggled_on))
+	gui_inputs[Type.BOOL].toggled.connect(emit_value_changed)
 	# VECTOR2
 	gui_inputs.insert(Type.VECTOR2, NodeUtils.get_node_or_add(self, "VECTOR2", Vector2SpinBox, NodeUtils.INTERNAL))
-	gui_inputs[Type.VECTOR2].value_changed.connect(func(new_value): value_changed.emit(new_value))
+	gui_inputs[Type.VECTOR2].value_changed.connect(emit_value_changed)
 	# STRING
 	gui_inputs.insert(Type.STRING, NodeUtils.get_node_or_add(self, "STRING", LineEdit, NodeUtils.INTERNAL))
 	gui_inputs[Type.STRING].text_submitted.connect(func(new_text): value_changed.emit(new_text); get_viewport().gui_release_focus())
+	gui_inputs[Type.STRING].editing_toggled.connect(unedit_release_focus)
 	# COLOR
 	gui_inputs.insert(Type.COLOR, NodeUtils.get_node_or_add(self, "COLOR", ColorPickerButton, NodeUtils.INTERNAL))
-	gui_inputs[Type.COLOR].color_changed.connect(func(new_color): value_changed.emit(new_color))
+	gui_inputs[Type.COLOR].color_changed.connect(emit_value_changed)
 	# ENUM
 	gui_inputs.insert(Type.ENUM, NodeUtils.get_node_or_add(self, "ENUM", OptionButton, NodeUtils.INTERNAL))
-	gui_inputs[Type.ENUM].item_selected.connect(func(new_index): value_changed.emit(new_index))
+	gui_inputs[Type.ENUM].item_selected.connect(emit_value_changed)
 	# NODE2D
 	gui_inputs.insert(Type.NODE2D, NodeUtils.get_node_or_add(self, "NODE2D", Button, NodeUtils.INTERNAL))
 	for child in gui_inputs:
