@@ -14,8 +14,12 @@ signal value_changed(new_value: Vector2)
 @export var prefix: String:
 	set(value):
 		prefix = value
-		for spinbox in [spinbox_x, spinbox_y]:
-			spinbox.prefix = value
+		if value != "":
+			for spinbox in [spinbox_x, spinbox_y]:
+				spinbox.prefix = value
+		else:
+			spinbox_x.prefix = "x:"
+			spinbox_y.prefix = "y:"
 @export var suffix: String:
 	set(value):
 		suffix = value
