@@ -1,0 +1,103 @@
+[gd_scene load_steps=7 format=3 uid="uid://p05aiexxfmbc"]
+
+[ext_resource type="PackedScene" uid="uid://dibiibymus6dt" path="res://scenes/components/game_components/trigger_ui/trigger_components/TriggerBaseUIGroup.tscn" id="1_g2dna"]
+[ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="2_g2dna"]
+[ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/editor/TriggerPropertyWatcher.gd" id="3_1rp8w"]
+[ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="4_4m5uk"]
+[ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="5_omcx3"]
+[ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="6_ccyb7"]
+
+[node name="MoveTriggerUi" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Group" parent="." instance=ExtResource("1_g2dna")]
+layout_mode = 2
+
+[node name="Mode" type="HBoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("2_g2dna")
+type = 6
+enum_fields = PackedStringArray("Set", "Add", "Move Towards")
+default_enum_idx = 1
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+
+[node name="TriggerPropertyWatcher" type="Node" parent="Mode" node_paths=PackedStringArray("target")]
+script = ExtResource("3_1rp8w")
+target = NodePath("../../Move Towards")
+condition = "value == 2"
+property = &"visible"
+
+[node name="TriggerPropertyWatcher2" type="Node" parent="Mode" node_paths=PackedStringArray("target")]
+script = ExtResource("3_1rp8w")
+target = NodePath("../../Position")
+condition = "value != 2"
+property = &"visible"
+
+[node name="Position" type="HBoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("2_g2dna")
+type = 3
+step = 0.01
+or_greater = true
+or_less = true
+suffix = "cells"
+default_float = 1.0
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Position"]
+script = ExtResource("6_ccyb7")
+property_name = "_position"
+
+[node name="Move Towards" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+script = ExtResource("4_4m5uk")
+label_settings = ExtResource("5_omcx3")
+metadata/_custom_type_script = "uid://cuih47milvqcs"
+
+[node name="Target" type="HBoxContainer" parent="Move Towards" groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("2_g2dna")
+type = 7
+step = 0.01
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Move Towards/Target"]
+script = ExtResource("6_ccyb7")
+property_name = "_move_towards_target"
+
+[node name="Distance Multiplier" type="HBoxContainer" parent="Move Towards" groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("2_g2dna")
+step = 0.01
+or_greater = true
+default_float = 1.0
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Move Towards/Distance Multiplier"]
+script = ExtResource("6_ccyb7")
+property_name = "_move_towards_distance_multiplier"
+
+[node name="Offset" type="HBoxContainer" parent="Move Towards" groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("2_g2dna")
+type = 3
+step = 0.01
+or_greater = true
+or_less = true
+suffix = "cells"
+default_float = 1.0
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Move Towards/Offset"]
+script = ExtResource("6_ccyb7")
+property_name = "_move_towards_offset"
