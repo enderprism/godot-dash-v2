@@ -7,8 +7,8 @@ class_name ColorChannelSetter
 
 
 func _ready() -> void:
-	base._input[Property.Type.STRING].focus_entered.connect(_on_property_focus_entered)
-	detail._input[Property.Type.STRING].focus_entered.connect(_on_property_focus_entered)
+	base.gui_inputs[Property.Type.STRING].focus_entered.connect(_on_property_focus_entered)
+	detail.gui_inputs[Property.Type.STRING].focus_entered.connect(_on_property_focus_entered)
 
 
 func _on_property_focus_entered() -> void:
