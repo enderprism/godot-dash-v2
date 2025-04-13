@@ -8,8 +8,6 @@ enum Mode {
 	MOVE_TOWARDS,
 }
 
-## 1.0 MoveTrigger units are equal to a single [constant LevelManager.CELL_SIZE].
-const UNIT := 128.0
 
 @export var mode: Mode = Mode.ADD:
 	set(value):
@@ -56,15 +54,15 @@ func _physics_process(_delta: float) -> void:
 				var _initial_global_position = _initial_positions[_target]
 				match mode:
 					Mode.SET:
-						_target.global_position += (owner.to_global(_position * UNIT) - _initial_global_position) * _weight_delta
+						_target.global_position += (owner.to_global(_position * LevelManager.CELL_SIZE) - _initial_global_position) * _weight_delta
 					Mode.ADD:
-						_target.global_position += _position * _weight_delta * UNIT
+						_target.global_position += _position * _weight_delta * LevelManager.CELL_SIZE
 					Mode.MOVE_TOWARDS:
 						var _initial_distance = _initial_distances[_target]
 						if _move_towards_target != null:
 							_target.global_position = lerp(
 									_initial_global_position,
-									_move_towards_target.global_position + (_initial_distance * _move_towards_distance_multiplier) + _move_towards_offset * UNIT,
+									_move_towards_target.global_position + (_initial_distance * _move_towards_distance_multiplier) + _move_towards_offset * LevelManager.CELL_SIZE,
 									easing._weight)
 						elif LevelManager.in_editor and LevelManager.level_playing:
 							printerr("In ", name, ": move_towards_target is unset!")

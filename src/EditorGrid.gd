@@ -1,11 +1,8 @@
 @tool
 extends Node2D
-
-## DONE Wrap with a Parallax2D in 4.3
-
 class_name EditorGrid
 
-@export var grid_size := Vector2i(LevelManager.CELL_SIZE, LevelManager.CELL_SIZE):
+@export var grid_size := Vector2i.ONE * LevelManager.CELL_SIZE:
 	set(value):
 		grid_size = value
 		queue_redraw()
@@ -13,7 +10,7 @@ class_name EditorGrid
 	set(value):
 		primary_line_every = value
 		queue_redraw()
-@export var cell_size := Vector2(64, 64):
+@export var cell_size := Vector2.ONE * LevelManager.CELL_SIZE:
 	set(value):
 		cell_size = value
 		queue_redraw()
@@ -36,10 +33,12 @@ const LINE_COLOR_SECONDARY := Color("ffffff", 0.3)
 const LINE_WIDTH_PRIMARY := 4.0
 const LINE_WIDTH_SECONDARY := 2.0
 
+
 func _ready() -> void:
 	if get_parent() is Parallax2D:
 		get_parent().repeat_size = Vector2(grid_size) * cell_size * 2
 	visible = LevelManager.in_editor
+
 
 func _draw() -> void:
 	var line_width: Vector2
@@ -49,9 +48,6 @@ func _draw() -> void:
 		if (cell_x % primary_line_every.x) == 0:
 			line_color_y = LINE_COLOR_PRIMARY
 			line_width.y = primary_line_thickness
-			# if not Engine.is_editor_hint():
-			# 	line_width.y /= get_viewport().get_camera_2d().zoom.y
-			# 	line_color_y.a *= get_viewport().get_camera_2d().zoom.y
 		else:
 			line_color_y = LINE_COLOR_SECONDARY
 			line_width.y = secondary_line_thickness
@@ -61,37 +57,27 @@ func _draw() -> void:
 		draw_line(
 			Vector2(cell_x * cell_size.x, _line_base_y),
 			Vector2(cell_x * cell_size.x, -grid_size.y * cell_size.y),
-			line_color_y, line_width.y
-		)
+			line_color_y, line_width.y)
 		if symmetrize & 0b01:
 			draw_line(
 				Vector2(-cell_x * cell_size.x, _line_base_y),
 				Vector2(-cell_x * cell_size.x, -grid_size.y * cell_size.y),
-				line_color_y, line_width.y
-			)
+				line_color_y, line_width.y)
 	for cell_y in grid_size.y + 1:
 		var line_color_x: Color
 		var line_base_x = 0.0 if not symmetrize & 0b01 else -grid_size.x * cell_size.x
 		if (cell_y % primary_line_every.y) == 0:
 			line_color_x = LINE_COLOR_PRIMARY
 			line_width.x = primary_line_thickness
-			# if not Engine.is_editor_hint():
-			# 	line_width.x /= get_viewport().get_camera_2d().zoom.x
-			# 	line_color_x.a *= get_viewport().get_camera_2d().zoom.x
 		else:
 			line_color_x = LINE_COLOR_SECONDARY
 			line_width.x = secondary_line_thickness
-			# if not Engine.is_editor_hint():
-			# 	line_width.x /= get_viewport().get_camera_2d().zoom.x
-			# 	line_color_x.a *= get_viewport().get_camera_2d().zoom.x
 		draw_line(
 			Vector2(line_base_x, -cell_y * cell_size.y),
 			Vector2(grid_size.x * cell_size.x, -cell_y * cell_size.y),
-			line_color_x, line_width.x
-		)
+			line_color_x, line_width.x)
 		if symmetrize & 0b10:
 			draw_line(
 				Vector2(line_base_x, cell_y * cell_size.y),
 				Vector2(grid_size.x * cell_size.x, cell_y * cell_size.y),
-				line_color_x, line_width.x
-			)
+				line_color_x, line_width.x)
