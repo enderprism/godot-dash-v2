@@ -3,14 +3,18 @@ extends Node
 class_name SaveLoadConfigValue
 
 @export var config_property: StringName
-@export var property: StringName
-@export var save_signal: StringName
-@onready var parent := get_parent() as Node
+
+@onready var parent := get_parent() as Property
+
+var type: Property.Type
+
 
 func _ready() -> void:
-	get_parent().connect(save_signal, save)
+	parent.value_changed.connect(save)
+	type = parent.type
 	if Config.config.get(config_property) != null:
-		parent.set(property, Config.config.get(config_property))
+		parent.call_deferred("set_value", Config.config.get(config_property), type)
+
 
 func save(value: Variant) -> void:
 	Config.config.set(config_property, value)

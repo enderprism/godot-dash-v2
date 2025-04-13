@@ -46,6 +46,7 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("1_yndxv")
 step = 0.01
+default_float = 1.0
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
 [node name="Copy" type="VBoxContainer" parent="."]
@@ -73,6 +74,7 @@ layout_mode = 2
 script = ExtResource("1_yndxv")
 step = 0.01
 or_greater = true
+default_float = 1.0
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Copy/Alpha Multiplier"]

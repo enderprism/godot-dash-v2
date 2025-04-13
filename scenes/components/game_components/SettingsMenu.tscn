@@ -1,15 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6gonom0s5k1n"]
+[gd_scene load_steps=9 format=3 uid="uid://b6gonom0s5k1n"]
 
-[ext_resource type="Script" uid="uid://vcw23ujuen2f" path="res://src/gui/GUIInputValueReset.gd" id="1_kwnn5"]
 [ext_resource type="Material" uid="uid://dmfwkx1hhpd5x" path="res://resources/SimpleBlurMaterial.tres" id="1_olkne"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_r47on"]
-[ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="3_1fi1f"]
 [ext_resource type="Script" uid="uid://86h6yxdj6auo" path="res://src/SettingsMenu.gd" id="3_rvg0e"]
 [ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="4_fiwkk"]
-[ext_resource type="Script" uid="uid://c8oockuh8b8dc" path="res://src/gui/IDOptionButton.gd" id="6_awsok"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="6_ea76q"]
-[ext_resource type="Script" uid="uid://ckqgnvpbftev7" path="res://src/SaveLoadConfigValue.gd" id="6_p6jor"]
+[ext_resource type="Script" uid="uid://ckqgnvpbftev7" path="res://src/gui/PropertySaveLoad.gd" id="6_p6jor"]
 [ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="8_eb8rq"]
+[ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="11_06nbq"]
 
 [node name="SettingsMenu" type="TabContainer"]
 texture_filter = 4
@@ -22,12 +20,11 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_r47on")
-current_tab = 1
+current_tab = 0
 script = ExtResource("3_rvg0e")
 metadata/_edit_group_ = true
 
 [node name="Graphics" type="ScrollContainer" parent="."]
-visible = false
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
@@ -50,74 +47,38 @@ script = ExtResource("8_eb8rq")
 label_settings = ExtResource("6_ea76q")
 label_alignment = 1
 
-[node name="FPS" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Framerate"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Graphics/MarginContainer/VBoxContainer/Framerate/FPS"]
-layout_mode = 2
-focus_mode = 1
-text = "Max FPS"
-
-[node name="Control" type="Control" parent="Graphics/MarginContainer/VBoxContainer/Framerate/FPS"]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 1
-
-[node name="FPSSpinBox" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Framerate/FPS"]
+[node name="Max FPS" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Framerate"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-max_value = 60.0
-value = 60.0
+script = ExtResource("11_06nbq")
+step = 1.0
 rounded = true
-allow_greater = true
-alignment = 3
+or_greater = true
 suffix = "fps"
+default_float = 60.0
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
-[node name="SaveLoadConfigValue" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Framerate/FPS/FPSSpinBox"]
+[node name="SaveLoadConfigValue" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
 script = ExtResource("6_p6jor")
 config_property = &"max_fps"
-property = &"value"
-save_signal = &"value_changed"
-
-[node name="GUIInputValueReset" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Framerate/FPS/FPSSpinBox"]
-script = ExtResource("1_kwnn5")
-property = &"value"
 
 [node name="VSync" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Framerate"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+script = ExtResource("11_06nbq")
+type = 6
+step = 1.0
+rounded = true
+or_greater = true
+suffix = "fps"
+enum_fields = PackedStringArray("Disabled", "Enabled", "Adaptive", "Mailbox")
+default_float = 60.0
+default_enum_idx = 1
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
-[node name="Label" type="Label" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
-layout_mode = 2
-focus_mode = 1
-text = "VSync"
-
-[node name="Control" type="Control" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 1
-
-[node name="IDOptionButton" type="OptionButton" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
-layout_mode = 2
-selected = 1
-item_count = 4
-popup/item_0/text = "Disabled"
-popup/item_1/text = "Enabled"
-popup/item_1/id = 1
-popup/item_2/text = "Adaptive"
-popup/item_2/id = 2
-popup/item_3/text = "Mailbox"
-popup/item_3/id = 3
-script = ExtResource("6_awsok")
-
-[node name="SaveLoadConfigValue" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync/IDOptionButton"]
+[node name="SaveLoadConfigValue" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
 script = ExtResource("6_p6jor")
 config_property = &"vsync"
-property = &"selected"
-save_signal = &"item_selected"
-
-[node name="GUIInputValueReset" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync/IDOptionButton"]
-script = ExtResource("1_kwnn5")
-property = &"selected"
 
 [node name="Window" type="VBoxContainer" parent="Graphics/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 34)
@@ -126,42 +87,22 @@ script = ExtResource("8_eb8rq")
 label_settings = ExtResource("6_ea76q")
 label_alignment = 1
 
-[node name="WindowMode" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Window"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Graphics/MarginContainer/VBoxContainer/Window/WindowMode"]
-layout_mode = 2
-focus_mode = 1
-text = "Window mode"
-
-[node name="Control" type="Control" parent="Graphics/MarginContainer/VBoxContainer/Window/WindowMode"]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 1
-
-[node name="WindowModePicker" type="OptionButton" parent="Graphics/MarginContainer/VBoxContainer/Window/WindowMode"]
+[node name="Window Mode" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Window"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-selected = 1
-item_count = 3
-popup/item_0/text = "Windowed"
-popup/item_1/text = "Borderless Fullscreen"
-popup/item_1/id = 3
-popup/item_2/text = "Exclusive Fullscreen"
-popup/item_2/id = 4
-script = ExtResource("6_awsok")
+script = ExtResource("11_06nbq")
+type = 6
+enum_fields = PackedStringArray("Windowed", "Borderless Fullscreen", "Exclusive Fullscreen")
+default_enum_idx = 1
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
-[node name="SaveLoadConfigValue" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Window/WindowMode/WindowModePicker"]
+[node name="SaveLoadConfigValue" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
 script = ExtResource("6_p6jor")
 config_property = &"window_mode"
-property = &"selected"
-save_signal = &"item_selected"
-
-[node name="GUIInputValueReset" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Window/WindowMode/WindowModePicker"]
-script = ExtResource("1_kwnn5")
-property = &"selected"
 
 [node name="Audio" type="ScrollContainer" parent="."]
+visible = false
 layout_mode = 2
 focus_mode = 1
 metadata/_tab_index = 1
@@ -183,173 +124,57 @@ script = ExtResource("8_eb8rq")
 label_settings = ExtResource("6_ea76q")
 label_alignment = 1
 
-[node name="MasterVolume" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
+[node name="Master" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+script = ExtResource("11_06nbq")
+type = 1
+slider_width = 256.0
+default_float = 1.0
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
-[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/Volume/MasterVolume"]
-layout_mode = 2
-focus_mode = 1
-text = "Master volume"
-
-[node name="Control" type="Control" parent="Audio/MarginContainer/VBoxContainer/Volume/MasterVolume"]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 1
-
-[node name="GameVolumeSliderSpinboxCombo" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume/MasterVolume"]
-layout_mode = 2
-alignment = 1
-script = ExtResource("3_1fi1f")
-
-[node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/Volume/MasterVolume/GameVolumeSliderSpinboxCombo"]
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/MasterVolume/GameVolumeSliderSpinboxCombo"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="SaveLoadConfigValue" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/MasterVolume/GameVolumeSliderSpinboxCombo"]
+[node name="SaveLoadConfigValue" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
 script = ExtResource("6_p6jor")
 config_property = &"master_audio_level"
-property = &"value"
-save_signal = &"value_changed"
 
-[node name="GUIInputValueReset" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/MasterVolume/GameVolumeSliderSpinboxCombo"]
-script = ExtResource("1_kwnn5")
-property = &"value"
-
-[node name="MusicVolume" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
+[node name="Music" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+script = ExtResource("11_06nbq")
+type = 1
+slider_width = 256.0
+default_float = 1.0
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
-[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/Volume/MusicVolume"]
-layout_mode = 2
-focus_mode = 1
-text = "Music volume"
-
-[node name="Control" type="Control" parent="Audio/MarginContainer/VBoxContainer/Volume/MusicVolume"]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 1
-
-[node name="GameVolumeSliderSpinboxCombo" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume/MusicVolume"]
-layout_mode = 2
-alignment = 1
-script = ExtResource("3_1fi1f")
-
-[node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/Volume/MusicVolume/GameVolumeSliderSpinboxCombo"]
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/MusicVolume/GameVolumeSliderSpinboxCombo"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="SaveLoadConfigValue" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/MusicVolume/GameVolumeSliderSpinboxCombo"]
+[node name="SaveLoadConfigValue" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
 script = ExtResource("6_p6jor")
 config_property = &"music_audio_level"
-property = &"value"
-save_signal = &"value_changed"
 
-[node name="GUIInputValueReset" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/MusicVolume/GameVolumeSliderSpinboxCombo"]
-script = ExtResource("1_kwnn5")
-property = &"value"
-
-[node name="GameSFXVolume" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
+[node name="Game SFX" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+script = ExtResource("11_06nbq")
+type = 1
+slider_width = 256.0
+default_float = 1.0
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
-[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/Volume/GameSFXVolume"]
-layout_mode = 2
-focus_mode = 1
-text = "Game SFX volume"
-
-[node name="Control" type="Control" parent="Audio/MarginContainer/VBoxContainer/Volume/GameSFXVolume"]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 1
-
-[node name="GameVolumeSliderSpinboxCombo" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume/GameSFXVolume"]
-layout_mode = 2
-alignment = 1
-script = ExtResource("3_1fi1f")
-
-[node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/Volume/GameSFXVolume/GameVolumeSliderSpinboxCombo"]
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/GameSFXVolume/GameVolumeSliderSpinboxCombo"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="SaveLoadConfigValue" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/GameSFXVolume/GameVolumeSliderSpinboxCombo"]
+[node name="SaveLoadConfigValue" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
 script = ExtResource("6_p6jor")
 config_property = &"game_sfx_audio_level"
-property = &"value"
-save_signal = &"value_changed"
 
-[node name="GUIInputValueReset" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/GameSFXVolume/GameVolumeSliderSpinboxCombo"]
-script = ExtResource("1_kwnn5")
-property = &"value"
-
-[node name="InLevelSFXVolume" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
+[node name="Level SFX" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+script = ExtResource("11_06nbq")
+type = 1
+slider_width = 256.0
+default_float = 1.0
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
-[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/Volume/InLevelSFXVolume"]
-layout_mode = 2
-focus_mode = 1
-text = "In level SFX volume"
-
-[node name="Control" type="Control" parent="Audio/MarginContainer/VBoxContainer/Volume/InLevelSFXVolume"]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 1
-
-[node name="GameVolumeSliderSpinboxCombo" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume/InLevelSFXVolume"]
-layout_mode = 2
-alignment = 1
-script = ExtResource("3_1fi1f")
-
-[node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/Volume/InLevelSFXVolume/GameVolumeSliderSpinboxCombo"]
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/InLevelSFXVolume/GameVolumeSliderSpinboxCombo"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="SaveLoadConfigValue" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/InLevelSFXVolume/GameVolumeSliderSpinboxCombo"]
+[node name="SaveLoadConfigValue" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
 script = ExtResource("6_p6jor")
 config_property = &"in_level_sfx_audio_level"
-property = &"value"
-save_signal = &"value_changed"
-
-[node name="GUIInputValueReset" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/InLevelSFXVolume/GameVolumeSliderSpinboxCombo"]
-script = ExtResource("1_kwnn5")
-property = &"value"
 
 [node name="Editor" type="ScrollContainer" parent="."]
 visible = false
@@ -382,65 +207,29 @@ layout_mode = 2
 script = ExtResource("8_eb8rq")
 label_settings = ExtResource("6_ea76q")
 
-[node name="SelectionZoneColor" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/SelectionZoneColor"]
-layout_mode = 2
-focus_mode = 1
-text = "Selection zone color
-"
-
-[node name="Control" type="Control" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/SelectionZoneColor"]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 1
-
-[node name="SelectionZoneColorPicker" type="ColorPickerButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/SelectionZoneColor"]
-custom_minimum_size = Vector2(64, 32)
-layout_mode = 2
-color = Color(0, 1, 0, 1)
-
-[node name="SaveLoadConfigValue" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/SelectionZoneColor/SelectionZoneColorPicker"]
-script = ExtResource("6_p6jor")
-config_property = &"selection_zone_color"
-property = &"color"
-save_signal = &"color_changed"
-
-[node name="GUIInputValueReset" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/SelectionZoneColor/SelectionZoneColorPicker"]
-script = ExtResource("1_kwnn5")
-property = &"color"
-
-[node name="SelectionZoneFillAlpha" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/SelectionZoneFillAlpha"]
-layout_mode = 2
-focus_mode = 1
-text = "Selection zone fill alpha"
-
-[node name="Control" type="Control" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/SelectionZoneFillAlpha"]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 1
-
-[node name="SpinBox" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/SelectionZoneFillAlpha"]
+[node name="Color" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-max_value = 1.0
-step = 0.01
-value = 0.2
-alignment = 3
+script = ExtResource("11_06nbq")
+type = 5
+default_color = Color(0, 1, 0, 1)
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
-[node name="SaveLoadConfigValue" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/SelectionZoneFillAlpha/SpinBox"]
+[node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
+script = ExtResource("6_p6jor")
+config_property = &"selection_zone_color"
+
+[node name="Alpha" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("11_06nbq")
+default_float = 0.2
+default_color = Color(0, 1, 0, 1)
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+
+[node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
 script = ExtResource("6_p6jor")
 config_property = &"selection_zone_fill_alpha"
-property = &"value"
-save_signal = &"value_changed"
-
-[node name="GUIInputValueReset" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/SelectionZoneFillAlpha/SpinBox"]
-script = ExtResource("1_kwnn5")
-property = &"value"
 
 [node name="Trigger hitboxes" type="VBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors"]
 custom_minimum_size = Vector2(0, 34)
@@ -448,72 +237,32 @@ layout_mode = 2
 script = ExtResource("8_eb8rq")
 label_settings = ExtResource("6_ea76q")
 
-[node name="TriggerHitboxesColor" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/TriggerHitboxesColor"]
-layout_mode = 2
-focus_mode = 1
-text = "Trigger hitboxes color
-"
-
-[node name="Control" type="Control" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/TriggerHitboxesColor"]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 1
-
-[node name="SelectionZoneColorPicker" type="ColorPickerButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/TriggerHitboxesColor"]
-custom_minimum_size = Vector2(64, 32)
-layout_mode = 2
-color = Color(0, 1, 1, 1)
-
-[node name="SaveLoadConfigValue" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/TriggerHitboxesColor/SelectionZoneColorPicker"]
-script = ExtResource("6_p6jor")
-config_property = &"trigger_hitbox_color"
-property = &"color"
-save_signal = &"color_changed"
-
-[node name="GUIInputValueReset" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/TriggerHitboxesColor/SelectionZoneColorPicker"]
-script = ExtResource("1_kwnn5")
-property = &"color"
-
-[node name="TriggerHitboxesFillAlpha" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/TriggerHitboxesFillAlpha"]
-layout_mode = 2
-focus_mode = 1
-text = "Trigger hitboxes fill alpha"
-
-[node name="Control" type="Control" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/TriggerHitboxesFillAlpha"]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 1
-
-[node name="SpinBox" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/TriggerHitboxesFillAlpha"]
+[node name="Color" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-max_value = 1.0
-step = 0.01
-value = 0.2
-alignment = 3
+script = ExtResource("11_06nbq")
+type = 5
+default_color = Color(0, 1, 1, 1)
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
-[node name="SaveLoadConfigValue" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/TriggerHitboxesFillAlpha/SpinBox"]
+[node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
+script = ExtResource("6_p6jor")
+config_property = &"trigger_hitbox_color"
+
+[node name="Alpha" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("11_06nbq")
+default_float = 0.2
+default_color = Color(0, 1, 0, 1)
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+
+[node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
 script = ExtResource("6_p6jor")
 config_property = &"trigger_hitbox_fill_alpha"
-property = &"value"
-save_signal = &"value_changed"
 
-[node name="GUIInputValueReset" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/TriggerHitboxesFillAlpha/SpinBox"]
-script = ExtResource("1_kwnn5")
-property = &"value"
-
-[connection signal="value_changed" from="Graphics/MarginContainer/VBoxContainer/Framerate/FPS/FPSSpinBox" to="." method="_on_max_fps_value_changed"]
-[connection signal="id_selected" from="Graphics/MarginContainer/VBoxContainer/Framerate/VSync/IDOptionButton" to="." method="_on_vsync_value_changed"]
-[connection signal="id_selected" from="Graphics/MarginContainer/VBoxContainer/Window/WindowMode/WindowModePicker" to="." method="_on_window_mode_value_changed"]
-[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/Volume/MasterVolume/GameVolumeSliderSpinboxCombo" to="." method="_on_game_volume_value_changed"]
-[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/Volume/MusicVolume/GameVolumeSliderSpinboxCombo" to="." method="_on_music_volume_value_changed"]
-[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/Volume/GameSFXVolume/GameVolumeSliderSpinboxCombo" to="." method="_on_game_sfx_volume_value_changed"]
-[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/Volume/InLevelSFXVolume/GameVolumeSliderSpinboxCombo" to="." method="_on_in_level_sfx_volume_value_changed"]
-[connection signal="value_changed" from="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/SelectionZoneFillAlpha/SpinBox" to="." method="_on_max_fps_value_changed"]
-[connection signal="value_changed" from="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/TriggerHitboxesFillAlpha/SpinBox" to="." method="_on_max_fps_value_changed"]
+[connection signal="value_changed" from="Graphics/MarginContainer/VBoxContainer/Window/Window Mode" to="." method="_on_window_mode_value_changed"]
+[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/Volume/Master" to="." method="_on_game_volume_value_changed"]
+[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/Volume/Music" to="." method="_on_music_volume_value_changed"]
+[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/Volume/Game SFX" to="." method="_on_game_sfx_volume_value_changed"]
+[connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/Volume/Level SFX" to="." method="_on_in_level_sfx_volume_value_changed"]
