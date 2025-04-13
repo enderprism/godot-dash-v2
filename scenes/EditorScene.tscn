@@ -1,4 +1,4 @@
-[gd_scene load_steps=138 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=160 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -135,6 +135,28 @@
 [ext_resource type="PackedScene" uid="uid://d05asiy6k2voi" path="res://scenes/components/level_components/portals/other_portals/TeleportalIn.tscn" id="82_n18q3"]
 [ext_resource type="PackedScene" uid="uid://ckrakyci0r2eg" path="res://scenes/components/level_components/portals/other_portals/TeleportalOut.tscn" id="83_gaibe"]
 [ext_resource type="Texture2D" uid="uid://cjen3j6at6ei" path="res://assets/textures/portals/other_portals/teleportal_out/TeleportalOutFront.png" id="84_glhus"]
+[ext_resource type="Script" uid="uid://rmric86hnf6y" path="res://src/triggers/CameraStaticTrigger.gd" id="106_6sar2"]
+[ext_resource type="Texture2D" uid="uid://cq3vm0mtdhxgb" path="res://assets/textures/triggers/CameraStatic.svg" id="107_ik2f6"]
+[ext_resource type="Texture2D" uid="uid://2fg5ga0mw6c2" path="res://assets/textures/triggers/CameraZoom.svg" id="108_cxib2"]
+[ext_resource type="Script" uid="uid://jsxcfvoyx87o" path="res://src/triggers/CameraZoomTrigger.gd" id="108_ksayh"]
+[ext_resource type="Script" uid="uid://fsddjdtuhoce" path="res://src/triggers/GameplayRotateTrigger.gd" id="110_0xs65"]
+[ext_resource type="Texture2D" uid="uid://4totkksq1aty" path="res://assets/textures/triggers/GameplayRotate.svg" id="111_1i48y"]
+[ext_resource type="Script" uid="uid://c17qkhhbfghd2" path="res://src/triggers/GravityTrigger.gd" id="112_xvtum"]
+[ext_resource type="Texture2D" uid="uid://bvphweuyltx18" path="res://assets/textures/triggers/Gravity.svg" id="113_nlcfe"]
+[ext_resource type="Script" uid="uid://def0fbfwr2qjy" path="res://src/triggers/MoveTrigger.gd" id="114_i4ywb"]
+[ext_resource type="Texture2D" uid="uid://odtrgqretvc6" path="res://assets/textures/triggers/Move.svg" id="115_rr1b7"]
+[ext_resource type="Script" uid="uid://dobbsyon74ne6" path="res://src/triggers/RotateTrigger.gd" id="116_qn6bu"]
+[ext_resource type="Texture2D" uid="uid://dvi6pd8pnm7k2" path="res://assets/textures/triggers/Rotate.svg" id="117_bwl0g"]
+[ext_resource type="Script" uid="uid://wi7ct1im4mm8" path="res://src/triggers/ScaleTrigger.gd" id="117_jhfap"]
+[ext_resource type="Script" uid="uid://mds3qdfocdm2" path="res://src/triggers/SongTrigger.gd" id="118_aynhx"]
+[ext_resource type="Script" uid="uid://bcemnh85tntc3" path="res://src/triggers/SpawnTrigger.gd" id="119_5caaf"]
+[ext_resource type="Texture2D" uid="uid://bba5v7yjggwa" path="res://assets/textures/triggers/Scale.svg" id="119_52ufo"]
+[ext_resource type="Script" uid="uid://6n2ab53pmj7k" path="res://src/triggers/TimewarpTrigger.gd" id="120_80r87"]
+[ext_resource type="Texture2D" uid="uid://d3l8sf08ogkdf" path="res://assets/textures/triggers/Song.svg" id="121_pcjvf"]
+[ext_resource type="Script" uid="uid://byevnl8r53vui" path="res://src/triggers/ToggleTrigger.gd" id="121_r2yu4"]
+[ext_resource type="Texture2D" uid="uid://b6eeefnqgnv52" path="res://assets/textures/triggers/Spawn.svg" id="123_tl5y0"]
+[ext_resource type="Texture2D" uid="uid://btcr6ed74qke" path="res://assets/textures/triggers/Timewarp.svg" id="125_1ad2k"]
+[ext_resource type="Texture2D" uid="uid://b7fnymfkmta1d" path="res://assets/textures/triggers/ToggleMultipleGroups.svg" id="127_d556q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac3bt"]
 radius = 2.0
@@ -250,7 +272,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
 theme = ExtResource("3_k1q1p")
-current_tab = 2
+current_tab = 3
 script = ExtResource("4_2at5j")
 metadata/_tab_index = 0
 
@@ -376,6 +398,7 @@ type = 2
 object = ExtResource("14_wyjb2")
 
 [node name="Interactables" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 metadata/_tab_name = ""
@@ -1184,7 +1207,6 @@ type = 7
 object = ExtResource("83_gaibe")
 
 [node name="Triggers" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 metadata/_tab_name = ""
@@ -1206,7 +1228,7 @@ layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 
-[node name="PaletteButton" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+[node name="Alpha" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -1219,13 +1241,13 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Alpha"]
 script = ExtResource("7_f0stj")
 type = 8
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("20_bqqbv")
 
-[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton"]
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Alpha"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1235,11 +1257,11 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton/CenterAnchor"]
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Alpha/CenterAnchor"]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("19_lbtum")
 
-[node name="PaletteButton2" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+[node name="CameraOffset" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -1252,13 +1274,13 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton2"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraOffset"]
 script = ExtResource("7_f0stj")
 type = 8
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("21_o7rvp")
 
-[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton2"]
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraOffset"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1268,11 +1290,11 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton2/CenterAnchor"]
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraOffset/CenterAnchor"]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("22_2am2m")
 
-[node name="PaletteButton3" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+[node name="CameraRotate" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -1285,13 +1307,13 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton3"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraRotate"]
 script = ExtResource("7_f0stj")
 type = 8
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("23_6k40u")
 
-[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton3"]
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraRotate"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1301,9 +1323,372 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/PaletteButton3/CenterAnchor"]
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraRotate/CenterAnchor"]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("24_ji6ug")
+
+[node name="CameraStatic" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraStatic"]
+script = ExtResource("7_f0stj")
+type = 8
+object = ExtResource("7_ii36d")
+trigger_script = ExtResource("106_6sar2")
+
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraStatic"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraStatic/CenterAnchor"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("107_ik2f6")
+
+[node name="CameraZoom" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraZoom"]
+script = ExtResource("7_f0stj")
+type = 8
+object = ExtResource("7_ii36d")
+trigger_script = ExtResource("108_ksayh")
+
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraZoom"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraZoom/CenterAnchor"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("108_cxib2")
+
+[node name="GameplayRotate" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/GameplayRotate"]
+script = ExtResource("7_f0stj")
+type = 8
+object = ExtResource("7_ii36d")
+trigger_script = ExtResource("110_0xs65")
+
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/GameplayRotate"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/GameplayRotate/CenterAnchor"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("111_1i48y")
+
+[node name="Gravity" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Gravity"]
+script = ExtResource("7_f0stj")
+type = 8
+object = ExtResource("7_ii36d")
+trigger_script = ExtResource("112_xvtum")
+
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Gravity"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Gravity/CenterAnchor"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("113_nlcfe")
+
+[node name="Move" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Move"]
+script = ExtResource("7_f0stj")
+type = 8
+object = ExtResource("7_ii36d")
+trigger_script = ExtResource("114_i4ywb")
+
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Move"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Move/CenterAnchor"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("115_rr1b7")
+
+[node name="Rotate" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Rotate"]
+script = ExtResource("7_f0stj")
+type = 8
+object = ExtResource("7_ii36d")
+trigger_script = ExtResource("116_qn6bu")
+
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Rotate"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Rotate/CenterAnchor"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("117_bwl0g")
+
+[node name="Scale" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Scale"]
+script = ExtResource("7_f0stj")
+type = 8
+object = ExtResource("7_ii36d")
+trigger_script = ExtResource("117_jhfap")
+
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Scale"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Scale/CenterAnchor"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("119_52ufo")
+
+[node name="Song" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Song"]
+script = ExtResource("7_f0stj")
+type = 8
+object = ExtResource("7_ii36d")
+trigger_script = ExtResource("118_aynhx")
+
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Song"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Song/CenterAnchor"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("121_pcjvf")
+
+[node name="Spawn" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Spawn"]
+script = ExtResource("7_f0stj")
+type = 8
+object = ExtResource("7_ii36d")
+trigger_script = ExtResource("119_5caaf")
+
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Spawn"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Spawn/CenterAnchor"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("123_tl5y0")
+
+[node name="Timewarp" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Timewarp"]
+script = ExtResource("7_f0stj")
+type = 8
+object = ExtResource("7_ii36d")
+trigger_script = ExtResource("120_80r87")
+
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Timewarp"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Timewarp/CenterAnchor"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("125_1ad2k")
+
+[node name="Toggle" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_k1q1p")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Toggle"]
+script = ExtResource("7_f0stj")
+type = 8
+object = ExtResource("7_ii36d")
+trigger_script = ExtResource("121_r2yu4")
+
+[node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Toggle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Toggle/CenterAnchor"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("127_d556q")
 
 [node name="BlockPaletteIcons" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
 script = ExtResource("3_d5qub")
