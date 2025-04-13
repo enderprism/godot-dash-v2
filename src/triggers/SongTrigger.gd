@@ -8,7 +8,7 @@ class_name SongTrigger
 var base: TriggerBase
 
 func _ready() -> void:
-	TriggerSetup.setup(self, false, false)
+	TriggerSetup.setup(self, TriggerSetup.NONE)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Song.svg"))
 
 func start(_body: Node2D) -> void:
