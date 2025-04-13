@@ -70,6 +70,7 @@ func _set_x(new_value: float) -> void:
 	if keep_aspect:
 		value.y = new_value * 1/aspect_ratio
 		spinbox_y.set_value_no_signal(value.y)
+		value_changed.emit(value)
 
 
 func _set_y(new_value: float) -> void:
@@ -77,6 +78,7 @@ func _set_y(new_value: float) -> void:
 	if keep_aspect:
 		value.x = new_value * aspect_ratio
 		spinbox_x.set_value_no_signal(value.x)
+		value_changed.emit(value)
 
 func set_value_no_signal(new_value: Vector2):
 	spinbox_x.set_value_no_signal(new_value.x)
