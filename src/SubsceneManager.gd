@@ -13,6 +13,7 @@ enum SubScene {
 @export var quit_game_button: Button
 @export var fade_screen_layer: CanvasLayer
 @export var settings_layer: CanvasLayer
+@export var menu_loop: AudioStreamPlayer
 
 @export_group("Subscenes")
 @export var created_levels_list: Control
@@ -53,6 +54,8 @@ func _ready() -> void:
 	icon_garage.hide()
 	level_selector.hide()
 	active_pcam.set_priority(PhantomCameraHistory.PhantomCameraStatus.CURRENT_ACTIVE)
+	await settings_layer.get_node("%SettingsMenu").ready
+	menu_loop.play()
 
 func _return_to_title_screen() -> void:
 	history._previous_phantomcamera(active_pcam)

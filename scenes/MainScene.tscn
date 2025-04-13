@@ -552,10 +552,10 @@ script = ExtResource("6_0wc6k")
 
 [node name="MenuLoop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_ir7j4")
-autoplay = true
+stream_paused = true
 bus = &"Music"
 
-[node name="Subscene Manager" type="Node" parent="." node_paths=PackedStringArray("active_pcam", "history", "page_control_container", "quit_game_button", "fade_screen_layer", "settings_layer", "created_levels_list", "icon_garage", "level_selector", "created_levels_list_camera", "icon_garage_camera", "quit_game_camera", "title_screen_camera", "title_screen_background", "title_screen_ground", "level_selector_page_container")]
+[node name="Subscene Manager" type="Node" parent="." node_paths=PackedStringArray("active_pcam", "history", "page_control_container", "quit_game_button", "fade_screen_layer", "settings_layer", "menu_loop", "created_levels_list", "icon_garage", "level_selector", "created_levels_list_camera", "icon_garage_camera", "quit_game_camera", "title_screen_camera", "title_screen_background", "title_screen_ground", "level_selector_page_container")]
 script = ExtResource("9_iy7r1")
 active_pcam = NodePath("../TitleScreen/CameraCenterParent/TitleScreenCamera")
 history = NodePath("PhantomCamera2DHistory")
@@ -563,6 +563,7 @@ page_control_container = NodePath("../LevelSelector/CanvasLayer/PageControlConta
 quit_game_button = NodePath("../TitleScreen/QuitGame")
 fade_screen_layer = NodePath("../FadeScreenLayer")
 settings_layer = NodePath("../SettingsLayer")
+menu_loop = NodePath("../MenuLoop")
 created_levels_list = NodePath("../CreatedLevelsList")
 icon_garage = NodePath("../IconGarage")
 level_selector = NodePath("../LevelSelector")
