@@ -30,16 +30,12 @@ script = ExtResource("2_bofn2")
 target = NodePath("../../Alpha")
 condition = "value != 0"
 property = &"or_greater"
-if_false = "false"
-if_true = "true"
 
 [node name="TriggerPropertyWatcher2" type="Node" parent="Mode" node_paths=PackedStringArray("target")]
 script = ExtResource("2_bofn2")
 target = NodePath("../../Copy")
 condition = "value == 3"
 property = &"visible"
-if_false = "false"
-if_true = "true"
 
 [node name="Alpha" type="HBoxContainer" parent="." groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)

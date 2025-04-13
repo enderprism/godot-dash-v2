@@ -5,8 +5,6 @@ class_name TriggerPropertyWatcher
 ## Comparison on the parent Property's value. Refer to the value as [value].
 @export var condition: String
 @export var property: StringName
-@export var if_false: String
-@export var if_true: String
 
 func _ready() -> void:
 	var parent := get_parent() as Property
@@ -16,10 +14,6 @@ func _watcher_update_value(value: Variant) -> void:
 	var expression := Expression.new()
 	expression.parse(condition, ["value"])
 	var result := expression.execute([value]) as bool
-	if result:
-		expression.parse(if_true)
-	else:
-		expression.parse(if_false)
-	target.set(property, expression.execute())
+	target.set(property, result)
 	if target is Property:
 		target.update_internals()
