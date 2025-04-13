@@ -101,7 +101,10 @@ func _ready() -> void:
 	renamed.connect(_refresh)
 
 
-
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"gui_input_reset_default") \
+			and gui_inputs[type].get_rect().has_point(get_local_mouse_position()):
+		reset()
 
 
 func _validate_property(property: Dictionary) -> void:
@@ -124,7 +127,7 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 
-func set_value(new_value: Variant, value_type: Type) -> void:
+func set_value(new_value: Variant, value_type: Type = type) -> void:
 	# TODO add error handling when type of new_value and the value type don't match and result in invalid assignments
 	match value_type:
 		Type.FLOAT:
@@ -143,7 +146,7 @@ func set_value(new_value: Variant, value_type: Type) -> void:
 			gui_inputs[Type.ENUM].select(new_value)
 
 
-func get_value(value_type: Type) -> Variant:
+func get_value(value_type: Type = type) -> Variant:
 	match value_type:
 		Type.FLOAT, Type.FLOAT_SLIDER, Type.VECTOR2:
 			return gui_inputs[value_type].value
@@ -168,8 +171,8 @@ func set_input_state(enabled: bool) -> void:
 			gui_inputs[type].disabled = not enabled
 
 
-func reset(value_type: Type) -> void:
-	set_value(DEFAULT_VALUE_TYPES[value_type], value_type)
+func reset() -> void:
+	set_value(DEFAULT_VALUE_TYPES[type], type)
 
 
 func update_internals() -> void:
