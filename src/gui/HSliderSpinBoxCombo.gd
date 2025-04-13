@@ -10,6 +10,8 @@ signal value_changed(value: float)
 @export var rounded: bool
 @export var allow_greater: bool
 @export var allow_lesser: bool
+@export var prefix: String
+@export var suffix: String
 @export var slider_width: float = 256.0:
 	set(value):
 		slider_width = value
@@ -38,6 +40,12 @@ func _ready() -> void:
 	hslider.custom_minimum_size.x = slider_width
 	hslider.size_flags_vertical = SIZE_FILL
 	spinbox = NodeUtils.get_node_or_add(self, "SpinBox", SpinBox, NodeUtils.INTERNAL)
+	update_internals()
+	hslider.value_changed.connect(_update_value)
+	spinbox.value_changed.connect(_update_value)
+
+
+func update_internals() -> void:
 	for _range in [hslider, spinbox]:
 		_range.min_value = min_value
 		_range.max_value = max_value
@@ -45,8 +53,9 @@ func _ready() -> void:
 		_range.rounded = rounded
 		_range.allow_greater = allow_greater
 		_range.allow_lesser = allow_lesser
-	hslider.value_changed.connect(_update_value)
-	spinbox.value_changed.connect(_update_value)
+	var lineedit := spinbox.get_line_edit()
+	lineedit.prefix = prefix
+	lineedit.suffix = suffix
 
 
 func _update_value(new_value: float) -> void:
