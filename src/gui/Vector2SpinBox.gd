@@ -4,11 +4,6 @@ class_name Vector2SpinBox
 
 signal value_changed(new_value: Vector2)
 
-@export var suffix: String:
-	set(value):
-		suffix = value
-		for spinbox in [spinbox_x, spinbox_y]:
-			spinbox.suffix = value
 @export var keep_aspect: bool
 @export var rounded: bool
 @export var step: float
@@ -16,6 +11,16 @@ signal value_changed(new_value: Vector2)
 @export var max_value: float
 @export var allow_greater: bool
 @export var allow_lesser: bool
+@export var prefix: String:
+	set(value):
+		prefix = value
+		for spinbox in [spinbox_x, spinbox_y]:
+			spinbox.prefix = value
+@export var suffix: String:
+	set(value):
+		suffix = value
+		for spinbox in [spinbox_x, spinbox_y]:
+			spinbox.suffix = value
 
 @onready var spinbox_x: SpinBox
 @onready var spinbox_y: SpinBox

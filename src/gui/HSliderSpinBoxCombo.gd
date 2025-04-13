@@ -53,9 +53,8 @@ func update_internals() -> void:
 		_range.rounded = rounded
 		_range.allow_greater = allow_greater
 		_range.allow_lesser = allow_lesser
-	var lineedit := spinbox.get_line_edit()
-	lineedit.prefix = prefix
-	lineedit.suffix = suffix
+	spinbox.prefix = prefix
+	spinbox.suffix = suffix
 
 
 func _update_value(new_value: float) -> void:

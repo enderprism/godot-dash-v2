@@ -28,6 +28,10 @@ enum Type {
 @export var rounded: bool
 @export var or_greater: bool
 @export var or_less: bool
+@export var prefix: String
+@export var suffix: String
+
+@export var slider_width: float = 100.0
 
 # LineEdit type exports
 @export var lineedit_width: float = 100.0
@@ -44,6 +48,8 @@ enum Type {
 @export var default_color: Color
 @export var default_enum_idx: int
 @export var default_node2d_path: String
+
+@export_tool_button("Refresh") var refresh_property = _refresh
 
 const DEFAULT_VALUE_TYPES: Dictionary[Type, String] = {
 	Type.FLOAT: "default_float",
@@ -108,10 +114,12 @@ func _input(event: InputEvent) -> void:
 
 
 func _validate_property(property: Dictionary) -> void:
-	if property.name in ["_min", "_max", "step", "rounded", "or_greater", "or_less"] \
+	if property.name in ["_min", "_max", "step", "rounded", "or_greater", "or_less", "prefix", "suffix"] \
 			and type not in [Type.FLOAT, Type.FLOAT_SLIDER, Type.VECTOR2]:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name == "default_float" and type not in [Type.FLOAT, Type.FLOAT_SLIDER]:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+	if property.name == "slider_width" and type != Type.FLOAT_SLIDER:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name == "default_bool" and type != Type.BOOL:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
@@ -172,7 +180,7 @@ func set_input_state(enabled: bool) -> void:
 
 
 func reset() -> void:
-	set_value(DEFAULT_VALUE_TYPES[type], type)
+	set_value(get(DEFAULT_VALUE_TYPES[type]), type)
 
 
 func update_internals() -> void:
@@ -183,7 +191,9 @@ func update_internals() -> void:
 		input.rounded = rounded
 		input.allow_greater = or_greater
 		input.allow_lesser = or_less
-	gui_inputs[Type.FLOAT_SLIDER].slider_width = 100
+		input.prefix = prefix
+		input.suffix = suffix
+	gui_inputs[Type.FLOAT_SLIDER].slider_width = slider_width
 	gui_inputs[Type.VECTOR2].vertical = true
 	gui_inputs[Type.STRING].custom_minimum_size.x = lineedit_width
 	gui_inputs[Type.STRING].focus_mode = Control.FOCUS_CLICK
@@ -205,6 +215,6 @@ func _refresh() -> void:
 	# Input type refresh
 	for i in range(len(gui_inputs)):
 		gui_inputs[i].visible = i == int(type)
-	if type == Type.STRING and len(gui_inputs) > Type.STRING:
-		gui_inputs[Type.STRING].placeholder_text = placeholder_text
-		gui_inputs[Type.STRING].custom_minimum_size.x = lineedit_width
+	update_internals()
+	if Engine.is_editor_hint():
+		reset()
