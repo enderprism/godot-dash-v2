@@ -8,12 +8,14 @@ enum Mode {
 	MOVE_TOWARDS,
 }
 
+## 1.0 MoveTrigger units are equal to a single [constant LevelManager.CELL_SIZE].
+const UNIT := 128.0
+
 @export var mode: Mode = Mode.ADD:
 	set(value):
 		mode = value
 		notify_property_list_changed()
-@export var _set_position: Vector2
-@export var _add_position: Vector2
+@export var _position: Vector2 ## New position in units.
 @export_group("Move Towards", "_move_towards")
 @export var _move_towards_target: Node2D
 ## Multiplies the target distance between each object in the group. [br][br]
@@ -23,7 +25,7 @@ enum Mode {
 ## - [code]2.0[/code]: the group's objects will follow the target object but [b]double[/b] their relative distance to it. [br]
 ## - [code]-1.0[/code]: the group's objects will follow the target object but [b]invert[/b] their relative distance to it.
 @export_range(0.0, 2.0, 0.05, "or_greater", "or_less") var _move_towards_distance_multiplier: float
-@export var _move_towards_offset: Vector2 ## Offset in global coordinates from the move target.
+@export var _move_towards_offset: Vector2 ## Offset in global coordinates in units from the move target.
 
 # Hide unneeded elements in the inspector
 func _validate_property(property: Dictionary) -> void:
@@ -54,15 +56,15 @@ func _physics_process(_delta: float) -> void:
 				var _initial_global_position = _initial_positions[_target]
 				match mode:
 					Mode.SET:
-						_target.global_position += (owner.to_global(_set_position) - _initial_global_position) * _weight_delta
+						_target.global_position += (owner.to_global(_position * UNIT) - _initial_global_position) * _weight_delta
 					Mode.ADD:
-						_target.global_position += _add_position * _weight_delta
+						_target.global_position += _position * _weight_delta * UNIT
 					Mode.MOVE_TOWARDS:
 						var _initial_distance = _initial_distances[_target]
 						if _move_towards_target != null:
 							_target.global_position = lerp(
 									_initial_global_position,
-									_move_towards_target.global_position + (_initial_distance * _move_towards_distance_multiplier) + _move_towards_offset,
+									_move_towards_target.global_position + (_initial_distance * _move_towards_distance_multiplier) + _move_towards_offset * UNIT,
 									easing._weight)
 						elif LevelManager.in_editor and LevelManager.level_playing:
 							printerr("In ", name, ": move_towards_target is unset!")
