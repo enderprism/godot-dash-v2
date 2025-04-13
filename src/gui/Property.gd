@@ -97,7 +97,8 @@ func _ready() -> void:
 	# ENUM
 	gui_inputs.insert(Type.ENUM, NodeUtils.get_node_or_add(self, "ENUM", OptionButton, NodeUtils.INTERNAL))
 	gui_inputs[Type.ENUM].item_selected.connect(func(new_index): value_changed.emit(new_index))
-	update_internals()
+	# NODE2D
+	gui_inputs.insert(Type.NODE2D, NodeUtils.get_node_or_add(self, "NODE2D", Button, NodeUtils.INTERNAL))
 	for child in gui_inputs:
 		child.hide()
 		child.theme = preload("res://resources/NoFocusColor.tres")
@@ -209,6 +210,8 @@ func setup_enum(fields: PackedStringArray) -> void:
 
 
 func _refresh() -> void:
+	if not is_node_ready():
+		await ready
 	# Label refresh
 	if _label != null:
 		_label.text = name
