@@ -36,6 +36,26 @@ enum Type {
 # Enum type exports
 @export var enum_fields: PackedStringArray
 
+# Default values
+@export var default_float: float
+@export var default_bool: bool
+@export var default_vector2: Vector2
+@export var default_string: String
+@export var default_color: Color
+@export var default_enum_idx: int
+@export var default_node2d_path: String
+
+const DEFAULT_VALUE_TYPES: Dictionary[Type, String] = {
+	Type.FLOAT: "default_float",
+	Type.FLOAT_SLIDER: "default_float",
+	Type.BOOL: "default_bool",
+	Type.VECTOR2: "default_vector2",
+	Type.STRING: "default_string",
+	Type.COLOR: "default_color",
+	Type.ENUM: "default_enum_idx",
+	Type.NODE2D: "default_node2d_path",
+}
+
 var _label: Label
 var _spacer: Control
 var _input: Array[Control]
@@ -84,9 +104,19 @@ func _validate_property(property: Dictionary) -> void:
 	if property.name in ["_min", "_max", "step", "rounded", "or_greater", "or_less"] \
 			and type not in [Type.FLOAT, Type.FLOAT_SLIDER, Type.VECTOR2]:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name in ["placeholder_text", "lineedit_width"] and type != Type.STRING:
+	if property.name == "default_float" and type not in [Type.FLOAT, Type.FLOAT_SLIDER]:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name in ["enum_fields"] and type != Type.ENUM:
+	if property.name == "default_bool" and type != Type.BOOL:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+	if property.name == "default_vector2" and type != Type.VECTOR2:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+	if property.name in ["placeholder_text", "lineedit_width", "default_string"] and type != Type.STRING:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+	if property.name == "default_color" and type != Type.COLOR:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+	if property.name in ["enum_fields", "default_enum_idx"] and type != Type.ENUM:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+	if property.name == "default_node2d_path" and type != Type.NODE2D:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 func set_value(new_value: Variant, value_type: Type) -> void:
@@ -130,6 +160,10 @@ func set_input_state(enabled: bool) -> void:
 			_input[type].editable = enabled
 		Type.BOOL, Type.COLOR, Type.ENUM: # Button-inheriting types
 			_input[type].disabled = not enabled
+
+
+func reset(value_type: Type) -> void:
+	set_value(DEFAULT_VALUE_TYPES[value_type], value_type)
 
 
 func update_internals() -> void:
