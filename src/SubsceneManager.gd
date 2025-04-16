@@ -117,6 +117,7 @@ func _on_go_to_level_selector_pressed() -> void:
 func _on_go_to_created_levels_list_pressed() -> void:
 	var _fade_screen = fade_screen_layer.get_child(0)
 	if not _fade_screen.is_fading:
+		var editor_scene: PackedScene = load("res://scenes/EditorScene.tscn")
 		$"../MenuLoop".playing = false
 		SFXManager.play_sfx("res://assets/sounds/sfx/game_sfx/LevelPlay.ogg")
 		_fade_screen.fade_in(0.5, Tween.EASE_IN, Tween.TRANS_EXPO)
@@ -124,7 +125,7 @@ func _on_go_to_created_levels_list_pressed() -> void:
 		await _fade_screen.fade_finished
 		LevelManager.entering_editor = true
 		# get_tree().change_scene_to_packed(level_editor)
-		get_tree().change_scene_to_file("res://scenes/EditorScene.tscn")
+		get_tree().change_scene_to_packed(editor_scene)
 
 func _on_go_to_icon_garage_pressed() -> void:
 	level_selector.hide()

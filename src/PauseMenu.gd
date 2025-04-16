@@ -3,6 +3,8 @@ extends Control
 signal paused
 signal unpaused
 
+@onready var main_scene: PackedScene = preload("res://scenes/MainScene.tscn")
+
 func _ready() -> void:
 	$"../SettingsLayer".visible = visible
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -19,7 +21,7 @@ func _on_leave_pressed() -> void:
 	get_tree().paused = false
 	LevelManager.platformer = false
 	SFXManager.play_sfx("res://assets/sounds/sfx/game_sfx/LevelQuit.ogg")
-	get_tree().change_scene_to_file("res://scenes/MainScene.tscn")
+	get_tree().change_scene_to_packed(main_scene)
 
 func _on_continue_pressed() -> void:
 	if $"../SettingsLayer/SettingsContainer".position.y == -$"../SettingsLayer/SettingsContainer".get_viewport_rect().size.y:
