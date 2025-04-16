@@ -15,6 +15,8 @@ signal value_changed(new_value: Vector2)
 @export var suffix: String:
 	set(value):
 		suffix = value
+		if not is_node_ready():
+			return
 		for spinbox in [spinbox_x, spinbox_y]:
 			spinbox.suffix = value
 @export var select_all_on_focus: bool
@@ -25,8 +27,8 @@ var value: Vector2: set = _set_value
 
 
 func _ready() -> void:
-	spinbox_x = NodeUtils.get_node_or_add(self, "SpinBoxX", SpinBox, NodeUtils.INTERNAL)
-	spinbox_y = NodeUtils.get_node_or_add(self, "SpinBoxY", SpinBox, NodeUtils.INTERNAL)
+	spinbox_x = NodeUtils.get_node_or_add(self, "SpinBoxX", SpinBox, NodeUtils.INTERNAL | NodeUtils.SET_OWNER)
+	spinbox_y = NodeUtils.get_node_or_add(self, "SpinBoxY", SpinBox, NodeUtils.INTERNAL | NodeUtils.SET_OWNER)
 	spinbox_x.value_changed.connect(_set_x)
 	spinbox_y.value_changed.connect(_set_y)
 	update_internals()

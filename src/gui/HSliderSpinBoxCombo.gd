@@ -37,10 +37,10 @@ var value: float:
 
 func _ready() -> void:
 	alignment = ALIGNMENT_CENTER
-	hslider = NodeUtils.get_node_or_add(self, "HSlider", HSlider, NodeUtils.INTERNAL)
+	hslider = NodeUtils.get_node_or_add(self, "HSlider", HSlider, NodeUtils.INTERNAL | NodeUtils.SET_OWNER)
 	hslider.custom_minimum_size.x = slider_width
 	hslider.size_flags_vertical = SIZE_FILL
-	spinbox = NodeUtils.get_node_or_add(self, "SpinBox", SpinBox, NodeUtils.INTERNAL)
+	spinbox = NodeUtils.get_node_or_add(self, "SpinBox", SpinBox, NodeUtils.INTERNAL | NodeUtils.SET_OWNER)
 	update_internals()
 	hslider.value_changed.connect(_update_value)
 	spinbox.value_changed.connect(_update_value)

@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://cw15476n2m4we"]
+[gd_scene load_steps=11 format=3 uid="uid://cw15476n2m4we"]
 
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_orc32"]
 [ext_resource type="Script" uid="uid://dpfci6rxt0pwi" path="res://src/editor/ColorChannelEditor.gd" id="2_cnty4"]
 [ext_resource type="Texture2D" uid="uid://bnuunm3nj6gcg" path="res://assets/textures/guis/shared/AddItem.svg" id="3_quqpo"]
 [ext_resource type="ButtonGroup" uid="uid://cev0xn2madcx2" path="res://resources/ColorChannelItemButtonGroup.tres" id="3_u8i2y"]
 [ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="6_l2xjh"]
+[ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="6_lmm7r"]
 [ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="6_w4jfe"]
+[ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="7_b5wg1"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="7_vl4eh"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_xqmy5"]
@@ -78,12 +80,136 @@ layout_mode = 2
 script = ExtResource("6_w4jfe")
 type = 2
 
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/Copy channel"]
+layout_mode = 2
+text = "Copy channel"
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/VBoxContainer/Copy channel"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="MarginContainer/VBoxContainer/VBoxContainer/Copy channel"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/Copy channel"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+alignment = 1
+script = ExtResource("6_lmm7r")
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="BOOL" type="CheckBox" parent="MarginContainer/VBoxContainer/VBoxContainer/Copy channel"]
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="VECTOR2" type="BoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/Copy channel"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+vertical = true
+script = ExtResource("7_b5wg1")
+step = 0.05
+max_value = 1.0
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="MarginContainer/VBoxContainer/VBoxContainer/Copy channel"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("1_orc32")
+
+[node name="COLOR" type="ColorPickerButton" parent="MarginContainer/VBoxContainer/VBoxContainer/Copy channel"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="ENUM" type="OptionButton" parent="MarginContainer/VBoxContainer/VBoxContainer/Copy channel"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="NODE2D" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/Copy channel"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
 [node name="Color" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("6_w4jfe")
 type = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/Color"]
+layout_mode = 2
+text = "Color"
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/VBoxContainer/Color"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="MarginContainer/VBoxContainer/VBoxContainer/Color"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/Color"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+alignment = 1
+script = ExtResource("6_lmm7r")
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="BOOL" type="CheckBox" parent="MarginContainer/VBoxContainer/VBoxContainer/Color"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="VECTOR2" type="BoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/Color"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+vertical = true
+script = ExtResource("7_b5wg1")
+step = 0.05
+max_value = 1.0
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="MarginContainer/VBoxContainer/VBoxContainer/Color"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("1_orc32")
+
+[node name="COLOR" type="ColorPickerButton" parent="MarginContainer/VBoxContainer/VBoxContainer/Color"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="ENUM" type="OptionButton" parent="MarginContainer/VBoxContainer/VBoxContainer/Color"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="NODE2D" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/Color"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
 
 [node name="Channel" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -92,6 +218,82 @@ layout_mode = 2
 script = ExtResource("6_w4jfe")
 type = 6
 enum_fields = PackedStringArray("Background", "Ground", "Line", "P1", "P2", "Glow")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/Channel"]
+layout_mode = 2
+text = "Channel"
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/VBoxContainer/Channel"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="MarginContainer/VBoxContainer/VBoxContainer/Channel"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/Channel"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+alignment = 1
+script = ExtResource("6_lmm7r")
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="BOOL" type="CheckBox" parent="MarginContainer/VBoxContainer/VBoxContainer/Channel"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="VECTOR2" type="BoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/Channel"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+vertical = true
+script = ExtResource("7_b5wg1")
+step = 0.05
+max_value = 1.0
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="MarginContainer/VBoxContainer/VBoxContainer/Channel"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("1_orc32")
+
+[node name="COLOR" type="ColorPickerButton" parent="MarginContainer/VBoxContainer/VBoxContainer/Channel"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="ENUM" type="OptionButton" parent="MarginContainer/VBoxContainer/VBoxContainer/Channel"]
+layout_mode = 2
+theme = ExtResource("1_orc32")
+selected = 0
+item_count = 6
+popup/item_0/text = "Background"
+popup/item_0/id = 0
+popup/item_1/text = "Ground"
+popup/item_1/id = 1
+popup/item_2/text = "Line"
+popup/item_2/id = 2
+popup/item_3/text = "P1"
+popup/item_3/id = 3
+popup/item_4/text = "P2"
+popup/item_4/id = 4
+popup/item_5/text = "Glow"
+popup/item_5/id = 5
+
+[node name="NODE2D" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/Channel"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
 
 [node name="HSV shift" type="VBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -106,12 +308,142 @@ layout_mode = 2
 script = ExtResource("6_w4jfe")
 _min = -1.0
 
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Hue"]
+layout_mode = 2
+text = "Hue"
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Hue"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Hue"]
+layout_mode = 2
+theme = ExtResource("1_orc32")
+min_value = -1.0
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Hue"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+alignment = 1
+script = ExtResource("6_lmm7r")
+min_value = -1.0
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="BOOL" type="CheckBox" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Hue"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="VECTOR2" type="BoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Hue"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+vertical = true
+script = ExtResource("7_b5wg1")
+step = 0.05
+min_value = -1.0
+max_value = 1.0
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Hue"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("1_orc32")
+
+[node name="COLOR" type="ColorPickerButton" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Hue"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="ENUM" type="OptionButton" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Hue"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="NODE2D" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Hue"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
 [node name="Saturation" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("6_w4jfe")
 _min = -1.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Saturation"]
+layout_mode = 2
+text = "Saturation"
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Saturation"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Saturation"]
+layout_mode = 2
+theme = ExtResource("1_orc32")
+min_value = -1.0
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Saturation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+alignment = 1
+script = ExtResource("6_lmm7r")
+min_value = -1.0
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="BOOL" type="CheckBox" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Saturation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="VECTOR2" type="BoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Saturation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+vertical = true
+script = ExtResource("7_b5wg1")
+step = 0.05
+min_value = -1.0
+max_value = 1.0
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Saturation"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("1_orc32")
+
+[node name="COLOR" type="ColorPickerButton" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Saturation"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="ENUM" type="OptionButton" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Saturation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="NODE2D" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Saturation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
 
 [node name="Value" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift"]
 unique_name_in_owner = true
@@ -120,6 +452,71 @@ layout_mode = 2
 script = ExtResource("6_w4jfe")
 _min = -1.0
 
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Value"]
+layout_mode = 2
+text = "Value"
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Value"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Value"]
+layout_mode = 2
+theme = ExtResource("1_orc32")
+min_value = -1.0
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Value"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+alignment = 1
+script = ExtResource("6_lmm7r")
+min_value = -1.0
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="BOOL" type="CheckBox" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Value"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="VECTOR2" type="BoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Value"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+vertical = true
+script = ExtResource("7_b5wg1")
+step = 0.05
+min_value = -1.0
+max_value = 1.0
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Value"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("1_orc32")
+
+[node name="COLOR" type="ColorPickerButton" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Value"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="ENUM" type="OptionButton" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Value"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="NODE2D" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Value"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
 [node name="Strength" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
@@ -127,11 +524,138 @@ layout_mode = 2
 script = ExtResource("6_w4jfe")
 or_greater = true
 
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Strength"]
+layout_mode = 2
+text = "Strength"
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Strength"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Strength"]
+layout_mode = 2
+theme = ExtResource("1_orc32")
+max_value = 1.0
+step = 0.05
+allow_greater = true
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Strength"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+alignment = 1
+script = ExtResource("6_lmm7r")
+allow_greater = true
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="BOOL" type="CheckBox" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Strength"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="VECTOR2" type="BoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Strength"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+vertical = true
+script = ExtResource("7_b5wg1")
+step = 0.05
+max_value = 1.0
+allow_greater = true
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Strength"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("1_orc32")
+
+[node name="COLOR" type="ColorPickerButton" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Strength"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="ENUM" type="OptionButton" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Strength"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="NODE2D" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Strength"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
 [node name="Alpha" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("6_w4jfe")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Alpha"]
+layout_mode = 2
+text = "Alpha"
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Alpha"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Alpha"]
+layout_mode = 2
+theme = ExtResource("1_orc32")
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Alpha"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+alignment = 1
+script = ExtResource("6_lmm7r")
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="BOOL" type="CheckBox" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Alpha"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="VECTOR2" type="BoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Alpha"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+vertical = true
+script = ExtResource("7_b5wg1")
+step = 0.05
+max_value = 1.0
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Alpha"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("1_orc32")
+
+[node name="COLOR" type="ColorPickerButton" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Alpha"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="ENUM" type="OptionButton" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Alpha"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
+
+[node name="NODE2D" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer/HSV shift/Alpha"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_orc32")
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
 auto_translate_mode = 1
