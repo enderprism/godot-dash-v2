@@ -38,6 +38,8 @@ var base: TriggerBase
 var easing: TriggerEasing
 var target_link: TargetLink
 
+var CELLS_TO_PX := Vector2(LevelManager.CELL_SIZE, -LevelManager.CELL_SIZE)
+
 var _targets: Array[Node]
 var _initial_positions: Dictionary
 var _initial_distances: Dictionary
@@ -54,15 +56,15 @@ func _physics_process(_delta: float) -> void:
 				var _initial_global_position = _initial_positions[_target]
 				match mode:
 					Mode.SET:
-						_target.global_position += (owner.to_global(_position * LevelManager.CELL_SIZE) - _initial_global_position) * _weight_delta
+						_target.global_position += (owner.to_global(_position * CELLS_TO_PX) - _initial_global_position) * _weight_delta
 					Mode.ADD:
-						_target.global_position += _position * _weight_delta * LevelManager.CELL_SIZE
+						_target.global_position += _position * _weight_delta * CELLS_TO_PX
 					Mode.MOVE_TOWARDS:
 						var _initial_distance = _initial_distances[_target]
 						if _move_towards_target != null:
 							_target.global_position = lerp(
 									_initial_global_position,
-									_move_towards_target.global_position + (_initial_distance * _move_towards_distance_multiplier) + _move_towards_offset * LevelManager.CELL_SIZE,
+									_move_towards_target.global_position + (_initial_distance * _move_towards_distance_multiplier) + _move_towards_offset * CELLS_TO_PX,
 									easing._weight)
 						elif LevelManager.in_editor and LevelManager.level_playing:
 							printerr("In ", name, ": move_towards_target is unset!")
