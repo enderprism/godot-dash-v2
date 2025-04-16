@@ -132,7 +132,7 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name == "default_bool" and type != Type.BOOL:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name == "default_vector2" and type != Type.VECTOR2:
+	if property.name in ["default_vector2", "keep_aspect"] and type != Type.VECTOR2:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name in ["placeholder_text", "lineedit_width", "default_string"] and type != Type.STRING:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
