@@ -21,7 +21,6 @@ func _ready() -> void:
 		level = $GameScene/Level.get_child(0)
 	elif $GameScene/Level.get_child(0) == null:
 		$GameScene/Level.add_child(level)
-		level.owner = self
 
 	if LevelManager.entering_editor:
 		LevelManager.entering_editor = false
