@@ -21,6 +21,7 @@ func _on_leave_pressed() -> void:
 	get_tree().paused = false
 	LevelManager.platformer = false
 	SFXManager.play_sfx("res://assets/sounds/sfx/game_sfx/LevelQuit.ogg")
+	await get_tree().create_timer(0).timeout # Avoid the frozen frame
 	get_tree().change_scene_to_packed(main_scene)
 
 func _on_continue_pressed() -> void:
