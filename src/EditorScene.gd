@@ -22,12 +22,12 @@ func _ready() -> void:
 	elif $GameScene/Level.get_child(0) == null:
 		$GameScene/Level.add_child(level)
 
-	if LevelManager.entering_editor:
-		LevelManager.entering_editor = false
+	if SceneTransition.from_main():
+		SceneTransition.previous = SceneTransition.Scene.EDITOR
 		var _fade_screen = $FadeScreenLayer/FadeScreen
 		_fade_screen.show()
 		_fade_screen.modulate = Color("000000ff")
-		_fade_screen.fade_out(0.5, Tween.EASE_OUT, Tween.TRANS_EXPO)
+		_fade_screen.fade_out(0.5, Tween.EASE_OUT, Tween.TRANS_SINE)
 		create_tween().tween_property($EditorCamera, "zoom", Vector2.ONE * 0.8, 0.5)\
 				.set_ease(Tween.EASE_OUT) \
 				.set_trans(Tween.TRANS_EXPO) \
@@ -40,6 +40,7 @@ func _ready() -> void:
 	$GameScene/PlayerCamera.enabled = false
 	$GameScene/EditorGridParallax/EditorGrid.show()
 	$GameScene/EditorGridParallax/EditorGrid.queue_redraw()
+	$GameScene/PauseMenuLayer/PauseMenu.leave.connect(_on_leave_pressed)
 
 	LevelManager.in_editor = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -96,4 +97,13 @@ func _on_playtest_pressed() -> void:
 		$GameScene._start_level()
 	else:
 		get_tree().change_scene_to_packed(LevelManager.editor_backup)
+
+
+func _on_leave_pressed() -> void:
+	var _fade_screen = $FadeScreenLayer/FadeScreen
+	_fade_screen.show()
+	_fade_screen.fade_in(0.5, Tween.EASE_IN, Tween.TRANS_SINE)
+	create_tween().tween_property($EditorCamera, "zoom", $EditorCamera.zoom / 2, 0.5) \
+			.set_ease(Tween.EASE_IN) \
+			.set_trans(Tween.TRANS_EXPO)
 

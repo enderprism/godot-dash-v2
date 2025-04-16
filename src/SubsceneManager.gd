@@ -1,4 +1,5 @@
 @tool extends Node
+class_name SubsceneManager
 
 enum SubScene {
 	TITLE_SCREEN,
@@ -53,9 +54,27 @@ func _ready() -> void:
 	created_levels_list.hide()
 	icon_garage.hide()
 	level_selector.hide()
-	active_pcam.set_priority(PhantomCameraHistory.PhantomCameraStatus.CURRENT_ACTIVE)
 	await settings_layer.get_node("%SettingsMenu").ready
-	menu_loop.play()
+	if not Engine.is_editor_hint():
+		menu_loop.play()
+	if not SceneTransition.from_main():
+		# HACK: Manual animation because PhantomCamera gets in the way
+		$"../Camera/PhantomCameraHost".queue_free()
+		var _fade_screen = fade_screen_layer.get_child(0)
+		_fade_screen.fade_out(0.5, Tween.EASE_OUT, Tween.TRANS_SINE)
+		var camera_tween := create_tween()
+		(
+			camera_tween
+				.tween_property($"../Camera", "zoom", Vector2.ONE, 0.5)
+				.from(Vector2.ONE * 2)
+				.set_ease(Tween.EASE_OUT)
+				.set_trans(Tween.TRANS_EXPO)
+		)
+		await camera_tween.finished
+		$"../Camera".add_child(PhantomCameraHost.new())
+	else:
+		active_pcam.set_priority(PhantomCameraHistory.PhantomCameraStatus.CURRENT_ACTIVE)
+
 
 func _return_to_title_screen() -> void:
 	history._previous_phantomcamera(active_pcam)
@@ -120,10 +139,10 @@ func _on_go_to_created_levels_list_pressed() -> void:
 		var editor_scene: PackedScene = load("res://scenes/EditorScene.tscn")
 		$"../MenuLoop".playing = false
 		SFXManager.play_sfx("res://assets/sounds/sfx/game_sfx/LevelPlay.ogg")
-		_fade_screen.fade_in(0.5, Tween.EASE_IN, Tween.TRANS_EXPO)
+		_fade_screen.fade_in(0.5, Tween.EASE_IN, Tween.TRANS_SINE)
 		history._change_phantomcamera(active_pcam, created_levels_list_camera)
 		await _fade_screen.fade_finished
-		LevelManager.entering_editor = true
+		SceneTransition.previous = SceneTransition.Scene.MAIN
 		# get_tree().change_scene_to_packed(level_editor)
 		get_tree().change_scene_to_packed(editor_scene)
 

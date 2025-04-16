@@ -2,6 +2,7 @@ extends Control
 
 signal paused
 signal unpaused
+signal leave
 
 @onready var main_scene: PackedScene = preload("res://scenes/MainScene.tscn")
 
@@ -19,9 +20,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_leave_pressed() -> void:
 	get_tree().paused = false
+	get_parent().hide()
+	leave.emit()
 	LevelManager.platformer = false
+	LevelManager.level_playing = false
 	SFXManager.play_sfx("res://assets/sounds/sfx/game_sfx/LevelQuit.ogg")
-	await get_tree().create_timer(0).timeout # Avoid the frozen frame
+	await get_tree().create_timer(0.5).timeout # Avoid the frozen frame
 	get_tree().change_scene_to_packed(main_scene)
 
 func _on_continue_pressed() -> void:

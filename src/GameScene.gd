@@ -16,6 +16,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), false)
 	if not get_parent() is EditorScene:
+		$PauseMenuLayer/PauseMenu.leave.connect(_leave_level)
 		if LevelManager.is_first_attempt:
 			$FadeScreenLayer/FadeScreen.show()
 			$FadeScreenLayer/FadeScreen.modulate = Color("000000ff")
@@ -25,17 +26,24 @@ func _ready() -> void:
 		LevelManager.platformer = current_level.platformer
 		$PlayerCamera.position_offset = PlayerCamera.DEFAULT_OFFSET if not LevelManager.platformer else Vector2.ZERO
 		$Level.add_child(current_level)
+		SceneTransition.previous = SceneTransition.Scene.LEVEL
 		_start_level()
 
 func _start_level() -> void:
 	if LevelManager.is_first_attempt:
 		await get_tree().create_timer(0.2).timeout
-		$FadeScreenLayer/FadeScreen.fade_out(0.5, Tween.EASE_OUT, Tween.TRANS_EXPO)
+		$FadeScreenLayer/FadeScreen.fade_out(0.5, Tween.EASE_OUT, Tween.TRANS_SINE)
 		await $FadeScreenLayer/FadeScreen.fade_finished
 		$Level.get_child(0).start_level()
 		LevelManager.is_first_attempt = false
 	else:
 		$Level.get_child(0).start_level()
+
+
+func _leave_level() -> void:
+	$FadeScreenLayer/FadeScreen.fade_in(0.5, Tween.EASE_IN, Tween.TRANS_SINE)
+
+
 
 func _process(_delta: float) -> void:
 	for ground_sprite in LevelManager.ground_sprites:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cinyg32n0bonm"]
+[gd_scene load_steps=31 format=3 uid="uid://cinyg32n0bonm"]
 
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/FadeScreen.tscn" id="1_e44lk"]
 [ext_resource type="Texture2D" uid="uid://dewrklmfoeg7m" path="res://assets/textures/grounds/ground-1.png" id="2_5u8e8"]
@@ -44,6 +44,12 @@ script = ExtResource("12_ct30d")
 duration = 0.5
 transition = 5
 ease = 0
+
+[sub_resource type="Resource" id="Resource_7wwop"]
+script = ExtResource("12_ct30d")
+duration = 0.5
+transition = 5
+ease = 1
 
 [node name="MainScene" type="Control"]
 layout_mode = 3
@@ -363,6 +369,25 @@ tween_parameters = SubResource("Resource_m8p16")
 tween_on_load = true
 inactive_update_mode = 0
 
+[node name="FromEditorCamera" type="Node2D" parent="CameraCenterParent"]
+script = ExtResource("8_04kr6")
+priority_override = false
+priority = 0
+zoom = Vector2(2, 2)
+follow_mode = 0
+frame_preview = true
+pixel_perfect = false
+limit/draw_limits = true
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = false
+tween_parameters = SubResource("Resource_7wwop")
+tween_on_load = true
+inactive_update_mode = 0
+
 [node name="CreatedLevelsList" type="Control" parent="."]
 visible = false
 layout_mode = 1
@@ -552,7 +577,6 @@ script = ExtResource("6_0wc6k")
 
 [node name="MenuLoop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_ir7j4")
-stream_paused = true
 bus = &"Music"
 
 [node name="Subscene Manager" type="Node" parent="." node_paths=PackedStringArray("active_pcam", "history", "page_control_container", "quit_game_button", "fade_screen_layer", "settings_layer", "menu_loop", "created_levels_list", "icon_garage", "level_selector", "created_levels_list_camera", "icon_garage_camera", "quit_game_camera", "title_screen_camera", "title_screen_background", "title_screen_ground", "level_selector_page_container")]

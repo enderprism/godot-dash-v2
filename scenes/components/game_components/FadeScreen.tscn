@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bcvao0q4nxnl6" path="res://src/FadeScreen.gd" id="1_a1tqg"]
 
 [node name="FadeScreenLayer" type="CanvasLayer"]
+process_mode = 3
 layer = 110
 
 [node name="FadeScreen" type="ColorRect" parent="."]
