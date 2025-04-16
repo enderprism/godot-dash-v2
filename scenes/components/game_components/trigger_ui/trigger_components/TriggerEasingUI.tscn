@@ -47,7 +47,7 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("3_7o0da")
 type = 6
-enum_fields = PackedStringArray("Linear", "Sine", "Quint", "Quart", "Quad", "Expo", "Elastic", "Cubic", "Circ", "Bounce", "Back", "Sprink")
+enum_fields = PackedStringArray("Linear", "Sine", "Quint", "Quart", "Quad", "Expo", "Elastic", "Cubic", "Circ", "Bounce", "Back", "Spring")
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Transition"]
