@@ -65,11 +65,11 @@ b = Vector2(0, 128)
 a = Vector2(0, -8192)
 b = Vector2(0, 8192)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_mdglc"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_spjyg"]
 a = Vector2(0, -8192)
 b = Vector2(0, 8192)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_md885"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_iot8l"]
 a = Vector2(0, -8192)
 b = Vector2(0, 8192)
 
@@ -567,7 +567,7 @@ single_usage = true
 script = ExtResource("12_bmhr7")
 
 [node name="Hitbox" type="CollisionShape2D" parent="tCameraStatic3/TriggerBase"]
-shape = SubResource("SegmentShape2D_mdglc")
+shape = SubResource("SegmentShape2D_spjyg")
 debug_color = Color(1, 0.960784, 0, 0.419608)
 
 [node name="Sprite" type="Sprite2D" parent="tCameraStatic3/TriggerBase"]
@@ -599,7 +599,7 @@ single_usage = true
 script = ExtResource("12_bmhr7")
 
 [node name="Hitbox" type="CollisionShape2D" parent="tCameraStatic4/TriggerBase"]
-shape = SubResource("SegmentShape2D_md885")
+shape = SubResource("SegmentShape2D_iot8l")
 debug_color = Color(1, 0.960784, 0, 0.419608)
 
 [node name="Sprite" type="Sprite2D" parent="tCameraStatic4/TriggerBase"]
@@ -964,7 +964,6 @@ z_index = -50
 
 [node name="TriggerEasing" type="Node" parent="tCameraStatic2"]
 script = ExtResource("10_srhyw")
-_duration = 2.0
 easing_transition = 4
 
 [node name="TriggerBase" type="Area2D" parent="tCameraStatic2" node_paths=PackedStringArray("_target")]

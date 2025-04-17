@@ -57,6 +57,8 @@ const EVALUATE_CLICK_BUFFER := 1
 		displayed_gamemode = value
 		for icon in $Icon.get_children():
 			if icon.gamemode != value: icon.hide()
+			elif not LevelManager.platformer and icon.platformer == IconGamemodeProp.PlatformerState.PLATFORMER_ONLY: icon.hide()
+			elif LevelManager.platformer and icon.platformer == IconGamemodeProp.PlatformerState.SIDESCROLLER_ONLY: icon.hide()
 			else: icon.show()
 @export var internal_gamemode: Gamemode
 @export var default_collider: RectangleShape2D

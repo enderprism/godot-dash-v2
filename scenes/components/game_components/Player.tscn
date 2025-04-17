@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://bl48psvuka73y"]
+[gd_scene load_steps=109 format=3 uid="uid://bl48psvuka73y"]
 
 [ext_resource type="Script" uid="uid://dlfmgrvw7q01y" path="res://src/Player.gd" id="1_nvqsc"]
 [ext_resource type="Texture2D" uid="uid://omcvgcf1uk5p" path="res://assets/textures/player/cube/Cube.svg" id="2_6ab5b"]
@@ -40,6 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://bxf2eny7xic88" path="res://assets/textures/player/spider/Spider.svg" id="20_bb8qe"]
 [ext_resource type="Texture2D" uid="uid://dnl23vymdbygl" path="res://assets/textures/player/spider/Parts/Spider_Leg-glow.svg" id="21_fajhm"]
 [ext_resource type="Texture2D" uid="uid://dyu6awwvh1u7c" path="res://assets/textures/player/spider/Parts/Spider_Leg.svg" id="22_2ro0i"]
+[ext_resource type="Texture2D" uid="uid://cfwfqja2lpecd" path="res://assets/textures/player/jetpack/Jetpack.svg" id="27_vov5s"]
 [ext_resource type="Texture2D" uid="uid://cclfd4gmsd4a0" path="res://assets/textures/player/FireBoost.svg" id="29_475ha"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_14y25"]
@@ -2070,10 +2071,22 @@ texture = ExtResource("18_nmour")
 visible = false
 script = ExtResource("2_sxyn3")
 gamemode = 1
+platformer = 1
 
 [node name="ShipIcon" type="Sprite2D" parent="Icon/Ship"]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("4_mqpwg")
+
+[node name="Jetpack" type="Node2D" parent="Icon"]
+visible = false
+script = ExtResource("2_sxyn3")
+gamemode = 1
+platformer = 2
+
+[node name="JetpackIcon" type="Sprite2D" parent="Icon/Jetpack"]
+position = Vector2(0, -10)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("27_vov5s")
 
 [node name="Swing" type="Node2D" parent="Icon"]
 visible = false
