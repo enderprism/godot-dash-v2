@@ -16,6 +16,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), false)
 	if not get_parent() is EditorScene:
+		LevelManager.player.process_mode = Node.PROCESS_MODE_DISABLED
 		$PauseMenuLayer/PauseMenu.leave.connect(_leave_level)
 		if LevelManager.is_first_attempt:
 			$FadeScreenLayer/FadeScreen.show()
@@ -38,6 +39,7 @@ func _start_level() -> void:
 		LevelManager.is_first_attempt = false
 	else:
 		$Level.get_child(0).start_level()
+	LevelManager.player.process_mode = Node.PROCESS_MODE_INHERIT
 
 
 func _leave_level() -> void:
