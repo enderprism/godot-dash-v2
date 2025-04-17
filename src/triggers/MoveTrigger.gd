@@ -3,8 +3,8 @@ extends Node2D
 class_name MoveTrigger
 
 enum Mode {
-	SET,
 	ADD,
+	SET,
 	MOVE_TOWARDS,
 }
 
@@ -27,9 +27,9 @@ enum Mode {
 
 # Hide unneeded elements in the inspector
 func _validate_property(property: Dictionary) -> void:
-	if property.name == "_set_position" and mode != Mode.SET:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name == "_add_position" and mode != Mode.ADD:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+	if property.name == "_set_position" and mode != Mode.SET:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name in ["_move_towards_target", "_move_towards_offset", "_move_towards_distance_multiplier"] and mode != Mode.MOVE_TOWARDS:
 		property.usage = PROPERTY_USAGE_NO_EDITOR

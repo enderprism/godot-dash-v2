@@ -71,6 +71,7 @@ var gui_inputs: Array[Control]
 func _ready() -> void:
 	# Setup
 	custom_minimum_size.y = 32
+	set_meta("_edit_group_", true)
 	_label = NodeUtils.get_node_or_add(self, "Label", Label, NodeUtils.INTERNAL | NodeUtils.SET_OWNER)
 	_spacer = NodeUtils.get_node_or_add(self, "Spacer", Control, NodeUtils.INTERNAL | NodeUtils.SET_OWNER)
 	_spacer.size_flags_horizontal = SIZE_FILL | SIZE_EXPAND
