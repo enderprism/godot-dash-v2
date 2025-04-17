@@ -60,27 +60,21 @@ func _physics_process(_delta: float) -> void:
 					Mode.COPY:
 						if _copy_target != null:
 							if not _copy_look_at:
-								_target.global_rotation_degrees = lerp(
-									_initial_global_rotation_degrees,
-									_copy_target.global_rotation_degrees + _copy_offset,
-									easing._weight)
+								_rotation_delta = (_copy_target.global_rotation_degrees + _copy_offset - _initial_global_rotation_degrees) * _weight_delta
 							else:
-								_target.global_rotation_degrees = lerp(
-									_initial_global_rotation_degrees,
-									_target.global_position.get_angle_to(_copy_target.global_position) + _copy_offset,
-									easing._weight)
+								_rotation_delta = (_target.global_position.get_angle_to(_copy_target.global_position) + _copy_offset - _initial_global_rotation_degrees) * _weight_delta
 						elif LevelManager.in_editor and LevelManager.level_playing:
 							printerr("In ", name, ": copy_target is unset!")
-						# Escape the current loop iteration to avoid adding the rotation delta, even if it's null.
-						continue
 				# Add the rotation delta
 				if _rotate_around_self:
 					_target.global_rotation_degrees += _rotation_delta
-				else:
+				elif _pivot != null:
 					_target.global_rotation_degrees += _rotation_delta
 					var position_relative_to_pivot: Vector2 = _target.global_position - _pivot.global_position
 					var position_delta := position_relative_to_pivot.rotated(deg_to_rad(_rotation_delta)) - position_relative_to_pivot
 					_target.global_position += position_delta
+				else:
+					printerr("In ", name, ": _pivot is unset")
 		elif LevelManager.in_editor and LevelManager.level_playing:
 			printerr("In ", name, ": _target is unset")
 	elif Engine.is_editor_hint() or LevelManager.in_editor:
