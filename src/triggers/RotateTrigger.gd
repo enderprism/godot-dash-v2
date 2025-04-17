@@ -19,16 +19,13 @@ enum Mode {
 	set(value):
 		mode = value
 		notify_property_list_changed()
-@export_range(-360, 360, 0.01, "or_greater", "or_less", "degrees") var _set_rotation_degrees: float
-@export_range(-360, 360, 0.01, "or_greater", "or_less", "degrees") var _add_rotation_degrees: float
+@export_range(-360, 360, 0.01, "or_greater", "or_less", "degrees") var _rotation_degrees: float
 @export var _copy_target: Node2D
 @export_range(-360, 360, 0.01, "or_greater", "or_less", "degrees") var _copy_offset: float ## Offset in global coordinates from the rotation target.
 
 # Hide unneeded elements in the inspector
 func _validate_property(property: Dictionary) -> void:
-	if property.name == "_set_rotation_degrees" and mode != Mode.SET:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name == "_add_rotation_degrees" and mode != Mode.ADD:
+	if property.name == "_rotation_degrees" and (mode != Mode.SET and mode != Mode.ADD):
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name in ["_copy_target", "_copy_offset"] and mode != Mode.COPY:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
@@ -55,9 +52,9 @@ func _physics_process(_delta: float) -> void:
 				var _rotation_delta: float
 				match mode:
 					Mode.SET:
-						_rotation_delta = (_set_rotation_degrees - _initial_global_rotation_degrees) * _weight_delta
+						_rotation_delta = (_rotation_degrees - _initial_global_rotation_degrees) * _weight_delta
 					Mode.ADD:
-						_rotation_delta = _add_rotation_degrees * _weight_delta
+						_rotation_delta = _rotation_degrees * _weight_delta
 					Mode.COPY:
 						if _copy_target != null:
 							_target.global_rotation_degrees = lerp(

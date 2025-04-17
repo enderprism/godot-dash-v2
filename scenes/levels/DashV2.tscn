@@ -361,7 +361,7 @@ script = ExtResource("14_2jira")
 position = Vector2(1342, -960)
 script = ExtResource("16_pj4c7")
 _rotate_around_self = true
-_add_rotation_degrees = 180.0
+_rotation_degrees = 180.0
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="RotateTrigger" instance=ExtResource("6_bolvq")]
@@ -1212,7 +1212,7 @@ one_shot = true
 position = Vector2(5952, -960)
 script = ExtResource("16_pj4c7")
 _pivot = NodePath("../Cross2")
-_add_rotation_degrees = 90.0
+_rotation_degrees = 90.0
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="RotateTrigger2" instance=ExtResource("6_bolvq")]
