@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgh6cf5sa4uce"
-path="res://.godot/imported/SizePortalNormalFront.png-cf99979cd74d0097f60c1ee6cf6ceb84.ctex"
+uid="uid://ddjeyix04leys"
+path="res://.godot/imported/ScalePortalSmallFront.png-8514a8268271ecc51b26e5aece05a5ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/portals/other_portals/size_portal_normal/SizePortalNormalFront.png"
-dest_files=["res://.godot/imported/SizePortalNormalFront.png-cf99979cd74d0097f60c1ee6cf6ceb84.ctex"]
+source_file="res://assets/textures/portals/other_portals/scale_portal_small/ScalePortalSmallFront.png"
+dest_files=["res://.godot/imported/ScalePortalSmallFront.png-8514a8268271ecc51b26e5aece05a5ef.ctex"]
 
 [params]
 

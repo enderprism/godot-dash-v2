@@ -37,7 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://bwjxj7jcot0cn" path="res://scenes/components/level_components/letter_objects/StopDash.tscn" id="30_me5kp"]
 [ext_resource type="PackedScene" uid="uid://cct7q7sr6fwc0" path="res://scenes/components/level_components/portals/gamemode_portals/WavePortal.tscn" id="31_bjlog"]
 [ext_resource type="Texture2D" uid="uid://b6eeefnqgnv52" path="res://assets/textures/triggers/Spawn.svg" id="32_eh181"]
-[ext_resource type="PackedScene" uid="uid://b2civdkigbcth" path="res://scenes/components/level_components/portals/other_portals/SizePortalSmall.tscn" id="32_k5j6h"]
+[ext_resource type="PackedScene" uid="uid://b2civdkigbcth" path="res://scenes/components/level_components/portals/other_portals/ScalePortalSmall.tscn" id="32_k5j6h"]
 [ext_resource type="Texture2D" uid="uid://cihka00vqqj3m" path="res://assets/textures/triggers/Alpha.svg" id="38_tkw8r"]
 [ext_resource type="Script" uid="uid://78e8oeq1vi6k" path="res://src/TargetLink.gd" id="39_yr81y"]
 
