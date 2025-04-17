@@ -27,6 +27,11 @@ func start_level() -> void:
 	LevelManager.level_playing = true
 
 
+func stop_level() -> void:
+	song_player.stop()
+	LevelManager.level_playing = false
+
+
 func setup_color_channel_watchers() -> void:
 	for color_channel in color_channels:
 		var watcher := ColorChannelWatcher.new(color_channel)

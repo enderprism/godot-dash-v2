@@ -41,6 +41,8 @@ func _start_level() -> void:
 
 
 func _leave_level() -> void:
+	if $Level.get_child(0) != null:
+		$Level.get_child(0).stop_level()
 	$FadeScreenLayer/FadeScreen.fade_in(0.5, Tween.EASE_IN, Tween.TRANS_SINE)
 
 
