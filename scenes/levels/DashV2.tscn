@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://dk23aw7g82m5p" path="res://src/triggers/trigger_components/TriggerHitboxDisplay.gd" id="12_bmhr7"]
 [ext_resource type="PackedScene" uid="uid://dh1l6k3qxgwdf" path="res://scenes/components/level_components/hazards/SpikeFlat.tscn" id="12_sa2ab"]
 [ext_resource type="Texture2D" uid="uid://odtrgqretvc6" path="res://assets/textures/triggers/Move.svg" id="13_wjfr7"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/SingleUsage.gd" id="14_2jira"]
+[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="14_2jira"]
 [ext_resource type="PackedScene" uid="uid://calhypvupvj4m" path="res://scenes/components/level_components/hazards/Spike.tscn" id="14_kphb3"]
 [ext_resource type="Script" uid="uid://fsddjdtuhoce" path="res://src/triggers/GameplayRotateTrigger.gd" id="15_3ludl"]
 [ext_resource type="PackedScene" uid="uid://duu44mnb4uo8u" path="res://scenes/components/level_components/portals/gamemode_portals/BallPortal.tscn" id="15_khho3"]
@@ -223,6 +223,7 @@ script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../DefaultCube7")
 target_group = &"colon_jumpscare_wall"
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="MoveTrigger/TriggerBase"]
 visible = false
@@ -259,6 +260,7 @@ script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../FloorButton")
 target_group = &"floorbutton1"
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="FloorButtonMove/TriggerBase"]
 visible = false
@@ -342,6 +344,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../SpiderPortal")
 target_group = &"spiderportal"
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="AlphaTrigger/TriggerBase"]
 script = ExtResource("12_bmhr7")
@@ -377,6 +380,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../SpiderPortal")
 target_group = &"spiderportal"
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="RotateTrigger/TriggerBase"]
 script = ExtResource("12_bmhr7")
@@ -412,6 +416,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../SpiderPortal")
 target_group = &"spiderportal"
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="ScaleTrigger/TriggerBase"]
 script = ExtResource("12_bmhr7")
@@ -443,6 +448,7 @@ _duration = 0.0
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 hitbox_height = 2.0
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="GameplayRotateTrigger/TriggerBase"]
 script = ExtResource("12_bmhr7")
@@ -479,7 +485,6 @@ _duration = 0.0
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 hitbox_height = 1.0
-single_usage = false
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="GameplayRotateTrigger2/TriggerBase"]
 script = ExtResource("12_bmhr7")
@@ -522,6 +527,7 @@ easing_transition = 1
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../Cross")
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="CameraStaticTrigger/TriggerBase"]
 script = ExtResource("12_bmhr7")
@@ -555,6 +561,7 @@ _duration = 0.2
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../Cross")
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="tCameraStatic3/TriggerBase"]
 script = ExtResource("12_bmhr7")
@@ -586,6 +593,7 @@ easing_transition = 1
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../Cross2")
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="tCameraStatic4/TriggerBase"]
 script = ExtResource("12_bmhr7")
@@ -629,6 +637,7 @@ script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../PinkOrb")
 target_group = &"orb1"
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="tMove2/TriggerBase"]
 visible = false
@@ -670,6 +679,7 @@ script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../PinkOrb2")
 target_group = &"orb2"
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="tMove3/TriggerBase"]
 visible = false
@@ -699,6 +709,7 @@ default_color = Color(0, 1, 1, 1)
 [node name="TriggerBase" type="Area2D" parent="SpawnTrigger"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="SpawnTrigger/TriggerBase"]
 script = ExtResource("12_bmhr7")
@@ -734,6 +745,7 @@ default_color = Color(0, 1, 1, 1)
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 1
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="SpawnTrigger2/TriggerBase"]
 script = ExtResource("12_bmhr7")
@@ -775,6 +787,7 @@ script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../FloorButton2")
 target_group = &"floorbutton2"
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="FloorButtonMove2/TriggerBase"]
 visible = false
@@ -815,6 +828,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 target_group = &"spike1"
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="LowerSpike1/TriggerBase"]
 visible = false
@@ -855,6 +869,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 target_group = &"spike2"
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="LowerSpike2/TriggerBase"]
 visible = false
@@ -895,6 +910,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 target_group = &"spike3"
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="LowerSpike3/TriggerBase"]
 visible = false
@@ -956,6 +972,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 hitbox_height = 1.5
 _target = NodePath("../../Cross")
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="tCameraStatic2/TriggerBase"]
 script = ExtResource("12_bmhr7")
@@ -993,6 +1010,7 @@ default_color = Color(0, 1, 1, 1)
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 1
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="SpawnTrigger3/TriggerBase"]
 script = ExtResource("12_bmhr7")
@@ -1053,6 +1071,7 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 target_group = &"BallPortalWithPads"
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="MoveBallPlatform/TriggerBase"]
 visible = false
@@ -1089,6 +1108,7 @@ script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 _target = NodePath("../../FloorButton3")
 target_group = &"floorbutton3"
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="FloorButtonMove3/TriggerBase"]
 visible = false
@@ -1127,6 +1147,7 @@ script = ExtResource("10_srhyw")
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 1
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="SpawnTrigger4/TriggerBase"]
 script = ExtResource("12_bmhr7")
@@ -1189,6 +1210,7 @@ script = ExtResource("10_srhyw")
 [node name="TriggerBase" type="Area2D" parent="tSpawn5"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
+single_usage = true
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="tSpawn5/TriggerBase"]
 script = ExtResource("12_bmhr7")
@@ -1229,7 +1251,6 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 target_group = &"spawnlooped_cube"
-single_usage = false
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="RotateTrigger2/TriggerBase"]
 visible = false
@@ -1266,7 +1287,6 @@ collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
 target_group = &"spawnlooped_cube"
-single_usage = false
 
 [node name="TriggerHitboxDisplay" type="Node2D" parent="ScaleTrigger2/TriggerBase"]
 visible = false

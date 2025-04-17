@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://05h0teol0odp" path="res://scenes/particle_emitter_presets/PadParticles.tscn" id="4_26ak1"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="5_hg5x3"]
 [ext_resource type="Script" uid="uid://bprbt31kxjc76" path="res://src/interactables/public_components/ReboundComponent.gd" id="6_actth"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/SingleUsage.gd" id="7_8bjuk"]
+[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="7_8bjuk"]
 [ext_resource type="Script" uid="uid://crvw7wonis42n" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="8_lapvy"]
 [ext_resource type="Script" uid="uid://b26yjae2kfyeo" path="res://src/interactables/private_components/ReboundPadSprite.gd" id="9_50uy8"]
 

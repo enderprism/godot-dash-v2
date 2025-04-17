@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bcwax4487q6kc" path="res://assets/textures/portals/gamemode_portals/swing_portal/SwingPortalIndicatorIcon.png" id="5_dmdv1"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="8_58jg0"]
 [ext_resource type="Script" uid="uid://ch7r67xegri61" path="res://src/interactables/public_components/GamemodeChangerComponent.gd" id="9_gvnbb"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/SingleUsage.gd" id="10_mnyix"]
+[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="10_mnyix"]
 [ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="11_qa8wx"]
 [ext_resource type="Script" uid="uid://dh8clxh0ec2bd" path="res://src/interactables/public_components/GroundMoverComponent.gd" id="12_adlvq"]
 [ext_resource type="Script" uid="uid://cd3jqi4il3x2p" path="res://src/interactables/private_components/TextureRotatePin.gd" id="13_ibmvd"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://dvxuhegi7klq8"]
 
 [ext_resource type="Script" uid="uid://f5fvarclvwxg" path="res://src/interactables/OrbInteractable.gd" id="1_xmkgn"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/SingleUsage.gd" id="2_jnww5"]
+[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="2_jnww5"]
 [ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_y4jb6"]
 [ext_resource type="Script" uid="uid://cx0n1qip15t20" path="res://src/interactables/private_components/MusicScale.gd" id="3_8l25v"]
 [ext_resource type="Script" uid="uid://c772o12ml0hud" path="res://src/interactables/public_components/FireDashComponent.gd" id="3_binks"]

@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="3_tsh4p"]
 [ext_resource type="Texture2D" uid="uid://c4ex0v5xsqcma" path="res://assets/textures/portals/other_portals/count_portal_dual/CountPortalDualBack.png" id="4_wghhi"]
 [ext_resource type="Texture2D" uid="uid://djl51mcjms05k" path="res://assets/textures/portals/other_portals/count_portal_dual/CountPortalDualFront.png" id="5_vi280"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/SingleUsage.gd" id="6_dk752"]
+[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="6_dk752"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="7_h7re3"]
 [ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="8_7bsqi"]
 

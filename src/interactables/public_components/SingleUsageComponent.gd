@@ -1,4 +1,4 @@
-extends Node
+extends Component
 class_name SingleUsageComponent
 
 @onready var _parent := get_parent() as Area2D
@@ -6,9 +6,8 @@ var _enabled := false
 
 
 func _ready() -> void:
+	super()
 	_enabled = _parent.single_usage
-	# Doesn't register itself if the parent is an Interactable because it's a private component
-	# aka it only interacts with its parent.
 	if _enabled:
 		if _parent is OrbInteractable:
 			_parent.pressed.connect(disable)

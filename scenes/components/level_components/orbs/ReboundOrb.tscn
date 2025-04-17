@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://3bx52cwl061u" path="res://src/interactables/private_components/ReboundOrbSprite.gd" id="5_7g4ia"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="7_17vtt"]
 [ext_resource type="Script" uid="uid://crvw7wonis42n" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="8_ivhwd"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/SingleUsage.gd" id="8_lm2ku"]
+[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="8_lm2ku"]
 [ext_resource type="Script" uid="uid://blkbj1no2k35m" path="res://src/interactables/private_components/PulseRing.gd" id="8_xmpji"]
 [ext_resource type="Script" uid="uid://bprbt31kxjc76" path="res://src/interactables/public_components/ReboundComponent.gd" id="11_03fns"]
 

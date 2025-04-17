@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bccihwc0pstxx" path="res://src/interactables/PadInteractable.gd" id="1_muv28"]
 [ext_resource type="PackedScene" uid="uid://05h0teol0odp" path="res://scenes/particle_emitter_presets/PadParticles.tscn" id="2_287b4"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="4_tujog"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/SingleUsage.gd" id="5_s7saa"]
+[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="5_s7saa"]
 [ext_resource type="Texture2D" uid="uid://cbbt17ufbgqqu" path="res://assets/textures/pads/RedPad.svg" id="6_ielrm"]
 [ext_resource type="Script" uid="uid://cqkay7r3kwd6f" path="res://src/interactables/public_components/JumpBoostComponent.gd" id="6_lk0tv"]
 [ext_resource type="Script" uid="uid://crvw7wonis42n" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="7_reb52"]

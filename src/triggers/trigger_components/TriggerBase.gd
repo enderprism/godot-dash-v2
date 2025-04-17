@@ -1,6 +1,6 @@
 @tool
 class_name TriggerBase
-extends Area2D
+extends Interactable
 ## The base class for Godot Dash triggers.
 
 signal target_changed
@@ -33,8 +33,6 @@ enum TriggerHitboxShape {
 
 @export var target_group: StringName
 
-## If the trigger can be used multiple times.
-@export var single_usage: bool = true
 
 func _validate_property(property: Dictionary) -> void:
 	if property.name == "hitbox_height" and _hitbox_shape != TriggerHitboxShape.LINE:
@@ -46,7 +44,6 @@ var sprite: Sprite2D
 var ui_path: String
 ## The trigger's collision shape.
 var _hitbox: CollisionShape2D
-var _single_usage_component: SingleUsageComponent
 var _hitbox_display: TriggerHitboxDisplay
 
 func _ready() -> void:
@@ -58,7 +55,7 @@ func _ready() -> void:
 	_hitbox.debug_color = Color("fff5006b")
 	sprite.scale = Vector2.ONE * 0.2
 	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
-	_single_usage_component = NodeUtils.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"), NodeUtils.INTERNAL)
+	NodeUtils.get_node_or_add(self, "SingleUsageComponent", SingleUsageComponent, NodeUtils.INTERNAL)
 	NodeUtils.connect_new(hitbox_shape_changed, _hitbox_display.update_shape)
 	_set_hitbox_shape()
 

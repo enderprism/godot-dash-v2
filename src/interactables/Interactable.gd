@@ -3,7 +3,7 @@ class_name Interactable
 
 @export var single_usage := false
 
-var components: Array[Node]
+var components: Array[Component]
 
 func _ready() -> void:
 	if LevelManager.in_editor:
@@ -15,5 +15,5 @@ func _ready() -> void:
 		$Hitbox.debug_color = Color("00ff0033")
 
 
-func register_public(component: Node):
+func register_public(component: Component):
 	components.append(component)

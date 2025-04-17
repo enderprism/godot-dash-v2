@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="6_he45p"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="8_x1q1h"]
 [ext_resource type="Script" uid="uid://ch7r67xegri61" path="res://src/interactables/public_components/GamemodeChangerComponent.gd" id="9_rtwxu"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/SingleUsage.gd" id="10_2r1wn"]
+[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="10_2r1wn"]
 [ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="11_jb6b4"]
 [ext_resource type="Script" uid="uid://dh8clxh0ec2bd" path="res://src/interactables/public_components/GroundMoverComponent.gd" id="12_kxch4"]
 [ext_resource type="Script" uid="uid://cd3jqi4il3x2p" path="res://src/interactables/private_components/TextureRotatePin.gd" id="13_c3ums"]

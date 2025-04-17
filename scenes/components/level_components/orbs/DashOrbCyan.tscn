@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d28pf7aqf5nj4" path="res://assets/textures/orbs/DashOrbCyan.svg" id="4_bux5k"]
 [ext_resource type="Script" uid="uid://blkbj1no2k35m" path="res://src/interactables/private_components/PulseRing.gd" id="5_ndqdo"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="6_kltjm"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/SingleUsage.gd" id="7_14ggb"]
+[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="7_14ggb"]
 [ext_resource type="Script" uid="uid://c772o12ml0hud" path="res://src/interactables/public_components/FireDashComponent.gd" id="8_1gryp"]
 [ext_resource type="Script" uid="uid://crvw7wonis42n" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="10_5fmuc"]
 [ext_resource type="Script" uid="uid://dvw68q15l24y6" path="res://src/interactables/private_components/FireDashPathFollowSpeed.gd" id="10_bufb6"]
