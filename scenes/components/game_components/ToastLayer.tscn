@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c5g3ab1px7wu0"]
+
+[node name="ToastLayer" type="CanvasLayer"]
+
+[node name="ToastContainer" type="VBoxContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -79.5
+offset_right = 79.5
+offset_bottom = 69.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="Spacer" type="Control" parent="ToastContainer"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
