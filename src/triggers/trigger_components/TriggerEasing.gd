@@ -38,7 +38,7 @@ func get_weight_delta() -> float:
 	return _result
 
 func is_inactive() -> bool:
-	return _weight == 0.0 or (_weight == 1.0 and not keep_active)
+	return _weight == 0.0 or (_previous_weight == 1.0 and not keep_active)
 
 func reset() -> void:
 	_weight = 0.0
