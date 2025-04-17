@@ -20,6 +20,13 @@ signal value_changed(new_value: Vector2)
 		for spinbox in [spinbox_x, spinbox_y]:
 			spinbox.suffix = value
 @export var select_all_on_focus: bool
+@export var editable: bool:
+	set(value):
+		editable = value
+		if not is_node_ready():
+			return
+		for spinbox in [spinbox_x, spinbox_y]:
+			spinbox.editable = value
 @onready var spinbox_x: SpinBox
 @onready var spinbox_y: SpinBox
 var aspect_ratio: float

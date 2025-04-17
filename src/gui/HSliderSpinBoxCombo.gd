@@ -13,6 +13,13 @@ signal value_changed(value: float)
 @export var prefix: String
 @export var suffix: String
 @export var select_all_on_focus: bool
+@export var editable: bool:
+	set(value):
+		editable = value
+		if not is_node_ready():
+			return
+		for _range in [hslider, spinbox]:
+			_range.editable = value
 @export var slider_width: float = 256.0:
 	set(value):
 		slider_width = value
@@ -42,7 +49,7 @@ func _ready() -> void:
 	hslider.size_flags_vertical = SIZE_FILL
 	spinbox = NodeUtils.get_node_or_add(self, "SpinBox", SpinBox, NodeUtils.INTERNAL | NodeUtils.SET_OWNER)
 	update_internals()
-	hslider.value_changed.connect(_update_value)
+	spinbox.share(hslider)
 	spinbox.value_changed.connect(_update_value)
 
 
@@ -60,10 +67,8 @@ func update_internals() -> void:
 
 
 func _update_value(new_value: float) -> void:
-	hslider.value = new_value
 	spinbox.value = new_value
 	value_changed.emit(value)
 
 func set_value_no_signal(new_value: float) -> void:
-	hslider.value = new_value
 	spinbox.value = new_value
