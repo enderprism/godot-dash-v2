@@ -11,6 +11,7 @@ collision_layer = 4
 metadata/_edit_group_ = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_yud3k")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]

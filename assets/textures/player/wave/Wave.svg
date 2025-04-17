@@ -7,7 +7,7 @@
    viewBox="0 0 149.22502 149.22502"
    version="1.1"
    id="svg1"
-   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
    sodipodi:docname="Wave.svg"
    inkscape:export-filename="cube.png"
    inkscape:export-xdpi="96"
@@ -28,8 +28,8 @@
      inkscape:deskcolor="#181825"
      inkscape:document-units="px"
      inkscape:zoom="0.68085106"
-     inkscape:cx="508.1875"
-     inkscape:cy="199.75"
+     inkscape:cx="468.53125"
+     inkscape:cy="201.21875"
      inkscape:window-width="1920"
      inkscape:window-height="1080"
      inkscape:window-x="0"
@@ -160,7 +160,7 @@
        link_styles="false" /><linearGradient
        id="linearGradient26"
        inkscape:collect="always"><stop
-         style="stop-color:#6600ff;stop-opacity:1"
+         style="stop-color:#7d00ff;stop-opacity:1;"
          offset="0"
          id="stop26" /><stop
          style="stop-color:#00ffff;stop-opacity:1"

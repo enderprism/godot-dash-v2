@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buwtqcrkk8knn"
-path="res://.godot/imported/RegularBlock01.svg-8440a42de23e7a71424e801b5cbb4ee3.ctex"
+uid="uid://dwu7wyhadhlnu"
+path="res://.godot/imported/OutlineBlock01.svg-a8e2498b7f22a843da13ce16667c9e41.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/solids/RegularBlock01.svg"
-dest_files=["res://.godot/imported/RegularBlock01.svg-8440a42de23e7a71424e801b5cbb4ee3.ctex"]
+source_file="res://assets/textures/solids/outline_blocks/OutlineBlock01.svg"
+dest_files=["res://.godot/imported/OutlineBlock01.svg-a8e2498b7f22a843da13ce16667c9e41.ctex"]
 
 [params]
 

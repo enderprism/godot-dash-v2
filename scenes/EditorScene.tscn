@@ -1,4 +1,4 @@
-[gd_scene load_steps=166 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=174 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -9,9 +9,9 @@
 [ext_resource type="Script" uid="uid://blxkynmwmuvce" path="res://src/editor/NoFocusTabContainer.gd" id="4_2at5j"]
 [ext_resource type="Texture2D" uid="uid://c3d7se3g1r25n" path="res://assets/textures/guis/editor/block_palette/Solids.svg" id="4_7or8s"]
 [ext_resource type="Script" uid="uid://doei3yc3rs41t" path="res://src/BouncyButton.gd" id="4_gl2yd"]
-[ext_resource type="Texture2D" uid="uid://buwtqcrkk8knn" path="res://assets/textures/solids/RegularBlock01.svg" id="4_u8igg"]
+[ext_resource type="Texture2D" uid="uid://buwtqcrkk8knn" path="res://assets/textures/solids/regular_blocks/RegularBlock01.svg" id="4_u8igg"]
 [ext_resource type="Texture2D" uid="uid://7qnm5gdpp818" path="res://assets/textures/guis/editor/block_palette/Hazards.svg" id="5_gyl57"]
-[ext_resource type="Texture2D" uid="uid://dwu7wyhadhlnu" path="res://assets/textures/solids/OutlineBlock01.svg" id="6_2nlu4"]
+[ext_resource type="Texture2D" uid="uid://dwu7wyhadhlnu" path="res://assets/textures/solids/outline_blocks/OutlineBlock01.svg" id="6_2nlu4"]
 [ext_resource type="Texture2D" uid="uid://bdlj0vb8x71it" path="res://assets/textures/guis/editor/block_palette/Interactables.svg" id="6_gh5m2"]
 [ext_resource type="Script" uid="uid://4twseak4h1wb" path="res://src/MapCamera2D.gd" id="6_wcytj"]
 [ext_resource type="Script" uid="uid://dsgesrbkguesm" path="res://src/editor/BlockPaletteRef.gd" id="7_f0stj"]
@@ -21,15 +21,22 @@
 [ext_resource type="Texture2D" uid="uid://djlnfy6mugjwc" path="res://assets/textures/hazards/RegularSpikeNormal.svg" id="11_xeik2"]
 [ext_resource type="PackedScene" uid="uid://calhypvupvj4m" path="res://scenes/components/level_components/hazards/Spike.tscn" id="12_18txt"]
 [ext_resource type="Texture2D" uid="uid://b8twes5otuygx" path="res://assets/textures/hazards/RegularSpikeFlat.svg" id="13_06phv"]
+[ext_resource type="Texture2D" uid="uid://b5b8kj1ubkugy" path="res://assets/textures/solids/regular_blocks/RegularSlope01.svg" id="14_ccqvw"]
 [ext_resource type="PackedScene" uid="uid://dh1l6k3qxgwdf" path="res://scenes/components/level_components/hazards/SpikeFlat.tscn" id="14_wyjb2"]
 [ext_resource type="Texture2D" uid="uid://bidrk8pvqveup" path="res://assets/textures/orbs/YellowOrb.svg" id="15_cisni"]
+[ext_resource type="PackedScene" uid="uid://dcab8tedyj616" path="res://scenes/components/level_components/solids/DefaultSlope01.tscn" id="15_lojhq"]
+[ext_resource type="PackedScene" uid="uid://bs82trmwlnsmy" path="res://scenes/components/level_components/solids/DefaultSlope02.tscn" id="16_lojhq"]
 [ext_resource type="PackedScene" uid="uid://bncq73polqc8u" path="res://scenes/components/level_components/orbs/YellowOrb.tscn" id="16_nywui"]
+[ext_resource type="Texture2D" uid="uid://chtrj70jj3qlf" path="res://assets/textures/solids/regular_blocks/RegularSlope02.svg" id="16_pmc7a"]
 [ext_resource type="Texture2D" uid="uid://cgq0oyg02x4d2" path="res://assets/textures/orbs/RedOrb.svg" id="17_a7wr4"]
 [ext_resource type="PackedScene" uid="uid://cglxf6jw4fmi" path="res://scenes/components/level_components/orbs/RedOrb.tscn" id="18_1ww1r"]
+[ext_resource type="Texture2D" uid="uid://b6tbqasvosqbs" path="res://assets/textures/solids/outline_blocks/OutlineSlope01.svg" id="18_txut0"]
 [ext_resource type="PackedScene" uid="uid://c7u5r5wqi845u" path="res://scenes/components/level_components/orbs/PinkOrb.tscn" id="19_jb5ft"]
 [ext_resource type="Texture2D" uid="uid://cnuxa4cqkiika" path="res://assets/textures/orbs/PinkOrb.svg" id="19_kancb"]
 [ext_resource type="Texture2D" uid="uid://cihka00vqqj3m" path="res://assets/textures/triggers/Alpha.svg" id="19_lbtum"]
+[ext_resource type="Texture2D" uid="uid://c7riu6ei28aen" path="res://assets/textures/solids/outline_blocks/OutlineSlope03.svg" id="19_mf7h4"]
 [ext_resource type="Script" uid="uid://0r2hn7pl4u3j" path="res://src/triggers/AlphaTrigger.gd" id="20_bqqbv"]
+[ext_resource type="Texture2D" uid="uid://dxn2xvtuil4q8" path="res://assets/textures/solids/outline_blocks/OutlineSlope04.svg" id="20_hgbal"]
 [ext_resource type="Texture2D" uid="uid://fw4dir7i5dm1" path="res://assets/textures/orbs/BlackOrb.svg" id="21_hu5g3"]
 [ext_resource type="Script" uid="uid://dmmpck6bgnsj" path="res://src/triggers/CameraOffsetTrigger.gd" id="21_o7rvp"]
 [ext_resource type="Texture2D" uid="uid://6tc6g218qrva" path="res://assets/textures/triggers/CameraOffset.svg" id="22_2am2m"]
@@ -160,6 +167,7 @@
 [ext_resource type="Texture2D" uid="uid://b6eeefnqgnv52" path="res://assets/textures/triggers/Spawn.svg" id="123_tl5y0"]
 [ext_resource type="Texture2D" uid="uid://btcr6ed74qke" path="res://assets/textures/triggers/Timewarp.svg" id="125_1ad2k"]
 [ext_resource type="Texture2D" uid="uid://b7fnymfkmta1d" path="res://assets/textures/triggers/ToggleMultipleGroups.svg" id="127_d556q"]
+[ext_resource type="Texture2D" uid="uid://dv0sqs0l30luf" path="res://assets/textures/guis/editor/block_palette/Slopes.svg" id="138_ha8mj"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="147_1ad2k"]
 [ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="147_pcjvf"]
 [ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="148_tl5y0"]
@@ -271,25 +279,24 @@ custom_minimum_size = Vector2(0, 312)
 layout_mode = 2
 current_tab = 0
 script = ExtResource("4_2at5j")
-metadata/_edit_group_ = true
 
 [node name="Place" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
 theme = ExtResource("147_1ad2k")
-current_tab = 3
+current_tab = 1
 script = ExtResource("4_2at5j")
 metadata/_tab_index = 0
 
-[node name="Solids" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
+[node name="Blocks" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
 visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 0
 metadata/_tab_name = ""
 
-[node name="MarginContainer" type="MarginContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Solids"]
+[node name="MarginContainer" type="MarginContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -298,12 +305,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("51_rnq45")
 
-[node name="ButtonContainer" type="HFlowContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Solids/MarginContainer"]
+[node name="ButtonContainer" type="HFlowContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 
-[node name="RegularBlock01" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Solids/MarginContainer/ButtonContainer"]
+[node name="RegularBlock01" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -317,11 +324,11 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Solids/MarginContainer/ButtonContainer/RegularBlock01"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/RegularBlock01"]
 script = ExtResource("7_f0stj")
 object = ExtResource("7_ii36d")
 
-[node name="OutlineBlock01" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Solids/MarginContainer/ButtonContainer"]
+[node name="OutlineBlock01" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 focus_mode = 0
@@ -334,20 +341,152 @@ expand_icon = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Solids/MarginContainer/ButtonContainer/OutlineBlock01"]
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/OutlineBlock01"]
 script = ExtResource("7_f0stj")
 id = 1
 object = ExtResource("7_ii36d")
 
-[node name="BlockPaletteTextureSwap" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Solids/MarginContainer/ButtonContainer/OutlineBlock01"]
+[node name="BlockPaletteTextureSwap" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/OutlineBlock01"]
 script = ExtResource("10_ledqp")
 texture_override = ExtResource("6_2nlu4")
 texture_owner = NodePath("Sprite")
 
+[node name="Slopes" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
+layout_mode = 2
+mouse_filter = 1
+metadata/_tab_index = 1
+metadata/_tab_name = ""
+
+[node name="MarginContainer" type="MarginContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("51_rnq45")
+
+[node name="ButtonContainer" type="HFlowContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+
+[node name="RegularSlope01" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("147_1ad2k")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("14_ccqvw")
+flat = true
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/RegularSlope01"]
+script = ExtResource("7_f0stj")
+type = 5
+object = ExtResource("15_lojhq")
+
+[node name="RegularSlope02" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("147_1ad2k")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("16_pmc7a")
+flat = true
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/RegularSlope02"]
+script = ExtResource("7_f0stj")
+type = 5
+object = ExtResource("16_lojhq")
+
+[node name="OutlineSlope01" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("147_1ad2k")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("18_txut0")
+flat = true
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/OutlineSlope01"]
+script = ExtResource("7_f0stj")
+type = 5
+id = 3
+object = ExtResource("15_lojhq")
+
+[node name="OutlineSlope02" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("147_1ad2k")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("18_txut0")
+flat = true
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/OutlineSlope02"]
+script = ExtResource("7_f0stj")
+type = 6
+id = 3
+object = ExtResource("15_lojhq")
+
+[node name="OutlineSlope03" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("147_1ad2k")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("19_mf7h4")
+flat = true
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/OutlineSlope03"]
+script = ExtResource("7_f0stj")
+type = 5
+id = 4
+object = ExtResource("15_lojhq")
+
+[node name="OutlineSlope04" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("147_1ad2k")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("20_hgbal")
+flat = true
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/OutlineSlope04"]
+script = ExtResource("7_f0stj")
+type = 6
+id = 4
+object = ExtResource("15_lojhq")
+
 [node name="Hazards" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 1
+metadata/_tab_index = 2
 metadata/_tab_name = ""
 
 [node name="MarginContainer" type="MarginContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Hazards"]
@@ -406,7 +545,7 @@ object = ExtResource("14_wyjb2")
 [node name="Interactables" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 2
+metadata/_tab_index = 3
 metadata/_tab_name = ""
 
 [node name="MarginContainer" type="MarginContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Interactables"]
@@ -1266,8 +1405,9 @@ type = 7
 object = ExtResource("83_gaibe")
 
 [node name="Triggers" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
+visible = false
 layout_mode = 2
-metadata/_tab_index = 3
+metadata/_tab_index = 4
 metadata/_tab_name = ""
 
 [node name="MarginContainer" type="MarginContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Triggers"]
@@ -1751,7 +1891,7 @@ texture = ExtResource("127_d556q")
 
 [node name="BlockPaletteIcons" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
 script = ExtResource("3_d5qub")
-icons = Array[Texture2D]([ExtResource("4_7or8s"), ExtResource("5_gyl57"), ExtResource("6_gh5m2"), ExtResource("7_m16em")])
+icons = Array[Texture2D]([ExtResource("4_7or8s"), ExtResource("138_ha8mj"), ExtResource("5_gyl57"), ExtResource("6_gh5m2"), ExtResource("7_m16em")])
 
 [node name="Edit" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes"]
 visible = false

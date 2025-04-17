@@ -7,7 +7,7 @@
    viewBox="0 0 216.95835 149.22502"
    version="1.1"
    id="svg1"
-   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
    sodipodi:docname="Ship.svg"
    inkscape:export-filename="cube.png"
    inkscape:export-xdpi="96"
@@ -28,7 +28,7 @@
      inkscape:deskcolor="#181825"
      inkscape:document-units="px"
      inkscape:zoom="0.9628688"
-     inkscape:cx="354.15001"
+     inkscape:cx="354.15002"
      inkscape:cy="355.18858"
      inkscape:window-width="1920"
      inkscape:window-height="1080"
@@ -188,7 +188,7 @@
        id="linearGradient30"
        inkscape:collect="always">
       <stop
-         style="stop-color:#7d2aff;stop-opacity:1;"
+         style="stop-color:#7d00ff;stop-opacity:1;"
          offset="0"
          id="stop31" />
       <stop
@@ -387,7 +387,7 @@
        id="linearGradient26"
        inkscape:collect="always">
       <stop
-         style="stop-color:#6600ff;stop-opacity:1"
+         style="stop-color:#7d00ff;stop-opacity:1;"
          offset="0"
          id="stop26" />
       <stop

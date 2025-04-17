@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bs82trmwlnsmy"]
 
-[ext_resource type="Texture2D" uid="uid://chtrj70jj3qlf" path="res://assets/textures/solids/RegularSlope02.svg" id="1_8v7oy"]
+[ext_resource type="Texture2D" uid="uid://chtrj70jj3qlf" path="res://assets/textures/solids/regular_blocks/RegularSlope02.svg" id="1_8v7oy"]
 [ext_resource type="PackedScene" uid="uid://cnru264bpjwxo" path="res://scenes/components/level_components/EditorSelectionCollider.tscn" id="2_07kje"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_onp7b"]

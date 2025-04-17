@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djlnfy6mugjwc"
-path="res://.godot/imported/RegularSpikeNormal.svg-06d5f0476a806528a66a504811dedfad.ctex"
+uid="uid://b4ivb6x32p3qq"
+path="res://.godot/imported/GridBlock01.svg-a10ea6b5d8ba301798068bfe40843e12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/hazards/RegularSpikeNormal.svg"
-dest_files=["res://.godot/imported/RegularSpikeNormal.svg-06d5f0476a806528a66a504811dedfad.ctex"]
+source_file="res://assets/textures/solids/grid_blocks/GridBlock01.svg"
+dest_files=["res://.godot/imported/GridBlock01.svg-a10ea6b5d8ba301798068bfe40843e12.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
