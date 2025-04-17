@@ -196,6 +196,7 @@ func _copy_selection() -> void:
 	clipboard = selection.duplicate()
 	clipboard_camera_position = get_viewport().get_camera_2d().get_screen_center_position()
 	clipboard_changed.emit(clipboard)
+	Toasts.new_toast("Selection copied!")
 
 
 func _paste_selection() -> void:
