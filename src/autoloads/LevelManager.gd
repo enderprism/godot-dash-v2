@@ -2,8 +2,9 @@ extends Node
 
 const CELL_SIZE: int = 128
 
-@onready var game_scene := preload("res://scenes/GameScene.tscn")
+@onready var game_scene_packed := preload("res://scenes/GameScene.tscn")
 
+var game_scene: Node2D
 var current_level: String
 var current_level_name: String
 var is_first_attempt: bool
