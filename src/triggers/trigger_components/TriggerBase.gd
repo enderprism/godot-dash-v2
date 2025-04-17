@@ -34,13 +34,7 @@ enum TriggerHitboxShape {
 @export var target_group: StringName
 
 ## If the trigger can be used multiple times.
-@export var single_usage: bool = true:
-	set(value):
-		single_usage = value
-		if is_inside_tree() and _single_usage_component == null and value:
-			_single_usage_component = NodeUtils.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"))
-		if _single_usage_component != null and not value:
-			_single_usage_component.queue_free()
+@export var single_usage: bool = true
 
 func _validate_property(property: Dictionary) -> void:
 	if property.name == "hitbox_height" and _hitbox_shape != TriggerHitboxShape.LINE:
@@ -64,8 +58,7 @@ func _ready() -> void:
 	_hitbox.debug_color = Color("fff5006b")
 	sprite.scale = Vector2.ONE * 0.2
 	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
-	if single_usage:
-		_single_usage_component = NodeUtils.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"), NodeUtils.INTERNAL)
+	_single_usage_component = NodeUtils.get_node_or_add(self, "SingleUsageComponent", load("res://src/SingleUsage.gd"), NodeUtils.INTERNAL)
 	NodeUtils.connect_new(hitbox_shape_changed, _hitbox_display.update_shape)
 	_set_hitbox_shape()
 
