@@ -14,6 +14,9 @@ func _watcher_update_value(value: Variant) -> void:
 	var expression := Expression.new()
 	expression.parse(condition, ["value"])
 	var result := expression.execute([value]) as bool
-	target.set(property, result)
+	if target is Property and property == "enabled":
+		target.set_input_state(result)
+	else:
+		target.set(property, result)
 	if target is Property:
 		target.update_internals()
