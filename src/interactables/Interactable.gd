@@ -1,13 +1,7 @@
 extends Area2D
 class_name Interactable
 
-@export var single_usage: bool:
-	set(value):
-		single_usage = value
-		if value:
-			NodeUtils.get_node_or_add(self, "SingleUsageComponent", SingleUsageComponent)
-		elif get_node_or_null(^"SingleUsageComponent") != null:
-			get_node(^"SingleUsageComponent").queue_free()
+@export var single_usage := false
 
 var components: Array[Node]
 
