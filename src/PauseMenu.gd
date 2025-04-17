@@ -17,6 +17,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		_on_restart_pressed()
 	if event.is_action_pressed("pause_level"):
 		_on_continue_pressed()
+	if event.is_action_pressed("hide_pause_menu"):
+		visible = not visible
 
 func _on_leave_pressed() -> void:
 	get_tree().paused = false
