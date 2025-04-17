@@ -37,6 +37,7 @@ func _ready() -> void:
 	$EditorCamera.enabled = true
 	%EditorModes.show()
 	%SidePanel.show()
+	$GameScene/Player.process_mode = Node.PROCESS_MODE_DISABLED
 	$GameScene/PlayerCamera.enabled = false
 	$GameScene/EditorGridParallax/EditorGrid.show()
 	$GameScene/EditorGridParallax/EditorGrid.queue_redraw()
@@ -89,6 +90,7 @@ func _on_playtest_pressed() -> void:
 		%EditorModes.hide()
 		%SidePanel.hide()
 		%EditorViewport.mouse_filter = MOUSE_FILTER_STOP
+		$GameScene/Player.process_mode = Node.PROCESS_MODE_INHERIT
 		if not $EditHandler.selection.is_empty():
 			$EditHandler.selection.map(EditHandler.remove_selection_highlight)
 			$EditHandler.selection.clear()
