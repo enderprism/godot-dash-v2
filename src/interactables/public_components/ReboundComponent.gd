@@ -23,5 +23,4 @@ func _physics_process(delta: float) -> void:
 
 func get_velocity(player: Player) -> float:
 	# Not compatible with dual (can't choose which player to track dynamically so it'll track P1)
-	print(-_velocity * player.gravity_multiplier)
 	return -_velocity * player.gravity_multiplier
