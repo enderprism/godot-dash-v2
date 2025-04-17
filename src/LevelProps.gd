@@ -29,6 +29,7 @@ func start_level() -> void:
 
 func stop_level() -> void:
 	song_player.stop()
+	LevelManager.player_duals.clear()
 	LevelManager.level_playing = false
 	process_mode = Node.PROCESS_MODE_DISABLED
 

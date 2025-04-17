@@ -11,6 +11,7 @@ var level_playing: bool
 var in_editor: bool
 var pause_manager: Node
 var player: Player
+var player_duals: Array[Player]
 var player_camera: PlayerCamera
 var background_sprites: Array[Sprite2D]
 var ground_sprites: Array[GroundObject]

@@ -109,6 +109,7 @@ var last_collision: KinematicCollision2D
 var floor_angle_history: Array[float]
 var floor_angle_average: float
 var sprite_floor_angle: float
+var dual_index: int
 
 # Queues
 var orb_queue: Array[OrbInteractable]
@@ -119,7 +120,6 @@ var _spider_jump_invulnerability_frames: int = 0
 var _click_buffer_state: ClickBufferState
 var _dead: bool
 var _is_flying_gamemode: bool
-var _dual_instance: bool
 var _last_spider_trail: SpiderTrail
 var _last_spider_trail_height: float
 var _deferred_velocity_redirect: bool
@@ -134,8 +134,10 @@ func _ready() -> void:
 	dash_control = null
 	internal_gamemode = Gamemode.CUBE
 	displayed_gamemode = Gamemode.CUBE
-	if not _dual_instance:
+	if dual_index == 0:
 		LevelManager.player = self
+	else:
+		LevelManager.player_duals.append(self)
 	apply_floor_snap()
 
 func _physics_process(delta: float) -> void:

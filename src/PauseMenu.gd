@@ -47,6 +47,7 @@ func _on_continue_pressed() -> void:
 			$"../SettingsLayer".hide()
 
 func _on_restart_pressed() -> void:
+	LevelManager.player_duals.clear()
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 	unpaused.emit()
