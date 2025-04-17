@@ -9,6 +9,7 @@ signal finished
 
 # Tween controls
 @export_range(0.0, 10.0, 0.0001, "or_more") var _duration: float = 1.0
+@export var keep_active: bool ## Keep the easing active after it completes.
 @export var easing_type: Tween.EaseType = Tween.EASE_IN_OUT
 @export var easing_transition: Tween.TransitionType
 
@@ -37,7 +38,7 @@ func get_weight_delta() -> float:
 	return _result
 
 func is_inactive() -> bool:
-	return _weight == 0.0 or _weight == 1.0
+	return _weight == 0.0 or (_weight == 1.0 and not keep_active)
 
 func reset() -> void:
 	_weight = 0.0

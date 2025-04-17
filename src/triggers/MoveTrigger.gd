@@ -50,7 +50,7 @@ func _ready() -> void:
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Move.svg"))
 
 func _physics_process(_delta: float) -> void:
-	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
+	if not Engine.is_editor_hint() and not easing.is_inactive():
 		if not _targets.is_empty():
 			var _weight_delta = easing.get_weight_delta()
 			for _target in _targets:

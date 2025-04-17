@@ -25,8 +25,11 @@ script = ExtResource("3_7o0da")
 _max = 10.0
 step = 0.01
 or_greater = true
+or_less = true
+suffix = "s"
 default_float = 1.0
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="Duration"]
 layout_mode = 2
@@ -43,6 +46,8 @@ max_value = 10.0
 step = 0.01
 value = 1.0
 allow_greater = true
+allow_lesser = true
+suffix = "s"
 select_all_on_focus = true
 
 [node name="FLOAT_SLIDER" type="HBoxContainer" parent="Duration"]
@@ -54,8 +59,25 @@ script = ExtResource("5_wrtyk")
 max_value = 10.0
 step = 0.01
 allow_greater = true
+allow_lesser = true
+suffix = "s"
 select_all_on_focus = true
 slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="Duration/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 10.0
+step = 0.01
+allow_greater = true
+
+[node name="SpinBox" type="SpinBox" parent="Duration/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 10.0
+step = 0.01
+allow_greater = true
+select_all_on_focus = true
 
 [node name="BOOL" type="CheckBox" parent="Duration"]
 visible = false
@@ -71,6 +93,32 @@ script = ExtResource("6_71efo")
 step = 0.01
 max_value = 10.0
 allow_greater = true
+allow_lesser = true
+suffix = "s"
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="Duration/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 10.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+alignment = 3
+prefix = "x:"
+suffix = "s"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="Duration/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 10.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+alignment = 3
+prefix = "y:"
+suffix = "s"
 select_all_on_focus = true
 
 [node name="STRING" type="LineEdit" parent="Duration"]
@@ -100,6 +148,140 @@ theme = ExtResource("4_ownah")
 script = ExtResource("4_y847c")
 property_name = "_duration"
 
+[node name="Keep Active" type="HBoxContainer" parent="." groups=["trigger_easing_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("3_7o0da")
+type = 2
+_max = 10.0
+step = 0.01
+or_greater = true
+or_less = true
+suffix = "s"
+default_float = 1.0
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Keep Active"]
+layout_mode = 2
+text = "Keep Active"
+
+[node name="Spacer" type="Control" parent="Keep Active"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="Keep Active"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_ownah")
+max_value = 10.0
+step = 0.01
+value = 1.0
+allow_greater = true
+allow_lesser = true
+suffix = "s"
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Keep Active"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_ownah")
+alignment = 1
+script = ExtResource("5_wrtyk")
+max_value = 10.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "s"
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="Keep Active/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 10.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+
+[node name="SpinBox" type="SpinBox" parent="Keep Active/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 10.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "s"
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="Keep Active"]
+layout_mode = 2
+theme = ExtResource("4_ownah")
+
+[node name="VECTOR2" type="BoxContainer" parent="Keep Active"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_ownah")
+vertical = true
+script = ExtResource("6_71efo")
+step = 0.01
+max_value = 10.0
+allow_greater = true
+allow_lesser = true
+suffix = "s"
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="Keep Active/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 10.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+alignment = 3
+prefix = "x:"
+suffix = "s"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="Keep Active/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 10.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+alignment = 3
+prefix = "y:"
+suffix = "s"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="Keep Active"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("4_ownah")
+
+[node name="COLOR" type="ColorPickerButton" parent="Keep Active"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("4_ownah")
+
+[node name="ENUM" type="OptionButton" parent="Keep Active"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_ownah")
+
+[node name="NODE2D" type="Button" parent="Keep Active"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_ownah")
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Keep Active"]
+script = ExtResource("4_y847c")
+property_name = "keep_active"
+
 [node name="Easing" type="HBoxContainer" parent="." groups=["trigger_easing_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
@@ -108,6 +290,7 @@ type = 6
 enum_fields = PackedStringArray("Ease In", "Ease Out", "Ease In-Out", "Ease Out-In")
 default_enum_idx = 2
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="Easing"]
 layout_mode = 2
@@ -134,6 +317,19 @@ script = ExtResource("5_wrtyk")
 select_all_on_focus = true
 slider_width = 100.0
 
+[node name="HSlider" type="HSlider" parent="Easing/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+
+[node name="SpinBox" type="SpinBox" parent="Easing/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
 [node name="BOOL" type="CheckBox" parent="Easing"]
 visible = false
 layout_mode = 2
@@ -147,6 +343,24 @@ vertical = true
 script = ExtResource("6_71efo")
 step = 0.05
 max_value = 1.0
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="Easing/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "x:"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="Easing/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "y:"
 select_all_on_focus = true
 
 [node name="STRING" type="LineEdit" parent="Easing"]
@@ -192,6 +406,7 @@ script = ExtResource("3_7o0da")
 type = 6
 enum_fields = PackedStringArray("Linear", "Sine", "Quint", "Quart", "Quad", "Expo", "Elastic", "Cubic", "Circ", "Bounce", "Back", "Spring")
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="Transition"]
 layout_mode = 2
@@ -218,6 +433,19 @@ script = ExtResource("5_wrtyk")
 select_all_on_focus = true
 slider_width = 100.0
 
+[node name="HSlider" type="HSlider" parent="Transition/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+
+[node name="SpinBox" type="SpinBox" parent="Transition/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
 [node name="BOOL" type="CheckBox" parent="Transition"]
 visible = false
 layout_mode = 2
@@ -231,6 +459,24 @@ vertical = true
 script = ExtResource("6_71efo")
 step = 0.05
 max_value = 1.0
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="Transition/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "x:"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="Transition/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "y:"
 select_all_on_focus = true
 
 [node name="STRING" type="LineEdit" parent="Transition"]
