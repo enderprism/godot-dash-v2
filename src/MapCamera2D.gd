@@ -109,14 +109,14 @@ func _input(event):
 		
 		_pan_direction += _pan_direction_mouse
 	elif event is InputEventKey:
-		if zoom_keyboard && event.pressed:
+		if zoom_keyboard && event.pressed and (get_viewport().gui_get_hovered_control() == editor_viewport and not passthrough_gui) or passthrough_gui:
 			match event.keycode:
 				KEY_MINUS:
 					_change_zoom(zoom_factor if zoom_factor < 1 else 1 / zoom_factor, false)
 				KEY_EQUAL:
 					_change_zoom(zoom_factor if zoom_factor > 1 else 1 / zoom_factor, false)
 		
-		if pan_keyboard && !event.echo:
+		if pan_keyboard && !event.echo and (get_viewport().gui_get_hovered_control() == editor_viewport and not passthrough_gui) or passthrough_gui:
 			match event.keycode:
 				KEY_LEFT:
 					_pan_direction -= Vector2(1 if event.pressed else -1, 0)
