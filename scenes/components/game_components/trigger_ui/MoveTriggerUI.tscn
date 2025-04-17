@@ -475,6 +475,7 @@ theme = ExtResource("2_4m5uk")
 [node name="NODE2D" type="Button" parent="Move Towards/Target"]
 layout_mode = 2
 theme = ExtResource("2_4m5uk")
+text = "    Assign…    "
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Move Towards/Target"]
 script = ExtResource("6_ccyb7")
@@ -582,6 +583,7 @@ theme = ExtResource("2_4m5uk")
 [node name="NODE2D" type="Button" parent="Move Towards/Group Center"]
 layout_mode = 2
 theme = ExtResource("2_4m5uk")
+text = "    Assign…    "
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Move Towards/Group Center"]
 script = ExtResource("6_ccyb7")

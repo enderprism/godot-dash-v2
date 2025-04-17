@@ -48,7 +48,7 @@ enum Type {
 @export var default_string: String
 @export var default_color: Color
 @export var default_enum_idx: int
-@export var default_node2d_path: String
+@export var default_node2d_path: Node2D
 
 @export_tool_button("Refresh") var refresh_property = _refresh
 
@@ -66,6 +66,7 @@ const DEFAULT_VALUE_TYPES: Dictionary[Type, String] = {
 var _label: Label
 var _spacer: Control
 var gui_inputs: Array[Control]
+var node_2d_ref: Node2D
 
 
 func _ready() -> void:
@@ -107,6 +108,7 @@ func _ready() -> void:
 	gui_inputs[Type.ENUM].item_selected.connect(emit_value_changed)
 	# NODE2D
 	gui_inputs.insert(Type.NODE2D, NodeUtils.get_node_or_add(self, "NODE2D", Button, NodeUtils.INTERNAL | NodeUtils.SET_OWNER))
+	gui_inputs[Type.NODE2D].pressed.connect(update_node2d)
 	for child in gui_inputs:
 		child.hide()
 		child.theme = preload("res://resources/NoFocusColor.tres")
@@ -161,6 +163,12 @@ func set_value(new_value: Variant, value_type: Type = type) -> void:
 			gui_inputs[Type.COLOR].set_pick_color(new_value) # ColorPickerButton doesn't have a no-signal method
 		Type.ENUM:
 			gui_inputs[Type.ENUM].select(new_value)
+		Type.NODE2D:
+			if new_value == null or Engine.is_editor_hint():
+				gui_inputs[Type.NODE2D].set_text("    Assign…    ")
+			else:
+				gui_inputs[Type.NODE2D].set_text(LevelManager.editor_edited_level.get_path_to(new_value))
+			node_2d_ref = new_value
 
 
 func get_value(value_type: Type = type) -> Variant:
@@ -175,6 +183,8 @@ func get_value(value_type: Type = type) -> Variant:
 			return gui_inputs[Type.COLOR].color
 		Type.ENUM:
 			return gui_inputs[Type.ENUM].get_selected()
+		Type.NODE2D:
+			return gui_inputs[Type.NODE2D].get_text()
 		_:
 			return null
 
@@ -184,7 +194,7 @@ func set_input_state(enabled: bool) -> void:
 	match type:
 		Type.FLOAT, Type.FLOAT_SLIDER, Type.VECTOR2, Type.STRING: # LineEdit-inheriting types
 			gui_inputs[type].editable = enabled
-		Type.BOOL, Type.COLOR, Type.ENUM: # Button-inheriting types
+		Type.BOOL, Type.COLOR, Type.ENUM, Type.NODE2D: # Button-inheriting types
 			gui_inputs[type].disabled = not enabled
 
 
@@ -218,6 +228,19 @@ func setup_enum(fields: PackedStringArray) -> void:
 	gui_inputs[Type.ENUM].clear()
 	for field in fields:
 		gui_inputs[Type.ENUM].add_item(field)
+
+
+func update_node2d() -> void:
+	var clipboard := LevelManager.editor_clipboard
+	if len(clipboard) > 1:
+		return
+	if clipboard.is_empty() or Engine.is_editor_hint():
+		gui_inputs[Type.NODE2D].set_text("    Assign…    ")
+		node_2d_ref = null
+	else:
+		gui_inputs[Type.NODE2D].set_text(LevelManager.editor_edited_level.get_path_to(clipboard[0]))
+		node_2d_ref = clipboard[0]
+	value_changed.emit(node_2d_ref)
 
 
 func _refresh() -> void:
