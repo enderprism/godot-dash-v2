@@ -3,11 +3,14 @@ class_name EditHandler
 
 signal selection_zone_changed(new_zone: Rect2)
 signal selection_changed(selection: Array[Node2D])
+signal clipboard_changed(clipboard: Array[Node2D])
 
 @export var editor_viewport: Control
 
 var level: LevelProps
 var selection: Array[Node2D]
+var clipboard: Array[Node2D]
+var clipboard_camera_position: Vector2
 var object_move_cooldown: float
 var placed_objects_collider: Area2D
 var editor_mode: TabContainer
@@ -20,6 +23,8 @@ var selection_pivot := Vector2.INF
 func _ready() -> void:
 	_reset_selection_zone(true)
 	selection_changed.connect(_reset_selection_pivot)
+	var update_global_clipboard := func(new_clipboard): LevelManager.editor_clipboard = new_clipboard
+	clipboard_changed.connect(update_global_clipboard)
 
 func _physics_process(delta: float) -> void:
 	if LevelManager.level_playing:
@@ -47,6 +52,11 @@ func _physics_process(delta: float) -> void:
 				selection_changed.emit(selection)
 			if Input.is_action_just_pressed(&"editor_duplicate"):
 				_duplicate_selection()
+				object_move_cooldown = 5
+			if Input.is_action_just_pressed(&"ui_copy"):
+				_copy_selection()
+			if Input.is_action_just_pressed(&"ui_paste"):
+				_paste_selection()
 				object_move_cooldown = 5
 			if Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down") and object_move_cooldown <= 0:
 				var move_vector: Vector2
@@ -163,23 +173,39 @@ func _swipe_selection_zone() -> void:
 
 
 func _clone(object: Node) -> Node:
+	remove_selection_highlight(object)
 	var packer := PackedScene.new()
 	packer.pack(object)
 	var clone := packer.instantiate()
 	object.get_parent().add_child(clone)
 	clone.owner = object.owner
+	add_selection_highlight(clone)
 	return clone
 
 
 func _duplicate_selection() -> void:
-	selection.map(remove_selection_highlight)
 	selection = Array(selection.map(_clone), TYPE_OBJECT, "Node2D", null)
-	selection.map(add_selection_highlight)
 	for object in selection:
 		if object.has_node("HSVWatcher"):
 			object = object.get_node("HSVWatcher")
 		object.get_node("SelectionHighlight")._set_duplicate()
 	selection_changed.emit(selection)
+
+
+func _copy_selection() -> void:
+	clipboard = selection.duplicate()
+	clipboard_camera_position = get_viewport().get_camera_2d().get_screen_center_position()
+	clipboard_changed.emit(clipboard)
+
+
+func _paste_selection() -> void:
+	selection.map(remove_selection_highlight)
+	selection = clipboard.duplicate()
+	selection = Array(selection.map(_clone), TYPE_OBJECT, "Node2D", null)
+	selection_changed.emit(selection)
+	var move_objects_to_new_screen_center = func(object):
+		object.global_position += (get_viewport().get_camera_2d().get_screen_center_position() - clipboard_camera_position).snappedf(LevelManager.CELL_SIZE)
+	selection.map(move_objects_to_new_screen_center)
 
 
 func _rotate_selection(angle: float) -> void:
