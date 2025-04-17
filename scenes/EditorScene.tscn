@@ -3022,6 +3022,7 @@ process_priority = 1
 position = Vector2(640, 256)
 offset = Vector2(640, 413)
 zoom = Vector2(0.8, 0.8)
+position_smoothing_enabled = true
 script = ExtResource("6_wcytj")
 pan_margin = 0.0
 pan_keyboard = false

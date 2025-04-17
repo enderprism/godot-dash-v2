@@ -203,13 +203,13 @@ func _change_zoom(factor, with_cursor = true):
 			if _tween_offset != null:
 				_tween_offset.kill()
 			
-			_tween_offset = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_process_mode(process_callback as Tween.TweenProcessMode)
+			_tween_offset = create_tween().set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT).set_process_mode(process_callback as Tween.TweenProcessMode)
 			_tween_offset.tween_property(self, 'offset', offset + relative, 2.5 / position_smoothing_speed)
 		
 		if _tween_zoom != null:
 			_tween_zoom.kill()
 		
-		_tween_zoom = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).set_process_mode(process_callback as Tween.TweenProcessMode)
+		_tween_zoom = create_tween().set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT).set_process_mode(process_callback as Tween.TweenProcessMode)
 		_tween_zoom.tween_method(func(value): _set_zoom_level(Vector2.ONE / value), Vector2.ONE / zoom, Vector2.ONE / clamped_zoom, 2.5 / position_smoothing_speed)
 	else:
 		if zoom_relative && with_cursor:
