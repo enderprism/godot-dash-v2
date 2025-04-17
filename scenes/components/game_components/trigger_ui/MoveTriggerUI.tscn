@@ -212,9 +212,9 @@ layout_mode = 2
 theme = ExtResource("2_4m5uk")
 selected = 0
 item_count = 3
-popup/item_0/text = "Set"
+popup/item_0/text = "Add"
 popup/item_0/id = 0
-popup/item_1/text = "Add"
+popup/item_1/text = "Set"
 popup/item_1/id = 1
 popup/item_2/text = "Move Towards"
 popup/item_2/id = 2
@@ -368,7 +368,6 @@ script = ExtResource("6_ccyb7")
 property_name = "_position"
 
 [node name="Move Towards" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 2
 script = ExtResource("4_4m5uk")
 label_settings = ExtResource("5_omcx3")
@@ -480,6 +479,113 @@ theme = ExtResource("2_4m5uk")
 [node name="TriggerPropertyInternalName" type="Node" parent="Move Towards/Target"]
 script = ExtResource("6_ccyb7")
 property_name = "_move_towards_target"
+
+[node name="Group Center" type="HBoxContainer" parent="Move Towards" groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("2_g2dna")
+type = 7
+step = 0.01
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Move Towards/Group Center"]
+layout_mode = 2
+text = "Group Center"
+
+[node name="Spacer" type="Control" parent="Move Towards/Group Center"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="Move Towards/Group Center"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_4m5uk")
+max_value = 1.0
+step = 0.01
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Move Towards/Group Center"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_4m5uk")
+alignment = 1
+script = ExtResource("3_omcx3")
+step = 0.01
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="Move Towards/Group Center/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+
+[node name="SpinBox" type="SpinBox" parent="Move Towards/Group Center/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="Move Towards/Group Center"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_4m5uk")
+
+[node name="VECTOR2" type="BoxContainer" parent="Move Towards/Group Center"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_4m5uk")
+vertical = true
+script = ExtResource("4_ccyb7")
+step = 0.01
+max_value = 1.0
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="Move Towards/Group Center/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+alignment = 3
+prefix = "x:"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="Move Towards/Group Center/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+alignment = 3
+prefix = "y:"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="Move Towards/Group Center"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("2_4m5uk")
+
+[node name="COLOR" type="ColorPickerButton" parent="Move Towards/Group Center"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2_4m5uk")
+
+[node name="ENUM" type="OptionButton" parent="Move Towards/Group Center"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_4m5uk")
+
+[node name="NODE2D" type="Button" parent="Move Towards/Group Center"]
+layout_mode = 2
+theme = ExtResource("2_4m5uk")
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Move Towards/Group Center"]
+script = ExtResource("6_ccyb7")
+property_name = "_move_towards_group_center"
 
 [node name="Distance Multiplier" type="HBoxContainer" parent="Move Towards" groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)

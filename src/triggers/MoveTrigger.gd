@@ -18,10 +18,11 @@ enum Mode {
 @export var _move_towards_target: Node2D
 ## Multiplies the target distance between each object in the group. [br][br]
 ## [b]Examples:[/b] [br]
-## - [code]0.0[/code]: the group's objects will all move towards the target object. [br]
-## - [code]1.0[/code]: the group's objects will follow the target object but [b]keep[/b] their relative distance to it. [br]
-## - [code]2.0[/code]: the group's objects will follow the target object but [b]double[/b] their relative distance to it. [br]
-## - [code]-1.0[/code]: the group's objects will follow the target object but [b]invert[/b] their relative distance to it.
+##   •  [code]0.0[/code]: the group's objects will all move towards the target object. [br]
+##   •  [code]1.0[/code]: the group's objects will follow the target object but [b]keep[/b] their relative distance to it. [br]
+##   •  [code]2.0[/code]: the group's objects will follow the target object but [b]double[/b] their relative distance to it. [br]
+##   •  [code]-1.0[/code]: the group's objects will follow the target object but [b]invert[/b] their relative distance to it.
+@export var _move_towards_group_center: Node2D
 @export_range(0.0, 2.0, 0.05, "or_greater", "or_less") var _move_towards_distance_multiplier: float = 1.0
 @export var _move_towards_offset: Vector2 ## Offset in global coordinates in units from the move target.
 
@@ -31,7 +32,7 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name == "_set_position" and mode != Mode.SET:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name in ["_move_towards_target", "_move_towards_offset", "_move_towards_distance_multiplier"] and mode != Mode.MOVE_TOWARDS:
+	if property.name in ["_move_towards_target", "_move_towards_group_center", "_move_towards_offset", "_move_towards_distance_multiplier"] and mode != Mode.MOVE_TOWARDS:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 var base: TriggerBase
