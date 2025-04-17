@@ -503,8 +503,14 @@ func _rotate_sprite_degrees(delta: float):
 			rotation_delta *= gravity_multiplier
 		$Icon/Ball.rotation_degrees += rotation_delta
 	if not dash_control:
+		var ball_grounded_look_factor = $Icon/Ball.get_meta("ball_grounded_look_factor", 0.0)
+		if (abs(velocity.rotated(-gameplay_rotation).x) / speed_multiplier) < speed.x * 0.5:
+			ball_grounded_look_factor = lerpf(ball_grounded_look_factor, 1.0, 10 * delta)
+		else:
+			ball_grounded_look_factor = lerpf(ball_grounded_look_factor, 0.0, 10 * delta)
+		$Icon/Ball.set_meta("ball_grounded_look_factor", ball_grounded_look_factor)
 		var ball_rotation_in_air: float = abs(sin(($Icon/Ball.rotation * TAU) / deg_to_rad(72*2)))
-		$Icon/Ball.position.y = lerpf(0, 10, ball_rotation_in_air)
+		$Icon/Ball.position.y = lerpf(0.0, lerpf(0, 10, ball_rotation_in_air), ball_grounded_look_factor)
 	#endregion
 	#region spider/robot
 	$Icon/Spider.rotation_degrees = gameplay_rotation_degrees
