@@ -1,0 +1,1037 @@
+[gd_scene load_steps=10 format=3 uid="uid://ch2n2xkjlvq7e"]
+
+[ext_resource type="PackedScene" uid="uid://dibiibymus6dt" path="res://scenes/components/game_components/trigger_ui/trigger_components/TriggerBaseUIGroup.tscn" id="1_2ffn6"]
+[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="2_qwopy"]
+[ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="3_ednh1"]
+[ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="4_v2pn5"]
+[ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="5_wavvx"]
+[ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/editor/TriggerPropertyWatcher.gd" id="6_dlql5"]
+[ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="7_3ag2i"]
+[ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="8_4iak7"]
+[ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="9_c3vao"]
+
+[node name="RotateTriggerUI" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Group" parent="." instance=ExtResource("1_2ffn6")]
+layout_mode = 2
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Group"]
+layout_mode = 2
+text = "Group"
+
+[node name="Spacer" type="Control" parent="Group"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="Group"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Group"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+alignment = 1
+script = ExtResource("3_ednh1")
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="Group/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+
+[node name="SpinBox" type="SpinBox" parent="Group/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="Group"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="VECTOR2" type="BoxContainer" parent="Group"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+vertical = true
+script = ExtResource("4_v2pn5")
+step = 0.05
+max_value = 1.0
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="Group/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "x:"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="Group/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "y:"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="Group"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("2_qwopy")
+
+[node name="COLOR" type="ColorPickerButton" parent="Group"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="ENUM" type="OptionButton" parent="Group"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="NODE2D" type="Button" parent="Group"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="Mode" type="HBoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("5_wavvx")
+type = 6
+enum_fields = PackedStringArray("Add", "Set", "Copy")
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Mode"]
+layout_mode = 2
+text = "Mode"
+
+[node name="Spacer" type="Control" parent="Mode"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="Mode"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Mode"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+alignment = 1
+script = ExtResource("3_ednh1")
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="Mode/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+
+[node name="SpinBox" type="SpinBox" parent="Mode/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="Mode"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="VECTOR2" type="BoxContainer" parent="Mode"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+vertical = true
+script = ExtResource("4_v2pn5")
+step = 0.05
+max_value = 1.0
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="Mode/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "x:"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="Mode/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "y:"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="Mode"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("2_qwopy")
+
+[node name="COLOR" type="ColorPickerButton" parent="Mode"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="ENUM" type="OptionButton" parent="Mode"]
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+selected = 0
+item_count = 3
+popup/item_0/text = "Add"
+popup/item_0/id = 0
+popup/item_1/text = "Set"
+popup/item_1/id = 1
+popup/item_2/text = "Copy"
+popup/item_2/id = 2
+
+[node name="NODE2D" type="Button" parent="Mode"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="TriggerPropertyWatcher" type="Node" parent="Mode" node_paths=PackedStringArray("target")]
+script = ExtResource("6_dlql5")
+target = NodePath("../../Copy")
+condition = "value == 2"
+property = &"visible"
+
+[node name="TriggerPropertyWatcher2" type="Node" parent="Mode" node_paths=PackedStringArray("target")]
+script = ExtResource("6_dlql5")
+target = NodePath("../../Rotation")
+condition = "value != 2"
+property = &"visible"
+
+[node name="TriggerPropertyWatcher3" type="Node" parent="Mode" node_paths=PackedStringArray("target")]
+script = ExtResource("6_dlql5")
+target = NodePath("../../Copy")
+condition = "value == 2"
+property = &"visible"
+metadata/_custom_type_script = "uid://dewr6g2sliqsr"
+
+[node name="Rotation" type="HBoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("5_wavvx")
+_min = -360.0
+_max = 360.0
+step = 0.01
+or_greater = true
+or_less = true
+suffix = "°"
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Rotation"]
+layout_mode = 2
+text = "Rotation"
+
+[node name="Spacer" type="Control" parent="Rotation"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="Rotation"]
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Rotation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+alignment = 1
+script = ExtResource("3_ednh1")
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="Rotation/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+
+[node name="SpinBox" type="SpinBox" parent="Rotation/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "cells"
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="Rotation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="VECTOR2" type="BoxContainer" parent="Rotation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+vertical = true
+script = ExtResource("4_v2pn5")
+step = 0.01
+min_value = -360.0
+max_value = 360.0
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="Rotation/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+alignment = 3
+prefix = "x:"
+suffix = "°"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="Rotation/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+alignment = 3
+prefix = "y:"
+suffix = "°"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="Rotation"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("2_qwopy")
+
+[node name="COLOR" type="ColorPickerButton" parent="Rotation"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="ENUM" type="OptionButton" parent="Rotation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="NODE2D" type="Button" parent="Rotation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Rotation"]
+script = ExtResource("7_3ag2i")
+property_name = "_rotation_degrees"
+
+[node name="Rotate Around Self" type="HBoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("5_wavvx")
+type = 2
+_min = -360.0
+_max = 360.0
+step = 0.01
+or_greater = true
+or_less = true
+suffix = "°"
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Rotate Around Self"]
+layout_mode = 2
+text = "Rotate Around Self"
+
+[node name="Spacer" type="Control" parent="Rotate Around Self"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="Rotate Around Self"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Rotate Around Self"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+alignment = 1
+script = ExtResource("3_ednh1")
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="Rotate Around Self/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+
+[node name="SpinBox" type="SpinBox" parent="Rotate Around Self/FLOAT_SLIDER"]
+layout_mode = 2
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="Rotate Around Self"]
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="VECTOR2" type="BoxContainer" parent="Rotate Around Self"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+vertical = true
+script = ExtResource("4_v2pn5")
+step = 0.01
+min_value = -360.0
+max_value = 360.0
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="Rotate Around Self/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+alignment = 3
+prefix = "x:"
+suffix = "°"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="Rotate Around Self/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+alignment = 3
+prefix = "y:"
+suffix = "°"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="Rotate Around Self"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("2_qwopy")
+
+[node name="COLOR" type="ColorPickerButton" parent="Rotate Around Self"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="ENUM" type="OptionButton" parent="Rotate Around Self"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="NODE2D" type="Button" parent="Rotate Around Self"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="TriggerPropertyWatcher" type="Node" parent="Rotate Around Self" node_paths=PackedStringArray("target")]
+script = ExtResource("6_dlql5")
+target = NodePath("../../Pivot")
+condition = "not value"
+property = &"enabled"
+metadata/_custom_type_script = "uid://dewr6g2sliqsr"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Rotate Around Self"]
+script = ExtResource("7_3ag2i")
+property_name = "_rotate_around_self"
+
+[node name="Pivot" type="HBoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("5_wavvx")
+type = 7
+_min = -360.0
+_max = 360.0
+step = 0.01
+or_greater = true
+or_less = true
+suffix = "°"
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Pivot"]
+layout_mode = 2
+text = "Pivot"
+
+[node name="Spacer" type="Control" parent="Pivot"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="Pivot"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Pivot"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+alignment = 1
+script = ExtResource("3_ednh1")
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="Pivot/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+
+[node name="SpinBox" type="SpinBox" parent="Pivot/FLOAT_SLIDER"]
+layout_mode = 2
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="Pivot"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="VECTOR2" type="BoxContainer" parent="Pivot"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+vertical = true
+script = ExtResource("4_v2pn5")
+step = 0.01
+min_value = -360.0
+max_value = 360.0
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="Pivot/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+alignment = 3
+prefix = "x:"
+suffix = "°"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="Pivot/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+alignment = 3
+prefix = "y:"
+suffix = "°"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="Pivot"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("2_qwopy")
+
+[node name="COLOR" type="ColorPickerButton" parent="Pivot"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="ENUM" type="OptionButton" parent="Pivot"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="NODE2D" type="Button" parent="Pivot"]
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+text = "    Assign…    "
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Pivot"]
+script = ExtResource("7_3ag2i")
+property_name = "_pivot"
+
+[node name="Copy" type="VBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("8_4iak7")
+label_settings = ExtResource("9_c3vao")
+metadata/_custom_type_script = "uid://cuih47milvqcs"
+
+[node name="Target" type="HBoxContainer" parent="Copy" groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("5_wavvx")
+type = 7
+step = 0.01
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Copy/Target"]
+layout_mode = 2
+text = "Target"
+
+[node name="Spacer" type="Control" parent="Copy/Target"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="Copy/Target"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+max_value = 1.0
+step = 0.01
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Copy/Target"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+alignment = 1
+script = ExtResource("3_ednh1")
+step = 0.01
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="Copy/Target/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+
+[node name="SpinBox" type="SpinBox" parent="Copy/Target/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="Copy/Target"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="VECTOR2" type="BoxContainer" parent="Copy/Target"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+vertical = true
+script = ExtResource("4_v2pn5")
+step = 0.01
+max_value = 1.0
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="Copy/Target/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+alignment = 3
+prefix = "x:"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="Copy/Target/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+alignment = 3
+prefix = "y:"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="Copy/Target"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("2_qwopy")
+
+[node name="COLOR" type="ColorPickerButton" parent="Copy/Target"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="ENUM" type="OptionButton" parent="Copy/Target"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="NODE2D" type="Button" parent="Copy/Target"]
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+text = "    Assign…    "
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Copy/Target"]
+script = ExtResource("7_3ag2i")
+property_name = "_copy_target"
+
+[node name="Look At Target" type="HBoxContainer" parent="Copy" groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("5_wavvx")
+type = 2
+step = 0.01
+or_greater = true
+default_float = 1.0
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Copy/Look At Target"]
+layout_mode = 2
+text = "Look At Target"
+
+[node name="Spacer" type="Control" parent="Copy/Look At Target"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="Copy/Look At Target"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+max_value = 1.0
+step = 0.01
+value = 1.0
+allow_greater = true
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Copy/Look At Target"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+alignment = 1
+script = ExtResource("3_ednh1")
+step = 0.01
+allow_greater = true
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="Copy/Look At Target/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+allow_greater = true
+
+[node name="SpinBox" type="SpinBox" parent="Copy/Look At Target/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+allow_greater = true
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="Copy/Look At Target"]
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="VECTOR2" type="BoxContainer" parent="Copy/Look At Target"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+vertical = true
+script = ExtResource("4_v2pn5")
+step = 0.01
+max_value = 1.0
+allow_greater = true
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="Copy/Look At Target/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+allow_greater = true
+alignment = 3
+prefix = "x:"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="Copy/Look At Target/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+allow_greater = true
+alignment = 3
+prefix = "y:"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="Copy/Look At Target"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("2_qwopy")
+
+[node name="COLOR" type="ColorPickerButton" parent="Copy/Look At Target"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="ENUM" type="OptionButton" parent="Copy/Look At Target"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="NODE2D" type="Button" parent="Copy/Look At Target"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Copy/Look At Target"]
+script = ExtResource("7_3ag2i")
+property_name = "_copy_look_at"
+
+[node name="Rotation Offset" type="HBoxContainer" parent="Copy" groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("5_wavvx")
+_min = -360.0
+_max = 360.0
+step = 0.01
+or_greater = true
+or_less = true
+suffix = "°"
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Copy/Rotation Offset"]
+layout_mode = 2
+text = "Rotation Offset"
+
+[node name="Spacer" type="Control" parent="Copy/Rotation Offset"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="Copy/Rotation Offset"]
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Copy/Rotation Offset"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+alignment = 1
+script = ExtResource("3_ednh1")
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="Copy/Rotation Offset/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+
+[node name="SpinBox" type="SpinBox" parent="Copy/Rotation Offset/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+suffix = "cells"
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="Copy/Rotation Offset"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="VECTOR2" type="BoxContainer" parent="Copy/Rotation Offset"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+vertical = true
+script = ExtResource("4_v2pn5")
+step = 0.01
+min_value = -360.0
+max_value = 360.0
+allow_greater = true
+allow_lesser = true
+suffix = "°"
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="Copy/Rotation Offset/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+alignment = 3
+prefix = "x:"
+suffix = "°"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="Copy/Rotation Offset/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+alignment = 3
+prefix = "y:"
+suffix = "°"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="Copy/Rotation Offset"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("2_qwopy")
+
+[node name="COLOR" type="ColorPickerButton" parent="Copy/Rotation Offset"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="ENUM" type="OptionButton" parent="Copy/Rotation Offset"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="NODE2D" type="Button" parent="Copy/Rotation Offset"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_qwopy")
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Copy/Rotation Offset"]
+script = ExtResource("7_3ag2i")
+property_name = "_copy_offset"
