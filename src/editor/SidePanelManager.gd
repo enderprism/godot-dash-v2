@@ -16,6 +16,10 @@ extends Node
 @export var hsv_shift: SectionHeading
 
 
+func _ready() -> void:
+	_on_edit_handler_selection_changed([])
+
+
 func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 	#section Groups
 	group_section.visible = not selection.is_empty()
