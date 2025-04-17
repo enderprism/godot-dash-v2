@@ -30,6 +30,7 @@ func start_level() -> void:
 func stop_level() -> void:
 	song_player.stop()
 	LevelManager.level_playing = false
+	process_mode = Node.PROCESS_MODE_DISABLED
 
 
 func setup_color_channel_watchers() -> void:
