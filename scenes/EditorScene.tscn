@@ -1,4 +1,4 @@
-[gd_scene load_steps=174 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=175 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -35,6 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://cnuxa4cqkiika" path="res://assets/textures/orbs/PinkOrb.svg" id="19_kancb"]
 [ext_resource type="Texture2D" uid="uid://cihka00vqqj3m" path="res://assets/textures/triggers/Alpha.svg" id="19_lbtum"]
 [ext_resource type="Texture2D" uid="uid://c7riu6ei28aen" path="res://assets/textures/solids/outline_blocks/OutlineSlope03.svg" id="19_mf7h4"]
+[ext_resource type="Texture2D" uid="uid://d1a6hsi5b38t8" path="res://assets/textures/solids/outline_blocks/OutlineSlope02.svg" id="19_p2ypn"]
 [ext_resource type="Script" uid="uid://0r2hn7pl4u3j" path="res://src/triggers/AlphaTrigger.gd" id="20_bqqbv"]
 [ext_resource type="Texture2D" uid="uid://dxn2xvtuil4q8" path="res://assets/textures/solids/outline_blocks/OutlineSlope04.svg" id="20_hgbal"]
 [ext_resource type="Texture2D" uid="uid://fw4dir7i5dm1" path="res://assets/textures/orbs/BlackOrb.svg" id="21_hu5g3"]
@@ -426,6 +427,11 @@ type = 5
 id = 3
 object = ExtResource("15_lojhq")
 
+[node name="BlockPaletteTextureSwap" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/OutlineSlope01"]
+script = ExtResource("10_ledqp")
+texture_override = ExtResource("6_2nlu4")
+texture_owner = NodePath("Sprite")
+
 [node name="OutlineSlope02" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -433,7 +439,7 @@ focus_mode = 0
 theme = ExtResource("147_1ad2k")
 toggle_mode = true
 button_group = ExtResource("3_0vcbd")
-icon = ExtResource("18_txut0")
+icon = ExtResource("19_p2ypn")
 flat = true
 expand_icon = true
 script = ExtResource("4_gl2yd")
@@ -443,7 +449,12 @@ block_palette_button = true
 script = ExtResource("7_f0stj")
 type = 6
 id = 3
-object = ExtResource("15_lojhq")
+object = ExtResource("16_lojhq")
+
+[node name="BlockPaletteTextureSwap" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/OutlineSlope02"]
+script = ExtResource("10_ledqp")
+texture_override = ExtResource("19_p2ypn")
+texture_owner = NodePath("Sprite")
 
 [node name="OutlineSlope03" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -464,6 +475,11 @@ type = 5
 id = 4
 object = ExtResource("15_lojhq")
 
+[node name="BlockPaletteTextureSwap" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/OutlineSlope03"]
+script = ExtResource("10_ledqp")
+texture_override = ExtResource("19_mf7h4")
+texture_owner = NodePath("Sprite")
+
 [node name="OutlineSlope04" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -481,7 +497,12 @@ block_palette_button = true
 script = ExtResource("7_f0stj")
 type = 6
 id = 4
-object = ExtResource("15_lojhq")
+object = ExtResource("16_lojhq")
+
+[node name="BlockPaletteTextureSwap" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/OutlineSlope04"]
+script = ExtResource("10_ledqp")
+texture_override = ExtResource("20_hgbal")
+texture_owner = NodePath("Sprite")
 
 [node name="Hazards" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
 visible = false
