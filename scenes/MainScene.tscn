@@ -430,7 +430,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -1080.0
-offset_right = 5760.0
+offset_right = 7680.0
 offset_bottom = -1080.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -537,6 +537,11 @@ selected_level = "res://scenes/levels/imported/SpiderTest.tscn"
 self_modulate = Color(1, 0.784314, 0, 1)
 layout_mode = 2
 selected_level = "res://scenes/levels/imported/SlopeTest.tscn"
+
+[node name="DualTest" parent="LevelSelector/PageContainer" instance=ExtResource("14_ade78")]
+self_modulate = Color(1, 0.784314, 0, 1)
+layout_mode = 2
+selected_level = "uid://dij7cq7vnww3p"
 
 [node name="CameraCenterParent" type="Control" parent="LevelSelector"]
 layout_mode = 1

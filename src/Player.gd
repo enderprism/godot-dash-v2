@@ -123,15 +123,15 @@ var _is_flying_gamemode: bool
 var _last_spider_trail: SpiderTrail
 var _last_spider_trail_height: float
 var _deferred_velocity_redirect: bool
+var _spider_state_machine: AnimationNodeStateMachinePlayback
+var _spider_animation_tree: AnimationTree
 
-
-
-@onready var _spider_animation_tree = $Icon/Spider/SpiderStateMachine as AnimationTree
-@onready var _spider_state_machine: AnimationNodeStateMachinePlayback = _spider_animation_tree["parameters/playback"]
 
 func _ready() -> void:
 	platform_on_leave = PlatformOnLeave.PLATFORM_ON_LEAVE_ADD_UPWARD_VELOCITY if not LevelManager.platformer else PlatformOnLeave.PLATFORM_ON_LEAVE_ADD_VELOCITY
 	dash_control = null
+	_spider_animation_tree = $Icon/Spider/SpiderStateMachine
+	_spider_state_machine = _spider_animation_tree["parameters/playback"]
 	internal_gamemode = Gamemode.CUBE
 	displayed_gamemode = Gamemode.CUBE
 	if dual_index == 0:
@@ -420,6 +420,7 @@ func _ensure_velocity_redirect(delta: float, global_velocity: Vector2) -> bool:
 			return (component is ReboundComponent and not is_on_floor()) or (component is TeleportComponent and component.redirect_velocity)
 	return false
 
+
 func _rotate_sprite_degrees(delta: float):
 	if $GroundCollider.shape is CircleShape2D:
 		if get_floor_normal() != Vector2.ZERO:
@@ -528,6 +529,7 @@ func _rotate_sprite_degrees(delta: float):
 	$Icon/Robot.scale.y = sign(gravity_multiplier)
 	#endregion
 
+
 func _update_swing_fire(delta: float) -> void:
 	if gravity_multiplier < 0.0:
 		$Icon/Swing/FireBoostTop.position = $Icon/Swing/FireBoostTop.position.lerp(Vector2.ZERO, 1-exp(-delta * 12))
@@ -535,6 +537,7 @@ func _update_swing_fire(delta: float) -> void:
 	else:
 		$Icon/Swing/FireBoostTop.position = $Icon/Swing/FireBoostTop.position.lerp(Vector2(-54.0, -63.0), 1-exp(-delta * 12))
 		$Icon/Swing/FireBoostBottom.position = $Icon/Swing/FireBoostBottom.position.lerp(Vector2.ZERO, 1-exp(-delta * 12))
+
 
 func _update_wave_trail(delta: float) -> void:
 	var wave_trail_width := WAVE_TRAIL_WIDTH
@@ -559,6 +562,7 @@ func _update_wave_trail(delta: float) -> void:
 		if is_zero_approx(%WaveTrailInner.modulate.a):
 			%WaveTrailInner.clear_points()
 
+
 func _get_spider_velocity_delta() -> float:
 	var _target_position = $Icon/Spider/SpiderCast.get_collision_point(0)
 	var _spider_velocity_delta: float = abs((_target_position - position).rotated(-gameplay_rotation).y)
@@ -569,6 +573,7 @@ func _get_spider_velocity_delta() -> float:
 	_last_spider_trail.scale.x = horizontal_direction
 	_last_spider_trail.trail_rotation = gameplay_rotation
 	return result
+
 
 func _update_spider_state_machine() -> void:
 	# `jump` was moved to _compute_velocity to only be triggered with orbs and pads
@@ -593,16 +598,20 @@ func _player_death() -> void:
 	$DeathParticles.restart()
 	SFXManager.play_sfx("res://assets/sounds/sfx/game_sfx/DeathSound.mp3")
 
+
 func _on_death_restart() -> void:
 	get_tree().reload_current_scene()
+
 
 func _on_kill_collider_solid_body_entered(_body:Node2D) -> void:
 	if _spider_jump_invulnerability_frames == 0:
 		$DeathAnimator.play("DeathAnimation")
 
+
 func _on_kill_collider_hazard_body_entered(_body:Node2D) -> void:
 	if _spider_jump_invulnerability_frames == 0:
 		$DeathAnimator.play("DeathAnimation")
+
 
 func stop_dash() -> void:
 	get_node("DashParticles").emitting = false

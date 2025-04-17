@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvdjnndhk1ir0"]
+[gd_scene load_steps=12 format=3 uid="uid://dvdjnndhk1ir0"]
 
 [ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_lt2hg"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_orkb7"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="6_dk752"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="7_h7re3"]
 [ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="8_7bsqi"]
+[ext_resource type="Script" uid="uid://crrysbex74mf0" path="res://src/interactables/public_components/PlayerCountChangerComponent.gd" id="9_orkb7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
 size = Vector2(128, 384)
@@ -58,3 +59,7 @@ script = ExtResource("7_h7re3")
 
 [node name="PulseWhite" type="Node" parent="."]
 script = ExtResource("8_7bsqi")
+
+[node name="PlayerCountChangerComponent" type="Node" parent="."]
+script = ExtResource("9_orkb7")
+count = 2
