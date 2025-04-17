@@ -278,7 +278,7 @@ editor_flip_v={
 
 2d_physics/layer_1="player"
 2d_physics/layer_2="solids"
-2d_physics/layer_3="hazards"
+2d_physics/layer_3="rectangular_hazards"
 2d_physics/layer_4="interactables"
 2d_physics/layer_5="triggers"
 2d_physics/layer_6="ground"
@@ -287,6 +287,7 @@ editor_flip_v={
 2d_physics/layer_9="editor_selection_colliders"
 2d_physics/layer_10="solid_overlap_check"
 2d_physics/layer_11="velocity_redirectors"
+2d_physics/layer_12="circular_hazards"
 
 [phantom_camera]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://bl48psvuka73y"]
+[gd_scene load_steps=108 format=3 uid="uid://bl48psvuka73y"]
 
 [ext_resource type="Script" uid="uid://dlfmgrvw7q01y" path="res://src/Player.gd" id="1_nvqsc"]
 [ext_resource type="Texture2D" uid="uid://omcvgcf1uk5p" path="res://assets/textures/player/cube/Cube.svg" id="2_6ab5b"]
@@ -69,10 +69,8 @@ particle_flag_rotate_y = true
 particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(0, 64, 1)
-direction = Vector3(-1, 0, 0)
+direction = Vector3(0, 0, 0)
 spread = 0.0
-initial_velocity_min = 32.0
-initial_velocity_max = 32.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.5
 scale_max = 0.5
@@ -1749,6 +1747,9 @@ size = Vector2(48, 48)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t218l"]
 size = Vector2(128, 128)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_b3l5p"]
+radius = 64.0
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_x7s6i"]
 animations = [{
 "frames": [{
@@ -1859,8 +1860,8 @@ modulate = Color(0, 1, 1, 1)
 material = ExtResource("5_dvha5")
 emitting = false
 amount = 30
-process_material = SubResource("ParticleProcessMaterial_1h32q")
 texture = ExtResource("5_qm8k0")
+process_material = SubResource("ParticleProcessMaterial_1h32q")
 
 [node name="DashFlame" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -2020,7 +2021,7 @@ texture = ExtResource("22_2ro0i")
 
 [node name="SpiderAnimation" type="AnimationPlayer" parent="Icon/Spider/SpiderSprites"]
 libraries = {
-"": SubResource("AnimationLibrary_mtow1")
+&"": SubResource("AnimationLibrary_mtow1")
 }
 playback_default_blend_time = 1.0
 next/RESET = &"walk"
@@ -2121,13 +2122,22 @@ rotation = 3.14159
 shape = SubResource("RectangleShape2D_4mg1a")
 debug_color = Color(0, 0.0705882, 0.701961, 0.223529)
 
-[node name="KillColliderHazard" type="Area2D" parent="."]
+[node name="KillColliderRectangularHazard" type="Area2D" parent="."]
 visible = false
 collision_mask = 4
 
-[node name="KillColliderHazardHitbox" type="CollisionShape2D" parent="KillColliderHazard"]
+[node name="KillColliderRectangularHazardHitbox" type="CollisionShape2D" parent="KillColliderRectangularHazard"]
 rotation = 3.14159
 shape = SubResource("RectangleShape2D_t218l")
+debug_color = Color(0.701961, 0, 0, 0.419608)
+
+[node name="KillColliderCircularHazard" type="Area2D" parent="."]
+visible = false
+collision_mask = 2048
+
+[node name="KillColliderCircularHazardHitbox" type="CollisionShape2D" parent="KillColliderCircularHazard"]
+rotation = 3.14159
+shape = SubResource("CircleShape2D_b3l5p")
 debug_color = Color(0.701961, 0, 0, 0.419608)
 
 [node name="SolidOverlapCheck" type="Area2D" parent="."]
@@ -2152,11 +2162,11 @@ modulate = Color(0, 1, 1, 1)
 material = ExtResource("5_dvha5")
 emitting = false
 amount = 30
-process_material = SubResource("ParticleProcessMaterial_uynvo")
 texture = ExtResource("5_qm8k0")
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_uynvo")
 
 [node name="DebugTrail" type="Line2D" parent="."]
 z_index = 2
@@ -2172,7 +2182,7 @@ length = 128
 [node name="DeathAnimator" type="AnimationPlayer" parent="."]
 process_mode = 1
 libraries = {
-"": SubResource("AnimationLibrary_sr0vc")
+&"": SubResource("AnimationLibrary_sr0vc")
 }
 
 [node name="RobotTimer" type="Timer" parent="."]
@@ -2195,5 +2205,6 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [connection signal="body_entered" from="KillColliderSolid" to="." method="_on_kill_collider_solid_body_entered"]
-[connection signal="body_entered" from="KillColliderHazard" to="." method="_on_kill_collider_hazard_body_entered"]
+[connection signal="body_entered" from="KillColliderRectangularHazard" to="." method="_on_kill_collider_hazard_body_entered"]
+[connection signal="body_entered" from="KillColliderCircularHazard" to="." method="_on_kill_collider_hazard_body_entered"]
 [connection signal="body_exited" from="SolidOverlapCheck" to="." method="_on_solid_overlap_check_body_exited"]
