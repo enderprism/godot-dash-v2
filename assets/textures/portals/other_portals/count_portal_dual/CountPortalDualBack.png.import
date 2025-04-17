@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djl51mcjms05k"
-path="res://.godot/imported/DualPortalOnFront.png-efa8ebcd4f525f91356e113d9b6b46f9.ctex"
+uid="uid://c4ex0v5xsqcma"
+path="res://.godot/imported/CountPortalDualBack.png-35715831a1e75b2d58890f9e7726b52e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/portals/other_portals/dual_portal_on/DualPortalOnFront.png"
-dest_files=["res://.godot/imported/DualPortalOnFront.png-efa8ebcd4f525f91356e113d9b6b46f9.ctex"]
+source_file="res://assets/textures/portals/other_portals/count_portal_dual/CountPortalDualBack.png"
+dest_files=["res://.godot/imported/CountPortalDualBack.png-35715831a1e75b2d58890f9e7726b52e.ctex"]
 
 [params]
 

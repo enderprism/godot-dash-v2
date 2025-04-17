@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=3 uid="uid://dvdjnndhk1ir0"]
+
+[ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_lt2hg"]
+[ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_orkb7"]
+[ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="3_tsh4p"]
+[ext_resource type="Texture2D" uid="uid://c4ex0v5xsqcma" path="res://assets/textures/portals/other_portals/count_portal_dual/CountPortalDualBack.png" id="4_wghhi"]
+[ext_resource type="Texture2D" uid="uid://djl51mcjms05k" path="res://assets/textures/portals/other_portals/count_portal_dual/CountPortalDualFront.png" id="5_vi280"]
+[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/SingleUsage.gd" id="6_dk752"]
+[ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="7_h7re3"]
+[ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="8_7bsqi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
+size = Vector2(128, 384)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ur3sr"]
+resource_local_to_scene = true
+shader = ExtResource("3_tsh4p")
+shader_parameter/shine_color = Color(1, 1, 1, 0)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 1.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/factor = 0.0
+shader_parameter/mode = 2
+
+[node name="CountPortalDual" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_lt2hg")
+metadata/_edit_group_ = true
+
+[node name="ParticleEmitter" parent="." instance=ExtResource("2_orkb7")]
+modulate = Color(1, 0.47451, 0, 1)
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cghk8")
+debug_color = Color(0, 1, 0, 0)
+
+[node name="Sprites" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_ur3sr")
+
+[node name="PortalBack" type="Sprite2D" parent="Sprites"]
+z_index = -1
+use_parent_material = true
+position = Vector2(1, 0)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("4_wghhi")
+
+[node name="PortalFront" type="Sprite2D" parent="Sprites"]
+z_index = 1
+use_parent_material = true
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("5_vi280")
+
+[node name="SingleUsageComponent" type="Node" parent="."]
+script = ExtResource("6_dk752")
+
+[node name="PulseCircle" type="Node2D" parent="."]
+script = ExtResource("7_h7re3")
+
+[node name="PulseWhite" type="Node" parent="."]
+script = ExtResource("8_7bsqi")

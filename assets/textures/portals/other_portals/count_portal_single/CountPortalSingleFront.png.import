@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cj6wk0jtmbbjp"
-path="res://.godot/imported/DualPortalOffFront.png-270c228e59c0414c172979e9843f56c9.ctex"
+path="res://.godot/imported/CountPortalSingleFront.png-6bf91d041fbe814bf226ce3aeacafe39.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/portals/other_portals/dual_portal_off/DualPortalOffFront.png"
-dest_files=["res://.godot/imported/DualPortalOffFront.png-270c228e59c0414c172979e9843f56c9.ctex"]
+source_file="res://assets/textures/portals/other_portals/count_portal_single/CountPortalSingleFront.png"
+dest_files=["res://.godot/imported/CountPortalSingleFront.png-6bf91d041fbe814bf226ce3aeacafe39.ctex"]
 
 [params]
 
