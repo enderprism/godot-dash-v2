@@ -9,6 +9,7 @@ signal toggled_groups_changed
 		toggled_groups_changed.emit()
 
 func _ready() -> void:
+	super()
 	if get_parent() is OrbInteractable:
 		parent.pressed.connect(toggle)
 	else:
