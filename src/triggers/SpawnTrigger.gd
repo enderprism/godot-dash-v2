@@ -37,7 +37,6 @@ func _ready() -> void:
 		if group.time > _duration:
 			_duration = group.time
 	# Spawn triggers with durations of 0 will get a timer wait time of 1.0, but it doesn't really matter.
-	print_debug(_duration)
 	easing._duration = _duration
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Spawn.svg"))
 	target_link.default_color = Color.CYAN

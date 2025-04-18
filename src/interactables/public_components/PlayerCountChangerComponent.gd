@@ -14,7 +14,6 @@ func set_player_count(player: Player) -> void:
 	var dual_count := count - 1
 	if dual_count < len(LevelManager.player_duals):
 		if dual_count == 0 and player.dual_index > 0:
-			print_debug("swapping players")
 			# Movement
 			LevelManager.player.global_position = player.global_position
 			LevelManager.player.velocity = player.velocity
