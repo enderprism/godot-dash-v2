@@ -19,6 +19,7 @@ grow_vertical = 2
 
 [node name="Group" parent="." instance=ExtResource("1_c7461")]
 layout_mode = 2
+metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="Group"]
 layout_mode = 2
@@ -120,6 +121,7 @@ script = ExtResource("1_yndxv")
 type = 6
 enum_fields = PackedStringArray("Set", "Multiply", "Divide", "Copy")
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="Mode"]
 layout_mode = 2
@@ -243,6 +245,7 @@ script = ExtResource("1_yndxv")
 step = 0.01
 default_float = 1.0
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="Alpha"]
 layout_mode = 2
@@ -353,6 +356,7 @@ script = ExtResource("1_yndxv")
 type = 7
 step = 0.01
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="Copy/Target"]
 layout_mode = 2
@@ -447,6 +451,7 @@ theme = ExtResource("2_mck23")
 [node name="NODE2D" type="Button" parent="Copy/Target"]
 layout_mode = 2
 theme = ExtResource("2_mck23")
+text = "    Assign…    "
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Copy/Target"]
 script = ExtResource("2_rkb0o")
@@ -460,6 +465,7 @@ step = 0.01
 or_greater = true
 default_float = 1.0
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="Copy/Alpha Multiplier"]
 layout_mode = 2
