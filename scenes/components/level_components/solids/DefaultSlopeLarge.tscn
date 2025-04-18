@@ -6,12 +6,15 @@
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_onp7b"]
 points = PackedVector2Array(-130, 65, 130, -65, 130, 65)
 
-[node name="DefaultSlope02" type="StaticBody2D"]
+[node name="DefaultSlopeLarge" type="StaticBody2D"]
 collision_layer = 66
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Base" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_8v7oy")
+
+[node name="Detail" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("ConvexPolygonShape2D_onp7b")

@@ -11,11 +11,21 @@ size = Vector2(128, 128)
 [node name="DefaultCube" type="StaticBody2D"]
 collision_layer = 2
 
-[node name="Sprite" type="Node2D" parent="."]
+[node name="Base" type="Node2D" parent="."]
 texture_filter = 2
 scale = Vector2(0.25, 0.25)
 script = ExtResource("3_5g55o")
 texture = ExtResource("2_yn5k1")
+size = Vector2(512, 512)
+patch_margin_left = 36.0
+patch_margin_top = 36.0
+patch_margin_right = 36.0
+patch_margin_bottom = 36.0
+
+[node name="Detail" type="Node2D" parent="."]
+texture_filter = 2
+scale = Vector2(0.25, 0.25)
+script = ExtResource("3_5g55o")
 size = Vector2(512, 512)
 patch_margin_left = 36.0
 patch_margin_top = 36.0
@@ -30,4 +40,4 @@ debug_color = Color(0, 0.071, 0.702, 0.25)
 
 [node name="NinePatchSprite2DAbsoluteSize" type="Node" parent="." node_paths=PackedStringArray("nine_patch_sprite")]
 script = ExtResource("4_cpky5")
-nine_patch_sprite = NodePath("../Sprite")
+nine_patch_sprite = NodePath("../Base")
