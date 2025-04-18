@@ -12,14 +12,10 @@ class_name SpawnTrigger
 @export_range(0.0, 10.0, 0.01, "or_greater", "suffix:s") var loop_delay: float = 0.0
 
 # Debugging purposes only
-@export var refresh_target_link: bool:
-	set(value):
-		update_target_link()
-@export var clear_external_target_links: bool:
-	set(value):
+@export_tool_button("Refresh Target Link") var refresh_target_link = update_target_link
+@export_tool_button("Clear External Target Links") var clear_external_target_links = func(): 
 		for group in spawned_groups:
 			get_node(group.path).get_node("SpawnTargetLink").queue_free()
-
 
 func _validate_property(property: Dictionary) -> void:
 	if property.name in ["loop_count", "loop_delay"] and not loop:
@@ -27,32 +23,30 @@ func _validate_property(property: Dictionary) -> void:
 
 
 var base: TriggerBase
-var timer: Timer
+var easing: TriggerEasing
 var target_link: TargetLink
 
 var _player: Player:
 	get(): return LevelManager.player if not Engine.is_editor_hint() else null
 var _current_loop: int
+var _duration: float
 
 func _ready() -> void:
-	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK)
-	timer = NodeUtils.get_node_or_add(self, "Timer", Timer)
-	timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
-	timer.one_shot = true # We need one_shot to be on to have a custom loop delay.
-	var duration := 0.0
+	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK | TriggerSetup.ADD_EASING)
 	for group in spawned_groups:
-		if group.time > duration:
-			duration = group.time
+		if group.time > _duration:
+			_duration = group.time
 	# Spawn triggers with durations of 0 will get a timer wait time of 1.0, but it doesn't really matter.
-	timer.wait_time = duration
+	print_debug(_duration)
+	easing._duration = _duration
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Spawn.svg"))
 	target_link.default_color = Color.CYAN
 	update_target_link()
 
 func _physics_process(_delta: float) -> void:
-	if not Engine.is_editor_hint() and not timer.is_stopped():
+	if not Engine.is_editor_hint() and not easing.is_inactive():
 		if spawned_groups != null:
-			var elapsed_time: float = timer.wait_time - timer.time_left
+			var elapsed_time: float = _duration * easing._weight
 			for group in spawned_groups:
 				if (elapsed_time > group.time or is_equal_approx(elapsed_time, group.time)) and group.loop_idx != _current_loop:
 					if get_node(group.path).has_node("TriggerBase"):
@@ -68,9 +62,8 @@ func _physics_process(_delta: float) -> void:
 		if Engine.is_editor_hint(): base.position = Vector2.ZERO
 
 func start(_body: Node2D):
-	timer.start()
-	if loop and not timer.timeout.is_connected(restart):
-		timer.timeout.connect(restart)
+	if loop and not easing.finished.is_connected(restart):
+		easing.finished.connect(restart)
 	_current_loop += 1
 
 func restart() -> void:

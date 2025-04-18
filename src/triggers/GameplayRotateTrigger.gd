@@ -59,14 +59,14 @@ func reset() -> void:
 		printerr("ERR_CANT_RESET_TRIGGER: In ", name, ": this GameplayRotateTrigger holds no player references")
 
 func _physics_process(_delta: float) -> void:
-	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
+	if not Engine.is_editor_hint() and not easing.is_inactive():
 		if not _players.is_empty():
 			if not is_zero_approx(easing._duration):
 				_indicator.show()
 				var _weight_delta: float = easing.get_weight_delta()
 				for _player in _players:
 					var _rotation_delta: float = (_rotation_degrees - _initial_global_rotation_degrees[_player]) * _weight_delta
-					_player.gameplay_rotation_degrees = lerp(_initial_global_rotation_degrees, _rotation_degrees, easing._weight)
+					_player.gameplay_rotation_degrees = lerp(_initial_global_rotation_degrees[_player], _rotation_degrees, easing._weight)
 					_player.get_node("DashFlame").rotation_degrees += _rotation_delta
 					_player.get_node("DashParticles").rotation_degrees += _rotation_delta
 					_player.velocity = _player.velocity.rotated(deg_to_rad(_rotation_delta))
