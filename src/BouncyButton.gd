@@ -6,6 +6,7 @@ class_name BouncyButton
 @export var block_palette_button: bool
 
 func _ready() -> void:
+	scale = Vector2.ONE
 	connect("button_down", Callable(self, "_button_held"))
 	connect("button_up", Callable(self, "_button_unheld"))
 
