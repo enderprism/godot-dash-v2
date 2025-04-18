@@ -50,6 +50,7 @@ func _ready() -> void:
 	collision_layer = 16
 	collision_mask = 1
 	_hitbox_display = NodeUtils.get_node_or_add(self, "TriggerHitboxDisplay", load("res://src/triggers/trigger_components/TriggerHitboxDisplay.gd"), NodeUtils.INTERNAL)
+	_hitbox_display.z_index = -20
 	_hitbox = NodeUtils.get_node_or_add(self, "Hitbox", CollisionShape2D, NodeUtils.INTERNAL)
 	sprite = NodeUtils.get_node_or_add(self, "Sprite", Sprite2D, NodeUtils.INTERNAL)
 	_hitbox.debug_color = Color("fff5006b")
