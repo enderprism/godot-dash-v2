@@ -1,5 +1,6 @@
 @tool
 extends BaseButton
+class_name BouncyButton
 
 # @export var selected_level: PackedScene
 @export var block_palette_button: bool

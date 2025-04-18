@@ -1,4 +1,4 @@
-[gd_scene load_steps=175 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=189 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -15,19 +15,26 @@
 [ext_resource type="Texture2D" uid="uid://bdlj0vb8x71it" path="res://assets/textures/guis/editor/block_palette/Interactables.svg" id="6_gh5m2"]
 [ext_resource type="Script" uid="uid://4twseak4h1wb" path="res://src/MapCamera2D.gd" id="6_wcytj"]
 [ext_resource type="Script" uid="uid://dsgesrbkguesm" path="res://src/editor/BlockPaletteRef.gd" id="7_f0stj"]
-[ext_resource type="PackedScene" uid="uid://ccdry45jmn43w" path="res://scenes/components/level_components/solids/DefaultCube.tscn" id="7_ii36d"]
+[ext_resource type="PackedScene" uid="uid://ccdry45jmn43w" path="res://scenes/components/level_components/solids/DefaultBlock.tscn" id="7_ii36d"]
 [ext_resource type="Texture2D" uid="uid://bq33ebf402ci7" path="res://assets/textures/guis/editor/block_palette/Triggers.svg" id="7_m16em"]
 [ext_resource type="Script" uid="uid://dgubfa17f24hq" path="res://src/editor/BlockPaletteTextureSwap.gd" id="10_ledqp"]
 [ext_resource type="Texture2D" uid="uid://djlnfy6mugjwc" path="res://assets/textures/hazards/RegularSpikeNormal.svg" id="11_xeik2"]
 [ext_resource type="PackedScene" uid="uid://calhypvupvj4m" path="res://scenes/components/level_components/hazards/Spike.tscn" id="12_18txt"]
+[ext_resource type="Script" uid="uid://co2f1y4xv7viv" path="res://src/resources/TextureOverride.gd" id="12_egrfm"]
+[ext_resource type="Script" uid="uid://d3taajer3dkry" path="res://src/editor/GenerateBlockPaletteVariants.gd" id="12_lvhj5"]
 [ext_resource type="Texture2D" uid="uid://b8twes5otuygx" path="res://assets/textures/hazards/RegularSpikeFlat.svg" id="13_06phv"]
+[ext_resource type="Texture2D" uid="uid://dvxhihlq7b81b" path="res://assets/textures/solids/grid_blocks/GridBlock01.svg" id="13_fa2pl"]
+[ext_resource type="Texture2D" uid="uid://mbqogq5cigyt" path="res://assets/textures/solids/grid_blocks/GridBlock02.svg" id="14_ajdcu"]
 [ext_resource type="Texture2D" uid="uid://b5b8kj1ubkugy" path="res://assets/textures/solids/regular_blocks/RegularSlope01.svg" id="14_ccqvw"]
 [ext_resource type="PackedScene" uid="uid://dh1l6k3qxgwdf" path="res://scenes/components/level_components/hazards/SpikeFlat.tscn" id="14_wyjb2"]
 [ext_resource type="Texture2D" uid="uid://bidrk8pvqveup" path="res://assets/textures/orbs/YellowOrb.svg" id="15_cisni"]
-[ext_resource type="PackedScene" uid="uid://dcab8tedyj616" path="res://scenes/components/level_components/solids/DefaultSlope01.tscn" id="15_lojhq"]
-[ext_resource type="PackedScene" uid="uid://bs82trmwlnsmy" path="res://scenes/components/level_components/solids/DefaultSlope02.tscn" id="16_lojhq"]
+[ext_resource type="Texture2D" uid="uid://xt2p3hurjk54" path="res://assets/textures/solids/grid_blocks/GridBlock03.svg" id="15_e8m1b"]
+[ext_resource type="PackedScene" uid="uid://dcab8tedyj616" path="res://scenes/components/level_components/solids/DefaultSlopeNormal.tscn" id="15_lojhq"]
+[ext_resource type="Texture2D" uid="uid://cmet5plkt22d4" path="res://assets/textures/solids/grid_blocks/GridBlock04.svg" id="16_cbmyc"]
+[ext_resource type="PackedScene" uid="uid://bs82trmwlnsmy" path="res://scenes/components/level_components/solids/DefaultSlopeLarge.tscn" id="16_lojhq"]
 [ext_resource type="PackedScene" uid="uid://bncq73polqc8u" path="res://scenes/components/level_components/orbs/YellowOrb.tscn" id="16_nywui"]
 [ext_resource type="Texture2D" uid="uid://chtrj70jj3qlf" path="res://assets/textures/solids/regular_blocks/RegularSlope02.svg" id="16_pmc7a"]
+[ext_resource type="Texture2D" uid="uid://cw8jxb5vecsbi" path="res://assets/textures/solids/grid_blocks/GridBlock05.svg" id="17_4a8ke"]
 [ext_resource type="Texture2D" uid="uid://cgq0oyg02x4d2" path="res://assets/textures/orbs/RedOrb.svg" id="17_a7wr4"]
 [ext_resource type="PackedScene" uid="uid://cglxf6jw4fmi" path="res://scenes/components/level_components/orbs/RedOrb.tscn" id="18_1ww1r"]
 [ext_resource type="Texture2D" uid="uid://b6tbqasvosqbs" path="res://assets/textures/solids/outline_blocks/OutlineSlope01.svg" id="18_txut0"]
@@ -173,6 +180,48 @@
 [ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="147_pcjvf"]
 [ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="148_tl5y0"]
 
+[sub_resource type="Resource" id="Resource_aofxv"]
+script = ExtResource("12_egrfm")
+base = ExtResource("4_u8igg")
+name = "RegularBlock01"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
+[sub_resource type="Resource" id="Resource_lvhj5"]
+script = ExtResource("12_egrfm")
+base = ExtResource("6_2nlu4")
+name = "OutlineBlock01"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
+[sub_resource type="Resource" id="Resource_sl8yb"]
+script = ExtResource("12_egrfm")
+base = ExtResource("13_fa2pl")
+name = "GridBlock01"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
+[sub_resource type="Resource" id="Resource_37pxl"]
+script = ExtResource("12_egrfm")
+base = ExtResource("14_ajdcu")
+name = "GridBlock02"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
+[sub_resource type="Resource" id="Resource_6ukik"]
+script = ExtResource("12_egrfm")
+base = ExtResource("15_e8m1b")
+name = "GridBlock03"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
+[sub_resource type="Resource" id="Resource_bs2up"]
+script = ExtResource("12_egrfm")
+base = ExtResource("16_cbmyc")
+name = "GridBlock04"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
+[sub_resource type="Resource" id="Resource_3clt4"]
+script = ExtResource("12_egrfm")
+base = ExtResource("17_4a8ke")
+name = "GridBlock05"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac3bt"]
 radius = 2.0
 
@@ -183,7 +232,9 @@ size = Vector2(2, 2)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_ftcrp")
+block_palette_button_group = ExtResource("3_0vcbd")
 metadata/_edit_lock_ = true
+metadata/_edit_vertical_guides_ = [-111.0]
 
 [node name="GameScene" parent="." instance=ExtResource("1_ql4al")]
 
@@ -286,12 +337,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
 theme = ExtResource("147_1ad2k")
-current_tab = 1
+current_tab = 0
 script = ExtResource("4_2at5j")
 metadata/_tab_index = 0
 
 [node name="Blocks" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
-visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 0
@@ -311,48 +361,531 @@ layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 
-[node name="RegularBlock01" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-focus_mode = 0
-theme = ExtResource("147_1ad2k")
-toggle_mode = true
+[node name="GenerateBlockPaletteVariants" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+script = ExtResource("12_lvhj5")
 button_group = ExtResource("3_0vcbd")
-icon = ExtResource("4_u8igg")
-flat = true
-expand_icon = true
+object = ExtResource("7_ii36d")
+textures = Array[ExtResource("12_egrfm")]([SubResource("Resource_aofxv"), SubResource("Resource_lvhj5"), SubResource("Resource_sl8yb"), SubResource("Resource_37pxl"), SubResource("Resource_6ukik"), SubResource("Resource_bs2up"), SubResource("Resource_3clt4")])
+
+[node name="RegularBlock01" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = ExtResource("3_0vcbd")
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
+metadata/texture_override = SubResource("Resource_aofxv")
+metadata/_edit_group_ = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/RegularBlock01"]
+[node name="@Node@750686" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/RegularBlock01"]
 script = ExtResource("7_f0stj")
 object = ExtResource("7_ii36d")
 
-[node name="OutlineBlock01" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@750687" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/RegularBlock01"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("4_u8igg")
+expand_mode = 3
+
+[node name="OutlineBlock01" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
 custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
 layout_mode = 2
-focus_mode = 0
-theme = ExtResource("147_1ad2k")
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
 toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
 button_group = ExtResource("3_0vcbd")
-icon = ExtResource("6_2nlu4")
-flat = true
-expand_icon = true
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
 script = ExtResource("4_gl2yd")
 block_palette_button = true
+metadata/texture_override = SubResource("Resource_lvhj5")
+metadata/_edit_group_ = true
 
-[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/OutlineBlock01"]
+[node name="@Node@750688" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/OutlineBlock01"]
 script = ExtResource("7_f0stj")
 id = 1
 object = ExtResource("7_ii36d")
 
-[node name="BlockPaletteTextureSwap" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/OutlineBlock01"]
-script = ExtResource("10_ledqp")
-texture_override = ExtResource("6_2nlu4")
-texture_owner = NodePath("Sprite")
+[node name="@TextureRect@750689" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/OutlineBlock01"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("6_2nlu4")
+expand_mode = 3
+
+[node name="GridBlock01" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = ExtResource("3_0vcbd")
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+metadata/texture_override = SubResource("Resource_sl8yb")
+metadata/_edit_group_ = true
+
+[node name="@Node@750690" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock01"]
+script = ExtResource("7_f0stj")
+id = 2
+object = ExtResource("7_ii36d")
+
+[node name="@TextureRect@750691" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock01"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("13_fa2pl")
+expand_mode = 3
+
+[node name="GridBlock02" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = ExtResource("3_0vcbd")
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+metadata/texture_override = SubResource("Resource_37pxl")
+metadata/_edit_group_ = true
+
+[node name="@Node@750692" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock02"]
+script = ExtResource("7_f0stj")
+id = 3
+object = ExtResource("7_ii36d")
+
+[node name="@TextureRect@750693" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock02"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("14_ajdcu")
+expand_mode = 3
+
+[node name="GridBlock03" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = ExtResource("3_0vcbd")
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+metadata/texture_override = SubResource("Resource_6ukik")
+metadata/_edit_group_ = true
+
+[node name="@Node@750694" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock03"]
+script = ExtResource("7_f0stj")
+id = 4
+object = ExtResource("7_ii36d")
+
+[node name="@TextureRect@750695" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock03"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("15_e8m1b")
+expand_mode = 3
+
+[node name="GridBlock04" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = ExtResource("3_0vcbd")
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+metadata/texture_override = SubResource("Resource_bs2up")
+metadata/_edit_group_ = true
+
+[node name="@Node@750696" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock04"]
+script = ExtResource("7_f0stj")
+id = 5
+object = ExtResource("7_ii36d")
+
+[node name="@TextureRect@750697" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock04"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("16_cbmyc")
+expand_mode = 3
+
+[node name="GridBlock05" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = ExtResource("3_0vcbd")
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+metadata/texture_override = SubResource("Resource_3clt4")
+metadata/_edit_group_ = true
+
+[node name="@Node@750698" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock05"]
+script = ExtResource("7_f0stj")
+id = 6
+object = ExtResource("7_ii36d")
+
+[node name="@TextureRect@750699" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock05"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("17_4a8ke")
+expand_mode = 3
 
 [node name="Slopes" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
+visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 1

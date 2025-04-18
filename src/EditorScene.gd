@@ -9,9 +9,10 @@ enum EditorAction {
 	SNAP      = 1 << 3,
 }
 
+@export var block_palette_button_group: ButtonGroup
+
 @onready var level := LevelProps.new()
 @onready var placed_objects_collider := $PlacedObjectsCollider as Area2D
-@onready var block_palette_button_group := %RegularBlock01.button_group as ButtonGroup
 
 var editor_actions: int
 

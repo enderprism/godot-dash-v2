@@ -11,7 +11,7 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 		var pressed_button := block_palette_button_group.get_pressed_button()
 		var block_palette_ref: BlockPaletteRef
 		if pressed_button != null:
-			block_palette_ref = pressed_button.get_node_or_null("BlockPaletteRef") as BlockPaletteRef
+			block_palette_ref = NodeUtils.get_child_of_type(pressed_button, BlockPaletteRef) as BlockPaletteRef
 		if block_palette_ref != null and not texture_variation_overlapping(placed_objects_collider, block_palette_ref.type, block_palette_ref.id) \
 				and Input.is_action_pressed(&"editor_add"):
 			if pressed_button != null:
@@ -20,17 +20,21 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 					object = block_palette_ref.trigger_script.new()
 				else:
 					object = block_palette_ref.object.instantiate()
-				if pressed_button.has_node("BlockPaletteTextureSwap"):
-					var block_palette_texture_swap := pressed_button.get_node("BlockPaletteTextureSwap") as BlockPaletteTextureSwap
-					var texture_owner: NodePath = block_palette_texture_swap.texture_owner
-					var texture_override: Texture = block_palette_texture_swap.texture_override
-					object.get_node(block_palette_texture_swap.texture_owner).texture = texture_override
+				if pressed_button.has_meta("texture_override"):
+					var override = pressed_button.get_meta("texture_override") as TextureOverride
+					object.get_node("Base").texture = override.base
+					if override.detail != null:
+						object.get_node("Detail").texture = override.detail
+					object.name = override.name
 					object.get_node("EditorSelectionCollider").id = block_palette_ref.id
 				var editor_grid := game_scene.get_node("%EditorGrid") as EditorGrid
 				var grid_offset_to_level_origin := Vector2(0, 64)
 				object.position = (level.get_local_mouse_position() + grid_offset_to_level_origin).snapped(editor_grid.cell_size) - grid_offset_to_level_origin
 				level.add_child(object)
+				object.scene_file_path = ""
 				object.owner = level
+				var change_owner := func(child): child.set_owner(object.owner)
+				object.get_children().map(change_owner)
 				var hsv_watcher := HSVWatcher.new()
 				hsv_watcher.name = "HSVWatcher"
 				object.add_child(hsv_watcher)
