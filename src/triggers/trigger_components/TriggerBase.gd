@@ -60,6 +60,7 @@ func _ready() -> void:
 	NodeUtils.connect_new(hitbox_shape_changed, _hitbox_display.update_shape)
 	_set_hitbox_shape()
 
+
 func _physics_process(_delta: float) -> void:
 	sprite.visible = sprite_visible()
 	if not get_parent() is GameplayRotateTrigger:
@@ -68,6 +69,7 @@ func _physics_process(_delta: float) -> void:
 		else:
 			sprite.global_rotation = LevelManager.player_camera.global_rotation
 	sprite.global_scale = Vector2.ONE * 0.2
+
 
 func sprite_visible() -> bool:
 	return Engine.is_editor_hint() or (not Engine.is_editor_hint() and get_tree().is_debugging_collisions_hint()) or LevelManager.in_editor
