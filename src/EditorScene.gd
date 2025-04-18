@@ -21,12 +21,6 @@ var level:
 var editor_actions: int
 
 func _ready() -> void:
-	if LevelManager.editor_level_backup.can_instantiate():
-		$GameScene/Level.add_child(LevelManager.editor_level_backup.instantiate())
-		level = $GameScene/Level.get_child(0)
-	elif $GameScene/Level.get_child(0) == null:
-		level = LevelProps.new()
-		$GameScene/Level.add_child(level)
 
 	if SceneTransition.from_main():
 		SceneTransition.previous = SceneTransition.Scene.EDITOR
@@ -55,6 +49,13 @@ func _ready() -> void:
 	$EditorCamera.zoom_changed.connect($GameScene/EditorGridParallax/EditorGrid.queue_redraw)
 	$EditHandler.placed_objects_collider = placed_objects_collider
 	$EditHandler.editor_mode = %EditorModes
+
+	if LevelManager.editor_level_backup.can_instantiate():
+		$GameScene/Level.add_child(LevelManager.editor_level_backup.instantiate())
+		level = $GameScene/Level.get_child(0)
+	elif $GameScene/Level.get_child(0) == null:
+		level = LevelProps.new()
+		$GameScene/Level.add_child(level)
 
 
 func _physics_process(_delta: float) -> void:
@@ -103,7 +104,8 @@ func _on_playtest_pressed() -> void:
 		LevelManager.editor_backup.pack(self)
 		$GameScene._start_level()
 	else:
-		get_tree().change_scene_to_packed(LevelManager.editor_backup)
+		LevelManager.player_duals.clear()
+		get_tree().reload_current_scene()
 
 
 func _on_leave_pressed() -> void:

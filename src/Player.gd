@@ -262,7 +262,7 @@ func _get_jump_state(options: int = 0) -> int:
 		if get_viewport().gui_get_hovered_control().name == "EditorViewport":
 			return jump_state
 		else:
-			return clampi(jump_state, -1, 0)
+			return -1
 	return jump_state
 
 func _compute_velocity(delta: float,
@@ -611,6 +611,7 @@ func _player_death() -> void:
 
 
 func _on_death_restart() -> void:
+	LevelManager.player_duals.clear()
 	get_tree().reload_current_scene()
 
 

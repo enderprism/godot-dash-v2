@@ -53,7 +53,7 @@ func _on_continue_pressed() -> void:
 func _on_restart_pressed() -> void:
 	LevelManager.player_duals.clear()
 	get_tree().paused = false
-	get_tree().reload_current_scene()
 	unpaused.emit()
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	get_parent().hide()
+	get_tree().reload_current_scene()
