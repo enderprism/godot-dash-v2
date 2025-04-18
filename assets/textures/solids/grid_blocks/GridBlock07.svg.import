@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvxhihlq7b81b"
-path="res://.godot/imported/GridBlock01.svg-a10ea6b5d8ba301798068bfe40843e12.ctex"
+uid="uid://bhxqb3jexeuow"
+path="res://.godot/imported/GridBlock07.svg-ca24d25f3f9d40769d4d4c2d1b668cfa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/solids/grid_blocks/GridBlock01.svg"
-dest_files=["res://.godot/imported/GridBlock01.svg-a10ea6b5d8ba301798068bfe40843e12.ctex"]
+source_file="res://assets/textures/solids/grid_blocks/GridBlock07.svg"
+dest_files=["res://.godot/imported/GridBlock07.svg-ca24d25f3f9d40769d4d4c2d1b668cfa.ctex"]
 
 [params]
 
