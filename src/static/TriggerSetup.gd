@@ -44,8 +44,10 @@ static func setup(caller: Node, options: int = ADD_EASING):
 	caller.base.ui_path = ui_path
 	#endregion
 	if LevelManager.in_editor:
-		var editor_selection_collider := preload("res://scenes/components/level_components/EditorSelectionCollider.tscn").instantiate() as EditorSelectionCollider
-		editor_selection_collider.type = EditorSelectionCollider.Type.TRIGGER
-		editor_selection_collider.id = hash(caller.get_script())
-		caller.add_child(editor_selection_collider)
-		NodeUtils.set_child_owner(caller, editor_selection_collider)
+		var editor_selection_collider := caller.base.get_node_or_null("EditorSelectionCollider") as EditorSelectionCollider
+		if editor_selection_collider == null:
+			editor_selection_collider = preload("res://scenes/components/level_components/EditorSelectionCollider.tscn").instantiate() as EditorSelectionCollider
+			editor_selection_collider.type = EditorSelectionCollider.Type.TRIGGER
+			editor_selection_collider.id = hash(caller.get_script())
+			caller.base.add_child(editor_selection_collider)
+			NodeUtils.set_child_owner(caller.base, editor_selection_collider)
