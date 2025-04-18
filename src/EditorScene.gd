@@ -92,6 +92,7 @@ func _on_playtest_pressed() -> void:
 		%SidePanel.hide()
 		%EditorViewport.mouse_filter = MOUSE_FILTER_STOP
 		$GameScene/Player.process_mode = Node.PROCESS_MODE_INHERIT
+		$GameScene/EditorGridParallax/EditorGrid.hide()
 		if not $EditHandler.selection.is_empty():
 			$EditHandler.selection.map(EditHandler.remove_selection_highlight)
 			$EditHandler.selection.clear()
