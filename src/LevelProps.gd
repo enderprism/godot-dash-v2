@@ -1,7 +1,7 @@
 extends Node2D
 class_name LevelProps
 
-@export var song: AudioStream
+@export_file var song_path: String
 @export_range(0.0, 60.0, 0.01, "or_greater", "suffix:s") var song_start_time: float
 @export var platformer: bool
 
@@ -11,12 +11,24 @@ class_name LevelProps
 var _pause_manager: Node
 
 func _ready() -> void:
-	add_child(song_player)
 	_pause_manager = LevelManager.pause_manager
-	LevelManager.level_song_player = song_player
+	if song_path != "":
+		var audio_stream: AudioStream
+		if song_path.begins_with("user"):
+			match song_path.get_extension():
+				"mp3":
+					audio_stream = AudioStreamMP3.load_from_file(song_path)
+				"wav":
+					audio_stream = AudioStreamWAV.load_from_file(song_path)
+				"ogg":
+					audio_stream = AudioStreamOggVorbis.load_from_file(song_path)
+		else:
+			audio_stream = load(song_path)
+		song_player.stream = audio_stream
 	song_player.process_mode = Node.PROCESS_MODE_PAUSABLE
 	song_player.set_bus("Music")
-	song_player.stream = song
+	LevelManager.level_song_player = song_player
+	add_child(song_player)
 	setup_color_channel_watchers()
 
 

@@ -1,7 +1,6 @@
-[gd_scene load_steps=67 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=66 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" uid="uid://bxxoioqd6wilw" path="res://src/LevelProps.gd" id="1_7ju0m"]
-[ext_resource type="AudioStream" uid="uid://vx22wmjgsl50" path="res://assets/sounds/music/level_music/Dash (Mashup).wav" id="2_gg6c8"]
 [ext_resource type="PackedScene" uid="uid://duj3dae6qcvtm" path="res://scenes/components/level_components/portals/gamemode_portals/SpiderPortal.tscn" id="3_iu2ry"]
 [ext_resource type="PackedScene" uid="uid://c7u5r5wqi845u" path="res://scenes/components/level_components/orbs/PinkOrb.tscn" id="4_7gr6s"]
 [ext_resource type="PackedScene" uid="uid://ccdry45jmn43w" path="res://scenes/components/level_components/solids/DefaultBlock.tscn" id="5_g4mtk"]
@@ -166,7 +165,7 @@ b = Vector2(0, 8192)
 
 [node name="Dash V2" type="Node2D"]
 script = ExtResource("1_7ju0m")
-song = ExtResource("2_gg6c8")
+song_path = "uid://vx22wmjgsl50"
 song_start_time = 5.6
 metadata/_edit_lock_ = true
 
