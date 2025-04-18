@@ -182,12 +182,15 @@ func _swipe_selection_zone() -> void:
 
 func _clone(object: Node) -> Node:
 	remove_selection_highlight(object)
+	NodeUtils.change_owner_recursive(object, object)
 	var packer := PackedScene.new()
 	packer.pack(object)
 	var clone := packer.instantiate()
 	object.get_parent().add_child(clone)
 	clone.owner = object.owner
 	add_selection_highlight(clone)
+	NodeUtils.change_owner_recursive(object, level)
+	NodeUtils.change_owner_recursive(clone, level)
 	return clone
 
 
@@ -264,8 +267,9 @@ func _flip_selection(axis: int):
 
 
 func _on_place_handler_object_deleted(object:Node) -> void:
-	selection.erase(object)
-	selection_changed.emit(selection)
+	if object in selection:
+		selection.erase(object)
+		selection_changed.emit(selection)
 
 
 func _on_move_controls_direction_pressed(direction: Vector2, step: float) -> void:

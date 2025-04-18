@@ -15,7 +15,7 @@ static func get_child_of_type(node: Node, child_type):
 
 
 # Note: passing a value for the type parameter causes a crash
-static func get_children_of_type(node: Node, child_type):
+static func get_children_of_type(node: Node, child_type) -> Array:
 	var list = []
 	for i in range(node.get_child_count()):
 		var child = node.get_child(i)
@@ -27,6 +27,13 @@ static func get_children_of_type(node: Node, child_type):
 static func set_child_owner(caller: Node, child: Node) -> void:
 	var _owner: Node = caller.get_parent() if caller.get_parent().get_owner() == null else caller.get_parent().get_owner()
 	child.set_owner(_owner)
+
+
+static func change_owner_recursive(object: Node, object_owner: Node):
+	object.owner = object_owner
+	if object.get_child_count() > 0:
+		object.get_children().map(change_owner_recursive.bind(object_owner))
+
 
 ## Return a reference to a node. If it doesn't exist, create it.
 ## Options:
