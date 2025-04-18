@@ -1,4 +1,4 @@
-[gd_scene load_steps=189 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=207 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -37,7 +37,9 @@
 [ext_resource type="Texture2D" uid="uid://cw8jxb5vecsbi" path="res://assets/textures/solids/grid_blocks/GridBlock05.svg" id="17_4a8ke"]
 [ext_resource type="Texture2D" uid="uid://cgq0oyg02x4d2" path="res://assets/textures/orbs/RedOrb.svg" id="17_a7wr4"]
 [ext_resource type="PackedScene" uid="uid://cglxf6jw4fmi" path="res://scenes/components/level_components/orbs/RedOrb.tscn" id="18_1ww1r"]
+[ext_resource type="Texture2D" uid="uid://pkobi5o4o83y" path="res://assets/textures/solids/grid_blocks/GridBlock06.svg" id="18_3clt4"]
 [ext_resource type="Texture2D" uid="uid://b6tbqasvosqbs" path="res://assets/textures/solids/outline_blocks/OutlineSlope01.svg" id="18_txut0"]
+[ext_resource type="Texture2D" uid="uid://bhxqb3jexeuow" path="res://assets/textures/solids/grid_blocks/GridBlock07.svg" id="19_ao6md"]
 [ext_resource type="PackedScene" uid="uid://c7u5r5wqi845u" path="res://scenes/components/level_components/orbs/PinkOrb.tscn" id="19_jb5ft"]
 [ext_resource type="Texture2D" uid="uid://cnuxa4cqkiika" path="res://assets/textures/orbs/PinkOrb.svg" id="19_kancb"]
 [ext_resource type="Texture2D" uid="uid://cihka00vqqj3m" path="res://assets/textures/triggers/Alpha.svg" id="19_lbtum"]
@@ -45,17 +47,24 @@
 [ext_resource type="Texture2D" uid="uid://d1a6hsi5b38t8" path="res://assets/textures/solids/outline_blocks/OutlineSlope02.svg" id="19_p2ypn"]
 [ext_resource type="Script" uid="uid://0r2hn7pl4u3j" path="res://src/triggers/AlphaTrigger.gd" id="20_bqqbv"]
 [ext_resource type="Texture2D" uid="uid://dxn2xvtuil4q8" path="res://assets/textures/solids/outline_blocks/OutlineSlope04.svg" id="20_hgbal"]
+[ext_resource type="Texture2D" uid="uid://bdsj31vohxt44" path="res://assets/textures/solids/grid_blocks/GridBlock08.svg" id="20_nk067"]
 [ext_resource type="Texture2D" uid="uid://fw4dir7i5dm1" path="res://assets/textures/orbs/BlackOrb.svg" id="21_hu5g3"]
 [ext_resource type="Script" uid="uid://dmmpck6bgnsj" path="res://src/triggers/CameraOffsetTrigger.gd" id="21_o7rvp"]
+[ext_resource type="Texture2D" uid="uid://bp8b8n0paiubs" path="res://assets/textures/solids/grid_blocks/GridBlock09.svg" id="21_wkjme"]
 [ext_resource type="Texture2D" uid="uid://6tc6g218qrva" path="res://assets/textures/triggers/CameraOffset.svg" id="22_2am2m"]
 [ext_resource type="PackedScene" uid="uid://dmb3bpsvcre7y" path="res://scenes/components/level_components/orbs/BlackOrb.tscn" id="22_62rc5"]
 [ext_resource type="PackedScene" uid="uid://ckkbbbslsv0pg" path="res://scenes/components/level_components/orbs/ReboundOrb.tscn" id="22_cb37e"]
+[ext_resource type="Texture2D" uid="uid://cvvqs45hpat1n" path="res://assets/textures/solids/grid_blocks/GridBlock10.svg" id="22_rke8t"]
+[ext_resource type="Texture2D" uid="uid://duct572xtxp5h" path="res://assets/textures/solids/grid_blocks/GridBlock11.svg" id="23_5ik7l"]
 [ext_resource type="Script" uid="uid://b182iblhyshh8" path="res://src/triggers/CameraRotateTrigger.gd" id="23_6k40u"]
 [ext_resource type="Texture2D" uid="uid://bw4wk20u6n4rx" path="res://assets/textures/guis/editor/block_palette/ReboundOrbPreview.svg" id="23_jc35a"]
+[ext_resource type="Texture2D" uid="uid://ce8d527dlwwip" path="res://assets/textures/solids/grid_blocks/GridBlock12.svg" id="24_0v0om"]
 [ext_resource type="Texture2D" uid="uid://cnonwwvnfl3ca" path="res://assets/textures/triggers/CameraRotate.svg" id="24_ji6ug"]
+[ext_resource type="Texture2D" uid="uid://csso3kjr2kpfc" path="res://assets/textures/solids/grid_blocks/GridBlock13.svg" id="25_33w7i"]
 [ext_resource type="PackedScene" uid="uid://d0dk4786hlokq" path="res://scenes/components/level_components/orbs/BlueOrb.tscn" id="26_ay76u"]
 [ext_resource type="Texture2D" uid="uid://did756jp8kche" path="res://assets/textures/orbs/BlueOrb.svg" id="26_guceq"]
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/FadeScreen.tscn" id="26_j5fve"]
+[ext_resource type="Texture2D" uid="uid://dnl8ddabana01" path="res://assets/textures/solids/grid_blocks/GridBlock14.svg" id="26_t7625"]
 [ext_resource type="PackedScene" uid="uid://danxhobafrnci" path="res://scenes/components/level_components/orbs/GreenOrb.tscn" id="27_wpv76"]
 [ext_resource type="Texture2D" uid="uid://c2yhbwvo7g3jj" path="res://assets/textures/orbs/GreenOrb.svg" id="28_lenuf"]
 [ext_resource type="PackedScene" uid="uid://33mc0xa2wc8i" path="res://scenes/components/level_components/orbs/SpiderOrb.tscn" id="28_qxx6w"]
@@ -222,6 +231,60 @@ base = ExtResource("17_4a8ke")
 name = "GridBlock05"
 metadata/_custom_type_script = "uid://co2f1y4xv7viv"
 
+[sub_resource type="Resource" id="Resource_e0lml"]
+script = ExtResource("12_egrfm")
+base = ExtResource("18_3clt4")
+name = "GridBlock06"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
+[sub_resource type="Resource" id="Resource_momrj"]
+script = ExtResource("12_egrfm")
+base = ExtResource("19_ao6md")
+name = "GridBlock07"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
+[sub_resource type="Resource" id="Resource_6fwf3"]
+script = ExtResource("12_egrfm")
+base = ExtResource("20_nk067")
+name = "GridBlock08"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
+[sub_resource type="Resource" id="Resource_gdkvu"]
+script = ExtResource("12_egrfm")
+base = ExtResource("21_wkjme")
+name = "GridBlock09"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
+[sub_resource type="Resource" id="Resource_vtwef"]
+script = ExtResource("12_egrfm")
+base = ExtResource("22_rke8t")
+name = "GridBlock10"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
+[sub_resource type="Resource" id="Resource_7k2uw"]
+script = ExtResource("12_egrfm")
+base = ExtResource("23_5ik7l")
+name = "GridBlock11"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
+[sub_resource type="Resource" id="Resource_tkktq"]
+script = ExtResource("12_egrfm")
+base = ExtResource("24_0v0om")
+name = "GridBlock12"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
+[sub_resource type="Resource" id="Resource_mvta7"]
+script = ExtResource("12_egrfm")
+base = ExtResource("25_33w7i")
+name = "GridBlock13"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
+[sub_resource type="Resource" id="Resource_wiub1"]
+script = ExtResource("12_egrfm")
+base = ExtResource("26_t7625")
+name = "GridBlock14"
+metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac3bt"]
 radius = 2.0
 
@@ -365,9 +428,9 @@ theme_override_constants/v_separation = 10
 script = ExtResource("12_lvhj5")
 button_group = ExtResource("3_0vcbd")
 object = ExtResource("7_ii36d")
-textures = Array[ExtResource("12_egrfm")]([SubResource("Resource_aofxv"), SubResource("Resource_lvhj5"), SubResource("Resource_sl8yb"), SubResource("Resource_37pxl"), SubResource("Resource_6ukik"), SubResource("Resource_bs2up"), SubResource("Resource_3clt4")])
+textures = Array[ExtResource("12_egrfm")]([SubResource("Resource_aofxv"), SubResource("Resource_lvhj5"), SubResource("Resource_sl8yb"), SubResource("Resource_37pxl"), SubResource("Resource_6ukik"), SubResource("Resource_bs2up"), SubResource("Resource_3clt4"), SubResource("Resource_e0lml"), SubResource("Resource_momrj"), SubResource("Resource_6fwf3"), SubResource("Resource_gdkvu"), SubResource("Resource_vtwef"), SubResource("Resource_7k2uw"), SubResource("Resource_tkktq"), SubResource("Resource_mvta7"), SubResource("Resource_wiub1")])
 
-[node name="RegularBlock01" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@BaseButton@846140" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -429,18 +492,18 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_aofxv")
 metadata/_edit_group_ = true
 
-[node name="@Node@750686" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/RegularBlock01"]
+[node name="@Node@846141" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846140"]
 script = ExtResource("7_f0stj")
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@750687" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/RegularBlock01"]
+[node name="@TextureRect@846142" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846140"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 texture = ExtResource("4_u8igg")
 expand_mode = 3
 
-[node name="OutlineBlock01" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@BaseButton@846143" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -502,19 +565,19 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_lvhj5")
 metadata/_edit_group_ = true
 
-[node name="@Node@750688" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/OutlineBlock01"]
+[node name="@Node@846144" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846143"]
 script = ExtResource("7_f0stj")
 id = 1
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@750689" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/OutlineBlock01"]
+[node name="@TextureRect@846145" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846143"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 texture = ExtResource("6_2nlu4")
 expand_mode = 3
 
-[node name="GridBlock01" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@BaseButton@846146" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -576,19 +639,19 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_sl8yb")
 metadata/_edit_group_ = true
 
-[node name="@Node@750690" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock01"]
+[node name="@Node@846147" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846146"]
 script = ExtResource("7_f0stj")
 id = 2
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@750691" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock01"]
+[node name="@TextureRect@846148" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846146"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 texture = ExtResource("13_fa2pl")
 expand_mode = 3
 
-[node name="GridBlock02" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@BaseButton@846149" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -650,19 +713,19 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_37pxl")
 metadata/_edit_group_ = true
 
-[node name="@Node@750692" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock02"]
+[node name="@Node@846150" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846149"]
 script = ExtResource("7_f0stj")
 id = 3
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@750693" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock02"]
+[node name="@TextureRect@846151" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846149"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 texture = ExtResource("14_ajdcu")
 expand_mode = 3
 
-[node name="GridBlock03" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@BaseButton@846152" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -724,19 +787,19 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_6ukik")
 metadata/_edit_group_ = true
 
-[node name="@Node@750694" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock03"]
+[node name="@Node@846153" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846152"]
 script = ExtResource("7_f0stj")
 id = 4
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@750695" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock03"]
+[node name="@TextureRect@846154" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846152"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 texture = ExtResource("15_e8m1b")
 expand_mode = 3
 
-[node name="GridBlock04" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@BaseButton@846155" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -798,19 +861,19 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_bs2up")
 metadata/_edit_group_ = true
 
-[node name="@Node@750696" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock04"]
+[node name="@Node@846156" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846155"]
 script = ExtResource("7_f0stj")
 id = 5
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@750697" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock04"]
+[node name="@TextureRect@846157" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846155"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 texture = ExtResource("16_cbmyc")
 expand_mode = 3
 
-[node name="GridBlock05" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@BaseButton@846158" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -872,16 +935,682 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_3clt4")
 metadata/_edit_group_ = true
 
-[node name="@Node@750698" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock05"]
+[node name="@Node@846159" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846158"]
 script = ExtResource("7_f0stj")
 id = 6
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@750699" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock05"]
+[node name="@TextureRect@846160" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846158"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 texture = ExtResource("17_4a8ke")
+expand_mode = 3
+
+[node name="@BaseButton@846161" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = ExtResource("3_0vcbd")
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+metadata/texture_override = SubResource("Resource_e0lml")
+metadata/_edit_group_ = true
+
+[node name="@Node@846162" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846161"]
+script = ExtResource("7_f0stj")
+id = 7
+object = ExtResource("7_ii36d")
+
+[node name="@TextureRect@846163" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846161"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("18_3clt4")
+expand_mode = 3
+
+[node name="@BaseButton@846164" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = ExtResource("3_0vcbd")
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+metadata/texture_override = SubResource("Resource_momrj")
+metadata/_edit_group_ = true
+
+[node name="@Node@846165" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846164"]
+script = ExtResource("7_f0stj")
+id = 8
+object = ExtResource("7_ii36d")
+
+[node name="@TextureRect@846166" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846164"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("19_ao6md")
+expand_mode = 3
+
+[node name="@BaseButton@846167" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = ExtResource("3_0vcbd")
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+metadata/texture_override = SubResource("Resource_6fwf3")
+metadata/_edit_group_ = true
+
+[node name="@Node@846168" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846167"]
+script = ExtResource("7_f0stj")
+id = 9
+object = ExtResource("7_ii36d")
+
+[node name="@TextureRect@846169" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846167"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("20_nk067")
+expand_mode = 3
+
+[node name="@BaseButton@846170" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = ExtResource("3_0vcbd")
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+metadata/texture_override = SubResource("Resource_gdkvu")
+metadata/_edit_group_ = true
+
+[node name="@Node@846171" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846170"]
+script = ExtResource("7_f0stj")
+id = 10
+object = ExtResource("7_ii36d")
+
+[node name="@TextureRect@846172" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846170"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("21_wkjme")
+expand_mode = 3
+
+[node name="@BaseButton@846173" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = ExtResource("3_0vcbd")
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+metadata/texture_override = SubResource("Resource_vtwef")
+metadata/_edit_group_ = true
+
+[node name="@Node@846174" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846173"]
+script = ExtResource("7_f0stj")
+id = 11
+object = ExtResource("7_ii36d")
+
+[node name="@TextureRect@846175" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846173"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("22_rke8t")
+expand_mode = 3
+
+[node name="@BaseButton@846176" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = ExtResource("3_0vcbd")
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+metadata/texture_override = SubResource("Resource_7k2uw")
+metadata/_edit_group_ = true
+
+[node name="@Node@846177" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846176"]
+script = ExtResource("7_f0stj")
+id = 12
+object = ExtResource("7_ii36d")
+
+[node name="@TextureRect@846178" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846176"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("23_5ik7l")
+expand_mode = 3
+
+[node name="@BaseButton@846179" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = ExtResource("3_0vcbd")
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+metadata/texture_override = SubResource("Resource_tkktq")
+metadata/_edit_group_ = true
+
+[node name="@Node@846180" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846179"]
+script = ExtResource("7_f0stj")
+id = 13
+object = ExtResource("7_ii36d")
+
+[node name="@TextureRect@846181" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846179"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("24_0v0om")
+expand_mode = 3
+
+[node name="GridBlock13" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = ExtResource("3_0vcbd")
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+metadata/texture_override = SubResource("Resource_mvta7")
+metadata/_edit_group_ = true
+
+[node name="@Node@846182" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock13"]
+script = ExtResource("7_f0stj")
+id = 14
+object = ExtResource("7_ii36d")
+
+[node name="@TextureRect@846183" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock13"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("25_33w7i")
+expand_mode = 3
+
+[node name="GridBlock14" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(64, 64)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = true
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = ExtResource("3_0vcbd")
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+metadata/texture_override = SubResource("Resource_wiub1")
+metadata/_edit_group_ = true
+
+[node name="@Node@846184" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock14"]
+script = ExtResource("7_f0stj")
+id = 15
+object = ExtResource("7_ii36d")
+
+[node name="@TextureRect@846185" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock14"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("26_t7625")
 expand_mode = 3
 
 [node name="Slopes" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place"]
