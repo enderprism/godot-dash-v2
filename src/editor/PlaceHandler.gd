@@ -31,10 +31,8 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 				var grid_offset_to_level_origin := Vector2(0, 64)
 				object.position = (level.get_local_mouse_position() + grid_offset_to_level_origin).snapped(editor_grid.cell_size) - grid_offset_to_level_origin
 				level.add_child(object)
+				change_owner(object, level)
 				object.scene_file_path = ""
-				object.owner = level
-				var change_owner := func(child): child.set_owner(object.owner)
-				object.get_children().map(change_owner)
 				var hsv_watcher := HSVWatcher.new()
 				hsv_watcher.name = "HSVWatcher"
 				object.add_child(hsv_watcher)
@@ -45,6 +43,12 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 				var overlapping_areas := placed_objects_collider.get_overlapping_areas()
 				object_deleted.emit(overlapping_areas[-1])
 				get_area(overlapping_areas[-1]).queue_free()
+
+
+func change_owner(object: Node, level: LevelProps):
+	object.owner = level
+	if object.get_child_count() > 0:
+		object.get_children().map(change_owner.bind(level))
 
 
 func get_area(area: Area2D) -> Node:

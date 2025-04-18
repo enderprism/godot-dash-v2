@@ -11,7 +11,11 @@ enum EditorAction {
 
 @export var block_palette_button_group: ButtonGroup
 
-@onready var level := LevelProps.new()
+var level:
+	set(value):
+		level = value
+		$EditHandler.level = value
+		LevelManager.editor_edited_level = value
 @onready var placed_objects_collider := $PlacedObjectsCollider as Area2D
 
 var editor_actions: int
@@ -21,6 +25,7 @@ func _ready() -> void:
 		$GameScene/Level.add_child(LevelManager.editor_level_backup.instantiate())
 		level = $GameScene/Level.get_child(0)
 	elif $GameScene/Level.get_child(0) == null:
+		level = LevelProps.new()
 		$GameScene/Level.add_child(level)
 
 	if SceneTransition.from_main():
@@ -50,8 +55,6 @@ func _ready() -> void:
 	$EditorCamera.zoom_changed.connect($GameScene/EditorGridParallax/EditorGrid.queue_redraw)
 	$EditHandler.placed_objects_collider = placed_objects_collider
 	$EditHandler.editor_mode = %EditorModes
-	$EditHandler.level = level
-	LevelManager.editor_edited_level = level
 
 
 func _physics_process(_delta: float) -> void:
