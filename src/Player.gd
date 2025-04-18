@@ -262,7 +262,7 @@ func _get_jump_state(options: int = 0) -> int:
 		if get_viewport().gui_get_hovered_control().name == "EditorViewport":
 			return jump_state
 		else:
-			return 0
+			return clampi(jump_state, -1, 0)
 	return jump_state
 
 func _compute_velocity(delta: float,
