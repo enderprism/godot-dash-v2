@@ -101,7 +101,13 @@ func _update_selection() -> void:
 			selection_changed.emit(selection)
 		_reset_selection_zone(false)
 		if placed_objects_collider.has_overlapping_areas() and not (Input.is_action_just_pressed(&"editor_add_swipe") or Input.is_action_just_pressed(&"editor_selection_remove")):
-			selection = [placed_objects_collider.get_overlapping_areas()[selection_index%len(placed_objects_collider.get_overlapping_areas())].get_parent()]
+			selection = [
+				_get_object_parent(
+						placed_objects_collider.get_overlapping_areas()[
+							selection_index%len(placed_objects_collider.get_overlapping_areas())
+					]
+				)
+			]
 			selection_changed.emit(selection)
 	if Input.is_action_pressed(&"editor_selection_remove") or Input.is_action_pressed(&"editor_add"):
 		_swipe_selection_zone()
@@ -119,8 +125,10 @@ func _update_selection() -> void:
 func _get_object_parent(object: Node) -> Node2D:
 	if object.get_parent() is TriggerBase:
 		return object.get_parent().get_parent()
-	else:
+	elif object is EditorSelectionCollider:
 		return object.get_parent()
+	else:
+		return object
 
 
 static func add_selection_highlight(object: Node2D) -> void:
