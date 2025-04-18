@@ -10,6 +10,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if _indicator_icon == null:
+		return
 	if not Engine.is_editor_hint() and LevelManager.player_camera != null:
 		if parent.has_node("GravityChangerComponent"):
 			_indicator_icon.global_rotation = LevelManager.player.gameplay_rotation
