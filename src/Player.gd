@@ -258,7 +258,7 @@ func _get_jump_state(options: int = 0) -> int:
 		jump_state = 1 if Input.is_action_just_pressed("jump") else -1
 	elif internal_gamemode == Gamemode.BALL or internal_gamemode == Gamemode.SPIDER:
 		jump_state = 1 if (Input.is_action_just_pressed("jump") and (is_on_floor() or is_on_ceiling())) else -1
-	return jump_state
+	return jump_state if get_viewport().gui_get_hovered_control() == null else 0
 
 func _compute_velocity(delta: float,
 		previous_velocity: Vector2,
