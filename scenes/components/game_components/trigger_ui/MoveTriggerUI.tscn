@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dibiibymus6dt" path="res://scenes/components/game_components/trigger_ui/trigger_components/TriggerBaseUIGroup.tscn" id="1_g2dna"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="2_4m5uk"]
 [ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="2_g2dna"]
-[ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/editor/TriggerPropertyWatcher.gd" id="3_1rp8w"]
+[ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/gui/PropertyWatcher.gd" id="3_1rp8w"]
 [ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="3_omcx3"]
 [ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="4_4m5uk"]
 [ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="4_ccyb7"]

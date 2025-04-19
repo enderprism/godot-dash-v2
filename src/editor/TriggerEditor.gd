@@ -75,6 +75,6 @@ func load_properties(trigger: TriggerBase) -> void:
 				value = value as String
 				value = value.trim_prefix(GroupEditor.GROUP_PREFIX)
 			var refresh_watchers := func(property_child): property_child.call_deferred("_watcher_update_value", value)
-			var watchers: Array = NodeUtils.get_children_of_type(property, TriggerPropertyWatcher)
+			var watchers: Array = NodeUtils.get_children_of_type(property, PropertyWatcher)
 			watchers.map(refresh_watchers)
 			property.set_value(value)

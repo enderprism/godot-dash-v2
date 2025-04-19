@@ -1,5 +1,5 @@
 extends Node
-class_name TriggerPropertyWatcher
+class_name PropertyWatcher
 
 @export var target: CanvasItem
 ## Comparison on the parent Property's value. Refer to the value as [value].
