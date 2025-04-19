@@ -15,12 +15,14 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if LevelManager.level_playing and event.is_action_pressed("restart_level"):
 		_on_restart_pressed()
-	if event.is_action_pressed("pause_level"):
+	if event.is_action_pressed("pause_level") and LevelManager.shortcut_blocker == null:
 		_on_continue_pressed()
 	if event.is_action_pressed("hide_pause_menu"):
 		visible = not visible
 
 func _notification(what):
+	if get_tree() == null:
+		return
 	if LevelManager.level_playing and not get_tree().paused and what == NOTIFICATION_APPLICATION_FOCUS_OUT:
 		_on_continue_pressed()
 

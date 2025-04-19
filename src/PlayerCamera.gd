@@ -52,12 +52,14 @@ func _physics_process(delta: float) -> void:
 							position_offset.y,
 							(sign(player.gameplay_rotation_degrees) * -1.4 * 0.5 * DEFAULT_OFFSET.x * player.get_direction() * sign(player.speed_multiplier))/zoom.y + additional_offset.x,
 							_offset_snap.x * framerate_compensation)
+					print_debug(position)
 				elif abs(_player_distance.y) > (MAX_DISTANCE.x / zoom.y):
 					position.y = lerpf(
 							position.y,
 							player.position.y - sign(_player_distance.y) * (MAX_DISTANCE.x / zoom.y),
 							_position_snap.y * framerate_compensation)
-				position_offset.x = lerpf(position_offset.x, DEFAULT_OFFSET.x/zoom.y + additional_offset.x, _offset_snap.y)
+				print_debug(DEFAULT_OFFSET.x)
+				# position_offset.x = lerpf(position_offset.x, DEFAULT_OFFSET.x/zoom.y + additional_offset.x, _offset_snap.y)
 				if _static.x == 0 and _freefly and abs(_player_distance.x) > (MAX_DISTANCE.y / zoom.y):
 					position.x = lerpf(
 							position.x,

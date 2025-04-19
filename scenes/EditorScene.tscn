@@ -477,12 +477,6 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("4_gl2yd")
 
-[node name="LevelSettings" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorViewport" instance=ExtResource("180_nk067")]
-visible = false
-layout_mode = 1
-offset_right = 420.0
-offset_bottom = 239.0
-
 [node name="EditorModes" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer"]
 unique_name_in_owner = true
 texture_filter = 4
@@ -5187,6 +5181,10 @@ visible = false
 layout_mode = 2
 theme = ExtResource("147_1ad2k")
 
+[node name="LevelSettings" parent="EditorUI" instance=ExtResource("180_nk067")]
+visible = false
+metadata/_edit_lock_ = true
+
 [node name="EditorCamera" type="Camera2D" parent="." node_paths=PackedStringArray("editor_viewport")]
 process_priority = 1
 position = Vector2(640, 256)
@@ -5269,9 +5267,10 @@ single_usage = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/S
 spawn_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered")
 touch_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered")
 
-[node name="MenuBarHandler" type="Node" parent="." node_paths=PackedStringArray("edit_handler", "open_dialog", "import_dialog", "save_as_dialog", "export_dialog", "save_changes_before_opening_dialog", "corrupted_level_dialog", "level_already_exists_dialog")]
+[node name="MenuBarHandler" type="Node" parent="." node_paths=PackedStringArray("edit_handler", "level_settings", "open_dialog", "import_dialog", "save_as_dialog", "export_dialog", "save_changes_before_opening_dialog", "corrupted_level_dialog", "level_already_exists_dialog")]
 script = ExtResource("189_ao6md")
 edit_handler = NodePath("../EditHandler")
+level_settings = NodePath("../EditorUI/LevelSettings")
 open_dialog = NodePath("../OpenLevelDialog")
 import_dialog = NodePath("../ImportAndOpenLevelDialog")
 save_as_dialog = NodePath("../SaveLevelAsDialog")
@@ -5386,6 +5385,7 @@ cancel_button_text = "Open Existing"
 [connection signal="selection_changed" from="EditHandler" to="BaseDetailHandler" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_changed" from="EditHandler" to="TriggerUIHandler" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_zone_changed" from="EditHandler" to="EditHandler/SelectionZone/SelectionZoneDisplay" method="_on_edit_handler_selection_zone_changed"]
+[connection signal="level_loaded" from="MenuBarHandler" to="EditorUI/LevelSettings" method="_on_menu_bar_handler_level_loaded"]
 [connection signal="timeout" from="MenuBarHandler/AutosaveTimer" to="MenuBarHandler" method="_save_level"]
 [connection signal="file_selected" from="OpenLevelDialog" to="MenuBarHandler" method="_on_open_level_dialog_file_selected"]
 [connection signal="file_selected" from="ImportAndOpenLevelDialog" to="MenuBarHandler" method="_on_import_and_open_level_dialog_file_selected"]

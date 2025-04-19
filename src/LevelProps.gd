@@ -1,9 +1,22 @@
 extends Node2D
 class_name LevelProps
 
+const START_SPEED: Array[float] = [
+	0.0,   # 0x
+	0.807, # 0.5x
+	1.0,   # 1x
+	1.243, # 2x
+	1.502, # 3x
+	1.849, # 4x
+	2.431, # 5x
+]
+
 @export_file var song_path: String
 @export_range(0.0, 60.0, 0.01, "or_greater", "suffix:s") var song_start_time: float
 @export var platformer: bool
+@export var start_speed: int = 2
+@export var start_reverse: bool
+@export var start_gameplay_rotation_degrees: float
 
 @onready var song_player := AudioStreamPlayer.new()
 
@@ -36,6 +49,10 @@ func start_level() -> void:
 	if get_tree().paused:
 		await _pause_manager.unpaused
 	song_player.play(song_start_time)
+	LevelManager.player.speed_multiplier = START_SPEED[start_speed]
+	LevelManager.player.horizontal_direction = -1 if start_reverse else 1
+	print_debug(start_gameplay_rotation_degrees)
+	LevelManager.player.gameplay_rotation_degrees = start_gameplay_rotation_degrees
 	LevelManager.level_playing = true
 
 

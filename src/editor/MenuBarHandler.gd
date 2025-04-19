@@ -1,7 +1,10 @@
 extends Node
 class_name MenuBarHandler
 
+signal level_loaded(level: LevelProps)
+
 @export var edit_handler: EditHandler
+@export var level_settings: LevelSettings
 @export var open_dialog: FileDialog
 @export var import_dialog: FileDialog
 @export var save_as_dialog: FileDialog
@@ -42,6 +45,9 @@ func _on_level_index_pressed(index:int) -> void:
 			if editor.level.has_meta("packed_file_name"):
 				export_dialog.set_current_file(editor.level.get_meta("packed_file_name").get_basename())
 			export_dialog.show()
+		7: # Level Options
+			level_settings.show()
+			LevelManager.shortcut_blocker = level_settings
 
 
 func _new_level() -> void:
@@ -49,6 +55,7 @@ func _new_level() -> void:
 	editor.level.add_sibling(new_level)
 	editor.level.queue_free()
 	editor.level = new_level
+	level_loaded.emit(new_level)
 
 
 func _open_level(path: String) -> void:
@@ -70,6 +77,7 @@ func _open_level(path: String) -> void:
 	editor.level.queue_free()
 	editor.level = level
 	edit_handler.selection.clear()
+	level_loaded.emit(level)
 	Toasts.new_toast("Opened level " + path.get_file().get_basename())
 
 

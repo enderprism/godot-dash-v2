@@ -23,6 +23,7 @@ var editor_backup := PackedScene.new()
 var editor_level_backup := PackedScene.new()
 var editor_edited_level: LevelProps
 var active_camera_static: CameraStaticTrigger
+var shortcut_blocker: Node
 
 func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color.BLACK)
