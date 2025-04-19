@@ -35,6 +35,10 @@ func generate_buttons() -> void:
 		button.add_child(block_palette_ref)
 		block_palette_ref.owner = parent.owner
 		# Display
+		var center_container := CenterContainer.new()
+		center_container.size = button.size
+		button.add_child(center_container)
+		center_container.owner = parent.owner
 		var texture_rects: Array[TextureRect]
 		var base := TextureRect.new()
 		base.texture = texture.base
@@ -44,7 +48,8 @@ func generate_buttons() -> void:
 			detail.texture = texture.detail
 			texture_rects.append(detail)
 		for texture_rect in texture_rects:
-			texture_rect.expand_mode = TextureRect.ExpandMode.EXPAND_FIT_WIDTH_PROPORTIONAL
-			texture_rect.size = button.size
-			button.add_child(texture_rect)
+			texture_rect.expand_mode = TextureRect.ExpandMode.EXPAND_IGNORE_SIZE
+			texture_rect.custom_minimum_size = button.size
+			texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			center_container.add_child(texture_rect)
 			texture_rect.owner = parent.owner
