@@ -76,7 +76,7 @@ func _import_level(path: String, keep_original: bool) -> void:
 	var level_dir := DirAccess.open("user://created_levels/levels")
 	var song_dir := DirAccess.open("user://created_levels/songs")
 	var level_path: String
-	if len(files) != 2:
+	if not "tscn" in Array(files).map(func(file): return file.get_extension()):
 		corrupted_level_dialog.show()
 		return
 	for file_path in files:
@@ -169,7 +169,6 @@ func _on_save_changes_before_opening_custom_action(action:StringName) -> void:
 
 
 func _on_export_level_dialog_file_selected(path:String) -> Error:
-	print_debug(path)
 	var writer = ZIPPacker.new()
 	var err = writer.open(path)
 	if err != OK:

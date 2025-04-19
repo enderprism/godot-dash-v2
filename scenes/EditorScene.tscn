@@ -4654,7 +4654,6 @@ auto_translate_mode = 1
 title = "Export"
 initial_position = 2
 size = Vector2i(1088, 720)
-ok_button_text = "Export"
 mode_overrides_title = false
 access = 2
 filters = PackedStringArray("*.level")
@@ -4668,10 +4667,10 @@ ok_button_text = "Save"
 dialog_text = "Save changes before opening level?"
 
 [node name="CorruptedLevelAcceptDialog" type="AcceptDialog" parent="."]
+title = "Warning!"
 initial_position = 2
-size = Vector2i(234, 100)
-force_native = true
-dialog_text = "This level can't be imported."
+size = Vector2i(588, 100)
+dialog_text = "This exported level doesn't contain a valid .tscn file and can't be imported."
 
 [node name="LevelAlreadyExists" type="ConfirmationDialog" parent="."]
 initial_position = 2
