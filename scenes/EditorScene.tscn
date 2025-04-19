@@ -528,7 +528,7 @@ button_group = ExtResource("3_0vcbd")
 object = ExtResource("7_ii36d")
 textures = Array[ExtResource("12_egrfm")]([SubResource("Resource_aofxv"), SubResource("Resource_lvhj5"), SubResource("Resource_sl8yb"), SubResource("Resource_37pxl"), SubResource("Resource_6ukik"), SubResource("Resource_bs2up"), SubResource("Resource_3clt4"), SubResource("Resource_e0lml"), SubResource("Resource_momrj"), SubResource("Resource_6fwf3"), SubResource("Resource_gdkvu"), SubResource("Resource_vtwef"), SubResource("Resource_7k2uw"), SubResource("Resource_tkktq"), SubResource("Resource_mvta7"), SubResource("Resource_wiub1")])
 
-[node name="@BaseButton@846140" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="RegularBlock01" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -590,18 +590,23 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_aofxv")
 metadata/_edit_group_ = true
 
-[node name="@Node@846141" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846140"]
+[node name="@Node@1209608" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/RegularBlock01"]
 script = ExtResource("7_f0stj")
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846142" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846140"]
+[node name="@CenterContainer@1209609" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/RegularBlock01"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("4_u8igg")
-expand_mode = 3
 
-[node name="@BaseButton@846143" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@1209610" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/RegularBlock01/@CenterContainer@1209609"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("4_u8igg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="OutlineBlock01" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -663,19 +668,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_lvhj5")
 metadata/_edit_group_ = true
 
-[node name="@Node@846144" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846143"]
+[node name="@Node@1209611" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/OutlineBlock01"]
 script = ExtResource("7_f0stj")
 id = 1
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846145" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846143"]
+[node name="@CenterContainer@1209612" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/OutlineBlock01"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("6_2nlu4")
-expand_mode = 3
 
-[node name="@BaseButton@846146" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@1209613" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/OutlineBlock01/@CenterContainer@1209612"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("6_2nlu4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridBlock01" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -737,19 +747,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_sl8yb")
 metadata/_edit_group_ = true
 
-[node name="@Node@846147" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846146"]
+[node name="@Node@1209614" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock01"]
 script = ExtResource("7_f0stj")
 id = 2
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846148" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846146"]
+[node name="@CenterContainer@1209615" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock01"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("13_fa2pl")
-expand_mode = 3
 
-[node name="@BaseButton@846149" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@1209616" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock01/@CenterContainer@1209615"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("13_fa2pl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridBlock02" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -811,19 +826,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_37pxl")
 metadata/_edit_group_ = true
 
-[node name="@Node@846150" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846149"]
+[node name="@Node@1209617" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock02"]
 script = ExtResource("7_f0stj")
 id = 3
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846151" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846149"]
+[node name="@CenterContainer@1209618" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock02"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("14_ajdcu")
-expand_mode = 3
 
-[node name="@BaseButton@846152" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@1209619" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock02/@CenterContainer@1209618"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("14_ajdcu")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridBlock03" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -885,19 +905,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_6ukik")
 metadata/_edit_group_ = true
 
-[node name="@Node@846153" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846152"]
+[node name="@Node@1209620" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock03"]
 script = ExtResource("7_f0stj")
 id = 4
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846154" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846152"]
+[node name="@CenterContainer@1209621" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock03"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("15_e8m1b")
-expand_mode = 3
 
-[node name="@BaseButton@846155" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@1209622" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock03/@CenterContainer@1209621"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("15_e8m1b")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridBlock04" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -959,19 +984,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_bs2up")
 metadata/_edit_group_ = true
 
-[node name="@Node@846156" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846155"]
+[node name="@Node@1209623" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock04"]
 script = ExtResource("7_f0stj")
 id = 5
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846157" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846155"]
+[node name="@CenterContainer@1209624" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock04"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("16_cbmyc")
-expand_mode = 3
 
-[node name="@BaseButton@846158" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@1209625" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock04/@CenterContainer@1209624"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("16_cbmyc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridBlock05" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -1033,19 +1063,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_3clt4")
 metadata/_edit_group_ = true
 
-[node name="@Node@846159" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846158"]
+[node name="@Node@1209626" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock05"]
 script = ExtResource("7_f0stj")
 id = 6
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846160" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846158"]
+[node name="@CenterContainer@1209627" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock05"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("17_4a8ke")
-expand_mode = 3
 
-[node name="@BaseButton@846161" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@1209628" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock05/@CenterContainer@1209627"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("17_4a8ke")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridBlock06" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -1107,19 +1142,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_e0lml")
 metadata/_edit_group_ = true
 
-[node name="@Node@846162" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846161"]
+[node name="@Node@1209629" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock06"]
 script = ExtResource("7_f0stj")
 id = 7
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846163" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846161"]
+[node name="@CenterContainer@1209630" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock06"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("18_3clt4")
-expand_mode = 3
 
-[node name="@BaseButton@846164" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@1209631" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock06/@CenterContainer@1209630"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("18_3clt4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridBlock07" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -1181,19 +1221,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_momrj")
 metadata/_edit_group_ = true
 
-[node name="@Node@846165" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846164"]
+[node name="@Node@1209632" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock07"]
 script = ExtResource("7_f0stj")
 id = 8
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846166" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846164"]
+[node name="@CenterContainer@1209633" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock07"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("19_ao6md")
-expand_mode = 3
 
-[node name="@BaseButton@846167" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@1209634" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock07/@CenterContainer@1209633"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("19_ao6md")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridBlock08" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -1255,19 +1300,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_6fwf3")
 metadata/_edit_group_ = true
 
-[node name="@Node@846168" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846167"]
+[node name="@Node@1209635" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock08"]
 script = ExtResource("7_f0stj")
 id = 9
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846169" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846167"]
+[node name="@CenterContainer@1209636" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock08"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("20_nk067")
-expand_mode = 3
 
-[node name="@BaseButton@846170" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@1209637" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock08/@CenterContainer@1209636"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("20_nk067")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridBlock09" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -1329,19 +1379,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_gdkvu")
 metadata/_edit_group_ = true
 
-[node name="@Node@846171" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846170"]
+[node name="@Node@1209638" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock09"]
 script = ExtResource("7_f0stj")
 id = 10
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846172" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846170"]
+[node name="@CenterContainer@1209639" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock09"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("21_wkjme")
-expand_mode = 3
 
-[node name="@BaseButton@846173" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@1209640" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock09/@CenterContainer@1209639"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("21_wkjme")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridBlock10" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -1403,19 +1458,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_vtwef")
 metadata/_edit_group_ = true
 
-[node name="@Node@846174" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846173"]
+[node name="@Node@1209641" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock10"]
 script = ExtResource("7_f0stj")
 id = 11
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846175" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846173"]
+[node name="@CenterContainer@1209642" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock10"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("22_rke8t")
-expand_mode = 3
 
-[node name="@BaseButton@846176" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@1209643" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock10/@CenterContainer@1209642"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("22_rke8t")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridBlock11" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -1477,19 +1537,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_7k2uw")
 metadata/_edit_group_ = true
 
-[node name="@Node@846177" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846176"]
+[node name="@Node@1209644" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock11"]
 script = ExtResource("7_f0stj")
 id = 12
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846178" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846176"]
+[node name="@CenterContainer@1209645" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock11"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("23_5ik7l")
-expand_mode = 3
 
-[node name="@BaseButton@846179" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@1209646" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock11/@CenterContainer@1209645"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("23_5ik7l")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridBlock12" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -1551,19 +1616,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_tkktq")
 metadata/_edit_group_ = true
 
-[node name="@Node@846180" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846179"]
+[node name="@Node@1209647" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock12"]
 script = ExtResource("7_f0stj")
 id = 13
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846181" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@846179"]
+[node name="@CenterContainer@1209648" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock12"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("24_0v0om")
-expand_mode = 3
 
-[node name="GridBlock13" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@1209649" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock12/@CenterContainer@1209648"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("24_0v0om")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="@BaseButton@1209650" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -1625,19 +1695,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_mvta7")
 metadata/_edit_group_ = true
 
-[node name="@Node@846182" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock13"]
+[node name="@Node@1209651" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@1209650"]
 script = ExtResource("7_f0stj")
 id = 14
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846183" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock13"]
+[node name="@CenterContainer@1209652" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@1209650"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
-texture = ExtResource("25_33w7i")
-expand_mode = 3
 
-[node name="GridBlock14" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
+[node name="@TextureRect@1209653" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@1209650/@CenterContainer@1209652"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("25_33w7i")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="@BaseButton@1209654" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -1699,17 +1774,22 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_wiub1")
 metadata/_edit_group_ = true
 
-[node name="@Node@846184" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock14"]
+[node name="@Node@1209655" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@1209654"]
 script = ExtResource("7_f0stj")
 id = 15
 object = ExtResource("7_ii36d")
 
-[node name="@TextureRect@846185" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/GridBlock14"]
+[node name="@CenterContainer@1209656" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@1209654"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
+
+[node name="@TextureRect@1209657" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer/ButtonContainer/@BaseButton@1209654/@CenterContainer@1209656"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
 texture = ExtResource("26_t7625")
-expand_mode = 3
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Slopes" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place"]
 layout_mode = 2
