@@ -26,3 +26,7 @@ var active_camera_static: CameraStaticTrigger
 
 func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color.BLACK)
+	if not DirAccess.dir_exists_absolute("user://created_levels/levels"):
+		DirAccess.make_dir_recursive_absolute("user://created_levels/levels")
+	if not DirAccess.dir_exists_absolute("user://created_levels/songs"):
+		DirAccess.make_dir_recursive_absolute("user://created_levels/songs")

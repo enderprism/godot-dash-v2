@@ -62,7 +62,7 @@ func _physics_process(_delta: float) -> void:
 	if LevelManager.level_playing:
 		return
 	placed_objects_collider.global_position = get_local_mouse_position()
-	if get_viewport().gui_get_focus_owner() is not LineEdit:
+	if get_viewport().gui_get_focus_owner() is not LineEdit and not any_dialog_is_open():
 		if Input.is_action_just_pressed(&"editor_place_mode"):
 			%EditorModes.current_tab = 0
 		elif Input.is_action_just_pressed(&"editor_edit_mode"):
@@ -85,6 +85,19 @@ func texture_variation_overlapping(type: EditorSelectionCollider.Type, id: int) 
 		return true
 	if placed_objects_collider.get_overlapping_areas()[-1].type == type:
 		return placed_objects_collider.get_overlapping_areas()[-1].id == id
+	return false
+
+
+func level_was_modified() -> bool:
+	# TODO: Create action history using UndoRedo
+	return level.get_child_count() > 1
+
+
+func any_dialog_is_open() -> bool:
+	var dialogs := NodeUtils.get_children_of_type(self, AcceptDialog)
+	for dialog in dialogs:
+		if dialog.visible:
+			return true
 	return false
 
 

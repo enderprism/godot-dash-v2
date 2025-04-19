@@ -13,5 +13,5 @@ grow_horizontal = 2
 theme_override_constants/separation = 10
 
 [node name="Spacer" type="Control" parent="ToastContainer"]
-custom_minimum_size = Vector2(0, 22)
+custom_minimum_size = Vector2(0, 53)
 layout_mode = 2

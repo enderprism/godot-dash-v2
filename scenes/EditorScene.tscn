@@ -1,4 +1,4 @@
-[gd_scene load_steps=207 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=208 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -188,6 +188,7 @@
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="147_1ad2k"]
 [ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="147_pcjvf"]
 [ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="148_tl5y0"]
+[ext_resource type="Script" uid="uid://c08lx7vbboo37" path="res://src/editor/MenuBarHandler.gd" id="189_ao6md"]
 
 [sub_resource type="Resource" id="Resource_aofxv"]
 script = ExtResource("12_egrfm")
@@ -304,53 +305,6 @@ metadata/_edit_vertical_guides_ = [-111.0]
 [node name="EditorUI" type="CanvasLayer" parent="."]
 layer = 100
 
-[node name="MenuBar" type="MenuBar" parent="EditorUI"]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 31.0
-grow_horizontal = 2
-
-[node name="File" type="PopupMenu" parent="EditorUI/MenuBar"]
-position = Vector2i(0, 32)
-size = Vector2i(126, 93)
-system_menu_id = 3
-prefer_native_menu = true
-item_count = 4
-item_0/text = "Save"
-item_0/id = 0
-item_1/text = "Save As"
-item_1/id = 1
-item_2/id = 2
-item_2/separator = true
-item_3/text = "Level Options"
-item_3/id = 3
-
-[node name="Edit" type="PopupMenu" parent="EditorUI/MenuBar"]
-item_count = 1
-item_0/text = "Preferences"
-item_0/id = 0
-
-[node name="View" type="PopupMenu" parent="EditorUI/MenuBar"]
-hide_on_checkable_item_selection = false
-item_count = 1
-item_0/text = "Panel Visibility"
-item_0/id = 0
-
-[node name="PanelVisibility" type="PopupMenu" parent="EditorUI/MenuBar/View"]
-hide_on_checkable_item_selection = false
-item_count = 1
-item_0/text = "Block Palette"
-item_0/checkable = 1
-item_0/checked = true
-item_0/id = 0
-
-[node name="Help" type="PopupMenu" parent="EditorUI/MenuBar"]
-item_count = 1
-item_0/text = "Manual"
-item_0/id = 0
-
 [node name="ColorRect" type="ColorRect" parent="EditorUI"]
 visible = false
 anchors_preset = 10
@@ -379,12 +333,94 @@ size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/separation = 0
 
+[node name="MenuBarContainer" type="PanelContainer" parent="EditorUI/EditorContainer/VBoxContainer"]
+unique_name_in_owner = true
+material = ExtResource("3_m55bu")
+layout_mode = 2
+
+[node name="MenuBar" type="MenuBar" parent="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+flat = true
+
+[node name="Level" type="PopupMenu" parent="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar"]
+position = Vector2i(0, 32)
+size = Vector2i(153, 147)
+system_menu_id = 3
+prefer_native_menu = true
+item_count = 8
+item_0/text = "New"
+item_0/id = 0
+item_1/text = "Open"
+item_1/id = 0
+item_2/text = "Import and Open"
+item_2/id = 0
+item_3/text = "Save"
+item_3/id = 0
+item_4/text = "Save As"
+item_4/id = 0
+item_5/text = "Export"
+item_5/id = 0
+item_6/id = 0
+item_6/separator = true
+item_7/text = "Level Options"
+item_7/id = 0
+
+[node name="Edit" type="PopupMenu" parent="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar"]
+item_count = 3
+item_0/text = "Copy"
+item_0/id = 0
+item_1/text = "Paste"
+item_1/id = 1
+item_2/text = "Duplicate"
+item_2/id = 2
+
+[node name="View" type="PopupMenu" parent="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar"]
+hide_on_checkable_item_selection = false
+item_count = 1
+item_0/text = "Panel Visibility"
+item_0/id = 0
+
+[node name="PanelVisibility" type="PopupMenu" parent="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar/View"]
+hide_on_checkable_item_selection = false
+item_count = 2
+item_0/text = "Bottom Panel"
+item_0/checkable = 1
+item_0/checked = true
+item_0/id = 0
+item_1/text = "Side Panel"
+item_1/checkable = 1
+item_1/checked = true
+item_1/id = 1
+
+[node name="Help" type="PopupMenu" parent="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar"]
+item_count = 1
+item_0/text = "Manual"
+item_0/id = 0
+
 [node name="EditorViewport" type="Control" parent="EditorUI/EditorContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 1
 mouse_filter = 1
+
+[node name="Playtest" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/EditorViewport"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 192.0
+pivot_offset = Vector2(64, 64)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("147_1ad2k")
+icon = ExtResource("3_qy4mu")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
 
 [node name="EditorModes" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -4482,21 +4518,6 @@ visible = false
 layout_mode = 2
 theme = ExtResource("147_1ad2k")
 
-[node name="Playtest" type="Button" parent="EditorUI"]
-offset_left = 64.0
-offset_top = 64.0
-offset_right = 192.0
-offset_bottom = 192.0
-pivot_offset = Vector2(64, 64)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("147_1ad2k")
-icon = ExtResource("3_qy4mu")
-flat = true
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("4_gl2yd")
-
 [node name="EditorCamera" type="Camera2D" parent="." node_paths=PackedStringArray("editor_viewport")]
 process_priority = 1
 position = Vector2(640, 256)
@@ -4579,6 +4600,89 @@ single_usage = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/S
 spawn_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered")
 touch_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered")
 
+[node name="MenuBarHandler" type="Node" parent="." node_paths=PackedStringArray("edit_handler", "open_dialog", "import_dialog", "save_as_dialog", "export_dialog", "save_changes_before_opening_dialog", "corrupted_level_dialog", "level_already_exists_dialog")]
+script = ExtResource("189_ao6md")
+edit_handler = NodePath("../EditHandler")
+open_dialog = NodePath("../OpenLevelDialog")
+import_dialog = NodePath("../ImportAndOpenLevelDialog")
+save_as_dialog = NodePath("../SaveLevelAsDialog")
+export_dialog = NodePath("../ExportLevelDialog")
+save_changes_before_opening_dialog = NodePath("../SaveChangesBeforeOpening")
+corrupted_level_dialog = NodePath("../CorruptedLevelAcceptDialog")
+level_already_exists_dialog = NodePath("../LevelAlreadyExists")
+
+[node name="OpenLevelDialog" type="FileDialog" parent="."]
+title = "Open"
+initial_position = 2
+size = Vector2i(1088, 720)
+ok_button_text = "Open"
+mode_overrides_title = false
+file_mode = 0
+access = 1
+root_subfolder = "created_levels/levels"
+filters = PackedStringArray("*.tscn")
+use_native_dialog = true
+
+[node name="ImportAndOpenLevelDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Import and open"
+initial_position = 2
+size = Vector2i(1088, 720)
+ok_button_text = "Open"
+mode_overrides_title = false
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.level")
+option_count = 1
+use_native_dialog = true
+option_0/name = "Keep original level file"
+option_0/default = 1
+
+[node name="SaveLevelAsDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Save as"
+initial_position = 2
+size = Vector2i(1088, 720)
+mode_overrides_title = false
+access = 1
+root_subfolder = "created_levels/levels"
+filters = PackedStringArray("*.tscn")
+use_native_dialog = true
+
+[node name="ExportLevelDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Export"
+initial_position = 2
+size = Vector2i(1088, 720)
+ok_button_text = "Export"
+mode_overrides_title = false
+access = 2
+filters = PackedStringArray("*.level")
+use_native_dialog = true
+
+[node name="SaveChangesBeforeOpening" type="ConfirmationDialog" parent="."]
+initial_position = 2
+size = Vector2i(289, 106)
+force_native = true
+ok_button_text = "Save"
+dialog_text = "Save changes before opening level?"
+
+[node name="CorruptedLevelAcceptDialog" type="AcceptDialog" parent="."]
+initial_position = 2
+size = Vector2i(234, 100)
+force_native = true
+dialog_text = "This level can't be imported."
+
+[node name="LevelAlreadyExists" type="ConfirmationDialog" parent="."]
+initial_position = 2
+size = Vector2i(514, 100)
+force_native = true
+ok_button_text = "Overwrite"
+dialog_text = "A level with the same name already exists in the game directory!"
+cancel_button_text = "Open Existing"
+
+[connection signal="index_pressed" from="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar/Level" to="MenuBarHandler" method="_on_level_index_pressed"]
+[connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorViewport/Playtest" to="." method="_on_playtest_pressed"]
 [connection signal="ready" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place" to="EditorUI/EditorContainer/VBoxContainer/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
 [connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsLeft/RotateLeft90" to="EditHandler" method="_on_rotate_left_90_pressed"]
 [connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsLeft/RotateRight90" to="EditHandler" method="_on_rotate_right_90_pressed"]
@@ -4605,10 +4709,15 @@ touch_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContaine
 [connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value" to="HSVHandler" method="_on_value_value_changed"]
 [connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength" to="HSVHandler" method="_on_strength_value_changed"]
 [connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha" to="HSVHandler" method="_on_alpha_value_changed"]
-[connection signal="pressed" from="EditorUI/Playtest" to="." method="_on_playtest_pressed"]
 [connection signal="object_deleted" from="PlaceHandler" to="EditHandler" method="_on_place_handler_object_deleted"]
 [connection signal="selection_changed" from="EditHandler" to="SidePanelManager" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_changed" from="EditHandler" to="HSVHandler" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_changed" from="EditHandler" to="BaseDetailHandler" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_changed" from="EditHandler" to="TriggerUIHandler" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_zone_changed" from="EditHandler" to="EditHandler/SelectionZone/SelectionZoneDisplay" method="_on_edit_handler_selection_zone_changed"]
+[connection signal="file_selected" from="OpenLevelDialog" to="MenuBarHandler" method="_on_open_level_dialog_file_selected"]
+[connection signal="file_selected" from="ImportAndOpenLevelDialog" to="MenuBarHandler" method="_on_import_and_open_level_dialog_file_selected"]
+[connection signal="file_selected" from="SaveLevelAsDialog" to="MenuBarHandler" method="_on_save_level_as_dialog_file_selected"]
+[connection signal="file_selected" from="ExportLevelDialog" to="MenuBarHandler" method="_on_export_level_dialog_file_selected"]
+[connection signal="confirmed" from="SaveChangesBeforeOpening" to="MenuBarHandler" method="_on_save_changes_before_opening_confirmed"]
+[connection signal="custom_action" from="SaveChangesBeforeOpening" to="MenuBarHandler" method="_on_save_changes_before_opening_custom_action"]
