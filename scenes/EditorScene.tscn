@@ -1,4 +1,4 @@
-[gd_scene load_steps=208 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=209 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -188,6 +188,7 @@
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="147_1ad2k"]
 [ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="147_pcjvf"]
 [ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="148_tl5y0"]
+[ext_resource type="PackedScene" uid="uid://ylswfd45fw38" path="res://scenes/components/game_components/LevelSettings.tscn" id="180_nk067"]
 [ext_resource type="Script" uid="uid://c08lx7vbboo37" path="res://src/editor/MenuBarHandler.gd" id="189_ao6md"]
 
 [sub_resource type="Resource" id="Resource_aofxv"]
@@ -426,6 +427,12 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("4_gl2yd")
+
+[node name="LevelSettings" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorViewport" instance=ExtResource("180_nk067")]
+visible = false
+layout_mode = 1
+offset_right = 420.0
+offset_bottom = 239.0
 
 [node name="EditorModes" type="TabContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer"]
 unique_name_in_owner = true
@@ -4616,6 +4623,9 @@ save_changes_before_opening_dialog = NodePath("../SaveChangesBeforeOpening")
 corrupted_level_dialog = NodePath("../CorruptedLevelAcceptDialog")
 level_already_exists_dialog = NodePath("../LevelAlreadyExists")
 
+[node name="AutosaveTimer" type="Timer" parent="MenuBarHandler"]
+one_shot = true
+
 [node name="OpenLevelDialog" type="FileDialog" parent="."]
 title = "Open"
 initial_position = 2
@@ -4719,6 +4729,7 @@ cancel_button_text = "Open Existing"
 [connection signal="selection_changed" from="EditHandler" to="BaseDetailHandler" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_changed" from="EditHandler" to="TriggerUIHandler" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_zone_changed" from="EditHandler" to="EditHandler/SelectionZone/SelectionZoneDisplay" method="_on_edit_handler_selection_zone_changed"]
+[connection signal="timeout" from="MenuBarHandler/AutosaveTimer" to="MenuBarHandler" method="_save_level"]
 [connection signal="file_selected" from="OpenLevelDialog" to="MenuBarHandler" method="_on_open_level_dialog_file_selected"]
 [connection signal="file_selected" from="ImportAndOpenLevelDialog" to="MenuBarHandler" method="_on_import_and_open_level_dialog_file_selected"]
 [connection signal="file_selected" from="SaveLevelAsDialog" to="MenuBarHandler" method="_on_save_level_as_dialog_file_selected"]

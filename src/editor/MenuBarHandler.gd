@@ -17,6 +17,9 @@ func _ready() -> void:
 	save_changes_before_opening_dialog.add_button("Don't Save", false, "dontsave")
 	save_as_dialog.root_subfolder = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	export_dialog.root_subfolder = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
+	var update_autosave_delay_and_restart := func():
+		$AutosaveTimer.start(Config.config.autosave_delay * 60.0)
+	$AutosaveTimer.timeout.connect(update_autosave_delay_and_restart)
 
 
 func _on_level_index_pressed(index:int) -> void:
@@ -67,6 +70,7 @@ func _open_level(path: String) -> void:
 	editor.level.queue_free()
 	editor.level = level
 	edit_handler.selection.clear()
+	Toasts.new_toast("Opened level " + path.get_file().get_basename())
 
 
 func _import_level(path: String, keep_original: bool) -> void:
@@ -143,6 +147,8 @@ func _on_import_and_open_level_dialog_file_selected(path:String) -> void:
 
 func _on_save_level_as_dialog_file_selected(path:String) -> void:
 	editor.level.set_meta("packed_file_name", path.get_file())
+	$AutosaveTimer.stop()
+	$AutosaveTimer.start(Config.config.autosave_delay * 60)
 	_save_level()
 
 

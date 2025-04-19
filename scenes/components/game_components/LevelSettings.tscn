@@ -1,0 +1,707 @@
+[gd_scene load_steps=9 format=3 uid="uid://ylswfd45fw38"]
+
+[ext_resource type="Material" uid="uid://dmfwkx1hhpd5x" path="res://resources/SimpleBlurMaterial.tres" id="1_0trr5"]
+[ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="1_tch7s"]
+[ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="2_stlnv"]
+[ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="3_d0u0j"]
+[ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="5_t0cjo"]
+[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="6_ikfu3"]
+[ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="7_2dtee"]
+[ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="8_bmwhr"]
+
+[node name="LevelSettings" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="."]
+material = ExtResource("1_0trr5")
+layout_mode = 2
+current_tab = 0
+
+[node name="Level Settings" type="MarginContainer" parent="TabContainer"]
+layout_mode = 2
+theme = ExtResource("1_tch7s")
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Level Settings"]
+layout_mode = 2
+
+[node name="Song" type="VBoxContainer" parent="TabContainer/Level Settings/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("2_stlnv")
+label_settings = ExtResource("3_d0u0j")
+metadata/_custom_type_script = "uid://cuih47milvqcs"
+
+[node name="Song Path" type="HBoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Song"]
+custom_minimum_size = Vector2(500, 32)
+layout_mode = 2
+script = ExtResource("5_t0cjo")
+type = 4
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path"]
+layout_mode = 2
+text = "Song Path"
+
+[node name="Spacer" type="Control" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+alignment = 1
+script = ExtResource("7_2dtee")
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+
+[node name="SpinBox" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="VECTOR2" type="BoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+vertical = true
+script = ExtResource("8_bmwhr")
+step = 0.05
+max_value = 1.0
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "x:"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "y:"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("6_ikfu3")
+
+[node name="COLOR" type="ColorPickerButton" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="ENUM" type="OptionButton" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="NODE2D" type="Button" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="Start Offset" type="HBoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Song"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("5_t0cjo")
+step = 0.001
+or_greater = true
+suffix = "s"
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset"]
+layout_mode = 2
+text = "Start Offset"
+
+[node name="Spacer" type="Control" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset"]
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+max_value = 1.0
+step = 0.001
+allow_greater = true
+suffix = "s"
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+alignment = 1
+script = ExtResource("7_2dtee")
+step = 0.001
+allow_greater = true
+suffix = "s"
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.001
+allow_greater = true
+
+[node name="SpinBox" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+allow_greater = true
+suffix = "s"
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="VECTOR2" type="BoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+vertical = true
+script = ExtResource("8_bmwhr")
+step = 0.001
+max_value = 1.0
+allow_greater = true
+suffix = "s"
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+allow_greater = true
+alignment = 3
+prefix = "x:"
+suffix = "s"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+allow_greater = true
+alignment = 3
+prefix = "y:"
+suffix = "s"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("6_ikfu3")
+
+[node name="COLOR" type="ColorPickerButton" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="ENUM" type="OptionButton" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="NODE2D" type="Button" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="Player" type="VBoxContainer" parent="TabContainer/Level Settings/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("2_stlnv")
+label_settings = ExtResource("3_d0u0j")
+metadata/_custom_type_script = "uid://cuih47milvqcs"
+
+[node name="Speed" type="HBoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Player"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("5_t0cjo")
+type = 6
+enum_fields = PackedStringArray("0.0x", "0.5x", "1.0x", "2.0x", "3.0x", "4.0x")
+default_enum_idx = 2
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed"]
+layout_mode = 2
+text = "Speed"
+
+[node name="Spacer" type="Control" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+alignment = 1
+script = ExtResource("7_2dtee")
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+
+[node name="SpinBox" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="VECTOR2" type="BoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+vertical = true
+script = ExtResource("8_bmwhr")
+step = 0.05
+max_value = 1.0
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "x:"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "y:"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("6_ikfu3")
+
+[node name="COLOR" type="ColorPickerButton" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="ENUM" type="OptionButton" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed"]
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+selected = 2
+item_count = 6
+popup/item_0/text = "0.0x"
+popup/item_0/id = 0
+popup/item_1/text = "0.5x"
+popup/item_1/id = 1
+popup/item_2/text = "1.0x"
+popup/item_2/id = 2
+popup/item_3/text = "2.0x"
+popup/item_3/id = 3
+popup/item_4/text = "3.0x"
+popup/item_4/id = 4
+popup/item_5/text = "4.0x"
+popup/item_5/id = 5
+
+[node name="NODE2D" type="Button" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="Reverse" type="HBoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Player"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("5_t0cjo")
+type = 2
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse"]
+layout_mode = 2
+text = "Reverse"
+
+[node name="Spacer" type="Control" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+alignment = 1
+script = ExtResource("7_2dtee")
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+
+[node name="SpinBox" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse"]
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="VECTOR2" type="BoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+vertical = true
+script = ExtResource("8_bmwhr")
+step = 0.05
+max_value = 1.0
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "x:"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "y:"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("6_ikfu3")
+
+[node name="COLOR" type="ColorPickerButton" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="ENUM" type="OptionButton" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="NODE2D" type="Button" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="Gameplay Rotation" type="HBoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Player"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("5_t0cjo")
+_min = -180.0
+_max = 180.0
+suffix = "°"
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation"]
+layout_mode = 2
+text = "Gameplay Rotation"
+
+[node name="Spacer" type="Control" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation"]
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+min_value = -180.0
+max_value = 180.0
+step = 0.05
+suffix = "°"
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+alignment = 1
+script = ExtResource("7_2dtee")
+min_value = -180.0
+max_value = 180.0
+suffix = "°"
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+min_value = -180.0
+max_value = 180.0
+step = 0.05
+
+[node name="SpinBox" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation/FLOAT_SLIDER"]
+layout_mode = 2
+min_value = -180.0
+max_value = 180.0
+step = 0.05
+suffix = "°"
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="VECTOR2" type="BoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+vertical = true
+script = ExtResource("8_bmwhr")
+step = 0.05
+min_value = -180.0
+max_value = 180.0
+suffix = "°"
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = -180.0
+max_value = 180.0
+step = 0.05
+alignment = 3
+prefix = "x:"
+suffix = "°"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+min_value = -180.0
+max_value = 180.0
+step = 0.05
+alignment = 3
+prefix = "y:"
+suffix = "°"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("6_ikfu3")
+
+[node name="COLOR" type="ColorPickerButton" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="ENUM" type="OptionButton" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="NODE2D" type="Button" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="Platformer" type="HBoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Player"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("5_t0cjo")
+type = 2
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer"]
+layout_mode = 2
+text = "Platformer"
+
+[node name="Spacer" type="Control" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+alignment = 1
+script = ExtResource("7_2dtee")
+select_all_on_focus = true
+slider_width = 100.0
+
+[node name="HSlider" type="HSlider" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+
+[node name="SpinBox" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="BOOL" type="CheckBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer"]
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="VECTOR2" type="BoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+vertical = true
+script = ExtResource("8_bmwhr")
+step = 0.05
+max_value = 1.0
+select_all_on_focus = true
+
+[node name="SpinBoxX" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "x:"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "y:"
+select_all_on_focus = true
+
+[node name="STRING" type="LineEdit" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("6_ikfu3")
+
+[node name="COLOR" type="ColorPickerButton" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="ENUM" type="OptionButton" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="NODE2D" type="Button" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Level Settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Level Settings/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="TabContainer/Level Settings/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "  Save  "
