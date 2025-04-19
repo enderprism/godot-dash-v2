@@ -20,6 +20,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("hide_pause_menu"):
 		visible = not visible
 
+func _notification(what):
+	if LevelManager.level_playing and not get_tree().paused and what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		_on_continue_pressed()
+
 func _on_leave_pressed() -> void:
 	get_tree().paused = false
 	get_parent().hide()
