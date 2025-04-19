@@ -1,6 +1,6 @@
 @tool
 extends Node
-class_name SaveLoadConfigValue
+class_name PropertySaveLoad
 
 @export var config_property: StringName
 
