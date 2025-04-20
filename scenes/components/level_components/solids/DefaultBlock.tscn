@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cjdpf2wcxjfb1" path="res://src/NinePatchSprite2DAbsoluteSize.gd" id="4_cpky5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4sak"]
-size = Vector2(128, 128)
+size = Vector2(130, 130)
 
 [node name="DefaultCube" type="StaticBody2D"]
 collision_layer = 2

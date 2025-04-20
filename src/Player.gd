@@ -343,7 +343,6 @@ func _compute_velocity(delta: float,
 
 	if ((is_on_floor() and jump_state <= 0 and not _deferred_velocity_redirect) or flying_gamemode_slope_boost) and pad_queue.is_empty():
 		_velocity.y = slope_velocity.y
-		print(true)
 
 	#region Apply pads velocity
 	if not pad_queue.is_empty():
@@ -463,7 +462,8 @@ func _rotate_sprite_degrees(delta: float):
 						-get_floor_angle_signed(false) + gameplay_rotation,
 						delta * 60 * ICON_LERP_FACTOR)
 		elif last_collision != null and last_collision.get_normal() != Vector2.ZERO:
-			var ceiling_slide_rotation := PI if -last_collision.get_normal().angle_to(up_direction) < 0.0 else 0.0
+			var collision_angle := -last_collision.get_normal().angle_to(up_direction)
+			var ceiling_slide_rotation := PI if collision_angle < 0.0 or abs(collision_angle) > PI/2 else 0.0
 			sprite_floor_angle = lerp_angle(
 					sprite_floor_angle,
 					-last_collision.get_normal().angle_to(up_direction) + gameplay_rotation + ceiling_slide_rotation,
@@ -576,7 +576,7 @@ func _rotate_sprite_degrees(delta: float):
 	$Icon/Spider.rotation_degrees = gameplay_rotation_degrees
 	$Icon/Spider/SpiderSprites.rotation = lerp_angle(
 			$Icon/Spider/SpiderSprites.rotation,
-			sprite_floor_angle * sign(gravity_multiplier),
+			(sprite_floor_angle - gameplay_rotation) * sign(gravity_multiplier),
 			ICON_LERP_FACTOR * delta * 60)
 	$Icon/Robot.rotation = lerp_angle(
 			$Icon/Robot.rotation,

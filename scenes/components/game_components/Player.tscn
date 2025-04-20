@@ -44,10 +44,10 @@
 [ext_resource type="Texture2D" uid="uid://cclfd4gmsd4a0" path="res://assets/textures/player/FireBoost.svg" id="29_475ha"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_14y25"]
-size = Vector2(128, 128)
+size = Vector2(126, 126)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xclbr"]
-radius = 64.0
+radius = 63.0
 
 [sub_resource type="Gradient" id="Gradient_locq2"]
 interpolation_mode = 2
@@ -126,7 +126,7 @@ animations = [{
 radius = 64.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8d76"]
-size = Vector2(128, 128)
+size = Vector2(126, 126)
 
 [sub_resource type="Animation" id="Animation_h4ye8"]
 length = 0.001
