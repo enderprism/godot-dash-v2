@@ -113,6 +113,7 @@ func _on_playtest_pressed() -> void:
 		if not $EditHandler.selection.is_empty():
 			$EditHandler.selection.map(EditHandler.remove_selection_highlight)
 			$EditHandler.selection.clear()
+		await get_tree().process_frame
 		LevelManager.editor_level_backup.pack(level)
 		LevelManager.editor_backup.pack(self)
 		$GameScene._start_level()
