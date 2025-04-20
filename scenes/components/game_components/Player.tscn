@@ -2203,7 +2203,6 @@ wait_time = 0.5
 one_shot = true
 
 [node name="GroundRaycast" type="RayCast2D" parent="."]
-visible = false
 target_position = Vector2(0, 128)
 collision_mask = 32
 

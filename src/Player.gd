@@ -168,10 +168,12 @@ func _physics_process(delta: float) -> void:
 		_last_spider_trail = null
 	#region 0x speed portal position nudge
 	if speed_0_portal_control:
-		var global_position_normalized = global_position.rotated(-gameplay_rotation)
-		var portal_global_position_normalized = speed_0_portal_control.parent.global_position.rotated(-gameplay_rotation)
-		global_position = Vector2(global_position_normalized.lerp(portal_global_position_normalized, 1-exp(-delta * 60 * 0.3)).rotated(gameplay_rotation).x, global_position.y)
-		if is_equal_approx(global_position_normalized.x, portal_global_position_normalized.x):
+		var rotation_local_global_position = global_position.rotated(-gameplay_rotation)
+		var rotation_local_portal_global_position = speed_0_portal_control.parent.global_position.rotated(-gameplay_rotation)
+		global_position = Vector2(rotation_local_global_position.lerp(
+				rotation_local_portal_global_position,
+				1-exp(-delta * 60 * 0.3)).rotated(gameplay_rotation).x, global_position.y)
+		if is_equal_approx(rotation_local_global_position.x, rotation_local_global_position.x):
 			speed_0_portal_control = null
 	#endregion
 	if displayed_gamemode == Gamemode.SPIDER: _update_spider_state_machine()
