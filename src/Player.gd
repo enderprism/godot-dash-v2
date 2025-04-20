@@ -192,19 +192,20 @@ func _physics_process(delta: float) -> void:
 
 
 func _handle_collision(collision: KinematicCollision2D) -> void:
-	if collision:
-		var collision_angle: float = collision.get_angle() - gameplay_rotation
-		var restricted_collision_angle: float = pingpong(collision_angle, PI/2) * sign(collision_angle)
-		var is_floor: bool = restricted_collision_angle >= floor_max_angle
-		var is_ceiling: bool = restricted_collision_angle <= deg_to_rad(10.0)
-		if not LevelManager.platformer and not is_ceiling:
-			if collision.get_collider().collision_layer & 1 << 1:
-				collision.get_collider().collision_layer = 1 << 9
-				collision.get_collider().get_node("Hitbox").debug_color.s = 0.0 # DEBUG: Hardcoded name for hitbox color
-		if not (is_floor or is_ceiling):
-			$GroundCollider.shape = slope_collider
-			$Icon/Spider/SpiderCast.shape = slope_collider
-			$SolidOverlapCheck/SolidOverlapCheckCollider.shape = slope_collider
+	if not collision:
+		return
+	var collision_angle: float = collision.get_angle(up_direction)
+	var restricted_collision_angle: float = pingpong(collision_angle, PI/2) * sign(collision_angle)
+	var is_floor: bool = restricted_collision_angle <= deg_to_rad(10.0)
+	var is_ceiling: bool = restricted_collision_angle >= floor_max_angle
+	if not LevelManager.platformer and not is_floor:
+		if collision.get_collider().collision_layer & 1 << 1:
+			collision.get_collider().collision_layer = 1 << 9
+			collision.get_collider().get_node("Hitbox").debug_color.s = 0.0 # DEBUG: Hardcoded name for hitbox color
+	if not (is_floor or is_ceiling):
+		$GroundCollider.shape = slope_collider
+		$Icon/Spider/SpiderCast.shape = slope_collider
+		$SolidOverlapCheck/SolidOverlapCheckCollider.shape = slope_collider
 
 
 func get_floor_angle_signed(last_slide: bool) -> float:
@@ -465,7 +466,6 @@ func _rotate_sprite_degrees(delta: float):
 					sprite_floor_angle,
 					-last_collision.get_normal().angle_to(up_direction) + gameplay_rotation + ceiling_slide_rotation,
 					delta * 60 * ICON_LERP_FACTOR)
-			printt(rad_to_deg(sprite_floor_angle))
 	else:
 		sprite_floor_angle = lerp_angle(sprite_floor_angle, gameplay_rotation, delta * 60 * ICON_LERP_FACTOR)
 	#region cube
