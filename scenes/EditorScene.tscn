@@ -417,13 +417,19 @@ item_7/text = "Level Settings"
 item_7/id = 0
 
 [node name="Edit" type="PopupMenu" parent="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar"]
-item_count = 3
+item_count = 6
 item_0/text = "Copy"
 item_0/id = 0
 item_1/text = "Paste"
 item_1/id = 1
 item_2/text = "Duplicate"
 item_2/id = 2
+item_3/id = 3
+item_3/separator = true
+item_4/text = "Select All"
+item_4/id = 4
+item_5/text = "Deselect All"
+item_5/id = 5
 
 [node name="View" type="PopupMenu" parent="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar"]
 hide_on_checkable_item_selection = false
