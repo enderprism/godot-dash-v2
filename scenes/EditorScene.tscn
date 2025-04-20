@@ -413,7 +413,7 @@ item_5/text = "Export"
 item_5/id = 0
 item_6/id = 0
 item_6/separator = true
-item_7/text = "Level Options"
+item_7/text = "Level Settings"
 item_7/id = 0
 
 [node name="Edit" type="PopupMenu" parent="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar"]

@@ -53,6 +53,7 @@ label_settings = ExtResource("3_d0u0j")
 metadata/_custom_type_script = "uid://cuih47milvqcs"
 
 [node name="Song Path" type="HBoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Song"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("5_t0cjo")
 type = 4
