@@ -56,10 +56,14 @@ const EVALUATE_CLICK_BUFFER := 1
 	set(value):
 		displayed_gamemode = value
 		for icon in $Icon.get_children():
-			if icon.gamemode != value: icon.hide()
-			elif not LevelManager.platformer and icon.platformer == IconGamemodeProp.PlatformerState.PLATFORMER_ONLY: icon.hide()
-			elif LevelManager.platformer and icon.platformer == IconGamemodeProp.PlatformerState.SIDESCROLLER_ONLY: icon.hide()
-			else: icon.show()
+			if icon.gamemode != value:
+				icon.hide()
+			elif (not LevelManager.platformer and speed_multiplier > 0.0) and icon.platformer == IconGamemodeProp.PlatformerState.PLATFORMER_ONLY:
+				icon.hide()
+			elif (LevelManager.platformer or speed_multiplier == 0.0) and icon.platformer == IconGamemodeProp.PlatformerState.SIDESCROLLER_ONLY:
+				icon.hide()
+			else:
+				icon.show()
 @export var internal_gamemode: Gamemode
 @export var default_collider: RectangleShape2D
 @export var slope_collider: CircleShape2D
@@ -170,10 +174,17 @@ func _physics_process(delta: float) -> void:
 	if speed_0_portal_control:
 		var rotation_local_global_position = global_position.rotated(-gameplay_rotation)
 		var rotation_local_portal_global_position = speed_0_portal_control.parent.global_position.rotated(-gameplay_rotation)
-		global_position = Vector2(rotation_local_global_position.lerp(
-				rotation_local_portal_global_position,
-				1-exp(-delta * 60 * 0.3)).rotated(gameplay_rotation).x, global_position.y)
-		if is_equal_approx(rotation_local_global_position.x, rotation_local_global_position.x):
+		var rotation_local_velocity = velocity.rotated(-gameplay_rotation)
+		global_position = Vector2(
+			rotation_local_global_position.lerp(rotation_local_portal_global_position, 0.3 * delta * 60).x,
+			rotation_local_global_position.y
+			).rotated(gameplay_rotation)
+		velocity = Vector2(
+			0.0,
+			rotation_local_velocity.y
+			).rotated(gameplay_rotation)
+		if is_equal_approx(rotation_local_global_position.x, rotation_local_portal_global_position.x):
+			displayed_gamemode = displayed_gamemode
 			speed_0_portal_control = null
 	#endregion
 	if displayed_gamemode == Gamemode.SPIDER: _update_spider_state_machine()
@@ -186,7 +197,7 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
 		var restricted_collision_angle: float = pingpong(collision_angle, PI/2) * sign(collision_angle)
 		var is_floor: bool = restricted_collision_angle >= floor_max_angle
 		var is_ceiling: bool = restricted_collision_angle <= deg_to_rad(10.0)
-		if not LevelManager.platformer and not is_floor:
+		if not LevelManager.platformer and not is_ceiling:
 			if collision.get_collider().collision_layer & 1 << 1:
 				collision.get_collider().collision_layer = 1 << 9
 				collision.get_collider().get_node("Hitbox").debug_color.s = 0.0 # DEBUG: Hardcoded name for hitbox color
@@ -480,13 +491,14 @@ func _rotate_sprite_degrees(delta: float):
 		$Icon/Swing.scale.x = sign(get_direction())
 	if not dash_control:
 		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
+			var target_rotation_degrees := gameplay_rotation_degrees + velocity.rotated(-gameplay_rotation).y * delta * get_direction() * (7.5/speed_multiplier)
 			$Icon/Ship.rotation_degrees = lerpf(
 					$Icon/Ship.rotation_degrees,
-					gameplay_rotation_degrees + velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 5,
+					target_rotation_degrees,
 					ICON_LERP_FACTOR * delta * 60)
 			$Icon/Swing.rotation_degrees = lerpf(
 					$Icon/Swing.rotation_degrees,
-					gameplay_rotation_degrees + velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 5,
+					target_rotation_degrees,
 					ICON_LERP_FACTOR * delta * 60)
 		else:
 			$Icon/Ship.rotation = lerp_angle($Icon/Ship.rotation, sprite_floor_angle, ICON_LERP_FACTOR * delta * 60)
