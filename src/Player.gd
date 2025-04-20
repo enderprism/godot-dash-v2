@@ -142,35 +142,38 @@ func _ready() -> void:
 		LevelManager.player_duals.append(self)
 	apply_floor_snap()
 
+
 func _physics_process(delta: float) -> void:
-	if LevelManager.level_playing and not _dead:
-		up_direction = Vector2.UP.rotated(gameplay_rotation) * sign(gravity_multiplier)
-		velocity = _compute_velocity(delta, velocity, get_direction(), _get_jump_state(EVALUATE_CLICK_BUFFER))
-		if not $SlopeShapecast.is_colliding() and $GroundCollider.shape is CircleShape2D:
-			$GroundCollider.shape = default_collider
-			$SolidOverlapCheck/SolidOverlapCheckCollider.shape = default_collider
-			$Icon/Spider/SpiderCast.shape = default_collider
-		last_collision = move_and_collide(velocity * delta, true)
-		floor_snap_length = 0.0 if LevelManager.platformer and internal_gamemode == Gamemode.WAVE else LevelManager.CELL_SIZE * 0.5 * speed_multiplier
-		_handle_collision(last_collision)
-		move_and_slide()
-		_rotate_sprite_degrees(delta)
-		_update_wave_trail(delta)
-		if _last_spider_trail != null:
-			add_child(_last_spider_trail)
-			_last_spider_trail.trail_global_position = $Icon/Spider/SpiderCast/SpiderTrailSpawnPoint.global_position if horizontal_direction > 0 \
-				else $Icon/Spider/SpiderCast/SpiderTrailSpawnPointReverse.global_position
-			_last_spider_trail.displayed_scale_y = abs(_last_spider_trail_height) * sign(gravity_multiplier)
-			_last_spider_trail.displayed_scale_x = -horizontal_direction
-			_last_spider_trail = null
-		#region 0x speed portal position nudge
-		if speed_0_portal_control:
-			var global_position_normalized = global_position.rotated(-gameplay_rotation)
-			var portal_global_position_normalized = speed_0_portal_control.parent.global_position.rotated(-gameplay_rotation)
-			global_position = Vector2(global_position_normalized.lerp(portal_global_position_normalized, 1-exp(-delta * 60 * 0.3)).rotated(gameplay_rotation).x, global_position.y)
-			if is_equal_approx(global_position_normalized.x, portal_global_position_normalized.x):
-				speed_0_portal_control = null
-		#endregion
+	if _dead or not LevelManager.level_playing:
+		return
+	
+	up_direction = Vector2.UP.rotated(gameplay_rotation) * sign(gravity_multiplier)
+	velocity = _compute_velocity(delta, velocity, get_direction(), _get_jump_state(EVALUATE_CLICK_BUFFER))
+	if not $SlopeShapecast.is_colliding() and $GroundCollider.shape is CircleShape2D:
+		$GroundCollider.shape = default_collider
+		$SolidOverlapCheck/SolidOverlapCheckCollider.shape = default_collider
+		$Icon/Spider/SpiderCast.shape = default_collider
+	last_collision = move_and_collide(velocity * delta, true)
+	floor_snap_length = 0.0 if LevelManager.platformer and internal_gamemode == Gamemode.WAVE else LevelManager.CELL_SIZE * 0.5 * speed_multiplier
+	_handle_collision(last_collision)
+	move_and_slide()
+	_rotate_sprite_degrees(delta)
+	_update_wave_trail(delta)
+	if _last_spider_trail != null:
+		add_child(_last_spider_trail)
+		_last_spider_trail.trail_global_position = $Icon/Spider/SpiderCast/SpiderTrailSpawnPoint.global_position if horizontal_direction > 0 \
+			else $Icon/Spider/SpiderCast/SpiderTrailSpawnPointReverse.global_position
+		_last_spider_trail.displayed_scale_y = abs(_last_spider_trail_height) * sign(gravity_multiplier)
+		_last_spider_trail.displayed_scale_x = -horizontal_direction
+		_last_spider_trail = null
+	#region 0x speed portal position nudge
+	if speed_0_portal_control:
+		var global_position_normalized = global_position.rotated(-gameplay_rotation)
+		var portal_global_position_normalized = speed_0_portal_control.parent.global_position.rotated(-gameplay_rotation)
+		global_position = Vector2(global_position_normalized.lerp(portal_global_position_normalized, 1-exp(-delta * 60 * 0.3)).rotated(gameplay_rotation).x, global_position.y)
+		if is_equal_approx(global_position_normalized.x, portal_global_position_normalized.x):
+			speed_0_portal_control = null
+	#endregion
 	if displayed_gamemode == Gamemode.SPIDER: _update_spider_state_machine()
 	if displayed_gamemode == Gamemode.SWING: _update_swing_fire(delta)
 
@@ -179,13 +182,13 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
 	if collision:
 		var collision_angle: float = collision.get_angle() - gameplay_rotation
 		var restricted_collision_angle: float = pingpong(collision_angle, PI/2) * sign(collision_angle)
-		var is_floor: bool = restricted_collision_angle <= floor_max_angle
-		var is_ceiling: bool = restricted_collision_angle >= -floor_max_angle
-		if (not LevelManager.platformer and not is_floor) or (LevelManager.platformer and not (is_floor or is_ceiling)):
+		var is_floor: bool = restricted_collision_angle >= floor_max_angle
+		var is_ceiling: bool = restricted_collision_angle <= deg_to_rad(10.0)
+		if not LevelManager.platformer and not is_floor:
 			if collision.get_collider().collision_layer & 1 << 1:
 				collision.get_collider().collision_layer = 1 << 9
 				collision.get_collider().get_node("Hitbox").debug_color.s = 0.0 # DEBUG: Hardcoded name for hitbox color
-		if collision.get_collider().collision_layer & 1 << 6:
+		if not (is_floor or is_ceiling):
 			$GroundCollider.shape = slope_collider
 			$Icon/Spider/SpiderCast.shape = slope_collider
 			$SolidOverlapCheck/SolidOverlapCheckCollider.shape = slope_collider
@@ -194,9 +197,9 @@ func _handle_collision(collision: KinematicCollision2D) -> void:
 func get_floor_angle_signed(last_slide: bool) -> float:
 	var floor_normal: Vector2
 	if last_slide:
-		floor_normal = get_last_slide_collision().get_normal().rotated(-gameplay_rotation)
+		floor_normal = get_last_slide_collision().get_normal()
 	else:
-		floor_normal = get_floor_normal().rotated(-gameplay_rotation)
+		floor_normal = get_floor_normal()
 	var floor_angle: float
 	if _is_flying_gamemode and is_on_ceiling() and _get_jump_state() == 1:
 		var local_up_direction: Vector2 = Vector2.DOWN.rotated(gameplay_rotation) * sign(gravity_multiplier)
@@ -225,6 +228,7 @@ func get_direction() -> int:
 	else:
 		direction = horizontal_direction
 	return direction
+
 
 func _get_jump_state(options: int = 0) -> int:
 	var jump_state: int
@@ -265,6 +269,7 @@ func _get_jump_state(options: int = 0) -> int:
 			return -1
 	return jump_state
 
+
 func _compute_velocity(delta: float,
 		previous_velocity: Vector2,
 		direction: int, jump_state: int) -> Vector2:
@@ -285,6 +290,11 @@ func _compute_velocity(delta: float,
 	if (internal_gamemode == Gamemode.SWING or internal_gamemode == Gamemode.BALL) and jump_state == 1 and orb_queue.is_empty():
 		gravity_multiplier *= -1
 
+	$GroundCollider.rotation = gameplay_rotation
+	$SolidOverlapCheck.rotation = gameplay_rotation
+	$KillColliderSolid.rotation = gameplay_rotation
+	$KillColliderRectangularHazard.rotation = gameplay_rotation
+	$KillColliderCircularHazard.rotation = gameplay_rotation
 	$GroundRaycast.rotation = gameplay_rotation
 	$GroundRaycast.scale.y = gravity_multiplier
 	$SlopeShapecast.rotation = gameplay_rotation
@@ -431,12 +441,20 @@ func _ensure_velocity_redirect(delta: float, global_velocity: Vector2) -> bool:
 func _rotate_sprite_degrees(delta: float):
 	if $GroundCollider.shape is CircleShape2D:
 		if get_floor_normal() != Vector2.ZERO:
-			if not is_zero_approx(rad_to_deg(get_floor_angle_signed(false))):
-				sprite_floor_angle = lerpf(sprite_floor_angle, rad_to_deg(wrapf(get_floor_angle_signed(false), -PI/2, PI/2)), delta * 60 * ICON_LERP_FACTOR)
+			if not is_zero_approx(get_floor_angle_signed(false)):
+				sprite_floor_angle = lerp_angle(
+						sprite_floor_angle,
+						-get_floor_angle_signed(false) + gameplay_rotation,
+						delta * 60 * ICON_LERP_FACTOR)
 		elif last_collision != null and last_collision.get_normal() != Vector2.ZERO:
-			sprite_floor_angle = lerpf(sprite_floor_angle, rad_to_deg(wrapf(last_collision.get_normal().angle_to(up_direction), -PI/2, PI/2)), delta * 60 * ICON_LERP_FACTOR)
+			var ceiling_slide_rotation := PI if -last_collision.get_normal().angle_to(up_direction) < 0.0 else 0.0
+			sprite_floor_angle = lerp_angle(
+					sprite_floor_angle,
+					-last_collision.get_normal().angle_to(up_direction) + gameplay_rotation + ceiling_slide_rotation,
+					delta * 60 * ICON_LERP_FACTOR)
+			printt(rad_to_deg(sprite_floor_angle))
 	else:
-		sprite_floor_angle = lerpf(sprite_floor_angle, 0.0, delta * 60 * ICON_LERP_FACTOR)
+		sprite_floor_angle = lerp_angle(sprite_floor_angle, gameplay_rotation, delta * 60 * ICON_LERP_FACTOR)
 	#region cube
 	$Icon/Cube.scale.y = 1.0
 	if horizontal_direction != 0:
@@ -445,10 +463,10 @@ func _rotate_sprite_degrees(delta: float):
 		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
 			$Icon/Cube.rotation_degrees += delta * gravity_multiplier * 400 * get_direction()
 		else:
-			$Icon/Cube.rotation_degrees = lerpf(
-					$Icon/Cube.rotation_degrees,
-					snapped($Icon/Cube.rotation_degrees + sprite_floor_angle, 90) - sprite_floor_angle,
-					ICON_LERP_FACTOR)
+			$Icon/Cube.rotation = lerpf(
+					$Icon/Cube.rotation,
+					snapped($Icon/Cube.rotation + sprite_floor_angle, PI) - sprite_floor_angle,
+					ICON_LERP_FACTOR * delta * 60)
 	else:
 		$Icon/Cube.rotation_degrees += delta * 800 * dash_control.initial_horizontal_direction
 	#endregion
@@ -460,17 +478,23 @@ func _rotate_sprite_degrees(delta: float):
 		$Icon/Swing.scale.x = sign(get_direction())
 	if not dash_control:
 		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
-			$Icon/Ship.rotation_degrees = lerpf($Icon/Ship.rotation_degrees, velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 5, ICON_LERP_FACTOR * delta * 60)
-			$Icon/Swing.rotation_degrees = lerpf($Icon/Swing.rotation_degrees, velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 5, ICON_LERP_FACTOR * delta * 60)
+			$Icon/Ship.rotation_degrees = lerpf(
+					$Icon/Ship.rotation_degrees,
+					gameplay_rotation_degrees + velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 5,
+					ICON_LERP_FACTOR * delta * 60)
+			$Icon/Swing.rotation_degrees = lerpf(
+					$Icon/Swing.rotation_degrees,
+					gameplay_rotation_degrees + velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 5,
+					ICON_LERP_FACTOR * delta * 60)
 		else:
-			$Icon/Ship.rotation_degrees = lerpf($Icon/Ship.rotation_degrees, -sprite_floor_angle, ICON_LERP_FACTOR * delta * 60)
-			$Icon/Swing.rotation_degrees = lerpf($Icon/Swing.rotation_degrees, -sprite_floor_angle, ICON_LERP_FACTOR * delta * 60)
+			$Icon/Ship.rotation = lerp_angle($Icon/Ship.rotation, sprite_floor_angle, ICON_LERP_FACTOR * delta * 60)
+			$Icon/Swing.rotation = lerp_angle($Icon/Swing.rotation, sprite_floor_angle, ICON_LERP_FACTOR * delta * 60)
 	else:
 		$Icon/Ship.rotation = lerpf($Icon/Ship.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR)
 		$Icon/Swing.rotation = lerpf($Icon/Swing.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR)
 	#endregion
 	#region wave
-	$Icon/Wave.rotation = gameplay_rotation
+	$Icon/Wave.rotation = lerpf($Icon/Wave.rotation, gameplay_rotation, ICON_LERP_FACTOR * delta * 60)
 	$Icon/Wave.scale.y = 1.0
 	if get_direction() != 0 or _get_jump_state() != 0:
 		$Icon/Wave.set_meta("last_8_direction", Vector2(get_direction(), _get_jump_state()))
@@ -480,16 +504,19 @@ func _rotate_sprite_degrees(delta: float):
 	if not dash_control:
 		if not is_on_floor() and not is_on_ceiling():
 			if wave_8_direction == Vector2.UP or wave_8_direction == Vector2.DOWN:
-				$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 90.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25)
+				$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 90.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25 * delta * 60)
 			elif wave_8_direction:
 				if player_scale == PlayerScale.NORMAL:
-					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 45.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25)
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 45.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25 * delta * 60)
 				elif player_scale == PlayerScale.MINI:
-					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 60.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25)
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 60.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25 * delta * 60)
 				elif player_scale == PlayerScale.BIG:
-					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 30.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25)
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 30.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25 * delta * 60)
 		else:
-			$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, -sprite_floor_angle * sign(gravity_multiplier) * $Icon/Wave.scale.x, ICON_LERP_FACTOR * delta * 60)
+			$Icon/Wave/Icon.rotation = lerp_angle(
+					$Icon/Wave/Icon.rotation,
+					sprite_floor_angle * sign(gravity_multiplier) * $Icon/Wave.scale.x - gameplay_rotation,
+					ICON_LERP_FACTOR * delta * 60)
 	else:
 		$Icon/Wave/Icon.rotation = lerpf($Icon/Wave/Icon.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR * delta * 60)
 	#endregion
@@ -503,8 +530,11 @@ func _rotate_sprite_degrees(delta: float):
 		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
 			$Icon/UFO.rotation_degrees = lerpf($Icon/UFO.rotation_degrees, velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 0.2, ICON_LERP_FACTOR * delta * 60)
 		else:
-			$Icon/UFO.rotation_degrees = lerpf($Icon/UFO.rotation_degrees, -sprite_floor_angle, ICON_LERP_FACTOR * delta * 60)
-		$Icon/Jetpack.rotation_degrees = lerpf($Icon/Jetpack.rotation_degrees, velocity.rotated(-gameplay_rotation).x * delta * 5, ICON_LERP_FACTOR * delta * 60)
+			$Icon/UFO.rotation = lerp_angle($Icon/UFO.rotation, sprite_floor_angle, ICON_LERP_FACTOR * delta * 60)
+		$Icon/Jetpack.rotation = lerp_angle(
+				$Icon/Jetpack.rotation,
+				deg_to_rad(velocity.rotated(-gameplay_rotation).x * delta * 5) + sprite_floor_angle,
+				ICON_LERP_FACTOR * delta * 60)
 	else:
 		$Icon/UFO.rotation = lerpf($Icon/UFO.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR * delta * 60)
 		$Icon/Jetpack.rotation = lerpf($Icon/UFO.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR * delta * 60)
@@ -524,15 +554,18 @@ func _rotate_sprite_degrees(delta: float):
 			ball_grounded_look_factor = lerpf(ball_grounded_look_factor, 0.0, 10 * delta)
 		$Icon/Ball.set_meta("ball_grounded_look_factor", ball_grounded_look_factor)
 		var ball_rotation_in_air: float = abs(sin(($Icon/Ball.rotation * TAU) / deg_to_rad(72*2)))
-		$Icon/Ball.position.y = lerpf(0.0, lerpf(0, 10, ball_rotation_in_air), ball_grounded_look_factor)
+		$Icon/Ball.position = Vector2(0.0, lerpf(0.0, lerpf(0, 10, ball_rotation_in_air), ball_grounded_look_factor)).rotated(gameplay_rotation)
 	#endregion
 	#region spider/robot
 	$Icon/Spider.rotation_degrees = gameplay_rotation_degrees
-	$Icon/Spider/SpiderSprites.rotation_degrees = lerpf(
-			$Icon/Spider/SpiderSprites.rotation_degrees,
-			-sprite_floor_angle * sign(gravity_multiplier),
+	$Icon/Spider/SpiderSprites.rotation = lerp_angle(
+			$Icon/Spider/SpiderSprites.rotation,
+			sprite_floor_angle * sign(gravity_multiplier),
 			ICON_LERP_FACTOR * delta * 60)
-	$Icon/Robot.rotation_degrees = gameplay_rotation_degrees
+	$Icon/Robot.rotation = lerp_angle(
+			$Icon/Robot.rotation,
+			sprite_floor_angle,
+			ICON_LERP_FACTOR * delta * 60)
 	if get_direction() != 0:
 		$Icon/Spider/SpiderSprites.scale.x = sign(get_direction())
 		$Icon/Robot.scale.x = sign(get_direction())
