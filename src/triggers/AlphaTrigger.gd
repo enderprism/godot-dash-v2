@@ -37,19 +37,18 @@ func _ready() -> void:
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Alpha.svg"))
 
 func _process(_delta: float) -> void:
-	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
+	if not Engine.is_editor_hint() and not easing.is_inactive():
 		if not _targets.is_empty():
-			var _weight_delta = easing.get_weight_delta()
 			for _target: Node2D in _targets:
 				var _initial_alpha: float = _initial_alphas[_target]
 				match mode:
 					Mode.SET:
-						_target.modulate.a += (alpha - _initial_alpha) * _weight_delta
+						_target.modulate.a += (alpha - _initial_alpha) * easing.weight_delta
 					Mode.MULTIPLY:
-						_target.modulate.a += (alpha * _initial_alpha - _initial_alpha) * _weight_delta
+						_target.modulate.a += (alpha * _initial_alpha - _initial_alpha) * easing.weight_delta
 					Mode.COPY:
 						if copy_target != null:
-							_target.modulate.a = lerp(_initial_alpha, copy_target.modulate.a * copy_multiplier, easing._weight)
+							_target.modulate.a = lerp(_initial_alpha, copy_target.modulate.a * copy_multiplier, easing.weight)
 						elif LevelManager.in_editor and LevelManager.level_playing:
 							printerr("In ", name, ": copy_target is unset!")
 		elif LevelManager.in_editor and LevelManager.level_playing:

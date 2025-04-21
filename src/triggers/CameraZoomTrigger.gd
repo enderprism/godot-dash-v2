@@ -34,16 +34,15 @@ func _ready() -> void:
 	base.sprite.set_texture(preload("res://assets/textures/triggers/CameraZoom.svg"))
 
 func _physics_process(_delta: float) -> void:
-	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
+	if not Engine.is_editor_hint() and not easing.is_inactive():
 		if _player_camera != null:
-			var _weight_delta = easing.get_weight_delta()
 			match mode:
 				Mode.SET:
-					_player_camera.zoom += (set_zoom - _initial_zoom) * _weight_delta * PlayerCamera.DEFAULT_ZOOM
+					_player_camera.zoom += (set_zoom - _initial_zoom) * easing.weight_delta * PlayerCamera.DEFAULT_ZOOM
 				Mode.MULTIPLY:
-					_player_camera.zoom -= (_initial_zoom - (_initial_zoom * multiply_zoom)) * _weight_delta * PlayerCamera.DEFAULT_ZOOM
+					_player_camera.zoom -= (_initial_zoom - (_initial_zoom * multiply_zoom)) * easing.weight_delta * PlayerCamera.DEFAULT_ZOOM
 				Mode.DIVIDE:
-					_player_camera.zoom -= (_initial_zoom - (_initial_zoom / multiply_zoom)) * _weight_delta * PlayerCamera.DEFAULT_ZOOM
+					_player_camera.zoom -= (_initial_zoom - (_initial_zoom / multiply_zoom)) * easing.weight_delta * PlayerCamera.DEFAULT_ZOOM
 		else:
 			printerr("In ", name, ": _player_camera is unset")
 	elif Engine.is_editor_hint():

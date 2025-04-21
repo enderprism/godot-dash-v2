@@ -48,21 +48,20 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not easing.is_inactive():
 		if not _targets.is_empty():
-			var _weight_delta = easing.get_weight_delta()
 			for _target in _targets:
 				var _initial_global_rotation_degrees: float = _initial_rotations[_target]
 				var _rotation_delta: float
 				match mode:
 					Mode.SET:
-						_rotation_delta = (_rotation_degrees - _initial_global_rotation_degrees) * _weight_delta
+						_rotation_delta = (_rotation_degrees - _initial_global_rotation_degrees) * easing.weight_delta
 					Mode.ADD:
-						_rotation_delta = _rotation_degrees * _weight_delta
+						_rotation_delta = _rotation_degrees * easing.weight_delta
 					Mode.COPY:
 						if _copy_target != null:
 							if not _copy_look_at:
-								_rotation_delta = (_copy_target.global_rotation_degrees + _copy_offset - _initial_global_rotation_degrees) * _weight_delta
+								_rotation_delta = (_copy_target.global_rotation_degrees + _copy_offset - _initial_global_rotation_degrees) * easing.weight_delta
 							else:
-								_rotation_delta = (_target.global_position.get_angle_to(_copy_target.global_position) + _copy_offset - _initial_global_rotation_degrees) * _weight_delta
+								_rotation_delta = (_target.global_position.get_angle_to(_copy_target.global_position) + _copy_offset - _initial_global_rotation_degrees) * easing.weight_delta
 						elif LevelManager.in_editor and LevelManager.level_playing:
 							printerr("In ", name, ": copy_target is unset!")
 				# Add the rotation delta

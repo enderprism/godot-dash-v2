@@ -42,7 +42,7 @@ func start(_body: Node2D) -> void:
 	_initial_global_rotation_degrees[_player] = _player.gameplay_rotation_degrees
 	if _player not in _players:
 		_players.append(_player)
-	if is_zero_approx(easing._duration):
+	if is_zero_approx(easing.duration):
 		if not LevelManager.platformer or _player.gravity_multiplier > 0:
 			_player.gameplay_rotation_degrees = _rotation_degrees
 		else:
@@ -61,12 +61,11 @@ func reset() -> void:
 func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not easing.is_inactive():
 		if not _players.is_empty():
-			if not is_zero_approx(easing._duration):
+			if not is_zero_approx(easing.duration):
 				_indicator.show()
-				var _weight_delta: float = easing.get_weight_delta()
 				for _player in _players:
-					var _rotation_delta: float = (_rotation_degrees - _initial_global_rotation_degrees[_player]) * _weight_delta
-					_player.gameplay_rotation_degrees = lerp(_initial_global_rotation_degrees[_player], _rotation_degrees, easing._weight)
+					var _rotation_delta: float = (_rotation_degrees - _initial_global_rotation_degrees[_player]) * easing.weight_delta
+					_player.gameplay_rotation_degrees = lerp(_initial_global_rotation_degrees[_player], _rotation_degrees, easing.weight)
 					_player.get_node("DashFlame").rotation_degrees += _rotation_delta
 					_player.get_node("DashParticles").rotation_degrees += _rotation_delta
 					_player.velocity = _player.velocity.rotated(deg_to_rad(_rotation_delta))

@@ -52,21 +52,20 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not easing.is_inactive():
 		if not _targets.is_empty():
-			var _weight_delta = easing.get_weight_delta()
 			for _target in _targets:
 				var _initial_global_position = _initial_positions[_target]
 				match mode:
 					Mode.SET:
-						_target.global_position += (owner.to_global(_position * CELLS_TO_PX) - _initial_global_position) * _weight_delta
+						_target.global_position += (owner.to_global(_position * CELLS_TO_PX) - _initial_global_position) * easing.weight_delta
 					Mode.ADD:
-						_target.global_position += _position * _weight_delta * CELLS_TO_PX
+						_target.global_position += _position * easing.weight_delta * CELLS_TO_PX
 					Mode.MOVE_TOWARDS:
 						var _initial_distance = _initial_distances[_target]
 						if _move_towards_target != null:
 							_target.global_position = lerp(
 									_initial_global_position,
 									_move_towards_target.global_position + (_initial_distance * _move_towards_distance_multiplier) + _move_towards_offset * CELLS_TO_PX,
-									easing._weight)
+									easing.weight)
 						elif LevelManager.in_editor and LevelManager.level_playing:
 							printerr("In ", name, ": move_towards_target is unset!")
 		elif LevelManager.in_editor and LevelManager.level_playing:

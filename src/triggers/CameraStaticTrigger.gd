@@ -29,49 +29,54 @@ var _player_camera: PlayerCamera:
 var _target: Node2D
 var _initial_global_position: Vector2
 
+
 func _ready() -> void:
 	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK | TriggerSetup.ADD_EASING)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/CameraStatic.svg"))
 	_target = base._target
 
+
 func update_target_link() -> void:
 	target_link.target = base._target
 
-func start(_body: Node2D) -> void:
-	if easing._tween.finished.is_connected(_exit_static_end):
-		easing._tween.finished.disconnect(_exit_static_end)
-	if mode == Mode.EXIT:
-		easing._tween.finished.connect(_exit_static_end)
-	if LevelManager.active_camera_static != null and LevelManager.active_camera_static != self:
-		LevelManager.active_camera_static.easing._tween.pause()
-		LevelManager.active_camera_static.easing._tween.custom_step(easing._duration)
-		LevelManager.active_camera_static.easing._weight = 1.0
-		LevelManager.active_camera_static.easing._tween.finished.emit()
-	LevelManager.active_camera_static = self
-	if easing.is_inactive():
-		if _player_camera != null:
-			if mode == Mode.ENTER:
-				if not ignore_x:
-					_player_camera._static.x = 1
-					if easing._duration == 0.0:
-						_player_camera.global_position.x = _target.global_position.x
-				if not ignore_y:
-					_player_camera._static.y = 1
-					_player_camera.limit_bottom = 10000000
-					if easing._duration == 0.0:
-						_player_camera.global_position.y = _target.global_position.y
-			elif mode == Mode.EXIT:
-				# We want to have the vertical camera aligment during the transition
-				if not ignore_y:
-					_player_camera._static.y = 0
-					_player_camera.limit_bottom = _player_camera.DEFAULT_LIMIT_BOTTOM
-			_initial_global_position = _player_camera.global_position
-		else:
-			printerr("In ", name, ": _player_camera is unset")
 
-func _exit_static_end() -> void:
-	if not ignore_x:
-		_player_camera._static.x = 0
+func start(_body: Node2D) -> void:
+	# if LevelManager.active_camera_static != null and LevelManager.active_camera_static != self:
+	# 	LevelManager.active_camera_static.easing._tween.pause()
+	# 	LevelManager.active_camera_static.easing._tween.custom_step(easing.duration)
+	# 	LevelManager.active_camera_static.easing.weight = 1.0
+	# 	LevelManager.active_camera_static.easing._tween.finished.emit()
+	# LevelManager.active_camera_static = self
+	if not easing.is_inactive():
+		return
+
+	if _player_camera == null:
+		printerr("In ", name, ": _player_camera is unset")
+		return
+	
+	_initial_global_position = _player_camera.global_position
+	
+	if mode == Mode.ENTER:
+		if not ignore_x:
+			_player_camera.movement_factor.x = 0
+			_player_camera.offset_factor.x = 0
+
+			if easing.duration == 0.0:
+				_player_camera.global_position.x = _target.global_position.x
+		if not ignore_y:
+			_player_camera.movement_factor.y = 0
+			_player_camera.offset_factor.y = 0
+			
+			if easing.duration == 0.0:
+				_player_camera.global_position.y = _target.global_position.y
+	# elif mode == Mode.EXIT:
+	# 	if not ignore_y:
+	# 		_player_camera.movement_factor.y = 1
+	# 		_player_camera.offset_factor.y = 1
+	#
+	# 		if easing.duration == 0.0:
+	# 			_player_camera.global_position.y = _player.global_position.y
+
 
 func reset() -> void:
 	if _player_camera != null:
@@ -79,28 +84,49 @@ func reset() -> void:
 	else:
 		printerr("In ", name, ": _player_camera is unset")
 
+
 func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not easing.is_inactive():
 		if _player_camera != null:
 			match mode:
 				Mode.ENTER:
 					if not ignore_x:
-						_player_camera._static.x = 1
 						_player_camera.global_position.x = lerpf(
 							_player_camera.global_position.x,
 							_target.global_position.x,
-							easing._weight)
+							easing.weight)
 					if not ignore_y:
 						_player_camera.global_position.y = lerpf(
 							_player_camera.global_position.y,
 							_target.global_position.y,
-							easing._weight)
+							easing.weight)
 				Mode.EXIT:
 					if not ignore_x:
+						_player_camera.offset_factor.x = lerpf(
+							0.0,
+							1.0,
+							easing.weight)
+						_player_camera.movement_factor.x = lerpf(
+							0.0,
+							1.0,
+							easing.weight)
 						_player_camera.global_position.x = lerpf(
 							_player_camera.global_position.x,
-							_player.global_position.x + _player_camera.position_offset.x,
-							easing._weight)
+							_player.global_position.x,
+							easing.weight)
+					if not ignore_y:
+						_player_camera.offset_factor.y = lerpf(
+							0.0,
+							1.0,
+							easing.weight)
+						_player_camera.movement_factor.y = lerpf(
+							0.0,
+							1.0,
+							easing.weight)
+						_player_camera.global_position.y = lerpf(
+							_player_camera.global_position.y,
+							_player.global_position.y,
+							easing.weight)
 		else:
 			printerr("In ", name, ": _player_camera is unset")
 	elif Engine.is_editor_hint():

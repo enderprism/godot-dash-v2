@@ -34,18 +34,17 @@ func _ready() -> void:
 	base.sprite.set_texture(preload("res://assets/textures/triggers/CameraOffset.svg"))
 
 func _physics_process(_delta: float) -> void:
-	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
+	if not Engine.is_editor_hint() and not easing.is_inactive():
 		if _player_camera != null:
-			var _weight_delta = easing.get_weight_delta()
 			if from_center:
-				_player_camera.additional_offset_multiplier = _player_camera.additional_offset_multiplier.lerp(Vector2.ZERO, easing._weight)
+				_player_camera.additional_offset_multiplier = _player_camera.additional_offset_multiplier.lerp(Vector2.ZERO, easing.weight)
 			else:
-				_player_camera.additional_offset_multiplier = _player_camera.additional_offset_multiplier.lerp(Vector2.ONE, easing._weight)
+				_player_camera.additional_offset_multiplier = _player_camera.additional_offset_multiplier.lerp(Vector2.ONE, easing.weight)
 			match mode:
 				Mode.SET:
-					_player_camera.additional_offset += (set_offset - _initial_offset) * _weight_delta
+					_player_camera.additional_offset += (set_offset - _initial_offset) * easing.weight_delta
 				Mode.ADD:
-					_player_camera.additional_offset += add_offset * _weight_delta
+					_player_camera.additional_offset += add_offset * easing.weight_delta
 		else:
 			printerr("In ", name, ": _player_camera is unset")
 	elif Engine.is_editor_hint():

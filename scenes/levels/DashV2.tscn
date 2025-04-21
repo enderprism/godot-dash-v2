@@ -39,6 +39,7 @@
 [ext_resource type="PackedScene" uid="uid://b2civdkigbcth" path="res://scenes/components/level_components/portals/other_portals/ScalePortalSmall.tscn" id="32_k5j6h"]
 [ext_resource type="Texture2D" uid="uid://cihka00vqqj3m" path="res://assets/textures/triggers/Alpha.svg" id="38_tkw8r"]
 [ext_resource type="Script" uid="uid://78e8oeq1vi6k" path="res://src/TargetLink.gd" id="39_yr81y"]
+[ext_resource type="PackedScene" uid="uid://ctf8cfrxbjfdk" path="res://scenes/components/level_components/portals/gamemode_portals/ShipPortal.tscn" id="40_spjyg"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ead7r"]
 a = Vector2(0, -8192)
@@ -60,10 +61,6 @@ b = Vector2(0, 256)
 a = Vector2(0, -128)
 b = Vector2(0, 128)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_t2b88"]
-a = Vector2(0, -8192)
-b = Vector2(0, 8192)
-
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_spjyg"]
 a = Vector2(0, -8192)
 b = Vector2(0, 8192)
@@ -75,13 +72,13 @@ b = Vector2(0, 8192)
 [sub_resource type="Resource" id="Resource_xjx6m"]
 resource_local_to_scene = true
 script = ExtResource("25_jkwa2")
-path = NodePath("../tMove2")
+path = NodePath("../OrbMoveTrigger")
 time = 0.0
 
 [sub_resource type="Resource" id="Resource_8vgik"]
 resource_local_to_scene = true
 script = ExtResource("25_jkwa2")
-path = NodePath("../tMove3")
+path = NodePath("../OrbMoveTrigger2")
 time = 0.5
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_nje7t"]
@@ -260,7 +257,7 @@ z_index = -50
 
 [node name="TriggerEasing" type="Node" parent="FloorButtonMove"]
 script = ExtResource("10_srhyw")
-_duration = 0.5
+duration = 0.5
 easing_type = 1
 easing_transition = 5
 
@@ -456,7 +453,7 @@ metadata/_edit_group_ = true
 
 [node name="TriggerEasing" type="Node" parent="GameplayRotateTrigger"]
 script = ExtResource("10_srhyw")
-_duration = 0.0
+duration = 0.0
 
 [node name="TriggerBase" type="Area2D" parent="GameplayRotateTrigger"]
 collision_layer = 16
@@ -494,7 +491,7 @@ metadata/_edit_group_ = true
 
 [node name="TriggerEasing" type="Node" parent="GameplayRotateTrigger2"]
 script = ExtResource("10_srhyw")
-_duration = 0.0
+duration = 0.0
 
 [node name="TriggerBase" type="Area2D" parent="GameplayRotateTrigger2"]
 collision_layer = 16
@@ -535,7 +532,7 @@ z_index = -50
 
 [node name="TriggerEasing" type="Node" parent="CameraStaticTrigger"]
 script = ExtResource("10_srhyw")
-_duration = 2.0
+duration = 2.0
 easing_type = 1
 easing_transition = 1
 
@@ -550,7 +547,7 @@ z_index = -20
 script = ExtResource("12_bmhr7")
 
 [node name="Hitbox" type="CollisionShape2D" parent="CameraStaticTrigger/TriggerBase"]
-shape = SubResource("SegmentShape2D_t2b88")
+shape = SubResource("SegmentShape2D_spjyg")
 debug_color = Color(1, 0.960784, 0, 0.419608)
 
 [node name="Sprite" type="Sprite2D" parent="CameraStaticTrigger/TriggerBase"]
@@ -560,39 +557,39 @@ texture = ExtResource("26_adqf5")
 [node name="SingleUsageComponent" type="Node" parent="CameraStaticTrigger/TriggerBase"]
 script = ExtResource("14_2jira")
 
-[node name="tCameraStatic3" type="Node2D" parent="."]
+[node name="CameraStaticTrigger3" type="Node2D" parent="."]
 position = Vector2(4096, -1216)
 script = ExtResource("24_r7vme")
 mode = 1
 ignore_x = true
 metadata/_edit_group_ = true
 
-[node name="TargetLink" parent="tCameraStatic3" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="CameraStaticTrigger3" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="TriggerEasing" type="Node" parent="tCameraStatic3"]
+[node name="TriggerEasing" type="Node" parent="CameraStaticTrigger3"]
 script = ExtResource("10_srhyw")
-_duration = 0.2
+duration = 0.2
 
-[node name="TriggerBase" type="Area2D" parent="tCameraStatic3" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="CameraStaticTrigger3" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _target = NodePath("../../Cross")
 single_usage = true
 
-[node name="TriggerHitboxDisplay" type="Node2D" parent="tCameraStatic3/TriggerBase"]
+[node name="TriggerHitboxDisplay" type="Node2D" parent="CameraStaticTrigger3/TriggerBase"]
 z_index = -20
 script = ExtResource("12_bmhr7")
 
-[node name="Hitbox" type="CollisionShape2D" parent="tCameraStatic3/TriggerBase"]
-shape = SubResource("SegmentShape2D_spjyg")
+[node name="Hitbox" type="CollisionShape2D" parent="CameraStaticTrigger3/TriggerBase"]
+shape = SubResource("SegmentShape2D_iot8l")
 debug_color = Color(1, 0.960784, 0, 0.419608)
 
-[node name="Sprite" type="Sprite2D" parent="tCameraStatic3/TriggerBase"]
+[node name="Sprite" type="Sprite2D" parent="CameraStaticTrigger3/TriggerBase"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("26_adqf5")
 
-[node name="SingleUsageComponent" type="Node" parent="tCameraStatic3/TriggerBase"]
+[node name="SingleUsageComponent" type="Node" parent="CameraStaticTrigger3/TriggerBase"]
 script = ExtResource("14_2jira")
 
 [node name="tCameraStatic4" type="Node2D" parent="."]
@@ -610,6 +607,7 @@ easing_transition = 1
 [node name="TriggerBase" type="Area2D" parent="tCameraStatic4" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
+_hitbox_shape = 2
 _target = NodePath("../../Cross2")
 single_usage = true
 
@@ -618,7 +616,6 @@ z_index = -20
 script = ExtResource("12_bmhr7")
 
 [node name="Hitbox" type="CollisionShape2D" parent="tCameraStatic4/TriggerBase"]
-shape = SubResource("SegmentShape2D_iot8l")
 debug_color = Color(1, 0.960784, 0, 0.419608)
 
 [node name="Sprite" type="Sprite2D" parent="tCameraStatic4/TriggerBase"]
@@ -635,22 +632,22 @@ position = Vector2(3328, -832)
 [node name="DashOrbGreen" parent="." instance=ExtResource("24_sifkm")]
 position = Vector2(3328, -832)
 
-[node name="tMove2" type="Node2D" parent="."]
+[node name="OrbMoveTrigger" type="Node2D" parent="."]
 position = Vector2(64, -832)
 script = ExtResource("8_ml13a")
 _position = Vector2(0, 1)
 metadata/_edit_group_ = true
 
-[node name="TargetLink" parent="tMove2" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="OrbMoveTrigger" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="TriggerEasing" type="Node" parent="tMove2"]
+[node name="TriggerEasing" type="Node" parent="OrbMoveTrigger"]
 script = ExtResource("10_srhyw")
-_duration = 0.5
+duration = 0.5
 easing_type = 1
 easing_transition = 3
 
-[node name="TriggerBase" type="Area2D" parent="tMove2" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="OrbMoveTrigger" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
@@ -658,42 +655,42 @@ _target = NodePath("../../PinkOrb")
 target_group = &"orb1"
 single_usage = true
 
-[node name="TriggerHitboxDisplay" type="Node2D" parent="tMove2/TriggerBase"]
+[node name="TriggerHitboxDisplay" type="Node2D" parent="OrbMoveTrigger/TriggerBase"]
 visible = false
 z_index = -20
 script = ExtResource("12_bmhr7")
 
-[node name="Hitbox" type="CollisionShape2D" parent="tMove2/TriggerBase"]
+[node name="Hitbox" type="CollisionShape2D" parent="OrbMoveTrigger/TriggerBase"]
 debug_color = Color(1, 0.960784, 0, 0.419608)
 
-[node name="Sprite" type="Sprite2D" parent="tMove2/TriggerBase"]
+[node name="Sprite" type="Sprite2D" parent="OrbMoveTrigger/TriggerBase"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("13_wjfr7")
 
-[node name="SingleUsageComponent" type="Node" parent="tMove2/TriggerBase"]
+[node name="SingleUsageComponent" type="Node" parent="OrbMoveTrigger/TriggerBase"]
 script = ExtResource("14_2jira")
 
-[node name="SpawnTargetLink" parent="tMove2" instance=ExtResource("6_bolvq")]
+[node name="SpawnTargetLink" parent="OrbMoveTrigger" instance=ExtResource("6_bolvq")]
 z_index = -50
 points = PackedVector2Array(192, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
-[node name="tMove3" type="Node2D" parent="."]
+[node name="OrbMoveTrigger2" type="Node2D" parent="."]
 position = Vector2(256, -832)
 script = ExtResource("8_ml13a")
 _position = Vector2(0, 1)
 metadata/_edit_group_ = true
 
-[node name="TargetLink" parent="tMove3" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="OrbMoveTrigger2" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="TriggerEasing" type="Node" parent="tMove3"]
+[node name="TriggerEasing" type="Node" parent="OrbMoveTrigger2"]
 script = ExtResource("10_srhyw")
-_duration = 0.5
+duration = 0.5
 easing_type = 1
 easing_transition = 3
 
-[node name="TriggerBase" type="Area2D" parent="tMove3" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="OrbMoveTrigger2" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 _hitbox_shape = 2
@@ -701,19 +698,19 @@ _target = NodePath("../../PinkOrb2")
 target_group = &"orb2"
 single_usage = true
 
-[node name="TriggerHitboxDisplay" type="Node2D" parent="tMove3/TriggerBase"]
+[node name="TriggerHitboxDisplay" type="Node2D" parent="OrbMoveTrigger2/TriggerBase"]
 visible = false
 z_index = -20
 script = ExtResource("12_bmhr7")
 
-[node name="Hitbox" type="CollisionShape2D" parent="tMove3/TriggerBase"]
+[node name="Hitbox" type="CollisionShape2D" parent="OrbMoveTrigger2/TriggerBase"]
 debug_color = Color(1, 0.960784, 0, 0.419608)
 
-[node name="Sprite" type="Sprite2D" parent="tMove3/TriggerBase"]
+[node name="Sprite" type="Sprite2D" parent="OrbMoveTrigger2/TriggerBase"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("13_wjfr7")
 
-[node name="SingleUsageComponent" type="Node" parent="tMove3/TriggerBase"]
+[node name="SingleUsageComponent" type="Node" parent="OrbMoveTrigger2/TriggerBase"]
 script = ExtResource("14_2jira")
 
 [node name="SpawnTrigger" type="Node2D" parent="."]
@@ -749,7 +746,7 @@ script = ExtResource("14_2jira")
 
 [node name="TriggerEasing" type="Node" parent="SpawnTrigger"]
 script = ExtResource("10_srhyw")
-_duration = 0.5
+duration = 0.5
 
 [node name="SpawnTrigger2" type="Node2D" parent="."]
 position = Vector2(2240, -640)
@@ -785,7 +782,7 @@ script = ExtResource("14_2jira")
 
 [node name="TriggerEasing" type="Node" parent="SpawnTrigger2"]
 script = ExtResource("10_srhyw")
-_duration = 0.1
+duration = 0.1
 
 [node name="FloorButtonMove2" type="Node2D" parent="."]
 position = Vector2(2240, -1088)
@@ -798,7 +795,7 @@ z_index = -50
 
 [node name="TriggerEasing" type="Node" parent="FloorButtonMove2"]
 script = ExtResource("10_srhyw")
-_duration = 0.5
+duration = 0.5
 easing_type = 1
 easing_transition = 5
 
@@ -841,7 +838,7 @@ z_index = -50
 
 [node name="TriggerEasing" type="Node" parent="LowerSpike1"]
 script = ExtResource("10_srhyw")
-_duration = 0.5
+duration = 0.5
 easing_type = 0
 easing_transition = 3
 
@@ -883,7 +880,7 @@ z_index = -50
 
 [node name="TriggerEasing" type="Node" parent="LowerSpike2"]
 script = ExtResource("10_srhyw")
-_duration = 0.5
+duration = 0.5
 easing_type = 0
 easing_transition = 3
 
@@ -925,7 +922,7 @@ z_index = -50
 
 [node name="TriggerEasing" type="Node" parent="LowerSpike3"]
 script = ExtResource("10_srhyw")
-_duration = 0.5
+duration = 0.5
 easing_type = 0
 easing_transition = 3
 
@@ -976,7 +973,7 @@ scale = Vector2(1, 0.5)
 [node name="SpikeFlat3" parent="." groups=["spike3"] instance=ExtResource("12_sa2ab")]
 position = Vector2(2176, -448)
 
-[node name="tCameraStatic2" type="Node2D" parent="."]
+[node name="CameraStaticTrigger2" type="Node2D" parent="."]
 position = Vector2(2048, -320)
 rotation = 1.57079
 script = ExtResource("24_r7vme")
@@ -984,34 +981,35 @@ mode = 1
 ignore_y = true
 metadata/_edit_group_ = true
 
-[node name="TargetLink" parent="tCameraStatic2" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="CameraStaticTrigger2" instance=ExtResource("6_bolvq")]
 z_index = -50
 
-[node name="TriggerEasing" type="Node" parent="tCameraStatic2"]
+[node name="TriggerEasing" type="Node" parent="CameraStaticTrigger2"]
 script = ExtResource("10_srhyw")
+easing_type = 1
 easing_transition = 4
 
-[node name="TriggerBase" type="Area2D" parent="tCameraStatic2" node_paths=PackedStringArray("_target")]
+[node name="TriggerBase" type="Area2D" parent="CameraStaticTrigger2" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 hitbox_height = 1.5
 _target = NodePath("../../Cross")
 single_usage = true
 
-[node name="TriggerHitboxDisplay" type="Node2D" parent="tCameraStatic2/TriggerBase"]
+[node name="TriggerHitboxDisplay" type="Node2D" parent="CameraStaticTrigger2/TriggerBase"]
 z_index = -20
 script = ExtResource("12_bmhr7")
 
-[node name="Hitbox" type="CollisionShape2D" parent="tCameraStatic2/TriggerBase"]
+[node name="Hitbox" type="CollisionShape2D" parent="CameraStaticTrigger2/TriggerBase"]
 shape = SubResource("SegmentShape2D_lg7bd")
 debug_color = Color(1, 0.960784, 0, 0.419608)
 
-[node name="Sprite" type="Sprite2D" parent="tCameraStatic2/TriggerBase"]
+[node name="Sprite" type="Sprite2D" parent="CameraStaticTrigger2/TriggerBase"]
 rotation = -1.57079
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("26_adqf5")
 
-[node name="SingleUsageComponent" type="Node" parent="tCameraStatic2/TriggerBase"]
+[node name="SingleUsageComponent" type="Node" parent="CameraStaticTrigger2/TriggerBase"]
 script = ExtResource("14_2jira")
 
 [node name="CubePortal" parent="." instance=ExtResource("28_vs028")]
@@ -1058,7 +1056,7 @@ one_shot = true
 
 [node name="TriggerEasing" type="Node" parent="SpawnTrigger3"]
 script = ExtResource("10_srhyw")
-_duration = 0.0
+duration = 0.0
 
 [node name="FloorButton" parent="." groups=["floorbutton1"] instance=ExtResource("5_g4mtk")]
 modulate = Color(0, 0.419608, 1, 1)
@@ -1094,7 +1092,7 @@ z_index = -50
 
 [node name="TriggerEasing" type="Node" parent="MoveBallPlatform"]
 script = ExtResource("10_srhyw")
-_duration = 0.5
+duration = 0.5
 
 [node name="TriggerBase" type="Area2D" parent="MoveBallPlatform"]
 collision_layer = 16
@@ -1129,7 +1127,7 @@ z_index = -50
 
 [node name="TriggerEasing" type="Node" parent="FloorButtonMove3"]
 script = ExtResource("10_srhyw")
-_duration = 0.5
+duration = 0.5
 easing_type = 1
 easing_transition = 5
 
@@ -1174,7 +1172,7 @@ default_color = Color(0, 1, 1, 1)
 
 [node name="TriggerEasing" type="Node" parent="SpawnTrigger4"]
 script = ExtResource("10_srhyw")
-_duration = 0.0
+duration = 0.0
 
 [node name="TriggerBase" type="Area2D" parent="SpawnTrigger4"]
 collision_layer = 16
@@ -1224,47 +1222,43 @@ rotation = 0.523598
 [node name="Pivot" type="Node2D" parent="."]
 position = Vector2(5760, -576)
 
-[node name="tSpawn5" type="Node2D" parent="."]
+[node name="SpawnTrigger5" type="Node2D" parent="."]
 position = Vector2(5888, -960)
 script = ExtResource("24_l04c6")
 spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_4mfmg"), SubResource("Resource_hl221")])
 loop = true
 loop_count = -1
-loop_delay = 0.1
+loop_delay = 0.6
 metadata/_edit_group_ = true
 
-[node name="TargetLink" parent="tSpawn5" instance=ExtResource("6_bolvq")]
+[node name="TargetLink" parent="SpawnTrigger5" instance=ExtResource("6_bolvq")]
 z_index = -50
 points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
-[node name="TriggerEasing" type="Node" parent="tSpawn5"]
+[node name="TriggerEasing" type="Node" parent="SpawnTrigger5"]
 script = ExtResource("10_srhyw")
-_duration = 0.0
+duration = 0.0
 
-[node name="TriggerBase" type="Area2D" parent="tSpawn5"]
+[node name="TriggerBase" type="Area2D" parent="SpawnTrigger5"]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
 single_usage = true
 
-[node name="TriggerHitboxDisplay" type="Node2D" parent="tSpawn5/TriggerBase"]
+[node name="TriggerHitboxDisplay" type="Node2D" parent="SpawnTrigger5/TriggerBase"]
 z_index = -20
 script = ExtResource("12_bmhr7")
 
-[node name="Hitbox" type="CollisionShape2D" parent="tSpawn5/TriggerBase"]
+[node name="Hitbox" type="CollisionShape2D" parent="SpawnTrigger5/TriggerBase"]
 shape = SubResource("SegmentShape2D_err0a")
 debug_color = Color(1, 0.960784, 0, 0.419608)
 
-[node name="Sprite" type="Sprite2D" parent="tSpawn5/TriggerBase"]
+[node name="Sprite" type="Sprite2D" parent="SpawnTrigger5/TriggerBase"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("32_eh181")
 
-[node name="SingleUsageComponent" type="Node" parent="tSpawn5/TriggerBase"]
+[node name="SingleUsageComponent" type="Node" parent="SpawnTrigger5/TriggerBase"]
 script = ExtResource("14_2jira")
-
-[node name="Timer" type="Timer" parent="tSpawn5"]
-process_callback = 0
-one_shot = true
 
 [node name="RotateTrigger2" type="Node2D" parent="." node_paths=PackedStringArray("_pivot")]
 position = Vector2(6016, -960)
@@ -1278,7 +1272,7 @@ z_index = -50
 
 [node name="TriggerEasing" type="Node" parent="RotateTrigger2"]
 script = ExtResource("10_srhyw")
-_duration = 0.5
+duration = 0.5
 easing_type = 1
 easing_transition = 5
 
@@ -1302,11 +1296,11 @@ texture = ExtResource("17_wblj1")
 
 [node name="SpawnTargetLink" parent="RotateTrigger2" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(0, 128, 0, 0)
+points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="ScaleTrigger2" type="Node2D" parent="." node_paths=PackedStringArray("_pivot")]
-position = Vector2(6016, -832)
+position = Vector2(6144, -960)
 script = ExtResource("19_vvu8j")
 _pivot = NodePath("../Pivot")
 mode = 1
@@ -1339,7 +1333,7 @@ texture = ExtResource("21_jw8px")
 
 [node name="TriggerEasing" type="Node" parent="ScaleTrigger2"]
 script = ExtResource("10_srhyw")
-_duration = 0.5
+duration = 0.5
 easing_type = 1
 easing_transition = 5
 
@@ -1348,3 +1342,10 @@ position = Vector2(4480, -832)
 
 [node name="SizePortalSmall" parent="." instance=ExtResource("32_k5j6h")]
 position = Vector2(6848, -384)
+
+[node name="WavePortal2" parent="." instance=ExtResource("31_bjlog")]
+position = Vector2(-192, 256)
+scale = Vector2(-1, 1)
+
+[node name="ShipPortal" parent="." instance=ExtResource("40_spjyg")]
+position = Vector2(-192, -192)

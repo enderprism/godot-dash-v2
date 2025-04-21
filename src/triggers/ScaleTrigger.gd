@@ -50,9 +50,8 @@ func _ready() -> void:
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Scale.svg"))
 
 func _physics_process(_delta: float) -> void:
-	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
+	if not Engine.is_editor_hint() and not easing.is_inactive():
 		if not _targets.is_empty():
-			var _weight_delta = easing.get_weight_delta()
 			var _pivot_scale: Vector2
 			# Do assignment outside loop to avoid doing for every object in the group.
 			# The performance benefit is probably negligeable.
@@ -63,16 +62,16 @@ func _physics_process(_delta: float) -> void:
 				var _scale_delta: Vector2
 				match mode:
 					Mode.SET:
-						_scale_delta = (_set_scale - _initial_global_scale) * _weight_delta
+						_scale_delta = (_set_scale - _initial_global_scale) * easing.weight_delta
 					Mode.ADD:
-						_scale_delta = _add_scale * _weight_delta
+						_scale_delta = _add_scale * easing.weight_delta
 					Mode.MULTIPLY:
-						_scale_delta = ((_initial_global_scale * _multiply_scale) - _initial_global_scale) * _weight_delta
+						_scale_delta = ((_initial_global_scale * _multiply_scale) - _initial_global_scale) * easing.weight_delta
 					Mode.DIVIDE:
-						_scale_delta = ((_initial_global_scale / _multiply_scale) - _initial_global_scale) * _weight_delta
+						_scale_delta = ((_initial_global_scale / _multiply_scale) - _initial_global_scale) * easing.weight_delta
 					Mode.COPY:
 						if _copy_target != null:
-							_target.global_scale = lerp(_initial_global_scale, _copy_target.global_scale * _copy_multiplier, easing._weight)
+							_target.global_scale = lerp(_initial_global_scale, _copy_target.global_scale * _copy_multiplier, easing.weight)
 						elif LevelManager.in_editor and LevelManager.level_playing:
 							printerr("In ", name, ": copy_target is unset!")
 						# Escape the current loop iteration to avoid adding the rotation delta, even if it's null.

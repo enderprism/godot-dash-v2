@@ -38,17 +38,19 @@ func _ready() -> void:
 	base.sprite.set_texture(preload("res://assets/textures/triggers/CameraRotate.svg"))
 
 func _physics_process(_delta: float) -> void:
-	if not Engine.is_editor_hint() and not is_zero_approx(easing._weight):
+	if not Engine.is_editor_hint() and not easing.is_inactive():
 		if _player_camera != null:
-			var _weight_delta = easing.get_weight_delta()
 			match mode:
 				Mode.SET:
-					_player_camera.global_rotation_degrees += (_set_rotation_degrees - _initial_global_rotation_degrees) * _weight_delta
+					_player_camera.global_rotation_degrees += (_set_rotation_degrees - _initial_global_rotation_degrees) * easing.weight_delta
 				Mode.ADD:
-					_player_camera.global_rotation_degrees += _add_rotation_degrees * _weight_delta
+					_player_camera.global_rotation_degrees += _add_rotation_degrees * easing.weight_delta
 				Mode.COPY:
 					if _copy_target != null:
-						_player_camera.global_rotation_degrees = lerp(_initial_global_rotation_degrees, _copy_target.global_rotation_degrees + _copy_offset, easing._weight)
+						_player_camera.global_rotation = lerp_angle(
+							deg_to_rad(_initial_global_rotation_degrees),
+							_copy_target.global_rotation + deg_to_rad(_copy_offset),
+							easing.weight)
 					else:
 						printerr("In ", name, ": copy_player_camera is unset!")
 		else:
