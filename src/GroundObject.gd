@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	if LevelManager.player_camera != null:
 		var zoom_factor: Vector2 = PlayerCamera.DEFAULT_ZOOM/LevelManager.player_camera.zoom
 		# var zoom_factor := Vector2.ONE
-		if not LevelManager.player_camera._freefly:
+		if not LevelManager.player_camera.freefly:
 			var global_position_rotated: Vector2 = global_position.rotated(LevelManager.player.gameplay_rotation)
 			global_position_rotated = global_position_rotated.lerp(
 				Vector2(

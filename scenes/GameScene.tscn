@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/FadeScreen.tscn" id="6_7ju4w"]
 [ext_resource type="Script" uid="uid://nl1xrhaw0nyb" path="res://src/PositionFollow2D.gd" id="6_kvomc"]
 [ext_resource type="Script" uid="uid://dwo41qkfxpajj" path="res://src/GroundObject.gd" id="7_fb2li"]
-[ext_resource type="Script" uid="uid://cp4b5tutccsbo" path="res://src/PlayerCamera.gd" id="7_vnv5l"]
+[ext_resource type="PackedScene" uid="uid://dxcgyea560vmr" path="res://scenes/components/game_components/PlayerCamera.tscn" id="9_e8rlm"]
 [ext_resource type="PackedScene" uid="uid://th7jwdop3hdv" path="res://scenes/components/game_components/PauseMenu.tscn" id="9_vv033"]
 [ext_resource type="Shader" uid="uid://c37wfprwryexl" path="res://resources/shaders/Grayscale.gdshader" id="10_tgbxk"]
 [ext_resource type="Shader" uid="uid://bmo5oa3f8elxu" path="res://resources/shaders/LensCircle.gdshader" id="11_bdlmb"]
@@ -203,16 +203,8 @@ position = Vector2(0, -77.2)
 shape = SubResource("RectangleShape2D_l4i0t")
 debug_color = Color(0, 0.701961, 0.607843, 0.419608)
 
-[node name="PlayerCamera" type="Camera2D" parent="."]
-process_priority = 2
-z_index = 100
+[node name="PlayerCamera" parent="." instance=ExtResource("9_e8rlm")]
 position = Vector2(640, 413)
-ignore_rotation = false
-zoom = Vector2(0.8, 0.8)
-process_callback = 0
-limit_smoothed = true
-editor_draw_limits = true
-script = ExtResource("7_vnv5l")
 
 [node name="ShaderLayer" type="CanvasLayer" parent="."]
 layer = 50

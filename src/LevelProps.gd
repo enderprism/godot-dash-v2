@@ -49,10 +49,12 @@ func start_level() -> void:
 	if get_tree().paused:
 		await _pause_manager.unpaused
 	song_player.play(song_start_time)
+	LevelManager.platformer = platformer
 	LevelManager.player.speed_multiplier = START_SPEED[start_speed]
 	LevelManager.player.horizontal_direction = -1 if start_reverse else 1
-	print_debug(start_gameplay_rotation_degrees)
 	LevelManager.player.gameplay_rotation_degrees = start_gameplay_rotation_degrees
+	LevelManager.player_camera.position_offset = PlayerCamera.DEFAULT_OFFSET.rotated(start_gameplay_rotation_degrees) if not LevelManager.platformer else Vector2.ZERO
+	LevelManager.player_camera.position = LevelManager.player.position
 	LevelManager.level_playing = true
 
 
