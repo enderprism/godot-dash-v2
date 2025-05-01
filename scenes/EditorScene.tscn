@@ -4141,6 +4141,17 @@ text = "Single usage"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage"]
+visible = false
+layout_mode = 2
+theme = ExtResource("147_1ad2k")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage"]
 visible = false
 layout_mode = 2
@@ -4242,6 +4253,17 @@ text = "Spawn triggered"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"]
+visible = false
+layout_mode = 2
+theme = ExtResource("147_1ad2k")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"]
 visible = false
 layout_mode = 2
@@ -4342,6 +4364,17 @@ text = "Touch triggered"
 [node name="Spacer" type="Control" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered"]
+visible = false
+layout_mode = 2
+theme = ExtResource("147_1ad2k")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
 
 [node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered"]
 visible = false
@@ -4461,6 +4494,17 @@ text = "Base Color"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color"]
+visible = false
+layout_mode = 2
+theme = ExtResource("147_1ad2k")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color"]
 visible = false
 layout_mode = 2
@@ -4563,6 +4607,17 @@ text = "Detail Color"
 [node name="Spacer" type="Control" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color"]
+visible = false
+layout_mode = 2
+theme = ExtResource("147_1ad2k")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
 
 [node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color"]
 visible = false
@@ -4670,6 +4725,17 @@ text = "Hue"
 [node name="Spacer" type="Control" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue"]
+visible = false
+layout_mode = 2
+theme = ExtResource("147_1ad2k")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
 
 [node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue"]
 layout_mode = 2
@@ -4779,6 +4845,17 @@ text = "Saturation"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("147_1ad2k")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation"]
 layout_mode = 2
 theme = ExtResource("147_1ad2k")
@@ -4886,6 +4963,17 @@ text = "Value"
 [node name="Spacer" type="Control" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value"]
+visible = false
+layout_mode = 2
+theme = ExtResource("147_1ad2k")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
 
 [node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value"]
 layout_mode = 2
@@ -4995,6 +5083,17 @@ text = "Strength"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength"]
+visible = false
+layout_mode = 2
+theme = ExtResource("147_1ad2k")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength"]
 layout_mode = 2
 theme = ExtResource("147_1ad2k")
@@ -5102,6 +5201,17 @@ text = "Alpha"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha"]
+visible = false
+layout_mode = 2
+theme = ExtResource("147_1ad2k")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha"]
 layout_mode = 2
 theme = ExtResource("147_1ad2k")
@@ -5188,6 +5298,7 @@ layout_mode = 2
 theme = ExtResource("147_1ad2k")
 
 [node name="LevelSettings" parent="EditorUI" instance=ExtResource("180_nk067")]
+unique_name_in_owner = true
 visible = false
 metadata/_edit_lock_ = true
 

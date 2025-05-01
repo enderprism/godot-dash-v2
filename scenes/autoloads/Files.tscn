@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://brosws87g5swa"]
+
+[ext_resource type="Script" uid="uid://dvn1rtcbt812u" path="res://src/autoloads/Files.gd" id="1_7mfnx"]
+
+[node name="Files" type="Node" node_paths=PackedStringArray("load_dialog", "import_and_load_dialog")]
+script = ExtResource("1_7mfnx")
+load_dialog = NodePath("Load")
+import_and_load_dialog = NodePath("ImportAndLoad")
+
+[node name="Load" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Load"
+initial_position = 2
+size = Vector2i(1088, 720)
+ok_button_text = "Open"
+mode_overrides_title = false
+file_mode = 0
+access = 1
+filters = PackedStringArray("*.tscn")
+use_native_dialog = true
+
+[node name="ImportAndLoad" type="FileDialog" parent="."]
+auto_translate_mode = 1
+title = "Import and load"
+initial_position = 2
+size = Vector2i(1088, 720)
+ok_button_text = "Open"
+mode_overrides_title = false
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.level")
+option_count = 1
+use_native_dialog = true
+option_0/name = "Keep original level file"
+option_0/default = 1

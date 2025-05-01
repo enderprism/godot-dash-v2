@@ -38,6 +38,17 @@ text = "Duration"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="Duration"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_ownah")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="Duration"]
 layout_mode = 2
 theme = ExtResource("4_ownah")
@@ -68,14 +79,12 @@ size_flags_vertical = 1
 max_value = 10.0
 step = 0.01
 allow_greater = true
-allow_lesser = true
 
 [node name="SpinBox" type="SpinBox" parent="Duration/FLOAT_SLIDER"]
 layout_mode = 2
 max_value = 10.0
 step = 0.01
 allow_greater = true
-allow_lesser = true
 suffix = "s"
 select_all_on_focus = true
 
@@ -166,6 +175,17 @@ text = "Keep Active"
 [node name="Spacer" type="Control" parent="Keep Active"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="FILE" type="MenuButton" parent="Keep Active"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_ownah")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
 
 [node name="FLOAT" type="SpinBox" parent="Keep Active"]
 visible = false
@@ -297,6 +317,17 @@ text = "Easing"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="Easing"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_ownah")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="Easing"]
 visible = false
 layout_mode = 2
@@ -412,6 +443,17 @@ text = "Transition"
 [node name="Spacer" type="Control" parent="Transition"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="FILE" type="MenuButton" parent="Transition"]
+visible = false
+layout_mode = 2
+theme = ExtResource("4_ownah")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
 
 [node name="FLOAT" type="SpinBox" parent="Transition"]
 visible = false

@@ -70,6 +70,7 @@ Config="*res://src/autoloads/Config.gd"
 SignalLens="*res://addons/signal_lens/autoload/signal_lens_autoload.gd"
 Toasts="*res://src/autoloads/Toasts.gd"
 SceneTransition="*res://src/autoloads/SceneTransition.gd"
+Files="*res://scenes/autoloads/Files.tscn"
 
 [display]
 

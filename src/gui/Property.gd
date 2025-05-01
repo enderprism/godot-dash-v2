@@ -13,6 +13,7 @@ enum Type {
 	COLOR,
 	ENUM,
 	NODE2D,
+	FILE,
 }
 
 @export var type: Type:
@@ -41,6 +42,11 @@ enum Type {
 # Enum type exports
 @export var enum_fields: PackedStringArray
 
+# File type exports
+@export var filetype_filters: PackedStringArray
+@export var load_root: String
+@export var import_to: String
+
 # Default values
 @export var default_float: float
 @export var default_bool: bool
@@ -49,6 +55,7 @@ enum Type {
 @export var default_color: Color
 @export var default_enum_idx: int
 @export var default_node2d_path: Node2D
+@export var default_file_path: String
 
 @export_tool_button("Refresh") var refresh_property = _refresh
 
@@ -61,6 +68,7 @@ const DEFAULT_VALUE_TYPES: Dictionary[Type, String] = {
 	Type.COLOR: "default_color",
 	Type.ENUM: "default_enum_idx",
 	Type.NODE2D: "default_node2d_path",
+	Type.FILE: "default_file_path",
 }
 
 var _label: Label
@@ -109,6 +117,9 @@ func _ready() -> void:
 	# NODE2D
 	gui_inputs.insert(Type.NODE2D, NodeUtils.get_node_or_add(self, "NODE2D", Button, NodeUtils.INTERNAL | NodeUtils.SET_OWNER))
 	gui_inputs[Type.NODE2D].pressed.connect(update_node2d)
+	# FILE
+	gui_inputs.insert(Type.FILE, NodeUtils.get_node_or_add(self, "FILE", MenuButton, NodeUtils.INTERNAL | NodeUtils.SET_OWNER))
+	# Theme
 	for child in gui_inputs:
 		child.hide()
 		child.theme = preload("res://resources/NoFocusColor.tres")
@@ -144,6 +155,8 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 	if property.name == "default_node2d_path" and type != Type.NODE2D:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
+	if property.name in ["default_file_path", "filetype_filters", "load_root", "import_to"] and type != Type.FILE:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 
 func set_value(new_value: Variant, value_type: Type = type) -> void:
@@ -169,6 +182,9 @@ func set_value(new_value: Variant, value_type: Type = type) -> void:
 			else:
 				gui_inputs[Type.NODE2D].set_text(LevelManager.editor_edited_level.get_path_to(new_value))
 			node_2d_ref = new_value
+		Type.FILE:
+			gui_inputs[Type.FILE].set_text("    Load…    " if new_value.is_empty() or Engine.is_editor_hint() else new_value.get_file())
+			gui_inputs[Type.FILE].set_meta("file_path", new_value)
 
 
 func get_value(value_type: Type = type) -> Variant:
@@ -185,6 +201,9 @@ func get_value(value_type: Type = type) -> Variant:
 			return gui_inputs[Type.ENUM].get_selected()
 		Type.NODE2D:
 			return gui_inputs[Type.NODE2D].get_text()
+		Type.FILE:
+			print_debug(gui_inputs[Type.FILE].get_meta("file_path", ""))
+			return gui_inputs[Type.FILE].get_meta("file_path", "")
 		_:
 			return null
 
@@ -203,6 +222,8 @@ func reset() -> void:
 
 
 func update_internals() -> void:
+	move_child(_label, 0)
+	move_child(_spacer, 1)
 	for input in [gui_inputs[Type.FLOAT], gui_inputs[Type.FLOAT_SLIDER], gui_inputs[Type.VECTOR2]]:
 		input.min_value = _min
 		input.max_value = _max
@@ -220,8 +241,15 @@ func update_internals() -> void:
 	gui_inputs[Type.STRING].custom_minimum_size.x = lineedit_width
 	gui_inputs[Type.STRING].focus_mode = Control.FOCUS_CLICK
 	gui_inputs[Type.COLOR].custom_minimum_size.x = 100
+	gui_inputs[Type.FILE].flat = false
 	if enum_fields != null:
 		setup_enum(enum_fields)
+	if gui_inputs[Type.FILE].get_popup() != null:
+		var popup := gui_inputs[Type.FILE].get_popup() as PopupMenu
+		popup.clear()
+		popup.add_item("Load")
+		popup.add_item("Import and load")
+		NodeUtils.connect_new(popup.index_pressed, update_file)
 
 
 func setup_enum(fields: PackedStringArray) -> void:
@@ -241,6 +269,19 @@ func update_node2d() -> void:
 		gui_inputs[Type.NODE2D].set_text(LevelManager.editor_edited_level.get_path_to(clipboard[0]))
 		node_2d_ref = clipboard[0]
 	value_changed.emit(node_2d_ref)
+
+
+func update_file(index: int) -> void:
+	var file_path: String
+	match index:
+		0: # Load
+			Files.load(filetype_filters, load_root)
+		1: # Import and load
+			Files.import_and_load(filetype_filters, "", import_to, Files.SINGLE_FILE)
+	file_path = await Files.file_loaded
+	if not file_path.is_empty():
+		set_value(file_path)
+	value_changed.emit(file_path)
 
 
 func _refresh() -> void:

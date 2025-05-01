@@ -53,10 +53,12 @@ label_settings = ExtResource("3_d0u0j")
 metadata/_custom_type_script = "uid://cuih47milvqcs"
 
 [node name="Song Path" type="HBoxContainer" parent="TabContainer/Level Settings/VBoxContainer/Song"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("5_t0cjo")
-type = 4
+type = 8
+filetype_filters = PackedStringArray("*.mp3", "*.wav", "*.ogg")
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 metadata/_edit_group_ = true
 
@@ -67,6 +69,18 @@ text = "Song Path"
 [node name="Spacer" type="Control" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="FILE" type="MenuButton" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path"]
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+text = "    Load…    "
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+metadata/file_path = ""
 
 [node name="FLOAT" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path"]
 visible = false
@@ -132,6 +146,7 @@ prefix = "y:"
 select_all_on_focus = true
 
 [node name="STRING" type="LineEdit" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path"]
+visible = false
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
@@ -167,6 +182,17 @@ or_greater = true
 suffix = "s"
 metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
 metadata/_edit_group_ = true
+
+[node name="FILE" type="MenuButton" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
 
 [node name="Label" type="Label" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset"]
 layout_mode = 2
@@ -302,6 +328,17 @@ text = "Platformer"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer"]
 visible = false
 layout_mode = 2
@@ -416,6 +453,17 @@ text = "Speed"
 [node name="Spacer" type="Control" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="FILE" type="MenuButton" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
 
 [node name="FLOAT" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed"]
 visible = false
@@ -537,6 +585,17 @@ text = "Reverse"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse"]
 visible = false
 layout_mode = 2
@@ -644,6 +703,17 @@ text = "Gameplay Rotation"
 [node name="Spacer" type="Control" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="FILE" type="MenuButton" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_ikfu3")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
 
 [node name="FLOAT" type="SpinBox" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation"]
 layout_mode = 2
