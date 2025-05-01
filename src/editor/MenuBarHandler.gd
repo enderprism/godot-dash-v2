@@ -71,7 +71,7 @@ func _open_level(path: String) -> void:
 		song_file_path = ResourceUID.get_id_path(ResourceUID.text_to_id(level.song_path)).get_file()
 	else:
 		song_file_path = level.song_path.get_file()
-	level.song_path = "user://created_levels/songs/" + song_file_path
+	level.song_path = "" if song_file_path.is_empty() else "user://created_levels/songs/" + song_file_path
 	level.set_meta("packed_file_path", path)
 	editor.level.add_sibling(level)
 	editor.level.queue_free()
