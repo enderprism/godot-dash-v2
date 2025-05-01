@@ -54,3 +54,8 @@ static func get_node_or_add(caller: Node, path: NodePath, script, options: int =
 static func connect_new(_signal: Signal, callable: Callable) -> void:
 	if not _signal.is_connected(callable):
 		_signal.connect(callable)
+
+
+static func disconnect_all(_signal: Signal):
+	for connection in _signal.get_connections():
+		_signal.disconnect(connection.callable)
