@@ -21,7 +21,6 @@ var level:
 var editor_actions: int
 
 func _ready() -> void:
-
 	if SceneTransition.from_main():
 		SceneTransition.previous = SceneTransition.Scene.EDITOR
 		var _fade_screen = $FadeScreenLayer/FadeScreen
@@ -55,6 +54,7 @@ func _ready() -> void:
 		level = $GameScene/Level.get_child(0)
 	elif $GameScene/Level.get_child(0) == null:
 		level = LevelProps.new()
+		level.version_history = UndoRedo.new()
 		$GameScene/Level.add_child(level)
 
 
@@ -130,3 +130,9 @@ func _on_leave_pressed() -> void:
 			.set_ease(Tween.EASE_IN) \
 			.set_trans(Tween.TRANS_EXPO)
 
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"ui_undo"):
+		level.version_history.undo()
+	elif event.is_action_pressed(&"ui_redo"):
+		level.version_history.redo()

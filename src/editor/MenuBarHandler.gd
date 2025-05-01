@@ -55,6 +55,7 @@ func _new_level() -> void:
 	editor.level.add_sibling(new_level)
 	editor.level.queue_free()
 	editor.level = new_level
+	new_level.version_history = UndoRedo.new()
 	level_loaded.emit(new_level)
 
 

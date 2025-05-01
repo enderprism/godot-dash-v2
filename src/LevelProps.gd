@@ -11,6 +11,8 @@ const START_SPEED: Array[float] = [
 	2.431, # 5x
 ]
 
+@export_storage var version_history: UndoRedo
+
 @export_file var song_path: String:
 	set(value):
 		song_path = value
