@@ -107,6 +107,7 @@ func _on_playtest_pressed() -> void:
 	if $GameScene/PlayerCamera.enabled:
 		%EditorModes.hide()
 		%SidePanel.hide()
+		%LevelSettings.hide()
 		%EditorViewport.mouse_filter = MOUSE_FILTER_STOP
 		$GameScene/Player.process_mode = Node.PROCESS_MODE_INHERIT
 		$GameScene/EditorGridParallax/EditorGrid.hide()
