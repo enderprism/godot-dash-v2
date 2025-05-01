@@ -70,7 +70,6 @@ func _physics_process(_delta: float) -> void:
 		elif Input.is_action_just_pressed(&"editor_selection_filters_mode"):
 			%EditorModes.current_tab = 2
 
-	$EditorCamera.wrap_inset = get_viewport_rect().size - %EditorViewport.size
 	if %EditorModes.get_current_tab_control().name == "Place" \
 			and (Input.is_action_just_pressed(&"editor_add") or Input.is_action_just_pressed(&"editor_remove") \
 			or Input.is_action_pressed(&"editor_add_swipe") or Input.is_action_pressed(&"editor_remove_swipe")):

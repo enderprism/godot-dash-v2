@@ -5311,7 +5311,6 @@ position_smoothing_enabled = true
 script = ExtResource("6_wcytj")
 pan_margin = 0.0
 pan_keyboard = false
-wrap_inset = Vector2(0, 312)
 editor_viewport = NodePath("../EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorViewport")
 
 [node name="PlacedObjectsCollider" type="Area2D" parent="."]

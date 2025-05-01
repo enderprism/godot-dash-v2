@@ -29,8 +29,6 @@ signal zoom_changed
 ## If [code]true[/code], the mouse will warp to the opposite edge when going close to an edge, like in the Godot editor.
 @export var enable_wrap := true
 
-@export var wrap_inset: Vector2
-
 ## If [code]true[/code], the map can be dragged even when GUI is hovered.
 @export var passthrough_gui := false
 
@@ -89,7 +87,7 @@ func _input(event):
 				_tween_offset.kill()
 
 			if enable_wrap:
-				_wrap(event.relative)
+				_wrap(event.relative, editor_viewport)
 			
 			clamp_offset(-event.relative / zoom)
 		elif pan_margin > 0:
@@ -140,13 +138,13 @@ func _set_pan_direction(value):
 		if _tween_offset != null:
 			_tween_offset.kill()
 
-func _wrap(relative: Vector2, margins: float = 1) -> void:
-	var screen_size := get_viewport_rect().size - wrap_inset
+func _wrap(relative: Vector2, viewport: Control, margins: float = 1) -> void:
 	var mouse_position := get_viewport().get_mouse_position() + relative
+	var rect := viewport.get_rect()
 	var new_position := mouse_position
-	new_position.x = wrapf(mouse_position.x, margins, screen_size.x - margins)
-	new_position.y = wrapf(mouse_position.y, margins, screen_size.y - margins)
-	if (mouse_position.x - new_position.x > screen_size.x/2) or (mouse_position.y - new_position.y > screen_size.y/2) \
+	new_position.x = wrapf(mouse_position.x, viewport.global_position.x + rect.position.x + margins, viewport.global_position.x + rect.position.x + rect.size.x - margins)
+	new_position.y = wrapf(mouse_position.y, viewport.global_position.y + rect.position.y + margins, viewport.global_position.y + rect.position.y + rect.size.y - margins)
+	if (mouse_position.x - new_position.x > rect.position.x + rect.size.x/2) or (mouse_position.y - new_position.y > rect.position.y + rect.size.y/2) \
 			or (mouse_position.x - new_position.x < 0) or (mouse_position.y - new_position.y < 0):
 		get_viewport().warp_mouse(new_position)
 
