@@ -15,6 +15,7 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 		if block_palette_ref != null and not texture_variation_overlapping(placed_objects_collider, block_palette_ref.type, block_palette_ref.id) \
 				and Input.is_action_pressed(&"editor_add"):
 			if pressed_button != null:
+				print(level.version_history.get_current_action())
 				var object: Node2D
 				if block_palette_ref.type == EditorSelectionCollider.Type.TRIGGER:
 					object = block_palette_ref.trigger_script.new()
@@ -37,6 +38,20 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 				hsv_watcher.name = "HSVWatcher"
 				object.add_child(hsv_watcher)
 				hsv_watcher.set_owner(LevelManager.editor_edited_level)
+				var add_object := func(_object: Node):
+					if _object.is_in_group("deleted"):
+						_object.remove_from_group("deleted")
+					_object.show()
+					_object.process_mode = Node.PROCESS_MODE_INHERIT
+				var remove_object := func(_object: Node):
+					_object.hide()
+					_object.process_mode = Node.PROCESS_MODE_DISABLED
+					_object.add_to_group("deleted")
+				level.version_history.create_action("Place object " + object.name)
+				level.version_history.add_do_method(add_object.bind(object))
+				level.version_history.add_do_reference(object)
+				level.version_history.add_undo_method(remove_object.bind(object))
+				level.version_history.commit_action()
 		# Handle object deletion
 		elif Input.is_action_pressed(&"editor_remove") and placed_objects_collider.has_overlapping_areas():
 			if len(placed_objects_collider.get_overlapping_areas()) > 0 and placed_objects_collider.get_overlapping_areas()[-1].get_parent() is not LevelProps:

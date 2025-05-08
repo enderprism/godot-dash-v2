@@ -29,6 +29,8 @@ const START_SPEED: Array[float] = [
 var _pause_manager: Node
 
 func _ready() -> void:
+	if version_history == null:
+		version_history = UndoRedo.new()
 	_pause_manager = LevelManager.pause_manager
 	update_song(song_path)
 	song_player.process_mode = Node.PROCESS_MODE_PAUSABLE
