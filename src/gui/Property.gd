@@ -234,11 +234,15 @@ func update_internals() -> void:
 		input.prefix = prefix
 		input.suffix = suffix
 		input.select_all_on_focus = true
+	gui_inputs[Type.FLOAT].get_line_edit().expand_to_text_length = true
+	gui_inputs[Type.FLOAT_SLIDER].expand_to_text_length = true
+	gui_inputs[Type.VECTOR2].expand_to_text_length = true
 	gui_inputs[Type.FLOAT_SLIDER].slider_width = slider_width
 	gui_inputs[Type.VECTOR2].vertical = true
 	gui_inputs[Type.VECTOR2].keep_aspect = keep_aspect
 	gui_inputs[Type.VECTOR2].call_deferred("update_internals")
 	gui_inputs[Type.STRING].custom_minimum_size.x = lineedit_width
+	gui_inputs[Type.STRING].expand_to_text_length = true
 	gui_inputs[Type.STRING].focus_mode = Control.FOCUS_CLICK
 	gui_inputs[Type.COLOR].custom_minimum_size.x = 100
 	gui_inputs[Type.FILE].flat = false

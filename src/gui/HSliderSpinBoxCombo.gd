@@ -25,6 +25,7 @@ signal value_changed(value: float)
 		slider_width = value
 		if hslider != null:
 			hslider.custom_minimum_size.x = value
+@export var expand_to_text_length: bool
 
 var hslider: HSlider
 var spinbox: SpinBox
@@ -64,6 +65,7 @@ func update_internals() -> void:
 	spinbox.prefix = prefix
 	spinbox.suffix = suffix
 	spinbox.select_all_on_focus = select_all_on_focus
+	spinbox.get_line_edit().expand_to_text_length = expand_to_text_length
 
 
 func _update_value(new_value: float) -> void:

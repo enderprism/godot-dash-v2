@@ -29,6 +29,7 @@ signal value_changed(new_value: Vector2)
 			spinbox.editable = value
 @onready var spinbox_x: SpinBox
 @onready var spinbox_y: SpinBox
+@export var expand_to_text_length: bool
 var aspect_ratio: float
 var value: Vector2: set = _set_value
 
@@ -56,6 +57,7 @@ func update_internals() -> void:
 		spinbox.alignment = HORIZONTAL_ALIGNMENT_FILL
 		spinbox.rounded = rounded
 		spinbox.select_all_on_focus = select_all_on_focus
+		spinbox.get_line_edit().expand_to_text_length = expand_to_text_length
 	_set_prefix(prefix)
 
 
