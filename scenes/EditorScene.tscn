@@ -190,7 +190,7 @@
 [ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="147_pcjvf"]
 [ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="148_tl5y0"]
 [ext_resource type="PackedScene" uid="uid://ylswfd45fw38" path="res://scenes/components/game_components/LevelSettings.tscn" id="180_nk067"]
-[ext_resource type="Script" uid="uid://c08lx7vbboo37" path="res://src/editor/MenuBarHandler.gd" id="189_ao6md"]
+[ext_resource type="Script" uid="uid://c08lx7vbboo37" path="res://src/editor/LevelOperationsHandler.gd" id="189_ao6md"]
 
 [sub_resource type="Resource" id="Resource_aofxv"]
 script = ExtResource("12_egrfm")
@@ -5383,7 +5383,7 @@ single_usage = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/S
 spawn_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered")
 touch_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered")
 
-[node name="MenuBarHandler" type="Node" parent="." node_paths=PackedStringArray("edit_handler", "level_settings", "open_dialog", "import_dialog", "save_as_dialog", "export_dialog", "save_changes_before_opening_dialog", "corrupted_level_dialog", "level_already_exists_dialog")]
+[node name="LevelOperationsHandler" type="Node" parent="." node_paths=PackedStringArray("edit_handler", "level_settings", "open_dialog", "import_dialog", "save_as_dialog", "export_dialog", "save_changes_before_opening_dialog", "corrupted_level_dialog", "level_already_exists_dialog")]
 script = ExtResource("189_ao6md")
 edit_handler = NodePath("../EditHandler")
 level_settings = NodePath("../EditorUI/LevelSettings")
@@ -5395,7 +5395,7 @@ save_changes_before_opening_dialog = NodePath("../SaveChangesBeforeOpening")
 corrupted_level_dialog = NodePath("../CorruptedLevelAcceptDialog")
 level_already_exists_dialog = NodePath("../LevelAlreadyExists")
 
-[node name="AutosaveTimer" type="Timer" parent="MenuBarHandler"]
+[node name="AutosaveTimer" type="Timer" parent="LevelOperationsHandler"]
 one_shot = true
 
 [node name="OpenLevelDialog" type="FileDialog" parent="."]
@@ -5467,7 +5467,7 @@ ok_button_text = "Overwrite"
 dialog_text = "A level with the same name already exists in the game directory!"
 cancel_button_text = "Open Existing"
 
-[connection signal="index_pressed" from="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar/Level" to="MenuBarHandler" method="_on_level_index_pressed"]
+[connection signal="index_pressed" from="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar/Level" to="LevelOperationsHandler" method="_on_level_index_pressed"]
 [connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorViewport/Playtest" to="." method="_on_playtest_pressed"]
 [connection signal="ready" from="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place" to="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
 [connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsLeft/RotateLeft90" to="EditHandler" method="_on_rotate_left_90_pressed"]
@@ -5501,11 +5501,11 @@ cancel_button_text = "Open Existing"
 [connection signal="selection_changed" from="EditHandler" to="BaseDetailHandler" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_changed" from="EditHandler" to="TriggerUIHandler" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_zone_changed" from="EditHandler" to="EditHandler/SelectionZone/SelectionZoneDisplay" method="_on_edit_handler_selection_zone_changed"]
-[connection signal="level_loaded" from="MenuBarHandler" to="EditorUI/LevelSettings" method="_on_menu_bar_handler_level_loaded"]
-[connection signal="timeout" from="MenuBarHandler/AutosaveTimer" to="MenuBarHandler" method="_save_level"]
-[connection signal="file_selected" from="OpenLevelDialog" to="MenuBarHandler" method="_on_open_level_dialog_file_selected"]
-[connection signal="file_selected" from="ImportAndOpenLevelDialog" to="MenuBarHandler" method="_on_import_and_open_level_dialog_file_selected"]
-[connection signal="file_selected" from="SaveLevelAsDialog" to="MenuBarHandler" method="_on_save_level_as_dialog_file_selected"]
-[connection signal="file_selected" from="ExportLevelDialog" to="MenuBarHandler" method="_on_export_level_dialog_file_selected"]
-[connection signal="confirmed" from="SaveChangesBeforeOpening" to="MenuBarHandler" method="_on_save_changes_before_opening_confirmed"]
-[connection signal="custom_action" from="SaveChangesBeforeOpening" to="MenuBarHandler" method="_on_save_changes_before_opening_custom_action"]
+[connection signal="level_loaded" from="LevelOperationsHandler" to="EditorUI/LevelSettings" method="_on_menu_bar_handler_level_loaded"]
+[connection signal="timeout" from="LevelOperationsHandler/AutosaveTimer" to="LevelOperationsHandler" method="_save_level"]
+[connection signal="file_selected" from="OpenLevelDialog" to="LevelOperationsHandler" method="_on_open_level_dialog_file_selected"]
+[connection signal="file_selected" from="ImportAndOpenLevelDialog" to="LevelOperationsHandler" method="_on_import_and_open_level_dialog_file_selected"]
+[connection signal="file_selected" from="SaveLevelAsDialog" to="LevelOperationsHandler" method="_on_save_level_as_dialog_file_selected"]
+[connection signal="file_selected" from="ExportLevelDialog" to="LevelOperationsHandler" method="_on_export_level_dialog_file_selected"]
+[connection signal="confirmed" from="SaveChangesBeforeOpening" to="LevelOperationsHandler" method="_on_save_changes_before_opening_confirmed"]
+[connection signal="custom_action" from="SaveChangesBeforeOpening" to="LevelOperationsHandler" method="_on_save_changes_before_opening_custom_action"]

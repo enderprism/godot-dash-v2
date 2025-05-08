@@ -1,5 +1,5 @@
 extends Node
-class_name MenuBarHandler
+class_name LevelOperationsHandler
 
 signal level_loaded(level: LevelProps)
 
