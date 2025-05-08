@@ -4,6 +4,7 @@ class_name EditHandler
 signal selection_zone_changed(new_zone: Rect2)
 signal selection_changed(selection: Array[Node2D])
 signal clipboard_changed(clipboard: Array[Node2D])
+signal rotated_object_degrees(rotation_degrees: float)
 
 @export var editor_viewport: Control
 
@@ -46,6 +47,7 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed(&"editor_delete"):
 				selection.map(func(object): object.queue_free())
 				selection.clear()
+				rotated_object_degrees.emit(0.0) # Reset
 				_reset_selection_zone()
 				selection_changed.emit(selection)
 			if Input.is_action_just_pressed(&"editor_duplicate"):
@@ -68,9 +70,11 @@ func _physics_process(delta: float) -> void:
 			if not rotation_lock:
 				if Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45") and object_move_cooldown <= 0:
 					_rotate_selection(Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45") * 45.0)
+					rotated_object_degrees.emit(Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45") * 45.0)
 					object_move_cooldown = 0.2
 				if Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90") and object_move_cooldown <= 0:
 					_rotate_selection(Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90") * 90.0)
+					rotated_object_degrees.emit(Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90") * 90.0)
 					object_move_cooldown = 0.2
 			if Input.is_action_just_pressed(&"editor_flip_h"):
 				_flip_selection(Vector2.AXIS_X)
@@ -235,6 +239,7 @@ func clear_selection() -> void:
 	selection.map(remove_selection_highlight)
 	selection.clear()
 	_reset_selection_zone()
+	selection_changed.emit(selection)
 
 
 func select_all() -> void:

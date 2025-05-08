@@ -5532,6 +5532,7 @@ cancel_button_text = "Open Existing"
 [connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength" to="HSVHandler" method="_on_strength_value_changed"]
 [connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha" to="HSVHandler" method="_on_alpha_value_changed"]
 [connection signal="object_deleted" from="PlaceHandler" to="EditHandler" method="_on_place_handler_object_deleted"]
+[connection signal="rotated_object_degrees" from="EditHandler" to="PlaceHandler" method="_on_edit_handler_rotated_object_degrees"]
 [connection signal="selection_changed" from="EditHandler" to="SidePanelManager" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_changed" from="EditHandler" to="HSVHandler" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_changed" from="EditHandler" to="BaseDetailHandler" method="_on_edit_handler_selection_changed"]
