@@ -42,21 +42,19 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed(&"editor_single_selection_cycle"):
 				selection_index -= 1
 			if Input.is_action_just_pressed(&"editor_deselect"):
-				selection.map(remove_selection_highlight)
-				selection.clear()
-				_reset_selection_zone()
+				clear_selection()
 			if Input.is_action_just_pressed(&"editor_delete"):
 				selection.map(func(object): object.queue_free())
 				selection.clear()
 				_reset_selection_zone()
 				selection_changed.emit(selection)
 			if Input.is_action_just_pressed(&"editor_duplicate"):
-				_duplicate_selection()
+				duplicate_selection()
 				object_move_cooldown = 5
 			if Input.is_action_just_pressed(&"ui_copy"):
-				_copy_selection()
+				copy_selection()
 			if Input.is_action_just_pressed(&"ui_paste"):
-				_paste_selection()
+				paste_selection()
 				object_move_cooldown = 5
 			if Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down") and object_move_cooldown <= 0:
 				var move_vector: Vector2
@@ -194,7 +192,7 @@ func _clone(object: Node) -> Node:
 	return clone
 
 
-func _duplicate_selection() -> void:
+func duplicate_selection() -> void:
 	selection = Array(selection.map(_clone), TYPE_OBJECT, "Node2D", null)
 	for object in selection:
 		if object.has_node("HSVWatcher"):
@@ -203,14 +201,14 @@ func _duplicate_selection() -> void:
 	selection_changed.emit(selection)
 
 
-func _copy_selection() -> void:
+func copy_selection() -> void:
 	clipboard = selection.duplicate()
 	clipboard_camera_position = get_viewport().get_camera_2d().get_screen_center_position()
 	clipboard_changed.emit(clipboard)
 	Toasts.new_toast("Selection copied!")
 
 
-func _paste_selection() -> void:
+func paste_selection() -> void:
 	selection.map(remove_selection_highlight)
 	selection = clipboard.duplicate()
 	selection = Array(selection.map(_clone), TYPE_OBJECT, "Node2D", null)
@@ -231,6 +229,19 @@ func _rotate_selection(angle: float) -> void:
 		var position_delta := position_relative_to_pivot.rotated(deg_to_rad(angle)) - position_relative_to_pivot
 		object.global_position += position_delta
 	rotation_lock = false
+
+
+func clear_selection() -> void:
+	selection.map(remove_selection_highlight)
+	selection.clear()
+	_reset_selection_zone()
+
+
+func select_all() -> void:
+	clear_selection()
+	var only_node_2ds := func(object): return object is Node2D
+	selection.assign(level.get_children().duplicate().filter(only_node_2ds))
+	selection.map(add_selection_highlight)
 
 
 func _update_pivot() -> void:
@@ -263,7 +274,6 @@ func _flip_selection(axis: int):
 				var position_relative_to_pivot: Vector2 = object.global_position - selection_pivot
 				var y_delta := position_relative_to_pivot.y * -1 - position_relative_to_pivot.y
 				object.global_position.y += y_delta
-
 
 
 func _on_place_handler_object_deleted(object:Node) -> void:
