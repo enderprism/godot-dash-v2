@@ -15,14 +15,27 @@ signal level_loaded(level: LevelProps)
 
 @onready var editor := get_parent() as EditorScene
 
+var autosave_toast: Toast
+
 
 func _ready() -> void:
 	save_changes_before_opening_dialog.add_button("Don't Save", false, "dontsave")
 	save_as_dialog.root_subfolder = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	export_dialog.root_subfolder = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
-	var update_autosave_delay_and_restart := func():
-		$AutosaveTimer.start(Config.config.autosave_delay * 60.0)
-	$AutosaveTimer.timeout.connect(update_autosave_delay_and_restart)
+	$AutosaveTimer.timeout.connect(_save_level)
+
+
+func _process(_delta: float) -> void:
+	if is_zero_approx($AutosaveTimer.get_time_left()) and autosave_toast != null:
+		autosave_toast.dismiss()
+	if $AutosaveTimer.is_stopped():
+		return
+	elif $AutosaveTimer.get_time_left() < 5.0:
+		var autosave_message := "Autosaving in " + str(ceilf($AutosaveTimer.get_time_left())) + "s"
+		if autosave_toast == null:
+			autosave_toast = Toasts.new_toast(autosave_message, -1.0, Toasts.ToastOptions.PERSISTENT)
+		else:
+			autosave_toast.update_text(autosave_message)
 
 
 func _on_level_index_pressed(index:int) -> void:
@@ -80,6 +93,7 @@ func _open_level(path: String) -> void:
 	edit_handler.selection.clear()
 	level_loaded.emit(level)
 	Toasts.new_toast("Opened level " + path.get_file().get_basename())
+	$AutosaveTimer.start()
 
 
 func _import_level(path: String, keep_original: bool) -> void:
@@ -131,6 +145,8 @@ func _save_level() -> void:
 		LevelManager.editor_level_backup.pack(editor.level)
 		edit_handler.selection = selection_backup
 		edit_handler.selection.map(EditHandler.add_selection_highlight)
+	$AutosaveTimer.stop()
+	$AutosaveTimer.start(Config.config.autosave_delay * 60)
 	ResourceSaver.save(LevelManager.editor_level_backup, "user://created_levels/levels/" + file_name)
 	Toasts.new_toast("Saved level " + file_name.get_basename())
 
@@ -156,8 +172,6 @@ func _on_import_and_open_level_dialog_file_selected(path:String) -> void:
 
 func _on_save_level_as_dialog_file_selected(path:String) -> void:
 	editor.level.set_meta("packed_file_name", path.get_file())
-	$AutosaveTimer.stop()
-	$AutosaveTimer.start(Config.config.autosave_delay * 60)
 	_save_level()
 
 

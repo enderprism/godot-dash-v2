@@ -120,6 +120,7 @@ texture = ExtResource("9_s0yil")
 expand_mode = 1
 
 [node name="SettingsLayer" parent="." instance=ExtResource("8_63kaq")]
+layer = 103
 
 [connection signal="pressed" from="PauseMenu/VBoxContainer/PauseButtonsContainer/Restart" to="PauseMenu" method="_on_restart_pressed"]
 [connection signal="pressed" from="PauseMenu/VBoxContainer/PauseButtonsContainer/Continue" to="PauseMenu" method="_on_continue_pressed"]

@@ -1,19 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctc3ynyextvpj"]
+[gd_scene load_steps=6 format=3 uid="uid://ctc3ynyextvpj"]
 
-[ext_resource type="Material" uid="uid://dmfwkx1hhpd5x" path="res://resources/SimpleBlurMaterial.tres" id="1_4cufj"]
+[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_j3oen"]
 [ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="2_j3oen"]
+[ext_resource type="Script" uid="uid://da1d1gb14fxub" path="res://src/editor/Toast.gd" id="2_vg06y"]
 [ext_resource type="LabelSettings" uid="uid://cdbv8jpu4j57v" path="res://resources/Toast.tres" id="3_vg06y"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4cufj"]
+
 [node name="Toast" type="PanelContainer"]
-material = ExtResource("1_4cufj")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_j3oen")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_4cufj")
+script = ExtResource("2_vg06y")
+
+[node name="Dismiss" type="Button" parent="."]
+layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("2_j3oen")
 
 [node name="Label" type="Label" parent="MarginContainer"]
@@ -22,3 +32,9 @@ layout_mode = 2
 text = "Default Toast text"
 label_settings = ExtResource("3_vg06y")
 horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+ignore_time_scale = true
+
+[connection signal="pressed" from="Dismiss" to="." method="_on_dismiss_pressed"]

@@ -238,6 +238,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PauseMenuLayer" parent="." instance=ExtResource("9_vv033")]
+layer = 102
 visible = false
 
 [node name="FadeScreenLayer" parent="." instance=ExtResource("6_7ju4w")]
