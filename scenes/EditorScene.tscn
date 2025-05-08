@@ -1,4 +1,4 @@
-[gd_scene load_steps=218 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=220 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -11,7 +11,9 @@
 [ext_resource type="Script" uid="uid://doei3yc3rs41t" path="res://src/BouncyButton.gd" id="4_gl2yd"]
 [ext_resource type="Texture2D" uid="uid://buwtqcrkk8knn" path="res://assets/textures/solids/regular_blocks/RegularBlock01.svg" id="4_u8igg"]
 [ext_resource type="Texture2D" uid="uid://7qnm5gdpp818" path="res://assets/textures/guis/editor/block_palette/Hazards.svg" id="5_gyl57"]
+[ext_resource type="Script" uid="uid://dgml627pc73bt" path="res://src/editor/menu_bar/MenuBarEdit.gd" id="5_rke8t"]
 [ext_resource type="Texture2D" uid="uid://dwu7wyhadhlnu" path="res://assets/textures/solids/outline_blocks/OutlineBlock01.svg" id="6_2nlu4"]
+[ext_resource type="Script" uid="uid://d2n1k6h7xbso6" path="res://src/editor/menu_bar/MenuBarView.gd" id="6_5ik7l"]
 [ext_resource type="Texture2D" uid="uid://bdlj0vb8x71it" path="res://assets/textures/guis/editor/block_palette/Interactables.svg" id="6_gh5m2"]
 [ext_resource type="Script" uid="uid://4twseak4h1wb" path="res://src/MapCamera2D.gd" id="6_wcytj"]
 [ext_resource type="Script" uid="uid://dsgesrbkguesm" path="res://src/editor/BlockPaletteRef.gd" id="7_f0stj"]
@@ -416,7 +418,8 @@ item_6/separator = true
 item_7/text = "Level Settings"
 item_7/id = 0
 
-[node name="Edit" type="PopupMenu" parent="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar"]
+[node name="Edit" type="PopupMenu" parent="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar" node_paths=PackedStringArray("edit_handler")]
+size = Vector2i(110, 147)
 item_count = 6
 item_0/text = "Copy"
 item_0/id = 0
@@ -430,24 +433,24 @@ item_4/text = "Select All"
 item_4/id = 4
 item_5/text = "Deselect All"
 item_5/id = 5
+script = ExtResource("5_rke8t")
+edit_handler = NodePath("../../../../../../EditHandler")
 
-[node name="View" type="PopupMenu" parent="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar"]
-hide_on_checkable_item_selection = false
-item_count = 1
-item_0/text = "Panel Visibility"
-item_0/id = 0
-
-[node name="PanelVisibility" type="PopupMenu" parent="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar/View"]
+[node name="View" type="PopupMenu" parent="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar" node_paths=PackedStringArray("side_panel", "bottom_panel")]
+size = Vector2i(133, 100)
 hide_on_checkable_item_selection = false
 item_count = 2
-item_0/text = "Bottom Panel"
+item_0/text = "Side Panel"
 item_0/checkable = 1
 item_0/checked = true
 item_0/id = 0
-item_1/text = "Side Panel"
+item_1/text = "Bottom Panel"
 item_1/checkable = 1
 item_1/checked = true
 item_1/id = 1
+script = ExtResource("6_5ik7l")
+side_panel = NodePath("../../../../SidePanel")
+bottom_panel = NodePath("../../../VSplitContainer/EditorModes")
 
 [node name="Help" type="PopupMenu" parent="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar"]
 item_count = 1
@@ -5468,6 +5471,8 @@ dialog_text = "A level with the same name already exists in the game directory!"
 cancel_button_text = "Open Existing"
 
 [connection signal="index_pressed" from="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar/Level" to="LevelOperationsHandler" method="_on_level_index_pressed"]
+[connection signal="index_pressed" from="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar/Edit" to="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar/Edit" method="_on_index_pressed"]
+[connection signal="index_pressed" from="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar/View" to="EditorUI/EditorContainer/VBoxContainer/MenuBarContainer/MenuBar/View" method="_on_index_pressed"]
 [connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorViewport/Playtest" to="." method="_on_playtest_pressed"]
 [connection signal="ready" from="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place" to="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/BlockPaletteIcons" method="_on_tab_container_ready"]
 [connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsLeft/RotateLeft90" to="EditHandler" method="_on_rotate_left_90_pressed"]
