@@ -22,11 +22,10 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_r47on")
-current_tab = 1
+current_tab = 0
 script = ExtResource("3_rvg0e")
 
 [node name="Graphics" type="ScrollContainer" parent="."]
-visible = false
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
@@ -69,6 +68,17 @@ text = "Max FPS"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_r47on")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
 layout_mode = 2
 theme = ExtResource("1_r47on")
@@ -91,6 +101,7 @@ allow_greater = true
 suffix = "fps"
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -125,6 +136,7 @@ max_value = 1.0
 allow_greater = true
 suffix = "fps"
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -154,6 +166,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
 visible = false
@@ -198,6 +211,17 @@ text = "VSync"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_r47on")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
 visible = false
 layout_mode = 2
@@ -220,6 +244,7 @@ allow_greater = true
 suffix = "fps"
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -254,6 +279,7 @@ max_value = 1.0
 allow_greater = true
 suffix = "fps"
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -283,6 +309,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
 visible = false
@@ -339,6 +366,17 @@ text = "Window Mode"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_r47on")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
 visible = false
 layout_mode = 2
@@ -355,6 +393,7 @@ alignment = 1
 script = ExtResource("8_7bjej")
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -383,6 +422,7 @@ script = ExtResource("9_06nbq")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -408,6 +448,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
 visible = false
@@ -437,6 +478,7 @@ script = ExtResource("6_p6jor")
 config_property = &"window_mode"
 
 [node name="Audio" type="ScrollContainer" parent="."]
+visible = false
 layout_mode = 2
 focus_mode = 1
 metadata/_tab_index = 1
@@ -476,6 +518,17 @@ text = "Master"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_r47on")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
 visible = false
 layout_mode = 2
@@ -490,6 +543,7 @@ theme = ExtResource("1_r47on")
 alignment = 1
 script = ExtResource("8_7bjej")
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/Volume/Master/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(256, 0)
@@ -520,6 +574,7 @@ script = ExtResource("9_06nbq")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Master/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -545,6 +600,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
 visible = false
@@ -584,6 +640,17 @@ text = "Music"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_r47on")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
 visible = false
 layout_mode = 2
@@ -598,6 +665,7 @@ theme = ExtResource("1_r47on")
 alignment = 1
 script = ExtResource("8_7bjej")
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/Volume/Music/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(256, 0)
@@ -628,6 +696,7 @@ script = ExtResource("9_06nbq")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Music/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -653,6 +722,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
 visible = false
@@ -692,6 +762,17 @@ text = "Game SFX"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_r47on")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
 visible = false
 layout_mode = 2
@@ -706,6 +787,7 @@ theme = ExtResource("1_r47on")
 alignment = 1
 script = ExtResource("8_7bjej")
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(256, 0)
@@ -736,6 +818,7 @@ script = ExtResource("9_06nbq")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -761,6 +844,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
 visible = false
@@ -800,6 +884,17 @@ text = "Level SFX"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_r47on")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
 visible = false
 layout_mode = 2
@@ -814,6 +909,7 @@ theme = ExtResource("1_r47on")
 alignment = 1
 script = ExtResource("8_7bjej")
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(256, 0)
@@ -844,6 +940,7 @@ script = ExtResource("9_06nbq")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -869,6 +966,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
 visible = false
@@ -907,6 +1005,17 @@ text = "Mute game on unfocus"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_r47on")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
 visible = false
 layout_mode = 2
@@ -923,6 +1032,7 @@ alignment = 1
 script = ExtResource("8_7bjej")
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -951,6 +1061,7 @@ script = ExtResource("9_06nbq")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -976,6 +1087,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
 visible = false
@@ -1046,6 +1158,17 @@ text = "Color"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_r47on")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
 visible = false
 layout_mode = 2
@@ -1062,6 +1185,7 @@ alignment = 1
 script = ExtResource("8_7bjej")
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -1090,6 +1214,7 @@ script = ExtResource("9_06nbq")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -1115,6 +1240,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
 custom_minimum_size = Vector2(100, 0)
@@ -1153,6 +1279,17 @@ text = "Alpha"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_r47on")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
 layout_mode = 2
 theme = ExtResource("1_r47on")
@@ -1169,6 +1306,7 @@ alignment = 1
 script = ExtResource("8_7bjej")
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -1197,6 +1335,7 @@ script = ExtResource("9_06nbq")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -1222,6 +1361,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
 visible = false
@@ -1266,6 +1406,17 @@ text = "Color"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_r47on")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
 visible = false
 layout_mode = 2
@@ -1282,6 +1433,7 @@ alignment = 1
 script = ExtResource("8_7bjej")
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -1310,6 +1462,7 @@ script = ExtResource("9_06nbq")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -1335,6 +1488,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
 custom_minimum_size = Vector2(100, 0)
@@ -1373,6 +1527,17 @@ text = "Alpha"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FILE" type="MenuButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_r47on")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
+
 [node name="FLOAT" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
 layout_mode = 2
 theme = ExtResource("1_r47on")
@@ -1389,6 +1554,7 @@ alignment = 1
 script = ExtResource("8_7bjej")
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -1417,6 +1583,7 @@ script = ExtResource("9_06nbq")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -1442,6 +1609,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
 visible = false
@@ -1474,7 +1642,7 @@ metadata/_custom_type_script = "uid://cuih47milvqcs"
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 tooltip_text = "Delay in minutes after which the level will be automatically saved.
-The autosave timer will not start for level that were never saved."
+The autosave timer will not start for levels that were never saved."
 script = ExtResource("11_06nbq")
 or_greater = true
 suffix = "min"
@@ -1489,6 +1657,17 @@ text = "Autosave Delay"
 [node name="Spacer" type="Control" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="FILE" type="MenuButton" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_r47on")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1
 
 [node name="FLOAT" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
 layout_mode = 2
@@ -1510,6 +1689,7 @@ allow_greater = true
 suffix = "min"
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -1543,6 +1723,7 @@ max_value = 1.0
 allow_greater = true
 suffix = "min"
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -1572,6 +1753,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
 visible = false

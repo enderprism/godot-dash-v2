@@ -4171,6 +4171,7 @@ alignment = 1
 script = ExtResource("147_pcjvf")
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -4198,6 +4199,7 @@ script = ExtResource("148_tl5y0")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -4223,6 +4225,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("147_1ad2k")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage"]
 visible = false
@@ -4283,6 +4286,7 @@ alignment = 1
 script = ExtResource("147_pcjvf")
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -4310,6 +4314,7 @@ script = ExtResource("148_tl5y0")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -4335,6 +4340,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("147_1ad2k")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"]
 visible = false
@@ -4395,6 +4401,7 @@ alignment = 1
 script = ExtResource("147_pcjvf")
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -4422,6 +4429,7 @@ script = ExtResource("148_tl5y0")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -4447,6 +4455,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("147_1ad2k")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered"]
 visible = false
@@ -4524,6 +4533,7 @@ alignment = 1
 script = ExtResource("147_pcjvf")
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -4552,6 +4562,7 @@ script = ExtResource("148_tl5y0")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -4576,6 +4587,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("147_1ad2k")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color"]
 visible = false
@@ -4638,6 +4650,7 @@ alignment = 1
 script = ExtResource("147_pcjvf")
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -4666,6 +4679,7 @@ script = ExtResource("148_tl5y0")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -4690,6 +4704,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("147_1ad2k")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color"]
 visible = false
@@ -4757,6 +4772,7 @@ script = ExtResource("147_pcjvf")
 min_value = -1.0
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -4788,6 +4804,7 @@ step = 0.05
 min_value = -1.0
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -4815,6 +4832,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("147_1ad2k")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue"]
 visible = false
@@ -4876,6 +4894,7 @@ script = ExtResource("147_pcjvf")
 min_value = -1.0
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -4907,6 +4926,7 @@ step = 0.05
 min_value = -1.0
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -4934,6 +4954,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("147_1ad2k")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation"]
 visible = false
@@ -4995,6 +5016,7 @@ script = ExtResource("147_pcjvf")
 min_value = -1.0
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -5026,6 +5048,7 @@ step = 0.05
 min_value = -1.0
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -5053,6 +5076,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("147_1ad2k")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value"]
 visible = false
@@ -5114,6 +5138,7 @@ script = ExtResource("147_pcjvf")
 allow_greater = true
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -5145,6 +5170,7 @@ step = 0.05
 max_value = 1.0
 allow_greater = true
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -5172,6 +5198,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("147_1ad2k")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength"]
 visible = false
@@ -5230,6 +5257,7 @@ alignment = 1
 script = ExtResource("147_pcjvf")
 select_all_on_focus = true
 slider_width = 100.0
+expand_to_text_length = true
 
 [node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha/FLOAT_SLIDER"]
 custom_minimum_size = Vector2(100, 0)
@@ -5258,6 +5286,7 @@ script = ExtResource("148_tl5y0")
 step = 0.05
 max_value = 1.0
 select_all_on_focus = true
+expand_to_text_length = true
 
 [node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha/VECTOR2"]
 custom_minimum_size = Vector2(128, 0)
@@ -5283,6 +5312,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("147_1ad2k")
+expand_to_text_length = true
 
 [node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha"]
 visible = false
@@ -5329,10 +5359,11 @@ debug_color = Color(0.678125, 0.7, 0, 0.42)
 
 [node name="FadeScreenLayer" parent="." instance=ExtResource("26_j5fve")]
 
-[node name="PlaceHandler" type="Node" parent="." node_paths=PackedStringArray("game_scene", "editor_viewport")]
+[node name="PlaceHandler" type="Node" parent="." node_paths=PackedStringArray("game_scene", "editor_viewport", "edit_handler")]
 script = ExtResource("33_uwrsc")
 game_scene = NodePath("../GameScene")
 editor_viewport = NodePath("../EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorViewport")
+edit_handler = NodePath("../EditHandler")
 
 [node name="EditHandler" type="Node" parent="." node_paths=PackedStringArray("editor_viewport")]
 script = ExtResource("34_7dx3o")
