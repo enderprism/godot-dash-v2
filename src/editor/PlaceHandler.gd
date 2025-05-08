@@ -4,6 +4,7 @@ signal object_deleted(object: Node)
 
 @export var game_scene: Node2D
 @export var editor_viewport: Control
+@export var edit_handler: EditHandler
 
 func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collider: Area2D, level: LevelProps) -> void:
 	if get_viewport().gui_get_hovered_control() == editor_viewport:
@@ -15,7 +16,7 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 		if block_palette_ref != null and not texture_variation_overlapping(placed_objects_collider, block_palette_ref.type, block_palette_ref.id) \
 				and Input.is_action_pressed(&"editor_add"):
 			if pressed_button != null:
-				print(level.version_history.get_current_action())
+				edit_handler.clear_selection()
 				var object: Node2D
 				if block_palette_ref.type == EditorSelectionCollider.Type.TRIGGER:
 					object = block_palette_ref.trigger_script.new()
@@ -52,6 +53,10 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 				level.version_history.add_do_reference(object)
 				level.version_history.add_undo_method(remove_object.bind(object))
 				level.version_history.commit_action()
+				edit_handler.selection.append(object)
+				edit_handler.selection.map(EditHandler.add_selection_highlight)
+				edit_handler.selection_changed.emit()
+				edit_handler._reset_selection_pivot([])
 		# Handle object deletion
 		elif Input.is_action_pressed(&"editor_remove") and placed_objects_collider.has_overlapping_areas():
 			if len(placed_objects_collider.get_overlapping_areas()) > 0 and placed_objects_collider.get_overlapping_areas()[-1].get_parent() is not LevelProps:
