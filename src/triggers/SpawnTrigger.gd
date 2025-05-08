@@ -33,6 +33,9 @@ var _duration: float
 
 func _ready() -> void:
 	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK | TriggerSetup.ADD_EASING)
+	var skip_deleted := func(group):
+		return not get_node(group.path).is_in_group("deleted")
+	spawned_groups = spawned_groups.filter(skip_deleted)
 	for group in spawned_groups:
 		if group.time > _duration:
 			_duration = group.time
