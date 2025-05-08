@@ -202,7 +202,6 @@ func get_value(value_type: Type = type) -> Variant:
 		Type.NODE2D:
 			return gui_inputs[Type.NODE2D].get_text()
 		Type.FILE:
-			print_debug(gui_inputs[Type.FILE].get_meta("file_path", ""))
 			return gui_inputs[Type.FILE].get_meta("file_path", "")
 		_:
 			return null

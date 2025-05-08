@@ -22,7 +22,6 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 	spawn_triggered.value_changed.connect(_on_spawn_triggered_value_changed.bind(trigger_bases))
 	touch_triggered.value_changed.connect(_on_touch_triggered_value_changed.bind(trigger_bases))
 	if not is_selection_same_trigger_type(selection):
-		print_debug(selection)
 		return
 	var trigger_bases_typed: Array[TriggerBase]
 	trigger_bases_typed.assign(trigger_bases)
