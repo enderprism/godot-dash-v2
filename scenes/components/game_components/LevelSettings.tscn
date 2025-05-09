@@ -9,8 +9,8 @@
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="6_ikfu3"]
 [ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="7_2dtee"]
 [ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="8_bmwhr"]
-[ext_resource type="Script" uid="uid://ckqgnvpbftev7" path="res://src/gui/PropertySaveLoad.gd" id="10_2dtee"]
-[ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/gui/PropertyWatcher.gd" id="11_bmwhr"]
+[ext_resource type="Script" uid="uid://ckqgnvpbftev7" path="res://src/gui/properties/components/PropertySaveLoad.gd" id="10_2dtee"]
+[ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/gui/properties/components/PropertyWatcher.gd" id="11_bmwhr"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_bmwhr"]
 color = Color(1, 1, 1, 0.5)

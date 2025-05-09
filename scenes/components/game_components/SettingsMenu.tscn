@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://86h6yxdj6auo" path="res://src/SettingsMenu.gd" id="3_rvg0e"]
 [ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="4_fiwkk"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="6_ea76q"]
-[ext_resource type="Script" uid="uid://ckqgnvpbftev7" path="res://src/gui/PropertySaveLoad.gd" id="6_p6jor"]
+[ext_resource type="Script" uid="uid://ckqgnvpbftev7" path="res://src/gui/properties/components/PropertySaveLoad.gd" id="6_p6jor"]
 [ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="8_7bjej"]
 [ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="8_eb8rq"]
 [ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="9_06nbq"]
