@@ -42,12 +42,12 @@ func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 	var objects_with_hsv_watcher: Array[Node2D] = selection.filter(func(object): return object.has_node("HSVWatcher"))
 	if objects_with_hsv_watcher.is_empty():
 		for property in [hue, saturation, value]:
-			property.set_value(0.0, Property.Type.FLOAT)
-		strength.set_value(1.0, Property.Type.FLOAT)
-		alpha.set_value(1.0, Property.Type.FLOAT)
+			property.set_value(0.0)
+		strength.set_value(1.0)
+		alpha.set_value(1.0)
 	else:
-		hue.set_value(objects_with_hsv_watcher[-1].get_node("HSVWatcher").hsv_shift[0], Property.Type.FLOAT)
-		saturation.set_value(objects_with_hsv_watcher[-1].get_node("HSVWatcher").hsv_shift[1], Property.Type.FLOAT)
-		value.set_value(objects_with_hsv_watcher[-1].get_node("HSVWatcher").hsv_shift[2], Property.Type.FLOAT)
-		strength.set_value(objects_with_hsv_watcher[-1].get_node("HSVWatcher").strength, Property.Type.FLOAT)
-		alpha.set_value(objects_with_hsv_watcher[-1].get_node("HSVWatcher").alpha, Property.Type.FLOAT)
+		hue.set_value(objects_with_hsv_watcher[-1].get_node("HSVWatcher").hsv_shift[0])
+		saturation.set_value(objects_with_hsv_watcher[-1].get_node("HSVWatcher").hsv_shift[1])
+		value.set_value(objects_with_hsv_watcher[-1].get_node("HSVWatcher").hsv_shift[2])
+		strength.set_value(objects_with_hsv_watcher[-1].get_node("HSVWatcher").strength)
+		alpha.set_value(objects_with_hsv_watcher[-1].get_node("HSVWatcher").alpha)

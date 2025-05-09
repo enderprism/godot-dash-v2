@@ -11,9 +11,9 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 		return
 	var trigger_bases: Array = selection.map(func(object): return object.get_node("TriggerBase") as TriggerBase)
 	var trigger_base := trigger_bases[0] as TriggerBase
-	single_usage.set_value(trigger_base.single_usage, Property.Type.BOOL)
-	spawn_triggered.set_value(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.DISABLED, Property.Type.BOOL)
-	touch_triggered.set_value(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.SQUARE, Property.Type.BOOL)
+	single_usage.set_value(trigger_base.single_usage)
+	spawn_triggered.set_value(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.DISABLED)
+	touch_triggered.set_value(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.SQUARE)
 	spawn_triggered.set_input_state(trigger_base._hitbox_shape != TriggerBase.TriggerHitboxShape.SQUARE)
 	touch_triggered.set_input_state(trigger_base._hitbox_shape != TriggerBase.TriggerHitboxShape.DISABLED)
 	for property in [single_usage, spawn_triggered, touch_triggered]:

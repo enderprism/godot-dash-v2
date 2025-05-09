@@ -20,7 +20,7 @@ func _on_base_color_value_changed(value:Variant) -> void:
 	var base_channel := value as String
 	var existing_color_channels := LevelManager.editor_edited_level.color_channels.map(func(channel): return channel.associated_group.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX))
 	if not base_channel in existing_color_channels:
-		base.set_value("", Property.Type.STRING)
+		base.set_value("")
 		return
 	var objects_base: Array
 	for object in $"../EditHandler".selection:
@@ -39,7 +39,7 @@ func _on_detail_color_value_changed(value:Variant) -> void:
 	var detail_channel := value as String
 	var existing_color_channels := LevelManager.editor_edited_level.color_channels.map(func(channel): return channel.associated_group.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX))
 	if not detail_channel in existing_color_channels:
-		detail.set_value("", Property.Type.STRING)
+		detail.set_value("")
 		return
 	var objects_detail: Array = (
 		$"../EditHandler".selection
@@ -72,9 +72,9 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 		base_channel = base_channel_array[0]
 	base_channel = base_channel.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX)
 	if base_channel != null or base_channel != "":
-		base.set_value(base_channel, Property.Type.STRING)
+		base.set_value(base_channel)
 	else:
-		base.set_value("", Property.Type.STRING)
+		base.set_value("")
 	# Detail
 	var objects_detail: Array = (
 		$"../EditHandler".selection
@@ -89,9 +89,9 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 		detail_channel = detail_channel_array[0]
 	detail_channel = detail_channel.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX)
 	if detail_channel != null or base_channel != "":
-		detail.set_value(detail_channel, Property.Type.STRING)
+		detail.set_value(detail_channel)
 	else:
-		detail.set_value("", Property.Type.STRING)
+		detail.set_value("")
 
 
 func _reset_color(object: Node) -> void:

@@ -44,14 +44,14 @@ func _show_properties() -> void:
 	if button_group.get_pressed_button() == null:
 		return
 	var channel_item := button_group.get_pressed_button().get_parent() as ColorChannelItem
-	%"Copy channel".set_value(channel_item.data.copy, Property.Type.BOOL)
-	%Channel.set_value(channel_item.data.copied_channel, Property.Type.ENUM)
-	%Color.set_value(channel_item.data.color, Property.Type.COLOR)
-	%Hue.set_value(channel_item.data.hsv_shift[0], Property.Type.FLOAT)
-	%Saturation.set_value(channel_item.data.hsv_shift[1], Property.Type.FLOAT)
-	%Value.set_value(channel_item.data.hsv_shift[2], Property.Type.FLOAT)
-	%Strength.set_value(channel_item.data.strength, Property.Type.FLOAT)
-	%Alpha.set_value(channel_item.data.strength, Property.Type.FLOAT)
+	%"Copy channel".set_value(channel_item.data.copy)
+	%Channel.set_value(channel_item.data.copied_channel)
+	%Color.set_value(channel_item.data.color)
+	%Hue.set_value(channel_item.data.hsv_shift[0])
+	%Saturation.set_value(channel_item.data.hsv_shift[1])
+	%Value.set_value(channel_item.data.hsv_shift[2])
+	%Strength.set_value(channel_item.data.strength)
+	%Alpha.set_value(channel_item.data.strength)
 	%Channel.visible = channel_item.data.copy
 	%Color.visible = not channel_item.data.copy
 
