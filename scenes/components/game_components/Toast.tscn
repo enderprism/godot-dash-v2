@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctc3ynyextvpj"]
+[gd_scene load_steps=7 format=3 uid="uid://ctc3ynyextvpj"]
 
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_j3oen"]
 [ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="2_j3oen"]
 [ext_resource type="Script" uid="uid://da1d1gb14fxub" path="res://src/editor/Toast.gd" id="2_vg06y"]
+[ext_resource type="Material" uid="uid://dmfwkx1hhpd5x" path="res://resources/SimpleBlurMaterial.tres" id="3_td1kt"]
 [ext_resource type="LabelSettings" uid="uid://cdbv8jpu4j57v" path="res://resources/Toast.tres" id="3_vg06y"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4cufj"]
@@ -19,6 +20,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_4cufj")
 script = ExtResource("2_vg06y")
 
 [node name="Dismiss" type="Button" parent="."]
+material = ExtResource("3_td1kt")
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
