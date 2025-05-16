@@ -26,14 +26,10 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if is_zero_approx($AutosaveTimer.get_time_left()) and autosave_toast != null:
-		autosave_toast.dismiss()
-	if $AutosaveTimer.is_stopped():
-		return
-	elif $AutosaveTimer.get_time_left() < 5.0:
+	if $AutosaveTimer.get_time_left() < 5.0 and not $AutosaveTimer.is_stopped():
 		var autosave_message := "Autosaving in " + str(ceilf($AutosaveTimer.get_time_left())) + "s"
 		if autosave_toast == null:
-			autosave_toast = Toasts.new_toast(autosave_message, -1.0, Toasts.ToastOptions.PERSISTENT)
+			autosave_toast = Toasts.new_toast(autosave_message, $AutosaveTimer.get_time_left())
 		else:
 			autosave_toast.update_text(autosave_message)
 
@@ -93,7 +89,8 @@ func _open_level(path: String) -> void:
 	edit_handler.selection.clear()
 	level_loaded.emit(level)
 	Toasts.new_toast("Opened level " + path.get_file().get_basename())
-	$AutosaveTimer.start()
+	$AutosaveTimer.stop()
+	$AutosaveTimer.start(Config.config.autosave_delay * 60)
 
 
 func _import_level(path: String, keep_original: bool) -> void:
