@@ -1,5 +1,5 @@
 @tool
-extends HBoxContainer
+extends BoxContainer
 class_name Property
 
 signal value_changed(value: Variant)
@@ -159,9 +159,8 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 
-func set_value(new_value: Variant, value_type: Type = type) -> void:
-	# TODO add error handling when type of new_value and the value type don't match and result in invalid assignments
-	match value_type:
+func set_value(new_value: Variant) -> void:
+	match type:
 		Type.FLOAT:
 			gui_inputs[Type.FLOAT].set_value_no_signal(new_value)
 		Type.FLOAT_SLIDER:
@@ -217,7 +216,7 @@ func set_input_state(enabled: bool) -> void:
 
 
 func reset() -> void:
-	set_value(get(DEFAULT_VALUE_TYPES[type]), type)
+	set_value(get(DEFAULT_VALUE_TYPES[type]))
 
 
 func update_internals() -> void:
