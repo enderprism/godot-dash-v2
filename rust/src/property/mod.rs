@@ -1,4 +1,5 @@
 pub mod bool;
+pub mod color;
 pub mod float;
 pub mod string;
 
