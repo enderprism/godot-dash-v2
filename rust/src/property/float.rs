@@ -20,9 +20,9 @@ struct FloatProperty {
     #[export]
     rounded: bool,
     #[export]
-    allow_greater: bool,
-    #[export]
     allow_lesser: bool,
+    #[export]
+    allow_greater: bool,
     #[export]
     prefix: GString,
     #[export]

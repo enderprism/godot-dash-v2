@@ -65,6 +65,19 @@ select_all_on_focus = true
 slider_width = 100.0
 expand_to_text_length = true
 
+[node name="HSlider" type="HSlider" parent="Property/FLOAT_SLIDER"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.05
+
+[node name="SpinBox" type="SpinBox" parent="Property/FLOAT_SLIDER"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
 [node name="BOOL" type="CheckBox" parent="Property"]
 visible = false
 layout_mode = 2
@@ -80,6 +93,24 @@ step = 0.05
 max_value = 1.0
 select_all_on_focus = true
 expand_to_text_length = true
+
+[node name="SpinBoxX" type="SpinBox" parent="Property/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "x:"
+select_all_on_focus = true
+
+[node name="SpinBoxY" type="SpinBox" parent="Property/VECTOR2"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+alignment = 3
+prefix = "y:"
+select_all_on_focus = true
 
 [node name="STRING" type="LineEdit" parent="Property"]
 visible = false
