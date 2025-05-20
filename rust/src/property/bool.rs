@@ -58,6 +58,8 @@ impl Property<bool> for BoolProperty {
         self.input.set_pressed_no_signal(self.default);
     }
     fn refresh(&mut self) {
+        self.base_mut()
+            .set_custom_minimum_size(Vector2::new(0.0, 32.0));
         // Label
         let text = self.base().get_name();
         self.label.set_text(text.arg());
