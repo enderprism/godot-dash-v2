@@ -1,0 +1,117 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm6hduf8mgx3f"]
+
+[ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="1_5mij2"]
+[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="2_g4w72"]
+[ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="3_350y5"]
+[ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="4_1pvt7"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.298039, 0.298039, 0.298039, 1)
+
+[node name="Property" type="BoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -16.0
+offset_right = 81.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5mij2")
+metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Property"]
+layout_mode = 2
+text = "Property"
+
+[node name="Spacer" type="Control" parent="Property"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FLOAT" type="SpinBox" parent="Property"]
+layout_mode = 2
+theme = ExtResource("2_g4w72")
+max_value = 1.0
+step = 0.05
+select_all_on_focus = true
+
+[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Property"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_g4w72")
+alignment = 1
+script = ExtResource("3_350y5")
+select_all_on_focus = true
+slider_width = 100.0
+expand_to_text_length = true
+
+[node name="BOOL" type="CheckBox" parent="Property"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_g4w72")
+
+[node name="VECTOR2" type="BoxContainer" parent="Property"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_g4w72")
+vertical = true
+script = ExtResource("4_1pvt7")
+step = 0.05
+max_value = 1.0
+select_all_on_focus = true
+expand_to_text_length = true
+
+[node name="STRING" type="LineEdit" parent="Property"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("2_g4w72")
+expand_to_text_length = true
+
+[node name="COLOR" type="ColorPickerButton" parent="Property"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2_g4w72")
+
+[node name="ENUM" type="OptionButton" parent="Property"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_g4w72")
+
+[node name="NODE2D" type="Button" parent="Property"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_g4w72")
+
+[node name="FILE" type="MenuButton" parent="Property"]
+visible = false
+layout_mode = 2
+theme = ExtResource("2_g4w72")
+flat = false
+item_count = 2
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Import and load"
+popup/item_1/id = 1

@@ -1,0 +1,10 @@
+[package]
+name = "godot-dash-v2"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"] # Compile this crate to a dynamic C library.
+
+[dependencies]
+godot = { git = "https://github.com/godot-rust/gdext", branch = "master" }
