@@ -29,8 +29,10 @@ struct FloatProperty {
     suffix: GString,
 
     // Members
-    label: Option<Gd<Label>>,
-    input: Option<Gd<SpinBox>>,
+    #[init(val = OnReady::manual())]
+    label: OnReady<Gd<Label>>,
+    #[init(val = OnReady::manual())]
+    input: OnReady<Gd<SpinBox>>,
     base: Base<HBoxContainer>,
 }
 
@@ -46,8 +48,8 @@ impl IHBoxContainer for FloatProperty {
         self.base_mut().add_child(&label.clone().upcast::<Node>());
         self.base_mut().add_child(&spacer.upcast::<Node>());
         self.base_mut().add_child(&input.clone().upcast::<Node>());
-        self.label = Some(label);
-        self.input = Some(input);
+        self.label.init(label);
+        self.input.init(input);
         self.signals().renamed().connect_self(Self::refresh);
     }
 }
@@ -55,41 +57,23 @@ impl IHBoxContainer for FloatProperty {
 expose_property!(FloatProperty, f64);
 impl Property<f64> for FloatProperty {
     fn set_value(&mut self, value: f64) {
-        match &mut self.input {
-            Some(input) => input.set_value_no_signal(value),
-            None => godot_error!("Input field is not initalized"),
-        }
+        self.input.set_value_no_signal(value);
         self.signals().value_changed().emit(value);
     }
     fn get_value(&self) -> f64 {
-        match &self.input {
-            Some(input) => input.get_value(),
-            None => {
-                godot_error!("Input field is not initalized");
-                f64::NAN // Result<T, E> doesn't exist in GDScript
-            }
-        }
+        self.input.get_value()
     }
     fn reset(&mut self) {
-        match &mut self.input {
-            Some(input) => input.set_value_no_signal(self.default),
-            None => godot_error!("Input field is not initalized"),
-        }
+        self.input.set_value_no_signal(self.default);
     }
     fn refresh(&mut self) {
         let text = self.base().get_name();
-        match &mut self.label {
-            Some(label) => label.set_text(text.arg()),
-            None => godot_error!("Label is not initialized"),
-        }
+        self.label.set_text(text.arg());
         if Engine::singleton().is_editor_hint() {
             self.reset();
         }
     }
     fn set_input_state(&mut self, enabled: bool) {
-        match &mut self.input {
-            Some(input) => input.set_editable(enabled),
-            None => godot_error!("Input field is not initalized"),
-        }
+        self.input.set_editable(enabled);
     }
 }
