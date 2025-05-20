@@ -1,3 +1,4 @@
+pub mod bool;
 pub mod float;
 
 trait Property<T> {
