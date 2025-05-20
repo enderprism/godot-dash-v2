@@ -20,9 +20,9 @@ struct FloatProperty {
     #[export]
     rounded: bool,
     #[export]
-    or_greater: bool,
+    allow_greater: bool,
     #[export]
-    or_less: bool,
+    allow_lesser: bool,
     #[export]
     prefix: GString,
     #[export]
@@ -51,6 +51,7 @@ impl IHBoxContainer for FloatProperty {
         self.label.init(label);
         self.input.init(input);
         self.signals().renamed().connect_self(Self::refresh);
+        self.refresh();
     }
 }
 
@@ -67,8 +68,20 @@ impl Property<f64> for FloatProperty {
         self.input.set_value_no_signal(self.default);
     }
     fn refresh(&mut self) {
+        // Label
         let text = self.base().get_name();
         self.label.set_text(text.arg());
+        // Input
+        self.input.set_min(self.min);
+        self.input.set_max(self.max);
+        self.input.set_step(self.step);
+        self.input.set_use_rounded_values(self.rounded);
+        self.input.set_allow_greater(self.allow_greater);
+        self.input.set_allow_lesser(self.allow_lesser);
+        self.input.set_prefix(&self.prefix);
+        self.input.set_suffix(&self.suffix);
+        self.input.set_select_all_on_focus(true);
+        // Editor refresh
         if Engine::singleton().is_editor_hint() {
             self.reset();
         }
