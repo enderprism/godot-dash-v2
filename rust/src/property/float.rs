@@ -41,10 +41,16 @@ impl IHBoxContainer for FloatProperty {
     fn ready(&mut self) {
         let mut label = Label::new_alloc();
         let mut spacer = Control::new_alloc();
-        let input = SpinBox::new_alloc();
+        let mut input = SpinBox::new_alloc();
         let text = self.base().get_name();
         label.set_text(text.arg());
         spacer.set_h_size_flags(SizeFlags::EXPAND);
+        input
+            .signals()
+            .value_changed()
+            .connect_obj(&self.to_gd(), |s: &mut Self, new_value| {
+                s.signals().value_changed().emit(new_value);
+            });
         self.base_mut().add_child(&label.clone().upcast::<Node>());
         self.base_mut().add_child(&spacer.upcast::<Node>());
         self.base_mut().add_child(&input.clone().upcast::<Node>());
