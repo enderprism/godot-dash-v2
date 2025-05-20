@@ -1,5 +1,6 @@
 pub mod bool;
 pub mod float;
+pub mod string;
 
 trait Property<T> {
     fn set_value(&mut self, value: T);
