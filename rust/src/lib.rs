@@ -1,5 +1,5 @@
 use godot::prelude::*;
-mod property;
+mod gui;
 
 struct MyExtension;
 
