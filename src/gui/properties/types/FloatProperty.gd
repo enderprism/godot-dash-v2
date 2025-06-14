@@ -42,7 +42,7 @@ func get_value() -> float:
 	return input.get_value()
 
 func reset() -> void:
-	input.set_value_no_signal(default)
+	set_value(default)
 
 func refresh() -> void:
 	label.text = name

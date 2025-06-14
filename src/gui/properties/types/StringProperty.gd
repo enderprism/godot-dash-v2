@@ -36,7 +36,7 @@ func get_value() -> String:
 	return input.get_text()
 
 func reset() -> void:
-	input.set_value_no_signal(default)
+	set_value(default)
 
 func refresh() -> void:
 	label.text = name
