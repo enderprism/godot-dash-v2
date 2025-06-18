@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://p05aiexxfmbc"]
 
 [ext_resource type="PackedScene" uid="uid://dibiibymus6dt" path="res://scenes/components/game_components/trigger_ui/trigger_components/TriggerBaseUIGroup.tscn" id="1_g2dna"]
-[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="2_4m5uk"]
-[ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="2_g2dna"]
+[ext_resource type="Script" uid="uid://djfsy06pkw4ju" path="res://src/gui/properties/types/EnumProperty.gd" id="2_omcx3"]
 [ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/gui/properties/components/PropertyWatcher.gd" id="3_1rp8w"]
-[ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="3_omcx3"]
 [ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="4_4m5uk"]
-[ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="4_ccyb7"]
+[ext_resource type="Script" uid="uid://crich318mmmk2" path="res://src/gui/properties/types/Vector2Property.gd" id="4_phgqb"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="5_omcx3"]
 [ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="6_ccyb7"]
+[ext_resource type="Script" uid="uid://bm3bhys0ur0ns" path="res://src/gui/properties/types/Node2DProperty.gd" id="8_4m5uk"]
+[ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="9_omcx3"]
 
 [node name="MoveTriggerUi" type="VBoxContainer"]
 anchors_preset = 15
@@ -19,210 +19,14 @@ grow_vertical = 2
 
 [node name="Group" parent="." instance=ExtResource("1_g2dna")]
 layout_mode = 2
-metadata/_edit_group_ = true
 
-[node name="Label" type="Label" parent="Group"]
-layout_mode = 2
-text = "Group"
-
-[node name="Spacer" type="Control" parent="Group"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FLOAT" type="SpinBox" parent="Group"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Group"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-alignment = 1
-script = ExtResource("3_omcx3")
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Group/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="Group/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Group"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="VECTOR2" type="BoxContainer" parent="Group"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-vertical = true
-script = ExtResource("4_ccyb7")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Group/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Group/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Group"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("2_4m5uk")
-
-[node name="COLOR" type="ColorPickerButton" parent="Group"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="ENUM" type="OptionButton" parent="Group"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="NODE2D" type="Button" parent="Group"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="Mode" type="HBoxContainer" parent="." groups=["trigger_property"]]
+[node name="Mode" type="BoxContainer" parent="." groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("2_g2dna")
-type = 6
-enum_fields = PackedStringArray("Add", "Set", "Move Towards")
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Mode"]
-layout_mode = 2
-text = "Mode"
-
-[node name="Spacer" type="Control" parent="Mode"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FLOAT" type="SpinBox" parent="Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-alignment = 1
-script = ExtResource("3_omcx3")
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Mode/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="Mode/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="VECTOR2" type="BoxContainer" parent="Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-vertical = true
-script = ExtResource("4_ccyb7")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Mode/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Mode/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Mode"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("2_4m5uk")
-
-[node name="COLOR" type="ColorPickerButton" parent="Mode"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="ENUM" type="OptionButton" parent="Mode"]
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-selected = 0
-item_count = 3
-popup/item_0/text = "Add"
-popup/item_0/id = 0
-popup/item_1/text = "Set"
-popup/item_1/id = 1
-popup/item_2/text = "Move Towards"
-popup/item_2/id = 2
-
-[node name="NODE2D" type="Button" parent="Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
+script = ExtResource("2_omcx3")
+fields = PackedStringArray("Add", "Set", "Move Towards")
+_value = 0
+metadata/_custom_type_script = "uid://djfsy06pkw4ju"
 
 [node name="TriggerPropertyWatcher" type="Node" parent="Mode" node_paths=PackedStringArray("target")]
 script = ExtResource("3_1rp8w")
@@ -236,601 +40,71 @@ target = NodePath("../../Position")
 condition = "value != 2"
 property = &"visible"
 
-[node name="Position" type="HBoxContainer" parent="." groups=["trigger_property"]]
+[node name="Position" type="BoxContainer" parent="." groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("2_g2dna")
-type = 3
-step = 0.01
-or_greater = true
-or_less = true
-suffix = "cells"
-default_float = 1.0
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Position"]
-layout_mode = 2
-text = "Position"
-
-[node name="Spacer" type="Control" parent="Position"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FLOAT" type="SpinBox" parent="Position"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-max_value = 1.0
-step = 0.01
-allow_greater = true
+script = ExtResource("4_phgqb")
 allow_lesser = true
-suffix = "cells"
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Position"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-alignment = 1
-script = ExtResource("3_omcx3")
-step = 0.01
 allow_greater = true
-allow_lesser = true
 suffix = "cells"
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Position/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.01
-allow_greater = true
-allow_lesser = true
-
-[node name="SpinBox" type="SpinBox" parent="Position/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-allow_greater = true
-allow_lesser = true
-suffix = "cells"
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Position"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="VECTOR2" type="BoxContainer" parent="Position"]
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-vertical = true
-script = ExtResource("4_ccyb7")
-step = 0.01
-max_value = 1.0
-allow_greater = true
-allow_lesser = true
-suffix = "cells"
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Position/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-allow_greater = true
-allow_lesser = true
-alignment = 3
-prefix = "x:"
-suffix = "cells"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Position/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-allow_greater = true
-allow_lesser = true
-alignment = 3
-prefix = "y:"
-suffix = "cells"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Position"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("2_4m5uk")
-
-[node name="COLOR" type="ColorPickerButton" parent="Position"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="ENUM" type="OptionButton" parent="Position"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="NODE2D" type="Button" parent="Position"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
+_value = Vector2(0, 0)
+metadata/_custom_type_script = "uid://crich318mmmk2"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Position"]
 script = ExtResource("6_ccyb7")
 property_name = "_position"
 
 [node name="Move Towards" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 script = ExtResource("4_4m5uk")
 label_settings = ExtResource("5_omcx3")
 metadata/_custom_type_script = "uid://cuih47milvqcs"
 
-[node name="Target" type="HBoxContainer" parent="Move Towards" groups=["trigger_property"]]
+[node name="Target" type="BoxContainer" parent="Move Towards" groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("2_g2dna")
-type = 7
-step = 0.01
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Move Towards/Target"]
-layout_mode = 2
-text = "Target"
-
-[node name="Spacer" type="Control" parent="Move Towards/Target"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FLOAT" type="SpinBox" parent="Move Towards/Target"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-max_value = 1.0
-step = 0.01
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Move Towards/Target"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-alignment = 1
-script = ExtResource("3_omcx3")
-step = 0.01
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Move Towards/Target/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.01
-
-[node name="SpinBox" type="SpinBox" parent="Move Towards/Target/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Move Towards/Target"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="VECTOR2" type="BoxContainer" parent="Move Towards/Target"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-vertical = true
-script = ExtResource("4_ccyb7")
-step = 0.01
-max_value = 1.0
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Move Towards/Target/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Move Towards/Target/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Move Towards/Target"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("2_4m5uk")
-
-[node name="COLOR" type="ColorPickerButton" parent="Move Towards/Target"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="ENUM" type="OptionButton" parent="Move Towards/Target"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="NODE2D" type="Button" parent="Move Towards/Target"]
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-text = "    Assign…    "
+script = ExtResource("8_4m5uk")
+metadata/_custom_type_script = "uid://bm3bhys0ur0ns"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Move Towards/Target"]
 script = ExtResource("6_ccyb7")
 property_name = "_move_towards_target"
 
-[node name="Group Center" type="HBoxContainer" parent="Move Towards" groups=["trigger_property"]]
+[node name="Group Center" type="BoxContainer" parent="Move Towards" groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("2_g2dna")
-type = 7
-step = 0.01
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Move Towards/Group Center"]
-layout_mode = 2
-text = "Group Center"
-
-[node name="Spacer" type="Control" parent="Move Towards/Group Center"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FLOAT" type="SpinBox" parent="Move Towards/Group Center"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-max_value = 1.0
-step = 0.01
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Move Towards/Group Center"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-alignment = 1
-script = ExtResource("3_omcx3")
-step = 0.01
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Move Towards/Group Center/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.01
-
-[node name="SpinBox" type="SpinBox" parent="Move Towards/Group Center/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Move Towards/Group Center"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="VECTOR2" type="BoxContainer" parent="Move Towards/Group Center"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-vertical = true
-script = ExtResource("4_ccyb7")
-step = 0.01
-max_value = 1.0
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Move Towards/Group Center/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Move Towards/Group Center/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Move Towards/Group Center"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("2_4m5uk")
-
-[node name="COLOR" type="ColorPickerButton" parent="Move Towards/Group Center"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="ENUM" type="OptionButton" parent="Move Towards/Group Center"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="NODE2D" type="Button" parent="Move Towards/Group Center"]
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-text = "    Assign…    "
+script = ExtResource("8_4m5uk")
+metadata/_custom_type_script = "uid://bm3bhys0ur0ns"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Move Towards/Group Center"]
 script = ExtResource("6_ccyb7")
 property_name = "_move_towards_group_center"
 
-[node name="Distance Multiplier" type="HBoxContainer" parent="Move Towards" groups=["trigger_property"]]
+[node name="Distance Multiplier" type="BoxContainer" parent="Move Towards" groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("2_g2dna")
-step = 0.01
-or_greater = true
-default_float = 1.0
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Move Towards/Distance Multiplier"]
-layout_mode = 2
-text = "Distance Multiplier"
-
-[node name="Spacer" type="Control" parent="Move Towards/Distance Multiplier"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FLOAT" type="SpinBox" parent="Move Towards/Distance Multiplier"]
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-max_value = 1.0
-step = 0.01
-value = 1.0
-allow_greater = true
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Move Towards/Distance Multiplier"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-alignment = 1
-script = ExtResource("3_omcx3")
+script = ExtResource("9_omcx3")
+default = 1.0
 step = 0.01
 allow_greater = true
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Move Towards/Distance Multiplier/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.01
-allow_greater = true
-
-[node name="SpinBox" type="SpinBox" parent="Move Towards/Distance Multiplier/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-allow_greater = true
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Move Towards/Distance Multiplier"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="VECTOR2" type="BoxContainer" parent="Move Towards/Distance Multiplier"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-vertical = true
-script = ExtResource("4_ccyb7")
-step = 0.01
-max_value = 1.0
-allow_greater = true
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Move Towards/Distance Multiplier/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-allow_greater = true
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Move Towards/Distance Multiplier/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-allow_greater = true
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Move Towards/Distance Multiplier"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("2_4m5uk")
-
-[node name="COLOR" type="ColorPickerButton" parent="Move Towards/Distance Multiplier"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="ENUM" type="OptionButton" parent="Move Towards/Distance Multiplier"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="NODE2D" type="Button" parent="Move Towards/Distance Multiplier"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
+_value = 1.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Move Towards/Distance Multiplier"]
 script = ExtResource("6_ccyb7")
 property_name = "_move_towards_distance_multiplier"
 
-[node name="Offset" type="HBoxContainer" parent="Move Towards" groups=["trigger_property"]]
+[node name="Offset" type="BoxContainer" parent="Move Towards" groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("2_g2dna")
-type = 3
+script = ExtResource("4_phgqb")
 step = 0.01
-or_greater = true
-or_less = true
-suffix = "cells"
-default_float = 1.0
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Move Towards/Offset"]
-layout_mode = 2
-text = "Offset"
-
-[node name="Spacer" type="Control" parent="Move Towards/Offset"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FLOAT" type="SpinBox" parent="Move Towards/Offset"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-max_value = 1.0
-step = 0.01
-allow_greater = true
 allow_lesser = true
-suffix = "cells"
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Move Towards/Offset"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-alignment = 1
-script = ExtResource("3_omcx3")
-step = 0.01
 allow_greater = true
-allow_lesser = true
 suffix = "cells"
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Move Towards/Offset/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.01
-allow_greater = true
-allow_lesser = true
-
-[node name="SpinBox" type="SpinBox" parent="Move Towards/Offset/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-allow_greater = true
-allow_lesser = true
-suffix = "cells"
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Move Towards/Offset"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="VECTOR2" type="BoxContainer" parent="Move Towards/Offset"]
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-vertical = true
-script = ExtResource("4_ccyb7")
-step = 0.01
-max_value = 1.0
-allow_greater = true
-allow_lesser = true
-suffix = "cells"
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Move Towards/Offset/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-allow_greater = true
-allow_lesser = true
-alignment = 3
-prefix = "x:"
-suffix = "cells"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Move Towards/Offset/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-allow_greater = true
-allow_lesser = true
-alignment = 3
-prefix = "y:"
-suffix = "cells"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Move Towards/Offset"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("2_4m5uk")
-
-[node name="COLOR" type="ColorPickerButton" parent="Move Towards/Offset"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="ENUM" type="OptionButton" parent="Move Towards/Offset"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
-
-[node name="NODE2D" type="Button" parent="Move Towards/Offset"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_4m5uk")
+_value = Vector2(0, 0)
+metadata/_custom_type_script = "uid://crich318mmmk2"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Move Towards/Offset"]
 script = ExtResource("6_ccyb7")

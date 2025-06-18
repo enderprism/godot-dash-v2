@@ -123,7 +123,6 @@
 [ext_resource type="PackedScene" uid="uid://duj3dae6qcvtm" path="res://scenes/components/level_components/portals/gamemode_portals/SpiderPortal.tscn" id="55_5nc47"]
 [ext_resource type="PackedScene" uid="uid://da4xswy05y0ve" path="res://scenes/components/game_components/GroupEditor.tscn" id="55_5vu0v"]
 [ext_resource type="PackedScene" uid="uid://cw15476n2m4we" path="res://scenes/components/game_components/ColorChannelEditor.tscn" id="55_wey7f"]
-[ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="55_x15b8"]
 [ext_resource type="Texture2D" uid="uid://cj6wk0jtmbbjp" path="res://assets/textures/portals/other_portals/count_portal_single/CountPortalSingleFront.png" id="56_ot2jm"]
 [ext_resource type="PackedScene" uid="uid://ycasm4t3yh3a" path="res://scenes/components/level_components/portals/other_portals/CountPortalSingle.tscn" id="57_1ad2k"]
 [ext_resource type="Texture2D" uid="uid://djvb6aor51lsu" path="res://assets/textures/guis/editor/edit_panel/FlipObjectH.svg" id="57_tt0di"]
@@ -189,9 +188,10 @@
 [ext_resource type="Texture2D" uid="uid://b7fnymfkmta1d" path="res://assets/textures/triggers/ToggleMultipleGroups.svg" id="127_d556q"]
 [ext_resource type="Texture2D" uid="uid://dv0sqs0l30luf" path="res://assets/textures/guis/editor/block_palette/Slopes.svg" id="138_ha8mj"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="147_1ad2k"]
-[ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="147_pcjvf"]
-[ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="148_tl5y0"]
+[ext_resource type="Script" uid="uid://bss8ppxnt7gio" path="res://src/gui/properties/types/BoolProperty.gd" id="179_0v0om"]
 [ext_resource type="PackedScene" uid="uid://ylswfd45fw38" path="res://scenes/components/game_components/LevelSettings.tscn" id="180_nk067"]
+[ext_resource type="Script" uid="uid://c1ejd8ud4q1b6" path="res://src/gui/properties/types/StringProperty.gd" id="184_33w7i"]
+[ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="185_t7625"]
 [ext_resource type="Script" uid="uid://c08lx7vbboo37" path="res://src/editor/LevelOperationsHandler.gd" id="189_ao6md"]
 
 [sub_resource type="Resource" id="Resource_aofxv"]
@@ -4094,6 +4094,7 @@ material = ExtResource("3_m55bu")
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 focus_mode = 1
+theme = ExtResource("147_1ad2k")
 
 [node name="MarginContainer" type="MarginContainer" parent="EditorUI/EditorContainer/SidePanel"]
 layout_mode = 2
@@ -4128,350 +4129,26 @@ metadata/_custom_type_script = "uid://cuih47milvqcs"
 [node name="TriggerEditor" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger" instance=ExtResource("65_1n4fp")]
 layout_mode = 2
 
-[node name="Single usage" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger"]
+[node name="Single usage" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("55_x15b8")
-type = 2
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
+script = ExtResource("179_0v0om")
+_value = false
+metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
-[node name="Label" type="Label" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage"]
-layout_mode = 2
-text = "Single usage"
-
-[node name="Spacer" type="Control" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-alignment = 1
-script = ExtResource("147_pcjvf")
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage"]
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="VECTOR2" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-vertical = true
-script = ExtResource("148_tl5y0")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("147_1ad2k")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="ENUM" type="OptionButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="NODE2D" type="Button" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Single usage"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="Spawn triggered" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger"]
+[node name="Spawn triggered" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("55_x15b8")
-type = 2
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
+script = ExtResource("179_0v0om")
+_value = false
+metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
-[node name="Label" type="Label" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"]
-layout_mode = 2
-text = "Spawn triggered"
-
-[node name="Spacer" type="Control" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-alignment = 1
-script = ExtResource("147_pcjvf")
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"]
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="VECTOR2" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-vertical = true
-script = ExtResource("148_tl5y0")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("147_1ad2k")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="ENUM" type="OptionButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="NODE2D" type="Button" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Spawn triggered"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="Touch triggered" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger"]
+[node name="Touch triggered" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("55_x15b8")
-type = 2
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered"]
-layout_mode = 2
-text = "Touch triggered"
-
-[node name="Spacer" type="Control" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-alignment = 1
-script = ExtResource("147_pcjvf")
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered"]
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="VECTOR2" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-vertical = true
-script = ExtResource("148_tl5y0")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("147_1ad2k")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="ENUM" type="OptionButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="NODE2D" type="Button" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Trigger/Touch triggered"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
+script = ExtResource("179_0v0om")
+_value = false
+metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
 [node name="Colors" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -4488,239 +4165,25 @@ label_settings = ExtResource("53_jrbqn")
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 
-[node name="Base Color" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors"]
+[node name="Base Color" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors"]
 visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("55_x15b8")
-type = 4
+script = ExtResource("184_33w7i")
+placeholder = "Color channel name"
 lineedit_width = 200.0
-placeholder_text = "Pick a color channel…"
-metadata/_edit_group_ = true
+_value = ""
+metadata/_custom_type_script = "uid://c1ejd8ud4q1b6"
 
-[node name="Label" type="Label" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color"]
-layout_mode = 2
-text = "Base Color"
-
-[node name="Spacer" type="Control" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-alignment = 1
-script = ExtResource("147_pcjvf")
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="VECTOR2" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-vertical = true
-script = ExtResource("148_tl5y0")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("147_1ad2k")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="ENUM" type="OptionButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="NODE2D" type="Button" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Base Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="Detail Color" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors"]
+[node name="Detail Color" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors"]
 visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("55_x15b8")
-type = 4
+script = ExtResource("184_33w7i")
+placeholder = "Color channel name"
 lineedit_width = 200.0
-placeholder_text = "Pick a color channel…"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color"]
-layout_mode = 2
-text = "Detail Color"
-
-[node name="Spacer" type="Control" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-alignment = 1
-script = ExtResource("147_pcjvf")
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="VECTOR2" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-vertical = true
-script = ExtResource("148_tl5y0")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("147_1ad2k")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="ENUM" type="OptionButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="NODE2D" type="Button" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/Detail Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
+_value = ""
+metadata/_custom_type_script = "uid://c1ejd8ud4q1b6"
 
 [node name="HSV Shift" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors"]
 visible = false
@@ -4728,607 +4191,56 @@ layout_mode = 2
 script = ExtResource("52_3jb55")
 label_settings = ExtResource("53_jrbqn")
 
-[node name="Hue" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift"]
+[node name="Hue" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("55_x15b8")
-_min = -1.0
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue"]
-layout_mode = 2
-text = "Hue"
-
-[node name="Spacer" type="Control" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue"]
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
+script = ExtResource("185_t7625")
 min_value = -1.0
 max_value = 1.0
-step = 0.05
-select_all_on_focus = true
+_value = 0.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-alignment = 1
-script = ExtResource("147_pcjvf")
-min_value = -1.0
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-min_value = -1.0
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue/FLOAT_SLIDER"]
-layout_mode = 2
-min_value = -1.0
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="VECTOR2" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-vertical = true
-script = ExtResource("148_tl5y0")
-step = 0.05
-min_value = -1.0
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-min_value = -1.0
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-min_value = -1.0
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("147_1ad2k")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="ENUM" type="OptionButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="NODE2D" type="Button" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Hue"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="Saturation" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift"]
+[node name="Saturation" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("55_x15b8")
-_min = -1.0
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation"]
-layout_mode = 2
-text = "Saturation"
-
-[node name="Spacer" type="Control" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation"]
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
+script = ExtResource("185_t7625")
 min_value = -1.0
 max_value = 1.0
-step = 0.05
-select_all_on_focus = true
+_value = 0.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-alignment = 1
-script = ExtResource("147_pcjvf")
-min_value = -1.0
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-min_value = -1.0
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation/FLOAT_SLIDER"]
-layout_mode = 2
-min_value = -1.0
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="VECTOR2" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-vertical = true
-script = ExtResource("148_tl5y0")
-step = 0.05
-min_value = -1.0
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-min_value = -1.0
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-min_value = -1.0
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("147_1ad2k")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="ENUM" type="OptionButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="NODE2D" type="Button" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Saturation"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="Value" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift"]
+[node name="Value" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("55_x15b8")
-_min = -1.0
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value"]
-layout_mode = 2
-text = "Value"
-
-[node name="Spacer" type="Control" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value"]
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
+script = ExtResource("185_t7625")
 min_value = -1.0
 max_value = 1.0
-step = 0.05
-select_all_on_focus = true
+_value = 0.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-alignment = 1
-script = ExtResource("147_pcjvf")
-min_value = -1.0
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-min_value = -1.0
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value/FLOAT_SLIDER"]
-layout_mode = 2
-min_value = -1.0
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="VECTOR2" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-vertical = true
-script = ExtResource("148_tl5y0")
-step = 0.05
-min_value = -1.0
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-min_value = -1.0
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-min_value = -1.0
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("147_1ad2k")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="ENUM" type="OptionButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="NODE2D" type="Button" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Value"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="Strength" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift"]
+[node name="Strength" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("55_x15b8")
-or_greater = true
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength"]
-layout_mode = 2
-text = "Strength"
-
-[node name="Spacer" type="Control" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength"]
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-max_value = 1.0
-step = 0.05
-allow_greater = true
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-alignment = 1
-script = ExtResource("147_pcjvf")
-allow_greater = true
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-allow_greater = true
-
-[node name="SpinBox" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-allow_greater = true
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="VECTOR2" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-vertical = true
-script = ExtResource("148_tl5y0")
-step = 0.05
+script = ExtResource("185_t7625")
+min_value = -1.0
 max_value = 1.0
 allow_greater = true
-select_all_on_focus = true
-expand_to_text_length = true
+_value = 0.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
-[node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-allow_greater = true
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-allow_greater = true
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("147_1ad2k")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="ENUM" type="OptionButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="NODE2D" type="Button" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Strength"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="Alpha" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift"]
+[node name="Alpha" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("55_x15b8")
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha"]
-layout_mode = 2
-text = "Alpha"
-
-[node name="Spacer" type="Control" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha"]
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
+script = ExtResource("185_t7625")
+min_value = -1.0
 max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-alignment = 1
-script = ExtResource("147_pcjvf")
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="VECTOR2" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-vertical = true
-script = ExtResource("148_tl5y0")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("147_1ad2k")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="ENUM" type="OptionButton" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
-
-[node name="NODE2D" type="Button" parent="EditorUI/EditorContainer/SidePanel/MarginContainer/ScrollContainer/VBoxContainer/Colors/HSV Shift/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("147_1ad2k")
+_value = 0.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="LevelSettings" parent="EditorUI" instance=ExtResource("180_nk067")]
 unique_name_in_owner = true

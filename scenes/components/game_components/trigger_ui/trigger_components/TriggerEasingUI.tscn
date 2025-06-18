@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dke2k5lclqlgp"]
+[gd_scene load_steps=7 format=3 uid="uid://dke2k5lclqlgp"]
 
 [ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="1_pdn8j"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="2_076yy"]
-[ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="3_7o0da"]
-[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="4_ownah"]
+[ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="3_71efo"]
 [ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="4_y847c"]
-[ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="5_wrtyk"]
-[ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="6_71efo"]
+[ext_resource type="Script" uid="uid://djfsy06pkw4ju" path="res://src/gui/properties/types/EnumProperty.gd" id="6_tyuh0"]
+[ext_resource type="Script" uid="uid://bss8ppxnt7gio" path="res://src/gui/properties/types/BoolProperty.gd" id="9_tyuh0"]
 
 [node name="Tweening" type="VBoxContainer"]
 anchors_preset = 15
@@ -18,553 +17,48 @@ script = ExtResource("1_pdn8j")
 label_settings = ExtResource("2_076yy")
 metadata/_custom_type_script = "uid://cuih47milvqcs"
 
-[node name="Duration" type="HBoxContainer" parent="." groups=["trigger_easing_property"]]
-custom_minimum_size = Vector2(0, 32)
+[node name="Duration" type="BoxContainer" parent="." groups=["trigger_easing_property"]]
 layout_mode = 2
-script = ExtResource("3_7o0da")
-_max = 10.0
-step = 0.01
-or_greater = true
-suffix = "s"
-default_float = 1.0
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Duration"]
-layout_mode = 2
-text = "Duration"
-
-[node name="Spacer" type="Control" parent="Duration"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Duration"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Duration"]
-layout_mode = 2
-theme = ExtResource("4_ownah")
-max_value = 10.0
-step = 0.01
-value = 1.0
+script = ExtResource("3_71efo")
+default = 1.0
 allow_greater = true
 suffix = "s"
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Duration"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-alignment = 1
-script = ExtResource("5_wrtyk")
-max_value = 10.0
-step = 0.01
-allow_greater = true
-suffix = "s"
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Duration/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 10.0
-step = 0.01
-allow_greater = true
-
-[node name="SpinBox" type="SpinBox" parent="Duration/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 10.0
-step = 0.01
-allow_greater = true
-suffix = "s"
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Duration"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-
-[node name="VECTOR2" type="BoxContainer" parent="Duration"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-vertical = true
-script = ExtResource("6_71efo")
-step = 0.01
-max_value = 10.0
-allow_greater = true
-suffix = "s"
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Duration/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 10.0
-step = 0.01
-allow_greater = true
-alignment = 3
-prefix = "x:"
-suffix = "s"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Duration/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 10.0
-step = 0.01
-allow_greater = true
-alignment = 3
-prefix = "y:"
-suffix = "s"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Duration"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("4_ownah")
-
-[node name="COLOR" type="ColorPickerButton" parent="Duration"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("4_ownah")
-
-[node name="ENUM" type="OptionButton" parent="Duration"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-
-[node name="NODE2D" type="Button" parent="Duration"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
+_value = 1.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Duration"]
 script = ExtResource("4_y847c")
 property_name = "duration"
 
-[node name="Keep Active" type="HBoxContainer" parent="." groups=["trigger_easing_property"]]
-custom_minimum_size = Vector2(0, 32)
+[node name="Keep Active" type="BoxContainer" parent="." groups=["trigger_easing_property"]]
 layout_mode = 2
-script = ExtResource("3_7o0da")
-type = 2
-_max = 10.0
-step = 0.01
-or_greater = true
-or_less = true
-suffix = "s"
-default_float = 1.0
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Keep Active"]
-layout_mode = 2
-text = "Keep Active"
-
-[node name="Spacer" type="Control" parent="Keep Active"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Keep Active"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Keep Active"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-max_value = 10.0
-step = 0.01
-value = 1.0
-allow_greater = true
-allow_lesser = true
-suffix = "s"
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Keep Active"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-alignment = 1
-script = ExtResource("5_wrtyk")
-max_value = 10.0
-step = 0.01
-allow_greater = true
-allow_lesser = true
-suffix = "s"
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Keep Active/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 10.0
-step = 0.01
-allow_greater = true
-allow_lesser = true
-
-[node name="SpinBox" type="SpinBox" parent="Keep Active/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 10.0
-step = 0.01
-allow_greater = true
-allow_lesser = true
-suffix = "s"
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Keep Active"]
-layout_mode = 2
-theme = ExtResource("4_ownah")
-
-[node name="VECTOR2" type="BoxContainer" parent="Keep Active"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-vertical = true
-script = ExtResource("6_71efo")
-step = 0.01
-max_value = 10.0
-allow_greater = true
-allow_lesser = true
-suffix = "s"
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Keep Active/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 10.0
-step = 0.01
-allow_greater = true
-allow_lesser = true
-alignment = 3
-prefix = "x:"
-suffix = "s"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Keep Active/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 10.0
-step = 0.01
-allow_greater = true
-allow_lesser = true
-alignment = 3
-prefix = "y:"
-suffix = "s"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Keep Active"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("4_ownah")
-
-[node name="COLOR" type="ColorPickerButton" parent="Keep Active"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("4_ownah")
-
-[node name="ENUM" type="OptionButton" parent="Keep Active"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-
-[node name="NODE2D" type="Button" parent="Keep Active"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
+script = ExtResource("9_tyuh0")
+_value = false
+metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Keep Active"]
 script = ExtResource("4_y847c")
 property_name = "keep_active"
 
-[node name="Easing" type="HBoxContainer" parent="." groups=["trigger_easing_property"]]
-custom_minimum_size = Vector2(0, 32)
+[node name="Easing" type="BoxContainer" parent="." groups=["trigger_easing_property"]]
 layout_mode = 2
-script = ExtResource("3_7o0da")
-type = 6
-enum_fields = PackedStringArray("Ease In", "Ease Out", "Ease In-Out", "Ease Out-In")
-default_enum_idx = 2
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Easing"]
-layout_mode = 2
-text = "Easing"
-
-[node name="Spacer" type="Control" parent="Easing"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Easing"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Easing"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Easing"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-alignment = 1
-script = ExtResource("5_wrtyk")
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Easing/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="Easing/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Easing"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-
-[node name="VECTOR2" type="BoxContainer" parent="Easing"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-vertical = true
-script = ExtResource("6_71efo")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Easing/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Easing/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Easing"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("4_ownah")
-
-[node name="COLOR" type="ColorPickerButton" parent="Easing"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("4_ownah")
-
-[node name="ENUM" type="OptionButton" parent="Easing"]
-layout_mode = 2
-theme = ExtResource("4_ownah")
-selected = 2
-item_count = 4
-popup/item_0/text = "Ease In"
-popup/item_0/id = 0
-popup/item_1/text = "Ease Out"
-popup/item_1/id = 1
-popup/item_2/text = "Ease In-Out"
-popup/item_2/id = 2
-popup/item_3/text = "Ease Out-In"
-popup/item_3/id = 3
-
-[node name="NODE2D" type="Button" parent="Easing"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
+script = ExtResource("6_tyuh0")
+default = 2
+fields = PackedStringArray("Ease In", "Ease Out", "Ease In-Out", "Ease Out-In")
+_value = 2
+metadata/_custom_type_script = "uid://djfsy06pkw4ju"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Easing"]
 script = ExtResource("4_y847c")
 property_name = "easing_type"
 
-[node name="Transition" type="HBoxContainer" parent="." groups=["trigger_easing_property"]]
-custom_minimum_size = Vector2(0, 32)
+[node name="Transition" type="BoxContainer" parent="." groups=["trigger_easing_property"]]
 layout_mode = 2
-script = ExtResource("3_7o0da")
-type = 6
-enum_fields = PackedStringArray("Linear", "Sine", "Quint", "Quart", "Quad", "Expo", "Elastic", "Cubic", "Circ", "Bounce", "Back", "Spring")
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Transition"]
-layout_mode = 2
-text = "Transition"
-
-[node name="Spacer" type="Control" parent="Transition"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Transition"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Transition"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Transition"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-alignment = 1
-script = ExtResource("5_wrtyk")
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Transition/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="Transition/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Transition"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-
-[node name="VECTOR2" type="BoxContainer" parent="Transition"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
-vertical = true
-script = ExtResource("6_71efo")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Transition/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Transition/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Transition"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("4_ownah")
-
-[node name="COLOR" type="ColorPickerButton" parent="Transition"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("4_ownah")
-
-[node name="ENUM" type="OptionButton" parent="Transition"]
-layout_mode = 2
-theme = ExtResource("4_ownah")
-selected = 0
-item_count = 12
-popup/item_0/text = "Linear"
-popup/item_0/id = 0
-popup/item_1/text = "Sine"
-popup/item_1/id = 1
-popup/item_2/text = "Quint"
-popup/item_2/id = 2
-popup/item_3/text = "Quart"
-popup/item_3/id = 3
-popup/item_4/text = "Quad"
-popup/item_4/id = 4
-popup/item_5/text = "Expo"
-popup/item_5/id = 5
-popup/item_6/text = "Elastic"
-popup/item_6/id = 6
-popup/item_7/text = "Cubic"
-popup/item_7/id = 7
-popup/item_8/text = "Circ"
-popup/item_8/id = 8
-popup/item_9/text = "Bounce"
-popup/item_9/id = 9
-popup/item_10/text = "Back"
-popup/item_10/id = 10
-popup/item_11/text = "Spring"
-popup/item_11/id = 11
-
-[node name="NODE2D" type="Button" parent="Transition"]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_ownah")
+script = ExtResource("6_tyuh0")
+default = 2
+fields = PackedStringArray("Linear", "Sine", "Quint", "Quart", "Quad", "Expo", "Elastic", "Cubic", "Circ", "Bounce", "Back", "Spring")
+_value = 2
+metadata/_custom_type_script = "uid://djfsy06pkw4ju"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Transition"]
 script = ExtResource("4_y847c")
