@@ -18,8 +18,6 @@ func _ready() -> void:
 	input.toggled.connect(func(new_value): value_changed.emit(new_value))
 	renamed.connect(refresh)
 	refresh()
-	if _value == null:
-		reset()
 	NodeUtils \
 		.get_node_or_add(self, "PropertyReset", PropertyReset, NodeUtils.INTERNAL) \
 		.set_input(input)
@@ -31,7 +29,7 @@ func set_value(new_value: bool) -> void:
 
 func set_value_no_signal(new_value: bool) -> void:
 	_value = new_value
-	input.set_value_no_signal(new_value)
+	input.set_pressed_no_signal(new_value)
 
 func get_value() -> float:
 	return input.get_value()
