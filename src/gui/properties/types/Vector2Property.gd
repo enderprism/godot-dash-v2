@@ -7,7 +7,7 @@ signal value_changed(value: float)
 @export var default: Vector2
 @export var min_value: float
 @export var max_value: float = 100.0
-@export var step: float
+@export var step: float = 0.001
 @export var rounded: bool
 @export var allow_lesser: bool
 @export var allow_greater: bool
