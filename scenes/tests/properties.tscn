@@ -21,6 +21,7 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="FloatProperty" type="BoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("1_1q0ts")
 default = 50.0
@@ -28,6 +29,7 @@ _value = 50.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="FloatSliderProperty" type="BoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("2_rks8l")
 default = 7.5
@@ -37,6 +39,7 @@ _value = 7.5
 metadata/_custom_type_script = "uid://c73uilol0rw1g"
 
 [node name="BoolProperty" type="BoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("3_bgdif")
 default = true
@@ -44,6 +47,7 @@ _value = true
 metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
 [node name="Vector2Property" type="BoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("4_rks8l")
 default = Vector2(5, 0)
@@ -51,6 +55,7 @@ _value = Vector2(5, 0)
 metadata/_custom_type_script = "uid://crich318mmmk2"
 
 [node name="StringProperty" type="BoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("5_bgdif")
 default = "a"
@@ -59,13 +64,15 @@ _value = "a"
 metadata/_custom_type_script = "uid://c1ejd8ud4q1b6"
 
 [node name="ColorProperty" type="BoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("6_msomc")
 default = Color(0, 1, 0, 1)
-_value = Color(0.330291, 0.978058, 0.124511, 1)
+_value = Color(0, 1, 0, 1)
 metadata/_custom_type_script = "uid://bwcwfobfohbsd"
 
 [node name="EnumProperty" type="BoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("7_4ovid")
 default = 1
@@ -74,11 +81,13 @@ _value = 1
 metadata/_custom_type_script = "uid://djfsy06pkw4ju"
 
 [node name="Node2DProperty" type="BoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("8_eapbg")
 metadata/_custom_type_script = "uid://bm3bhys0ur0ns"
 
 [node name="FileProperty" type="BoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("9_eabr2")
 _value = ""
