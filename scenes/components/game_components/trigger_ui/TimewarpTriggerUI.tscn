@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://s2h2pf2qoxsa"]
+
+[ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="1_ifxd5"]
+[ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="2_ham2v"]
+
+[node name="TimewarpTriggerUI" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Time scale" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("1_ifxd5")
+default = 1.0
+min_value = 0.001
+allow_greater = true
+_value = 1.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Time scale"]
+script = ExtResource("2_ham2v")
+property_name = "_time_scale"
