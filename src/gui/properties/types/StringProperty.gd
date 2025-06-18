@@ -41,6 +41,7 @@ func reset() -> void:
 func refresh() -> void:
 	label.text = name
 	input.custom_minimum_size.x = lineedit_width
+	input.focus_mode = Control.FOCUS_CLICK
 	input.placeholder_text = placeholder
 	input.select_all_on_focus = select_all_on_focus
 	if Engine.is_editor_hint():
