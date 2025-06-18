@@ -77,4 +77,4 @@ func load_properties(trigger: TriggerBase) -> void:
 			var refresh_watchers := func(property_child): property_child.call_deferred("_watcher_update_value", value)
 			var watchers: Array = NodeUtils.get_children_of_type(property, PropertyWatcher)
 			watchers.map(refresh_watchers)
-			property.set_value(value)
+			property.set_value_no_signal(value)
