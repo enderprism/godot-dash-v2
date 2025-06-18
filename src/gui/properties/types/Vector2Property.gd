@@ -13,7 +13,7 @@ signal value_changed(value: float)
 @export var allow_greater: bool
 @export var prefix: String
 @export var suffix: String
-@export var keep_aspect: bool
+@export var keep_aspect: bool ## Use the monitor's aspect ratio
 @export var expand_to_text_length: bool
 @export var vertical_property: bool = true
 @export_tool_button("Refresh") var _refresh = refresh
