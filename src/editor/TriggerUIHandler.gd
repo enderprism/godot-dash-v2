@@ -2,9 +2,9 @@ extends Node
 class_name TriggerUIHandler
 
 @export var trigger_editor: TriggerEditor
-@export var single_usage: Property
-@export var spawn_triggered: Property
-@export var touch_triggered: Property
+@export var single_usage: BoolProperty
+@export var spawn_triggered: BoolProperty
+@export var touch_triggered: BoolProperty
 
 func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 	if not is_selection_trigger_only(selection):

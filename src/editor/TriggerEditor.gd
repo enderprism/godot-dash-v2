@@ -36,7 +36,7 @@ func connect_ui(triggers: Array[TriggerBase]) -> void:
 		if properties.is_empty():
 			printerr("Empty properties in ", group)
 			return
-		for property in properties as Array[Property]:
+		for property in properties as Array[AbstractProperty]:
 			var remove_connections := func(connection):
 				if not "watcher" in connection.callable.get_method():
 					property.value_changed.disconnect(connection.callable)
@@ -63,7 +63,7 @@ func load_properties(trigger: TriggerBase) -> void:
 		if properties.is_empty():
 			return
 		var property_owner := trigger.get_parent() if group == TRIGGER_PROPERTY_GROUP else trigger.get_node("../TriggerEasing") if group == TRIGGER_EASING_PROPERTY_GROUP else trigger
-		for property in properties as Array[Property]:
+		for property in properties as Array[AbstractProperty]:
 			var property_name := property.name.to_camel_case()
 			if property.has_node("TriggerPropertyInternalName"):
 				property_name = property.get_node("TriggerPropertyInternalName").property_name
