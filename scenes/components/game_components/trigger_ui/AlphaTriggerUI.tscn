@@ -1,14 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3gwf8y0ft0my"]
+[gd_scene load_steps=9 format=3 uid="uid://d3gwf8y0ft0my"]
 
 [ext_resource type="PackedScene" uid="uid://dibiibymus6dt" path="res://scenes/components/game_components/trigger_ui/trigger_components/TriggerBaseUIGroup.tscn" id="1_c7461"]
-[ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="1_yndxv"]
-[ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/gui/PropertyWatcher.gd" id="2_bofn2"]
-[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="2_mck23"]
+[ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/gui/properties/components/PropertyWatcher.gd" id="2_bofn2"]
 [ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="2_rkb0o"]
-[ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="3_trwpw"]
-[ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="4_367j8"]
+[ext_resource type="Script" uid="uid://djfsy06pkw4ju" path="res://src/gui/properties/types/EnumProperty.gd" id="2_trwpw"]
 [ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="4_c7461"]
+[ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="4_liw5s"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="5_fyygt"]
+[ext_resource type="Script" uid="uid://bm3bhys0ur0ns" path="res://src/gui/properties/types/Node2DProperty.gd" id="7_liw5s"]
 
 [node name="AlphaTriggerUi" type="VBoxContainer"]
 anchors_preset = 15
@@ -19,212 +18,14 @@ grow_vertical = 2
 
 [node name="Group" parent="." instance=ExtResource("1_c7461")]
 layout_mode = 2
-metadata/_edit_group_ = true
 
-[node name="Label" type="Label" parent="Group"]
-layout_mode = 2
-text = "Group"
-
-[node name="Spacer" type="Control" parent="Group"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FLOAT" type="SpinBox" parent="Group"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Group"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-alignment = 1
-script = ExtResource("3_trwpw")
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Group/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="Group/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Group"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-
-[node name="VECTOR2" type="BoxContainer" parent="Group"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-vertical = true
-script = ExtResource("4_367j8")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Group/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Group/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Group"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("2_mck23")
-
-[node name="COLOR" type="ColorPickerButton" parent="Group"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("2_mck23")
-
-[node name="ENUM" type="OptionButton" parent="Group"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-
-[node name="NODE2D" type="Button" parent="Group"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-
-[node name="Mode" type="HBoxContainer" parent="." groups=["trigger_property"]]
+[node name="Mode" type="BoxContainer" parent="." groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("1_yndxv")
-type = 6
-enum_fields = PackedStringArray("Set", "Multiply", "Divide", "Copy")
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Mode"]
-layout_mode = 2
-text = "Mode"
-
-[node name="Spacer" type="Control" parent="Mode"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FLOAT" type="SpinBox" parent="Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-alignment = 1
-script = ExtResource("3_trwpw")
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Mode/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="Mode/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-
-[node name="VECTOR2" type="BoxContainer" parent="Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-vertical = true
-script = ExtResource("4_367j8")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Mode/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Mode/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Mode"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("2_mck23")
-
-[node name="COLOR" type="ColorPickerButton" parent="Mode"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("2_mck23")
-
-[node name="ENUM" type="OptionButton" parent="Mode"]
-layout_mode = 2
-theme = ExtResource("2_mck23")
-selected = 0
-item_count = 4
-popup/item_0/text = "Set"
-popup/item_0/id = 0
-popup/item_1/text = "Multiply"
-popup/item_1/id = 1
-popup/item_2/text = "Divide"
-popup/item_2/id = 2
-popup/item_3/text = "Copy"
-popup/item_3/id = 3
-
-[node name="NODE2D" type="Button" parent="Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
+script = ExtResource("2_trwpw")
+fields = PackedStringArray("Set", "Multiply", "Divide", "Copy")
+_value = 0
+metadata/_custom_type_script = "uid://djfsy06pkw4ju"
 
 [node name="TriggerPropertyWatcher" type="Node" parent="Mode" node_paths=PackedStringArray("target")]
 script = ExtResource("2_bofn2")
@@ -238,336 +39,42 @@ target = NodePath("../../Copy")
 condition = "value == 3"
 property = &"visible"
 
-[node name="Alpha" type="HBoxContainer" parent="." groups=["trigger_property"]]
+[node name="Alpha" type="BoxContainer" parent="." groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("1_yndxv")
-step = 0.01
-default_float = 1.0
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Alpha"]
-layout_mode = 2
-text = "Alpha"
-
-[node name="Spacer" type="Control" parent="Alpha"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FLOAT" type="SpinBox" parent="Alpha"]
-layout_mode = 2
-theme = ExtResource("2_mck23")
+script = ExtResource("4_liw5s")
+default = 1.0
 max_value = 1.0
 step = 0.01
-value = 1.0
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-alignment = 1
-script = ExtResource("3_trwpw")
-step = 0.01
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Alpha/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.01
-
-[node name="SpinBox" type="SpinBox" parent="Alpha/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-
-[node name="VECTOR2" type="BoxContainer" parent="Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-vertical = true
-script = ExtResource("4_367j8")
-step = 0.01
-max_value = 1.0
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Alpha/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Alpha/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Alpha"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("2_mck23")
-
-[node name="COLOR" type="ColorPickerButton" parent="Alpha"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("2_mck23")
-
-[node name="ENUM" type="OptionButton" parent="Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-
-[node name="NODE2D" type="Button" parent="Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
+_value = 1.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="Copy" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 2
 script = ExtResource("4_c7461")
 label_settings = ExtResource("5_fyygt")
 metadata/_custom_type_script = "uid://cuih47milvqcs"
 
-[node name="Target" type="HBoxContainer" parent="Copy" groups=["trigger_property"]]
+[node name="Target" type="BoxContainer" parent="Copy" groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("1_yndxv")
-type = 7
-step = 0.01
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Copy/Target"]
-layout_mode = 2
-text = "Target"
-
-[node name="Spacer" type="Control" parent="Copy/Target"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FLOAT" type="SpinBox" parent="Copy/Target"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-max_value = 1.0
-step = 0.01
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Copy/Target"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-alignment = 1
-script = ExtResource("3_trwpw")
-step = 0.01
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Copy/Target/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.01
-
-[node name="SpinBox" type="SpinBox" parent="Copy/Target/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Copy/Target"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-
-[node name="VECTOR2" type="BoxContainer" parent="Copy/Target"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-vertical = true
-script = ExtResource("4_367j8")
-step = 0.01
-max_value = 1.0
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Copy/Target/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Copy/Target/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Copy/Target"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("2_mck23")
-
-[node name="COLOR" type="ColorPickerButton" parent="Copy/Target"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("2_mck23")
-
-[node name="ENUM" type="OptionButton" parent="Copy/Target"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-
-[node name="NODE2D" type="Button" parent="Copy/Target"]
-layout_mode = 2
-theme = ExtResource("2_mck23")
-text = "    Assign…    "
+script = ExtResource("7_liw5s")
+metadata/_custom_type_script = "uid://bm3bhys0ur0ns"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Copy/Target"]
 script = ExtResource("2_rkb0o")
 property_name = "copy_target"
 
-[node name="Alpha Multiplier" type="HBoxContainer" parent="Copy" groups=["trigger_property"]]
+[node name="Alpha Multiplier" type="BoxContainer" parent="Copy" groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("1_yndxv")
-step = 0.01
-or_greater = true
-default_float = 1.0
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Copy/Alpha Multiplier"]
-layout_mode = 2
-text = "Alpha Multiplier"
-
-[node name="Spacer" type="Control" parent="Copy/Alpha Multiplier"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FLOAT" type="SpinBox" parent="Copy/Alpha Multiplier"]
-layout_mode = 2
-theme = ExtResource("2_mck23")
-max_value = 1.0
-step = 0.01
-value = 1.0
-allow_greater = true
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Copy/Alpha Multiplier"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-alignment = 1
-script = ExtResource("3_trwpw")
-step = 0.01
-allow_greater = true
-select_all_on_focus = true
-slider_width = 100.0
-
-[node name="HSlider" type="HSlider" parent="Copy/Alpha Multiplier/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
+script = ExtResource("4_liw5s")
+default = 1.0
 max_value = 1.0
 step = 0.01
 allow_greater = true
-
-[node name="SpinBox" type="SpinBox" parent="Copy/Alpha Multiplier/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-allow_greater = true
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Copy/Alpha Multiplier"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-
-[node name="VECTOR2" type="BoxContainer" parent="Copy/Alpha Multiplier"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-vertical = true
-script = ExtResource("4_367j8")
-step = 0.01
-max_value = 1.0
-allow_greater = true
-select_all_on_focus = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Copy/Alpha Multiplier/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-allow_greater = true
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Copy/Alpha Multiplier/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-allow_greater = true
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Copy/Alpha Multiplier"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("2_mck23")
-
-[node name="COLOR" type="ColorPickerButton" parent="Copy/Alpha Multiplier"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("2_mck23")
-
-[node name="ENUM" type="OptionButton" parent="Copy/Alpha Multiplier"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
-
-[node name="NODE2D" type="Button" parent="Copy/Alpha Multiplier"]
-visible = false
-layout_mode = 2
-theme = ExtResource("2_mck23")
+_value = 1.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Copy/Alpha Multiplier"]
 script = ExtResource("2_rkb0o")

@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbucyw5fupwev"]
 
-[ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="1_camu5"]
+[ext_resource type="Script" uid="uid://bm3bhys0ur0ns" path="res://src/gui/properties/types/Node2DProperty.gd" id="1_camu5"]
 [ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="2_qkjbg"]
 
-[node name="Target" type="HBoxContainer" groups=["trigger_base_property"]]
+[node name="Target" type="BoxContainer" groups=["trigger_base_property"]]
 custom_minimum_size = Vector2(0, 32)
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,8 +11,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_camu5")
-type = 7
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
+metadata/_custom_type_script = "uid://bm3bhys0ur0ns"
+metadata/_edit_group_ = true
 
 [node name="TriggerPropertyInternalName" type="Node" parent="."]
 script = ExtResource("2_qkjbg")

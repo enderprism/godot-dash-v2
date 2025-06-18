@@ -9,3 +9,5 @@ scenes/levels/imported
 assets/sounds/music/level_music/*
 
 assets/textures/triggers_imported
+
+rust/

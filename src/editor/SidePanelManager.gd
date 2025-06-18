@@ -8,11 +8,11 @@ extends Node
 @export_group("Triggers")
 @export var trigger_section: SectionHeading
 @export var trigger_editor: TriggerEditor
-@export var trigger_properties: Array[Property]
+@export var trigger_properties: Array[BoolProperty]
 @export_group("Colors")
 @export var color_section: SectionHeading
-@export var base: Property
-@export var detail: Property
+@export var base: StringProperty
+@export var detail: StringProperty
 @export var hsv_shift: SectionHeading
 
 

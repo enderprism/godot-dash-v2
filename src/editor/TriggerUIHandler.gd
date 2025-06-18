@@ -2,18 +2,18 @@ extends Node
 class_name TriggerUIHandler
 
 @export var trigger_editor: TriggerEditor
-@export var single_usage: Property
-@export var spawn_triggered: Property
-@export var touch_triggered: Property
+@export var single_usage: BoolProperty
+@export var spawn_triggered: BoolProperty
+@export var touch_triggered: BoolProperty
 
 func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 	if not is_selection_trigger_only(selection):
 		return
 	var trigger_bases: Array = selection.map(func(object): return object.get_node("TriggerBase") as TriggerBase)
 	var trigger_base := trigger_bases[0] as TriggerBase
-	single_usage.set_value(trigger_base.single_usage)
-	spawn_triggered.set_value(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.DISABLED)
-	touch_triggered.set_value(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.SQUARE)
+	single_usage.set_value_no_signal(trigger_base.single_usage)
+	spawn_triggered.set_value_no_signal(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.DISABLED)
+	touch_triggered.set_value_no_signal(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.SQUARE)
 	spawn_triggered.set_input_state(trigger_base._hitbox_shape != TriggerBase.TriggerHitboxShape.SQUARE)
 	touch_triggered.set_input_state(trigger_base._hitbox_shape != TriggerBase.TriggerHitboxShape.DISABLED)
 	for property in [single_usage, spawn_triggered, touch_triggered]:

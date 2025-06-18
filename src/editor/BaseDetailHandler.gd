@@ -1,14 +1,14 @@
 extends Node
 class_name ColorChannelSetter
 
-@export var base: Property
-@export var detail: Property
+@export var base: StringProperty
+@export var detail: StringProperty
 @export var color_channel_editor: ColorChannelEditor
 
 
 func _ready() -> void:
-	base.gui_inputs[Property.Type.STRING].focus_entered.connect(_on_property_focus_entered)
-	detail.gui_inputs[Property.Type.STRING].focus_entered.connect(_on_property_focus_entered)
+	base.input.focus_entered.connect(_on_property_focus_entered)
+	detail.input.focus_entered.connect(_on_property_focus_entered)
 
 
 func _on_property_focus_entered() -> void:
@@ -20,7 +20,7 @@ func _on_base_color_value_changed(value:Variant) -> void:
 	var base_channel := value as String
 	var existing_color_channels := LevelManager.editor_edited_level.color_channels.map(func(channel): return channel.associated_group.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX))
 	if not base_channel in existing_color_channels:
-		base.set_value("")
+		base.set_value_no_signal("")
 		return
 	var objects_base: Array
 	for object in $"../EditHandler".selection:
@@ -39,7 +39,7 @@ func _on_detail_color_value_changed(value:Variant) -> void:
 	var detail_channel := value as String
 	var existing_color_channels := LevelManager.editor_edited_level.color_channels.map(func(channel): return channel.associated_group.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX))
 	if not detail_channel in existing_color_channels:
-		detail.set_value("")
+		detail.set_value_no_signal("")
 		return
 	var objects_detail: Array = (
 		$"../EditHandler".selection

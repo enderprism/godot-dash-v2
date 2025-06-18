@@ -1,15 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6gonom0s5k1n"]
+[gd_scene load_steps=13 format=3 uid="uid://b6gonom0s5k1n"]
 
 [ext_resource type="Material" uid="uid://dmfwkx1hhpd5x" path="res://resources/SimpleBlurMaterial.tres" id="1_olkne"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_r47on"]
 [ext_resource type="Script" uid="uid://86h6yxdj6auo" path="res://src/SettingsMenu.gd" id="3_rvg0e"]
 [ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="4_fiwkk"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="6_ea76q"]
-[ext_resource type="Script" uid="uid://ckqgnvpbftev7" path="res://src/gui/PropertySaveLoad.gd" id="6_p6jor"]
-[ext_resource type="Script" uid="uid://dhchdcftlesyv" path="res://src/gui/HSliderSpinBoxCombo.gd" id="8_7bjej"]
+[ext_resource type="Script" uid="uid://ckqgnvpbftev7" path="res://src/gui/properties/components/PropertySaveLoad.gd" id="6_p6jor"]
+[ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="7_ndunm"]
 [ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="8_eb8rq"]
-[ext_resource type="Script" uid="uid://cp1v71jb2n4jc" path="res://src/gui/Vector2SpinBox.gd" id="9_06nbq"]
-[ext_resource type="Script" uid="uid://dr8ohqjw3p58t" path="res://src/gui/Property.gd" id="11_06nbq"]
+[ext_resource type="Script" uid="uid://djfsy06pkw4ju" path="res://src/gui/properties/types/EnumProperty.gd" id="9_vf3uf"]
+[ext_resource type="Script" uid="uid://c73uilol0rw1g" path="res://src/gui/properties/types/FloatSliderProperty.gd" id="10_vf3uf"]
+[ext_resource type="Script" uid="uid://bss8ppxnt7gio" path="res://src/gui/properties/types/BoolProperty.gd" id="11_egxjo"]
+[ext_resource type="Script" uid="uid://bwcwfobfohbsd" path="res://src/gui/properties/types/ColorProperty.gd" id="12_bi686"]
 
 [node name="SettingsMenu" type="TabContainer"]
 texture_filter = 4
@@ -48,293 +50,30 @@ script = ExtResource("8_eb8rq")
 label_settings = ExtResource("6_ea76q")
 label_alignment = 1
 
-[node name="Max FPS" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Framerate"]
+[node name="Max FPS" type="BoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Framerate"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("11_06nbq")
-step = 1.0
-rounded = true
-or_greater = true
-suffix = "fps"
-default_float = 60.0
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
-layout_mode = 2
-text = "Max FPS"
-
-[node name="Spacer" type="Control" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
-layout_mode = 2
-theme = ExtResource("1_r47on")
-max_value = 1.0
-value = 60.0
-rounded = true
-allow_greater = true
-suffix = "fps"
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-alignment = 1
-script = ExtResource("8_7bjej")
+script = ExtResource("7_ndunm")
+default = 60.0
 step = 1.0
 rounded = true
 allow_greater = true
 suffix = "fps"
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-rounded = true
-allow_greater = true
-
-[node name="SpinBox" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-rounded = true
-allow_greater = true
-suffix = "fps"
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="VECTOR2" type="BoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-vertical = true
-script = ExtResource("9_06nbq")
-rounded = true
-step = 1.0
-max_value = 1.0
-allow_greater = true
-suffix = "fps"
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-rounded = true
-allow_greater = true
-alignment = 3
-prefix = "x:"
-suffix = "fps"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-rounded = true
-allow_greater = true
-alignment = 3
-prefix = "y:"
-suffix = "fps"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("1_r47on")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="ENUM" type="OptionButton" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="NODE2D" type="Button" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
+_value = 60.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="PropertySaveLoad" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
 script = ExtResource("6_p6jor")
 config_property = &"max_fps"
 
-[node name="VSync" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Framerate"]
+[node name="VSync" type="BoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Framerate"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("11_06nbq")
-type = 6
-step = 1.0
-rounded = true
-or_greater = true
-suffix = "fps"
-enum_fields = PackedStringArray("Disabled", "Enabled", "Adaptive", "Mailbox")
-default_float = 60.0
-default_enum_idx = 1
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
-layout_mode = 2
-text = "VSync"
-
-[node name="Spacer" type="Control" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-max_value = 1.0
-rounded = true
-allow_greater = true
-suffix = "fps"
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-alignment = 1
-script = ExtResource("8_7bjej")
-step = 1.0
-rounded = true
-allow_greater = true
-suffix = "fps"
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-rounded = true
-allow_greater = true
-
-[node name="SpinBox" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-rounded = true
-allow_greater = true
-suffix = "fps"
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="VECTOR2" type="BoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-vertical = true
-script = ExtResource("9_06nbq")
-rounded = true
-step = 1.0
-max_value = 1.0
-allow_greater = true
-suffix = "fps"
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-rounded = true
-allow_greater = true
-alignment = 3
-prefix = "x:"
-suffix = "fps"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-rounded = true
-allow_greater = true
-alignment = 3
-prefix = "y:"
-suffix = "fps"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("1_r47on")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="ENUM" type="OptionButton" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
-layout_mode = 2
-theme = ExtResource("1_r47on")
-selected = 1
-item_count = 4
-popup/item_0/text = "Disabled"
-popup/item_0/id = 0
-popup/item_1/text = "Enabled"
-popup/item_1/id = 1
-popup/item_2/text = "Adaptive"
-popup/item_2/id = 2
-popup/item_3/text = "Mailbox"
-popup/item_3/id = 3
-
-[node name="NODE2D" type="Button" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
+script = ExtResource("9_vf3uf")
+default = 1
+fields = PackedStringArray("Disabled", "Enabled", "Adaptive", "Mailbox")
+_value = 1
+metadata/_custom_type_script = "uid://djfsy06pkw4ju"
 
 [node name="PropertySaveLoad" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
 script = ExtResource("6_p6jor")
@@ -347,131 +86,15 @@ script = ExtResource("8_eb8rq")
 label_settings = ExtResource("6_ea76q")
 label_alignment = 1
 
-[node name="Window Mode" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Window"]
+[node name="Window Mode" type="BoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Window"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("11_06nbq")
-type = 6
-enum_fields = PackedStringArray("Windowed", "Borderless Fullscreen", "Exclusive Fullscreen")
-default_enum_idx = 1
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
-layout_mode = 2
-text = "Window Mode"
-
-[node name="Spacer" type="Control" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-alignment = 1
-script = ExtResource("8_7bjej")
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="VECTOR2" type="BoxContainer" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-vertical = true
-script = ExtResource("9_06nbq")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("1_r47on")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="ENUM" type="OptionButton" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
-layout_mode = 2
-theme = ExtResource("1_r47on")
-selected = 1
-item_count = 3
-popup/item_0/text = "Windowed"
-popup/item_0/id = 0
-popup/item_1/text = "Borderless Fullscreen"
-popup/item_1/id = 1
-popup/item_2/text = "Exclusive Fullscreen"
-popup/item_2/id = 2
-
-[node name="NODE2D" type="Button" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
+script = ExtResource("9_vf3uf")
+default = 1
+fields = PackedStringArray("Windowed", "Borderless Fullscreen", "Exclusive Fullscreen")
+_value = 1
+metadata/_custom_type_script = "uid://djfsy06pkw4ju"
 
 [node name="PropertySaveLoad" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
 script = ExtResource("6_p6jor")
@@ -500,610 +123,69 @@ script = ExtResource("8_eb8rq")
 label_settings = ExtResource("6_ea76q")
 label_alignment = 1
 
-[node name="Master" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
+[node name="Master" type="BoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("11_06nbq")
-type = 1
+script = ExtResource("10_vf3uf")
+default = 1.0
+max_value = 1.0
 slider_width = 256.0
-default_float = 1.0
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
-layout_mode = 2
-text = "Master"
-
-[node name="Spacer" type="Control" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
-layout_mode = 2
-theme = ExtResource("1_r47on")
-alignment = 1
-script = ExtResource("8_7bjej")
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/Volume/Master/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Master/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-value = 1.0
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="VECTOR2" type="BoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-vertical = true
-script = ExtResource("9_06nbq")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Master/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Master/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("1_r47on")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="ENUM" type="OptionButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="NODE2D" type="Button" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
+_value = 1.0
+metadata/_custom_type_script = "uid://c73uilol0rw1g"
 
 [node name="PropertySaveLoad" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
 script = ExtResource("6_p6jor")
 config_property = &"master_audio_level"
 
-[node name="Music" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
+[node name="Music" type="BoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("11_06nbq")
-type = 1
+script = ExtResource("10_vf3uf")
+default = 1.0
+max_value = 1.0
 slider_width = 256.0
-default_float = 1.0
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
-layout_mode = 2
-text = "Music"
-
-[node name="Spacer" type="Control" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
-layout_mode = 2
-theme = ExtResource("1_r47on")
-alignment = 1
-script = ExtResource("8_7bjej")
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/Volume/Music/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Music/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-value = 1.0
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="VECTOR2" type="BoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-vertical = true
-script = ExtResource("9_06nbq")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Music/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Music/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("1_r47on")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="ENUM" type="OptionButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="NODE2D" type="Button" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
+_value = 1.0
+metadata/_custom_type_script = "uid://c73uilol0rw1g"
 
 [node name="PropertySaveLoad" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
 script = ExtResource("6_p6jor")
 config_property = &"music_audio_level"
 
-[node name="Game SFX" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
+[node name="Game SFX" type="BoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("11_06nbq")
-type = 1
+script = ExtResource("10_vf3uf")
+default = 1.0
+max_value = 1.0
 slider_width = 256.0
-default_float = 1.0
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
-layout_mode = 2
-text = "Game SFX"
-
-[node name="Spacer" type="Control" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
-layout_mode = 2
-theme = ExtResource("1_r47on")
-alignment = 1
-script = ExtResource("8_7bjej")
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-value = 1.0
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="VECTOR2" type="BoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-vertical = true
-script = ExtResource("9_06nbq")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("1_r47on")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="ENUM" type="OptionButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="NODE2D" type="Button" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
+_value = 1.0
+metadata/_custom_type_script = "uid://c73uilol0rw1g"
 
 [node name="PropertySaveLoad" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
 script = ExtResource("6_p6jor")
 config_property = &"game_sfx_audio_level"
 
-[node name="Level SFX" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
+[node name="Level SFX" type="BoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("11_06nbq")
-type = 1
+script = ExtResource("10_vf3uf")
+min_value = 1.0
+max_value = 1.0
 slider_width = 256.0
-default_float = 1.0
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
-layout_mode = 2
-text = "Level SFX"
-
-[node name="Spacer" type="Control" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
-layout_mode = 2
-theme = ExtResource("1_r47on")
-alignment = 1
-script = ExtResource("8_7bjej")
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-value = 1.0
-
-[node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-value = 1.0
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="VECTOR2" type="BoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-vertical = true
-script = ExtResource("9_06nbq")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("1_r47on")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="ENUM" type="OptionButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="NODE2D" type="Button" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
+_value = 0.0
+metadata/_custom_type_script = "uid://c73uilol0rw1g"
 
 [node name="PropertySaveLoad" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
 script = ExtResource("6_p6jor")
 config_property = &"in_level_sfx_audio_level"
 
-[node name="Mute game on unfocus" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
+[node name="Mute game on unfocus" type="BoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("11_06nbq")
-type = 2
-default_bool = true
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
-layout_mode = 2
-text = "Mute game on unfocus"
-
-[node name="Spacer" type="Control" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-alignment = 1
-script = ExtResource("8_7bjej")
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
-layout_mode = 2
-theme = ExtResource("1_r47on")
-button_pressed = true
-
-[node name="VECTOR2" type="BoxContainer" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-vertical = true
-script = ExtResource("9_06nbq")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("1_r47on")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="ENUM" type="OptionButton" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="NODE2D" type="Button" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
+script = ExtResource("11_egxjo")
+default = true
+_value = true
+metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
 [node name="PropertySaveLoad" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
 script = ExtResource("6_p6jor")
@@ -1141,243 +223,26 @@ layout_mode = 2
 script = ExtResource("8_eb8rq")
 label_settings = ExtResource("6_ea76q")
 
-[node name="Color" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone"]
+[node name="Color" type="BoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("11_06nbq")
-type = 5
-default_color = Color(0, 1, 0, 1)
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
-layout_mode = 2
-text = "Color"
-
-[node name="Spacer" type="Control" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-alignment = 1
-script = ExtResource("8_7bjej")
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="VECTOR2" type="BoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-vertical = true
-script = ExtResource("9_06nbq")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("1_r47on")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("1_r47on")
-color = Color(0, 1, 0, 1)
-
-[node name="ENUM" type="OptionButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="NODE2D" type="Button" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
+script = ExtResource("12_bi686")
+default = Color(0, 1, 0, 1)
+_value = Color(0, 1, 0, 1)
+metadata/_custom_type_script = "uid://bwcwfobfohbsd"
 
 [node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
 script = ExtResource("6_p6jor")
 config_property = &"selection_zone_color"
 
-[node name="Alpha" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone"]
+[node name="Alpha" type="BoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("11_06nbq")
-default_float = 0.2
-default_color = Color(0, 1, 0, 1)
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
-layout_mode = 2
-text = "Alpha"
-
-[node name="Spacer" type="Control" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
-layout_mode = 2
-theme = ExtResource("1_r47on")
+script = ExtResource("7_ndunm")
+default = 0.2
 max_value = 1.0
-step = 0.05
-value = 0.2
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-alignment = 1
-script = ExtResource("8_7bjej")
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="VECTOR2" type="BoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-vertical = true
-script = ExtResource("9_06nbq")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("1_r47on")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="ENUM" type="OptionButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="NODE2D" type="Button" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
+_value = 0.2
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
 script = ExtResource("6_p6jor")
@@ -1389,243 +254,26 @@ layout_mode = 2
 script = ExtResource("8_eb8rq")
 label_settings = ExtResource("6_ea76q")
 
-[node name="Color" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes"]
+[node name="Color" type="BoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("11_06nbq")
-type = 5
-default_color = Color(0, 1, 1, 1)
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
-layout_mode = 2
-text = "Color"
-
-[node name="Spacer" type="Control" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-alignment = 1
-script = ExtResource("8_7bjej")
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="VECTOR2" type="BoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-vertical = true
-script = ExtResource("9_06nbq")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("1_r47on")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("1_r47on")
-color = Color(0, 1, 1, 1)
-
-[node name="ENUM" type="OptionButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="NODE2D" type="Button" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
+script = ExtResource("12_bi686")
+default = Color(0, 1, 1, 1)
+_value = Color(0, 1, 1, 1)
+metadata/_custom_type_script = "uid://bwcwfobfohbsd"
 
 [node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
 script = ExtResource("6_p6jor")
 config_property = &"trigger_hitbox_color"
 
-[node name="Alpha" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes"]
+[node name="Alpha" type="BoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("11_06nbq")
-default_float = 0.2
-default_color = Color(0, 1, 0, 1)
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
-layout_mode = 2
-text = "Alpha"
-
-[node name="Spacer" type="Control" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
-layout_mode = 2
-theme = ExtResource("1_r47on")
+script = ExtResource("7_ndunm")
+default = 0.2
 max_value = 1.0
-step = 0.05
-value = 0.2
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-alignment = 1
-script = ExtResource("8_7bjej")
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-
-[node name="SpinBox" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="VECTOR2" type="BoxContainer" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-vertical = true
-script = ExtResource("9_06nbq")
-step = 0.05
-max_value = 1.0
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "x:"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-alignment = 3
-prefix = "y:"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("1_r47on")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="ENUM" type="OptionButton" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="NODE2D" type="Button" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
+_value = 0.2
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
 script = ExtResource("6_p6jor")
@@ -1638,144 +286,23 @@ label_settings = ExtResource("6_ea76q")
 label_alignment = 1
 metadata/_custom_type_script = "uid://cuih47milvqcs"
 
-[node name="Autosave Delay" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Level"]
+[node name="Autosave Delay" type="BoxContainer" parent="Editor/MarginContainer/VBoxContainer/Level"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 tooltip_text = "Delay in minutes after which the level will be automatically saved.
 The autosave timer will not start for levels that were never saved."
-script = ExtResource("11_06nbq")
-or_greater = true
-suffix = "min"
-default_float = 2.0
-metadata/_custom_type_script = "uid://dr8ohqjw3p58t"
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
-layout_mode = 2
-text = "Autosave Delay"
-
-[node name="Spacer" type="Control" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FILE" type="MenuButton" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-flat = false
-item_count = 2
-popup/item_0/text = "Load"
-popup/item_0/id = 0
-popup/item_1/text = "Import and load"
-popup/item_1/id = 1
-
-[node name="FLOAT" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
-layout_mode = 2
-theme = ExtResource("1_r47on")
-max_value = 1.0
-step = 0.05
-value = 2.0
-allow_greater = true
-suffix = "min"
-select_all_on_focus = true
-
-[node name="FLOAT_SLIDER" type="HBoxContainer" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-alignment = 1
-script = ExtResource("8_7bjej")
-allow_greater = true
-suffix = "min"
-select_all_on_focus = true
-slider_width = 100.0
-expand_to_text_length = true
-
-[node name="HSlider" type="HSlider" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay/FLOAT_SLIDER"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 1.0
-step = 0.05
-allow_greater = true
-
-[node name="SpinBox" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay/FLOAT_SLIDER"]
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-allow_greater = true
-suffix = "min"
-select_all_on_focus = true
-
-[node name="BOOL" type="CheckBox" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="VECTOR2" type="BoxContainer" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-vertical = true
-script = ExtResource("9_06nbq")
-step = 0.05
+script = ExtResource("7_ndunm")
+default = 2.0
 max_value = 1.0
 allow_greater = true
 suffix = "min"
-select_all_on_focus = true
-expand_to_text_length = true
-
-[node name="SpinBoxX" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-allow_greater = true
-alignment = 3
-prefix = "x:"
-suffix = "min"
-select_all_on_focus = true
-
-[node name="SpinBoxY" type="SpinBox" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay/VECTOR2"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-allow_greater = true
-alignment = 3
-prefix = "y:"
-suffix = "min"
-select_all_on_focus = true
-
-[node name="STRING" type="LineEdit" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-focus_mode = 1
-theme = ExtResource("1_r47on")
-expand_to_text_length = true
-
-[node name="COLOR" type="ColorPickerButton" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="ENUM" type="OptionButton" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
-
-[node name="NODE2D" type="Button" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_r47on")
+_value = 2.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
 script = ExtResource("6_p6jor")
 config_property = &"autosave_delay"
 
-[connection signal="value_changed" from="Graphics/MarginContainer/VBoxContainer/Window/Window Mode" to="." method="_on_window_mode_value_changed"]
 [connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/Volume/Master" to="." method="_on_game_volume_value_changed"]
 [connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/Volume/Music" to="." method="_on_music_volume_value_changed"]
 [connection signal="value_changed" from="Audio/MarginContainer/VBoxContainer/Volume/Game SFX" to="." method="_on_game_sfx_volume_value_changed"]
