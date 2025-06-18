@@ -18,7 +18,6 @@ signal value_changed(value: float)
 
 var label: Label
 var input: HSliderSpinBoxCombo
-var value: set = set_value, get = get_value
 
 func _ready() -> void:
 	label = NodeUtils.get_node_or_add(self, "Label", Label, NodeUtils.INTERNAL)
@@ -31,12 +30,19 @@ func _ready() -> void:
 	line_edit.text_submitted.connect(submitted_release_focus)
 	line_edit.editing_toggled.connect(unedit_release_focus)
 	refresh()
+	if _value == null:
+		reset()
+	NodeUtils \
+		.get_node_or_add(self, "PropertyReset", PropertyReset, NodeUtils.INTERNAL) \
+		.set_input(input)
 
 func set_value(new_value: float) -> void:
+	_value = new_value
 	input.set_value_no_signal(new_value)
 	value_changed.emit(new_value)
 
 func set_value_no_signal(new_value: float) -> void:
+	_value = new_value
 	input.set_value_no_signal(new_value)
 
 func get_value() -> float:

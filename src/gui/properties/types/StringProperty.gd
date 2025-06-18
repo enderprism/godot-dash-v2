@@ -12,7 +12,6 @@ signal value_changed(value: String)
 
 var label: Label
 var input: LineEdit
-var value: set = set_value, get = get_value
 
 func _ready() -> void:
 	label = NodeUtils.get_node_or_add(self, "Label", Label, NodeUtils.INTERNAL)
@@ -24,12 +23,19 @@ func _ready() -> void:
 	input.editing_toggled.connect(unedit_release_focus)
 	renamed.connect(refresh)
 	refresh()
+	if _value == null:
+		reset()
+	NodeUtils \
+		.get_node_or_add(self, "PropertyReset", PropertyReset, NodeUtils.INTERNAL) \
+		.set_input(input)
 
 func set_value(new_value: String) -> void:
+	_value = new_value
 	input.set_text(new_value)
 	value_changed.emit(new_value)
 
 func set_value_no_signal(new_value: String) -> void:
+	_value = new_value
 	input.set_text(new_value)
 
 func get_value() -> String:

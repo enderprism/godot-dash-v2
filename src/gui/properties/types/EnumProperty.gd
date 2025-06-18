@@ -19,15 +19,19 @@ func _ready() -> void:
 	input.item_selected.connect(func(new_value): value_changed.emit(new_value))
 	renamed.connect(refresh)
 	refresh()
+	if _value == null:
+		reset()
 	NodeUtils \
 		.get_node_or_add(self, "PropertyReset", PropertyReset, NodeUtils.INTERNAL) \
 		.set_input(input)
 
 func set_value(new_value: int) -> void:
+	_value = new_value
 	input.selected = new_value
 	value_changed.emit(new_value)
 
 func set_value_no_signal(new_value: int) -> void:
+	_value = new_value
 	input.selected = new_value
 
 func get_value() -> int:

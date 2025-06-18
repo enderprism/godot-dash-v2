@@ -2,6 +2,10 @@ extends BoxContainer
 class_name AbstractProperty
 
 
+# Used to serialize the value
+@export_storage var _value: Variant
+
+
 func reset() -> void:
 	pass
 
