@@ -5,6 +5,8 @@ class_name AbstractProperty
 # Used to serialize the value
 @export_storage var _value: Variant
 
+func _init() -> void:
+	custom_minimum_size.y = 32.0
 
 func reset() -> void:
 	pass
