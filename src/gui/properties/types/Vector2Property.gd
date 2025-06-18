@@ -40,6 +40,10 @@ func set_value(new_value: Vector2) -> void:
 	input.set_value_no_signal(new_value)
 	value_changed.emit(new_value)
 
+func set_value_no_signal(new_value: Vector2) -> void:
+	_value = new_value
+	input.set_value_no_signal(new_value)
+
 func get_value() -> Vector2:
 	return input.get_value()
 
