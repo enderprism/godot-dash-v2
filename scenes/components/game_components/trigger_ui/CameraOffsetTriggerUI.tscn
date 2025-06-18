@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxccroo8uyygd"]
+
+[ext_resource type="Script" uid="uid://djfsy06pkw4ju" path="res://src/gui/properties/types/EnumProperty.gd" id="1_7q6lm"]
+[ext_resource type="Script" uid="uid://crich318mmmk2" path="res://src/gui/properties/types/Vector2Property.gd" id="2_gdjgg"]
+[ext_resource type="Script" uid="uid://bss8ppxnt7gio" path="res://src/gui/properties/types/BoolProperty.gd" id="3_a85tx"]
+
+[node name="CameraOffsetTriggerUI" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Mode" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("1_7q6lm")
+fields = PackedStringArray("Set", "Add")
+_value = 0
+metadata/_custom_type_script = "uid://djfsy06pkw4ju"
+
+[node name="Offset" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("2_gdjgg")
+min_value = -100.0
+allow_lesser = true
+allow_greater = true
+suffix = "units"
+_value = Vector2(0, 0)
+metadata/_custom_type_script = "uid://crich318mmmk2"
+
+[node name="From center" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("3_a85tx")
+_value = false
+metadata/_custom_type_script = "uid://bss8ppxnt7gio"
