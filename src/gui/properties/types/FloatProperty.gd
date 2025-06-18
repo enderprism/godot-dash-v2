@@ -29,8 +29,6 @@ func _ready() -> void:
 	line_edit.text_submitted.connect(submitted_release_focus)
 	line_edit.editing_toggled.connect(unedit_release_focus)
 	refresh()
-	if _value == null:
-		reset()
 	NodeUtils \
 		.get_node_or_add(self, "PropertyReset", PropertyReset, NodeUtils.INTERNAL) \
 		.set_input(input)

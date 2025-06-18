@@ -23,8 +23,6 @@ func _ready() -> void:
 	input.editing_toggled.connect(unedit_release_focus)
 	renamed.connect(refresh)
 	refresh()
-	if _value == null:
-		reset()
 	NodeUtils \
 		.get_node_or_add(self, "PropertyReset", PropertyReset, NodeUtils.INTERNAL) \
 		.set_input(input)

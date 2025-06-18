@@ -19,8 +19,6 @@ func _ready() -> void:
 	input.item_selected.connect(func(new_value): value_changed.emit(new_value))
 	renamed.connect(refresh)
 	refresh()
-	if _value == null:
-		reset()
 	NodeUtils \
 		.get_node_or_add(self, "PropertyReset", PropertyReset, NodeUtils.INTERNAL) \
 		.set_input(input)
