@@ -16,24 +16,27 @@ func _process(_delta: float) -> void:
 		if focused_property in [hue, saturation, value] and get_viewport().gui_get_hovered_control() == editor_viewport:
 			editor_viewport.grab_focus()
 
+func _has_hsv_watcher(object) -> bool:
+	return object.has_node("HSVWatcher")
+
 func _on_hue_value_changed(new_value: Variant) -> void:
-	$"../EditHandler".selection.map(func(object): object.get_node("HSVWatcher").hsv_shift[0] = new_value)
+	$"../EditHandler".selection.filter(_has_hsv_watcher).map(func(object): object.get_node("HSVWatcher").hsv_shift[0] = new_value)
 
 
 func _on_saturation_value_changed(new_value: Variant) -> void:
-	$"../EditHandler".selection.map(func(object): object.get_node("HSVWatcher").hsv_shift[1] = new_value)
+	$"../EditHandler".selection.filter(_has_hsv_watcher).map(func(object): object.get_node("HSVWatcher").hsv_shift[1] = new_value)
 
 
 func _on_value_value_changed(new_value: Variant) -> void:
-	$"../EditHandler".selection.map(func(object): object.get_node("HSVWatcher").hsv_shift[2] = new_value)
+	$"../EditHandler".selection.filter(_has_hsv_watcher).map(func(object): object.get_node("HSVWatcher").hsv_shift[2] = new_value)
 
 
 func _on_strength_value_changed(new_value: Variant) -> void:
-	$"../EditHandler".selection.map(func(object): object.get_node("HSVWatcher").strength = new_value)
+	$"../EditHandler".selection.filter(_has_hsv_watcher).map(func(object): object.get_node("HSVWatcher").strength = new_value)
 
 
 func _on_alpha_value_changed(new_value: Variant) -> void:
-	$"../EditHandler".selection.map(func(object): object.get_node("HSVWatcher").alpha = new_value)
+	$"../EditHandler".selection.filter(_has_hsv_watcher).map(func(object): object.get_node("HSVWatcher").alpha = new_value)
 
 
 func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
