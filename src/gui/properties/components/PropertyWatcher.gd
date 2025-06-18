@@ -7,7 +7,7 @@ class_name PropertyWatcher
 @export var property: StringName
 
 func _ready() -> void:
-	var parent := get_parent() as Property
+	var parent := get_parent() as AbstractProperty
 	parent.value_changed.connect(_watcher_update_value)
 
 func _watcher_update_value(value: Variant) -> void:
