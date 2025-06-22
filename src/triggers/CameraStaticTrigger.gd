@@ -33,7 +33,7 @@ var _initial_global_position: Vector2
 func _ready() -> void:
 	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK | TriggerSetup.ADD_EASING)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/CameraStatic.svg"))
-	_target = base._target
+	update_target_link()
 
 
 func update_target_link() -> void:
@@ -41,6 +41,7 @@ func update_target_link() -> void:
 
 
 func start(_body: Node2D) -> void:
+	_target = base._target
 	# if LevelManager.active_camera_static != null and LevelManager.active_camera_static != self:
 	# 	LevelManager.active_camera_static.easing._tween.pause()
 	# 	LevelManager.active_camera_static.easing._tween.custom_step(easing.duration)
@@ -92,12 +93,12 @@ func _physics_process(_delta: float) -> void:
 				Mode.ENTER:
 					if not ignore_x:
 						_player_camera.global_position.x = lerpf(
-							_player_camera.global_position.x,
+							_initial_global_position.x,
 							_target.global_position.x,
 							easing.weight)
 					if not ignore_y:
 						_player_camera.global_position.y = lerpf(
-							_player_camera.global_position.y,
+							_initial_global_position.y,
 							_target.global_position.y,
 							easing.weight)
 				Mode.EXIT:
@@ -111,7 +112,7 @@ func _physics_process(_delta: float) -> void:
 							1.0,
 							easing.weight)
 						_player_camera.global_position.x = lerpf(
-							_player_camera.global_position.x,
+							_initial_global_position.x,
 							_player.global_position.x,
 							easing.weight)
 					if not ignore_y:
@@ -124,7 +125,7 @@ func _physics_process(_delta: float) -> void:
 							1.0,
 							easing.weight)
 						_player_camera.global_position.y = lerpf(
-							_player_camera.global_position.y,
+							_initial_global_position.y,
 							_player.global_position.y,
 							easing.weight)
 		else:
