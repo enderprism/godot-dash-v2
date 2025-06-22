@@ -45,7 +45,7 @@ func _ready() -> void:
 
 func update_internals() -> void:
 	if keep_aspect:
-		aspect_ratio = get_viewport_rect().size.x/get_viewport_rect().size.y
+		aspect_ratio = get_viewport_rect().size.aspect()
 	for spinbox in [spinbox_x, spinbox_y]:
 		spinbox.min_value = min_value
 		spinbox.max_value = max_value
