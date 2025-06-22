@@ -2,9 +2,14 @@
 extends Node2D
 class_name SongTrigger
 
-@export var _song_stream: AudioStream
-@export var _song_start: float
+@export var song_path: String:
+	set(value):
+		song_path = value
+		if LevelManager.level_playing:
+			song_stream = LevelProps.load_song(song_path)
+@export var song_start: float
 
+var song_stream: AudioStream
 var base: TriggerBase
 
 func _ready() -> void:
@@ -12,5 +17,5 @@ func _ready() -> void:
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Song.svg"))
 
 func start(_body: Node2D) -> void:
-	LevelManager.level_song_player.stream = _song_stream
-	LevelManager.level_song_player.play(_song_start)
+	LevelManager.level_song_player.stream = song_stream
+	LevelManager.level_song_player.play(song_start)
