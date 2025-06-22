@@ -16,7 +16,8 @@ const START_SPEED: Array[float] = [
 @export_file var song_path: String:
 	set(value):
 		song_path = value
-		update_song(value)
+		if song_player != null:
+			song_player.stream = load_song(value)
 @export_range(0.0, 60.0, 0.01, "or_greater", "suffix:s") var song_start_time: float
 @export var platformer: bool
 @export var start_speed: int = 2
@@ -32,7 +33,7 @@ func _ready() -> void:
 	if version_history == null:
 		version_history = UndoRedo.new()
 	_pause_manager = LevelManager.pause_manager
-	update_song(song_path)
+	song_player.stream = load_song(song_path)
 	song_player.process_mode = Node.PROCESS_MODE_PAUSABLE
 	song_player.set_bus("Music")
 	LevelManager.level_song_player = song_player
@@ -66,11 +67,11 @@ func setup_color_channel_watchers() -> void:
 		add_child(watcher)
 
 
-func update_song(path: String) -> void:
-	if path.is_empty() or song_player == null:
+static func load_song(path: String) -> AudioStream:
+	if path.is_empty():
 		return
 	var audio_stream: AudioStream
-	match song_path.get_extension():
+	match path.get_extension():
 		"mp3":
 			audio_stream = AudioStreamMP3.load_from_file(path)
 		"wav":
@@ -79,4 +80,4 @@ func update_song(path: String) -> void:
 			audio_stream = AudioStreamOggVorbis.load_from_file(path)
 		_:
 			printerr("Song isn't of valid type")
-	song_player.stream = audio_stream
+	return audio_stream
