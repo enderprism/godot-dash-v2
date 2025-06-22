@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxsksqqquhq7u"]
+
+[ext_resource type="Script" uid="uid://djfsy06pkw4ju" path="res://src/gui/properties/types/EnumProperty.gd" id="1_ilj7w"]
+[ext_resource type="Script" uid="uid://crich318mmmk2" path="res://src/gui/properties/types/Vector2Property.gd" id="2_kha8o"]
+
+[node name="CameraOffsetTriggerUI" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Mode" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("1_ilj7w")
+fields = PackedStringArray("Set", "Multiply", "Divide")
+_value = 0
+metadata/_custom_type_script = "uid://djfsy06pkw4ju"
+
+[node name="Zoom" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("2_kha8o")
+default = Vector2(1, 1)
+min_value = -100.0
+allow_lesser = true
+allow_greater = true
+_value = Vector2(1, 1)
+metadata/_custom_type_script = "uid://crich318mmmk2"
