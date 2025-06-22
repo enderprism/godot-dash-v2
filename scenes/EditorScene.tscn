@@ -1,4 +1,4 @@
-[gd_scene load_steps=220 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=222 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -147,7 +147,9 @@
 [ext_resource type="PackedScene" uid="uid://qgdkpydyjs5f" path="res://scenes/components/game_components/TriggerEditor.tscn" id="65_1n4fp"]
 [ext_resource type="Texture2D" uid="uid://bxkysp21y32lm" path="res://assets/textures/portals/speed_portals/SpeedPortal3x.svg" id="66_wdba8"]
 [ext_resource type="Texture2D" uid="uid://crgfornwvgker" path="res://assets/textures/portals/speed_portals/SpeedPortal4x.svg" id="68_107fg"]
+[ext_resource type="Texture2D" uid="uid://bifer0ndxb2i0" path="res://assets/textures/orbs/TeleportationOrbOutline.svg" id="70_33w7i"]
 [ext_resource type="Texture2D" uid="uid://b8gagycaqj5bl" path="res://assets/textures/portals/speed_portals/SpeedPortal5x.svg" id="70_av0ti"]
+[ext_resource type="PackedScene" uid="uid://bbcetmg5ilsc1" path="res://scenes/components/level_components/orbs/TeleportOrb.tscn" id="71_t7625"]
 [ext_resource type="Texture2D" uid="uid://dsq6xk2pblqrm" path="res://assets/textures/portals/other_portals/gravity_portal_normal/GravityPortalNormalFront.png" id="72_av0ti"]
 [ext_resource type="PackedScene" uid="uid://bwqcjqk3as34v" path="res://scenes/components/level_components/portals/other_portals/GravityPortalNormal.tscn" id="72_pd34h"]
 [ext_resource type="Script" uid="uid://ga3j0304hroi" path="res://src/editor/HSVHandler.gd" id="73_s77jp"]
@@ -500,11 +502,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
 theme = ExtResource("147_1ad2k")
-current_tab = 0
+current_tab = 4
 script = ExtResource("4_2at5j")
 metadata/_tab_index = 0
 
 [node name="Blocks" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place"]
+visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 0
@@ -2785,6 +2788,25 @@ script = ExtResource("7_f0stj")
 type = 7
 object = ExtResource("31_q754w")
 
+[node name="TeleportOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("147_1ad2k")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("70_33w7i")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/TeleportOrb"]
+script = ExtResource("7_f0stj")
+type = 7
+object = ExtResource("71_t7625")
+
 [node name="Pads" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
 layout_mode = 2
 
@@ -3396,7 +3418,6 @@ type = 7
 object = ExtResource("83_gaibe")
 
 [node name="Triggers" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 metadata/_tab_name = ""

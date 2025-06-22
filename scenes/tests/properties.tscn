@@ -25,6 +25,7 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("1_1q0ts")
 default = 50.0
+expand_to_text_length = null
 _value = 50.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
@@ -35,6 +36,7 @@ script = ExtResource("2_rks8l")
 default = 7.5
 min_value = 5.0
 max_value = 10.0
+expand_to_text_length = null
 _value = 7.5
 metadata/_custom_type_script = "uid://c73uilol0rw1g"
 
