@@ -13,6 +13,7 @@ signal value_changed(value: float)
 @export var allow_greater: bool
 @export var prefix: String
 @export var suffix: String
+@export var expand_to_text_length: bool
 @export_tool_button("Refresh") var _refresh = refresh
 
 var label: Label
@@ -59,6 +60,7 @@ func refresh() -> void:
 	input.prefix = prefix
 	input.suffix = suffix
 	input.select_all_on_focus = true
+	input.get_line_edit().expand_to_text_length = expand_to_text_length
 	if Engine.is_editor_hint():
 		reset()
 

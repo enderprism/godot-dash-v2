@@ -14,6 +14,7 @@ signal value_changed(value: float)
 @export var prefix: String
 @export var suffix: String
 @export var slider_width: float = 100.0
+@export var expand_to_text_length: bool
 @export_tool_button("Refresh") var _refresh = refresh
 
 var label: Label
@@ -61,6 +62,7 @@ func refresh() -> void:
 	input.suffix = suffix
 	input.select_all_on_focus = true
 	input.slider_width = slider_width
+	input.expand_to_text_length = expand_to_text_length
 	input.update_internals()
 	if Engine.is_editor_hint():
 		reset()
