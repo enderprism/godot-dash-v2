@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://b13vff5jd4eg3"]
+
+[ext_resource type="Script" uid="uid://3na5h1vigpxe" path="res://src/gui/properties/types/FileProperty.gd" id="1_cgw8h"]
+[ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="2_w6aa4"]
+[ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="3_w6aa4"]
+
+[node name="SongTriggerUI" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Song" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("1_cgw8h")
+load_root = "user://created_levels/songs/"
+import_to = "user://created_levels/songs/"
+_value = ""
+metadata/_custom_type_script = "uid://3na5h1vigpxe"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Song"]
+script = ExtResource("2_w6aa4")
+property_name = "song_path"
+
+[node name="Start" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("3_w6aa4")
+suffix = "s"
+_value = 0.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Start"]
+script = ExtResource("2_w6aa4")
+property_name = "song_start"
