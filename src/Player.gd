@@ -610,8 +610,8 @@ func _update_wave_trail(delta: float) -> void:
 	if displayed_gamemode == Gamemode.WAVE:
 		%WaveTrail.modulate.a = 1.0
 		%WaveTrailInner.modulate.a = 1.0
-		%WaveTrail.length = lerpf(%WaveTrail.length, WAVE_TRAIL_LENGTH, delta * 60 * 0.2)
-		%WaveTrailInner.length = lerpf(%WaveTrail.length, WAVE_TRAIL_LENGTH, delta * 60 * 0.2)
+		%WaveTrail.length = lerpf(%WaveTrail.length, WAVE_TRAIL_LENGTH / LevelManager.player_camera.zoom.x, delta * 60 * 0.2)
+		%WaveTrailInner.length = lerpf(%WaveTrail.length, WAVE_TRAIL_LENGTH / LevelManager.player_camera.zoom.x, delta * 60 * 0.2)
 	else:
 		%WaveTrail.length = 0
 		%WaveTrailInner.length = 0
