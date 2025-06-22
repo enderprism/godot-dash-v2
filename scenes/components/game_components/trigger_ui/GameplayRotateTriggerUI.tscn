@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://dal8v0o3rmhy6"]
+
+[ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="1_o1ugb"]
+[ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="2_3n0gl"]
+[ext_resource type="Script" uid="uid://bss8ppxnt7gio" path="res://src/gui/properties/types/BoolProperty.gd" id="3_3n0gl"]
+
+[node name="TimewarpTriggerUI" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gameplay Rotation" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("1_o1ugb")
+min_value = -360.0
+max_value = 360.0
+allow_lesser = true
+allow_greater = true
+suffix = "°"
+_value = 0.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Gameplay Rotation"]
+script = ExtResource("2_3n0gl")
+property_name = "_rotation_degrees"
+
+[node name="Reverse" type="BoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("3_3n0gl")
+_value = false
+metadata/_custom_type_script = "uid://bss8ppxnt7gio"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Reverse"]
+script = ExtResource("2_3n0gl")
+property_name = "_reverse"
