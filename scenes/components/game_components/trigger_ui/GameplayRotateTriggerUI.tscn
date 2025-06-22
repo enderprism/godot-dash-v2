@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="2_3n0gl"]
 [ext_resource type="Script" uid="uid://bss8ppxnt7gio" path="res://src/gui/properties/types/BoolProperty.gd" id="3_3n0gl"]
 
-[node name="TimewarpTriggerUI" type="VBoxContainer"]
+[node name="GameplayRotateTriggerUI" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

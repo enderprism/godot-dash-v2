@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="8_cat87"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="9_p3kac"]
 
-[node name="RotateTriggerUI" type="VBoxContainer"]
+[node name="CameraRotateTriggerUI" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

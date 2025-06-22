@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/gui/properties/components/PropertyWatcher.gd" id="2_qpuqq"]
 [ext_resource type="Script" uid="uid://bss8ppxnt7gio" path="res://src/gui/properties/types/BoolProperty.gd" id="3_h0pr1"]
 
-[node name="CameraOffsetTriggerUI" type="VBoxContainer"]
+[node name="CameraStaticTriggerUI" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
