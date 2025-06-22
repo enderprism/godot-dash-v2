@@ -15,11 +15,10 @@ func _ready() -> void:
 	TriggerSetup.setup(self)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Gravity.svg"))
 
-func _process(_delta: float) -> void:
-	if not Engine.is_editor_hint() and not easing.is_inactive():
-		if easing.duration > 0.0:
-			var _gravity_multiplier_delta: float = (gravity_multiplier - _initial_gravity_multiplier) * easing.weight_delta
-			_player.gameplay_trigger_gravity_multiplier += _gravity_multiplier_delta
+func _physics_process(_delta: float) -> void:
+	if not Engine.is_editor_hint() and not easing.is_inactive() and easing.duration > 0.0:
+		var _gravity_multiplier_delta: float = (gravity_multiplier - _initial_gravity_multiplier) * easing.weight_delta
+		_player.gameplay_trigger_gravity_multiplier += _gravity_multiplier_delta
 	if Engine.is_editor_hint():
 		base.position = Vector2.ZERO
 
@@ -29,4 +28,4 @@ func start(_body: Node2D) -> void:
 		_player.gameplay_trigger_gravity_multiplier = gravity_multiplier
 
 func reset() -> void:
-	_player.gravity_multiplier = _initial_gravity_multiplier
+	_player.gameplay_trigger_gravity_multiplier = _initial_gravity_multiplier
