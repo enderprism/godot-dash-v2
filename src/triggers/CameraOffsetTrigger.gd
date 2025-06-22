@@ -11,16 +11,8 @@ enum Mode {
 	set(value):
 		mode = value
 		notify_property_list_changed()
-@export var set_offset: Vector2
-@export var add_offset: Vector2
+@export var offset: Vector2
 @export var from_center: bool
-
-# Hide unneeded elements in the inspector
-func _validate_property(property: Dictionary) -> void:
-	if property.name == "set_offset" and mode != Mode.SET:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name == "add_offset" and mode != Mode.ADD:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 var base: TriggerBase
 var easing: TriggerEasing
@@ -42,9 +34,9 @@ func _physics_process(_delta: float) -> void:
 				_player_camera.additional_offset_multiplier = _player_camera.additional_offset_multiplier.lerp(Vector2.ONE, easing.weight)
 			match mode:
 				Mode.SET:
-					_player_camera.additional_offset += (set_offset - _initial_offset) * easing.weight_delta
+					_player_camera.additional_offset += (offset - _initial_offset) * easing.weight_delta
 				Mode.ADD:
-					_player_camera.additional_offset += add_offset * easing.weight_delta
+					_player_camera.additional_offset += offset * easing.weight_delta
 		else:
 			printerr("In ", name, ": _player_camera is unset")
 	elif Engine.is_editor_hint():
