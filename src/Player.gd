@@ -469,7 +469,10 @@ func _rotate_sprite_degrees(delta: float):
 					-last_collision.get_normal().angle_to(up_direction) + gameplay_rotation + ceiling_slide_rotation,
 					delta * 60 * ICON_LERP_FACTOR)
 	else:
-		sprite_floor_angle = lerp_angle(sprite_floor_angle, gameplay_rotation, delta * 60 * ICON_LERP_FACTOR)
+		if displayed_gamemode == Gamemode.CUBE:
+			sprite_floor_angle = 0.0
+		else:
+			sprite_floor_angle = lerp_angle(sprite_floor_angle, gameplay_rotation, delta * 60 * ICON_LERP_FACTOR)
 	#region cube
 	$Icon/Cube.scale.y = 1.0
 	if horizontal_direction != 0:
@@ -478,9 +481,9 @@ func _rotate_sprite_degrees(delta: float):
 		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
 			$Icon/Cube.rotation_degrees += delta * gravity_multiplier * 400 * get_direction()
 		else:
-			$Icon/Cube.rotation = lerpf(
+			$Icon/Cube.rotation = lerp_angle(
 					$Icon/Cube.rotation,
-					snapped($Icon/Cube.rotation + sprite_floor_angle, PI) - sprite_floor_angle,
+					snapped($Icon/Cube.rotation + sprite_floor_angle, PI/2) - sprite_floor_angle,
 					ICON_LERP_FACTOR * delta * 60)
 	else:
 		$Icon/Cube.rotation_degrees += delta * 800 * dash_control.initial_horizontal_direction
