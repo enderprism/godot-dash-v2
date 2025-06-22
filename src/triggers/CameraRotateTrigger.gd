@@ -3,8 +3,8 @@ extends Node2D
 class_name CameraRotateTrigger
 
 enum Mode {
-	SET,
 	ADD,
+	SET,
 	COPY,
 }
 
