@@ -64,6 +64,7 @@ func _physics_process(_delta: float) -> void:
 			if not is_zero_approx(easing.duration):
 				_indicator.show()
 				for _player in _players:
+					if _player == null: continue
 					var _rotation_delta: float = (_rotation_degrees - _initial_global_rotation_degrees[_player]) * easing.weight_delta
 					_player.gameplay_rotation_degrees = lerp(_initial_global_rotation_degrees[_player], _rotation_degrees, easing.weight)
 					_player.get_node("DashFlame").rotation_degrees += _rotation_delta
