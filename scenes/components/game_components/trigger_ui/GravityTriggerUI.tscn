@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://djuqnkewnatai"]
+
+[ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="1_yclds"]
+[ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="2_k0mxp"]
+
+[node name="GravityTriggerUI" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gravity multiplier" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("1_yclds")
+default = 1.0
+allow_greater = true
+_value = 1.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Gravity multiplier"]
+script = ExtResource("2_k0mxp")
+property_name = "gravity_multiplier"
