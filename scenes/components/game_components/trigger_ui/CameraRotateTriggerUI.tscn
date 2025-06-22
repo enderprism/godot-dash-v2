@@ -1,0 +1,99 @@
+[gd_scene load_steps=9 format=3 uid="uid://c3bm1ap61ya4n"]
+
+[ext_resource type="Script" uid="uid://djfsy06pkw4ju" path="res://src/gui/properties/types/EnumProperty.gd" id="2_6gmng"]
+[ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/gui/properties/components/PropertyWatcher.gd" id="3_qo22w"]
+[ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="4_f3edl"]
+[ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="5_m6sii"]
+[ext_resource type="Script" uid="uid://bss8ppxnt7gio" path="res://src/gui/properties/types/BoolProperty.gd" id="6_slv1k"]
+[ext_resource type="Script" uid="uid://bm3bhys0ur0ns" path="res://src/gui/properties/types/Node2DProperty.gd" id="7_x5keu"]
+[ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="8_cat87"]
+[ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="9_p3kac"]
+
+[node name="RotateTriggerUI" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Mode" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("2_6gmng")
+default = 1
+fields = PackedStringArray("Add", "Set", "Copy")
+_value = 1
+metadata/_custom_type_script = "uid://djfsy06pkw4ju"
+
+[node name="TriggerPropertyWatcher" type="Node" parent="Mode" node_paths=PackedStringArray("target")]
+script = ExtResource("3_qo22w")
+target = NodePath("../../Copy")
+condition = "value == 2"
+property = &"visible"
+metadata/_custom_type_script = "uid://dewr6g2sliqsr"
+
+[node name="TriggerPropertyWatcher2" type="Node" parent="Mode" node_paths=PackedStringArray("target")]
+script = ExtResource("3_qo22w")
+target = NodePath("../../Rotation")
+condition = "value != 2"
+property = &"visible"
+metadata/_custom_type_script = "uid://dewr6g2sliqsr"
+
+[node name="Rotation" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("4_f3edl")
+min_value = -360.0
+max_value = 360.0
+allow_lesser = true
+allow_greater = true
+suffix = "°"
+_value = 0.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Rotation"]
+script = ExtResource("5_m6sii")
+property_name = "_rotation_degrees"
+
+[node name="Copy" type="VBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("8_cat87")
+label_settings = ExtResource("9_p3kac")
+metadata/_custom_type_script = "uid://cuih47milvqcs"
+
+[node name="Target" type="BoxContainer" parent="Copy" groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("7_x5keu")
+metadata/_custom_type_script = "uid://bm3bhys0ur0ns"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Copy/Target"]
+script = ExtResource("5_m6sii")
+property_name = "_copy_target"
+
+[node name="Look At Target" type="BoxContainer" parent="Copy" groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("6_slv1k")
+_value = false
+metadata/_custom_type_script = "uid://bss8ppxnt7gio"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Copy/Look At Target"]
+script = ExtResource("5_m6sii")
+property_name = "_copy_look_at"
+
+[node name="Rotation Offset" type="BoxContainer" parent="Copy" groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("4_f3edl")
+min_value = -360.0
+max_value = 360.0
+allow_lesser = true
+allow_greater = true
+suffix = "°"
+_value = 0.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Copy/Rotation Offset"]
+script = ExtResource("5_m6sii")
+property_name = "_copy_offset"
