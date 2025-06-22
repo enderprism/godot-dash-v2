@@ -58,9 +58,9 @@ const EVALUATE_CLICK_BUFFER := 1
 		for icon in $Icon.get_children():
 			if icon.gamemode != value:
 				icon.hide()
-			elif (not LevelManager.platformer and speed_multiplier > 0.0) and icon.platformer == IconGamemodeProp.PlatformerState.PLATFORMER_ONLY:
+			elif icon.platformer == IconGamemodeProp.PlatformerState.PLATFORMER_ONLY and (not LevelManager.platformer and speed_multiplier > 0.0):
 				icon.hide()
-			elif (LevelManager.platformer or speed_multiplier == 0.0) and icon.platformer == IconGamemodeProp.PlatformerState.SIDESCROLLER_ONLY:
+			elif icon.platformer == IconGamemodeProp.PlatformerState.SIDESCROLLER_ONLY and (LevelManager.platformer or speed_multiplier == 0.0):
 				icon.hide()
 			else:
 				icon.show()
@@ -175,6 +175,7 @@ func _physics_process(delta: float) -> void:
 		var rotation_local_global_position = global_position.rotated(-gameplay_rotation)
 		var rotation_local_portal_global_position = speed_0_portal_control.parent.global_position.rotated(-gameplay_rotation)
 		var rotation_local_velocity = velocity.rotated(-gameplay_rotation)
+		displayed_gamemode = displayed_gamemode
 		global_position = Vector2(
 			rotation_local_global_position.lerp(rotation_local_portal_global_position, 0.3 * delta * 60).x,
 			rotation_local_global_position.y
@@ -184,7 +185,6 @@ func _physics_process(delta: float) -> void:
 			rotation_local_velocity.y
 			).rotated(gameplay_rotation)
 		if is_equal_approx(rotation_local_global_position.x, rotation_local_portal_global_position.x):
-			displayed_gamemode = displayed_gamemode
 			speed_0_portal_control = null
 	#endregion
 	if displayed_gamemode == Gamemode.SPIDER: _update_spider_state_machine()
