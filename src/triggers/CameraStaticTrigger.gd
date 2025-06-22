@@ -34,6 +34,7 @@ func _ready() -> void:
 	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK | TriggerSetup.ADD_EASING)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/CameraStatic.svg"))
 	update_target_link()
+	easing.finished.connect(_on_easing_finished)
 
 
 func update_target_link() -> void:
@@ -79,6 +80,17 @@ func start(_body: Node2D) -> void:
 	# 			_player_camera.global_position.y = _player.global_position.y
 
 
+func _on_easing_finished() -> void:
+	if mode != Mode.EXIT:
+		return
+	if not ignore_x:
+		_player_camera.movement_factor.x = 1
+		_player_camera.offset_factor.x = 1
+	if not ignore_y:
+		_player_camera.movement_factor.y = 1
+		_player_camera.offset_factor.y = 1
+
+
 func reset() -> void:
 	if _player_camera != null:
 		_player_camera.global_position = _initial_global_position
@@ -103,30 +115,14 @@ func _physics_process(_delta: float) -> void:
 							easing.weight)
 				Mode.EXIT:
 					if not ignore_x:
-						_player_camera.offset_factor.x = lerpf(
-							0.0,
-							1.0,
-							easing.weight)
-						_player_camera.movement_factor.x = lerpf(
-							0.0,
-							1.0,
-							easing.weight)
 						_player_camera.global_position.x = lerpf(
 							_initial_global_position.x,
-							_player.global_position.x,
+							_player.global_position.x + _player_camera.get_offset_target().x if not LevelManager.platformer else _player.global_position.x,
 							easing.weight)
 					if not ignore_y:
-						_player_camera.offset_factor.y = lerpf(
-							0.0,
-							1.0,
-							easing.weight)
-						_player_camera.movement_factor.y = lerpf(
-							0.0,
-							1.0,
-							easing.weight)
 						_player_camera.global_position.y = lerpf(
 							_initial_global_position.y,
-							_player.global_position.y,
+							_player.global_position.y + _player_camera.get_offset_target().y,
 							easing.weight)
 		else:
 			printerr("In ", name, ": _player_camera is unset")

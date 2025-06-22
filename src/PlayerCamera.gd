@@ -63,8 +63,7 @@ func _physics_process(delta: float) -> void:
 		rotation_local_offset.x = lerpf(
 			rotation_local_offset.x,
 			get_offset_target().x,
-			offset_smoothing.x * framerate_compensation
-			) * offset_factor.x
+			offset_smoothing.x * framerate_compensation)
 	if freefly:
 		if abs(rotation_local_player_distance.y) > (MAX_DISTANCE.y / zoom.y):
 			rotation_local_position.y = lerpf(
@@ -84,12 +83,12 @@ func _physics_process(delta: float) -> void:
 	rotation_local_offset.y = lerpf(
 		rotation_local_offset.y,
 		get_offset_target().y,
-		offset_smoothing.y * framerate_compensation) * offset_factor.y
+		offset_smoothing.y * framerate_compensation)
 
 	# position += rotation_local_velocity.rotated(player.gameplay_rotation)
 	position = rotation_local_position.rotated(player.gameplay_rotation)
 	position_offset = rotation_local_offset.rotated(player.gameplay_rotation) + additional_offset.rotated(-player.gameplay_rotation)
-	position += position_offset
+	position += position_offset * offset_factor
 
 
 	position.y = clampf(
