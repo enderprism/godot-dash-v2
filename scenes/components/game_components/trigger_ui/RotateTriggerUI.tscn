@@ -53,7 +53,6 @@ allow_greater = true
 suffix = "°"
 _value = 0.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
-metadata/_edit_group_ = true
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Rotation"]
 script = ExtResource("7_3ag2i")
@@ -65,7 +64,6 @@ layout_mode = 2
 script = ExtResource("6_v2pn5")
 _value = false
 metadata/_custom_type_script = "uid://bss8ppxnt7gio"
-metadata/_edit_group_ = true
 
 [node name="TriggerPropertyWatcher" type="Node" parent="Rotate Around Self" node_paths=PackedStringArray("target")]
 script = ExtResource("6_dlql5")
@@ -83,7 +81,6 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("7_wavvx")
 metadata/_custom_type_script = "uid://bm3bhys0ur0ns"
-metadata/_edit_group_ = true
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Pivot"]
 script = ExtResource("7_3ag2i")
@@ -100,7 +97,6 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("7_wavvx")
 metadata/_custom_type_script = "uid://bm3bhys0ur0ns"
-metadata/_edit_group_ = true
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Copy/Target"]
 script = ExtResource("7_3ag2i")
@@ -112,7 +108,6 @@ layout_mode = 2
 script = ExtResource("6_v2pn5")
 _value = false
 metadata/_custom_type_script = "uid://bss8ppxnt7gio"
-metadata/_edit_group_ = true
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Copy/Look At Target"]
 script = ExtResource("7_3ag2i")
@@ -129,7 +124,6 @@ allow_greater = true
 suffix = "°"
 _value = 0.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
-metadata/_edit_group_ = true
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Copy/Rotation Offset"]
 script = ExtResource("7_3ag2i")

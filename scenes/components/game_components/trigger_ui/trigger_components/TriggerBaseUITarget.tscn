@@ -12,7 +12,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_camu5")
 metadata/_custom_type_script = "uid://bm3bhys0ur0ns"
-metadata/_edit_group_ = true
 
 [node name="TriggerPropertyInternalName" type="Node" parent="."]
 script = ExtResource("2_qkjbg")
