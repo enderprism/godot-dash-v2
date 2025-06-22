@@ -61,7 +61,7 @@ func _physics_process(_delta: float) -> void:
 							if not _copy_look_at:
 								_rotation_delta = (_copy_target.global_rotation_degrees + _copy_offset - _initial_global_rotation_degrees) * easing.weight_delta
 							else:
-								_rotation_delta = (_target.global_position.get_angle_to(_copy_target.global_position) + _copy_offset - _initial_global_rotation_degrees) * easing.weight_delta
+								_rotation_delta = (_target.global_position.angle_to(_copy_target.global_position) + _copy_offset - _initial_global_rotation_degrees) * easing.weight_delta
 						elif LevelManager.in_editor and LevelManager.level_playing:
 							printerr("In ", name, ": copy_target is unset!")
 				# Add the rotation delta
