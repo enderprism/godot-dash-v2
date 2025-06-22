@@ -4,9 +4,8 @@ class_name PlayerCamera
 
 const DEFAULT_ZOOM: Vector2 = Vector2(0.8, 0.8)
 const DEFAULT_OFFSET: Vector2 = Vector2(400.0, 0.0)
-const DEFAULT_LIMIT_BOTTOM: int = 1080
 const MIN_HEIGHT: float = -5500.0
-const MAX_HEIGHT: float = 413.0
+const MAX_HEIGHT: float = 1080.0
 const MAX_DISTANCE := Vector2(400.0, 200.0)
 
 @export var position_smoothing: Vector2 = Vector2(0.1, 0.1)
@@ -32,9 +31,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var framerate_compensation := delta * 60.0
-
-	if zoom.y > 1.0:
-		limit_bottom = int(DEFAULT_LIMIT_BOTTOM * zoom.y)
 
 	if not LevelManager.level_playing:
 		return
@@ -90,15 +86,16 @@ func _physics_process(delta: float) -> void:
 	position_offset = rotation_local_offset.rotated(player.gameplay_rotation) + additional_offset.rotated(-player.gameplay_rotation)
 	position += position_offset * offset_factor
 
-
-	position.y = clampf(
-			position.y,
-			MIN_HEIGHT,
-			MAX_HEIGHT)
+	# Clamp bottom edge of the screen to the ground
+	var half_screen_height = get_viewport_rect().size.y / 2
+	if position.y + half_screen_height / zoom.y > MAX_HEIGHT:
+		position.y = MAX_HEIGHT - half_screen_height / zoom.y
+	# Same thing for the top edge of the screen
+	if position.y - half_screen_height / zoom.y < MIN_HEIGHT:
+		position.y = MIN_HEIGHT + half_screen_height / zoom.y
 
 
 func get_offset_target() -> Vector2:
 	return Vector2(
 		((DEFAULT_OFFSET.x * player.get_direction() * sign(player.speed_multiplier)) / zoom.x),
-		(DEFAULT_OFFSET.y / zoom.y)
-	)
+		(DEFAULT_OFFSET.y / zoom.y))
