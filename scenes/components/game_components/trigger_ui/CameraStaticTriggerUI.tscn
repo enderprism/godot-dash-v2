@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6s2d34bsysu8"]
+
+[ext_resource type="Script" uid="uid://djfsy06pkw4ju" path="res://src/gui/properties/types/EnumProperty.gd" id="1_kdhgs"]
+[ext_resource type="PackedScene" uid="uid://bbucyw5fupwev" path="res://scenes/components/game_components/trigger_ui/trigger_components/TriggerBaseUITarget.tscn" id="1_qpuqq"]
+[ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/gui/properties/components/PropertyWatcher.gd" id="2_qpuqq"]
+[ext_resource type="Script" uid="uid://bss8ppxnt7gio" path="res://src/gui/properties/types/BoolProperty.gd" id="3_h0pr1"]
+
+[node name="CameraOffsetTriggerUI" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Mode" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("1_kdhgs")
+fields = PackedStringArray("Enter", "Exit")
+_value = 0
+metadata/_custom_type_script = "uid://djfsy06pkw4ju"
+
+[node name="TriggerPropertyWatcher" type="Node" parent="Mode" node_paths=PackedStringArray("target")]
+script = ExtResource("2_qpuqq")
+target = NodePath("../../Target")
+condition = "value == 0"
+property = &"visible"
+metadata/_custom_type_script = "uid://dewr6g2sliqsr"
+
+[node name="Target" parent="." instance=ExtResource("1_qpuqq")]
+layout_mode = 2
+
+[node name="Ignore X" type="BoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("3_h0pr1")
+_value = false
+metadata/_custom_type_script = "uid://bss8ppxnt7gio"
+
+[node name="Ignore Y" type="BoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("3_h0pr1")
+_value = false
+metadata/_custom_type_script = "uid://bss8ppxnt7gio"
