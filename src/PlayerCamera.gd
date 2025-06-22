@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 					rotation_local_player_position.x - signf(rotation_local_player_distance.x) * (MAX_DISTANCE.x / zoom.x),
 					position_smoothing.x * framerate_compensation),
 				movement_factor.x)
-		rotation_local_offset.x = additional_offset.x
+		rotation_local_offset.x = 0.0
 	else:
 		rotation_local_position.x = lerpf(
 			rotation_local_position.x,
@@ -62,9 +62,9 @@ func _physics_process(delta: float) -> void:
 			movement_factor.x)
 		rotation_local_offset.x = lerpf(
 			rotation_local_offset.x,
-			((DEFAULT_OFFSET.x * player.get_direction() * sign(player.speed_multiplier)) / zoom.x),
+			get_offset_target().x,
 			offset_smoothing.x * framerate_compensation
-			) * offset_factor.x + additional_offset.x
+			) * offset_factor.x
 	if freefly:
 		if abs(rotation_local_player_distance.y) > (MAX_DISTANCE.y / zoom.y):
 			rotation_local_position.y = lerpf(
@@ -83,12 +83,12 @@ func _physics_process(delta: float) -> void:
 
 	rotation_local_offset.y = lerpf(
 		rotation_local_offset.y,
-		(DEFAULT_OFFSET.y / zoom.y) * offset_factor.y + additional_offset.y,
-		offset_smoothing.y * framerate_compensation)
+		get_offset_target().y,
+		offset_smoothing.y * framerate_compensation) * offset_factor.y
 
 	# position += rotation_local_velocity.rotated(player.gameplay_rotation)
 	position = rotation_local_position.rotated(player.gameplay_rotation)
-	position_offset = rotation_local_offset.rotated(player.gameplay_rotation)
+	position_offset = rotation_local_offset.rotated(player.gameplay_rotation) + additional_offset.rotated(-player.gameplay_rotation)
 	position += position_offset
 
 
@@ -97,3 +97,9 @@ func _physics_process(delta: float) -> void:
 			MIN_HEIGHT,
 			MAX_HEIGHT)
 
+
+func get_offset_target() -> Vector2:
+	return Vector2(
+		((DEFAULT_OFFSET.x * player.get_direction() * sign(player.speed_multiplier)) / zoom.x),
+		(DEFAULT_OFFSET.y / zoom.y)
+	)
