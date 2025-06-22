@@ -12,18 +12,16 @@ enum Mode {
 	set(value):
 		mode = value
 		notify_property_list_changed()
-@export_range(-360, 360, 0.01, "or_greater", "or_less", "degrees") var _set_rotation_degrees: float
-@export_range(-360, 360, 0.01, "or_greater", "or_less", "degrees") var _add_rotation_degrees: float
+@export_range(-360, 360, 0.01, "or_greater", "or_less", "degrees") var _rotation_degrees: float
 @export var _copy_target: Node2D
+@export var _copy_look_at: bool
 @export_range(-360, 360, 0.01, "or_greater", "or_less", "degrees") var _copy_offset: float ## Offset in global coordinates from the move target.
 
 # Hide unneeded elements in the inspector
 func _validate_property(property: Dictionary) -> void:
-	if property.name == "_set_rotation_degrees" and mode != Mode.SET:
+	if property.name == "_rotation_degrees" and (mode != Mode.SET and mode != Mode.ADD):
 		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name == "_add_rotation_degrees" and mode != Mode.ADD:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name in ["_copy_target", "_copy_offset"] and mode != Mode.COPY:
+	if property.name in ["_copy_target", "_copy_look_at", "_copy_offset"] and mode != Mode.COPY:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 var base: TriggerBase
@@ -42,15 +40,19 @@ func _physics_process(_delta: float) -> void:
 		if _player_camera != null:
 			match mode:
 				Mode.SET:
-					_player_camera.global_rotation_degrees += (_set_rotation_degrees - _initial_global_rotation_degrees) * easing.weight_delta
+					_player_camera.global_rotation_degrees += (_rotation_degrees - _initial_global_rotation_degrees) * easing.weight_delta
 				Mode.ADD:
-					_player_camera.global_rotation_degrees += _add_rotation_degrees * easing.weight_delta
+					_player_camera.global_rotation_degrees += _rotation_degrees * easing.weight_delta
 				Mode.COPY:
 					if _copy_target != null:
-						_player_camera.global_rotation = lerp_angle(
-							deg_to_rad(_initial_global_rotation_degrees),
-							_copy_target.global_rotation + deg_to_rad(_copy_offset),
-							easing.weight)
+						if not _copy_look_at:
+							_player_camera.global_rotation_degrees += (
+									(_copy_target.global_rotation_degrees + _copy_offset - _initial_global_rotation_degrees)
+									* easing.weight_delta)
+						else:
+							_player_camera.global_rotation_degrees += (
+									(_player_camera.global_position.angle_to(_copy_target.global_position) + _copy_offset - _initial_global_rotation_degrees)
+									* easing.weight_delta)
 					else:
 						printerr("In ", name, ": copy_player_camera is unset!")
 		else:
