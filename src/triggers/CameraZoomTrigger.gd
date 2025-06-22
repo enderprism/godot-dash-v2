@@ -12,15 +12,7 @@ enum Mode {
 	set(value):
 		mode = value
 		notify_property_list_changed()
-@export var set_zoom := Vector2.ONE
-@export var multiply_zoom := Vector2.ONE
-
-# Hide unneeded elements in the inspector
-func _validate_property(property: Dictionary) -> void:
-	if property.name == "set_zoom" and mode != Mode.SET:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
-	if property.name == "multiply_zoom" and mode != Mode.MULTIPLY and mode != Mode.DIVIDE:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
+@export var zoom := Vector2.ONE
 
 var base: TriggerBase
 
@@ -38,11 +30,11 @@ func _physics_process(_delta: float) -> void:
 		if _player_camera != null:
 			match mode:
 				Mode.SET:
-					_player_camera.zoom += (set_zoom - _initial_zoom) * easing.weight_delta * PlayerCamera.DEFAULT_ZOOM
+					_player_camera.zoom += (zoom - _initial_zoom) * easing.weight_delta * PlayerCamera.DEFAULT_ZOOM
 				Mode.MULTIPLY:
-					_player_camera.zoom -= (_initial_zoom - (_initial_zoom * multiply_zoom)) * easing.weight_delta * PlayerCamera.DEFAULT_ZOOM
+					_player_camera.zoom -= (_initial_zoom - (_initial_zoom * zoom)) * easing.weight_delta * PlayerCamera.DEFAULT_ZOOM
 				Mode.DIVIDE:
-					_player_camera.zoom -= (_initial_zoom - (_initial_zoom / multiply_zoom)) * easing.weight_delta * PlayerCamera.DEFAULT_ZOOM
+					_player_camera.zoom -= (_initial_zoom - (_initial_zoom / zoom)) * easing.weight_delta * PlayerCamera.DEFAULT_ZOOM
 		else:
 			printerr("In ", name, ": _player_camera is unset")
 	elif Engine.is_editor_hint():
