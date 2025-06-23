@@ -33,6 +33,8 @@ var _initial_global_position: Vector2
 func _ready() -> void:
 	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK | TriggerSetup.ADD_EASING)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/CameraStatic.svg"))
+	target_link.default_color = Color.GREEN
+	target_link.width = 3.0
 	update_target_link()
 	easing.finished.connect(_on_easing_finished)
 
