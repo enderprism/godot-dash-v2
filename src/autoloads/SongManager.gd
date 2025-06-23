@@ -45,4 +45,6 @@ func unload_all() -> void:
 
 
 func _exit_tree() -> void:
+	if thread == null:
+		return
 	thread.wait_to_finish()
