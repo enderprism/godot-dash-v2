@@ -1,0 +1,115 @@
+[gd_scene load_steps=10 format=3 uid="uid://ci5ylt47q3anx"]
+
+[ext_resource type="PackedScene" uid="uid://dibiibymus6dt" path="res://scenes/components/game_components/trigger_ui/trigger_components/TriggerBaseUIGroup.tscn" id="1_twplh"]
+[ext_resource type="Script" uid="uid://djfsy06pkw4ju" path="res://src/gui/properties/types/EnumProperty.gd" id="2_bmu4d"]
+[ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/gui/properties/components/PropertyWatcher.gd" id="3_oowfl"]
+[ext_resource type="Script" uid="uid://crich318mmmk2" path="res://src/gui/properties/types/Vector2Property.gd" id="4_s17kw"]
+[ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="5_c146e"]
+[ext_resource type="Script" uid="uid://bss8ppxnt7gio" path="res://src/gui/properties/types/BoolProperty.gd" id="6_bmu4d"]
+[ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="6_w604n"]
+[ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="7_h4qg4"]
+[ext_resource type="Script" uid="uid://bm3bhys0ur0ns" path="res://src/gui/properties/types/Node2DProperty.gd" id="8_d3jsx"]
+
+[node name="MoveTriggerUi" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Group" parent="." instance=ExtResource("1_twplh")]
+layout_mode = 2
+
+[node name="Mode" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("2_bmu4d")
+default = 1
+fields = PackedStringArray("Add", "Multiply", "Divide", "Set", "Copy")
+_value = 1
+metadata/_custom_type_script = "uid://djfsy06pkw4ju"
+
+[node name="TriggerPropertyWatcher" type="Node" parent="Mode" node_paths=PackedStringArray("target")]
+script = ExtResource("3_oowfl")
+target = NodePath("../../Copy")
+condition = "value == 2"
+property = &"visible"
+
+[node name="TriggerPropertyWatcher2" type="Node" parent="Mode" node_paths=PackedStringArray("target")]
+script = ExtResource("3_oowfl")
+target = NodePath("../../Scale")
+condition = "value != 2"
+property = &"visible"
+
+[node name="Scale" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("4_s17kw")
+default = Vector2(1, 1)
+allow_lesser = true
+allow_greater = true
+_value = Vector2(1, 1)
+metadata/_custom_type_script = "uid://crich318mmmk2"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Scale"]
+script = ExtResource("5_c146e")
+property_name = "target_scale"
+
+[node name="Scale Around Self" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("6_bmu4d")
+_value = false
+metadata/_custom_type_script = "uid://bss8ppxnt7gio"
+
+[node name="TriggerPropertyWatcher" type="Node" parent="Scale Around Self" node_paths=PackedStringArray("target")]
+script = ExtResource("3_oowfl")
+target = NodePath("../../Pivot")
+condition = "not value"
+property = &"enabled"
+metadata/_custom_type_script = "uid://dewr6g2sliqsr"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Scale Around Self"]
+script = ExtResource("5_c146e")
+property_name = "scale_around_self"
+
+[node name="Pivot" type="BoxContainer" parent="." groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("8_d3jsx")
+metadata/_custom_type_script = "uid://bm3bhys0ur0ns"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Pivot"]
+script = ExtResource("5_c146e")
+property_name = "pivot"
+
+[node name="Copy" type="VBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("6_w604n")
+label_settings = ExtResource("7_h4qg4")
+metadata/_custom_type_script = "uid://cuih47milvqcs"
+
+[node name="Target" type="BoxContainer" parent="Copy" groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("8_d3jsx")
+metadata/_custom_type_script = "uid://bm3bhys0ur0ns"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Copy/Target"]
+script = ExtResource("5_c146e")
+property_name = "_move_towards_target"
+
+[node name="Multiplier" type="BoxContainer" parent="Copy" groups=["trigger_property"]]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("4_s17kw")
+default = Vector2(1, 1)
+step = 0.01
+allow_lesser = true
+allow_greater = true
+_value = Vector2(1, 1)
+metadata/_custom_type_script = "uid://crich318mmmk2"
+
+[node name="TriggerPropertyInternalName" type="Node" parent="Copy/Multiplier"]
+script = ExtResource("5_c146e")
+property_name = "_move_towards_offset"
