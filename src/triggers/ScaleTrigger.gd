@@ -10,17 +10,17 @@ enum Mode {
 	COPY,
 }
 
+@export var mode: Mode = Mode.MULTIPLY:
+	set(value):
+		mode = value
+		notify_property_list_changed()
 @export var scale_around_self: bool:
 	set(value):
 		scale_around_self = value
 		notify_property_list_changed()
 @export var pivot: Node2D
 @export var change_position_only: bool
-@export var mode: Mode = Mode.ADD:
-	set(value):
-		mode = value
-		notify_property_list_changed()
-@export var target_scale: Vector2
+@export var target_scale: Vector2 = Vector2.ONE
 @export var copy_target: Node2D
 @export var copy_multiplier: Vector2 = Vector2.ONE ## Multiplier of the scale of the copy target.
 
