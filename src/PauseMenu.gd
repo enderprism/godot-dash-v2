@@ -32,6 +32,7 @@ func _on_leave_pressed() -> void:
 	leave.emit()
 	LevelManager.platformer = false
 	LevelManager.level_playing = false
+	SongManager.unload_all()
 	SFXManager.play_sfx("res://assets/sounds/sfx/game_sfx/LevelQuit.ogg")
 	await get_tree().create_timer(0.5).timeout # Avoid the frozen frame
 	LevelManager.game_scene = null
