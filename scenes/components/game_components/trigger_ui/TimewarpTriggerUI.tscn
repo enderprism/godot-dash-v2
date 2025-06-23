@@ -10,7 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Time scale" type="BoxContainer" parent="." groups=["trigger_property"]]
+[node name="Time Scale" type="BoxContainer" parent="." groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("1_ifxd5")
@@ -20,6 +20,6 @@ allow_greater = true
 _value = 1.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
-[node name="TriggerPropertyInternalName" type="Node" parent="Time scale"]
+[node name="TriggerPropertyInternalName" type="Node" parent="Time Scale"]
 script = ExtResource("2_ham2v")
 property_name = "_time_scale"

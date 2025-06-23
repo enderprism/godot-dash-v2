@@ -30,7 +30,7 @@ suffix = "units"
 _value = Vector2(0, 0)
 metadata/_custom_type_script = "uid://crich318mmmk2"
 
-[node name="From center" type="BoxContainer" parent="." groups=["trigger_property"]]
+[node name="From Center" type="BoxContainer" parent="." groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("3_a85tx")

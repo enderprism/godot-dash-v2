@@ -10,7 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Gravity multiplier" type="BoxContainer" parent="." groups=["trigger_property"]]
+[node name="Gravity Multiplier" type="BoxContainer" parent="." groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("1_yclds")
@@ -19,6 +19,6 @@ allow_greater = true
 _value = 1.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
-[node name="TriggerPropertyInternalName" type="Node" parent="Gravity multiplier"]
+[node name="TriggerPropertyInternalName" type="Node" parent="Gravity Multiplier"]
 script = ExtResource("2_k0mxp")
 property_name = "gravity_multiplier"
