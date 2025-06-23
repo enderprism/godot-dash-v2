@@ -18,7 +18,7 @@ var background_sprites: Array[Sprite2D]
 var ground_sprites: Array[GroundObject]
 var level_song_player: AudioStreamPlayer
 var platformer := false
-var editor_clipboard: Array[Node2D]
+var editor_clipboard: Array[NodePath]
 var editor_backup := PackedScene.new()
 var editor_level_backup := PackedScene.new()
 var editor_edited_level: LevelProps

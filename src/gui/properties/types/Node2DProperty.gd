@@ -2,7 +2,7 @@
 extends AbstractProperty
 class_name Node2DProperty
 
-signal value_changed(value: String)
+signal value_changed(value: Node2D)
 
 @export var default: Node2D
 @export_tool_button("Refresh") var _refresh = refresh
@@ -27,7 +27,7 @@ func _ready() -> void:
 func set_value(new_value: Node2D) -> void:
 	_value = new_value
 	input.text = LevelManager.editor_edited_level.get_path_to(new_value)
-	value_changed.emit(new_value)
+	value_changed.emit(_value)
 
 func set_value_no_signal(new_value: Node2D) -> void:
 	_value = new_value
@@ -56,4 +56,4 @@ func _on_input_pressed() -> void:
 	if clipboard.is_empty() or Engine.is_editor_hint():
 		reset()
 	else:
-		set_value(clipboard[0])
+		set_value(LevelManager.editor_edited_level.get_node(clipboard[0]))

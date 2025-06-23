@@ -3,14 +3,14 @@ class_name EditHandler
 
 signal selection_zone_changed(new_zone: Rect2)
 signal selection_changed(selection: Array[Node2D])
-signal clipboard_changed(clipboard: Array[Node2D])
+signal clipboard_changed(clipboard: Array[NodePath])
 signal rotated_object_degrees(rotation_degrees: float)
 
 @export var editor_viewport: Control
 
 var level: LevelProps
 var selection: Array[Node2D]
-var clipboard: Array[Node2D]
+var clipboard: Array[NodePath]
 var clipboard_camera_position: Vector2
 var object_move_cooldown: float
 var placed_objects_collider: Area2D
@@ -206,7 +206,11 @@ func duplicate_selection() -> void:
 
 
 func copy_selection() -> void:
-	clipboard = selection.duplicate()
+	# Using map returns an array filled with `null` instead of NodePaths.
+	# Go figure.
+	clipboard.clear()
+	for object in selection:
+		clipboard.append(level.get_path_to(object))
 	clipboard_camera_position = get_viewport().get_camera_2d().get_screen_center_position()
 	clipboard_changed.emit(clipboard)
 	Toasts.new_toast("Selection copied!")
@@ -214,7 +218,9 @@ func copy_selection() -> void:
 
 func paste_selection() -> void:
 	selection.map(remove_selection_highlight)
-	selection = clipboard.duplicate()
+	selection.clear()
+	for path in clipboard:
+		selection.append(level.get_node(path))
 	selection = Array(selection.map(_clone), TYPE_OBJECT, "Node2D", null)
 	selection_changed.emit(selection)
 	var move_objects_to_new_screen_center = func(object):
