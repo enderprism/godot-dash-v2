@@ -18,13 +18,13 @@ signal value_changed(value: float)
 @export_tool_button("Refresh") var _refresh = refresh
 
 var label: Label
-var input: HSliderSpinBoxCombo
+var input: HSliderSpinBox
 
 func _ready() -> void:
 	label = NodeUtils.get_node_or_add(self, "Label", Label, NodeUtils.INTERNAL)
 	var spacer = NodeUtils.get_node_or_add(self, "Spacer", Control, NodeUtils.INTERNAL)
 	spacer.size_flags_horizontal = SIZE_EXPAND_FILL
-	input = NodeUtils.get_node_or_add(self, "Input", HSliderSpinBoxCombo, NodeUtils.INTERNAL)
+	input = NodeUtils.get_node_or_add(self, "Input", HSliderSpinBox, NodeUtils.INTERNAL)
 	input.value_changed.connect(func(new_value): value_changed.emit(new_value))
 	renamed.connect(refresh)
 	var line_edit = input.spinbox.get_line_edit()

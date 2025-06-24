@@ -1,6 +1,6 @@
 @tool
 extends HBoxContainer
-class_name HSliderSpinBoxCombo
+class_name HSliderSpinBox
 
 signal value_changed(value: float)
 
