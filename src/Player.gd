@@ -687,4 +687,3 @@ func _on_solid_overlap_check_body_exited(body:Node2D) -> void:
 	body = body as CollisionObject2D
 	body.collision_layer = 1 << 1
 	body.get_node("Hitbox").debug_color = Color("#0012b340") # DEBUG: Hardcoded name for hitbox color
-
