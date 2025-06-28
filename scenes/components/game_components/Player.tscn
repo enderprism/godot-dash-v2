@@ -1743,7 +1743,7 @@ transitions = ["jump", "fall", SubResource("AnimationNodeStateMachineTransition_
 graph_offset = Vector2(-109, 42)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mg1a"]
-size = Vector2(48, 48)
+size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t218l"]
 size = Vector2(128, 128)
