@@ -1,4 +1,4 @@
-[gd_scene load_steps=222 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=224 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -94,9 +94,11 @@
 [ext_resource type="PackedScene" uid="uid://ctf8cfrxbjfdk" path="res://scenes/components/level_components/portals/gamemode_portals/ShipPortal.tscn" id="45_d4tqp"]
 [ext_resource type="PackedScene" uid="uid://bf1l71kmqh0i0" path="res://scenes/components/level_components/pads/RedPad.tscn" id="45_x850y"]
 [ext_resource type="Texture2D" uid="uid://diqogjimevxe2" path="res://assets/textures/pads/PinkPad.svg" id="46_6sar2"]
+[ext_resource type="Texture2D" uid="uid://bf8jb2o4drjtd" path="res://assets/textures/hazards/GroundSpikeDefault.svg" id="46_e0lml"]
 [ext_resource type="Texture2D" uid="uid://g17qv6d5a8iq" path="res://assets/textures/portals/gamemode_portals/ufo_portal/UFOPortalFront.png" id="46_ll2xx"]
 [ext_resource type="PackedScene" uid="uid://bd0j0ubumn1dc" path="res://scenes/components/level_components/portals/gamemode_portals/UFOPortal.tscn" id="47_d4tqp"]
 [ext_resource type="PackedScene" uid="uid://cugg15j2jxyay" path="res://scenes/components/level_components/pads/PinkPad.tscn" id="47_ik2f6"]
+[ext_resource type="PackedScene" uid="uid://igg2spglq8i1" path="res://scenes/components/level_components/hazards/GroundSpike.tscn" id="47_momrj"]
 [ext_resource type="PackedScene" uid="uid://cjbdfuvh8nxcn" path="res://scenes/components/level_components/pads/ReboundPad.tscn" id="48_cxib2"]
 [ext_resource type="Texture2D" uid="uid://cb1rbkb0djr36" path="res://assets/textures/portals/gamemode_portals/wave_portal/WavePortalFront.png" id="48_d48k0"]
 [ext_resource type="Texture2D" uid="uid://nw150on8bl8d" path="res://assets/textures/guis/editor/block_palette/ReboundPadPreview.svg" id="48_x850y"]
@@ -502,7 +504,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 0
 theme = ExtResource("147_1ad2k")
-current_tab = 4
+current_tab = 2
 script = ExtResource("4_2at5j")
 metadata/_tab_index = 0
 
@@ -2478,7 +2480,6 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Hazards" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 metadata/_tab_name = ""
@@ -2535,6 +2536,24 @@ block_palette_button = true
 script = ExtResource("7_f0stj")
 type = 2
 object = ExtResource("14_wyjb2")
+
+[node name="GroundSpike" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Hazards/MarginContainer/ButtonContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("147_1ad2k")
+toggle_mode = true
+button_group = ExtResource("3_0vcbd")
+icon = ExtResource("46_e0lml")
+flat = true
+expand_icon = true
+script = ExtResource("4_gl2yd")
+block_palette_button = true
+
+[node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Hazards/MarginContainer/ButtonContainer/GroundSpike"]
+script = ExtResource("7_f0stj")
+type = 5
+object = ExtResource("47_momrj")
 
 [node name="Interactables" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place"]
 visible = false
@@ -3418,6 +3437,7 @@ type = 7
 object = ExtResource("83_gaibe")
 
 [node name="Triggers" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 metadata/_tab_name = ""

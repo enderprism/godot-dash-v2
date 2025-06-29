@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 514 514" width="514" height="514">
+	<title>RegularSpikeNormal</title>
+	<style>
+		.s0 { fill: #000000 } 
+	</style>
+	<g id="layer1">
+		<path id="spike" class="s0" d="m0 423.6l33-64.6 30 48 54-76 35 78 37-51 24 40 68-129 69 143 37-39 26 31 23-51 18 43 35-47 25 74.6v90.4h-514z"/>
+	</g>
+</svg>
