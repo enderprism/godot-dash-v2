@@ -35,6 +35,7 @@ const TERMINAL_VELOCITY := Vector2(0.0 * 2, 1500.0 * 2)
 const FLY_TERMINAL_VELOCITY := Vector2(0.0 * 2, 900.0 * 2)
 const FLY_GRAVITY_MULTIPLIER: float = 0.5
 const UFO_GRAVITY_MULTIPLIER: float = 0.7
+const SPIDER_GRAVITY_MULTIPLIER: float = 0.65
 const PLAYER_SCALE_WAVE := Vector2(0.6, 0.6)
 const PLAYER_SCALE_MINI := Vector2(0.6, 0.6)
 const PLAYER_SCALE_NORMAL := Vector2.ONE
@@ -46,6 +47,7 @@ const DASH_BOOM: PackedScene = preload("res://scenes/components/game_components/
 const ICON_LERP_FACTOR := 0.5
 const PLATFORMER_ACCELERATION := 5.0
 const ENSURE_VELOCITY_REDIRECT_SAFE_MARGIN := 2.0
+const SPIDER_BOUNCE_MULTIPLIER := 0.65
 #endregion
 
 #region Bit Flags
@@ -329,6 +331,9 @@ func _compute_velocity(delta: float,
 				_velocity.y *= 2
 			elif player_scale == PlayerScale.BIG:
 				_velocity.y *= 0.5
+		elif internal_gamemode == Gamemode.SPIDER:
+			_velocity.y += GRAVITY * delta * gravity_multiplier * gameplay_trigger_gravity_multiplier * jump_state * -1 * SPIDER_GRAVITY_MULTIPLIER
+			_velocity.y = clamp(_velocity.y, -TERMINAL_VELOCITY.y, TERMINAL_VELOCITY.y)
 		elif not is_on_floor() and not $GroundRaycast.is_colliding():
 			if internal_gamemode == Gamemode.UFO:
 				_velocity.y += GRAVITY * delta * gravity_multiplier * gameplay_trigger_gravity_multiplier * UFO_GRAVITY_MULTIPLIER
@@ -349,7 +354,10 @@ func _compute_velocity(delta: float,
 		var colliding_pad: PadInteractable = pad_queue.pop_front()
 		for component in colliding_pad.components:
 			if internal_gamemode != Gamemode.WAVE and (component is JumpBoostComponent or (component is ReboundComponent and (not is_on_floor() or _deferred_velocity_redirect))):
-				_velocity.y = component.get_velocity(self)
+				if internal_gamemode == Gamemode.SPIDER:
+					_velocity.y = component.get_velocity(self) * SPIDER_BOUNCE_MULTIPLIER
+				else:
+					_velocity.y = component.get_velocity(self)
 				if displayed_gamemode == Gamemode.SPIDER:
 					_spider_state_machine.travel("jump")
 			elif component is SpiderDashComponent:
@@ -412,7 +420,10 @@ func _compute_velocity(delta: float,
 		colliding_orb.pressed.emit(self)
 		for component in colliding_orb.components:
 			if internal_gamemode != Gamemode.WAVE and (component is JumpBoostComponent or component is ReboundComponent):
-				_velocity.y = component.get_velocity(self)
+				if internal_gamemode == Gamemode.SPIDER:
+					_velocity.y = component.get_velocity(self) * SPIDER_BOUNCE_MULTIPLIER
+				else:
+					_velocity.y = component.get_velocity(self)
 				if displayed_gamemode == Gamemode.SPIDER:
 					_spider_state_machine.travel("jump")
 			elif component is SpiderDashComponent:
