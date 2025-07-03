@@ -21,7 +21,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		visible = not visible
 
 func _notification(what):
-	if get_tree() == null:
+	if not is_inside_tree():
 		return
 	if LevelManager.level_playing and not get_tree().paused and what == NOTIFICATION_APPLICATION_FOCUS_OUT:
 		_on_continue_pressed()

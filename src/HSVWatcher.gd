@@ -10,7 +10,8 @@ class_name HSVWatcher
 func _ready() -> void:
 	# Avoid using the parent's modulate if the modulate is already set.
 	# This happens when a scene with HSVWatchers with set up modulates is loaded.
-	if get_parent().get_meta("_has_hsvwatcher") == null:
+	
+	if !get_parent().has_meta("_has_hsvwatcher"):
 		modulate = get_parent().modulate
 	get_parent().set_meta("_has_hsvwatcher", true)
 	hsv_shift.resize(3)

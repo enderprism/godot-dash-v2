@@ -325,4 +325,3 @@ func _on_flip_h_pressed() -> void:
 
 func _on_flip_v_pressed() -> void:
 	_flip_selection(Vector2.AXIS_Y)
-

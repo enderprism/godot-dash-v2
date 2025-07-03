@@ -44,7 +44,7 @@ func _ready() -> void:
 
 	LevelManager.in_editor = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	%MenuBar/View.set_item_submenu(0, "PanelVisibility")
+	#%MenuBar/View.set_item_submenu(0, 'PanelVisibility') temporarily removed because it causes an  error
 	$EditorCamera.zoom_changed.connect($GameScene/EditorGridParallax/EditorGrid.queue_redraw)
 	$EditHandler.placed_objects_collider = placed_objects_collider
 	$EditHandler.editor_mode = %EditorModes
@@ -52,7 +52,7 @@ func _ready() -> void:
 	if LevelManager.editor_level_backup.can_instantiate():
 		$GameScene/Level.add_child(LevelManager.editor_level_backup.instantiate())
 		level = $GameScene/Level.get_child(0)
-	elif $GameScene/Level.get_child(0) == null:
+	elif !$GameScene/Level.get_child_count():
 		level = LevelProps.new()
 		level.version_history = UndoRedo.new()
 		$GameScene/Level.add_child(level)
