@@ -1831,11 +1831,11 @@ theme_override_constants/separation = 10
 [node name="GenerateBlockPaletteVariants" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal"]
 script = ExtResource("12_lvhj5")
 button_group = ExtResource("3_0vcbd")
-type = 5
+type = 6
 object = ExtResource("15_lojhq")
 textures = Array[ExtResource("12_egrfm")]([SubResource("Resource_ao6md"), SubResource("Resource_nk067"), SubResource("Resource_wkjme"), SubResource("Resource_rke8t")])
 
-[node name="RegularSlope01" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal"]
+[node name="@BaseButton@72203" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -1897,24 +1897,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_ao6md")
 metadata/_edit_group_ = true
 
-[node name="@Node@1200606" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/RegularSlope01"]
+[node name="@Node@72204" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/@BaseButton@72203"]
 script = ExtResource("7_f0stj")
-type = 5
+type = 6
 object = ExtResource("15_lojhq")
 
-[node name="@CenterContainer@1200607" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/RegularSlope01"]
+[node name="@CenterContainer@72205" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/@BaseButton@72203"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 
-[node name="@TextureRect@1200608" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/RegularSlope01/@CenterContainer@1200607"]
+[node name="@TextureRect@72206" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/@BaseButton@72203/@CenterContainer@72205"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("14_ccqvw")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="RegularSlope03" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal"]
+[node name="@BaseButton@72207" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -1976,25 +1976,25 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_nk067")
 metadata/_edit_group_ = true
 
-[node name="@Node@1200609" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/RegularSlope03"]
+[node name="@Node@72208" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/@BaseButton@72207"]
 script = ExtResource("7_f0stj")
-type = 5
+type = 6
 id = 1
 object = ExtResource("15_lojhq")
 
-[node name="@CenterContainer@1200610" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/RegularSlope03"]
+[node name="@CenterContainer@72209" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/@BaseButton@72207"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 
-[node name="@TextureRect@1200611" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/RegularSlope03/@CenterContainer@1200610"]
+[node name="@TextureRect@72210" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/@BaseButton@72207/@CenterContainer@72209"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("33_6ukik")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="OutlineSlope01" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal"]
+[node name="@BaseButton@72211" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -2056,25 +2056,25 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_wkjme")
 metadata/_edit_group_ = true
 
-[node name="@Node@1200612" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/OutlineSlope01"]
+[node name="@Node@72212" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/@BaseButton@72211"]
 script = ExtResource("7_f0stj")
-type = 5
+type = 6
 id = 2
 object = ExtResource("15_lojhq")
 
-[node name="@CenterContainer@1200613" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/OutlineSlope01"]
+[node name="@CenterContainer@72213" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/@BaseButton@72211"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 
-[node name="@TextureRect@1200614" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/OutlineSlope01/@CenterContainer@1200613"]
+[node name="@TextureRect@72214" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/@BaseButton@72211/@CenterContainer@72213"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("18_txut0")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="OutlineSlope03" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal"]
+[node name="@BaseButton@72215" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -2136,18 +2136,18 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_rke8t")
 metadata/_edit_group_ = true
 
-[node name="@Node@1200615" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/OutlineSlope03"]
+[node name="@Node@72216" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/@BaseButton@72215"]
 script = ExtResource("7_f0stj")
-type = 5
+type = 6
 id = 3
 object = ExtResource("15_lojhq")
 
-[node name="@CenterContainer@1200616" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/OutlineSlope03"]
+[node name="@CenterContainer@72217" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/@BaseButton@72215"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 
-[node name="@TextureRect@1200617" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/OutlineSlope03/@CenterContainer@1200616"]
+[node name="@TextureRect@72218" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeNormal/@BaseButton@72215/@CenterContainer@72217"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("19_mf7h4")
@@ -2161,11 +2161,11 @@ theme_override_constants/separation = 10
 [node name="GenerateBlockPaletteVariants2" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge"]
 script = ExtResource("12_lvhj5")
 button_group = ExtResource("3_0vcbd")
-type = 6
+type = 7
 object = ExtResource("16_lojhq")
 textures = Array[ExtResource("12_egrfm")]([SubResource("Resource_5ik7l"), SubResource("Resource_0v0om"), SubResource("Resource_33w7i"), SubResource("Resource_t7625")])
 
-[node name="RegularSlope02" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge"]
+[node name="@BaseButton@72460" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -2227,24 +2227,24 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_5ik7l")
 metadata/_edit_group_ = true
 
-[node name="@Node@1201338" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/RegularSlope02"]
+[node name="@Node@72461" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/@BaseButton@72460"]
 script = ExtResource("7_f0stj")
-type = 6
+type = 7
 object = ExtResource("16_lojhq")
 
-[node name="@CenterContainer@1201339" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/RegularSlope02"]
+[node name="@CenterContainer@72462" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/@BaseButton@72460"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 
-[node name="@TextureRect@1201340" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/RegularSlope02/@CenterContainer@1201339"]
+[node name="@TextureRect@72463" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/@BaseButton@72460/@CenterContainer@72462"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("16_pmc7a")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="RegularSlope04" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge"]
+[node name="@BaseButton@72464" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -2306,25 +2306,25 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_0v0om")
 metadata/_edit_group_ = true
 
-[node name="@Node@1201341" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/RegularSlope04"]
+[node name="@Node@72465" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/@BaseButton@72464"]
 script = ExtResource("7_f0stj")
-type = 6
+type = 7
 id = 1
 object = ExtResource("16_lojhq")
 
-[node name="@CenterContainer@1201342" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/RegularSlope04"]
+[node name="@CenterContainer@72466" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/@BaseButton@72464"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 
-[node name="@TextureRect@1201343" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/RegularSlope04/@CenterContainer@1201342"]
+[node name="@TextureRect@72467" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/@BaseButton@72464/@CenterContainer@72466"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("38_wkjme")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="OutlineSlope02" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge"]
+[node name="@BaseButton@72468" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -2386,25 +2386,25 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_33w7i")
 metadata/_edit_group_ = true
 
-[node name="@Node@1201344" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/OutlineSlope02"]
+[node name="@Node@72469" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/@BaseButton@72468"]
 script = ExtResource("7_f0stj")
-type = 6
+type = 7
 id = 2
 object = ExtResource("16_lojhq")
 
-[node name="@CenterContainer@1201345" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/OutlineSlope02"]
+[node name="@CenterContainer@72470" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/@BaseButton@72468"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 
-[node name="@TextureRect@1201346" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/OutlineSlope02/@CenterContainer@1201345"]
+[node name="@TextureRect@72471" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/@BaseButton@72468/@CenterContainer@72470"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("19_p2ypn")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="OutlineSlope04" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge"]
+[node name="@BaseButton@72472" type="BaseButton" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -2466,18 +2466,18 @@ block_palette_button = true
 metadata/texture_override = SubResource("Resource_t7625")
 metadata/_edit_group_ = true
 
-[node name="@Node@1201347" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/OutlineSlope04"]
+[node name="@Node@72473" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/@BaseButton@72472"]
 script = ExtResource("7_f0stj")
-type = 6
+type = 7
 id = 3
 object = ExtResource("16_lojhq")
 
-[node name="@CenterContainer@1201348" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/OutlineSlope04"]
+[node name="@CenterContainer@72474" type="CenterContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/@BaseButton@72472"]
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 
-[node name="@TextureRect@1201349" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/OutlineSlope04/@CenterContainer@1201348"]
+[node name="@TextureRect@72475" type="TextureRect" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer/ButtonContainer/SlopeLarge/@BaseButton@72472/@CenterContainer@72474"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("20_hgbal")
@@ -2600,7 +2600,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/YellowOrb"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("16_nywui")
 
 [node name="RedOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
@@ -2619,7 +2619,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/RedOrb"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("18_1ww1r")
 
 [node name="PinkOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
@@ -2638,7 +2638,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/PinkOrb"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("19_jb5ft")
 
 [node name="ReboundOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
@@ -2657,7 +2657,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/ReboundOrb"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("22_cb37e")
 
 [node name="BlackOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
@@ -2676,7 +2676,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/BlackOrb"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("22_62rc5")
 
 [node name="BlueOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
@@ -2695,7 +2695,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/BlueOrb"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("26_ay76u")
 
 [node name="GreenOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
@@ -2714,7 +2714,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/GreenOrb"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("27_wpv76")
 
 [node name="SpiderOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
@@ -2733,7 +2733,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/SpiderOrb"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("28_qxx6w")
 
 [node name="DashOrbGreen" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
@@ -2752,7 +2752,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/DashOrbGreen"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("29_lmspt")
 
 [node name="DashOrbMagenta" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
@@ -2771,7 +2771,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/DashOrbMagenta"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("30_5hb38")
 
 [node name="DashOrbCyan" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
@@ -2790,7 +2790,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/DashOrbCyan"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("37_rlt4b")
 
 [node name="ToggleOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
@@ -2809,7 +2809,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/ToggleOrb"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("31_q754w")
 
 [node name="TeleportOrb" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs"]
@@ -2828,7 +2828,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Orbs/TeleportOrb"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("71_t7625")
 
 [node name="Pads" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
@@ -2850,7 +2850,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads/YellowPad"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("43_t67qq")
 
 [node name="RedPad" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads"]
@@ -2869,7 +2869,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads/RedPad"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("45_x850y")
 
 [node name="PinkPad" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads"]
@@ -2888,7 +2888,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads/PinkPad"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("47_ik2f6")
 
 [node name="ReboundPad" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads"]
@@ -2907,7 +2907,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads/ReboundPad"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("48_cxib2")
 
 [node name="BlackPad" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads"]
@@ -2926,7 +2926,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads/BlackPad"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("50_0xs65")
 
 [node name="BluePad" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads"]
@@ -2945,7 +2945,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads/BluePad"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("52_xvtum")
 
 [node name="SpiderPad" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads"]
@@ -2964,7 +2964,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Pads/SpiderPad"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("54_lv6tf")
 
 [node name="CountPortals" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
@@ -2986,7 +2986,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/CountPortals/CountPortalSingle"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("57_1ad2k")
 
 [node name="CountPortalDual" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/CountPortals"]
@@ -3005,7 +3005,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/CountPortals/CountPortalDual"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("59_d556q")
 
 [node name="GamemodePortals" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
@@ -3027,7 +3027,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GamemodePortals/CubePortal"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("43_ow5kt")
 
 [node name="RobotPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GamemodePortals"]
@@ -3046,7 +3046,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GamemodePortals/RobotPortal"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("44_jb677")
 
 [node name="ShipPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GamemodePortals"]
@@ -3065,7 +3065,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GamemodePortals/ShipPortal"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("45_d4tqp")
 
 [node name="UFOPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GamemodePortals"]
@@ -3084,7 +3084,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GamemodePortals/UFOPortal"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("47_d4tqp")
 
 [node name="WavePortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GamemodePortals"]
@@ -3103,7 +3103,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GamemodePortals/WavePortal"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("49_aico2")
 
 [node name="SwingPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GamemodePortals"]
@@ -3122,7 +3122,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GamemodePortals/SwingPortal"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("51_vkyby")
 
 [node name="BallPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GamemodePortals"]
@@ -3141,7 +3141,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GamemodePortals/BallPortal"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("53_jb677")
 
 [node name="SpiderPortal" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GamemodePortals"]
@@ -3160,7 +3160,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GamemodePortals/SpiderPortal"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("55_5nc47")
 
 [node name="SpeedPortals" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
@@ -3182,7 +3182,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortals/SpeedPortal0x"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("58_20xqs")
 
 [node name="SpeedPortal05x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortals"]
@@ -3201,7 +3201,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortals/SpeedPortal05x"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("58_a0ef7")
 
 [node name="SpeedPortal1x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortals"]
@@ -3220,7 +3220,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortals/SpeedPortal1x"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("60_kbsrm")
 
 [node name="SpeedPortal2x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortals"]
@@ -3239,7 +3239,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortals/SpeedPortal2x"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("61_l48od")
 
 [node name="SpeedPortal3x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortals"]
@@ -3258,7 +3258,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortals/SpeedPortal3x"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("62_n03i7")
 
 [node name="SpeedPortal4x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortals"]
@@ -3277,7 +3277,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortals/SpeedPortal4x"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("63_itagw")
 
 [node name="SpeedPortal5x" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortals"]
@@ -3296,7 +3296,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/SpeedPortals/SpeedPortal5x"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("64_yuboy")
 
 [node name="GravityPortals" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
@@ -3318,7 +3318,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GravityPortals/GravityPortalNormal"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("72_pd34h")
 
 [node name="GravityPortalFlipped" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GravityPortals"]
@@ -3337,7 +3337,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GravityPortals/GravityPortalFlipped"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("73_wdba8")
 
 [node name="GravityPortalToggle" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GravityPortals"]
@@ -3356,7 +3356,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/GravityPortals/GravityPortalToggle"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("74_107fg")
 
 [node name="ScalePortals" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
@@ -3378,7 +3378,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/ScalePortals/ScalePortalNormal"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("78_qkade")
 
 [node name="ScalePortalSmall" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/ScalePortals"]
@@ -3397,7 +3397,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/ScalePortals/ScalePortalSmall"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("79_k1w38")
 
 [node name="Teleportals" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer"]
@@ -3419,7 +3419,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Teleportals/TeleportalIn"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("82_n18q3")
 
 [node name="TeleportalOut" type="Button" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Teleportals"]
@@ -3438,7 +3438,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Interactables/MarginContainer/ButtonContainer/Teleportals/TeleportalOut"]
 script = ExtResource("7_f0stj")
-type = 7
+type = 8
 object = ExtResource("83_gaibe")
 
 [node name="Triggers" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place"]
@@ -3479,7 +3479,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Alpha"]
 script = ExtResource("7_f0stj")
-type = 8
+type = 9
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("20_bqqbv")
 
@@ -3512,7 +3512,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraOffset"]
 script = ExtResource("7_f0stj")
-type = 8
+type = 9
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("21_o7rvp")
 
@@ -3545,7 +3545,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraRotate"]
 script = ExtResource("7_f0stj")
-type = 8
+type = 9
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("23_6k40u")
 
@@ -3578,7 +3578,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraStatic"]
 script = ExtResource("7_f0stj")
-type = 8
+type = 9
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("106_6sar2")
 
@@ -3611,7 +3611,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/CameraZoom"]
 script = ExtResource("7_f0stj")
-type = 8
+type = 9
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("108_ksayh")
 
@@ -3644,7 +3644,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/GameplayRotate"]
 script = ExtResource("7_f0stj")
-type = 8
+type = 9
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("110_0xs65")
 
@@ -3677,7 +3677,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Gravity"]
 script = ExtResource("7_f0stj")
-type = 8
+type = 9
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("112_xvtum")
 
@@ -3710,7 +3710,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Move"]
 script = ExtResource("7_f0stj")
-type = 8
+type = 9
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("114_i4ywb")
 
@@ -3743,7 +3743,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Rotate"]
 script = ExtResource("7_f0stj")
-type = 8
+type = 9
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("116_qn6bu")
 
@@ -3776,7 +3776,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Scale"]
 script = ExtResource("7_f0stj")
-type = 8
+type = 9
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("117_jhfap")
 
@@ -3809,7 +3809,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Song"]
 script = ExtResource("7_f0stj")
-type = 8
+type = 9
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("118_aynhx")
 
@@ -3842,7 +3842,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Spawn"]
 script = ExtResource("7_f0stj")
-type = 8
+type = 9
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("119_5caaf")
 
@@ -3875,7 +3875,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Timewarp"]
 script = ExtResource("7_f0stj")
-type = 8
+type = 9
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("120_80r87")
 
@@ -3908,7 +3908,7 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Toggle"]
 script = ExtResource("7_f0stj")
-type = 8
+type = 9
 object = ExtResource("7_ii36d")
 trigger_script = ExtResource("121_r2yu4")
 
