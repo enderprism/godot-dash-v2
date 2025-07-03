@@ -28,7 +28,8 @@ func load_song_threaded_request(path: String) -> Error:
 		return ERR_FILE_BAD_PATH
 	if thread == null:
 		thread = Thread.new()
-	thread.wait_to_finish()
+	if thread.is_started():
+		thread.wait_to_finish()
 	return thread.start(load_song.bind(path))
 
 
@@ -36,7 +37,8 @@ func load_song_threaded_get(path: String) -> AudioStream:
 	if path.is_empty() or path == null:
 		printerr("Song path is empty")
 		return null
-	thread.wait_to_finish()
+	if thread.is_started():
+		thread.wait_to_finish()
 	return loaded_songs[path]
 
 
