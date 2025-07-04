@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cinyg32n0bonm"]
+[gd_scene load_steps=35 format=3 uid="uid://cinyg32n0bonm"]
 
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/FadeScreen.tscn" id="1_e44lk"]
 [ext_resource type="Texture2D" uid="uid://dewrklmfoeg7m" path="res://assets/textures/grounds/ground-1.png" id="2_5u8e8"]
@@ -25,6 +25,10 @@
 [ext_resource type="Texture2D" uid="uid://docsh85xkmade" path="res://assets/textures/guis/level_selector/LevelSelectorPrevious.png" id="15_7mwgk"]
 [ext_resource type="Texture2D" uid="uid://bswqhh121flny" path="res://assets/textures/guis/level_selector/LevelSelectorNext.png" id="16_btcin"]
 [ext_resource type="PackedScene" uid="uid://dfde2ns6le0wd" path="res://scenes/components/game_components/PhantomCamera2DHistory.tscn" id="16_dgsi1"]
+[ext_resource type="Texture2D" uid="uid://omcvgcf1uk5p" path="res://assets/textures/player/cube/Cube.svg" id="19_qavw1"]
+[ext_resource type="FontFile" uid="uid://8e1lxpyo40t5" path="res://assets/fonts/Pusab.otf" id="20_i7ifx"]
+[ext_resource type="Script" uid="uid://l2sna2lde5fy" path="res://src/SceneSpawner.gd" id="21_i7ifx"]
+[ext_resource type="PackedScene" uid="uid://cglilroh4eew3" path="res://scenes/components/game_components/GarageButton.tscn" id="22_r3sjc"]
 [ext_resource type="PackedScene" uid="uid://bq6rd80p2817w" path="res://scenes/components/game_components/SettingsLayer.tscn" id="26_nre0g"]
 
 [sub_resource type="Resource" id="Resource_assks"]
@@ -278,7 +282,6 @@ inactive_update_mode = 0
 metadata/_edit_lock_ = true
 
 [node name="IconGarage" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -339,6 +342,50 @@ limit/smoothed = false
 tween_parameters = SubResource("Resource_assks")
 tween_on_load = true
 inactive_update_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="IconGarage"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -695.0
+offset_top = -393.0
+offset_right = 678.875
+offset_bottom = 393.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="IconGarage/VBoxContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("19_qavw1")
+expand_mode = 1
+
+[node name="TabContainer" type="TabContainer" parent="IconGarage/VBoxContainer"]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("20_i7ifx")
+theme_override_font_sizes/font_size = 41
+tab_alignment = 1
+current_tab = 0
+
+[node name="Cube" type="ScrollContainer" parent="IconGarage/VBoxContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Buttons" type="FlowContainer" parent="IconGarage/VBoxContainer/TabContainer/Cube"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spawner" type="Node" parent="IconGarage/VBoxContainer/TabContainer/Cube/Buttons"]
+script = ExtResource("21_i7ifx")
+scene = ExtResource("22_r3sjc")
+amount = 100
 
 [node name="CameraCenterParent" type="Control" parent="."]
 layout_mode = 1

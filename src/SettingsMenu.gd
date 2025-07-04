@@ -43,5 +43,3 @@ func _on_game_sfx_volume_value_changed(value:float) -> void:
 func _on_in_level_sfx_volume_value_changed(value:float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(&"In Level SFX"), linear_to_db(value))
 	ResourceSaver.save(AudioServer.generate_bus_layout(), "user://default_bus_layout.tres")
-
-
