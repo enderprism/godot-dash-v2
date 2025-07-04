@@ -11,4 +11,3 @@ func _ready() -> void:
 		else:
 			node = Node.new()
 		call_deferred("add_sibling", node)
-	queue_free()
