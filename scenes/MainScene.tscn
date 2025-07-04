@@ -370,7 +370,7 @@ expand_mode = 1
 custom_minimum_size = Vector2(0, 600)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("20_i7ifx")
-theme_override_font_sizes/font_size = 41
+theme_override_font_sizes/font_size = 36
 tab_alignment = 1
 current_tab = 0
 
@@ -386,6 +386,132 @@ size_flags_horizontal = 3
 script = ExtResource("21_i7ifx")
 scene = ExtResource("22_r3sjc")
 amount = 100
+
+[node name="Ship" type="ScrollContainer" parent="IconGarage/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Buttons" type="FlowContainer" parent="IconGarage/VBoxContainer/TabContainer/Ship"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spawner" type="Node" parent="IconGarage/VBoxContainer/TabContainer/Ship/Buttons"]
+script = ExtResource("21_i7ifx")
+scene = ExtResource("22_r3sjc")
+amount = 50
+
+[node name="Ball" type="ScrollContainer" parent="IconGarage/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Buttons" type="FlowContainer" parent="IconGarage/VBoxContainer/TabContainer/Ball"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spawner" type="Node" parent="IconGarage/VBoxContainer/TabContainer/Ball/Buttons"]
+script = ExtResource("21_i7ifx")
+scene = ExtResource("22_r3sjc")
+amount = 30
+
+[node name="Ufo" type="ScrollContainer" parent="IconGarage/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="Buttons" type="FlowContainer" parent="IconGarage/VBoxContainer/TabContainer/Ufo"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spawner" type="Node" parent="IconGarage/VBoxContainer/TabContainer/Ufo/Buttons"]
+script = ExtResource("21_i7ifx")
+scene = ExtResource("22_r3sjc")
+amount = 40
+
+[node name="Wave" type="ScrollContainer" parent="IconGarage/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="Buttons" type="FlowContainer" parent="IconGarage/VBoxContainer/TabContainer/Wave"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spawner" type="Node" parent="IconGarage/VBoxContainer/TabContainer/Wave/Buttons"]
+script = ExtResource("21_i7ifx")
+scene = ExtResource("22_r3sjc")
+amount = 60
+
+[node name="Robot" type="ScrollContainer" parent="IconGarage/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 5
+
+[node name="Buttons" type="FlowContainer" parent="IconGarage/VBoxContainer/TabContainer/Robot"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spawner" type="Node" parent="IconGarage/VBoxContainer/TabContainer/Robot/Buttons"]
+script = ExtResource("21_i7ifx")
+scene = ExtResource("22_r3sjc")
+amount = 30
+
+[node name="Spider" type="ScrollContainer" parent="IconGarage/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 6
+
+[node name="Buttons" type="FlowContainer" parent="IconGarage/VBoxContainer/TabContainer/Spider"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spawner" type="Node" parent="IconGarage/VBoxContainer/TabContainer/Spider/Buttons"]
+script = ExtResource("21_i7ifx")
+scene = ExtResource("22_r3sjc")
+amount = 30
+
+[node name="Swing" type="ScrollContainer" parent="IconGarage/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 7
+
+[node name="Buttons" type="FlowContainer" parent="IconGarage/VBoxContainer/TabContainer/Swing"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spawner" type="Node" parent="IconGarage/VBoxContainer/TabContainer/Swing/Buttons"]
+script = ExtResource("21_i7ifx")
+scene = ExtResource("22_r3sjc")
+amount = 20
+
+[node name="Jetpack" type="ScrollContainer" parent="IconGarage/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 8
+
+[node name="Buttons" type="FlowContainer" parent="IconGarage/VBoxContainer/TabContainer/Jetpack"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spawner" type="Node" parent="IconGarage/VBoxContainer/TabContainer/Jetpack/Buttons"]
+script = ExtResource("21_i7ifx")
+scene = ExtResource("22_r3sjc")
+amount = 20
+
+[node name="Death Effect" type="ScrollContainer" parent="IconGarage/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 9
+
+[node name="Buttons" type="FlowContainer" parent="IconGarage/VBoxContainer/TabContainer/Death Effect"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spawner" type="Node" parent="IconGarage/VBoxContainer/TabContainer/Death Effect/Buttons"]
+script = ExtResource("21_i7ifx")
+scene = ExtResource("22_r3sjc")
+amount = 5
 
 [node name="CameraCenterParent" type="Control" parent="."]
 layout_mode = 1
