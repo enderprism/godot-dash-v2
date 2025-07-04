@@ -78,7 +78,7 @@ autoscroll = Vector2(-300, 0)
 repeat_times = 2
 
 [node name="Background" type="Sprite2D" parent="TitleScreen/BackgroundParallax"]
-modulate = Color(0.27451, 0.627451, 1, 1)
+modulate = Color(0.213669, 0.439779, 1, 1)
 texture_repeat = 2
 position = Vector2(973, 3.05176e-05)
 scale = Vector2(1.25, 1.25)
@@ -92,7 +92,7 @@ autoscroll = Vector2(-800, 0)
 repeat_times = 2
 
 [node name="Ground" type="Sprite2D" parent="TitleScreen/GroundParallax"]
-self_modulate = Color(0.290196, 0.266667, 1, 1)
+self_modulate = Color(0.1078, 0.295423, 0.77, 1)
 texture_repeat = 2
 position = Vector2(940, 1005)
 texture = ExtResource("2_5u8e8")
