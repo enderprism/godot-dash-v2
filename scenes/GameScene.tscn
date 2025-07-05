@@ -169,7 +169,7 @@ DEFAULT_Y = -25000.0
 ground_position = -1
 
 [node name="Ground" type="Sprite2D" parent="GroundUpParallax/GroundUpOrigin"]
-self_modulate = Color(0.290196, 0.266667, 1, 1)
+self_modulate = Color(0.105882, 0.294118, 0.768627, 1)
 z_index = 50
 texture_repeat = 2
 position = Vector2(300, -300)
