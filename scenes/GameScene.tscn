@@ -77,7 +77,7 @@ shape = SubResource("RectangleShape2D_y3ubx")
 debug_color = Color(1, 0, 0, 0.419608)
 
 [node name="Background2" type="Sprite2D" parent="BackgroundParallax"]
-modulate = Color(0.27451, 0.627451, 1, 1)
+modulate = Color(0.105882, 0.294118, 0.768627, 1)
 z_index = -100
 texture_repeat = 2
 position = Vector2(640, 2972)
