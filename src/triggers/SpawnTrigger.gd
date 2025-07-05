@@ -42,6 +42,7 @@ func _ready() -> void:
 	easing.duration = _duration
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Spawn.svg"))
 	target_link.default_color = Color.CYAN
+	target_link.set_texture(preload("res://assets/textures/ArrowedLine.svg"))
 	update_target_link()
 
 func _physics_process(_delta: float) -> void:
