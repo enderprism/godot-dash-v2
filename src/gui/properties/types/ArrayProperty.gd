@@ -72,11 +72,20 @@ func add_item(idx: int) -> ArrayPropertyItem:
 
 
 func remove_item(idx: int) -> void:
-	_value.remove_at(idx)
-	items.get_child(idx).queue_free()
+	print_debug("item ", idx, " is being removed")
+	var debug_color := Color.from_hsv(randf_range(0.0, 1.0), 0.9, 1.0)
 	for i in range(idx, items.get_child_count()):
 		var item = items.get_child(i)
-		item.name = str(item.get_index() - 1)
+		var new_name := i - 1
+		item.name = str(new_name)
+		item.refresh()
+		item.property.name = item.name
+		item.property.label.text = item.name
+		item.property.refresh()
+		prints(i, new_name)
+		item.modulate = debug_color
+	items.get_child(idx).queue_free()
+	_value.remove_at(idx)
 
 
 func set_value(value: Array) -> void:
