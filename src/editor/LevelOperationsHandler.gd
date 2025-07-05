@@ -22,9 +22,7 @@ func _ready() -> void:
 	save_changes_before_opening_dialog.add_button("Don't Save", false, "dontsave")
 	save_as_dialog.root_subfolder = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	export_dialog.root_subfolder = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
-	if !$AutosaveTimer.timeout.is_connected(_save_level):
-		$AutosaveTimer.timeout.connect(_save_level)
-
+	NodeUtils.connect_new($AutosaveTimer.timeout, _save_level)
 
 func _process(_delta: float) -> void:
 	if $AutosaveTimer.get_time_left() < 5.0 and not $AutosaveTimer.is_stopped():

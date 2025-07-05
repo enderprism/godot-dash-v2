@@ -22,7 +22,7 @@ func build_ui(triggers: Array[TriggerBase]) -> void:
 	%UIRoot.add_child(instanced_ui)
 	if not trigger.has_node("../TriggerEasing") and %UIRoot.has_node("Tweening"):
 		%UIRoot.get_node("Tweening").queue_free()
-	if trigger.has_node("../TriggerEasing") and !%UIRoot.has_node("Tweening"):
+	if trigger.has_node("../TriggerEasing") and not %UIRoot.has_node("Tweening"):
 		var trigger_easing_ui := EASING_UI.instantiate() as SectionHeading
 		%UIRoot.add_child(trigger_easing_ui, true, INTERNAL_MODE_BACK)
 		trigger_easing_ui.set_deferred("name", "Tweening")

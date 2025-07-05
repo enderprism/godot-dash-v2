@@ -52,7 +52,7 @@ func _ready() -> void:
 	if LevelManager.editor_level_backup.can_instantiate():
 		$GameScene/Level.add_child(LevelManager.editor_level_backup.instantiate())
 		level = $GameScene/Level.get_child(0)
-	elif !$GameScene/Level.get_child_count():
+	elif not $GameScene/Level.get_child_count():
 		level = LevelProps.new()
 		level.version_history = UndoRedo.new()
 		$GameScene/Level.add_child(level)

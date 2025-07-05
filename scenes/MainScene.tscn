@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cinyg32n0bonm"]
+[gd_scene load_steps=34 format=3 uid="uid://cinyg32n0bonm"]
 
 [ext_resource type="PackedScene" uid="uid://dxsvurwa62arg" path="res://scenes/components/game_components/FadeScreen.tscn" id="1_e44lk"]
 [ext_resource type="Texture2D" uid="uid://dewrklmfoeg7m" path="res://assets/textures/grounds/ground-1.png" id="2_5u8e8"]
@@ -26,7 +26,6 @@
 [ext_resource type="Texture2D" uid="uid://bswqhh121flny" path="res://assets/textures/guis/level_selector/LevelSelectorNext.png" id="16_btcin"]
 [ext_resource type="PackedScene" uid="uid://dfde2ns6le0wd" path="res://scenes/components/game_components/PhantomCamera2DHistory.tscn" id="16_dgsi1"]
 [ext_resource type="Texture2D" uid="uid://omcvgcf1uk5p" path="res://assets/textures/player/cube/Cube.svg" id="19_qavw1"]
-[ext_resource type="FontFile" uid="uid://8e1lxpyo40t5" path="res://assets/fonts/Pusab.otf" id="20_i7ifx"]
 [ext_resource type="Script" uid="uid://l2sna2lde5fy" path="res://src/SceneSpawner.gd" id="21_i7ifx"]
 [ext_resource type="PackedScene" uid="uid://cglilroh4eew3" path="res://scenes/components/game_components/GarageButton.tscn" id="22_r3sjc"]
 [ext_resource type="PackedScene" uid="uid://bq6rd80p2817w" path="res://scenes/components/game_components/SettingsLayer.tscn" id="26_nre0g"]
@@ -369,8 +368,7 @@ expand_mode = 1
 [node name="TabContainer" type="TabContainer" parent="IconGarage/VBoxContainer"]
 custom_minimum_size = Vector2(0, 600)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("20_i7ifx")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 34
 tab_alignment = 1
 current_tab = 0
 
