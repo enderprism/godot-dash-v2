@@ -22,8 +22,7 @@ func _ready() -> void:
 	save_changes_before_opening_dialog.add_button("Don't Save", false, "dontsave")
 	save_as_dialog.root_subfolder = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 	export_dialog.root_subfolder = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
-	$AutosaveTimer.timeout.connect(_save_level)
-
+	NodeUtils.connect_new($AutosaveTimer.timeout, _save_level)
 
 func _process(_delta: float) -> void:
 	if $AutosaveTimer.get_time_left() < 5.0 and not $AutosaveTimer.is_stopped():
@@ -225,4 +224,3 @@ func _on_export_level_dialog_file_selected(path:String) -> Error:
 	writer.close()
 	Toasts.new_toast("Exported level " + path.get_file().get_basename() + " in directory " + path.get_base_dir(), 2.0)
 	return OK
-

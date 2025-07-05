@@ -203,8 +203,8 @@ position = Vector2(1536, -1216)
 scale = Vector2(1, 5)
 
 [node name="DefaultCube4" parent="." instance=ExtResource("5_g4mtk")]
-position = Vector2(2304, -576)
-scale = Vector2(1, 5)
+position = Vector2(2304, -636)
+scale = Vector2(1, 4)
 
 [node name="Spike" parent="." instance=ExtResource("14_kphb3")]
 position = Vector2(2560, -192)
@@ -410,10 +410,8 @@ script = ExtResource("14_2jira")
 [node name="ScaleTrigger" type="Node2D" parent="."]
 position = Vector2(1470, -1088)
 script = ExtResource("19_vvu8j")
-scale_around_self = true
 mode = 3
-target_scale = null
-copy_multiplier = null
+scale_around_self = true
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="ScaleTrigger" instance=ExtResource("6_bolvq")]
@@ -533,6 +531,8 @@ metadata/_edit_group_ = true
 [node name="TargetLink" parent="CameraStaticTrigger" instance=ExtResource("6_bolvq")]
 z_index = -50
 points = PackedVector2Array(896, 256, 0, 0)
+width = 3.0
+default_color = Color(0, 1, 0, 1)
 
 [node name="TriggerEasing" type="Node" parent="CameraStaticTrigger"]
 script = ExtResource("10_srhyw")
@@ -570,6 +570,8 @@ metadata/_edit_group_ = true
 [node name="TargetLink" parent="CameraStaticTrigger3" instance=ExtResource("6_bolvq")]
 z_index = -50
 points = PackedVector2Array(-2176, 640, 0, 0)
+width = 3.0
+default_color = Color(0, 1, 0, 1)
 
 [node name="TriggerEasing" type="Node" parent="CameraStaticTrigger3"]
 script = ExtResource("10_srhyw")
@@ -604,6 +606,8 @@ metadata/_edit_group_ = true
 [node name="TargetLink" parent="tCameraStatic4" instance=ExtResource("6_bolvq")]
 z_index = -50
 points = PackedVector2Array(768, 0, 0, 0)
+width = 3.0
+default_color = Color(0, 1, 0, 1)
 
 [node name="TriggerEasing" type="Node" parent="tCameraStatic4"]
 script = ExtResource("10_srhyw")
@@ -989,6 +993,8 @@ metadata/_edit_group_ = true
 [node name="TargetLink" parent="CameraStaticTrigger2" instance=ExtResource("6_bolvq")]
 z_index = -50
 points = PackedVector2Array(-256.001, 127.998, 0, 0)
+width = 3.0
+default_color = Color(0, 1, 0, 1)
 
 [node name="TriggerEasing" type="Node" parent="CameraStaticTrigger2"]
 script = ExtResource("10_srhyw")
@@ -1308,11 +1314,6 @@ default_color = Color(0, 1, 1, 1)
 [node name="ScaleTrigger2" type="Node2D" parent="."]
 position = Vector2(6144, -960)
 script = ExtResource("19_vvu8j")
-scale_around_self = null
-change_position_only = null
-mode = 1
-target_scale = null
-copy_multiplier = null
 metadata/_edit_group_ = true
 
 [node name="TargetLink" type="Line2D" parent="ScaleTrigger2"]

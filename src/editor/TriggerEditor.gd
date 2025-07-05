@@ -17,12 +17,12 @@ func build_ui(triggers: Array[TriggerBase]) -> void:
 		show()
 	var ui := load(trigger.ui_path) as PackedScene
 	var instanced_ui := ui.instantiate()
-	if %UIRoot.get_child(0) != null:
+	if %UIRoot.get_child_count(0) > 0:
 		%UIRoot.get_child(0).queue_free()
 	%UIRoot.add_child(instanced_ui)
 	if not trigger.has_node("../TriggerEasing") and %UIRoot.has_node("Tweening"):
 		%UIRoot.get_node("Tweening").queue_free()
-	if trigger.has_node("../TriggerEasing") and %UIRoot.get_node("Tweening") == null:
+	if trigger.has_node("../TriggerEasing") and not %UIRoot.has_node("Tweening"):
 		var trigger_easing_ui := EASING_UI.instantiate() as SectionHeading
 		%UIRoot.add_child(trigger_easing_ui, true, INTERNAL_MODE_BACK)
 		trigger_easing_ui.set_deferred("name", "Tweening")

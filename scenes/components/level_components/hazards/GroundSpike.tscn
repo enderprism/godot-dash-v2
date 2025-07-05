@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cnru264bpjwxo" path="res://scenes/components/level_components/EditorSelectionCollider.tscn" id="2_idjkk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hu62t"]
-size = Vector2(48, 17)
+size = Vector2(120, 20)
 
 [node name="Spike" type="StaticBody2D"]
 collision_layer = 4
@@ -14,7 +14,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_qc78j")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, 53.5)
+position = Vector2(0, 50)
 shape = SubResource("RectangleShape2D_hu62t")
 debug_color = Color(0.960784, 0, 0, 0)
 
