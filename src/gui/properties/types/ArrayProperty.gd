@@ -76,13 +76,13 @@ func remove_item(idx: int) -> void:
 	var debug_color := Color.from_hsv(randf_range(0.0, 1.0), 0.9, 1.0)
 	for i in range(idx, items.get_child_count()):
 		var item = items.get_child(i)
-		var new_name := i - 1
-		item.name = str(new_name)
-		item.refresh()
-		item.property.name = item.name
-		item.property.label.text = item.name
-		item.property.refresh()
-		prints(i, new_name)
+		# There is an issue where if we use `str(i - 1)` directly as the name,
+		# the item doesn't get renamed correctly.
+		# HACK: Adding a suffix fixes the renaming issue for some reason.
+		# I'm using U+200B to avoid making the label wider.
+		# Removing the suffix afterwards doesn't introduce the issue back.
+		item.name = (str(i - 1) + "​").trim_prefix("​")
+		item.renamed.emit(str(i - 1))
 		item.modulate = debug_color
 	items.get_child(idx).queue_free()
 	_value.remove_at(idx)
