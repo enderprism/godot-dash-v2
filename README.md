@@ -15,7 +15,9 @@ Godot Dash V2 is intended to work on Linux, Windows and macOS (unsigned app). **
 
 <!-- Head to the [releases](https://github.com/enderprism/godot-dash-v2/releases/) section and download the latest one. -->
 
-As of right now, the game doesn't have any releases. **This is normal.** I will make some when the game will have official levels (and will release the editor in a later release).
+As of right now, the game doesn't have any releases.
+This is because it doesn't have any playable levels (the levels the game currently has are for testing purposes), and because the editor isn't finished.
+Godot Dash V2 will start getting pre-releases as soon as the editor is completely usable (even if most objects from Geometry Dash are missing).
 
 ## Contributing
 
