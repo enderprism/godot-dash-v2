@@ -13,6 +13,9 @@ var type: Script
 func _ready() -> void:
 	reorder_button = NodeUtils.get_node_or_add(self, "Reorder", Button, NodeUtils.INTERNAL)
 	reorder_button.icon = preload("res://assets/textures/godot_editor_icons/TripleBar.png")
+	reorder_button.keep_pressed_outside = true
+	reorder_button.button_down.connect(reorder.bind(false))
+	reorder_button.button_up.connect(reorder.bind(true))
 	property = NodeUtils.get_node_or_add(self, "Property", type, NodeUtils.INTERNAL)
 	property.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	delete_button = NodeUtils.get_node_or_add(self, "Delete", Button, NodeUtils.INTERNAL)
@@ -25,14 +28,21 @@ func _ready() -> void:
 	delete_button.pressed.connect(remove_self)
 	renamed.connect(refresh)
 
-func refresh() -> void:
-	property.name = name
+
+func reorder(stop: bool) -> void:
+	var parent_container := get_parent() as BoxContainer
+	var parent_property := parent_container.get_parent() as ArrayProperty
+	parent_property.reordered_item = self if not stop else null
 
 
 func remove_self() -> void:
 	var parent_container := get_parent() as BoxContainer
 	var parent_property := parent_container.get_parent() as ArrayProperty
 	parent_property.remove_item(get_index())
+
+
+func refresh() -> void:
+	property.name = name
 
 
 func set_value(value: Variant) -> void:

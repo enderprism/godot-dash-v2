@@ -20,11 +20,13 @@ var label_container: HBoxContainer
 var label: Label
 var add: Button
 var items: VBoxContainer
-
+var reordered_item: ArrayPropertyItem # Option<ArrayPropertyItem>
+var reordering_tween: Tween
 
 func _ready() -> void:
 	_value = []
 	vertical = true
+	reordering_tween = create_tween()
 	label_container = NodeUtils.get_node_or_add(self, "LabelContainer", HBoxContainer, NodeUtils.INTERNAL)
 	label_container.custom_minimum_size.y = custom_minimum_size.y
 	label = NodeUtils.get_node_or_add(label_container, "Label", Label, NodeUtils.INTERNAL)
@@ -38,6 +40,31 @@ func _ready() -> void:
 	items = NodeUtils.get_node_or_add(self, "Items", VBoxContainer, NodeUtils.INTERNAL)
 	renamed.connect(refresh)
 	refresh()
+
+
+func _process(_delta: float) -> void:
+	if reordered_item == null:
+		return
+	var index: int = reordered_item.get_index()
+	var new_index: int = -1 # Option<i32>
+	# The actual positions of nodes within a container are kinda weird
+	if get_local_mouse_position().y < reordered_item.position.y + reordered_item.size.y - 4.0:
+		new_index = index - 1
+	if index < items.get_child_count() - 1 and get_local_mouse_position().y > reordered_item.position.y + reordered_item.size.y * 2.0 + 8.0:
+		new_index = index + 1
+	if new_index == -1:
+		return
+	new_index = clampi(new_index, 0, items.get_child_count() - 1)
+	items.move_child(reordered_item, new_index)
+	# Avoid duplicate names (e.g. <idx>2)
+	# I'm forced to apply a unique name to every item first,
+	# and then put the actual index as the name, because
+	# I can't find a universal way of doing it in one pass
+	# without having duplicate names at an iteration.
+	for item in items.get_children():
+		item.name = str(hash(item))
+	for item in items.get_children():
+		item.name = str(item.get_index())
 
 
 func refresh() -> void:
@@ -72,8 +99,6 @@ func add_item(idx: int) -> ArrayPropertyItem:
 
 
 func remove_item(idx: int) -> void:
-	print_debug("item ", idx, " is being removed")
-	var debug_color := Color.from_hsv(randf_range(0.0, 1.0), 0.9, 1.0)
 	for i in range(idx, items.get_child_count()):
 		var item = items.get_child(i)
 		# There is an issue where if we use `str(i - 1)` directly as the name,
@@ -82,8 +107,6 @@ func remove_item(idx: int) -> void:
 		# I'm using U+200B to avoid making the label wider.
 		# Removing the suffix afterwards doesn't introduce the issue back.
 		item.name = (str(i - 1) + "​").trim_prefix("​")
-		item.renamed.emit(str(i - 1))
-		item.modulate = debug_color
 	items.get_child(idx).queue_free()
 	_value.remove_at(idx)
 
