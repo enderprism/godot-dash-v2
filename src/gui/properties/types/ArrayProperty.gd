@@ -90,6 +90,8 @@ func refresh() -> void:
 
 
 func add_item(idx: int) -> ArrayPropertyItem:
+	if items.get_child_count() + 1 > maximum_size and not or_greater:
+		return
 	var item = ArrayPropertyItem.new()
 	item.type = item_type
 	item.name = str(idx if idx > 0 else items.get_child_count())
@@ -99,6 +101,8 @@ func add_item(idx: int) -> ArrayPropertyItem:
 
 
 func remove_item(idx: int) -> void:
+	if items.get_child_count() - 1 < minimum_size:
+		return
 	for i in range(idx, items.get_child_count()):
 		var item = items.get_child(i)
 		# There is an issue where if we use `str(i - 1)` directly as the name,
