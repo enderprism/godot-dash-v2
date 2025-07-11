@@ -24,7 +24,8 @@ var reordered_item: ArrayPropertyItem # Option<ArrayPropertyItem>
 var reordering_tween: Tween
 
 func _ready() -> void:
-	_value = []
+	if _value is not Array:
+		_value = []
 	vertical = true
 	reordering_tween = create_tween()
 	label_container = NodeUtils.get_node_or_add(self, "LabelContainer", HBoxContainer, NodeUtils.INTERNAL)
