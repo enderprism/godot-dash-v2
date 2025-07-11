@@ -31,13 +31,13 @@ func _ready() -> void:
 
 func reorder(stop: bool) -> void:
 	var parent_container := get_parent() as BoxContainer
-	var parent_property := parent_container.get_parent() as ArrayProperty
+	var parent_property := parent_container.get_meta("array_property") as ArrayProperty
 	parent_property.reordered_item = self if not stop else null
 
 
 func remove_self() -> void:
 	var parent_container := get_parent() as BoxContainer
-	var parent_property := parent_container.get_parent() as ArrayProperty
+	var parent_property := parent_container.get_meta("array_property") as ArrayProperty
 	parent_property.remove_item(get_index())
 
 

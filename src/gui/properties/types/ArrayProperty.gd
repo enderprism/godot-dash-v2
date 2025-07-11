@@ -37,7 +37,15 @@ func _ready() -> void:
 	add.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	add.custom_minimum_size.x = custom_minimum_size.y
 	add.pressed.connect(add_item.bind(-1))
-	items = NodeUtils.get_node_or_add(self, "Items", VBoxContainer, NodeUtils.INTERNAL)
+	var margin_container: MarginContainer = NodeUtils.get_node_or_add(
+		NodeUtils.get_node_or_add(self, "PanelContainer", PanelContainer, NodeUtils.INTERNAL),
+		"MarginContainer",
+		MarginContainer,
+		NodeUtils.INTERNAL
+	)
+	margin_container.theme = preload("res://resources/Margins.tres")
+	items = NodeUtils.get_node_or_add(margin_container, "Items", VBoxContainer, NodeUtils.INTERNAL)
+	items.set_meta("array_property", self)
 	renamed.connect(refresh)
 	refresh()
 
