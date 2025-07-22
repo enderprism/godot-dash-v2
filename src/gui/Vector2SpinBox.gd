@@ -62,6 +62,8 @@ func update_internals() -> void:
 
 
 func _set_prefix(new_prefix: String) -> void:
+	if spinbox_x == null or spinbox_y == null:
+		return
 	prefix = new_prefix
 	if new_prefix != "":
 		for spinbox in [spinbox_x, spinbox_y]:
@@ -100,3 +102,5 @@ func set_value_no_signal(new_value: Vector2):
 	spinbox_x.set_value_no_signal(new_value.x)
 	spinbox_y.set_value_no_signal(new_value.y)
 
+func get_value() -> Vector2:
+	return value
