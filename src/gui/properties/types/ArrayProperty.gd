@@ -8,12 +8,7 @@ signal value_changed(value: Array)
 @export var minimum_size: int = 1
 @export var maximum_size: int = 10
 @export var or_greater: bool
-@export var item_type: Script:
-	set(value):
-		if value.new() is not AbstractProperty:
-			item_type = null
-			push_error("Item type does not extend AbstractProperty")
-		item_type = value
+@export var item_template: AbstractProperty
 @export_tool_button("Refresh") var _refresh = refresh
 
 var label_container: HBoxContainer
@@ -81,7 +76,7 @@ func refresh() -> void:
 	var array_size = items.get_child_count() if not Engine.is_editor_hint() else default_size
 	array_size = minimum_size if array_size < minimum_size else array_size
 	array_size = maximum_size if array_size > maximum_size and not or_greater else array_size
-	if item_type == null:
+	if get_child(0) == null:
 		return
 	items.visible = array_size > 0
 	# Substractive
@@ -102,7 +97,8 @@ func add_item(idx: int) -> ArrayPropertyItem:
 	if items.get_child_count() + 1 > maximum_size and not or_greater:
 		return
 	var item = ArrayPropertyItem.new()
-	item.type = item_type
+	item.property = item_template.duplicate()
+	item.property.show()
 	item.name = str(idx if idx > 0 else items.get_child_count())
 	items.add_child(item)
 	_value.insert(idx, item.get_value())

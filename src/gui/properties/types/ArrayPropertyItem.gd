@@ -8,15 +8,13 @@ var reorder_button: Button
 var property: AbstractProperty
 var delete_button: Button
 
-var type: Script
-
 func _ready() -> void:
 	reorder_button = NodeUtils.get_node_or_add(self, "Reorder", Button, NodeUtils.INTERNAL)
 	reorder_button.icon = preload("res://assets/textures/godot_editor_icons/TripleBar.png")
 	reorder_button.keep_pressed_outside = true
 	reorder_button.button_down.connect(reorder.bind(false))
 	reorder_button.button_up.connect(reorder.bind(true))
-	property = NodeUtils.get_node_or_add(self, "Property", type, NodeUtils.INTERNAL)
+	add_child(property, false, INTERNAL_MODE_FRONT)
 	property.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	delete_button = NodeUtils.get_node_or_add(self, "Delete", Button, NodeUtils.INTERNAL)
 	delete_button.icon = preload("res://assets/textures/godot_editor_icons/Remove.png")
