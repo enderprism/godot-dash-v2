@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://3bc5088argko"]
+[gd_scene load_steps=15 format=3 uid="uid://3bc5088argko"]
 
 [ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="1_1q0ts"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_xcvel"]
@@ -11,6 +11,13 @@
 [ext_resource type="Script" uid="uid://bm3bhys0ur0ns" path="res://src/gui/properties/types/Node2DProperty.gd" id="8_eapbg"]
 [ext_resource type="Script" uid="uid://3na5h1vigpxe" path="res://src/gui/properties/types/FileProperty.gd" id="9_eabr2"]
 [ext_resource type="Script" uid="uid://d3j6obbost55b" path="res://src/gui/properties/types/ArrayProperty.gd" id="10_jpvj5"]
+[ext_resource type="Script" uid="uid://bcfxiueixkkwq" path="res://src/gui/properties/types/ResourceProperty.gd" id="12_ostnf"]
+[ext_resource type="Script" uid="uid://s3yc0qgg4nal" path="res://src/resources/SpawnedGroup.gd" id="13_iyxla"]
+
+[sub_resource type="Resource" id="Resource_ostnf"]
+script = ExtResource("13_iyxla")
+path = NodePath("")
+time = 0.0
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -114,11 +121,48 @@ script = ExtResource("9_eabr2")
 _value = ""
 metadata/_custom_type_script = "uid://3na5h1vigpxe"
 
-[node name="ArrayProperty" type="BoxContainer" parent="CenterContainer/VBoxContainer"]
+[node name="ArrayProperty" type="BoxContainer" parent="CenterContainer/VBoxContainer" node_paths=PackedStringArray("item_template")]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 vertical = true
 script = ExtResource("10_jpvj5")
-item_type = ExtResource("3_bgdif")
-_value = [0.0]
+item_template = NodePath("Vector2Property")
+_value = [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), 0.0, 0.0]
 metadata/_custom_type_script = "uid://d3j6obbost55b"
+
+[node name="Vector2Property" type="BoxContainer" parent="CenterContainer/VBoxContainer/ArrayProperty"]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("4_rks8l")
+allow_lesser = true
+allow_greater = true
+suffix = "px"
+_value = Vector2(0, 0)
+metadata/_custom_type_script = "uid://crich318mmmk2"
+
+[node name="ResourceProperty" type="BoxContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+vertical = true
+script = ExtResource("12_ostnf")
+default = SubResource("Resource_ostnf")
+resource_script = ExtResource("13_iyxla")
+metadata/_custom_type_script = "uid://bcfxiueixkkwq"
+
+[node name="Path" type="BoxContainer" parent="CenterContainer/VBoxContainer/ResourceProperty"]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("8_eapbg")
+metadata/_custom_type_script = "uid://bm3bhys0ur0ns"
+
+[node name="Time" type="BoxContainer" parent="CenterContainer/VBoxContainer/ResourceProperty"]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("1_1q0ts")
+allow_greater = true
+suffix = "s"
+_value = 0.0
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
