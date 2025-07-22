@@ -31,7 +31,7 @@ func set_value_no_signal(new_value: bool) -> void:
 	_value = new_value
 	input.set_pressed_no_signal(new_value)
 
-func get_value() -> float:
+func get_value() -> bool:
 	return input.is_pressed()
 
 func reset() -> void:
