@@ -16,13 +16,11 @@ var label: Label
 var add: Button
 var items: VBoxContainer
 var reordered_item: ArrayPropertyItem # Option<ArrayPropertyItem>
-var reordering_tween: Tween
 
 func _ready() -> void:
 	if _value is not Array:
 		_value = []
 	vertical = true
-	reordering_tween = create_tween()
 	label_container = NodeUtils.get_node_or_add(self, "LabelContainer", HBoxContainer, NodeUtils.INTERNAL)
 	label_container.custom_minimum_size.y = custom_minimum_size.y
 	label = NodeUtils.get_node_or_add(label_container, "Label", Label, NodeUtils.INTERNAL)
@@ -102,6 +100,7 @@ func add_item(idx: int) -> ArrayPropertyItem:
 	item.name = str(idx if idx > 0 else items.get_child_count())
 	items.add_child(item)
 	_value.insert(idx, item.get_value())
+	value_changed.emit(_value)
 	return item
 
 
@@ -118,6 +117,7 @@ func remove_item(idx: int) -> void:
 		item.name = (str(i - 1) + "​").trim_prefix("​")
 	items.get_child(idx).queue_free()
 	_value.remove_at(idx)
+	value_changed.emit(_value)
 
 
 func set_value(value: Array) -> void:
