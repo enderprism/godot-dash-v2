@@ -97,6 +97,9 @@ func add_item(idx: int) -> ArrayPropertyItem:
 	var item = ArrayPropertyItem.new()
 	item.property = item_template.duplicate()
 	item.property.show()
+	item.value_changed.connect(func(value):
+		_value[item.get_index()] = value
+		value_changed.emit(_value))
 	item.name = str(idx if idx > 0 else items.get_child_count())
 	items.add_child(item)
 	_value.insert(idx, item.get_value())
