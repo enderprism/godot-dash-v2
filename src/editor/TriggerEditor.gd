@@ -41,7 +41,8 @@ func connect_ui(triggers: Array[TriggerBase]) -> void:
 				if not "watcher" in connection.callable.get_method():
 					property.value_changed.disconnect(connection.callable)
 			property.value_changed.get_connections().map(remove_connections)
-			var property_name := property.name.to_camel_case()
+			var property_name := property.name.to_snake_case()
+			print_debug(property_name)
 			if property.has_node("TriggerPropertyInternalName"):
 				property_name = property.get_node("TriggerPropertyInternalName").property_name
 			property.value_changed.connect(save_property.bind(property_name, triggers, group))
@@ -64,11 +65,11 @@ func load_properties(trigger: TriggerBase) -> void:
 			return
 		var property_owner := trigger.get_parent() if group == TRIGGER_PROPERTY_GROUP else trigger.get_node("../TriggerEasing") if group == TRIGGER_EASING_PROPERTY_GROUP else trigger
 		for property in properties as Array[AbstractProperty]:
-			var property_name := property.name.to_camel_case()
+			var property_name := property.name.to_snake_case()
 			if property.has_node("TriggerPropertyInternalName"):
 				property_name = property.get_node("TriggerPropertyInternalName").property_name
 			if property_owner.get(property_name) == null:
-				printerr("Can't load_property property ", property_name, " on ", property_owner)
+				printerr("Can't load property ", property_name, " on ", property_owner)
 				continue
 			var value = property_owner.get(property_name)
 			if property_name == "target_group":
