@@ -18,6 +18,7 @@ label_settings = ExtResource("2_076yy")
 metadata/_custom_type_script = "uid://cuih47milvqcs"
 
 [node name="Duration" type="BoxContainer" parent="." groups=["trigger_easing_property"]]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("3_71efo")
 default = 1.0
@@ -31,6 +32,7 @@ script = ExtResource("4_y847c")
 property_name = "duration"
 
 [node name="Keep Active" type="BoxContainer" parent="." groups=["trigger_easing_property"]]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("9_tyuh0")
 _value = false
@@ -41,6 +43,7 @@ script = ExtResource("4_y847c")
 property_name = "keep_active"
 
 [node name="Easing" type="BoxContainer" parent="." groups=["trigger_easing_property"]]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("6_tyuh0")
 default = 2
@@ -53,6 +56,7 @@ script = ExtResource("4_y847c")
 property_name = "easing_type"
 
 [node name="Transition" type="BoxContainer" parent="." groups=["trigger_easing_property"]]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("6_tyuh0")
 default = 2
