@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://s3yc0qgg4nal" path="res://src/resources/SpawnedGroup.gd" id="13_iyxla"]
 
 [sub_resource type="Resource" id="Resource_ostnf"]
+resource_local_to_scene = true
 script = ExtResource("13_iyxla")
 path = NodePath("")
 time = 0.0
@@ -127,7 +128,7 @@ layout_mode = 2
 vertical = true
 script = ExtResource("10_jpvj5")
 item_template = NodePath("Vector2Property")
-_value = [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), 0.0, 0.0]
+_value = [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), 0.0, 0.0]
 metadata/_custom_type_script = "uid://d3j6obbost55b"
 
 [node name="Vector2Property" type="BoxContainer" parent="CenterContainer/VBoxContainer/ArrayProperty"]
@@ -148,6 +149,7 @@ vertical = true
 script = ExtResource("12_ostnf")
 default = SubResource("Resource_ostnf")
 resource_script = ExtResource("13_iyxla")
+_value = SubResource("Resource_ostnf")
 metadata/_custom_type_script = "uid://bcfxiueixkkwq"
 
 [node name="Path" type="BoxContainer" parent="CenterContainer/VBoxContainer/ResourceProperty"]
