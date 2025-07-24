@@ -74,6 +74,8 @@ func set_value_no_signal(new_value: Resource) -> void:
 		var field_input = indentation_container.get_child(i)
 		var field_name = resource_properties[i]
 		var field_value = resource_script.get(field_name)
+		if field_value == null and field_input is not Node2DProperty:
+			continue
 		field_input.set_value(field_value)
 
 func get_value() -> Resource:
