@@ -2,9 +2,15 @@
 extends Node2D
 class_name SpawnTrigger
 
+enum LoopState {
+	DISABLED,
+	COUNT,
+	INFINITE,
+}
+
 # TODO in editor, refresh timer duration if a spawned group's duration is changed
 @export var spawned_groups: Array[SpawnedGroup]
-@export var loop: bool = false:
+@export var loop: LoopState = LoopState.DISABLED:
 	set(value):
 		loop = value
 		notify_property_list_changed()
@@ -18,7 +24,7 @@ class_name SpawnTrigger
 			get_node(group.path).get_node("SpawnTargetLink").queue_free()
 
 func _validate_property(property: Dictionary) -> void:
-	if property.name in ["loop_count", "loop_delay"] and not loop:
+	if property.name in ["loop_count", "loop_delay"] and loop == LoopState.DISABLED:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 
@@ -70,7 +76,7 @@ func start(_body: Node2D):
 
 func restart() -> void:
 	await get_tree().create_timer(loop_delay).timeout
-	if loop_count < 0 or _current_loop < loop_count:
+	if loop == LoopState.INFINITE or _current_loop < loop_count:
 		base.emit_signal("body_entered", _player)
 
 func update_target_link() -> void:
