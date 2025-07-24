@@ -25,15 +25,15 @@ func _physics_process(_delta: float) -> void:
 
 func start(_body: Node2D) -> void:
 	tween = get_tree().create_tween()
-	if not $"../TriggerBase".single_usage:
-		reset()
-		tween.tween_property(self, "weight", 1.0, duration) \
-			.set_trans(easing_transition) \
-			.set_ease(easing_type).from(0.0)
-	else:
-		tween.tween_property(self, "weight", 1.0, duration) \
-			.set_trans(easing_transition) \
-			.set_ease(easing_type)
+	reset()
+	tween.tween_property(self, "weight", 1.0, duration) \
+		.set_trans(easing_transition) \
+		.set_ease(easing_type).from(0.0)
+	# if not $"../TriggerBase".single_usage:
+	# else:
+	# 	tween.tween_property(self, "weight", 1.0, duration) \
+	# 		.set_trans(easing_transition) \
+	# 		.set_ease(easing_type)
 	tween.finished.connect(func(): finished.emit())
 
 func get_weight_delta() -> float:

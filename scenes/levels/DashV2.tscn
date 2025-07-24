@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=67 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" uid="uid://bxxoioqd6wilw" path="res://src/LevelProps.gd" id="1_7ju0m"]
 [ext_resource type="PackedScene" uid="uid://duj3dae6qcvtm" path="res://scenes/components/level_components/portals/gamemode_portals/SpiderPortal.tscn" id="3_iu2ry"]
@@ -66,6 +66,10 @@ a = Vector2(0, -8192)
 b = Vector2(0, 8192)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_iot8l"]
+a = Vector2(0, -8192)
+b = Vector2(0, 8192)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_pu6ee"]
 a = Vector2(0, -8192)
 b = Vector2(0, 8192)
 
@@ -599,24 +603,24 @@ texture = ExtResource("26_adqf5")
 script = ExtResource("14_2jira")
 
 [node name="tCameraStatic4" type="Node2D" parent="."]
-position = Vector2(4992, -576)
+position = Vector2(4480, -1216)
 script = ExtResource("24_r7vme")
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="tCameraStatic4" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(768, 0, 0, 0)
+points = PackedVector2Array(1280, 640, 0, 0)
 width = 3.0
 default_color = Color(0, 1, 0, 1)
 
 [node name="TriggerEasing" type="Node" parent="tCameraStatic4"]
 script = ExtResource("10_srhyw")
-easing_transition = 1
+easing_type = 1
+easing_transition = 5
 
 [node name="TriggerBase" type="Area2D" parent="tCameraStatic4" node_paths=PackedStringArray("_target")]
 collision_layer = 16
 script = ExtResource("11_w8j1w")
-_hitbox_shape = 2
 _target = NodePath("../../Cross2")
 single_usage = true
 
@@ -625,6 +629,7 @@ z_index = -20
 script = ExtResource("12_bmhr7")
 
 [node name="Hitbox" type="CollisionShape2D" parent="tCameraStatic4/TriggerBase"]
+shape = SubResource("SegmentShape2D_pu6ee")
 debug_color = Color(1, 0.960784, 0, 0.419608)
 
 [node name="Sprite" type="Sprite2D" parent="tCameraStatic4/TriggerBase"]
@@ -1238,8 +1243,8 @@ position = Vector2(5760, -576)
 position = Vector2(5888, -960)
 script = ExtResource("24_l04c6")
 spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_4mfmg"), SubResource("Resource_hl221")])
-loop = 2
-loop_count = -1
+loop = 1
+loop_count = 5
 loop_delay = 0.6
 metadata/_edit_group_ = true
 
@@ -1311,9 +1316,11 @@ z_index = -50
 points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
-[node name="ScaleTrigger2" type="Node2D" parent="."]
+[node name="ScaleTrigger2" type="Node2D" parent="." node_paths=PackedStringArray("pivot")]
 position = Vector2(6144, -960)
 script = ExtResource("19_vvu8j")
+pivot = NodePath("../Pivot")
+target_scale = Vector2(0.9, 0.9)
 metadata/_edit_group_ = true
 
 [node name="TargetLink" type="Line2D" parent="ScaleTrigger2"]

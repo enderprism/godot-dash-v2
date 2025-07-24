@@ -70,14 +70,14 @@ func _physics_process(_delta: float) -> void:
 		if Engine.is_editor_hint(): base.position = Vector2.ZERO
 
 func start(_body: Node2D):
-	if loop and not easing.finished.is_connected(restart):
+	if loop != LoopState.DISABLED and not easing.finished.is_connected(restart):
 		easing.finished.connect(restart)
 	_current_loop += 1
 
 func restart() -> void:
 	await get_tree().create_timer(loop_delay).timeout
 	if loop == LoopState.INFINITE or _current_loop < loop_count:
-		base.emit_signal("body_entered", _player)
+		base.body_entered.emit(_player)
 
 func update_target_link() -> void:
 	if len(spawned_groups) >= 1:
