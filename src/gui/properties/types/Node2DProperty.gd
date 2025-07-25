@@ -26,12 +26,12 @@ func _ready() -> void:
 
 func set_value(new_value: Node2D) -> void:
 	_value = new_value
-	input.text = LevelManager.editor_edited_level.get_path_to(new_value)
+	input.text = LevelManager.current_level.get_path_to(new_value)
 	value_changed.emit(_value)
 
 func set_value_no_signal(new_value: Node2D) -> void:
 	_value = new_value
-	input.text = LevelManager.editor_edited_level.get_path_to(new_value)
+	input.text = LevelManager.current_level.get_path_to(new_value)
 
 func get_value() -> Node2D:
 	return _value
@@ -56,4 +56,4 @@ func _on_input_pressed() -> void:
 	if clipboard.is_empty() or Engine.is_editor_hint():
 		reset()
 	else:
-		set_value(LevelManager.editor_edited_level.get_node(clipboard[0]))
+		set_value(LevelManager.current_level.get_node(clipboard[0]))

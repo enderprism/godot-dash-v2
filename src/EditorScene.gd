@@ -15,7 +15,6 @@ var level:
 	set(value):
 		level = value
 		$EditHandler.level = value
-		LevelManager.editor_edited_level = value
 @onready var placed_objects_collider := $PlacedObjectsCollider as Area2D
 
 var editor_actions: int
@@ -50,8 +49,7 @@ func _ready() -> void:
 	$EditHandler.editor_mode = %EditorModes
 
 	if LevelManager.editor_level_backup.can_instantiate():
-		$GameScene/Level.add_child(LevelManager.editor_level_backup.instantiate())
-		level = $GameScene/Level.get_child(0)
+		level = LevelManager.game_scene.add_loaded_level(LevelManager.editor_level_backup.instantiate()) 
 	elif not $GameScene/Level.get_child_count():
 		level = LevelProps.new()
 		level.version_history = UndoRedo.new()

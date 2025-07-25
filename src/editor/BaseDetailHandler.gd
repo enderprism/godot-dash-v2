@@ -18,7 +18,7 @@ func _on_property_focus_entered() -> void:
 
 func _on_base_color_value_changed(value:Variant) -> void:
 	var base_channel := value as String
-	var existing_color_channels := LevelManager.editor_edited_level.color_channels.map(func(channel): return channel.associated_group.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX))
+	var existing_color_channels := LevelManager.current_level.color_channels.map(func(channel): return channel.associated_group.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX))
 	if not base_channel in existing_color_channels:
 		base.set_value_no_signal("")
 		return
@@ -37,7 +37,7 @@ func _on_base_color_value_changed(value:Variant) -> void:
 
 func _on_detail_color_value_changed(value:Variant) -> void:
 	var detail_channel := value as String
-	var existing_color_channels := LevelManager.editor_edited_level.color_channels.map(func(channel): return channel.associated_group.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX))
+	var existing_color_channels := LevelManager.current_level.color_channels.map(func(channel): return channel.associated_group.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX))
 	if not detail_channel in existing_color_channels:
 		detail.set_value_no_signal("")
 		return
@@ -56,7 +56,7 @@ func _on_detail_color_value_changed(value:Variant) -> void:
 	
 
 func clear_color_channels(selection: Array) -> void:
-	for color_channel in LevelManager.editor_edited_level.color_channels:
+	for color_channel in LevelManager.current_level.color_channels:
 		selection.map(func(object): object.remove_from_group(color_channel.associated_group))
 
 func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:

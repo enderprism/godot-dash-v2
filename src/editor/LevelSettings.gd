@@ -7,7 +7,7 @@ func _ready() -> void:
 	$"TabContainer/Level Settings/VBoxContainer".custom_minimum_size.y = $"TabContainer/Level Settings/VBoxContainer".size.y
 	saveloads = NodeUtils.get_children_of_type(self, PropertySaveLoad, true)
 	var refresh_saveloads := func(saveload: PropertySaveLoad):
-		saveload.property_owner = LevelManager.editor_edited_level
+		saveload.property_owner = LevelManager.current_level
 		saveload.load_value()
 	saveloads.map.call_deferred(refresh_saveloads)
 	%"Song Path".load_root = "created_levels/songs"

@@ -1,4 +1,5 @@
 extends Node2D
+class_name GameScene
 
 var has_level_started: bool
 
@@ -23,12 +24,19 @@ func _ready() -> void:
 			$FadeScreenLayer/FadeScreen.show()
 			$FadeScreenLayer/FadeScreen.modulate = Color("000000ff")
 		$EditorGridParallax/EditorGrid.hide()
-		ResourceLoader.load_threaded_request(LevelManager.current_level, "PackedScene", false, ResourceLoader.CACHE_MODE_IGNORE_DEEP)
-		var current_level: Node = ResourceLoader.load_threaded_get(LevelManager.current_level).instantiate()
+		ResourceLoader.load_threaded_request(LevelManager.current_level_path, "PackedScene", false, ResourceLoader.CACHE_MODE_IGNORE_DEEP)
+		var current_level: Node = ResourceLoader.load_threaded_get(LevelManager.current_level_path).instantiate()
 		LevelManager.platformer = current_level.platformer
-		$Level.add_child(current_level)
+		add_loaded_level(current_level)
 		SceneTransition.previous = SceneTransition.Scene.LEVEL
 		_start_level()
+
+
+func add_loaded_level(level: LevelProps) -> LevelProps:
+	LevelManager.current_level = level
+	$Level.add_child(level)
+	return level
+
 
 func _start_level() -> void:
 	if LevelManager.is_first_attempt:

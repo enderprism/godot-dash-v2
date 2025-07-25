@@ -4,8 +4,9 @@ const CELL_SIZE: int = 128
 
 @onready var game_scene_packed := preload("res://scenes/GameScene.tscn")
 
-var game_scene: Node2D
-var current_level: String
+var game_scene: GameScene
+var current_level: LevelProps
+var current_level_path: String
 var current_level_name: String
 var is_first_attempt: bool
 var level_playing: bool
@@ -21,7 +22,6 @@ var platformer := false
 var editor_clipboard: Array[NodePath]
 var editor_backup := PackedScene.new()
 var editor_level_backup := PackedScene.new()
-var editor_edited_level: LevelProps
 var active_camera_static: CameraStaticTrigger
 var shortcut_blocker: Node
 

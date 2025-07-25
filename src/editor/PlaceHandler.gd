@@ -46,7 +46,7 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 				hsv_watcher.name = "HSVWatcher"
 				object.add_child(hsv_watcher)
 				object.rotation_degrees = placed_object_rotation_degrees
-				hsv_watcher.set_owner(LevelManager.editor_edited_level)
+				hsv_watcher.set_owner(LevelManager.current_level)
 
 				# Version history
 				var add_object := func(_object: Node):

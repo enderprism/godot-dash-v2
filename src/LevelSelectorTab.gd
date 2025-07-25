@@ -21,5 +21,5 @@ func _on_button_pressed() -> void:
 		await get_tree().create_timer(0.5).timeout
 		LevelManager.current_level_name = name
 		LevelManager.is_first_attempt = true
-		LevelManager.current_level = selected_level
+		LevelManager.current_level_path = selected_level
 		get_tree().change_scene_to_packed(LevelManager.game_scene_packed)

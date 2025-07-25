@@ -44,10 +44,10 @@ func _ready() -> void:
 		child_duplicate.show()
 		child_duplicate.value_changed.connect(func(value):
 			if child_duplicate is Node2DProperty:
-				if LevelManager.editor_edited_level == null:
+				if LevelManager.current_level == null:
 					value = ^""
 				else:
-					value = LevelManager.editor_edited_level.get_path_to(value)
+					value = LevelManager.current_level.get_path_to(value)
 			_value.set(resource_properties[child_duplicate.get_index()], value)
 			value_changed.emit(_value))
 		indentation_container.add_child(child_duplicate)

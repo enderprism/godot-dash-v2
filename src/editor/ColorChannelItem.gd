@@ -42,14 +42,14 @@ func update() -> void:
 
 
 func register():
-	var level := LevelManager.editor_edited_level
+	var level := LevelManager.current_level
 	if data not in level.color_channels:
 		level.color_channels.append(data)
 		level.add_child(ColorChannelWatcher.new(data))
 
 
 func unregister():
-	var level := LevelManager.editor_edited_level
+	var level := LevelManager.current_level
 	level.color_channels.erase(data)
 	var watcher := get_tree().get_first_node_in_group(ColorChannelWatcher.WATCHER_GROUP_PREFIX + data.associated_group) as ColorChannelWatcher
 	watcher.queue_free()

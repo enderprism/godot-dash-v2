@@ -60,9 +60,8 @@ func _on_level_index_pressed(index:int) -> void:
 
 func _new_level() -> void:
 	var new_level := LevelProps.new()
-	editor.level.add_sibling(new_level)
 	editor.level.queue_free()
-	editor.level = new_level
+	editor.level = LevelManager.game_scene.add_loaded_level(new_level)
 	new_level.version_history = UndoRedo.new()
 	level_loaded.emit(new_level)
 
@@ -82,9 +81,8 @@ func _open_level(path: String) -> void:
 		song_file_path = level.song_path.get_file()
 	level.song_path = "" if song_file_path.is_empty() else "user://created_levels/songs/" + song_file_path
 	level.set_meta("packed_file_path", path)
-	editor.level.add_sibling(level)
 	editor.level.queue_free()
-	editor.level = level
+	editor.level = LevelManager.game_scene.add_loaded_level(level)
 	edit_handler.selection.clear()
 	level_loaded.emit(level)
 	Toasts.new_toast("Opened level " + path.get_file().get_basename())
