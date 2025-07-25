@@ -42,7 +42,6 @@ func connect_ui(triggers: Array[TriggerBase]) -> void:
 					property.value_changed.disconnect(connection.callable)
 			property.value_changed.get_connections().map(remove_connections)
 			var property_name := property.name.to_snake_case()
-			print_debug(property_name)
 			if property.has_node("TriggerPropertyInternalName"):
 				property_name = property.get_node("TriggerPropertyInternalName").property_name
 			property.value_changed.connect(save_property.bind(property_name, triggers, group))
