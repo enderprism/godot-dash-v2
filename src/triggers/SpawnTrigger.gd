@@ -21,7 +21,7 @@ enum LoopState {
 @export_tool_button("Refresh Target Link") var refresh_target_link = update_target_link
 @export_tool_button("Clear External Target Links") var clear_external_target_links = func(): 
 		for group in spawned_groups:
-			get_node(group.path).get_node("SpawnTargetLink").queue_free()
+			LevelManager.current_level.get_node(group.path).get_node("SpawnTargetLink").queue_free()
 
 func _validate_property(property: Dictionary) -> void:
 	if property.name in ["loop_count", "loop_delay"] and loop == LoopState.DISABLED:
@@ -40,7 +40,7 @@ var _duration: float
 func _ready() -> void:
 	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK | TriggerSetup.ADD_EASING)
 	var skip_deleted := func(group):
-		return not get_node(group.path).is_in_group("deleted")
+		return not LevelManager.current_level.get_node(group.path).is_in_group("deleted")
 	spawned_groups = spawned_groups.filter(skip_deleted)
 	for group in spawned_groups:
 		if group.time > _duration:
@@ -57,8 +57,8 @@ func _physics_process(_delta: float) -> void:
 			var elapsed_time: float = _duration * easing.weight
 			for group in spawned_groups:
 				if (elapsed_time > group.time or is_equal_approx(elapsed_time, group.time)) and group.loop_idx != _current_loop:
-					if get_node(group.path).has_node("TriggerBase"):
-						get_node(group.path).base.emit_signal("body_entered", _player)
+					if LevelManager.current_level.get_node(group.path).has_node("TriggerBase"):
+						LevelManager.current_level.get_node(group.path).base.emit_signal("body_entered", _player)
 					group.loop_idx = _current_loop
 		elif LevelManager.in_editor and LevelManager.level_playing:
 			printerr("In ", name, ": there aren't any groups to spawn.")
