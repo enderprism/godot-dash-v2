@@ -4,6 +4,8 @@ class_name ArrayProperty
 
 signal value_changed(value: Array)
 
+const NO_SIGNAL = 1
+
 @export var default_size: int
 @export var minimum_size: int = 1
 @export var maximum_size: int = 10
@@ -74,7 +76,6 @@ func refresh() -> void:
 	var array_size = items.get_child_count() if not Engine.is_editor_hint() else default_size
 	array_size = minimum_size if array_size < minimum_size else array_size
 	array_size = maximum_size if array_size > maximum_size and not or_greater else array_size
-	items.visible = array_size > 0
 	# Substractive
 	if items.get_child_count() > array_size:
 		for i in range(array_size, items.get_child_count()):
@@ -89,23 +90,28 @@ func refresh() -> void:
 		add_item(i)
 
 
-func add_item(idx: int) -> ArrayPropertyItem:
+func add_item(idx: int, options: int = 0) -> ArrayPropertyItem:
 	if items.get_child_count() + 1 > maximum_size and not or_greater:
 		return
 	var item = ArrayPropertyItem.new()
 	item.property = item_template.instantiate()
 	item.property.show()
 	item.value_changed.connect(func(value):
-		_value.insert(item.get_index(), value)
+		_value[item.get_index()] = value
 		value_changed.emit(_value))
 	item.name = str(idx if idx > 0 else items.get_child_count())
 	items.add_child(item)
-	_value.insert(idx, item.get_value())
-	value_changed.emit(_value)
+	if idx > 0:
+		_value.insert(idx, item.get_value())
+	else:
+		_value.append(item.get_value())
+	if not options & NO_SIGNAL:
+		value_changed.emit(_value)
+	print(item)
 	return item
 
 
-func remove_item(idx: int) -> void:
+func remove_item(idx: int, options: int = 0) -> void:
 	if items.get_child_count() - 1 < minimum_size:
 		return
 	for i in range(idx, items.get_child_count()):
@@ -118,7 +124,8 @@ func remove_item(idx: int) -> void:
 		item.name = (str(i - 1) + "​").trim_prefix("​")
 	items.get_child(idx).queue_free()
 	_value.remove_at(idx)
-	value_changed.emit(_value)
+	if not options & NO_SIGNAL:
+		value_changed.emit(_value)
 
 
 func set_value(value: Array) -> void:
@@ -127,10 +134,16 @@ func set_value(value: Array) -> void:
 
 
 func set_value_no_signal(value: Array) -> void:
-	_value = value
 	items.get_children().map(func(item): item.queue_free())
+	if len(value) < minimum_size:
+		for i in range(minimum_size):
+			add_item(i, NO_SIGNAL)
+	if len(value) > maximum_size and not or_greater:
+		value.resize(maximum_size)
+	_value = value
 	for i in range(len(value)):
-		add_item(i).set_value_no_signal(value[i])
+		print(i)
+		add_item(i, NO_SIGNAL).set_value_no_signal(value[i])
 
 
 func get_value() -> Array:
