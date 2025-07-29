@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://db7ebleody4s3"]
+[gd_scene load_steps=24 format=3 uid="uid://db7ebleody4s3"]
 
 [ext_resource type="Script" uid="uid://wgo4i4qn77d4" path="res://src/GameScene.gd" id="1_k47tp"]
 [ext_resource type="Texture2D" uid="uid://djstmwdco77pp" path="res://assets/textures/backgrounds/background1-3.png" id="2_i4f6q"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://nl1xrhaw0nyb" path="res://src/PositionFollow2D.gd" id="6_kvomc"]
 [ext_resource type="Script" uid="uid://dwo41qkfxpajj" path="res://src/GroundObject.gd" id="7_fb2li"]
 [ext_resource type="PackedScene" uid="uid://dxcgyea560vmr" path="res://scenes/components/game_components/PlayerCamera.tscn" id="9_e8rlm"]
+[ext_resource type="Shader" uid="uid://dghfnabjmw7js" path="res://resources/shaders/Ground.gdshader" id="9_qitmq"]
 [ext_resource type="PackedScene" uid="uid://th7jwdop3hdv" path="res://scenes/components/game_components/PauseMenu.tscn" id="9_vv033"]
 [ext_resource type="Shader" uid="uid://c37wfprwryexl" path="res://resources/shaders/Grayscale.gdshader" id="10_tgbxk"]
 [ext_resource type="Shader" uid="uid://bmo5oa3f8elxu" path="res://resources/shaders/LensCircle.gdshader" id="11_bdlmb"]
@@ -17,6 +18,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y3ubx"]
 size = Vector2(4096, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kxqg4"]
+shader = ExtResource("9_qitmq")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l4i0t"]
 size = Vector2(534.4, 154.4)
@@ -124,6 +128,7 @@ DEFAULT_Y = 925.0
 self_modulate = Color(0.105882, 0.294118, 0.768627, 1)
 z_index = 50
 texture_repeat = 2
+material = SubResource("ShaderMaterial_kxqg4")
 position = Vector2(300, 300)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_ylgfk")
@@ -172,6 +177,7 @@ ground_position = -1
 self_modulate = Color(0.105882, 0.294118, 0.768627, 1)
 z_index = 50
 texture_repeat = 2
+material = SubResource("ShaderMaterial_kxqg4")
 position = Vector2(300, -300)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_ylgfk")
