@@ -17,7 +17,7 @@ func build_ui(triggers: Array[TriggerBase]) -> void:
 		show()
 	var ui := load(trigger.ui_path) as PackedScene
 	var instanced_ui := ui.instantiate()
-	if %UIRoot.get_child_count(0) > 0:
+	if %UIRoot.get_child_count(true) > 0:
 		%UIRoot.get_child(0).queue_free()
 	%UIRoot.add_child(instanced_ui)
 	if not trigger.has_node("../TriggerEasing") and %UIRoot.has_node("Tweening"):
@@ -27,7 +27,7 @@ func build_ui(triggers: Array[TriggerBase]) -> void:
 		%UIRoot.add_child(trigger_easing_ui, true, INTERNAL_MODE_BACK)
 		trigger_easing_ui.set_deferred("name", "Tweening")
 	connect_ui(triggers)
-	call_deferred("load_properties", trigger)
+	load_properties.call_deferred(trigger)
 
 
 func connect_ui(triggers: Array[TriggerBase]) -> void:
@@ -59,7 +59,9 @@ func save_property(value: Variant, property: String, triggers: Array, group: Str
 
 func load_properties(trigger: TriggerBase) -> void:
 	for group in [TRIGGER_PROPERTY_GROUP, TRIGGER_EASING_PROPERTY_GROUP, TRIGGER_BASE_PROPERTY_GROUP]:
-		var properties := get_tree().get_nodes_in_group(group)
+		var properties := get_tree() \
+				.get_nodes_in_group(group) \
+				.filter(func(node): return not node.owner.is_queued_for_deletion())
 		if properties.is_empty():
 			return
 		var property_owner := trigger.get_parent() if group == TRIGGER_PROPERTY_GROUP else trigger.get_node("../TriggerEasing") if group == TRIGGER_EASING_PROPERTY_GROUP else trigger
