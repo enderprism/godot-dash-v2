@@ -53,7 +53,7 @@ func _ready() -> void:
 	elif not $GameScene/Level.get_child_count():
 		level = LevelProps.new()
 		level.version_history = UndoRedo.new()
-		$GameScene/Level.add_child(level)
+		LevelManager.game_scene.add_loaded_level(level)
 
 
 func _physics_process(_delta: float) -> void:
