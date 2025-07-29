@@ -15,6 +15,7 @@ const START_SPEED: Array[float] = [
 
 @export_file var song_path: String:
 	set(value):
+		register_required_song(song_path, value)
 		song_path = value
 		SongManager.load_song_threaded_request(value)
 @export_range(0.0, 60.0, 0.01, "or_greater", "suffix:s") var song_start_time: float
@@ -22,10 +23,11 @@ const START_SPEED: Array[float] = [
 @export var start_speed: int = 2
 @export var start_reverse: bool
 @export var start_gameplay_rotation_degrees: float
+@export var color_channels: Array[ColorChannelData]
 
 @onready var song_player := AudioStreamPlayer.new()
 
-@export var color_channels: Array[ColorChannelData]
+var required_songs: Dictionary[String, int] # HashMap<SongPath, SongUsers>
 var _pause_manager: Node
 
 func _ready() -> void:
@@ -66,3 +68,14 @@ func setup_color_channel_watchers() -> void:
 	for color_channel in color_channels:
 		var watcher := ColorChannelWatcher.new(color_channel)
 		add_child(watcher)
+
+
+func register_required_song(old_path: String, new_path: String) -> void:
+	if required_songs.has(old_path):
+		required_songs[old_path] -= 1
+		if required_songs[old_path] <= 0:
+			required_songs.erase(old_path)
+	if not new_path.is_empty():
+		if not required_songs.has(new_path):
+			required_songs[new_path] = 0
+		required_songs[new_path] += 1

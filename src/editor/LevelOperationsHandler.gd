@@ -213,10 +213,10 @@ func _on_export_level_dialog_file_selected(path:String) -> Error:
 	writer.close_file()
 	#endsection
 	#section Song Pack
-	if editor.level.song_path.get_file() != "":
-		file_name = editor.level.song_path.get_file()
+	for song_path in editor.level.required_songs.keys():
+		file_name = song_path.get_file()
 		writer.start_file(file_name)
-		var song_bytes := FileAccess.get_file_as_bytes(editor.level.song_path)
+		var song_bytes := FileAccess.get_file_as_bytes(song_path)
 		writer.write_file(song_bytes)
 		writer.close_file()
 	writer.close()

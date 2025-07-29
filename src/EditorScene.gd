@@ -11,7 +11,7 @@ enum EditorAction {
 
 @export var block_palette_button_group: ButtonGroup
 
-var level:
+var level: LevelProps:
 	set(value):
 		level = value
 		$EditHandler.level = value

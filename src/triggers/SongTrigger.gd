@@ -4,6 +4,8 @@ class_name SongTrigger
 
 @export var song_path: String:
 	set(value):
+		if LevelManager.current_level != null:
+			LevelManager.current_level.register_required_song(song_path, value)
 		song_path = value
 		ResourceLoader.load_threaded_request(value)
 @export var song_start: float
@@ -12,6 +14,7 @@ var base: TriggerBase
 
 func _ready() -> void:
 	ResourceLoader.load_threaded_request(song_path)
+	LevelManager.current_level.register_required_song(song_path, song_path)
 	TriggerSetup.setup(self, TriggerSetup.NONE)
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Song.svg"))
 
