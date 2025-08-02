@@ -16,15 +16,15 @@ func _on_property_focus_entered() -> void:
 		color_channel_editor.button_group.get_pressed_button().set_pressed(false)
 
 
-func _on_base_color_value_changed(value:Variant) -> void:
-	var base_channel := value as String
+func _on_base_color_value_changed(base_channel: String) -> void:
 	var existing_color_channels := LevelManager.current_level.color_channels.map(func(channel): return channel.associated_group.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX))
-	if not base_channel in existing_color_channels:
+	if base_channel != "" and not base_channel in existing_color_channels:
 		base.set_value_no_signal("")
 		return
 	var objects_base: Array
 	for object in $"../EditHandler".selection:
 		objects_base.append(object.get_node("Base") if object.has_node("Base") else object)
+	objects_base.assign(objects_base.map(use_hsv_watcher))
 	clear_color_channels(objects_base)
 	if base_channel == "":
 		objects_base.map(_reset_color)
@@ -32,7 +32,6 @@ func _on_base_color_value_changed(value:Variant) -> void:
 	objects_base.map(func(object): object.add_to_group(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX + base_channel, true))
 	var watcher = get_tree().get_first_node_in_group(ColorChannelWatcher.WATCHER_GROUP_PREFIX + ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX + base_channel) as ColorChannelWatcher
 	watcher.refresh_objects_color(objects_base)
-
 
 
 func _on_detail_color_value_changed(value:Variant) -> void:
@@ -45,6 +44,7 @@ func _on_detail_color_value_changed(value:Variant) -> void:
 		$"../EditHandler".selection
 			.map(func(object): return object.get_node_or_null("Detail") as Node2D)
 			.filter(func(object): return object != null)
+			.map(use_hsv_watcher)
 	)
 	clear_color_channels(objects_detail)
 	if detail_channel == "":
@@ -59,6 +59,7 @@ func clear_color_channels(selection: Array) -> void:
 	for color_channel in LevelManager.current_level.color_channels:
 		selection.map(func(object): object.remove_from_group(color_channel.associated_group))
 
+
 func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 	if selection.is_empty():
 		return
@@ -66,6 +67,7 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 	var objects_base: Array[Node2D]
 	for object in selection:
 		objects_base.append(object.get_node("Base") if object.has_node("Base") else object)
+	objects_base.assign(objects_base.map(use_hsv_watcher))
 	var base_channel_array: Array = objects_base[-1].get_groups().filter(func(group): return ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX in group)
 	var base_channel: String
 	if not base_channel_array.is_empty():
@@ -80,6 +82,7 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 		$"../EditHandler".selection
 			.map(func(object): return object.get_node_or_null("Detail") as Node2D)
 			.filter(func(object): return object != null)
+			.map(use_hsv_watcher)
 	)
 	if objects_detail.is_empty():
 		return
@@ -95,6 +98,12 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 
 
 func _reset_color(object: Node) -> void:
+	object = use_hsv_watcher(object)
 	if object.has_node("SelectionHighlight"):
 		object = object.get_node("SelectionHighlight")
 	object.modulate = Color.WHITE
+
+
+static func use_hsv_watcher(object: Node) -> Node:
+	var hsv_watcher = object.get_node_or_null("HSVWatcher")
+	return hsv_watcher if hsv_watcher != null else object
