@@ -27,6 +27,7 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 				var object: Node2D
 				if block_palette_ref.type == EditorSelectionCollider.Type.TRIGGER:
 					object = block_palette_ref.trigger_script.new()
+					object.name = block_palette_ref.trigger_script.get_global_name()
 				else:
 					object = block_palette_ref.object.instantiate()
 				if pressed_button.has_meta("texture_override"):
