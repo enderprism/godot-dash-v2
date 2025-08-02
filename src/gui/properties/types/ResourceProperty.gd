@@ -68,6 +68,7 @@ func set_value(new_value: Resource) -> void:
 	set_value_no_signal(new_value)
 	value_changed.emit(new_value)
 
+
 func set_value_no_signal(new_value: Resource) -> void:
 	_value = new_value
 	for i in indentation_container.get_child_count():
@@ -78,11 +79,14 @@ func set_value_no_signal(new_value: Resource) -> void:
 			continue
 		field_input.set_value_no_signal(field_value)
 
+
 func get_value() -> Resource:
 	return _value
 
+
 func reset() -> void:
 	set_value(default)
+
 
 func set_input_state(enabled: bool) -> void:
 	indentation_container.get_children().map(func(input): input.set_input_state(enabled))
