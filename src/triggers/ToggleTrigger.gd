@@ -17,9 +17,6 @@ func _physics_process(_delta: float) -> void:
 	if visible:
 		update_texture()
 
-func start(_body: Node2D) -> void:
-	toggle.toggle(self)
-
 func update_texture() -> void:
 	if toggle.toggled_groups.size() == 1 and toggle.toggled_groups[0] != null:
 		match toggle.toggled_groups[0].state: 

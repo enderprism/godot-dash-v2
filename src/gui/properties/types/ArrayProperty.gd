@@ -134,10 +134,10 @@ func set_value(value: Array) -> void:
 
 func set_value_no_signal(value: Array) -> void:
 	items.get_children().map(func(item): item.queue_free())
-	if len(value) < minimum_size:
+	if value.size() < minimum_size:
 		for i in range(minimum_size):
 			add_item(i, NO_SIGNAL)
-	if len(value) > maximum_size and not or_greater:
+	if value.size() > maximum_size and not or_greater:
 		value.resize(maximum_size)
 	for i in range(len(value)):
 		add_item(i, NO_SIGNAL).set_value_no_signal(value[i])
