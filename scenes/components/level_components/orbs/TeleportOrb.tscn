@@ -29,11 +29,11 @@ z_index = -50
 [node name="MusicScale" type="Node" parent="ParticleEmitter"]
 script = ExtResource("4_qsfvp")
 
-[node name="Outline" type="Sprite2D" parent="."]
+[node name="Base" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_dyh4w")
 
-[node name="MusicScale" type="Node" parent="Outline"]
+[node name="MusicScale" type="Node" parent="Base"]
 script = ExtResource("4_qsfvp")
 
 [node name="Fill" type="Sprite2D" parent="."]
@@ -57,11 +57,12 @@ script = ExtResource("7_l85uw")
 [node name="SingleUsageComponent" type="Node" parent="."]
 script = ExtResource("8_gvame")
 
-[node name="VariableFillColor" type="Node" parent="."]
-script = ExtResource("10_yqox7")
-
 [node name="DirectionChangerComponent" type="Node" parent="."]
 script = ExtResource("9_ktqww")
 
 [node name="TeleportComponent" type="Node" parent="."]
 script = ExtResource("9_dm5qn")
+
+[node name="Detail" type="Node2D" parent="."]
+script = ExtResource("10_yqox7")
+metadata/_custom_type_script = "uid://b0qdkfpjncyhk"

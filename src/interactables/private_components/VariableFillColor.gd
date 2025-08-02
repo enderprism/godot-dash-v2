@@ -1,8 +1,7 @@
 @tool
-extends Node
-
-@export var color := Color.WHITE
+extends Node2D
+class_name VariableFillColor
 
 func _process(_delta: float) -> void:
-	$"../ParticleEmitter".modulate = color
-	$"../Fill".modulate = color
+	$"../ParticleEmitter".modulate = modulate
+	$"../Fill".modulate = modulate

@@ -24,11 +24,11 @@ script = ExtResource("1_klrau")
 [node name="MusicScale" type="Node" parent="ParticleEmitter"]
 script = ExtResource("3_8a4sg")
 
-[node name="Outline" type="Sprite2D" parent="."]
+[node name="Base" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_4qwcb")
 
-[node name="MusicScale" type="Node" parent="Outline"]
+[node name="MusicScale" type="Node" parent="Base"]
 script = ExtResource("3_8a4sg")
 
 [node name="Fill" type="Sprite2D" parent="."]
@@ -52,11 +52,12 @@ script = ExtResource("9_hfjph")
 [node name="SingleUsageComponent" type="Node" parent="."]
 script = ExtResource("10_54lpo")
 
-[node name="VariableFillColor" type="Node" parent="."]
-script = ExtResource("11_fi63b")
-
 [node name="DirectionChangerComponent" type="Node" parent="."]
 script = ExtResource("12_j5u27")
 
 [node name="ToggleComponent" type="Node" parent="."]
 script = ExtResource("1_dcl03")
+
+[node name="Detail" type="Node2D" parent="."]
+script = ExtResource("11_fi63b")
+metadata/_custom_type_script = "uid://b0qdkfpjncyhk"

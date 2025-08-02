@@ -42,11 +42,16 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 				level.add_child(object)
 				NodeUtils.change_owner_recursive(object, level)
 				object.scene_file_path = ""
-				var hsv_watcher := HSVWatcher.new()
-				hsv_watcher.name = "HSVWatcher"
-				object.add_child(hsv_watcher)
+				var to_be_colored: Array
+				to_be_colored.append(object.get_node("Base") if object.has_node("Base") else object)
+				if object.has_node("Detail"):
+					to_be_colored.append(object.get_node("Detail"))
+				for to_be_colored_object in to_be_colored:
+					var hsv_watcher := HSVWatcher.new()
+					hsv_watcher.name = "HSVWatcher"
+					to_be_colored_object.add_child(hsv_watcher)
+					hsv_watcher.set_owner(LevelManager.current_level)
 				object.rotation_degrees = placed_object_rotation_degrees
-				hsv_watcher.set_owner(LevelManager.current_level)
 
 				# Version history
 				var add_object := func(_object: Node):
