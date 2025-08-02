@@ -107,7 +107,6 @@ func add_item(idx: int, options: int = 0) -> ArrayPropertyItem:
 		_value.append(item.get_value())
 	if not options & NO_SIGNAL:
 		value_changed.emit(_value)
-	print(item)
 	return item
 
 
@@ -140,10 +139,9 @@ func set_value_no_signal(value: Array) -> void:
 			add_item(i, NO_SIGNAL)
 	if len(value) > maximum_size and not or_greater:
 		value.resize(maximum_size)
-	_value = value
 	for i in range(len(value)):
-		print(i)
 		add_item(i, NO_SIGNAL).set_value_no_signal(value[i])
+	_value = value
 
 
 func get_value() -> Array:
