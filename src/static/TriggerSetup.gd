@@ -6,6 +6,7 @@ class_name TriggerSetup
 const NONE := 0
 const ADD_TARGET_LINK := 1 << 0
 const ADD_EASING := 1 << 1
+const DONT_CONNECT_START := 1 << 2
 
 const TRIGGER_UI_DIRECTORY: String = "res://scenes/components/game_components/trigger_ui/"
 
@@ -33,7 +34,8 @@ static func setup(caller: Node, options: int = ADD_EASING):
 		NodeUtils.set_child_owner(caller, caller.target_link)
 	#endregion
 	#region Signal connections
-	NodeUtils.connect_new(caller.base.body_entered, caller.start)
+	if not options & DONT_CONNECT_START:
+		NodeUtils.connect_new(caller.base.body_entered, caller.start)
 	if options & ADD_EASING:
 		NodeUtils.connect_new(caller.base.body_entered, caller.easing.start)
 	if options & ADD_TARGET_LINK:

@@ -7,7 +7,7 @@ var base: TriggerBase
 var toggle: ToggleComponent
 
 func _ready() -> void:
-	TriggerSetup.setup(self, TriggerSetup.NONE)
+	TriggerSetup.setup(self, TriggerSetup.DONT_CONNECT_START)
 	toggle = NodeUtils.get_node_or_add(base, "ToggleComponent", ToggleComponent)
 	if not toggle.is_connected("toggled_groups_changed", update_texture):
 		toggle.toggled_groups_changed.connect(update_texture)
