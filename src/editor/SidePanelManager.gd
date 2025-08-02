@@ -2,6 +2,7 @@ class_name SidePanelManager
 extends Node
 
 @export var side_panel: PanelContainer
+@export var object_name: LineEdit
 @export_group("Groups")
 @export var group_section: SectionHeading
 @export var group_editor: GroupEditor
@@ -17,10 +18,18 @@ extends Node
 
 
 func _ready() -> void:
+	object_name.text_submitted.connect(update_object_name)
 	_on_edit_handler_selection_changed([])
 
 
 func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
+	object_name.visible = not selection.is_empty()
+	if selection.size() == 1:
+		object_name.text = selection[0].name
+		object_name.editable = true
+	elif selection.size() > 1:
+		object_name.text = "Multiple objects"
+		object_name.editable = false
 	#section Groups
 	group_section.visible = not selection.is_empty()
 	group_editor.selected_objects = selection
@@ -38,3 +47,10 @@ func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 		for element in [base, detail, hsv_shift]:
 			element.visible = not selection.is_empty()
 	#endsection
+
+
+func update_object_name(text: String):
+	var selection = $"../EditHandler".selection
+	if selection.size() == 1:
+		selection[0].name = text
+	get_viewport().gui_release_focus() # Restore editor keybinds
