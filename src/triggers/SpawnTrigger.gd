@@ -85,7 +85,7 @@ func update_target_link() -> void:
 	if len(spawned_groups) >= 2:
 		for i in range(len(spawned_groups)-1):
 			# Start loop at index 1, skipping the first spawned group since it already has a 'spawn' target link
-			var group = get_node(spawned_groups[i].path)
+			var group = LevelManager.current_level.get_node(spawned_groups[i].path)
 			if not group.has_node("SpawnTargetLink"):
 				var group_spawn_target_link: TargetLink = load("res://scenes/components/game_components/TargetLink.tscn").instantiate()
 				group_spawn_target_link.default_color = Color.CYAN
