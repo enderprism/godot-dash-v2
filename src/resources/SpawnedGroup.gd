@@ -7,6 +7,6 @@ class_name SpawnedGroup
 	set(value):
 		path = value
 		emit_changed()
-@export_range(0.0, 1.0, 0.01) var time: float
+@export_range(0.0, 1.0, 0.01, "suffix:s") var time: float
 
 var loop_idx: int
