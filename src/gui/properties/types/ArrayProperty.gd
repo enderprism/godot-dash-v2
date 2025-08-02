@@ -146,3 +146,11 @@ func set_value_no_signal(value: Array) -> void:
 
 func get_value() -> Array:
 	return _value
+
+func reset() -> void:
+	pass # unimplemented, there is no easy way to change the type of an inspector typed array
+
+
+func set_input_state(enabled: bool) -> void:
+	add.disabled = not enabled
+	items.get_children().map(func(item): item.set_input_state(enabled))

@@ -54,3 +54,13 @@ func set_value_no_signal(value: Variant) -> void:
 
 func get_value() -> Variant:
 	return property.get_value()
+
+
+func reset() -> void:
+	pass # unimplemented
+
+
+func set_input_state(enabled: bool) -> void:
+	reorder_button.disabled = not enabled
+	delete_button.disabled = not enabled
+	property.set_input_state(enabled)
