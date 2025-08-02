@@ -10,6 +10,7 @@ signal value_changed(value: Node2D)
 var label: Label
 var input: Button
 
+
 func _ready() -> void:
 	label = NodeUtils.get_node_or_add(self, "Label", Label, NodeUtils.INTERNAL)
 	var spacer = NodeUtils.get_node_or_add(self, "Spacer", Control, NodeUtils.INTERNAL)
@@ -24,30 +25,40 @@ func _ready() -> void:
 		.get_node_or_add(self, "PropertyReset", PropertyReset, NodeUtils.INTERNAL) \
 		.set_input(input)
 
+
 func set_value(new_value: Node2D) -> void:
-	_value = new_value
-	input.text = LevelManager.current_level.get_path_to(new_value)
+	set_value_no_signal(new_value)
 	value_changed.emit(_value)
+
 
 func set_value_no_signal(new_value: Node2D) -> void:
 	_value = new_value
-	input.text = LevelManager.current_level.get_path_to(new_value)
+	match _value:
+		null:
+			input.text = "    Assign…    "
+		_:
+			input.text = LevelManager.current_level.get_path_to(new_value)
+
 
 func get_value() -> Node2D:
 	return _value
+
 
 func reset() -> void:
 	_value = null
 	input.text = "    Assign…    "
 	value_changed.emit(null)
 
+
 func refresh() -> void:
 	label.text = name
 	if Engine.is_editor_hint():
 		reset()
 
+
 func set_input_state(enabled: bool) -> void:
 	input.disabled = not enabled
+
 
 func _on_input_pressed() -> void:
 	var clipboard := LevelManager.editor_clipboard
