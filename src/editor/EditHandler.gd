@@ -105,8 +105,8 @@ func _update_selection() -> void:
 		if placed_objects_collider.has_overlapping_areas() and not (Input.is_action_just_pressed(&"editor_add_swipe") or Input.is_action_just_pressed(&"editor_selection_remove")):
 			selection = [
 				_get_object_parent(
-						placed_objects_collider.get_overlapping_areas()[
-							selection_index%len(placed_objects_collider.get_overlapping_areas())
+					placed_objects_collider.get_overlapping_areas()[
+						selection_index%len(placed_objects_collider.get_overlapping_areas())
 					]
 				)
 			]
