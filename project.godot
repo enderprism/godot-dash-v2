@@ -53,8 +53,8 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=60
 boot_splash/bg_color=Color(0.117647, 0.117647, 0.180392, 1)
 boot_splash/fullsize=false
-boot_splash/image="res://assets/logo/NewIcon.png"
-config/icon="res://assets/logo/NewIcon.svg"
+boot_splash/image="uid://c8auew2txgxb5"
+config/icon="uid://8t3i3wfji7of"
 
 [audio]
 
