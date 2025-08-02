@@ -21,7 +21,7 @@ func _on_line_edit_text_submitted(new_text:String) -> void:
 
 
 func _add_channel(channel_name: String) -> void:
-	if (channel_name in %ColorChannelContainer.get_children()
+	if channel_name.is_empty() or (channel_name in %ColorChannelContainer.get_children()
 			.map(func(color_channel: ColorChannelItem): return color_channel.channel_name)):
 		return
 	var channel_item := color_channel_item.instantiate() as ColorChannelItem
