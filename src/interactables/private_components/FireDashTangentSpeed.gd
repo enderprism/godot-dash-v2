@@ -14,6 +14,9 @@ func get_velocity(player: Player) -> Vector2:
 	if (player.is_on_floor() and sin(angle) > 0) or (player.is_on_ceiling() and sin(angle) < 0):
 		velocity.y = 0
 	else:
+		if not LevelManager.platformer:
+			angle = -clampf(pingpong(angle - PI/2, PI) - PI/2, deg_to_rad(-70), deg_to_rad(70))
 		velocity.y = tan(angle) * player.speed.x * direction * player.speed_multiplier
 	velocity.x = player.speed.x * direction * player.speed_multiplier
+	parent.angle = angle
 	return velocity

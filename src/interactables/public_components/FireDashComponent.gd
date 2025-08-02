@@ -19,7 +19,10 @@ func start(player: Player) -> void:
 	if LevelManager.platformer:
 		player.horizontal_direction = sign(cos(parent.global_rotation - initial_gameplay_rotation) * parent.scale.y)
 	initial_horizontal_direction = player.horizontal_direction
-	angle = pingpong(parent.global_rotation, PI/2) * sign(parent.global_rotation_degrees)
+	if LevelManager.platformer:
+		angle = pingpong(parent.global_rotation, PI/2) * sign(parent.global_rotation_degrees)
+	else:
+		angle = -clampf(pingpong(parent.global_rotation - PI/2, PI) - PI/2, deg_to_rad(-70), deg_to_rad(70))
 	player.get_node("DashParticles").emitting = true
 	player.get_node("DashFlame").show()
 	player.get_node("DashFlame").rotation = angle * player.horizontal_direction
