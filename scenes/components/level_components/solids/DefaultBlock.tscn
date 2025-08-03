@@ -12,7 +12,6 @@ size = Vector2(130, 130)
 collision_layer = 2
 
 [node name="Base" type="Node2D" parent="."]
-texture_filter = 2
 scale = Vector2(0.25, 0.25)
 script = ExtResource("3_5g55o")
 texture = ExtResource("2_yn5k1")
