@@ -9,7 +9,11 @@ enum LoopState {
 }
 
 # TODO in editor, refresh timer duration if a spawned group's duration is changed
-@export var spawned_groups: Array[SpawnedGroup]
+@export var spawned_groups: Array[SpawnedGroup]:
+	set(value):
+		spawned_groups = value
+		if is_node_ready():
+			update_target_link()
 @export var loop: LoopState = LoopState.DISABLED:
 	set(value):
 		loop = value
@@ -40,15 +44,19 @@ var _duration: float
 func _ready() -> void:
 	TriggerSetup.setup(self, TriggerSetup.ADD_TARGET_LINK | TriggerSetup.ADD_EASING)
 	var skip_deleted := func(group):
-		return not LevelManager.current_level.get_node(group.path).is_in_group("deleted")
+		var spawned_trigger = LevelManager.current_level.get_node_or_null(group.path)
+		if spawned_trigger == null:
+			return false
+		return not spawned_trigger.is_in_group("deleted")
 	spawned_groups = spawned_groups.filter(skip_deleted)
 	for group in spawned_groups:
 		if group.time > _duration:
 			_duration = group.time
 	easing.duration = _duration
 	base.sprite.set_texture(preload("res://assets/textures/triggers/Spawn.svg"))
+	target_link = preload("res://scenes/components/game_components/TargetLink.tscn").instantiate()
 	target_link.default_color = Color.CYAN
-	target_link.set_texture(preload("res://assets/textures/ArrowedLine.svg"))
+	set_meta(&"editor_update_target_link", "spawned_groups")
 	update_target_link()
 
 func _physics_process(_delta: float) -> void:
@@ -81,18 +89,20 @@ func restart() -> void:
 
 func update_target_link() -> void:
 	if len(spawned_groups) >= 1:
-		target_link.target = get_node_or_null(spawned_groups[0].path)
+		target_link.target = LevelManager.current_level.get_node_or_null(spawned_groups[0].path)
 	if len(spawned_groups) >= 2:
 		for i in range(len(spawned_groups)-1):
 			# Start loop at index 1, skipping the first spawned group since it already has a 'spawn' target link
-			var group = LevelManager.current_level.get_node(spawned_groups[i].path)
+			var group = LevelManager.current_level.get_node_or_null(spawned_groups[i].path)
+			if group == null:
+				continue
 			if not group.has_node("SpawnTargetLink"):
-				var group_spawn_target_link: TargetLink = load("res://scenes/components/game_components/TargetLink.tscn").instantiate()
+				var group_spawn_target_link: TargetLink = preload("res://scenes/components/game_components/TargetLink.tscn").instantiate()
 				group_spawn_target_link.default_color = Color.CYAN
 				group_spawn_target_link.name = "SpawnTargetLink"
 				group_spawn_target_link.z_index -= 1
-				group_spawn_target_link.target = get_node_or_null(spawned_groups[i+1].path)
+				group_spawn_target_link.target = LevelManager.current_level.get_node_or_null(spawned_groups[i+1].path)
 				group.add_child(group_spawn_target_link)
 				group_spawn_target_link.owner = group.get_parent()
 			else:
-				group.get_node("SpawnTargetLink").target = get_node_or_null(spawned_groups[i+1].path)
+				group.get_node("SpawnTargetLink").target = LevelManager.current_level.get_node_or_null(spawned_groups[i+1].path)
