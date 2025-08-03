@@ -41,11 +41,19 @@ func _physics_process(_delta: float) -> void:
 		base.position = Vector2.ZERO
 
 func start(_body: Node2D) -> void:
-	if easing.is_inactive():
-		if _player_camera != null:
-			_initial_zoom = _player_camera.zoom
-		else:
-			printerr("In ", name, ": _player_camera is unset")
+	if not easing.is_inactive():
+		return
+	if _player_camera == null:
+		printerr("In ", name, ": _player_camera is unset")
+	_initial_zoom = _player_camera.zoom
+	if is_zero_approx(easing.duration):
+		match mode:
+			Mode.SET:
+				_player_camera.zoom += (zoom - _initial_zoom) * PlayerCamera.DEFAULT_ZOOM
+			Mode.MULTIPLY:
+				_player_camera.zoom -= (_initial_zoom - (_initial_zoom * zoom)) * PlayerCamera.DEFAULT_ZOOM
+			Mode.DIVIDE:
+				_player_camera.zoom -= (_initial_zoom - (_initial_zoom / zoom)) * PlayerCamera.DEFAULT_ZOOM
 
 func reset() -> void:
 	if _player_camera != null:
