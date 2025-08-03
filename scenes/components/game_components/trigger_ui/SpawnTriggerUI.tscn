@@ -68,26 +68,26 @@ metadata/_custom_type_script = "uid://djfsy06pkw4ju"
 
 [node name="PropertyWatcher" type="Node" parent="Loop" node_paths=PackedStringArray("target")]
 script = ExtResource("1_m6wqb")
-target = NodePath("../../Loops2")
+target = NodePath("../../Loops")
 condition = "value != 0"
 property = &"visible"
 metadata/_custom_type_script = "uid://dewr6g2sliqsr"
 
 [node name="PropertyWatcher2" type="Node" parent="Loop" node_paths=PackedStringArray("target")]
 script = ExtResource("1_m6wqb")
-target = NodePath("../../Loops2/Count")
+target = NodePath("../../Loops/Count")
 condition = "value == 1"
 property = &"enabled"
 metadata/_custom_type_script = "uid://dewr6g2sliqsr"
 
-[node name="Loops2" type="VBoxContainer" parent="."]
+[node name="Loops" type="VBoxContainer" parent="."]
 visible = false
 layout_mode = 2
 script = ExtResource("5_jrceg")
 label_settings = ExtResource("6_oqf25")
 metadata/_custom_type_script = "uid://cuih47milvqcs"
 
-[node name="Count" type="BoxContainer" parent="Loops2" groups=["trigger_property"]]
+[node name="Count" type="BoxContainer" parent="Loops" groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("8_oqf25")
@@ -99,11 +99,11 @@ allow_greater = true
 _value = 1.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
-[node name="TriggerPropertyInternalName" type="Node" parent="Loops2/Count"]
+[node name="TriggerPropertyInternalName" type="Node" parent="Loops/Count"]
 script = ExtResource("2_ano3m")
 property_name = "loop_count"
 
-[node name="Delay" type="BoxContainer" parent="Loops2" groups=["trigger_property"]]
+[node name="Delay" type="BoxContainer" parent="Loops" groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("8_oqf25")
@@ -112,6 +112,6 @@ suffix = "s"
 _value = 0.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
-[node name="TriggerPropertyInternalName" type="Node" parent="Loops2/Delay"]
+[node name="TriggerPropertyInternalName" type="Node" parent="Loops/Delay"]
 script = ExtResource("2_ano3m")
 property_name = "loop_delay"

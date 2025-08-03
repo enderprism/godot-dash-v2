@@ -74,9 +74,11 @@ func set_value_no_signal(new_value: Resource) -> void:
 	for i in indentation_container.get_child_count():
 		var field_input = indentation_container.get_child(i)
 		var field_name = resource_properties[i]
-		var field_value = resource_script.get(field_name)
+		var field_value = _value.get(field_name)
 		if field_value == null and field_input is not Node2DProperty:
 			continue
+		if field_input is Node2DProperty:
+			field_value = LevelManager.current_level.get_node(field_value)
 		field_input.set_value_no_signal(field_value)
 
 
