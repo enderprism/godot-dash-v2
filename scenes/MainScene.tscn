@@ -696,29 +696,8 @@ grow_vertical = 2
 alignment = 1
 metadata/_edit_group_ = true
 
-[node name="Dash V2" parent="LevelSelector/PageContainer" instance=ExtResource("14_ade78")]
+[node name="Coming soon" parent="LevelSelector/PageContainer" instance=ExtResource("14_ade78")]
 layout_mode = 2
-selected_level = "res://scenes/levels/DashV2.tscn"
-
-[node name="Dash V3" parent="LevelSelector/PageContainer" instance=ExtResource("14_ade78")]
-self_modulate = Color(1, 0.105882, 0.92549, 1)
-layout_mode = 2
-selected_level = "res://scenes/levels/imported/Dash.tscn"
-
-[node name="SpiderTest" parent="LevelSelector/PageContainer" instance=ExtResource("14_ade78")]
-self_modulate = Color(1, 0.784314, 0, 1)
-layout_mode = 2
-selected_level = "res://scenes/levels/imported/SpiderTest.tscn"
-
-[node name="SlopeTest" parent="LevelSelector/PageContainer" instance=ExtResource("14_ade78")]
-self_modulate = Color(1, 0.784314, 0, 1)
-layout_mode = 2
-selected_level = "res://scenes/levels/imported/SlopeTest.tscn"
-
-[node name="DualTest" parent="LevelSelector/PageContainer" instance=ExtResource("14_ade78")]
-self_modulate = Color(1, 0.784314, 0, 1)
-layout_mode = 2
-selected_level = "uid://dij7cq7vnww3p"
 
 [node name="CameraCenterParent" type="Control" parent="LevelSelector"]
 layout_mode = 1
