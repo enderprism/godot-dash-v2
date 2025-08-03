@@ -2181,7 +2181,10 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_uynvo")
 
-[node name="DebugTrail" type="Line2D" parent="."]
+[node name="DebugOverlays" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="DebugTrail" type="Line2D" parent="DebugOverlays"]
 z_index = 2
 width = 5.0
 default_color = Color(1, 0, 0, 1)

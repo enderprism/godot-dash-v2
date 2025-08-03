@@ -150,6 +150,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	%DebugOverlays.visible = Config.config.draw_debug_overlays
+
 	if _dead or not LevelManager.level_playing:
 		return
 	

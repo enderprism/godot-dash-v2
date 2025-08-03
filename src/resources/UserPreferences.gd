@@ -19,6 +19,8 @@ class_name UserPreferences extends Resource
 @export_range(0, 1, .05) var trigger_hitbox_fill_alpha := 0.2
 @export var autosave_delay: float
 
+@export_group("Debug")
+@export var draw_debug_overlays: bool
 
 func save() -> void:
 	ResourceSaver.save(self, "user://user_prefs.tres")
@@ -26,6 +28,6 @@ func save() -> void:
 
 static func load_or_create() -> UserPreferences:
 	var user_preferences: UserPreferences = load("user://user_prefs.tres") as UserPreferences
-	if !user_preferences:
+	if not user_preferences:
 		user_preferences = UserPreferences.new()
 	return user_preferences
