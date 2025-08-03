@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hu62t"]
 size = Vector2(120, 20)
 
-[node name="Spike" type="StaticBody2D"]
+[node name="GroundSpike" type="StaticBody2D"]
 collision_layer = 4
 
 [node name="GroundSpike01" type="Sprite2D" parent="."]
