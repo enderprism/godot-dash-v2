@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://2ie2uex1m8mb"]
+[gd_scene load_steps=57 format=3 uid="uid://2ie2uex1m8mb"]
 
 [ext_resource type="Script" uid="uid://bxxoioqd6wilw" path="res://src/LevelProps.gd" id="1_7ju0m"]
 [ext_resource type="PackedScene" uid="uid://duj3dae6qcvtm" path="res://scenes/components/level_components/portals/gamemode_portals/SpiderPortal.tscn" id="3_iu2ry"]
@@ -26,7 +26,6 @@
 [ext_resource type="Script" uid="uid://rmric86hnf6y" path="res://src/triggers/CameraStaticTrigger.gd" id="24_r7vme"]
 [ext_resource type="PackedScene" uid="uid://dtumn0qc8usca" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal3x.tscn" id="24_rf2xj"]
 [ext_resource type="PackedScene" uid="uid://dvxuhegi7klq8" path="res://scenes/components/level_components/orbs/DashOrbGreen.tscn" id="24_sifkm"]
-[ext_resource type="Script" uid="uid://s3yc0qgg4nal" path="res://src/resources/SpawnedGroup.gd" id="25_jkwa2"]
 [ext_resource type="Texture2D" uid="uid://cq3vm0mtdhxgb" path="res://assets/textures/triggers/CameraStatic.svg" id="26_adqf5"]
 [ext_resource type="Texture2D" uid="uid://cmcq4iubclsti" path="res://assets/textures/Cross.svg" id="26_ohbn7"]
 [ext_resource type="PackedScene" uid="uid://qfmv2p1wt1tn" path="res://scenes/components/level_components/portals/gamemode_portals/CubePortal.tscn" id="28_vs028"]
@@ -34,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://b3wrcjp4ua15k" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal1x.tscn" id="29_qa435"]
 [ext_resource type="Script" uid="uid://0r2hn7pl4u3j" path="res://src/triggers/AlphaTrigger.gd" id="30_4btpy"]
 [ext_resource type="PackedScene" uid="uid://bwjxj7jcot0cn" path="res://scenes/components/level_components/letter_objects/StopDash.tscn" id="30_me5kp"]
+[ext_resource type="Script" uid="uid://s3yc0qgg4nal" path="res://src/resources/SpawnedGroup.gd" id="30_spjyg"]
 [ext_resource type="PackedScene" uid="uid://cct7q7sr6fwc0" path="res://scenes/components/level_components/portals/gamemode_portals/WavePortal.tscn" id="31_bjlog"]
 [ext_resource type="Texture2D" uid="uid://b6eeefnqgnv52" path="res://assets/textures/triggers/Spawn.svg" id="32_eh181"]
 [ext_resource type="PackedScene" uid="uid://b2civdkigbcth" path="res://scenes/components/level_components/portals/other_portals/ScalePortalSmall.tscn" id="32_k5j6h"]
@@ -73,45 +73,21 @@ b = Vector2(0, 8192)
 a = Vector2(0, -8192)
 b = Vector2(0, 8192)
 
-[sub_resource type="Resource" id="Resource_xjx6m"]
-resource_local_to_scene = true
-script = ExtResource("25_jkwa2")
-path = NodePath("../OrbMoveTrigger")
+[sub_resource type="Resource" id="Resource_spjyg"]
+script = ExtResource("30_spjyg")
+path = NodePath("OrbMoveTrigger")
 time = 0.0
+metadata/_custom_type_script = "uid://s3yc0qgg4nal"
 
-[sub_resource type="Resource" id="Resource_8vgik"]
-resource_local_to_scene = true
-script = ExtResource("25_jkwa2")
-path = NodePath("../OrbMoveTrigger2")
-time = 0.5
+[sub_resource type="Resource" id="Resource_iot8l"]
+script = ExtResource("30_spjyg")
+path = NodePath("OrbMoveTrigger2")
+time = 1.0
+metadata/_custom_type_script = "uid://s3yc0qgg4nal"
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_nje7t"]
 a = Vector2(0, -8192)
 b = Vector2(0, 8192)
-
-[sub_resource type="Resource" id="Resource_pqbtx"]
-resource_local_to_scene = true
-script = ExtResource("25_jkwa2")
-path = NodePath("../FloorButtonMove2")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_7eobs"]
-resource_local_to_scene = true
-script = ExtResource("25_jkwa2")
-path = NodePath("../LowerSpike1")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_mk6wh"]
-resource_local_to_scene = true
-script = ExtResource("25_jkwa2")
-path = NodePath("../LowerSpike2")
-time = 0.05
-
-[sub_resource type="Resource" id="Resource_i3pvv"]
-resource_local_to_scene = true
-script = ExtResource("25_jkwa2")
-path = NodePath("../LowerSpike3")
-time = 0.1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m67k2"]
 size = Vector2(128, 128)
@@ -120,45 +96,11 @@ size = Vector2(128, 128)
 a = Vector2(0, -192)
 b = Vector2(0, 192)
 
-[sub_resource type="Resource" id="Resource_3cdoe"]
-resource_local_to_scene = true
-script = ExtResource("25_jkwa2")
-path = NodePath("../FloorButtonMove")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_5r4w8"]
-resource_local_to_scene = true
-script = ExtResource("25_jkwa2")
-path = NodePath("../MoveTrigger")
-time = 0.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r5f36"]
 size = Vector2(128, 128)
 
-[sub_resource type="Resource" id="Resource_16fgi"]
-resource_local_to_scene = true
-script = ExtResource("25_jkwa2")
-path = NodePath("../FloorButtonMove3")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_utucu"]
-resource_local_to_scene = true
-script = ExtResource("25_jkwa2")
-path = NodePath("../MoveBallPlatform")
-time = 0.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ruj8y"]
 size = Vector2(128, 128)
-
-[sub_resource type="Resource" id="Resource_4mfmg"]
-script = ExtResource("25_jkwa2")
-path = NodePath("../RotateTrigger2")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_hl221"]
-script = ExtResource("25_jkwa2")
-path = NodePath("../ScaleTrigger2")
-time = 0.0
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_err0a"]
 a = Vector2(0, -8192)
@@ -290,7 +232,6 @@ script = ExtResource("14_2jira")
 
 [node name="SpawnTargetLink" parent="FloorButtonMove" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="DefaultCube9" parent="." instance=ExtResource("5_g4mtk")]
@@ -686,7 +627,6 @@ script = ExtResource("14_2jira")
 
 [node name="SpawnTargetLink" parent="OrbMoveTrigger" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(192, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="OrbMoveTrigger2" type="Node2D" parent="."]
@@ -730,12 +670,11 @@ script = ExtResource("14_2jira")
 [node name="SpawnTrigger" type="Node2D" parent="."]
 position = Vector2(64, -512)
 script = ExtResource("24_l04c6")
-spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_xjx6m"), SubResource("Resource_8vgik")])
+spawned_groups = Array[ExtResource("30_spjyg")]([SubResource("Resource_spjyg"), SubResource("Resource_iot8l")])
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="SpawnTrigger" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(0, -320, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="TriggerBase" type="Area2D" parent="SpawnTrigger"]
@@ -760,17 +699,15 @@ script = ExtResource("14_2jira")
 
 [node name="TriggerEasing" type="Node" parent="SpawnTrigger"]
 script = ExtResource("10_srhyw")
-duration = 0.5
+duration = 0.0
 
 [node name="SpawnTrigger2" type="Node2D" parent="."]
 position = Vector2(2240, -640)
 script = ExtResource("24_l04c6")
-spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_pqbtx"), SubResource("Resource_7eobs"), SubResource("Resource_mk6wh"), SubResource("Resource_i3pvv")])
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="SpawnTrigger2" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(0, -448, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="TriggerBase" type="Area2D" parent="SpawnTrigger2"]
@@ -796,7 +733,7 @@ script = ExtResource("14_2jira")
 
 [node name="TriggerEasing" type="Node" parent="SpawnTrigger2"]
 script = ExtResource("10_srhyw")
-duration = 0.1
+duration = 0.0
 
 [node name="FloorButtonMove2" type="Node2D" parent="."]
 position = Vector2(2240, -1088)
@@ -838,7 +775,6 @@ script = ExtResource("14_2jira")
 
 [node name="SpawnTargetLink" parent="FloorButtonMove2" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="LowerSpike1" type="Node2D" parent="."]
@@ -880,7 +816,6 @@ script = ExtResource("14_2jira")
 
 [node name="SpawnTargetLink" parent="LowerSpike1" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="LowerSpike2" type="Node2D" parent="."]
@@ -922,7 +857,6 @@ script = ExtResource("14_2jira")
 
 [node name="SpawnTargetLink" parent="LowerSpike2" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="LowerSpike3" type="Node2D" parent="."]
@@ -1038,12 +972,10 @@ position = Vector2(4096, -832)
 [node name="SpawnTrigger3" type="Node2D" parent="."]
 position = Vector2(1792, -896)
 script = ExtResource("24_l04c6")
-spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_3cdoe"), SubResource("Resource_5r4w8")])
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="SpawnTrigger3" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(0, -320, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="TriggerBase" type="Area2D" parent="SpawnTrigger3"]
@@ -1173,18 +1105,15 @@ script = ExtResource("14_2jira")
 
 [node name="SpawnTargetLink" parent="FloorButtonMove3" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="SpawnTrigger4" type="Node2D" parent="."]
 position = Vector2(2240, -128)
 script = ExtResource("24_l04c6")
-spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_16fgi"), SubResource("Resource_utucu")])
 metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="SpawnTrigger4" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(0, 320, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="TriggerEasing" type="Node" parent="SpawnTrigger4"]
@@ -1242,7 +1171,6 @@ position = Vector2(5760, -576)
 [node name="SpawnTrigger5" type="Node2D" parent="."]
 position = Vector2(5888, -960)
 script = ExtResource("24_l04c6")
-spawned_groups = Array[ExtResource("25_jkwa2")]([SubResource("Resource_4mfmg"), SubResource("Resource_hl221")])
 loop = 1
 loop_count = 5
 loop_delay = 0.6
@@ -1250,7 +1178,6 @@ metadata/_edit_group_ = true
 
 [node name="TargetLink" parent="SpawnTrigger5" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="TriggerEasing" type="Node" parent="SpawnTrigger5"]
@@ -1313,7 +1240,6 @@ texture = ExtResource("17_wblj1")
 
 [node name="SpawnTargetLink" parent="RotateTrigger2" instance=ExtResource("6_bolvq")]
 z_index = -50
-points = PackedVector2Array(128, 0, 0, 0)
 default_color = Color(0, 1, 1, 1)
 
 [node name="ScaleTrigger2" type="Node2D" parent="." node_paths=PackedStringArray("pivot")]
