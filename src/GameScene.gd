@@ -62,3 +62,9 @@ func _leave_level() -> void:
 func _process(_delta: float) -> void:
 	for ground_sprite in LevelManager.ground_sprites:
 		ground_sprite.get_node("Ground/Line").scale.x = 1/LevelManager.player_camera.zoom.x * 0.2
+
+
+static func get_camera_rect(camera: Camera2D, viewport: Viewport) -> Rect2:
+	var rect_pos := camera.get_screen_center_position()
+	var rect_size := (viewport.get_visible_rect().size/camera.zoom)
+	return Rect2(rect_pos - rect_size * 0.5, rect_size)
