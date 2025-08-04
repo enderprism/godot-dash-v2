@@ -51,7 +51,7 @@ script = ExtResource("6_gxrlg")
 
 [node name="JumpBoostComponent" type="Node" parent="."]
 script = ExtResource("7_vbccn")
-jump_boost = -0.706
+_jump_boost = -0.706
 
 [node name="GravityChangerComponent" type="Node" parent="."]
 script = ExtResource("8_knu32")
