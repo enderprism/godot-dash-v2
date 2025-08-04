@@ -26,7 +26,6 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 	touch_triggered.value_changed.connect(_on_touch_triggered_value_changed.bind(trigger_bases))
 	if not is_selection_same_interactable_type(selection):
 		return
-	printt(is_selection_trigger_only(selection), is_selection_interactable_only(selection))
 	if is_selection_trigger_only(selection):
 		var trigger_bases_typed: Array[TriggerBase]
 		trigger_bases_typed.assign(trigger_bases)
