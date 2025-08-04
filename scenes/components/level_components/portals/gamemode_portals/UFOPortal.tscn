@@ -71,7 +71,7 @@ script = ExtResource("8_uesul")
 
 [node name="GamemodeChangerComponent" type="Node" parent="."]
 script = ExtResource("9_h6xnr")
-gamemode = 2
+_gamemode = 2
 
 [node name="SingleUsageComponent" type="Node" parent="."]
 script = ExtResource("10_doyaa")
