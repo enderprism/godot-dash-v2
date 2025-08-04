@@ -11,6 +11,7 @@ enum Direction {
 @export var direction := Direction.KEEP
 
 func _ready() -> void:
+	super()
 	if parent is OrbInteractable:
 		parent.pressed.connect(set_direction)
 	else:

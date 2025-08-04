@@ -18,6 +18,7 @@ const LOCKEDFLY_GAMEMODE_GRID_HEIGHTS: Dictionary = {
 @export var freefly := true
 
 func _ready() -> void:
+	super()
 	parent.body_entered.connect(_move_grounds)
 
 func _move_grounds(_player: Player) -> void:
