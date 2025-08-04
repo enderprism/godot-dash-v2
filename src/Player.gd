@@ -45,6 +45,7 @@ const WAVE_TRAIL_LENGTH: int = 250
 const SPIDER_TRAIL: PackedScene = preload("res://scenes/components/game_components/SpiderTrail.tscn")
 const DASH_BOOM: PackedScene = preload("res://scenes/components/game_components/DashBoom.tscn")
 const ICON_LERP_FACTOR := 0.5
+const SHIP_ROTATION_LERP_FACTOR := 0.15
 const PLATFORMER_ACCELERATION := 5.0
 const ENSURE_VELOCITY_REDIRECT_SAFE_MARGIN := 2.0
 const SPIDER_BOUNCE_MULTIPLIER := 0.65
@@ -509,15 +510,16 @@ func _rotate_sprite_degrees(delta: float):
 		$Icon/Swing.scale.x = sign(get_direction())
 	if not dash_control:
 		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
-			var target_rotation_degrees := gameplay_rotation_degrees + velocity.rotated(-gameplay_rotation).y * delta * get_direction() * (7.5/speed_multiplier)
+			var local_velocity := velocity.rotated(-gameplay_rotation)
+			var target_rotation_degrees := gameplay_rotation_degrees + rad_to_deg(atan2(local_velocity.y * get_direction(), local_velocity.x * get_direction()))
 			$Icon/Ship.rotation_degrees = lerpf(
 					$Icon/Ship.rotation_degrees,
 					target_rotation_degrees,
-					ICON_LERP_FACTOR * delta * 60)
+					SHIP_ROTATION_LERP_FACTOR * delta * 60)
 			$Icon/Swing.rotation_degrees = lerpf(
 					$Icon/Swing.rotation_degrees,
 					target_rotation_degrees,
-					ICON_LERP_FACTOR * delta * 60)
+					SHIP_ROTATION_LERP_FACTOR * delta * 60)
 		else:
 			$Icon/Ship.rotation = lerp_angle($Icon/Ship.rotation, sprite_floor_angle, ICON_LERP_FACTOR * delta * 60)
 			$Icon/Swing.rotation = lerp_angle($Icon/Swing.rotation, sprite_floor_angle, ICON_LERP_FACTOR * delta * 60)
