@@ -6,9 +6,10 @@ extends Node
 @export_group("Groups")
 @export var group_section: SectionHeading
 @export var group_editor: GroupEditor
-@export_group("Triggers")
-@export var trigger_section: SectionHeading
+@export_group("Interactables")
+@export var interactable_section: SectionHeading
 @export var trigger_editor: TriggerEditor
+@export var interactable_editor: InteractableEditor
 @export var trigger_properties: Array[BoolProperty]
 @export_group("Colors")
 @export var color_section: SectionHeading
@@ -35,15 +36,20 @@ func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 	group_editor.selected_objects = selection
 	#endsection
 	#section Trigger
-	trigger_section.visible = TriggerUIHandler.is_selection_trigger_only(selection)
-	if not trigger_section.folded:
-		trigger_editor.visible = TriggerUIHandler.is_selection_trigger_only(selection) and TriggerUIHandler.is_selection_same_trigger_type(selection)
+	interactable_section.visible = TriggerUIHandler.is_selection_interactable_only(selection)
+	if not interactable_section.folded:
+		trigger_editor.visible = TriggerUIHandler.is_selection_trigger_only(selection) and TriggerUIHandler.is_selection_same_interactable_type(selection)
+		interactable_editor.visible = TriggerUIHandler.is_selection_interactable_only(selection) \
+				and TriggerUIHandler.is_selection_same_interactable_type(selection) \
+				and not TriggerUIHandler.is_selection_trigger_only(selection)
 		for property in trigger_properties:
 			property.visible = TriggerUIHandler.is_selection_trigger_only(selection)
+			if property.name == "Single usage":
+				property.visible = interactable_section.visible
 	#endsection
 	#section Colors
-	color_section.visible = not trigger_section.visible
-	if not trigger_section.visible and not color_section.folded:
+	color_section.visible = not interactable_section.visible
+	if not interactable_section.visible and not color_section.folded:
 		for element in [base, detail, hsv_shift]:
 			element.visible = not selection.is_empty()
 	#endsection
