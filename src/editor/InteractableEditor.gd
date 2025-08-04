@@ -50,7 +50,6 @@ func connect_ui(interactables: Array[Interactable], ui_root: Control) -> void:
 
 
 func save_property(value: Variant, component_name: String, property: String, interactables: Array[Interactable]) -> void:
-	prints(property, value, interactables)
 	interactables.map(func(interactable): interactable.get_node(component_name).set(property, value))
 
 
