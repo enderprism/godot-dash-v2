@@ -32,6 +32,17 @@ func build_ui(interactables: Array[Interactable]) -> void:
 						property = FloatProperty.new()
 						property.allow_lesser = true
 						property.allow_greater = true
+				TYPE_FLOAT:
+					# TODO: get min, max, or_lesser and or_greater from hint_string
+					property = FloatProperty.new()
+					property.allow_lesser = true
+					property.allow_greater = true
+				TYPE_STRING:
+					property = StringProperty.new()
+				TYPE_COLOR:
+					property = ColorProperty.new()
+				TYPE_VECTOR2:
+					property = Vector2Property.new()
 				TYPE_BOOL:
 					property = BoolProperty.new()
 				TYPE_NODE_PATH:
