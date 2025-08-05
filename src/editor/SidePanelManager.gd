@@ -48,8 +48,7 @@ func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 				property.visible = interactable_section.visible
 	#endsection
 	#section Colors
-	color_section.visible = not interactable_section.visible
-	if not interactable_section.visible and not color_section.folded:
+	if not color_section.folded:
 		for element in [base, detail, hsv_shift]:
 			element.visible = not selection.is_empty()
 	#endsection
