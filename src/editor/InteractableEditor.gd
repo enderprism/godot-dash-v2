@@ -1,12 +1,16 @@
 extends PanelContainer
 class_name InteractableEditor
 
+const COMPONENT_WHITELIST: Array[StringName] = [&"DirectionChangerComponent", &"GamemodeChangerComponent", &"ToggleComponent", &"TeleportComponent"]
+
 
 func build_ui(interactables: Array[Interactable]) -> void:
 	$MarginContainer.get_children().map(func(child): child.queue_free())
 	var first_interactable := interactables[0]
 	var ui_root := VBoxContainer.new()
 	for component in first_interactable.components:
+		if component.get_script().get_global_name() not in COMPONENT_WHITELIST:
+			continue
 		var fields = component.script.get_script_property_list()
 		fields.remove_at(0)
 		fields = fields \
@@ -24,11 +28,28 @@ func build_ui(interactables: Array[Interactable]) -> void:
 						property.fields = field["hint_string"].split(",")
 						for i in property.fields.size():
 							property.fields.set(i, property.fields[i].get_slice(":", 0))
-						ui_root.add_child(property)
+					else:
+						property = FloatProperty.new()
+						property.allow_lesser = true
+						property.allow_greater = true
 				TYPE_BOOL:
 					property = BoolProperty.new()
-			property.name = field_name.to_pascal_case()
+				TYPE_NODE_PATH:
+					property = Node2DProperty.new()
+				TYPE_ARRAY:
+					property = ArrayProperty.new()
+					var hint_string: String = field["hint_string"]
+					var array_type := int(hint_string.get_slice("/", 0))
+					var array_hint := int(hint_string.get_slice("/", 1))
+					var array_hint_string: String = hint_string.get_slice(":", 1)
+					var packed := PackedScene.new()
+					# TODO: handle other typed arrays
+					if array_type == TYPE_OBJECT and array_hint == PROPERTY_HINT_RESOURCE_TYPE:
+						packed = load("res://scenes/components/game_components/resource_properties/" + array_hint_string + "Property.tscn")
+					property.item_template = packed
+			property.name = field_name.capitalize()
 			property.set_meta("component_name", component.name)
+			ui_root.add_child(property)
 	$MarginContainer.add_child(ui_root)
 
 	connect_ui(interactables, ui_root)
@@ -46,11 +67,12 @@ func connect_ui(interactables: Array[Interactable], ui_root: Control) -> void:
 		property.value_changed.get_connections().map(remove_connections)
 		var property_name := property.name.to_snake_case()
 		property.value_changed.connect(save_property.bind(property.get_meta("component_name"), property_name, interactables))
-		print(property.value_changed.get_connections())
 
 
 func save_property(value: Variant, component_name: String, property: String, interactables: Array[Interactable]) -> void:
+	print_debug(value)
 	interactables.map(func(interactable): interactable.get_node(component_name).set(property, value))
+	print_debug(interactables[0].get_node(component_name).get(property) == value)
 
 
 func load_properties(interactable: Interactable, ui_root: Control) -> void:
