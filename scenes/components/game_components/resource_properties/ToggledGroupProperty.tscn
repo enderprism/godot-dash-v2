@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpyxsyimsm4gc"]
+
+[ext_resource type="Script" uid="uid://bcfxiueixkkwq" path="res://src/gui/properties/types/ResourceProperty.gd" id="1_l5smv"]
+[ext_resource type="Script" uid="uid://bhcs8su48ha5d" path="res://src/resources/ToggledGroup.gd" id="2_keppb"]
+[ext_resource type="Script" uid="uid://c1ejd8ud4q1b6" path="res://src/gui/properties/types/StringProperty.gd" id="3_j6w42"]
+[ext_resource type="Script" uid="uid://djfsy06pkw4ju" path="res://src/gui/properties/types/EnumProperty.gd" id="4_l5smv"]
+
+[sub_resource type="Resource" id="Resource_l5smv"]
+resource_local_to_scene = true
+script = ExtResource("2_keppb")
+group = &""
+state = 0
+
+[node name="ToggledGroupProperty" type="BoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+script = ExtResource("1_l5smv")
+default = SubResource("Resource_l5smv")
+resource_script = ExtResource("2_keppb")
+_value = SubResource("Resource_l5smv")
+metadata/_custom_type_script = "uid://bcfxiueixkkwq"
+
+[node name="Group" type="BoxContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("3_j6w42")
+placeholder = "Group name"
+select_all_on_focus = true
+lineedit_width = 150.0
+_value = ""
+metadata/_custom_type_script = "uid://c1ejd8ud4q1b6"
+
+[node name="State" type="BoxContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("4_l5smv")
+fields = PackedStringArray("On", "Off", "Flip")
+_value = 0
+metadata/_custom_type_script = "uid://djfsy06pkw4ju"
