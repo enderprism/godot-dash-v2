@@ -9,12 +9,16 @@ func build_ui(interactables: Array[Interactable]) -> void:
 	var first_interactable := interactables[0]
 	var ui_root := VBoxContainer.new()
 	for component in first_interactable.components:
+		var component_section := SectionHeading.new()
+		component_section.name = component.name.trim_suffix("Component").capitalize()
+		component_section.label_settings = preload("res://resources/SectionHeadings.tres")
+		component_section.label_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		if component.get_script().get_global_name() not in COMPONENT_WHITELIST:
 			continue
 		var fields = component.script.get_script_property_list()
 		fields.remove_at(0)
 		fields = fields \
-				.filter(func(field): return field["usage"] & PROPERTY_USAGE_EDITOR != 0)
+				.filter(func(field): return field["usage"] & PROPERTY_USAGE_EDITOR)
 		for field in fields:
 			var field_name: String = field["name"]
 			if field_name.begins_with("_"):
@@ -23,7 +27,8 @@ func build_ui(interactables: Array[Interactable]) -> void:
 			property = generate_property(field["type"], field)
 			property.name = field_name.capitalize()
 			property.set_meta("component_name", component.name)
-			ui_root.add_child(property)
+			component_section.add_child(property)
+		ui_root.add_child(component_section)
 	$MarginContainer.add_child(ui_root)
 
 	connect_ui(interactables, ui_root)
