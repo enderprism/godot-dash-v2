@@ -19,45 +19,8 @@ func build_ui(interactables: Array[Interactable]) -> void:
 			var field_name: String = field["name"]
 			if field_name.begins_with("_"):
 				continue
-			var field_value = component.get(field_name)
 			var property: AbstractProperty
-			match typeof(field_value):
-				TYPE_INT:
-					if field["hint"] == PROPERTY_HINT_ENUM:
-						property = EnumProperty.new()
-						property.fields = field["hint_string"].split(",")
-						for i in property.fields.size():
-							property.fields.set(i, property.fields[i].get_slice(":", 0))
-					else:
-						property = FloatProperty.new()
-						property.allow_lesser = true
-						property.allow_greater = true
-				TYPE_FLOAT:
-					# TODO: get min, max, or_lesser and or_greater from hint_string
-					property = FloatProperty.new()
-					property.allow_lesser = true
-					property.allow_greater = true
-				TYPE_STRING:
-					property = StringProperty.new()
-				TYPE_COLOR:
-					property = ColorProperty.new()
-				TYPE_VECTOR2:
-					property = Vector2Property.new()
-				TYPE_BOOL:
-					property = BoolProperty.new()
-				TYPE_NODE_PATH:
-					property = Node2DProperty.new()
-				TYPE_ARRAY:
-					property = ArrayProperty.new()
-					var hint_string: String = field["hint_string"]
-					var array_type := int(hint_string.get_slice("/", 0))
-					var array_hint := int(hint_string.get_slice("/", 1))
-					var array_hint_string: String = hint_string.get_slice(":", 1)
-					var packed := PackedScene.new()
-					# TODO: handle other typed arrays
-					if array_type == TYPE_OBJECT and array_hint == PROPERTY_HINT_RESOURCE_TYPE:
-						packed = load("res://scenes/components/game_components/resource_properties/" + array_hint_string + "Property.tscn")
-					property.item_template = packed
+			property = generate_property(field["type"], field)
 			property.name = field_name.capitalize()
 			property.set_meta("component_name", component.name)
 			ui_root.add_child(property)
@@ -65,6 +28,52 @@ func build_ui(interactables: Array[Interactable]) -> void:
 
 	connect_ui(interactables, ui_root)
 	load_properties.call_deferred(first_interactable, ui_root)
+
+
+func generate_property(variant_type: int, field: Dictionary) -> AbstractProperty:
+	var property: AbstractProperty
+	match variant_type:
+		TYPE_INT:
+			if field["hint"] == PROPERTY_HINT_ENUM:
+				property = EnumProperty.new()
+				property.fields = field["hint_string"].split(",")
+				for i in property.fields.size():
+					property.fields.set(i, property.fields[i].get_slice(":", 0))
+			else:
+				property = FloatProperty.new()
+				property.allow_lesser = true
+				property.allow_greater = true
+		TYPE_FLOAT:
+			# TODO: get min, max, or_lesser and or_greater from hint_string
+			property = FloatProperty.new()
+			property.allow_lesser = true
+			property.allow_greater = true
+		TYPE_STRING:
+			property = StringProperty.new()
+		TYPE_COLOR:
+			property = ColorProperty.new()
+		TYPE_VECTOR2:
+			property = Vector2Property.new()
+		TYPE_BOOL:
+			property = BoolProperty.new()
+		TYPE_OBJECT:
+			print_debug("TYPE_OBJECT")
+			match field["hint"]:
+				PROPERTY_HINT_NODE_TYPE:
+					if field["hint_string"] == "Node2D":
+						property = Node2DProperty.new()
+		TYPE_ARRAY:
+			property = ArrayProperty.new()
+			var hint_string: String = field["hint_string"]
+			var array_type := int(hint_string.get_slice("/", 0))
+			var array_hint := int(hint_string.get_slice("/", 1))
+			var array_hint_string: String = hint_string.get_slice(":", 1)
+			var packed := PackedScene.new()
+			# TODO: handle other typed arrays
+			if array_type == TYPE_OBJECT and array_hint == PROPERTY_HINT_RESOURCE_TYPE:
+				packed = load("res://scenes/components/game_components/resource_properties/" + array_hint_string + "Property.tscn")
+			property.item_template = packed
+	return property
 
 
 func connect_ui(interactables: Array[Interactable], ui_root: Control) -> void:
@@ -81,9 +90,7 @@ func connect_ui(interactables: Array[Interactable], ui_root: Control) -> void:
 
 
 func save_property(value: Variant, component_name: String, property: String, interactables: Array[Interactable]) -> void:
-	print_debug(value)
 	interactables.map(func(interactable): interactable.get_node(component_name).set(property, value))
-	print_debug(interactables[0].get_node(component_name).get(property) == value)
 
 
 func load_properties(interactable: Interactable, ui_root: Control) -> void:
