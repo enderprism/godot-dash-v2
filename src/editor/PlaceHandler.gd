@@ -40,7 +40,7 @@ func handle_place(block_palette_button_group: ButtonGroup, placed_objects_collid
 				var editor_grid := game_scene.get_node("%EditorGrid") as EditorGrid
 				var grid_offset_to_level_origin := Vector2(0, 64)
 				object.position = (level.get_local_mouse_position() + grid_offset_to_level_origin).snapped(editor_grid.cell_size) - grid_offset_to_level_origin
-				level.add_child(object)
+				level.add_child(object, true)
 				NodeUtils.change_owner_recursive(object, level)
 				object.scene_file_path = ""
 				var to_be_colored: Array
