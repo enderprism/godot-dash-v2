@@ -22,7 +22,6 @@ vertical = true
 script = ExtResource("1_do8kg")
 default = SubResource("Resource_do8kg")
 resource_script = ExtResource("2_lxw1a")
-_value = SubResource("Resource_do8kg")
 metadata/_custom_type_script = "uid://bcfxiueixkkwq"
 
 [node name="Path" type="BoxContainer" parent="."]
@@ -39,5 +38,4 @@ layout_mode = 2
 script = ExtResource("4_kxtx3")
 allow_greater = true
 suffix = "s"
-_value = 0.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"

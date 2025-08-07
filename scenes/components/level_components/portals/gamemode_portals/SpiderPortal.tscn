@@ -81,7 +81,7 @@ script = ExtResource("8_gktvw")
 
 [node name="GamemodeChangerComponent" type="Node" parent="."]
 script = ExtResource("9_rdthj")
-gamemode = 6
+_gamemode = 6
 
 [node name="SingleUsageComponent" type="Node" parent="."]
 script = ExtResource("10_go7f5")

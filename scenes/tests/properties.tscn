@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://3bc5088argko"]
+[gd_scene load_steps=15 format=3 uid="uid://3bc5088argko"]
 
 [ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="1_1q0ts"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_xcvel"]
@@ -13,66 +13,6 @@
 [ext_resource type="Script" uid="uid://d3j6obbost55b" path="res://src/gui/properties/types/ArrayProperty.gd" id="10_jpvj5"]
 [ext_resource type="PackedScene" uid="uid://ccy88idi6rrkp" path="res://scenes/components/game_components/resource_properties/SpawnedGroupProperty.tscn" id="12_ostnf"]
 [ext_resource type="Script" uid="uid://s3yc0qgg4nal" path="res://src/resources/SpawnedGroup.gd" id="13_iyxla"]
-
-[sub_resource type="Resource" id="Resource_4tfqb"]
-resource_local_to_scene = true
-script = ExtResource("13_iyxla")
-path = NodePath("")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_htt1w"]
-resource_local_to_scene = true
-script = ExtResource("13_iyxla")
-path = NodePath("")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_7kfuq"]
-resource_local_to_scene = true
-script = ExtResource("13_iyxla")
-path = NodePath("")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_pssp5"]
-resource_local_to_scene = true
-script = ExtResource("13_iyxla")
-path = NodePath("")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_ostnf"]
-resource_local_to_scene = true
-script = ExtResource("13_iyxla")
-path = NodePath("")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_5a3jb"]
-resource_local_to_scene = true
-script = ExtResource("13_iyxla")
-path = NodePath("")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_usmye"]
-resource_local_to_scene = true
-script = ExtResource("13_iyxla")
-path = NodePath("")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_sweh0"]
-resource_local_to_scene = true
-script = ExtResource("13_iyxla")
-path = NodePath("")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_4aeou"]
-resource_local_to_scene = true
-script = ExtResource("13_iyxla")
-path = NodePath("")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_plrdg"]
-resource_local_to_scene = true
-script = ExtResource("13_iyxla")
-path = NodePath("")
-time = 0.0
 
 [sub_resource type="Resource" id="Resource_iyxla"]
 resource_local_to_scene = true
@@ -114,7 +54,6 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("1_1q0ts")
 default = 50.0
-_value = 50.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="FloatSliderProperty" type="BoxContainer" parent="CenterContainer/VBoxContainer"]
@@ -124,7 +63,6 @@ script = ExtResource("2_rks8l")
 default = 7.5
 min_value = 5.0
 max_value = 10.0
-_value = 7.5
 metadata/_custom_type_script = "uid://c73uilol0rw1g"
 
 [node name="BoolProperty" type="BoxContainer" parent="CenterContainer/VBoxContainer"]
@@ -132,7 +70,6 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("3_bgdif")
 default = true
-_value = true
 metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
 [node name="Vector2Property" type="BoxContainer" parent="CenterContainer/VBoxContainer"]
@@ -140,7 +77,6 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("4_rks8l")
 default = Vector2(5, 0)
-_value = Vector2(5, 0)
 metadata/_custom_type_script = "uid://crich318mmmk2"
 
 [node name="StringProperty" type="BoxContainer" parent="CenterContainer/VBoxContainer"]
@@ -149,7 +85,6 @@ layout_mode = 2
 script = ExtResource("5_bgdif")
 default = "a"
 placeholder = ":3"
-_value = "a"
 metadata/_custom_type_script = "uid://c1ejd8ud4q1b6"
 
 [node name="ColorProperty" type="BoxContainer" parent="CenterContainer/VBoxContainer"]
@@ -157,7 +92,6 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("6_msomc")
 default = Color(0, 1, 0, 1)
-_value = Color(0, 1, 0, 1)
 metadata/_custom_type_script = "uid://bwcwfobfohbsd"
 
 [node name="EnumProperty" type="BoxContainer" parent="CenterContainer/VBoxContainer"]
@@ -166,7 +100,6 @@ layout_mode = 2
 script = ExtResource("7_4ovid")
 default = 1
 fields = PackedStringArray("a", "b")
-_value = 1
 metadata/_custom_type_script = "uid://djfsy06pkw4ju"
 
 [node name="Node2DProperty" type="BoxContainer" parent="CenterContainer/VBoxContainer"]
@@ -179,7 +112,6 @@ metadata/_custom_type_script = "uid://bm3bhys0ur0ns"
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("9_eabr2")
-_value = ""
 metadata/_custom_type_script = "uid://3na5h1vigpxe"
 
 [node name="ArrayProperty" type="BoxContainer" parent="CenterContainer/VBoxContainer"]
@@ -189,10 +121,8 @@ vertical = true
 script = ExtResource("10_jpvj5")
 default_size = 1
 item_template = ExtResource("12_ostnf")
-_value = [SubResource("Resource_4tfqb"), SubResource("Resource_htt1w"), SubResource("Resource_7kfuq"), SubResource("Resource_pssp5"), SubResource("Resource_ostnf"), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), 0.0, 0.0, SubResource("Resource_5a3jb"), SubResource("Resource_usmye"), SubResource("Resource_sweh0"), SubResource("Resource_4aeou"), SubResource("Resource_plrdg")]
 metadata/_custom_type_script = "uid://d3j6obbost55b"
 
 [node name="ResourceProperty" parent="CenterContainer/VBoxContainer" instance=ExtResource("12_ostnf")]
 layout_mode = 2
 default = SubResource("Resource_iyxla")
-_value = SubResource("Resource_iyxla")

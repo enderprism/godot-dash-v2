@@ -51,7 +51,7 @@ script = ExtResource("9_d4vsh")
 
 [node name="JumpBoostComponent" type="Node" parent="."]
 script = ExtResource("10_ofvbe")
-jump_boost = 0.985
+_jump_boost = 0.985
 
 [node name="GravityChangerComponent" type="Node" parent="."]
 script = ExtResource("11_ihas7")

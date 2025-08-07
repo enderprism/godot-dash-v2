@@ -48,11 +48,16 @@ func _ready() -> void:
 					value = ^""
 				else:
 					value = LevelManager.current_level.get_path_to(value)
+			print(Time.get_ticks_msec())
+			print("old value: ", _value)
+			_value = _value.duplicate(true)
 			_value.set(resource_properties[child_duplicate.get_index()], value)
+			print("new value: ", _value)
 			value_changed.emit(_value))
 		indentation_container.add_child(child_duplicate)
 	renamed.connect(refresh)
 	refresh()
+	reset()
 
 
 func refresh() -> void:
@@ -70,7 +75,7 @@ func set_value(new_value: Resource) -> void:
 
 
 func set_value_no_signal(new_value: Resource) -> void:
-	_value = new_value
+	_value = new_value.duplicate(true)
 	for i in indentation_container.get_child_count():
 		var field_input = indentation_container.get_child(i)
 		var field_name = resource_properties[i]
@@ -83,7 +88,7 @@ func set_value_no_signal(new_value: Resource) -> void:
 
 
 func get_value() -> Resource:
-	return _value
+	return _value.duplicate(true)
 
 
 func reset() -> void:

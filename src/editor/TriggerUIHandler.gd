@@ -2,34 +2,42 @@ extends Node
 class_name TriggerUIHandler
 
 @export var trigger_editor: TriggerEditor
+@export var interactable_editor: InteractableEditor
 @export var single_usage: BoolProperty
 @export var spawn_triggered: BoolProperty
 @export var touch_triggered: BoolProperty
 
 func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
-	if not is_selection_trigger_only(selection):
+	if not is_selection_interactable_only(selection):
 		return
 	var trigger_bases: Array = selection.map(func(object): return object.get_node("TriggerBase") as TriggerBase)
+	var interactables: Array = selection.map(into_interactable)
+	single_usage.set_value_no_signal(interactables[0].single_usage)
 	var trigger_base := trigger_bases[0] as TriggerBase
-	single_usage.set_value_no_signal(trigger_base.single_usage)
-	spawn_triggered.set_value_no_signal(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.DISABLED)
-	touch_triggered.set_value_no_signal(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.SQUARE)
-	spawn_triggered.set_input_state(trigger_base._hitbox_shape != TriggerBase.TriggerHitboxShape.SQUARE)
-	touch_triggered.set_input_state(trigger_base._hitbox_shape != TriggerBase.TriggerHitboxShape.DISABLED)
+	if trigger_base != null:
+		spawn_triggered.set_value_no_signal(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.DISABLED)
+		touch_triggered.set_value_no_signal(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.SQUARE)
+		spawn_triggered.set_input_state(trigger_base._hitbox_shape != TriggerBase.TriggerHitboxShape.SQUARE)
+		touch_triggered.set_input_state(trigger_base._hitbox_shape != TriggerBase.TriggerHitboxShape.DISABLED)
 	for property in [single_usage, spawn_triggered, touch_triggered]:
 		property.value_changed.get_connections().map(func(connection): property.value_changed.disconnect(connection.callable))
-	single_usage.value_changed.connect(_on_single_usage_value_changed.bind(trigger_bases))
+	single_usage.value_changed.connect(_on_single_usage_value_changed.bind(interactables))
 	spawn_triggered.value_changed.connect(_on_spawn_triggered_value_changed.bind(trigger_bases))
 	touch_triggered.value_changed.connect(_on_touch_triggered_value_changed.bind(trigger_bases))
-	if not is_selection_same_trigger_type(selection):
+	if not is_selection_same_interactable_type(selection):
 		return
-	var trigger_bases_typed: Array[TriggerBase]
-	trigger_bases_typed.assign(trigger_bases)
-	trigger_editor.build_ui(trigger_bases_typed)
+	if is_selection_trigger_only(selection):
+		var trigger_bases_typed: Array[TriggerBase]
+		trigger_bases_typed.assign(trigger_bases)
+		trigger_editor.build_ui(trigger_bases_typed)
+		return
+	var interactables_typed: Array[Interactable]
+	interactables_typed.assign(interactables)
+	interactable_editor.build_ui(interactables_typed)
 
 
-func _on_single_usage_value_changed(value: bool, trigger_bases: Array) -> void:
-	trigger_bases.map(func(trigger_base): trigger_base.single_usage = value)
+func _on_single_usage_value_changed(value: bool, interactables: Array) -> void:
+	interactables.map(func(interactable): interactable.single_usage = value)
 
 
 func _on_spawn_triggered_value_changed(value: bool, trigger_bases: Array) -> void:
@@ -50,15 +58,33 @@ func _on_touch_triggered_value_changed(value:Variant, trigger_bases: Array) -> v
 	trigger_bases.map(make_trigger_spawn_triggered)
 
 
+static func into_interactable(object: Node2D) -> Interactable:
+	if object.has_node(^"TriggerBase"):
+		object = object.get_node(^"TriggerBase")
+	return object if object is Interactable else null
+
+
+static func is_selection_interactable_only(selection: Array[Node2D]) -> bool:
+	if selection.is_empty():
+		return false
+	var is_interactable := func(object: Node2D): return object is Interactable or object.has_node(^"TriggerBase")
+	return selection.filter(is_interactable) == selection
+
+
+static func is_selection_same_interactable_type(selection: Array[Node2D]) -> bool:
+	if selection.is_empty():
+		return false
+	var flatten := func(object): return object != null
+	var trigger_type = selection[0].get_script()
+	var unmatching_trigger_types := selection.filter(func(trigger): return trigger.get_script() != trigger_type)
+	var interactables := selection.map(into_interactable).filter(flatten)
+	var matching_components: Array[Component] = interactables[0].components
+	var unmatching_interactables := interactables.filter(func(interactable): return interactable.components != matching_components)
+	return unmatching_trigger_types.is_empty() or unmatching_interactables.is_empty()
+
+
 static func is_selection_trigger_only(selection: Array[Node2D]) -> bool:
 	if selection.is_empty():
 		return false
-	var has_trigger := func(object: Node2D): return object.has_node("TriggerBase")
+	var has_trigger := func(object: Node2D): return object.has_node(^"TriggerBase")
 	return selection.filter(has_trigger) == selection
-
-static func is_selection_same_trigger_type(selection: Array[Node2D]) -> bool:
-	if selection.is_empty():
-		return false
-	var trigger_type = selection[0].get_script()
-	var unmatching_trigger_types := selection.filter(func(trigger): return trigger.get_script() != trigger_type)
-	return unmatching_trigger_types.is_empty()
