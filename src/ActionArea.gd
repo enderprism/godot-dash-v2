@@ -31,7 +31,7 @@ func _ready() -> void:
 		NodeUtils.set_child_owner(self, editor_selection_collider)
 
 func _process(_delta: float) -> void:
-	if Engine.is_editor_hint() or get_tree().debug_collisions_hint:
+	if Engine.is_editor_hint() or get_tree().debug_collisions_hint or LevelManager.in_editor:
 		_hitbox.debug_color = Color("00ff0000")
 		_ninepatchrect.visible = true
 		_letter.visible = true

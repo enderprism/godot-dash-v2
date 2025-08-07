@@ -37,7 +37,8 @@ scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(256, 256)
 theme = ExtResource("3_sf5fp")
 theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 262
-text = "s"
+theme_override_font_sizes/font_size = 142
+text = "stop
+dash"
 horizontal_alignment = 1
 vertical_alignment = 1
