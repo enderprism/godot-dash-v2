@@ -468,6 +468,8 @@ func _ensure_velocity_redirect(delta: float, global_velocity: Vector2) -> bool:
 
 
 func _rotate_sprite_degrees(delta: float):
+	var local_velocity := velocity.rotated(-gameplay_rotation)
+	var local_velocity_angle_degrees := rad_to_deg(atan2(local_velocity.y * get_direction(), local_velocity.x * get_direction()))
 	if $GroundCollider.shape is CircleShape2D:
 		if get_floor_normal() != Vector2.ZERO:
 			if not is_zero_approx(get_floor_angle_signed(false)):
@@ -510,8 +512,7 @@ func _rotate_sprite_degrees(delta: float):
 		$Icon/Swing.scale.x = sign(get_direction())
 	if not dash_control:
 		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
-			var local_velocity := velocity.rotated(-gameplay_rotation)
-			var target_rotation_degrees := gameplay_rotation_degrees + rad_to_deg(atan2(local_velocity.y * get_direction(), local_velocity.x * get_direction()))
+			var target_rotation_degrees := gameplay_rotation_degrees + local_velocity_angle_degrees
 			$Icon/Ship.rotation_degrees = lerpf(
 					$Icon/Ship.rotation_degrees,
 					target_rotation_degrees,
@@ -606,6 +607,10 @@ func _rotate_sprite_degrees(delta: float):
 	$Icon/Spider.scale.y = sign(gravity_multiplier)
 	$Icon/Robot.scale.y = sign(gravity_multiplier)
 	#endregion
+	var dash_particles_degrees := rad_to_deg(atan2(velocity.y * horizontal_direction, velocity.x * horizontal_direction))
+	$DashParticles.rotation_degrees = dash_particles_degrees
+	$DashParticles.process_material.angle_min = dash_particles_degrees
+	$DashParticles.process_material.angle_max = dash_particles_degrees
 
 
 func _update_swing_fire(delta: float) -> void:
