@@ -48,11 +48,16 @@ func _ready() -> void:
 					value = ^""
 				else:
 					value = LevelManager.current_level.get_path_to(value)
+			print(Time.get_ticks_msec())
+			print("old value: ", _value)
+			_value = _value.duplicate(true)
 			_value.set(resource_properties[child_duplicate.get_index()], value)
-			value_changed.emit(_value.duplicate(true)))
+			print("new value: ", _value)
+			value_changed.emit(_value))
 		indentation_container.add_child(child_duplicate)
 	renamed.connect(refresh)
 	refresh()
+	reset()
 
 
 func refresh() -> void:

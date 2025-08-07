@@ -4190,21 +4190,18 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("179_0v0om")
-_value = false
 metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
 [node name="Spawn triggered" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("179_0v0om")
-_value = false
 metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
 [node name="Touch triggered" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("179_0v0om")
-_value = false
 metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
 [node name="Colors" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer"]
@@ -4229,7 +4226,6 @@ layout_mode = 2
 script = ExtResource("184_33w7i")
 placeholder = "Color channel name"
 lineedit_width = 200.0
-_value = ""
 metadata/_custom_type_script = "uid://c1ejd8ud4q1b6"
 
 [node name="Detail Color" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors"]
@@ -4239,7 +4235,6 @@ layout_mode = 2
 script = ExtResource("184_33w7i")
 placeholder = "Color channel name"
 lineedit_width = 200.0
-_value = ""
 metadata/_custom_type_script = "uid://c1ejd8ud4q1b6"
 
 [node name="HSV Shift" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors"]
@@ -4255,7 +4250,6 @@ layout_mode = 2
 script = ExtResource("185_t7625")
 min_value = -1.0
 max_value = 1.0
-_value = 0.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="Saturation" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/HSV Shift"]
@@ -4265,7 +4259,6 @@ layout_mode = 2
 script = ExtResource("185_t7625")
 min_value = -1.0
 max_value = 1.0
-_value = 0.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="Value" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/HSV Shift"]
@@ -4275,7 +4268,6 @@ layout_mode = 2
 script = ExtResource("185_t7625")
 min_value = -1.0
 max_value = 1.0
-_value = 0.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="Strength" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/HSV Shift"]
@@ -4286,7 +4278,6 @@ script = ExtResource("185_t7625")
 min_value = -1.0
 max_value = 1.0
 allow_greater = true
-_value = 0.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="Alpha" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/HSV Shift"]
@@ -4296,7 +4287,6 @@ layout_mode = 2
 script = ExtResource("185_t7625")
 min_value = -1.0
 max_value = 1.0
-_value = 0.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="LevelSettings" parent="EditorUI" instance=ExtResource("180_nk067")]

@@ -1,44 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://ww6y4q8ewq3y"]
+[gd_scene load_steps=9 format=3 uid="uid://ww6y4q8ewq3y"]
 
 [ext_resource type="Script" uid="uid://d3j6obbost55b" path="res://src/gui/properties/types/ArrayProperty.gd" id="1_j0h7q"]
 [ext_resource type="Script" uid="uid://dewr6g2sliqsr" path="res://src/gui/properties/components/PropertyWatcher.gd" id="1_m6wqb"]
 [ext_resource type="Script" uid="uid://dbm3v6vyrehta" path="res://src/editor/TriggerPropertyInternalName.gd" id="2_ano3m"]
 [ext_resource type="PackedScene" uid="uid://ccy88idi6rrkp" path="res://scenes/components/game_components/resource_properties/SpawnedGroupProperty.tscn" id="2_fcfcd"]
-[ext_resource type="Script" uid="uid://s3yc0qgg4nal" path="res://src/resources/SpawnedGroup.gd" id="3_olvpa"]
 [ext_resource type="Script" uid="uid://djfsy06pkw4ju" path="res://src/gui/properties/types/EnumProperty.gd" id="4_5wbqj"]
 [ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="5_jrceg"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="6_oqf25"]
 [ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="8_oqf25"]
-
-[sub_resource type="Resource" id="Resource_ptj8w"]
-resource_local_to_scene = true
-script = ExtResource("3_olvpa")
-path = NodePath("")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_d5ph2"]
-resource_local_to_scene = true
-script = ExtResource("3_olvpa")
-path = NodePath("")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_adfcf"]
-resource_local_to_scene = true
-script = ExtResource("3_olvpa")
-path = NodePath("")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_oqf25"]
-resource_local_to_scene = true
-script = ExtResource("3_olvpa")
-path = NodePath("")
-time = 0.0
-
-[sub_resource type="Resource" id="Resource_itfds"]
-resource_local_to_scene = true
-script = ExtResource("3_olvpa")
-path = NodePath("")
-time = 0.0
 
 [node name="SpawnTriggerUI" type="VBoxContainer"]
 anchors_preset = 15
@@ -52,10 +21,8 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 vertical = true
 script = ExtResource("1_j0h7q")
-minimum_size = 0
 or_greater = true
 item_template = ExtResource("2_fcfcd")
-_value = [SubResource("Resource_ptj8w"), SubResource("Resource_d5ph2"), SubResource("Resource_adfcf"), SubResource("Resource_oqf25"), SubResource("Resource_itfds")]
 metadata/_custom_type_script = "uid://d3j6obbost55b"
 
 [node name="Loop" type="BoxContainer" parent="." groups=["trigger_property"]]
@@ -63,7 +30,6 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("4_5wbqj")
 fields = PackedStringArray("Disabled", "Count", "Infinite")
-_value = 0
 metadata/_custom_type_script = "uid://djfsy06pkw4ju"
 
 [node name="PropertyWatcher" type="Node" parent="Loop" node_paths=PackedStringArray("target")]
@@ -96,7 +62,6 @@ min_value = 1.0
 step = 1.0
 rounded = true
 allow_greater = true
-_value = 1.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Loops/Count"]
@@ -109,7 +74,6 @@ layout_mode = 2
 script = ExtResource("8_oqf25")
 allow_greater = true
 suffix = "s"
-_value = 0.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Loops/Delay"]
