@@ -4,6 +4,7 @@ class_name TriggerUIHandler
 @export var trigger_editor: TriggerEditor
 @export var interactable_editor: InteractableEditor
 @export var single_usage: BoolProperty
+@export var no_effects: BoolProperty
 @export var spawn_triggered: BoolProperty
 @export var touch_triggered: BoolProperty
 
@@ -13,15 +14,17 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 	var trigger_bases: Array = selection.map(func(object): return object.get_node("TriggerBase") as TriggerBase)
 	var interactables: Array = selection.map(into_interactable)
 	single_usage.set_value_no_signal(interactables[0].single_usage)
+	no_effects.set_value_no_signal(interactables[0].no_effects)
 	var trigger_base := trigger_bases[0] as TriggerBase
 	if trigger_base != null:
 		spawn_triggered.set_value_no_signal(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.DISABLED)
 		touch_triggered.set_value_no_signal(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.SQUARE)
 		spawn_triggered.set_input_state(trigger_base._hitbox_shape != TriggerBase.TriggerHitboxShape.SQUARE)
 		touch_triggered.set_input_state(trigger_base._hitbox_shape != TriggerBase.TriggerHitboxShape.DISABLED)
-	for property in [single_usage, spawn_triggered, touch_triggered]:
+	for property in [single_usage, no_effects, spawn_triggered, touch_triggered]:
 		property.value_changed.get_connections().map(func(connection): property.value_changed.disconnect(connection.callable))
 	single_usage.value_changed.connect(_on_single_usage_value_changed.bind(interactables))
+	no_effects.value_changed.connect(_on_no_effects_value_changed.bind(interactables))
 	spawn_triggered.value_changed.connect(_on_spawn_triggered_value_changed.bind(trigger_bases))
 	touch_triggered.value_changed.connect(_on_touch_triggered_value_changed.bind(trigger_bases))
 	if not is_selection_same_interactable_type(selection):
@@ -38,6 +41,10 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 
 func _on_single_usage_value_changed(value: bool, interactables: Array) -> void:
 	interactables.map(func(interactable): interactable.single_usage = value)
+
+
+func _on_no_effects_value_changed(value: bool, interactables: Array) -> void:
+	interactables.map(func(interactable): interactable.no_effects = value)
 
 
 func _on_spawn_triggered_value_changed(value: bool, trigger_bases: Array) -> void:

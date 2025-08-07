@@ -43,9 +43,7 @@ func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 				and TriggerUIHandler.is_selection_same_interactable_type(selection) \
 				and not TriggerUIHandler.is_selection_trigger_only(selection)
 		for property in trigger_properties:
-			property.visible = TriggerUIHandler.is_selection_trigger_only(selection)
-			if property.name == "Single usage":
-				property.visible = interactable_section.visible
+			property.visible = TriggerUIHandler.is_selection_trigger_only(selection) if "triggered" in property.name else interactable_section.visible
 	#endsection
 	#section Colors
 	if not color_section.folded:

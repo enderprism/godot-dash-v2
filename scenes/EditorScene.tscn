@@ -4192,6 +4192,12 @@ layout_mode = 2
 script = ExtResource("179_0v0om")
 metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
+[node name="No effects" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("179_0v0om")
+metadata/_custom_type_script = "uid://bss8ppxnt7gio"
+
 [node name="Spawn triggered" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
@@ -4350,7 +4356,7 @@ group_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/M
 interactable_section = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable")
 trigger_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/TriggerEditor")
 interactable_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/InteractableEditor")
-trigger_properties = [NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Single usage"), NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Spawn triggered"), NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Touch triggered")]
+trigger_properties = [NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Single usage"), NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Touch triggered"), NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Spawn triggered"), NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Touch triggered")]
 color_section = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors")
 base = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/Base Color")
 detail = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/Detail Color")
@@ -4371,11 +4377,12 @@ base = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginCon
 detail = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/Detail Color")
 color_channel_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/Channel Editor/ColorChannelEditor")
 
-[node name="TriggerUIHandler" type="Node" parent="." node_paths=PackedStringArray("trigger_editor", "interactable_editor", "single_usage", "spawn_triggered", "touch_triggered")]
+[node name="TriggerUIHandler" type="Node" parent="." node_paths=PackedStringArray("trigger_editor", "interactable_editor", "single_usage", "no_effects", "spawn_triggered", "touch_triggered")]
 script = ExtResource("76_n8dkx")
 trigger_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/TriggerEditor")
 interactable_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/InteractableEditor")
 single_usage = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Single usage")
+no_effects = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/No effects")
 spawn_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Spawn triggered")
 touch_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Touch triggered")
 

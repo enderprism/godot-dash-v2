@@ -16,6 +16,8 @@ func _ready() -> void:
 
 
 func pulse(_player: Player) -> void:
+	if parent.no_effects:
+		return
 	show()
 	var pulse_tween := create_tween().set_parallel()
 	pulse_tween.tween_property(self, ^"_radius", 128 * 1.5, 0.25)

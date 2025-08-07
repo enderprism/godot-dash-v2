@@ -28,6 +28,7 @@ func start(player: Player) -> void:
 	player.get_node("DashFlame").rotation = angle * player.horizontal_direction
 	player.get_node("DashFlame").scale.x = abs(player.get_node("DashFlame").scale.x) * player.horizontal_direction
 	# player.get_node("DashFlame").scale.y = sign(player.gravity_multiplier)
-	var dash_boom = player.DASH_BOOM.instantiate()
-	dash_boom.position = player.to_local(parent.global_position)
-	player.add_child(dash_boom)
+	if not parent.no_effects:
+		var dash_boom = player.DASH_BOOM.instantiate()
+		dash_boom.position = player.to_local(parent.global_position)
+		player.add_child(dash_boom)

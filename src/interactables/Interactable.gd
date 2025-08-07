@@ -2,8 +2,10 @@ extends Area2D
 class_name Interactable
 
 @export var single_usage := false
+@export var no_effects := false
 
 var components: Array[Component]
+
 
 func _ready() -> void:
 	if LevelManager.in_editor:
