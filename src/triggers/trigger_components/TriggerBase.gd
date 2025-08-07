@@ -31,7 +31,20 @@ enum TriggerHitboxShape {
 		_target = value
 		emit_signal("target_changed")
 
-@export var target_group: StringName
+@export var target_group: StringName:
+	set(value):
+		target_group = value
+		if group_display == null:
+			_center_anchor = NodeUtils.get_node_or_add(self, "Center Anchor", Control, NodeUtils.INTERNAL)
+			group_display = NodeUtils.get_node_or_add(_center_anchor, "Group Display", Label, NodeUtils.INTERNAL)
+		group_display.label_settings = preload("res://resources/TriggerGroupDisplay.tres")
+		group_display.text = target_group.trim_prefix(GroupEditor.GROUP_PREFIX)
+		group_display.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		group_display.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		move_child(group_display, -1)
+		var update_width := func(): group_display.position.x = -group_display.size.x/2
+		group_display.position.y = 6.0
+		update_width.call_deferred()
 
 
 func _validate_property(property: Dictionary) -> void:
@@ -42,6 +55,8 @@ func _validate_property(property: Dictionary) -> void:
 var sprite: Sprite2D
 ## The trigger's UI. [TriggerEditor] will instantiate it.
 var ui_path: String
+var group_display: Label
+var _center_anchor: Control
 ## The trigger's collision shape.
 var _hitbox: CollisionShape2D
 var _hitbox_display: TriggerHitboxDisplay
@@ -58,7 +73,10 @@ func _ready() -> void:
 	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
 	NodeUtils.get_node_or_add(self, "SingleUsageComponent", SingleUsageComponent, NodeUtils.INTERNAL)
 	NodeUtils.connect_new(hitbox_shape_changed, _hitbox_display.update_shape)
+	_center_anchor = NodeUtils.get_node_or_add(self, "Center Anchor", Control, NodeUtils.INTERNAL)
+	group_display = NodeUtils.get_node_or_add(_center_anchor, "Group Display", Label, NodeUtils.INTERNAL)
 	_set_hitbox_shape()
+	move_child(_center_anchor, -1)
 
 
 func _physics_process(_delta: float) -> void:
@@ -66,9 +84,11 @@ func _physics_process(_delta: float) -> void:
 	if not get_parent() is GameplayRotateTrigger:
 		if Engine.is_editor_hint() or LevelManager.player_camera == null:
 			sprite.global_rotation = 0.0
+			group_display.global_rotation = 0.0
 		else:
 			sprite.global_rotation = LevelManager.player_camera.global_rotation
 	sprite.global_scale = Vector2.ONE * 0.2
+	_center_anchor.rotation = sprite.rotation
 
 
 func sprite_visible() -> bool:

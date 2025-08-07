@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c7371tftg8uhq"]
+
+[ext_resource type="FontFile" uid="uid://8e1lxpyo40t5" path="res://assets/fonts/Pusab.otf" id="1_c1m0l"]
+
+[resource]
+font = ExtResource("1_c1m0l")
+font_size = 32
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.392157)
+shadow_offset = Vector2(6, 6)
