@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckrakyci0r2eg"]
+[gd_scene load_steps=7 format=3 uid="uid://ckrakyci0r2eg"]
 
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="3_4gkp4"]
 [ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="4_8crq8"]
@@ -14,7 +14,12 @@ shader_parameter/full_pulse_cycle = false
 shader_parameter/factor = 0.0
 shader_parameter/mode = 2
 
-[node name="TeleportalOut" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ohkw7"]
+size = Vector2(234, 384)
+
+[node name="TeleportalOut" type="Area2D"]
+collision_layer = 256
+collision_mask = 128
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("3_4gkp4")]
 modulate = Color(1, 0.74902, 0, 1)
@@ -35,3 +40,8 @@ z_index = 1
 use_parent_material = true
 texture = ExtResource("6_p5kb6")
 flip_h = true
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(-11, 0)
+shape = SubResource("RectangleShape2D_ohkw7")
+debug_color = Color(0, 1, 0, 0)
