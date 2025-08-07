@@ -46,7 +46,7 @@ script = ExtResource("6_axmoj")
 
 [node name="JumpBoostComponent" type="Node" parent="."]
 script = ExtResource("7_7u260")
-_jump_boost = 0.985
+jump_boost = 0.985
 
 [node name="DirectionChangerComponent" type="Node" parent="."]
 script = ExtResource("8_jgc4y")
