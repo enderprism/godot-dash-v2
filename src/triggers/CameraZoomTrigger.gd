@@ -45,7 +45,7 @@ func start(_body: Node2D) -> void:
 		return
 	if _player_camera == null:
 		printerr("In ", name, ": _player_camera is unset")
-	_initial_zoom = _player_camera.zoom
+	_initial_zoom = _player_camera.zoom / PlayerCamera.DEFAULT_ZOOM
 	if is_zero_approx(easing.duration):
 		match mode:
 			Mode.SET:
