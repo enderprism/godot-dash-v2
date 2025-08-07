@@ -97,8 +97,9 @@ func add_item(idx: int, options: int = 0) -> ArrayPropertyItem:
 	item.property = item_template.instantiate()
 	item.property.show()
 	item.value_changed.connect(func(value):
+		_value = _value.duplicate()
 		_value[item.get_index()] = value
-		value_changed.emit(_value.duplicate()))
+		value_changed.emit(_value))
 	item.name = str(idx if idx > 0 else items.get_child_count())
 	items.add_child(item)
 	if idx > 0:
