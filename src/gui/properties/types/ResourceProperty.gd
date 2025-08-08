@@ -37,6 +37,7 @@ func _ready() -> void:
 	resource_properties = resource_properties \
 			.filter(func(property): return property["usage"] & PROPERTY_USAGE_EDITOR != 0) \
 			.map(func(property): return property["name"])
+	reset()
 	for child in get_children(false):
 		child.hide()
 		var child_duplicate = child.duplicate()
@@ -47,16 +48,12 @@ func _ready() -> void:
 					value = ^""
 				else:
 					value = LevelManager.current_level.get_path_to(value)
-			print(Time.get_ticks_msec())
-			print("old value: ", _value)
 			_value = _value.duplicate(true)
 			_value.set(resource_properties[child_duplicate.get_index()], value)
-			print("new value: ", _value)
 			value_changed.emit(_value))
 		indentation_container.add_child(child_duplicate)
 	renamed.connect(refresh)
 	refresh()
-	reset()
 
 
 func refresh() -> void:
