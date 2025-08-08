@@ -68,7 +68,7 @@ func _ready() -> void:
 		quick_rotation_is_first_frame = true
 
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	handle_hovered = get_local_mouse_position().distance_to(handle_position) - handle_radius < 0
 	angle_input.position = Vector2.RIGHT * radius * 1.3 + Vector2.UP * angle_input.size.y * 0.5
 	snap_interval_input.position = Vector2.RIGHT * radius * 1.3 + Vector2.UP * snap_interval_input.size.y * 0.5 + Vector2.UP * angle_input.size.y
