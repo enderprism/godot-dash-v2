@@ -25,8 +25,6 @@ func start(player: Player) -> void:
 		angle = -clampf(pingpong(parent.global_rotation - PI/2, PI) - PI/2, deg_to_rad(-70), deg_to_rad(70))
 	player.get_node("DashParticles").emitting = true
 	player.get_node("DashFlame").show()
-	player.get_node("DashFlame").rotation = angle * player.horizontal_direction
-	player.get_node("DashFlame").scale.x = abs(player.get_node("DashFlame").scale.x) * player.horizontal_direction
 	# player.get_node("DashFlame").scale.y = sign(player.gravity_multiplier)
 	if not parent.no_effects:
 		var dash_boom = player.DASH_BOOM.instantiate()

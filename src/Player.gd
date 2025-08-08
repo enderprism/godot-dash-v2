@@ -470,6 +470,7 @@ func _ensure_velocity_redirect(delta: float, global_velocity: Vector2) -> bool:
 func _rotate_sprite_degrees(delta: float):
 	var local_velocity := velocity.rotated(-gameplay_rotation)
 	var local_velocity_angle_degrees := rad_to_deg(atan2(local_velocity.y * get_direction(), local_velocity.x * get_direction()))
+	var dash_horizontal_direction := horizontal_direction if not LevelManager.platformer or dash_control == null else dash_control.initial_horizontal_direction
 	if $GroundCollider.shape is CircleShape2D:
 		if get_floor_normal() != Vector2.ZERO:
 			if not is_zero_approx(get_floor_angle_signed(false)):
@@ -502,7 +503,7 @@ func _rotate_sprite_degrees(delta: float):
 					snapped($Icon/Cube.rotation - sprite_floor_angle, PI/2) + sprite_floor_angle,
 					ICON_LERP_FACTOR * delta * 60)
 	else:
-		$Icon/Cube.rotation_degrees += delta * 800 * dash_control.initial_horizontal_direction
+		$Icon/Cube.rotation_degrees += delta * 800 * dash_horizontal_direction
 	#endregion
 	#region ship/swing
 	$Icon/Ship.scale.y = sign(gravity_multiplier)
@@ -607,10 +608,13 @@ func _rotate_sprite_degrees(delta: float):
 	$Icon/Spider.scale.y = sign(gravity_multiplier)
 	$Icon/Robot.scale.y = sign(gravity_multiplier)
 	#endregion
+	#region dash
 	var dash_particles_degrees := rad_to_deg(atan2(velocity.y * horizontal_direction, velocity.x * horizontal_direction))
 	$DashParticles.rotation_degrees = dash_particles_degrees
 	$DashParticles.process_material.angle_min = dash_particles_degrees
 	$DashParticles.process_material.angle_max = dash_particles_degrees
+	$DashFlame.scale.x = abs($DashFlame.scale.x) * dash_horizontal_direction
+	#endregion
 
 
 func _update_swing_fire(delta: float) -> void:
@@ -698,8 +702,8 @@ func _on_kill_collider_hazard_body_entered(_body:Node2D) -> void:
 
 
 func stop_dash() -> void:
-	get_node("DashParticles").emitting = false
-	get_node("DashFlame").hide()
+	$DashParticles.emitting = false
+	$DashFlame.hide()
 	dash_control = null
 
 
