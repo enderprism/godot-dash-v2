@@ -344,6 +344,11 @@ func _on_rotate_free_pressed() -> void:
 	rotate_gizmo.global_position = selection_pivot
 	rotate_gizmo.angle_changed.connect(_rotate_selection)
 	var remove_gizmo := func(_selection, signal_to_disconnect):
+		var tween := create_tween()
+		tween.set_parallel()
+		tween.tween_property(rotate_gizmo, ^"scale_multiplier", 0.0, 0.25).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+		tween.tween_property(rotate_gizmo, ^"modulate:a", 0.0, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		await tween.finished
 		rotate_gizmo.queue_free()
 		selection_changed.disconnect(signal_to_disconnect)
 	selection_changed.connect(remove_gizmo.bind(remove_gizmo))
