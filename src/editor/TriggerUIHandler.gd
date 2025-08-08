@@ -5,8 +5,8 @@ class_name TriggerUIHandler
 @export var interactable_editor: InteractableEditor
 @export var single_usage: BoolProperty
 @export var no_effects: BoolProperty
-@export var spawn_triggered: BoolProperty
-@export var touch_triggered: BoolProperty
+@export var trigger_hitbox_shape: EnumProperty
+@export var trigger_hitbox_height: FloatProperty
 
 func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 	if not is_selection_interactable_only(selection):
@@ -17,16 +17,14 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 	no_effects.set_value_no_signal(interactables[0].no_effects)
 	var trigger_base := trigger_bases[0] as TriggerBase
 	if trigger_base != null:
-		spawn_triggered.set_value_no_signal(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.DISABLED)
-		touch_triggered.set_value_no_signal(trigger_base._hitbox_shape == TriggerBase.TriggerHitboxShape.SQUARE)
-		spawn_triggered.set_input_state(trigger_base._hitbox_shape != TriggerBase.TriggerHitboxShape.SQUARE)
-		touch_triggered.set_input_state(trigger_base._hitbox_shape != TriggerBase.TriggerHitboxShape.DISABLED)
-	for property in [single_usage, no_effects, spawn_triggered, touch_triggered]:
+		trigger_hitbox_shape.set_value_no_signal(trigger_base._hitbox_shape)
+		trigger_hitbox_height.set_value_no_signal(trigger_base.hitbox_height)
+	for property in [single_usage, no_effects, trigger_hitbox_shape, trigger_hitbox_height]:
 		property.value_changed.get_connections().map(func(connection): property.value_changed.disconnect(connection.callable))
 	single_usage.value_changed.connect(_on_single_usage_value_changed.bind(interactables))
 	no_effects.value_changed.connect(_on_no_effects_value_changed.bind(interactables))
-	spawn_triggered.value_changed.connect(_on_spawn_triggered_value_changed.bind(trigger_bases))
-	touch_triggered.value_changed.connect(_on_touch_triggered_value_changed.bind(trigger_bases))
+	trigger_hitbox_shape.value_changed.connect(_on_trigger_hitbox_shape_value_changed.bind(trigger_bases))
+	trigger_hitbox_height.value_changed.connect(_on_trigger_hitbox_height_value_changed.bind(trigger_bases))
 	if not is_selection_same_interactable_type(selection):
 		return
 	if is_selection_trigger_only(selection):
@@ -47,22 +45,17 @@ func _on_no_effects_value_changed(value: bool, interactables: Array) -> void:
 	interactables.map(func(interactable): interactable.no_effects = value)
 
 
-func _on_spawn_triggered_value_changed(value: bool, trigger_bases: Array) -> void:
-	touch_triggered.set_input_state(not value)
+func _on_trigger_hitbox_shape_value_changed(value: TriggerBase.TriggerHitboxShape, trigger_bases: Array) -> void:
 	if trigger_bases.is_empty():
 		return
-	var make_trigger_spawn_triggered := func(trigger_base: TriggerBase):
-		trigger_base._hitbox_shape = TriggerBase.TriggerHitboxShape.DISABLED if value else TriggerBase.TriggerHitboxShape.LINE
-	trigger_bases.map(make_trigger_spawn_triggered)
+	trigger_hitbox_height.visible = value == TriggerBase.TriggerHitboxShape.LINE
+	trigger_bases.map(func(trigger_base: TriggerBase): trigger_base._hitbox_shape = value)
 
 
-func _on_touch_triggered_value_changed(value:Variant, trigger_bases: Array) -> void:
-	spawn_triggered.set_input_state(not value)
+func _on_trigger_hitbox_height_value_changed(value: float, trigger_bases: Array) -> void:
 	if trigger_bases.is_empty():
 		return
-	var make_trigger_spawn_triggered := func(trigger_base: TriggerBase):
-		trigger_base._hitbox_shape = TriggerBase.TriggerHitboxShape.SQUARE if value else TriggerBase.TriggerHitboxShape.LINE
-	trigger_bases.map(make_trigger_spawn_triggered)
+	trigger_bases.map(func(trigger_base: TriggerBase): trigger_base.hitbox_height = value)
 
 
 static func into_interactable(object: Node2D) -> Interactable:

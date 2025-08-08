@@ -11,7 +11,8 @@ extends Node
 @export var interactable_section: SectionHeading
 @export var trigger_editor: TriggerEditor
 @export var interactable_editor: InteractableEditor
-@export var trigger_properties: Array[BoolProperty]
+@export var interactable_properties: Array[BoolProperty]
+@export var trigger_properties: Array[AbstractProperty]
 @export_group("Colors")
 @export var color_section: SectionHeading
 @export var base: StringProperty
@@ -48,10 +49,13 @@ func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 		interactable_editor.visible = TriggerUIHandler.is_selection_interactable_only(selection) \
 				and TriggerUIHandler.is_selection_same_interactable_type(selection) \
 				and not TriggerUIHandler.is_selection_trigger_only(selection)
+		for property in interactable_properties:
+			property.visible = interactable_section.visible
 		for property in trigger_properties:
-			property.visible = TriggerUIHandler.is_selection_trigger_only(selection) if "triggered" in property.name else interactable_section.visible
+			property.visible = trigger_editor.visible
 	#endsection
 	#section Colors
+	color_section.fold(interactable_section.visible)
 	if not color_section.folded:
 		for element in [base, detail, hsv_shift]:
 			element.visible = not selection.is_empty()

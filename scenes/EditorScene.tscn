@@ -1,4 +1,4 @@
-[gd_scene load_steps=228 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=229 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -199,6 +199,7 @@
 [ext_resource type="PackedScene" uid="uid://b4vh26wn3qq40" path="res://scenes/components/game_components/InteractableEditor.tscn" id="183_momrj"]
 [ext_resource type="Script" uid="uid://c1ejd8ud4q1b6" path="res://src/gui/properties/types/StringProperty.gd" id="184_33w7i"]
 [ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="185_t7625"]
+[ext_resource type="Script" uid="uid://djfsy06pkw4ju" path="res://src/gui/properties/types/EnumProperty.gd" id="187_vtwef"]
 [ext_resource type="Script" uid="uid://c08lx7vbboo37" path="res://src/editor/LevelOperationsHandler.gd" id="189_ao6md"]
 
 [sub_resource type="Resource" id="Resource_aofxv"]
@@ -4290,17 +4291,23 @@ layout_mode = 2
 script = ExtResource("179_0v0om")
 metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
-[node name="Spawn triggered" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable"]
+[node name="Hitbox shape" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("179_0v0om")
-metadata/_custom_type_script = "uid://bss8ppxnt7gio"
+script = ExtResource("187_vtwef")
+fields = PackedStringArray("Line", "Square", "Disabled")
+metadata/_custom_type_script = "uid://djfsy06pkw4ju"
 
-[node name="Touch triggered" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable"]
+[node name="Hitbox height" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-script = ExtResource("179_0v0om")
-metadata/_custom_type_script = "uid://bss8ppxnt7gio"
+script = ExtResource("185_t7625")
+default = 64.0
+max_value = 128.0
+allow_greater = true
+suffix = "cells"
+expand_to_text_length = true
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="Colors" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -4444,7 +4451,7 @@ debug_color = Color(0.284375, 0, 0.7, 0.42)
 z_index = 100
 script = ExtResource("35_xjepn")
 
-[node name="SidePanelManager" type="Node" parent="." node_paths=PackedStringArray("side_panel", "object_name", "group_section", "group_editor", "group_parent", "interactable_section", "trigger_editor", "interactable_editor", "trigger_properties", "color_section", "base", "detail", "hsv_shift")]
+[node name="SidePanelManager" type="Node" parent="." node_paths=PackedStringArray("side_panel", "object_name", "group_section", "group_editor", "group_parent", "interactable_section", "trigger_editor", "interactable_editor", "interactable_properties", "trigger_properties", "color_section", "base", "detail", "hsv_shift")]
 script = ExtResource("58_hnsxj")
 side_panel = NodePath("../EditorUI/EditorContainer/SidePanel")
 object_name = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Name")
@@ -4454,7 +4461,8 @@ group_parent = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/M
 interactable_section = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable")
 trigger_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/TriggerEditor")
 interactable_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/InteractableEditor")
-trigger_properties = [NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Single usage"), NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Touch triggered"), NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Spawn triggered"), NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Touch triggered")]
+interactable_properties = [NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Single usage"), NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/No effects")]
+trigger_properties = [NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Hitbox shape"), NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Hitbox height")]
 color_section = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors")
 base = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/Base Color")
 detail = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/Detail Color")
@@ -4475,14 +4483,14 @@ base = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginCon
 detail = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/Detail Color")
 color_channel_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/Channel Editor/ColorChannelEditor")
 
-[node name="TriggerUIHandler" type="Node" parent="." node_paths=PackedStringArray("trigger_editor", "interactable_editor", "single_usage", "no_effects", "spawn_triggered", "touch_triggered")]
+[node name="TriggerUIHandler" type="Node" parent="." node_paths=PackedStringArray("trigger_editor", "interactable_editor", "single_usage", "no_effects", "trigger_hitbox_shape", "trigger_hitbox_height")]
 script = ExtResource("76_n8dkx")
 trigger_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/TriggerEditor")
 interactable_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/InteractableEditor")
 single_usage = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Single usage")
 no_effects = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/No effects")
-spawn_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Spawn triggered")
-touch_triggered = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Touch triggered")
+trigger_hitbox_shape = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Hitbox shape")
+trigger_hitbox_height = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Hitbox height")
 
 [node name="LevelOperationsHandler" type="Node" parent="." node_paths=PackedStringArray("edit_handler", "level_settings", "open_dialog", "import_dialog", "save_as_dialog", "export_dialog", "save_changes_before_opening_dialog", "corrupted_level_dialog", "level_already_exists_dialog")]
 script = ExtResource("189_ao6md")
