@@ -499,7 +499,7 @@ func _rotate_sprite_degrees(delta: float):
 		else:
 			$Icon/Cube.rotation = lerp_angle(
 					$Icon/Cube.rotation,
-					snapped($Icon/Cube.rotation + sprite_floor_angle, PI/2) - sprite_floor_angle,
+					snapped($Icon/Cube.rotation - sprite_floor_angle, PI/2) + sprite_floor_angle,
 					ICON_LERP_FACTOR * delta * 60)
 	else:
 		$Icon/Cube.rotation_degrees += delta * 800 * dash_control.initial_horizontal_direction
