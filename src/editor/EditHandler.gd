@@ -39,7 +39,9 @@ func _physics_process(delta: float) -> void:
 		selection_index = 0
 	var is_already_swiping_selection: bool = $SelectionZone/Hitbox.shape.size != Vector2.ZERO
 	if is_already_swiping_selection or get_viewport().gui_get_hovered_control() == editor_viewport:
-		if editor_mode.get_current_tab_control().name == "Edit" and not (rotate_gizmo != null && (rotate_gizmo.rotating or rotate_gizmo.handle_hovered)):
+		if editor_mode.get_current_tab_control().name == "Edit" and not (
+				rotate_gizmo != null && (
+					rotate_gizmo.rotating != RotateGizmo.RotationState.DISABLED or rotate_gizmo.handle_hovered)):
 			_update_selection()
 		if not selection.is_empty() and not (
 			Input.is_action_pressed(&"editor_save") or
@@ -50,6 +52,9 @@ func _physics_process(delta: float) -> void:
 			):
 			if Input.is_action_just_pressed(&"editor_single_selection_cycle"):
 				selection_index -= 1
+			# if Input.is_action_just_pressed(&"ui_cancel") and rotate_gizmo != null and rotate_gizmo.quick_rotation == true:
+			# 	remove_gizmo()
+			#   TODO: cancel rotation here
 			if Input.is_action_just_pressed(&"editor_deselect"):
 				clear_selection()
 			if Input.is_action_just_pressed(&"editor_delete"):
@@ -88,6 +93,8 @@ func _physics_process(delta: float) -> void:
 				_flip_selection(Vector2.AXIS_X)
 			if Input.is_action_just_pressed(&"editor_flip_v"):
 				_flip_selection(Vector2.AXIS_Y)
+			if Input.is_action_just_pressed(&"editor_quick_rotate_free"):
+				_on_rotate_free_pressed(true)
 		if not (Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down")
 				or Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45")
 				or Input.get_axis(&"editor_rotate_-90", &"editor_rotate_90")):
@@ -335,21 +342,28 @@ func _on_flip_v_pressed() -> void:
 	_flip_selection(Vector2.AXIS_Y)
 
 
-func _on_rotate_free_pressed() -> void:
+func _on_rotate_free_pressed(quick: bool = false) -> void:
 	_update_pivot()
 	if rotate_gizmo != null:
 		rotate_gizmo.queue_free()
 	rotate_gizmo = RotateGizmo.new()
+	rotate_gizmo.quick_rotation = quick
+	if quick:
+		LevelManager.shortcut_blocker = self
 	gizmo_layer.add_child(rotate_gizmo)
 	rotate_gizmo.global_position = selection_pivot
 	rotate_gizmo.angle_changed.connect(_rotate_selection)
-	var remove_gizmo := func(_selection, signal_to_disconnect):
-		var tween := create_tween()
-		tween.set_parallel()
-		tween.tween_property(rotate_gizmo, ^"scale_multiplier", 0.0, 0.25).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
-		tween.tween_property(rotate_gizmo, ^"modulate:a", 0.0, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-		await tween.finished
-		rotate_gizmo.queue_free()
-		selection_changed.disconnect(signal_to_disconnect)
-	selection_changed.connect(remove_gizmo.bind(remove_gizmo))
+	selection_changed.connect(remove_gizmo)
+
+
+func remove_gizmo(_selection = null) -> void:
+	rotate_gizmo.rotating = RotateGizmo.RotationState.DISABLED
+	var tween := create_tween()
+	tween.set_parallel()
+	tween.tween_property(rotate_gizmo, ^"scale_multiplier", 0.0, 0.25).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	tween.tween_property(rotate_gizmo, ^"modulate:a", 0.0, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	await tween.finished
+	rotate_gizmo.queue_free()
+	selection_changed.disconnect(remove_gizmo)
+	LevelManager.shortcut_blocker = null
 

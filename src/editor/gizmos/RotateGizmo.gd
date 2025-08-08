@@ -3,6 +3,12 @@ class_name RotateGizmo
 
 signal angle_changed(degrees: float)
 
+enum RotationState {
+	DISABLED,
+	ENABLED,
+	FORCED,
+}
+
 const DIVISORS_OF_360 := [0.001, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30, 36, 40, 45, 60, 72, 90, 120, 180, 360]
 
 @export var radius: float = 128.0
@@ -14,10 +20,13 @@ const DIVISORS_OF_360 := [0.001, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24,
 @onready var snap_interval_input: FloatProperty = NodeUtils.get_node_or_add(self, "Snap interval", FloatProperty, NodeUtils.INTERNAL)
 @onready var angle_input: SpinBox = NodeUtils.get_node_or_add(self, "Angle", SpinBox, NodeUtils.INTERNAL)
 
-var rotating: bool
+var rotating: RotationState
 var handle_hovered: bool
 var tween: Tween
 var scale_multiplier: float
+var quick_rotation: bool
+var quick_rotation_is_first_frame: bool
+var quick_rotation_initial_angle: float
 
 
 func _ready() -> void:
@@ -46,6 +55,17 @@ func _ready() -> void:
 	snap_interval_input.min_value = 0.001
 	snap_interval_input.max_value = 360.0
 	snap_interval_input.refresh()
+	# Quick rotation
+	if quick_rotation:
+		snap_interval_input.set_value_no_signal(0.001)
+		tween.kill()
+		scale_multiplier = 1.0
+		modulate.a = 1.0
+		rotating = RotationState.FORCED
+		input_panel.hide()
+		angle_input.hide()
+		snap_interval_input.hide()
+		quick_rotation_is_first_frame = true
 
 
 func _process(_delta: float) -> void:
@@ -54,20 +74,29 @@ func _process(_delta: float) -> void:
 	snap_interval_input.position = Vector2.RIGHT * radius * 1.3 + Vector2.UP * snap_interval_input.size.y * 0.5 + Vector2.UP * angle_input.size.y
 	input_panel.position = snap_interval_input.position + (Vector2.LEFT + Vector2.UP) * 10.0
 	input_panel.size = angle_input.position - input_panel.position + angle_input.size + (Vector2.RIGHT + Vector2.DOWN) * 10.0
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and handle_hovered:
-		rotating = true
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		if handle_hovered:
+			rotating = RotationState.ENABLED
+		if rotating == RotationState.FORCED:
+			rotating = RotationState.DISABLED
+	if rotating == RotationState.FORCED:
+		snap_interval_input.set_value_no_signal(45.0 if Input.is_key_pressed(KEY_CTRL) else 0.001)
 	if rotating:
 		var previous_handle_position = handle_position
-		handle_position = Vector2.RIGHT.rotated(
-			snappedf(
-				get_local_mouse_position().angle(),
-				deg_to_rad(snap_interval_input.get_value()/2)
-			)
-		) * radius
+		if quick_rotation_is_first_frame:
+			quick_rotation_is_first_frame = false
+			quick_rotation_initial_angle = get_local_mouse_position().angle()
+		else:
+			handle_position = Vector2.RIGHT.rotated(
+				snappedf(
+					get_local_mouse_position().angle() - quick_rotation_initial_angle,
+					deg_to_rad(snap_interval_input.get_value()/2)
+				)
+			) * radius
 		angle_changed.emit(rad_to_deg(handle_position.angle() - previous_handle_position.angle()))
 		angle_input.set_value_no_signal(rad_to_deg(handle_position.angle()))
-	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		rotating = false
+	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and rotating == RotationState.ENABLED:
+		rotating = RotationState.DISABLED
 	if get_viewport().get_camera_2d() != null:
 		scale.x = 1/get_viewport().get_camera_2d().zoom.x
 		scale.y = 1/get_viewport().get_camera_2d().zoom.y
@@ -120,5 +149,6 @@ func draw_gizmo(color: Color, outline: bool = false) -> void:
 
 
 func _on_angle_input_value_changed(degrees: float) -> void:
+	angle_changed.emit(degrees - rad_to_deg(handle_position.angle()))
 	handle_position = Vector2.from_angle(deg_to_rad(degrees)) * radius
 	queue_redraw()
