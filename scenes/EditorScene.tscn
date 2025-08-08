@@ -1,4 +1,4 @@
-[gd_scene load_steps=228 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=227 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -108,7 +108,6 @@
 [ext_resource type="Texture2D" uid="uid://bp6ukusnk6ufx" path="res://assets/textures/portals/gamemode_portals/swing_portal/SwingPortalFront.png" id="50_j5nlm"]
 [ext_resource type="Texture2D" uid="uid://c0bsvfc1ce8wd" path="res://assets/textures/pads/BluePad.svg" id="51_1i48y"]
 [ext_resource type="Texture2D" uid="uid://mhmstl4xjq2g" path="res://assets/textures/portals/gamemode_portals/spider_portal/SpiderPortalFront.png" id="51_fn488"]
-[ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="51_rnq45"]
 [ext_resource type="PackedScene" uid="uid://dspnvt3u8uhqy" path="res://scenes/components/level_components/portals/gamemode_portals/SwingPortal.tscn" id="51_vkyby"]
 [ext_resource type="Texture2D" uid="uid://dd1s2apollksy" path="res://assets/textures/portals/gamemode_portals/ball_portal/BallPortalFront.png" id="51_vpsba"]
 [ext_resource type="PackedScene" uid="uid://c1lfp5vqcpgiw" path="res://scenes/components/game_components/EditorMoveControls.tscn" id="51_w2i7q"]
@@ -533,7 +532,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("51_rnq45")
 
 [node name="ButtonContainer" type="HFlowContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Blocks/MarginContainer"]
 layout_mode = 2
@@ -1823,7 +1821,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("51_rnq45")
 
 [node name="ButtonContainer" type="HFlowContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Slopes/MarginContainer"]
 layout_mode = 2
@@ -4034,7 +4031,6 @@ metadata/_tab_index = 1
 
 [node name="Integer Steps" type="MarginContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Edit"]
 layout_mode = 2
-theme = ExtResource("51_rnq45")
 metadata/_tab_index = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Edit/Integer Steps"]
@@ -4130,7 +4126,6 @@ expand_icon = true
 [node name="Fractional Steps" type="MarginContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Edit"]
 visible = false
 layout_mode = 2
-theme = ExtResource("51_rnq45")
 metadata/_tab_index = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Edit/Fractional Steps"]
@@ -4244,7 +4239,6 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("51_rnq45")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer"]
 layout_mode = 2

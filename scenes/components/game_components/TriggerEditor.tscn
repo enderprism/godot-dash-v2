@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://qgdkpydyjs5f"]
+[gd_scene load_steps=2 format=3 uid="uid://qgdkpydyjs5f"]
 
-[ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="1_hh718"]
 [ext_resource type="Script" uid="uid://cpcfmtwkbjwep" path="res://src/editor/TriggerEditor.gd" id="1_sfmnd"]
 
 [node name="TriggerEditor" type="PanelContainer"]
@@ -13,7 +12,6 @@ script = ExtResource("1_sfmnd")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-theme = ExtResource("1_hh718")
 
 [node name="UIRoot" type="VBoxContainer" parent="MarginContainer"]
 unique_name_in_owner = true

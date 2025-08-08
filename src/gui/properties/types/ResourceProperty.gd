@@ -27,7 +27,6 @@ func _ready() -> void:
 		"MarginContainer",
 		MarginContainer,
 		NodeUtils.INTERNAL) as MarginContainer
-	margin_container.theme = preload("res://resources/Margins.tres");
 	indentation_container = NodeUtils.get_node_or_add(
 		margin_container,
 		"VBoxContainer",

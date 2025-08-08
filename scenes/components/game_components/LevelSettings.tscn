@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://ylswfd45fw38"]
+[gd_scene load_steps=15 format=3 uid="uid://ylswfd45fw38"]
 
 [ext_resource type="Material" uid="uid://dmfwkx1hhpd5x" path="res://resources/SimpleBlurMaterial.tres" id="1_0trr5"]
 [ext_resource type="Script" uid="uid://bhqj6dqkejl2k" path="res://src/editor/LevelSettings.gd" id="1_ikfu3"]
-[ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="1_tch7s"]
 [ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="2_stlnv"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="3_d0u0j"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/Theme.tres" id="6_ikfu3"]
@@ -40,7 +39,6 @@ current_tab = 0
 
 [node name="Level Settings" type="MarginContainer" parent="TabContainer"]
 layout_mode = 2
-theme = ExtResource("1_tch7s")
 metadata/_tab_index = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Level Settings"]

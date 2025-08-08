@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6gonom0s5k1n"]
+[gd_scene load_steps=12 format=3 uid="uid://b6gonom0s5k1n"]
 
 [ext_resource type="Material" uid="uid://dmfwkx1hhpd5x" path="res://resources/SimpleBlurMaterial.tres" id="1_olkne"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/Theme.tres" id="1_r47on"]
 [ext_resource type="Script" uid="uid://86h6yxdj6auo" path="res://src/SettingsMenu.gd" id="3_rvg0e"]
-[ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="4_fiwkk"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="6_ea76q"]
 [ext_resource type="Script" uid="uid://ckqgnvpbftev7" path="res://src/gui/properties/components/PropertySaveLoad.gd" id="6_p6jor"]
 [ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="7_ndunm"]
@@ -37,7 +36,6 @@ metadata/_tab_index = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("4_fiwkk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Graphics/MarginContainer"]
 layout_mode = 2
@@ -59,7 +57,6 @@ step = 1.0
 rounded = true
 allow_greater = true
 suffix = "fps"
-_value = 60.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="PropertySaveLoad" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Framerate/Max FPS"]
@@ -72,7 +69,6 @@ layout_mode = 2
 script = ExtResource("9_vf3uf")
 default = 1
 fields = PackedStringArray("Disabled", "Enabled", "Adaptive", "Mailbox")
-_value = 1
 metadata/_custom_type_script = "uid://djfsy06pkw4ju"
 
 [node name="PropertySaveLoad" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Framerate/VSync"]
@@ -93,7 +89,6 @@ layout_mode = 2
 script = ExtResource("9_vf3uf")
 default = 1
 fields = PackedStringArray("Windowed", "Borderless Fullscreen", "Exclusive Fullscreen")
-_value = 1
 metadata/_custom_type_script = "uid://djfsy06pkw4ju"
 
 [node name="PropertySaveLoad" type="Node" parent="Graphics/MarginContainer/VBoxContainer/Window/Window Mode"]
@@ -110,7 +105,6 @@ metadata/_tab_index = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("4_fiwkk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Audio/MarginContainer"]
 layout_mode = 2
@@ -130,7 +124,6 @@ script = ExtResource("10_vf3uf")
 default = 1.0
 max_value = 1.0
 slider_width = 256.0
-_value = 1.0
 metadata/_custom_type_script = "uid://c73uilol0rw1g"
 
 [node name="PropertySaveLoad" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/Master"]
@@ -144,7 +137,6 @@ script = ExtResource("10_vf3uf")
 default = 1.0
 max_value = 1.0
 slider_width = 256.0
-_value = 1.0
 metadata/_custom_type_script = "uid://c73uilol0rw1g"
 
 [node name="PropertySaveLoad" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/Music"]
@@ -158,7 +150,6 @@ script = ExtResource("10_vf3uf")
 default = 1.0
 max_value = 1.0
 slider_width = 256.0
-_value = 1.0
 metadata/_custom_type_script = "uid://c73uilol0rw1g"
 
 [node name="PropertySaveLoad" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/Game SFX"]
@@ -172,7 +163,6 @@ script = ExtResource("10_vf3uf")
 min_value = 1.0
 max_value = 1.0
 slider_width = 256.0
-_value = 0.0
 metadata/_custom_type_script = "uid://c73uilol0rw1g"
 
 [node name="PropertySaveLoad" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/Level SFX"]
@@ -184,7 +174,6 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("11_egxjo")
 default = true
-_value = true
 metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
 [node name="PropertySaveLoad" type="Node" parent="Audio/MarginContainer/VBoxContainer/Volume/Mute game on unfocus"]
@@ -203,7 +192,6 @@ metadata/_tab_index = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("4_fiwkk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Editor/MarginContainer"]
 layout_mode = 2
@@ -228,7 +216,6 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("12_bi686")
 default = Color(0, 1, 0, 1)
-_value = Color(0, 1, 0, 1)
 metadata/_custom_type_script = "uid://bwcwfobfohbsd"
 
 [node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Color"]
@@ -241,7 +228,6 @@ layout_mode = 2
 script = ExtResource("7_ndunm")
 default = 0.2
 max_value = 1.0
-_value = 0.2
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Selection zone/Alpha"]
@@ -259,7 +245,6 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("12_bi686")
 default = Color(0, 1, 1, 1)
-_value = Color(0, 1, 1, 1)
 metadata/_custom_type_script = "uid://bwcwfobfohbsd"
 
 [node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Color"]
@@ -272,7 +257,6 @@ layout_mode = 2
 script = ExtResource("7_ndunm")
 default = 0.2
 max_value = 1.0
-_value = 0.2
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Colors/Trigger hitboxes/Alpha"]
@@ -296,7 +280,6 @@ default = 2.0
 max_value = 1.0
 allow_greater = true
 suffix = "min"
-_value = 2.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
@@ -312,7 +295,6 @@ metadata/_tab_index = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("4_fiwkk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Debug/MarginContainer"]
 layout_mode = 2
@@ -321,7 +303,6 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("11_egxjo")
-_value = false
 metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
 [node name="PropertySaveLoad" type="Node" parent="Debug/MarginContainer/VBoxContainer/Draw debug overlays"]

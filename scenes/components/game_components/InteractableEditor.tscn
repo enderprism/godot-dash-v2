@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4vh26wn3qq40"]
+[gd_scene load_steps=2 format=3 uid="uid://b4vh26wn3qq40"]
 
 [ext_resource type="Script" uid="uid://dxxcbi05qwalg" path="res://src/editor/InteractableEditor.gd" id="1_vj0e3"]
-[ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="2_qyrfy"]
 
 [node name="InteractableEditor" type="PanelContainer"]
 anchors_preset = 15
@@ -13,4 +12,3 @@ script = ExtResource("1_vj0e3")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-theme = ExtResource("2_qyrfy")

@@ -39,7 +39,6 @@ func _ready() -> void:
 		MarginContainer,
 		NodeUtils.INTERNAL
 	)
-	margin_container.theme = preload("res://resources/Margins.tres")
 	items = NodeUtils.get_node_or_add(margin_container, "Items", VBoxContainer, NodeUtils.INTERNAL)
 	items.set_meta("array_property", self)
 	renamed.connect(refresh)
