@@ -1,9 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ctubgkgi0wilt"]
-
-[ext_resource type="FontFile" uid="uid://8e1lxpyo40t5" path="res://assets/fonts/Pusab.otf" id="1_infyj"]
-
-[resource]
-Label/colors/font_outline_color = Color(0, 0, 0, 1)
-Label/constants/outline_size = 16
-Label/font_sizes/font_size = 75
-Label/fonts/font = ExtResource("1_infyj")

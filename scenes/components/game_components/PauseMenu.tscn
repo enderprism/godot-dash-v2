@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://th7jwdop3hdv"]
+[gd_scene load_steps=12 format=3 uid="uid://th7jwdop3hdv"]
 
 [ext_resource type="Script" uid="uid://dklkgkt30unai" path="res://src/PauseMenu.gd" id="1_aoxbt"]
-[ext_resource type="Theme" uid="uid://ctubgkgi0wilt" path="res://resources/PusabLabels.tres" id="2_ju4y8"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/Theme.tres" id="3_nyvmt"]
+[ext_resource type="FontFile" uid="uid://8e1lxpyo40t5" path="res://assets/fonts/Pusab.otf" id="3_s50gq"]
 [ext_resource type="Texture2D" uid="uid://d0bf2sf5rea0v" path="res://assets/textures/guis/pause_menu/Leave.png" id="3_uyf84"]
 [ext_resource type="Script" uid="uid://doei3yc3rs41t" path="res://src/BouncyButton.gd" id="4_wmjiq"]
 [ext_resource type="Texture2D" uid="uid://dugf8kgdm6i8g" path="res://assets/textures/guis/pause_menu/Continue.png" id="5_h5uf6"]
@@ -10,6 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://bq6rd80p2817w" path="res://scenes/components/game_components/SettingsLayer.tscn" id="8_63kaq"]
 [ext_resource type="Texture2D" uid="uid://dorpaiw1p6bw0" path="res://assets/textures/guis/shared/CircleButtonBase.svg" id="8_orfdw"]
 [ext_resource type="Texture2D" uid="uid://ca7kg07rmvxyl" path="res://assets/textures/guis/shared/SettingsButton.svg" id="9_s0yil"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nvv3k"]
+font = ExtResource("3_s50gq")
+font_size = 128
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
 
 [node name="PauseMenuLayer" type="CanvasLayer"]
 layer = 101
@@ -50,9 +56,8 @@ alignment = 1
 [node name="LevelName" type="Label" parent="PauseMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 256)
 layout_mode = 2
-theme = ExtResource("2_ju4y8")
-theme_override_font_sizes/font_size = 128
 text = "Level Name"
+label_settings = SubResource("LabelSettings_nvv3k")
 horizontal_alignment = 1
 vertical_alignment = 1
 

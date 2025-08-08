@@ -6,7 +6,6 @@
 [ext_resource type="Shader" uid="uid://dl46t6e3kvfa0" path="res://resources/shaders/BackgroundBlur.gdshader" id="2_ss55f"]
 [ext_resource type="FontFile" uid="uid://8e1lxpyo40t5" path="res://assets/fonts/Pusab.otf" id="4_3yq55"]
 [ext_resource type="Script" uid="uid://doei3yc3rs41t" path="res://src/BouncyButton.gd" id="5_pa43o"]
-[ext_resource type="Theme" uid="uid://ctubgkgi0wilt" path="res://resources/PusabLabels.tres" id="6_l3bfk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8fxol"]
 resource_local_to_scene = true
@@ -23,6 +22,12 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_ng4su"]
+font = ExtResource("4_3yq55")
+font_size = 75
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_38ea1"]
 script = ExtResource("2_25fwn")
@@ -83,8 +88,8 @@ offset_right = 37.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("6_l3bfk")
 text = "GDLevelSelectorTab"
+label_settings = SubResource("LabelSettings_ng4su")
 horizontal_alignment = 1
 vertical_alignment = 1
 

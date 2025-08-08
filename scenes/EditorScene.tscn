@@ -1,4 +1,4 @@
-[gd_scene load_steps=227 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=228 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -190,8 +190,8 @@
 [ext_resource type="Texture2D" uid="uid://btcr6ed74qke" path="res://assets/textures/triggers/Timewarp.svg" id="125_1ad2k"]
 [ext_resource type="Texture2D" uid="uid://b7fnymfkmta1d" path="res://assets/textures/triggers/ToggleMultipleGroups.svg" id="127_d556q"]
 [ext_resource type="PackedScene" uid="uid://fo7vbjwc7r60" path="res://scenes/components/level_components/letter_objects/StopJump.tscn" id="136_6fwf3"]
+[ext_resource type="FontFile" uid="uid://8e1lxpyo40t5" path="res://assets/fonts/Pusab.otf" id="136_vtwef"]
 [ext_resource type="PackedScene" uid="uid://bwjxj7jcot0cn" path="res://scenes/components/level_components/letter_objects/StopDash.tscn" id="137_gdkvu"]
-[ext_resource type="Theme" uid="uid://ctubgkgi0wilt" path="res://resources/PusabLabels.tres" id="137_vtwef"]
 [ext_resource type="Texture2D" uid="uid://dv0sqs0l30luf" path="res://assets/textures/guis/editor/block_palette/Slopes.svg" id="138_ha8mj"]
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/Theme.tres" id="147_1ad2k"]
 [ext_resource type="Script" uid="uid://bss8ppxnt7gio" path="res://src/gui/properties/types/BoolProperty.gd" id="179_0v0om"]
@@ -344,6 +344,10 @@ script = ExtResource("12_egrfm")
 base = ExtResource("20_hgbal")
 name = "OutlineSlope04"
 metadata/_custom_type_script = "uid://co2f1y4xv7viv"
+
+[sub_resource type="LabelSettings" id="LabelSettings_7k2uw"]
+font = ExtResource("136_vtwef")
+font_size = 64
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ac3bt"]
 radius = 2.0
@@ -3482,11 +3486,9 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(256, 256)
-theme = ExtResource("137_vtwef")
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 64
 text = "stop
 jump"
+label_settings = SubResource("LabelSettings_7k2uw")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -3525,11 +3527,9 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(256, 256)
-theme = ExtResource("137_vtwef")
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 64
 text = "stop
 dash"
+label_settings = SubResource("LabelSettings_7k2uw")
 horizontal_alignment = 1
 vertical_alignment = 1
 
