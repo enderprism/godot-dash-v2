@@ -22,11 +22,14 @@ func _ready() -> void:
 	parent.body_entered.connect(_move_grounds)
 
 func _move_grounds(_player: Player) -> void:
-	if not freefly:
-		GroundData.center = parent.global_position
-		GroundData.distance = LOCKEDFLY_GAMEMODE_GRID_HEIGHTS[parent.get_node("GamemodeChangerComponent").gamemode] * LevelManager.CELL_SIZE * 0.5
-		if parent.global_position.y + GroundData.distance > LevelManager.ground_sprites[0].DEFAULT_Y:
-			GroundData.offset = (parent.global_position.y + GroundData.distance) - LevelManager.ground_sprites[0].DEFAULT_Y
+	if LevelManager.player_camera != null and get_viewport().get_camera_2d() == LevelManager.player_camera:
+		LevelManager.player_camera.freefly = freefly
+	if freefly:
+		return
+	GroundData.center = parent.global_position
+	GroundData.distance = LOCKEDFLY_GAMEMODE_GRID_HEIGHTS[parent.get_node("GamemodeChangerComponent")._gamemode] * LevelManager.CELL_SIZE * 0.5
+	if parent.global_position.y + GroundData.distance > LevelManager.ground_sprites[0].DEFAULT_Y:
+		GroundData.offset = (parent.global_position.y + GroundData.distance) - LevelManager.ground_sprites[0].DEFAULT_Y
 
 func _get_configuration_warnings() -> PackedStringArray:
 	if not parent.has_node("GamemodeChangerComponent"):

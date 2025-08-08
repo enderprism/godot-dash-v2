@@ -1,7 +1,13 @@
 extends PanelContainer
 class_name InteractableEditor
 
-const COMPONENT_WHITELIST: Array[StringName] = [&"DirectionChangerComponent", &"GamemodeChangerComponent", &"ToggleComponent", &"TeleportComponent"]
+const COMPONENT_WHITELIST: Array[StringName] = [
+	&"DirectionChangerComponent",
+	&"GamemodeChangerComponent",
+	&"ToggleComponent",
+	&"TeleportComponent",
+	&"GroundMoverComponent"
+]
 
 
 func build_ui(interactables: Array[Interactable]) -> void:
