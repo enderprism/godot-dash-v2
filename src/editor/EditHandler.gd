@@ -258,7 +258,7 @@ func select_all() -> void:
 func _update_pivot() -> void:
 	if selection.is_empty():
 		return
-	var group_parents := selection.filter(func(object): object.has_meta("group_parent"))
+	var group_parents := selection.filter(func(object): return object.has_meta("group_parent"))
 	if selection_pivot == Vector2.INF:
 		if not group_parents.is_empty():
 			selection_pivot = group_parents[0].global_position
