@@ -2,13 +2,8 @@
 extends Component
 class_name TeleportComponent
 
-enum IgnoreAxis {
-	NONE,
-	X,
-	Y,
-}
 
-enum NewVelocityAxes {
+enum Axis {
 	BOTH,
 	X,
 	Y,
@@ -18,7 +13,7 @@ enum NewVelocityAxes {
 	set(value):
 		target = value
 		$"../TargetLink".target = value
-@export var ignore_axis: IgnoreAxis
+@export var restrict_axis: Axis
 @export var redirect_velocity: bool:
 	set(value):
 		redirect_velocity = value
@@ -30,7 +25,7 @@ enum NewVelocityAxes {
 		override_velocity = value
 		notify_property_list_changed()
 @export var new_velocity: Vector2
-@export var new_velocity_axes: NewVelocityAxes
+@export var new_velocity_axes: Axis
 
 
 func _validate_property(property: Dictionary) -> void:
@@ -55,12 +50,12 @@ func _ready() -> void:
 
 func teleport(player: Player):
 	if target != null:
-		match ignore_axis:
-			IgnoreAxis.NONE:
+		match restrict_axis:
+			Axis.BOTH:
 				player.global_position = target.global_position
-			IgnoreAxis.X:
+			Axis.X:
 				player.global_position.x = target.global_position.x
-			IgnoreAxis.Y:
+			Axis.Y:
 				player.global_position.y = target.global_position.y
 	if redirect_velocity:
 		var local_velocity_to_entrance := player.velocity.rotated(-parent.global_rotation)
@@ -69,14 +64,14 @@ func teleport(player: Player):
 		player.velocity = local_velocity_to_exit
 	elif override_velocity:
 		match new_velocity_axes:
-			NewVelocityAxes.BOTH:
+			Axis.BOTH:
 				player.velocity = new_velocity.rotated(player.gameplay_rotation)
-			NewVelocityAxes.X:
+			Axis.X:
 				player.velocity = Vector2(
 						new_velocity.x,
 						player.velocity.rotated(-player.gameplay_rotation).y,
 				).rotated(player.gameplay_rotation)
-			NewVelocityAxes.Y:
+			Axis.Y:
 				player.velocity = Vector2(
 						player.velocity.rotated(-player.gameplay_rotation).x,
 						new_velocity.y,
