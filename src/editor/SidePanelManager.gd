@@ -29,7 +29,7 @@ func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 		object_name.text = selection[0].name
 		object_name.editable = true
 	elif selection.size() > 1:
-		object_name.text = "Multiple objects"
+		object_name.text = "%s objects" % selection.size()
 		object_name.editable = false
 	#section Groups
 	group_section.visible = not selection.is_empty()
