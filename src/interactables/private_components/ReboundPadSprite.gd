@@ -21,8 +21,8 @@ func _draw() -> void:
 	var draw_height := lerpf(60, 30, factor)
 	var draw_position := Vector2(0, draw_height)
 	# Exterior arc
-	draw_circle(draw_position, inner_radius, Color.WHITE, false, 4, true)
+	draw_circle(draw_position, inner_radius, Color.WHITE, false, 4)
 	# Interior arc
-	draw_circle(draw_position, inner_radius-2, color, true, -1, true)
+	draw_circle(draw_position, inner_radius-2, color, true)
 	# Set particle emitter color
 	$"../../ParticleEmitter".modulate = color

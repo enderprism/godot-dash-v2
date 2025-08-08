@@ -20,11 +20,11 @@ func _draw() -> void:
 	var inner_radius := lerpf(32, 52, _factor_smoothed)
 	var color := _rebound_gradient.sample(_factor_smoothed)
 	# Exterior ring
-	draw_circle(Vector2.ZERO, 64-3, Color.WHITE, false, 6, true)
+	draw_circle(Vector2.ZERO, 64-3, Color.WHITE, false, 6)
 	# Interior ring
-	draw_circle(Vector2.ZERO, inner_radius-3, Color.WHITE, false, 6, true)
+	draw_circle(Vector2.ZERO, inner_radius-3, Color.WHITE, false, 6)
 	# Interior circle
-	draw_circle(Vector2.ZERO, inner_radius-3-3, color, true, -1, true)
+	draw_circle(Vector2.ZERO, inner_radius-3-3, color, true)
 	# Set particle emitter color
 	if has_node("../ParticleEmitter"):
 		$"../ParticleEmitter".modulate = color
