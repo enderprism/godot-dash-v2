@@ -7,6 +7,7 @@ signal clipboard_changed(clipboard: Array[NodePath])
 signal rotated_object_degrees(rotation_degrees: float)
 
 @export var editor_viewport: Control
+@export var gizmo_layer: CanvasLayer
 
 var level: LevelProps
 var selection: Array[Node2D]
@@ -20,6 +21,7 @@ var selection_index := 0
 var cursor_position_snapped: Vector2
 var previous_cursor_position_snapped: Vector2
 var selection_pivot := Vector2.INF
+var rotate_gizmo: RotateGizmo
 
 func _ready() -> void:
 	_reset_selection_zone(true)
@@ -37,7 +39,7 @@ func _physics_process(delta: float) -> void:
 		selection_index = 0
 	var is_already_swiping_selection: bool = $SelectionZone/Hitbox.shape.size != Vector2.ZERO
 	if is_already_swiping_selection or get_viewport().gui_get_hovered_control() == editor_viewport:
-		if editor_mode.get_current_tab_control().name == "Edit":
+		if editor_mode.get_current_tab_control().name == "Edit" and not (rotate_gizmo != null && (rotate_gizmo.rotating or rotate_gizmo.handle_hovered)):
 			_update_selection()
 		if not selection.is_empty() and not (
 			Input.is_action_pressed(&"editor_save") or
@@ -331,3 +333,18 @@ func _on_flip_h_pressed() -> void:
 
 func _on_flip_v_pressed() -> void:
 	_flip_selection(Vector2.AXIS_Y)
+
+
+func _on_rotate_free_pressed() -> void:
+	_update_pivot()
+	if rotate_gizmo != null:
+		rotate_gizmo.queue_free()
+	rotate_gizmo = RotateGizmo.new()
+	gizmo_layer.add_child(rotate_gizmo)
+	rotate_gizmo.global_position = selection_pivot
+	rotate_gizmo.angle_changed.connect(_rotate_selection)
+	var remove_gizmo := func(_selection, signal_to_disconnect):
+		rotate_gizmo.queue_free()
+		selection_changed.disconnect(signal_to_disconnect)
+	selection_changed.connect(remove_gizmo.bind(remove_gizmo))
+

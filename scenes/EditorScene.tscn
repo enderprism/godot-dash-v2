@@ -366,7 +366,7 @@ metadata/_edit_lock_ = true
 [node name="GameScene" parent="." instance=ExtResource("1_ql4al")]
 
 [node name="EditorUI" type="CanvasLayer" parent="."]
-layer = 100
+layer = 90
 
 [node name="ColorRect" type="ColorRect" parent="EditorUI"]
 visible = false
@@ -4392,6 +4392,10 @@ unique_name_in_owner = true
 visible = false
 metadata/_edit_lock_ = true
 
+[node name="Gizmos" type="CanvasLayer" parent="."]
+layer = 91
+follow_viewport_enabled = true
+
 [node name="EditorCamera" type="Camera2D" parent="." node_paths=PackedStringArray("editor_viewport")]
 process_priority = 1
 position = Vector2(640, 256)
@@ -4422,9 +4426,10 @@ game_scene = NodePath("../GameScene")
 editor_viewport = NodePath("../EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorViewport")
 edit_handler = NodePath("../EditHandler")
 
-[node name="EditHandler" type="Node" parent="." node_paths=PackedStringArray("editor_viewport")]
+[node name="EditHandler" type="Node" parent="." node_paths=PackedStringArray("editor_viewport", "gizmo_layer")]
 script = ExtResource("34_7dx3o")
 editor_viewport = NodePath("../EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorViewport")
+gizmo_layer = NodePath("../Gizmos")
 
 [node name="SelectionZone" type="Area2D" parent="EditHandler"]
 collision_layer = 128
@@ -4577,6 +4582,7 @@ cancel_button_text = "Open Existing"
 [connection signal="direction_pressed" from="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Edit/Integer Steps/HBoxContainer/MoveControlsTen" to="EditHandler" method="_on_move_controls_direction_pressed"]
 [connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsRight/FlipH" to="EditHandler" method="_on_flip_h_pressed"]
 [connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsRight/FlipV" to="EditHandler" method="_on_flip_v_pressed"]
+[connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Edit/Integer Steps/HBoxContainer/AdditionalControlsRight/RotateFree" to="EditHandler" method="_on_rotate_free_pressed"]
 [connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsLeft/RotateLeft90" to="EditHandler" method="_on_rotate_left_90_pressed"]
 [connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsLeft/RotateRight90" to="EditHandler" method="_on_rotate_right_90_pressed"]
 [connection signal="pressed" from="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Edit/Fractional Steps/HBoxContainer/AdditionalControlsLeft/RotateLeft45" to="EditHandler" method="_on_rotate_left_45_pressed"]
