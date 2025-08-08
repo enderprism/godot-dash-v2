@@ -358,7 +358,6 @@ size = Vector2(2, 2)
 [node name="LevelEditor" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-theme = ExtResource("147_1ad2k")
 script = ExtResource("1_ftcrp")
 block_palette_button_group = ExtResource("3_0vcbd")
 metadata/_edit_vertical_guides_ = [-111.0]
@@ -387,7 +386,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = ExtResource("147_1ad2k")
 theme_override_constants/separation = 0
 split_offset = 1920
 dragger_visibility = 2

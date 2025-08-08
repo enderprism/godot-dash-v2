@@ -94,6 +94,10 @@ enabled=PackedStringArray("res://addons/explore-editor-theme/plugin.cfg", "res:/
 
 import/blender/enabled=false
 
+[gui]
+
+theme/custom="uid://cntfsyilhn2ic"
+
 [input]
 
 ui_left={
