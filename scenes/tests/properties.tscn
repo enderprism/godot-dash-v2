@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://3bc5088argko"]
 
 [ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="1_1q0ts"]
-[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_xcvel"]
+[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/Theme.tres" id="1_xcvel"]
 [ext_resource type="Script" uid="uid://c73uilol0rw1g" path="res://src/gui/properties/types/FloatSliderProperty.gd" id="2_rks8l"]
 [ext_resource type="Script" uid="uid://bss8ppxnt7gio" path="res://src/gui/properties/types/BoolProperty.gd" id="3_bgdif"]
 [ext_resource type="Script" uid="uid://crich318mmmk2" path="res://src/gui/properties/types/Vector2Property.gd" id="4_rks8l"]

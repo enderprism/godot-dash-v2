@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cw15476n2m4we"]
 
-[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_orc32"]
+[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/Theme.tres" id="1_orc32"]
 [ext_resource type="Script" uid="uid://dpfci6rxt0pwi" path="res://src/editor/ColorChannelEditor.gd" id="2_cnty4"]
 [ext_resource type="Texture2D" uid="uid://bnuunm3nj6gcg" path="res://assets/textures/guis/shared/AddItem.svg" id="3_quqpo"]
 [ext_resource type="ButtonGroup" uid="uid://cev0xn2madcx2" path="res://resources/ColorChannelItemButtonGroup.tres" id="3_u8i2y"]

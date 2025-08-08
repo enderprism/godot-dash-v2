@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://djstmwdco77pp" path="res://assets/textures/backgrounds/background1-3.png" id="2_dgjna"]
 [ext_resource type="Shader" uid="uid://dghfnabjmw7js" path="res://resources/shaders/Ground.gdshader" id="3_r3sjc"]
 [ext_resource type="Texture2D" uid="uid://dga7nm2rjr2b0" path="res://assets/textures/ground_overlays/floorLine_001.png" id="3_skuyc"]
-[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="4_eh0ur"]
+[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/Theme.tres" id="4_eh0ur"]
 [ext_resource type="Texture2D" uid="uid://bjrdbga1v3vba" path="res://assets/textures/guis/title_screen/PlayButton.png" id="4_tln2n"]
 [ext_resource type="Texture2D" uid="uid://bu2hpb5owl44q" path="res://assets/textures/guis/title_screen/Title.png" id="4_yqc6o"]
 [ext_resource type="Script" uid="uid://nl1xrhaw0nyb" path="res://src/PositionFollow2D.gd" id="5_4luv8"]

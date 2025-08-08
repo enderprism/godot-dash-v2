@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://da4xswy05y0ve"]
 
-[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_b71ym"]
+[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/Theme.tres" id="1_b71ym"]
 [ext_resource type="Script" uid="uid://u5n6v8qenvt6" path="res://src/editor/GroupEditor.gd" id="1_laiw3"]
 [ext_resource type="Texture2D" uid="uid://bnuunm3nj6gcg" path="res://assets/textures/guis/shared/AddItem.svg" id="2_scenm"]
 

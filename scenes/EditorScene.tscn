@@ -194,7 +194,7 @@
 [ext_resource type="PackedScene" uid="uid://bwjxj7jcot0cn" path="res://scenes/components/level_components/letter_objects/StopDash.tscn" id="137_gdkvu"]
 [ext_resource type="Theme" uid="uid://ctubgkgi0wilt" path="res://resources/PusabLabels.tres" id="137_vtwef"]
 [ext_resource type="Texture2D" uid="uid://dv0sqs0l30luf" path="res://assets/textures/guis/editor/block_palette/Slopes.svg" id="138_ha8mj"]
-[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="147_1ad2k"]
+[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/Theme.tres" id="147_1ad2k"]
 [ext_resource type="Script" uid="uid://bss8ppxnt7gio" path="res://src/gui/properties/types/BoolProperty.gd" id="179_0v0om"]
 [ext_resource type="PackedScene" uid="uid://ylswfd45fw38" path="res://scenes/components/game_components/LevelSettings.tscn" id="180_nk067"]
 [ext_resource type="PackedScene" uid="uid://b4vh26wn3qq40" path="res://scenes/components/game_components/InteractableEditor.tscn" id="183_momrj"]
@@ -355,6 +355,7 @@ size = Vector2(2, 2)
 [node name="LevelEditor" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("147_1ad2k")
 script = ExtResource("1_ftcrp")
 block_palette_button_group = ExtResource("3_0vcbd")
 metadata/_edit_vertical_guides_ = [-111.0]
@@ -383,6 +384,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("147_1ad2k")
 theme_override_constants/separation = 0
 split_offset = 1920
 dragger_visibility = 2

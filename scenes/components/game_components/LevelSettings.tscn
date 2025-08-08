@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="1_tch7s"]
 [ext_resource type="Script" uid="uid://cuih47milvqcs" path="res://src/gui/SectionHeading.gd" id="2_stlnv"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="3_d0u0j"]
-[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="6_ikfu3"]
+[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/Theme.tres" id="6_ikfu3"]
 [ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="9_jvsdk"]
 [ext_resource type="Script" uid="uid://ckqgnvpbftev7" path="res://src/gui/properties/components/PropertySaveLoad.gd" id="10_2dtee"]
 [ext_resource type="Script" uid="uid://bss8ppxnt7gio" path="res://src/gui/properties/types/BoolProperty.gd" id="10_bo0r5"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://b6gonom0s5k1n"]
 
 [ext_resource type="Material" uid="uid://dmfwkx1hhpd5x" path="res://resources/SimpleBlurMaterial.tres" id="1_olkne"]
-[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/NoFocusColor.tres" id="1_r47on"]
+[ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/Theme.tres" id="1_r47on"]
 [ext_resource type="Script" uid="uid://86h6yxdj6auo" path="res://src/SettingsMenu.gd" id="3_rvg0e"]
 [ext_resource type="Theme" uid="uid://kqiya8o4sqm7" path="res://resources/Margins.tres" id="4_fiwkk"]
 [ext_resource type="LabelSettings" uid="uid://cge013srcxvfk" path="res://resources/SectionHeadings.tres" id="6_ea76q"]

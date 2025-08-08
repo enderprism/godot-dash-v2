@@ -1,0 +1,31 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://cntfsyilhn2ic"]
+
+[ext_resource type="FontFile" uid="uid://cm1ojskoj3s1a" path="res://assets/fonts/Inter.ttc" id="1_10srq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_521vp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1wseb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2htm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8t62t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o1vdk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qg2e3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2g2l"]
+
+[resource]
+default_font = ExtResource("1_10srq")
+Button/styles/focus = SubResource("StyleBoxEmpty_521vp")
+HSeparator/styles/separator = SubResource("StyleBoxEmpty_1wseb")
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_h2htm")
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 10
+TabBar/styles/tab_focus = SubResource("StyleBoxEmpty_8t62t")
+TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_o1vdk")
+Tree/styles/focus = SubResource("StyleBoxEmpty_qg2e3")
+VSeparator/styles/separator = SubResource("StyleBoxEmpty_h2g2l")

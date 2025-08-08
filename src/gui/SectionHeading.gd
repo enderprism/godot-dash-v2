@@ -33,7 +33,7 @@ func _ready() -> void:
 		fold_button.expand_icon = true
 		fold_button.toggled.connect(fold)
 		fold_button.texture_filter = TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
-		fold_button.theme = preload("res://resources/NoFocusColor.tres")
+		fold_button.theme = preload("res://resources/Theme.tres")
 
 	_refresh_text()
 	renamed.connect(_refresh_text)
