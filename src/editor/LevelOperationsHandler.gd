@@ -33,6 +33,21 @@ func _process(_delta: float) -> void:
 			autosave_toast.update_text(autosave_message)
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"editor_new_level"):
+		_on_level_index_pressed(0)
+	if event.is_action_pressed(&"editor_open_level"):
+		_on_level_index_pressed(1)
+	if event.is_action_pressed(&"editor_import_level"):
+		_on_level_index_pressed(2)
+	if event.is_action_pressed(&"editor_save") and not event.is_action_pressed(&"editor_save_as"):
+		_on_level_index_pressed(3)
+	if event.is_action_pressed(&"editor_save_as"):
+		_on_level_index_pressed(4)
+	if event.is_action_pressed(&"editor_export_level"):
+		_on_level_index_pressed(5)
+
+
 func _on_level_index_pressed(index:int) -> void:
 	match index:
 		0: # New

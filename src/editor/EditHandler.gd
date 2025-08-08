@@ -39,7 +39,13 @@ func _physics_process(delta: float) -> void:
 	if is_already_swiping_selection or get_viewport().gui_get_hovered_control() == editor_viewport:
 		if editor_mode.get_current_tab_control().name == "Edit":
 			_update_selection()
-		if not selection.is_empty():
+		if not selection.is_empty() and not (
+			Input.is_action_pressed(&"editor_save") or
+			Input.is_action_pressed(&"editor_save_as") or
+			Input.is_action_pressed(&"editor_new_level") or
+			Input.is_action_pressed(&"editor_import_level") or
+			Input.is_action_pressed(&"editor_export_level")
+			):
 			if Input.is_action_just_pressed(&"editor_single_selection_cycle"):
 				selection_index -= 1
 			if Input.is_action_just_pressed(&"editor_deselect"):
