@@ -20,18 +20,16 @@ max_value = 360.0
 allow_lesser = true
 allow_greater = true
 suffix = "°"
-_value = 0.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Gameplay Rotation"]
 script = ExtResource("2_3n0gl")
 property_name = "_rotation_degrees"
 
-[node name="Reverse" type="BoxContainer" parent="."]
+[node name="Reverse" type="BoxContainer" parent="." groups=["trigger_property"]]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("3_3n0gl")
-_value = false
 metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
 [node name="TriggerPropertyInternalName" type="Node" parent="Reverse"]
