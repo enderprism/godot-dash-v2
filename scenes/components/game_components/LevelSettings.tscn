@@ -61,7 +61,6 @@ script = ExtResource("11_am3gx")
 filetype_filters = PackedStringArray("*.mp3", "*.wav", "*.ogg")
 load_root = "user://created_levels/songs/"
 import_to = "user://created_levels/songs/"
-_value = ""
 metadata/_custom_type_script = "uid://3na5h1vigpxe"
 
 [node name="PropertySaveLoad" type="Node" parent="TabContainer/Level Settings/VBoxContainer/Song/Song Path"]
@@ -75,7 +74,6 @@ layout_mode = 2
 script = ExtResource("9_jvsdk")
 allow_greater = true
 suffix = "s"
-_value = 0.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="PropertySaveLoad" type="Node" parent="TabContainer/Level Settings/VBoxContainer/Song/Start Offset"]
@@ -93,7 +91,6 @@ metadata/_custom_type_script = "uid://cuih47milvqcs"
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("10_bo0r5")
-_value = false
 metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
 [node name="PropertyWatcher" type="Node" parent="TabContainer/Level Settings/VBoxContainer/Player/Platformer" node_paths=PackedStringArray("target")]
@@ -113,8 +110,7 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("12_am3gx")
 default = 2
-fields = PackedStringArray("0.0x", "0.5x", "1.0x", "2.0x", "3.0x", "4.0x")
-_value = 2
+fields = PackedStringArray("0.0x", "0.5x", "1.0x", "2.0x", "3.0x", "4.0x", "5.0x")
 metadata/_custom_type_script = "uid://djfsy06pkw4ju"
 
 [node name="PropertySaveLoad" type="Node" parent="TabContainer/Level Settings/VBoxContainer/Player/Speed"]
@@ -126,7 +122,6 @@ metadata/_custom_type_script = "uid://ckqgnvpbftev7"
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("10_bo0r5")
-_value = false
 metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
 [node name="PropertySaveLoad" type="Node" parent="TabContainer/Level Settings/VBoxContainer/Player/Reverse"]
@@ -141,7 +136,6 @@ script = ExtResource("9_jvsdk")
 min_value = -180.0
 max_value = 180.0
 suffix = "°"
-_value = 0.0
 metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="PropertySaveLoad" type="Node" parent="TabContainer/Level Settings/VBoxContainer/Player/Gameplay Rotation"]
