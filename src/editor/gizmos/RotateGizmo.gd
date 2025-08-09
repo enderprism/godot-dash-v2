@@ -59,9 +59,6 @@ func _ready() -> void:
 	# Quick rotation
 	if quick_rotation:
 		snap_interval_input.set_value_no_signal(0.001)
-		tween.kill()
-		scale_multiplier = 1.0
-		modulate.a = 1.0
 		rotating = RotationState.FORCED
 		input_panel.hide()
 		angle_input.hide()
