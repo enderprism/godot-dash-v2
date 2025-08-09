@@ -87,12 +87,15 @@ func update_target_link() -> void:
 
 func start(_body: Node2D) -> void:
 	_targets = get_tree().get_nodes_in_group(base.target_group)
+	if pivot == null and not scale_around_self:
+		Toasts.new_toast("Error: in %s: pivot is unset" % name, 1.0, Toasts.ERROR)
+		easing.tween.kill()
 	if easing.is_inactive():
 		if not _targets.is_empty():
 			for _target: Node2D in _targets:
 				_initial_scales[_target] = _target.global_scale
 		elif LevelManager.in_editor and LevelManager.level_playing:
-			printerr("In ", name, ", start: _target is unset")
+			Toasts.new_toast("Error: in %s: trigger has no target group" % name, 1.0, Toasts.ERROR)
 
 func reset() -> void:
 	if not _targets.is_empty():
