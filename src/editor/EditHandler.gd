@@ -93,7 +93,9 @@ func _physics_process(delta: float) -> void:
 				_flip_selection(Vector2.AXIS_X)
 			if Input.is_action_just_pressed(&"editor_flip_v"):
 				_flip_selection(Vector2.AXIS_Y)
-			if Input.is_action_just_pressed(&"editor_quick_rotate_free"):
+			if Input.is_action_just_pressed(&"editor_rotate_free"):
+				_on_rotate_free_pressed()
+			elif Input.is_action_just_pressed(&"editor_quick_rotate_free"):
 				_on_rotate_free_pressed(true)
 		if not (Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down")
 				or Input.get_axis(&"editor_rotate_-45", &"editor_rotate_45")
