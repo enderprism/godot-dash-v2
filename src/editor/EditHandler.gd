@@ -365,7 +365,8 @@ func remove_gizmo(_selection = null) -> void:
 	tween.tween_property(rotate_gizmo, ^"scale_multiplier", 0.0, 0.25).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
 	tween.tween_property(rotate_gizmo, ^"modulate:a", 0.0, 0.25).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	await tween.finished
-	rotate_gizmo.queue_free()
+	if rotate_gizmo != null:
+		rotate_gizmo.queue_free()
 	selection_changed.disconnect(remove_gizmo)
 	LevelManager.shortcut_blocker = null
 

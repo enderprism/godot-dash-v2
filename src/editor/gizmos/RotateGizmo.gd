@@ -44,9 +44,9 @@ func _ready() -> void:
 	angle_input.custom_arrow_step = 1.0
 	angle_input.select_all_on_focus = true
 	angle_input.custom_minimum_size.x = 196.0
+	angle_input.alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	var line_edit := angle_input.get_line_edit()
 	line_edit.add_theme_font_size_override("font_size", 32)
-	line_edit.alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	# Snap interval
 	snap_interval_input.set_value_no_signal(45)
 	snap_interval_input.value_changed.connect(func(value): snap_interval_input.set_value_no_signal(DIVISORS_OF_360[DIVISORS_OF_360.bsearch(value)]))
@@ -54,6 +54,7 @@ func _ready() -> void:
 	snap_interval_input.step = 0.001
 	snap_interval_input.min_value = 0.001
 	snap_interval_input.max_value = 360.0
+	snap_interval_input.default = 45.0
 	snap_interval_input.refresh()
 	# Quick rotation
 	if quick_rotation:
@@ -87,7 +88,7 @@ func _physics_process(_delta: float) -> void:
 			quick_rotation_is_first_frame = false
 			quick_rotation_initial_angle = get_local_mouse_position().angle()
 		else:
-			handle_position = Vector2.RIGHT.rotated(
+			handle_position = Vector2.from_angle(
 				snappedf(
 					get_local_mouse_position().angle() - quick_rotation_initial_angle,
 					deg_to_rad(snap_interval_input.get_value()/2)
