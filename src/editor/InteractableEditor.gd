@@ -6,7 +6,7 @@ const COMPONENT_WHITELIST: Array[StringName] = [
 	&"GamemodeChangerComponent",
 	&"ToggleComponent",
 	&"TeleportComponent",
-	&"GroundMoverComponent"
+	&"GroundMoverComponent",
 ]
 
 
@@ -22,7 +22,7 @@ func build_ui(interactables: Array[Interactable]) -> void:
 		if component.get_script().get_global_name() not in COMPONENT_WHITELIST:
 			continue
 		var fields = component.script.get_script_property_list()
-		fields.remove_at(0)
+		# TODO: follow _validate_property_list
 		fields = fields \
 				.filter(func(field): return field["usage"] & PROPERTY_USAGE_EDITOR)
 		for field in fields:
@@ -55,10 +55,22 @@ func generate_property(variant_type: int, field: Dictionary) -> AbstractProperty
 				property.allow_lesser = true
 				property.allow_greater = true
 		TYPE_FLOAT:
-			# TODO: get min, max, or_lesser and or_greater from hint_string
 			property = FloatProperty.new()
-			property.allow_lesser = true
-			property.allow_greater = true
+			if field["hint"] == PROPERTY_HINT_NONE:
+				property.allow_lesser = true
+				property.allow_greater = true
+			elif field["hint"] == PROPERTY_HINT_RANGE:
+				var hint_string: String = field["hint_string"]
+				var min_value = hint_string.get_slice(",", 0)
+				var max_value = hint_string.get_slice(",", 1)
+				var step = hint_string.get_slice(",", 2)
+				property.min_value = min_value
+				property.max_value = max_value
+				property.step = step
+				if "or_greater" in hint_string:
+					property.allow_greater = true
+				if "or_less" in hint_string:
+					property.allow_lesser = true
 		TYPE_STRING:
 			property = StringProperty.new()
 		TYPE_COLOR:
@@ -68,7 +80,6 @@ func generate_property(variant_type: int, field: Dictionary) -> AbstractProperty
 		TYPE_BOOL:
 			property = BoolProperty.new()
 		TYPE_OBJECT:
-			print_debug("TYPE_OBJECT")
 			match field["hint"]:
 				PROPERTY_HINT_NODE_TYPE:
 					if field["hint_string"] == "Node2D":
