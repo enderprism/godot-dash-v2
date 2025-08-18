@@ -16,23 +16,27 @@ func build_ui(interactables: Array[Interactable]) -> void:
 	var ui_root := VBoxContainer.new()
 	for component in first_interactable.components:
 		var component_section := SectionHeading.new()
+		component.property_list_changed.connect(build_ui.bind(interactables))
 		component_section.name = component.name.trim_suffix("Component").capitalize()
 		component_section.label_settings = preload("res://resources/SectionHeadings.tres")
 		component_section.label_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		if component.get_script().get_global_name() not in COMPONENT_WHITELIST:
 			continue
 		var fields = component.script.get_script_property_list()
-		# TODO: follow _validate_property_list
+		# Follow _validate_property
+		if component.has_method(&"_validate_property"): # HACK: cardinal sin
+			fields.map(func(field): component._validate_property(field))
 		fields = fields \
-				.filter(func(field): return field["usage"] & PROPERTY_USAGE_EDITOR)
+				.filter(func(field): return field.usage & PROPERTY_USAGE_EDITOR)
 		for field in fields:
-			var field_name: String = field["name"]
+			var field_name: String = field.name
 			if field_name.begins_with("_"):
 				continue
 			var property: AbstractProperty
-			property = generate_property(field["type"], field)
+			property = generate_property(field.type, field)
 			property.name = field_name.capitalize()
 			property.set_meta("component_name", component.name)
+			property.set_input_state(not field.usage & PROPERTY_USAGE_READ_ONLY)
 			component_section.add_child(property)
 		ui_root.add_child(component_section)
 	$MarginContainer.add_child(ui_root)
@@ -47,7 +51,7 @@ func generate_property(variant_type: int, field: Dictionary) -> AbstractProperty
 		TYPE_INT:
 			if field["hint"] == PROPERTY_HINT_ENUM:
 				property = EnumProperty.new()
-				property.fields = field["hint_string"].split(",")
+				property.fields = field.hint_string.split(",")
 				for i in property.fields.size():
 					property.fields.set(i, property.fields[i].get_slice(":", 0))
 			else:
@@ -60,7 +64,7 @@ func generate_property(variant_type: int, field: Dictionary) -> AbstractProperty
 				property.allow_lesser = true
 				property.allow_greater = true
 			elif field["hint"] == PROPERTY_HINT_RANGE:
-				var hint_string: String = field["hint_string"]
+				var hint_string: String = field.hint_string
 				var min_value = hint_string.get_slice(",", 0)
 				var max_value = hint_string.get_slice(",", 1)
 				var step = hint_string.get_slice(",", 2)
