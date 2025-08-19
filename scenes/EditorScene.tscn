@@ -1,4 +1,4 @@
-[gd_scene load_steps=229 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=226 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -145,7 +145,6 @@
 [ext_resource type="Texture2D" uid="uid://ba7uh3fv4d5jq" path="res://assets/textures/portals/speed_portals/SpeedPortal2x.svg" id="64_pd34h"]
 [ext_resource type="Script" uid="uid://bvvp2bquxkha5" path="res://src/editor/BaseDetailHandler.gd" id="64_ycx04"]
 [ext_resource type="PackedScene" uid="uid://bvu6th40mvb3q" path="res://scenes/components/level_components/portals/speed_portals/SpeedPortal5x.tscn" id="64_yuboy"]
-[ext_resource type="PackedScene" uid="uid://qgdkpydyjs5f" path="res://scenes/components/game_components/TriggerEditor.tscn" id="65_1n4fp"]
 [ext_resource type="Texture2D" uid="uid://bxkysp21y32lm" path="res://assets/textures/portals/speed_portals/SpeedPortal3x.svg" id="66_wdba8"]
 [ext_resource type="Texture2D" uid="uid://crgfornwvgker" path="res://assets/textures/portals/speed_portals/SpeedPortal4x.svg" id="68_107fg"]
 [ext_resource type="Texture2D" uid="uid://bifer0ndxb2i0" path="res://assets/textures/orbs/TeleportationOrbOutline.svg" id="70_33w7i"]
@@ -157,7 +156,6 @@
 [ext_resource type="PackedScene" uid="uid://dppduseecx3hw" path="res://scenes/components/level_components/portals/other_portals/GravityPortalFlipped.tscn" id="73_wdba8"]
 [ext_resource type="PackedScene" uid="uid://kr20govtffs" path="res://scenes/components/level_components/portals/other_portals/GravityPortalToggle.tscn" id="74_107fg"]
 [ext_resource type="Texture2D" uid="uid://1yecdu8rxahw" path="res://assets/textures/portals/other_portals/gravity_portal_flipped/GravityPortalFlippedFront.png" id="74_3268m"]
-[ext_resource type="Script" uid="uid://ctvwysparury5" path="res://src/editor/TriggerUIHandler.gd" id="76_n8dkx"]
 [ext_resource type="Texture2D" uid="uid://wm08ibe0gx8q" path="res://assets/textures/portals/other_portals/gravity_portal_toggle/GravityPortalToggleFront.png" id="76_qkade"]
 [ext_resource type="PackedScene" uid="uid://bhjfnlli5vshw" path="res://scenes/components/level_components/portals/other_portals/ScalePortalNormal.tscn" id="78_qkade"]
 [ext_resource type="Texture2D" uid="uid://ddjeyix04leys" path="res://assets/textures/portals/other_portals/scale_portal_small/ScalePortalSmallFront.png" id="78_tu7bm"]
@@ -199,7 +197,6 @@
 [ext_resource type="PackedScene" uid="uid://b4vh26wn3qq40" path="res://scenes/components/game_components/InteractableEditor.tscn" id="183_momrj"]
 [ext_resource type="Script" uid="uid://c1ejd8ud4q1b6" path="res://src/gui/properties/types/StringProperty.gd" id="184_33w7i"]
 [ext_resource type="Script" uid="uid://dd75trm1kaaiu" path="res://src/gui/properties/types/FloatProperty.gd" id="185_t7625"]
-[ext_resource type="Script" uid="uid://djfsy06pkw4ju" path="res://src/gui/properties/types/EnumProperty.gd" id="187_vtwef"]
 [ext_resource type="Script" uid="uid://c08lx7vbboo37" path="res://src/editor/LevelOperationsHandler.gd" id="189_ao6md"]
 
 [sub_resource type="Resource" id="Resource_aofxv"]
@@ -4273,41 +4270,8 @@ label_settings = ExtResource("53_jrbqn")
 label_alignment = 1
 metadata/_custom_type_script = "uid://cuih47milvqcs"
 
-[node name="TriggerEditor" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable" instance=ExtResource("65_1n4fp")]
-layout_mode = 2
-
 [node name="InteractableEditor" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable" instance=ExtResource("183_momrj")]
 layout_mode = 2
-
-[node name="Single usage" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-script = ExtResource("179_0v0om")
-metadata/_custom_type_script = "uid://bss8ppxnt7gio"
-
-[node name="No effects" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-script = ExtResource("179_0v0om")
-metadata/_custom_type_script = "uid://bss8ppxnt7gio"
-
-[node name="Hitbox shape" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-script = ExtResource("187_vtwef")
-fields = PackedStringArray("Line", "Square", "Disabled")
-metadata/_custom_type_script = "uid://djfsy06pkw4ju"
-
-[node name="Hitbox height" type="BoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-script = ExtResource("185_t7625")
-default = 64.0
-max_value = 128.0
-allow_greater = true
-suffix = "cells"
-expand_to_text_length = true
-metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 
 [node name="Colors" type="VBoxContainer" parent="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -4451,7 +4415,7 @@ debug_color = Color(0.284375, 0, 0.7, 0.42)
 z_index = 100
 script = ExtResource("35_xjepn")
 
-[node name="SidePanelManager" type="Node" parent="." node_paths=PackedStringArray("side_panel", "object_name", "group_section", "group_editor", "group_parent", "interactable_section", "trigger_editor", "interactable_editor", "interactable_properties", "trigger_properties", "color_section", "base", "detail", "hsv_shift")]
+[node name="SidePanelManager" type="Node" parent="." node_paths=PackedStringArray("side_panel", "object_name", "group_section", "group_editor", "group_parent", "interactable_section", "color_section", "base", "detail", "hsv_shift")]
 script = ExtResource("58_hnsxj")
 side_panel = NodePath("../EditorUI/EditorContainer/SidePanel")
 object_name = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Name")
@@ -4459,10 +4423,6 @@ group_section = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/
 group_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Groups/GroupEditor")
 group_parent = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Groups/Group parent")
 interactable_section = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable")
-trigger_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/TriggerEditor")
-interactable_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/InteractableEditor")
-interactable_properties = [NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Single usage"), NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/No effects")]
-trigger_properties = [NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Hitbox shape"), NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Hitbox height")]
 color_section = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors")
 base = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/Base Color")
 detail = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/Detail Color")
@@ -4482,15 +4442,6 @@ script = ExtResource("64_ycx04")
 base = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/Base Color")
 detail = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/Detail Color")
 color_channel_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/Channel Editor/ColorChannelEditor")
-
-[node name="TriggerUIHandler" type="Node" parent="." node_paths=PackedStringArray("trigger_editor", "interactable_editor", "single_usage", "no_effects", "trigger_hitbox_shape", "trigger_hitbox_height")]
-script = ExtResource("76_n8dkx")
-trigger_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/TriggerEditor")
-interactable_editor = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/InteractableEditor")
-single_usage = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Single usage")
-no_effects = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/No effects")
-trigger_hitbox_shape = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Hitbox shape")
-trigger_hitbox_height = NodePath("../EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/Hitbox height")
 
 [node name="LevelOperationsHandler" type="Node" parent="." node_paths=PackedStringArray("edit_handler", "level_settings", "open_dialog", "import_dialog", "save_as_dialog", "export_dialog", "save_changes_before_opening_dialog", "corrupted_level_dialog", "level_already_exists_dialog")]
 script = ExtResource("189_ao6md")
@@ -4609,10 +4560,10 @@ cancel_button_text = "Open Existing"
 [connection signal="value_changed" from="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Colors/HSV Shift/Alpha" to="HSVHandler" method="_on_alpha_value_changed"]
 [connection signal="object_deleted" from="PlaceHandler" to="EditHandler" method="_on_place_handler_object_deleted"]
 [connection signal="rotated_object_degrees" from="EditHandler" to="PlaceHandler" method="_on_edit_handler_rotated_object_degrees"]
+[connection signal="selection_changed" from="EditHandler" to="EditorUI/EditorContainer/SidePanel/ScrollContainer/MarginContainer/VBoxContainer/Interactable/InteractableEditor" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_changed" from="EditHandler" to="SidePanelManager" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_changed" from="EditHandler" to="HSVHandler" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_changed" from="EditHandler" to="BaseDetailHandler" method="_on_edit_handler_selection_changed"]
-[connection signal="selection_changed" from="EditHandler" to="TriggerUIHandler" method="_on_edit_handler_selection_changed"]
 [connection signal="selection_zone_changed" from="EditHandler" to="EditHandler/SelectionZone/SelectionZoneDisplay" method="_on_edit_handler_selection_zone_changed"]
 [connection signal="level_loaded" from="LevelOperationsHandler" to="EditorUI/LevelSettings" method="_on_menu_bar_handler_level_loaded"]
 [connection signal="timeout" from="LevelOperationsHandler/AutosaveTimer" to="LevelOperationsHandler" method="_save_level"]

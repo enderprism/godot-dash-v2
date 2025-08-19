@@ -1,17 +1,47 @@
-extends PanelContainer
+extends Control
 class_name InteractableEditor
 
-const COMPONENT_WHITELIST: Array[StringName] = [
-	&"DirectionChangerComponent",
-	&"GamemodeChangerComponent",
-	&"ToggleComponent",
-	&"TeleportComponent",
-	&"GroundMoverComponent",
+# Scripts aren't constants but the array shouldn't be modified nontheless.
+var COMPONENT_WHITELIST: Array[Script] = [
+	DirectionChangerComponent,
+	GamemodeChangerComponent,
+	ToggleComponent,
+	TeleportComponent,
+	GroundMoverComponent,
 ]
+
+# Querying this at runtime is overkill
+var MARKER_COMPONENTS: Array[Script] = [
+	SingleUsageComponent,
+	NoEffectsComponent,
+]
+
+var marker_properties: Dictionary[Script, BoolProperty]
+
+
+func _init() -> void:
+	COMPONENT_WHITELIST.make_read_only()
+	MARKER_COMPONENTS.make_read_only()
+
+
+func _ready() -> void:
+	for marker in MARKER_COMPONENTS:
+		var property := BoolProperty.new()
+		property.name = marker.get_global_name().trim_suffix("Component").capitalize()
+		marker_properties.set(marker, property)
+		%MarkerRoot.add_child(property)
+
+
+func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
+	if selection.is_empty() or not selection.all(is_interactable):
+		return
+	var interactables: Array[Interactable]
+	interactables.assign(selection)
+	build_ui(interactables)
 
 
 func build_ui(interactables: Array[Interactable]) -> void:
-	$MarginContainer.get_children().map(func(child): child.queue_free())
+	%ComponentRoot.get_children().map(func(child): child.queue_free())
 	var first_interactable := interactables[0]
 	var ui_root := VBoxContainer.new()
 	for component in first_interactable.components:
@@ -20,11 +50,11 @@ func build_ui(interactables: Array[Interactable]) -> void:
 		component_section.name = component.name.trim_suffix("Component").capitalize()
 		component_section.label_settings = preload("res://resources/SectionHeadings.tres")
 		component_section.label_alignment = HORIZONTAL_ALIGNMENT_LEFT
-		if component.get_script().get_global_name() not in COMPONENT_WHITELIST:
+		if component.get_script() not in COMPONENT_WHITELIST:
 			continue
 		var fields = component.script.get_script_property_list()
 		# Follow _validate_property
-		if component.has_method(&"_validate_property"): # HACK: cardinal sin
+		if component.has_method(&"_validate_property"):
 			fields.map(func(field): component._validate_property(field))
 		fields = fields \
 				.filter(func(field): return field.usage & PROPERTY_USAGE_EDITOR)
@@ -36,13 +66,13 @@ func build_ui(interactables: Array[Interactable]) -> void:
 			property = generate_property(field.type, field)
 			property.name = field_name.capitalize()
 			property.set_meta("component_name", component.name)
-			property.set_input_state(not field.usage & PROPERTY_USAGE_READ_ONLY)
+			property.set_input_state.call_deferred(not field.usage & PROPERTY_USAGE_READ_ONLY)
 			component_section.add_child(property)
 		ui_root.add_child(component_section)
-	$MarginContainer.add_child(ui_root)
+	%ComponentRoot.add_child(ui_root)
 
-	connect_ui(interactables, ui_root)
-	load_properties.call_deferred(first_interactable, ui_root)
+	connect_ui(interactables, self)
+	load_properties.call_deferred(first_interactable, self)
 
 
 func generate_property(variant_type: int, field: Dictionary) -> AbstractProperty:
@@ -60,10 +90,10 @@ func generate_property(variant_type: int, field: Dictionary) -> AbstractProperty
 				property.allow_greater = true
 		TYPE_FLOAT:
 			property = FloatProperty.new()
-			if field["hint"] == PROPERTY_HINT_NONE:
+			if field.hint == PROPERTY_HINT_NONE:
 				property.allow_lesser = true
 				property.allow_greater = true
-			elif field["hint"] == PROPERTY_HINT_RANGE:
+			elif field.hint == PROPERTY_HINT_RANGE:
 				var hint_string: String = field.hint_string
 				var min_value = hint_string.get_slice(",", 0)
 				var max_value = hint_string.get_slice(",", 1)
@@ -84,13 +114,13 @@ func generate_property(variant_type: int, field: Dictionary) -> AbstractProperty
 		TYPE_BOOL:
 			property = BoolProperty.new()
 		TYPE_OBJECT:
-			match field["hint"]:
+			match field.hint:
 				PROPERTY_HINT_NODE_TYPE:
-					if field["hint_string"] == "Node2D":
+					if field.hint_string == "Node2D":
 						property = Node2DProperty.new()
 		TYPE_ARRAY:
 			property = ArrayProperty.new()
-			var hint_string: String = field["hint_string"]
+			var hint_string: String = field.hint_string
 			var array_type := int(hint_string.get_slice("/", 0))
 			var array_hint := int(hint_string.get_slice("/", 1))
 			var array_hint_string: String = hint_string.get_slice(":", 1)
@@ -112,6 +142,9 @@ func connect_ui(interactables: Array[Interactable], ui_root: Control) -> void:
 				property.value_changed.disconnect(connection.callable)
 		property.value_changed.get_connections().map(remove_connections)
 		var property_name := property.name.to_snake_case()
+		if property in marker_properties.values():
+			property.value_changed.connect(refresh_marker.bind(marker_properties.find_key(property), interactables))
+			continue
 		property.value_changed.connect(save_property.bind(property.get_meta("component_name"), property_name, interactables))
 
 
@@ -119,11 +152,25 @@ func save_property(value: Variant, component_name: String, property: String, int
 	interactables.map(func(interactable): interactable.get_node(component_name).set(property, value))
 
 
+func refresh_marker(enabled: bool, marker_script: Script, interactables: Array[Interactable]) -> void:
+	for interactable in	interactables:
+		if enabled:
+			var marker: Component = NodeUtils.get_node_or_add(interactable, str(marker_script.get_global_name()), marker_script, NodeUtils.SET_OWNER | NodeUtils.FORCE_READABLE_NAME)
+			interactable.register_public(marker)
+		else:
+			NodeUtils.get_children_of_type(interactable, marker_script).map(func(marker):
+				interactable.components.erase(marker)
+				marker.queue_free())
+
+
 func load_properties(interactable: Interactable, ui_root: Control) -> void:
 	var properties := NodeUtils.get_children_of_type(ui_root, AbstractProperty, true)
 	if properties.is_empty():
 		return
 	for property in properties as Array[AbstractProperty]:
+		if property in marker_properties.values():
+			property.set_value_no_signal(interactable.has(marker_properties.find_key(property)))
+			continue
 		var property_name := property.name.to_snake_case()
 		var component := interactable.get_node(String(property.get_meta("component_name")))
 		if component.get(property_name) == null:
@@ -131,3 +178,19 @@ func load_properties(interactable: Interactable, ui_root: Control) -> void:
 			continue
 		var value = component.get(property_name)
 		property.set_value_no_signal(value)
+
+
+static func is_interactable(object: Node2D) -> bool:
+	return object is Interactable
+
+
+static func is_trigger(object: Node2D) -> bool:
+	return object is TriggerBase
+
+
+static func same_script(object: Interactable, reference: Interactable) -> bool:
+	return object.get_script() == reference.get_script()
+
+
+static func same_components(object: Interactable, reference: Interactable) -> bool:
+	return object.components == reference.components
