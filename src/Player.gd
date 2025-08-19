@@ -434,7 +434,7 @@ func _compute_velocity(delta: float,
 				gravity_multiplier = -sign($Icon/Spider/SpiderCast.scale.y)
 				position += Vector2.DOWN.rotated(gameplay_rotation) * _get_spider_velocity_delta()
 				jump_hold_disabled = true
-		if not colliding_orb.single_usage:
+		if not colliding_orb.has(SingleUsageComponent):
 			orb_queue.append(colliding_orb)
 	#endregion
 

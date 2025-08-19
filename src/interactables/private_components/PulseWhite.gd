@@ -20,6 +20,6 @@ func _process(delta: float) -> void:
 
 
 func pulse(_player: Player) -> void:
-	if parent.no_effects:
+	if parent.has(NoEffectsComponent):
 		return
 	_factor = 1.0

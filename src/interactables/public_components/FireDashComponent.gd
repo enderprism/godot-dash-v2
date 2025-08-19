@@ -26,7 +26,7 @@ func start(player: Player) -> void:
 	player.get_node("DashParticles").emitting = true
 	player.get_node("DashFlame").show()
 	# player.get_node("DashFlame").scale.y = sign(player.gravity_multiplier)
-	if not parent.no_effects:
+	if not parent.has(NoEffectsComponent):
 		var dash_boom = player.DASH_BOOM.instantiate()
 		dash_boom.position = player.to_local(parent.global_position)
 		player.add_child(dash_boom)

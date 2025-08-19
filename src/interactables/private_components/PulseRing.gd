@@ -16,7 +16,7 @@ func _ready() -> void:
 
 
 func pulse(_player: Player) -> void:
-	if parent.no_effects:
+	if parent.has(NoEffectsComponent):
 		return
 	show()
 	var pulse_tween := create_tween().set_parallel()

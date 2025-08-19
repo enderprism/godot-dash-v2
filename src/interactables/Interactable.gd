@@ -1,9 +1,6 @@
 extends Area2D
 class_name Interactable
 
-@export var single_usage := false
-@export var no_effects := false
-
 var components: Array[Component]
 
 
@@ -19,5 +16,9 @@ func _ready() -> void:
 		$Hitbox.debug_color = Color("00ff0033")
 
 
-func register_public(component: Component):
+func register_public(component: Component) -> void:
 	components.append(component)
+
+
+func has(component_type: Script) -> bool:
+	return components.any(func(component): return component.get_script() == component_type)
