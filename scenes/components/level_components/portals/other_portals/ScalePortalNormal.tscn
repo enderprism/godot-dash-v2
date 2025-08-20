@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhjfnlli5vshw"]
+[gd_scene load_steps=11 format=3 uid="uid://bhjfnlli5vshw"]
 
 [ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_wvyrf"]
 [ext_resource type="Texture2D" uid="uid://b2epvogeak18n" path="res://assets/textures/portals/other_portals/scale_portal_small/ScalePortalSmallBack.png" id="2_88axh"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_o2xvl"]
 [ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="3_aaqhj"]
 [ext_resource type="Texture2D" uid="uid://ddjeyix04leys" path="res://assets/textures/portals/other_portals/scale_portal_small/ScalePortalSmallFront.png" id="3_wvek7"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="6_lbsxs"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="7_cr5uw"]
 [ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="8_uq0n2"]
 [ext_resource type="Script" uid="uid://wg4jv4tqb5nq" path="res://src/interactables/public_components/PlayerScaleChangerComponent.gd" id="9_ryy04"]
@@ -49,9 +48,6 @@ z_index = 1
 use_parent_material = true
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("3_wvek7")
-
-[node name="SingleUsageComponent" type="Node" parent="."]
-script = ExtResource("6_lbsxs")
 
 [node name="PulseCircle" type="Node2D" parent="."]
 script = ExtResource("7_cr5uw")

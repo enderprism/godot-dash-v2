@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0dk4786hlokq"]
+[gd_scene load_steps=12 format=3 uid="uid://d0dk4786hlokq"]
 
 [ext_resource type="Script" uid="uid://f5fvarclvwxg" path="res://src/interactables/OrbInteractable.gd" id="1_lku1r"]
 [ext_resource type="PackedScene" uid="uid://bejm8xhsl8h0b" path="res://scenes/particle_emitter_presets/OrbParticles.tscn" id="2_7rlbo"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://cx0n1qip15t20" path="res://src/interactables/private_components/MusicScale.gd" id="3_wcw6k"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="4_bviuh"]
 [ext_resource type="Script" uid="uid://blkbj1no2k35m" path="res://src/interactables/private_components/PulseRing.gd" id="5_h0l2k"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="6_gxrlg"]
 [ext_resource type="Script" uid="uid://cqkay7r3kwd6f" path="res://src/interactables/public_components/JumpBoostComponent.gd" id="7_vbccn"]
 [ext_resource type="Script" uid="uid://df636dbhnu65v" path="res://src/interactables/public_components/GravityChangerComponent.gd" id="8_knu32"]
 [ext_resource type="Script" uid="uid://vrgtsmh26uj3" path="res://src/interactables/private_components/GravityTextureFlip.gd" id="9_pskmb"]
@@ -45,9 +44,6 @@ script = ExtResource("4_bviuh")
 [node name="PulseRing" type="Node2D" parent="."]
 scale = Vector2(1.2, 1.2)
 script = ExtResource("5_h0l2k")
-
-[node name="SingleUsageComponent" type="Node" parent="."]
-script = ExtResource("6_gxrlg")
 
 [node name="JumpBoostComponent" type="Node" parent="."]
 script = ExtResource("7_vbccn")

@@ -1,13 +1,31 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnah6ge1p0rr3"]
+[gd_scene load_steps=12 format=3 uid="uid://dnah6ge1p0rr3"]
 
 [ext_resource type="Script" uid="uid://bccihwc0pstxx" path="res://src/interactables/PadInteractable.gd" id="1_0aya1"]
 [ext_resource type="PackedScene" uid="uid://05h0teol0odp" path="res://scenes/particle_emitter_presets/PadParticles.tscn" id="2_hkj6m"]
 [ext_resource type="Texture2D" uid="uid://c0bsvfc1ce8wd" path="res://assets/textures/pads/BluePad.svg" id="4_8t53w"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="4_lmapq"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="5_an2gs"]
 [ext_resource type="Script" uid="uid://cqkay7r3kwd6f" path="res://src/interactables/public_components/JumpBoostComponent.gd" id="6_eisph"]
 [ext_resource type="Script" uid="uid://df636dbhnu65v" path="res://src/interactables/public_components/GravityChangerComponent.gd" id="7_i2245"]
 [ext_resource type="Script" uid="uid://crvw7wonis42n" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="8_63mce"]
+
+[sub_resource type="Curve" id="Curve_6hqd0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_dol5j"]
+curve = SubResource("Curve_6hqd0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wu47q"]
+resource_local_to_scene = true
+lifetime_randomness = 0.1
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(40, 0, 0)
+gravity = Vector3(0, -256, 0)
+scale_min = 0.25
+scale_max = 0.25
+scale_curve = SubResource("CurveTexture_dol5j")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4v8oj"]
 size = Vector2(98, 18)
@@ -19,6 +37,7 @@ script = ExtResource("1_0aya1")
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_hkj6m")]
 modulate = Color(0.0862745, 1, 1, 1)
 position = Vector2(0, 55)
+process_material = SubResource("ParticleProcessMaterial_wu47q")
 
 [node name="BluePad" type="Sprite2D" parent="."]
 texture = ExtResource("4_8t53w")
@@ -33,9 +52,6 @@ modulate = Color(1, 1, 1, 0.3)
 position = Vector2(0, 55)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("4_lmapq")
-
-[node name="SingleUsageComponent" type="Node" parent="."]
-script = ExtResource("5_an2gs")
 
 [node name="JumpBoostComponent" type="Node" parent="."]
 script = ExtResource("6_eisph")

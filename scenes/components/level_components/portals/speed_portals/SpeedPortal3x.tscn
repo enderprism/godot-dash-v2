@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dtumn0qc8usca"]
+[gd_scene load_steps=13 format=3 uid="uid://dtumn0qc8usca"]
 
 [ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_6iivv"]
 [ext_resource type="PackedScene" uid="uid://dl5c5hukbve28" path="res://scenes/particle_emitter_presets/SpeedPortalParticles.tscn" id="2_jo6r4"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bxkysp21y32lm" path="res://assets/textures/portals/speed_portals/SpeedPortal3x.svg" id="4_fb1yk"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="7_tm4o7"]
 [ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="8_ow1g0"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="8_q2xvc"]
 [ext_resource type="Script" uid="uid://2x4qudx4pood" path="res://src/interactables/public_components/SpeedChangerComponent.gd" id="9_qnayd"]
 
 [sub_resource type="Curve" id="Curve_f0tdc"]
@@ -65,7 +64,3 @@ script = ExtResource("8_ow1g0")
 [node name="SpeedChangerComponent" type="Node" parent="."]
 script = ExtResource("9_qnayd")
 speed = 1.502
-
-[node name="SingleUsageComponent" type="Node" parent="."]
-script = ExtResource("8_q2xvc")
-metadata/_custom_type_script = "uid://dfqmc7gmqqhe3"

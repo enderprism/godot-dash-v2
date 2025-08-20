@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dppduseecx3hw"]
+[gd_scene load_steps=14 format=3 uid="uid://dppduseecx3hw"]
 
 [ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_4pgoj"]
 [ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="2_t3huu"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://wy4ah6el1cax" path="res://assets/textures/portals/other_portals/gravity_portal_flipped/GravityPortalFlippedIndicatorBG.png" id="5_a28gt"]
 [ext_resource type="Texture2D" uid="uid://cv4neb8j28bg3" path="res://assets/textures/portals/other_portals/gravity_portal_flipped/GravityPortalFlippedIndicatorIcon.png" id="6_rnc5k"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="7_c150s"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="10_q68bi"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="11_n2d6i"]
 [ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="12_v67i3"]
 [ext_resource type="Script" uid="uid://df636dbhnu65v" path="res://src/interactables/public_components/GravityChangerComponent.gd" id="13_3nflt"]
@@ -64,9 +63,6 @@ texture = ExtResource("6_rnc5k")
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("7_c150s")]
 modulate = Color(1, 1, 0, 1)
-
-[node name="SingleUsageComponent" type="Node" parent="."]
-script = ExtResource("10_q68bi")
 
 [node name="PulseCircle" type="Node2D" parent="."]
 script = ExtResource("11_n2d6i")

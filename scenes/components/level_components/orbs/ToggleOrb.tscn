@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://43t0kgu3lhyt"]
+[gd_scene load_steps=12 format=3 uid="uid://43t0kgu3lhyt"]
 
 [ext_resource type="Script" uid="uid://bxvjbgjx18gup" path="res://src/interactables/public_components/ToggleComponent.gd" id="1_dcl03"]
 [ext_resource type="Script" uid="uid://f5fvarclvwxg" path="res://src/interactables/OrbInteractable.gd" id="1_klrau"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://cx0n1qip15t20" path="res://src/interactables/private_components/MusicScale.gd" id="3_8a4sg"]
 [ext_resource type="Script" uid="uid://blkbj1no2k35m" path="res://src/interactables/private_components/PulseRing.gd" id="8_8h2d8"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="9_hfjph"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="10_54lpo"]
 [ext_resource type="Script" uid="uid://b0qdkfpjncyhk" path="res://src/interactables/private_components/VariableFillColor.gd" id="11_fi63b"]
 [ext_resource type="Script" uid="uid://crvw7wonis42n" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="12_j5u27"]
 
@@ -48,9 +47,6 @@ script = ExtResource("8_8h2d8")
 
 [node name="PulseCircle" type="Node2D" parent="."]
 script = ExtResource("9_hfjph")
-
-[node name="SingleUsageComponent" type="Node" parent="."]
-script = ExtResource("10_54lpo")
 
 [node name="DirectionChangerComponent" type="Node" parent="."]
 script = ExtResource("12_j5u27")

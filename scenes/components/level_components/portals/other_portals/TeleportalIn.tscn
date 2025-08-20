@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d05asiy6k2voi"]
+[gd_scene load_steps=12 format=3 uid="uid://d05asiy6k2voi"]
 
 [ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_tja0n"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_6nd4y"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="7_vbgas"]
 [ext_resource type="Script" uid="uid://i73oidoqs007" path="res://src/interactables/public_components/TeleportComponent.gd" id="8_crgvb"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="9_rk7d5"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="10_465gw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bg8ge"]
 resource_local_to_scene = true
@@ -59,6 +58,3 @@ script = ExtResource("8_crgvb")
 
 [node name="PulseCircle" type="Node2D" parent="."]
 script = ExtResource("9_rk7d5")
-
-[node name="SingleUsageComponent" type="Node" parent="."]
-script = ExtResource("10_465gw")

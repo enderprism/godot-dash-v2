@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://qfmv2p1wt1tn"]
+[gd_scene load_steps=15 format=3 uid="uid://qfmv2p1wt1tn"]
 
 [ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_5w3p6"]
 [ext_resource type="Texture2D" uid="uid://2etpothgo1kw" path="res://assets/textures/portals/gamemode_portals/cube_portal/CubePortalBack.png" id="2_n76ru"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="6_yjtas"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="8_4wp27"]
 [ext_resource type="Script" uid="uid://ch7r67xegri61" path="res://src/interactables/public_components/GamemodeChangerComponent.gd" id="9_g22vt"]
-[ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="10_8u8u8"]
 [ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="11_sjwk2"]
 [ext_resource type="Script" uid="uid://dh8clxh0ec2bd" path="res://src/interactables/public_components/GroundMoverComponent.gd" id="12_re3iv"]
 [ext_resource type="Script" uid="uid://cd3jqi4il3x2p" path="res://src/interactables/private_components/TextureRotatePin.gd" id="13_hwy8w"]
@@ -71,9 +70,6 @@ script = ExtResource("8_4wp27")
 
 [node name="GamemodeChangerComponent" type="Node" parent="."]
 script = ExtResource("9_g22vt")
-
-[node name="SingleUsageComponent" type="Node" parent="."]
-script = ExtResource("10_8u8u8")
 
 [node name="PulseWhite" type="Node" parent="."]
 script = ExtResource("11_sjwk2")
