@@ -173,7 +173,7 @@ func load_properties(interactable: Interactable, ui_root: Control) -> void:
 			continue
 		var property_name := property.name.to_snake_case()
 		var component := interactable.get_node(String(property.get_meta("component_name")))
-		if component.get(property_name) == null:
+		if component == null or component.get(property_name) == null:
 			printerr("Can't load property ", property_name, " on ", interactable)
 			continue
 		var value = component.get(property_name)
