@@ -14,10 +14,7 @@ var _radius: float = RADIUS:
 
 
 func _ready() -> void:
-	if parent is OrbInteractable:
-		parent.pressed.connect(pulse)
-	else:
-		parent.body_entered.connect(pulse)
+	parent.interacted.connect(pulse)
 	hide()
 	modulate.a = 0.5
 	if not no_blending:

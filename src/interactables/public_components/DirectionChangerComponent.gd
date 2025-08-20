@@ -12,10 +12,7 @@ enum Direction {
 
 func _ready() -> void:
 	super()
-	if parent is OrbInteractable:
-		parent.pressed.connect(set_direction)
-	else:
-		parent.body_entered.connect(set_direction)
+	parent.interacted.connect(set_direction)
 
 func set_direction(player: Player):
 	if not LevelManager.platformer:

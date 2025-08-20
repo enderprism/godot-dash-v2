@@ -11,7 +11,7 @@ var angle: float
 
 func _ready() -> void:
 	$"../DashOrbPreview".visible = LevelManager.in_editor
-	parent.pressed.connect(start)
+	parent.interacted.connect(start)
 
 func start(player: Player) -> void:
 	player.dash_control = self

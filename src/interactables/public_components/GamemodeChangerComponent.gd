@@ -13,7 +13,7 @@ enum GamemodeChange {
 
 func _ready() -> void:
 	super()
-	parent.body_entered.connect(set_gamemode)
+	parent.interacted.connect(set_gamemode)
 
 
 func set_gamemode(player: Player) -> void:

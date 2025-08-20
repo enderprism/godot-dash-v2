@@ -420,7 +420,7 @@ func _compute_velocity(delta: float,
 			or (Input.is_action_just_pressed("jump") and _is_flying_gamemode)):
 		var colliding_orb: OrbInteractable = orb_queue.pop_front()
 		_click_buffer_state = ClickBufferState.BUFFER_USED
-		colliding_orb.pressed.emit(self)
+		colliding_orb.interacted.emit(self)
 		for component in colliding_orb.components:
 			if internal_gamemode != Gamemode.WAVE and (component is JumpBoostComponent or component is ReboundComponent):
 				if internal_gamemode == Gamemode.SPIDER:

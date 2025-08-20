@@ -1,13 +1,10 @@
-extends Component
+extends Marker
 class_name SingleUsageComponent
 
 
 func _ready() -> void:
 	super()
-	if parent is OrbInteractable:
-		parent.pressed.connect(disable)
-	else:
-		parent.body_entered.connect(disable)
+	parent.interacted.connect(disable)
 
 
 func disable(_body: Node2D) -> void:

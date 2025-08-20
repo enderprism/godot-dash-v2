@@ -42,13 +42,10 @@ func _ready() -> void:
 	super()
 	if redirect_velocity:
 		parent.collision_layer |= 1 << 10 # Velocity redirectors
-	if parent is OrbInteractable:
-		parent.pressed.connect(teleport)
-	else:
-		parent.body_entered.connect(teleport)
+	parent.interacted.connect(teleport)
 	$"../TargetLink".visible = LevelManager.in_editor
 
-func teleport(player: Player):
+func teleport(player: Player) -> void:
 	if target != null:
 		match restrict_axis:
 			Axis.BOTH:

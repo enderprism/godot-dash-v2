@@ -10,12 +10,9 @@ signal toggled_groups_changed
 
 func _ready() -> void:
 	super()
-	if get_parent() is OrbInteractable:
-		parent.pressed.connect(toggle)
-	else:
-		parent.body_entered.connect(toggle)
+	parent.interacted.connect(toggle)
 
-func toggle(_player: Node):
+func toggle(_player: Node) -> void:
 	for toggled_group in toggled_groups:
 		var group = toggled_group.group
 		var state = toggled_group.state

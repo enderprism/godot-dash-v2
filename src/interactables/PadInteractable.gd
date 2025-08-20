@@ -5,6 +5,7 @@ class_name PadInteractable
 func _ready() -> void:
 	super()
 	body_entered.connect(_add_to_player_queue)
+	body_entered.connect(func(_body): interacted.emit())
 	body_exited.connect(_remove_from_player_queue)
 
 
