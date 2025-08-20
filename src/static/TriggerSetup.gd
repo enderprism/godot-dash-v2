@@ -20,11 +20,11 @@ static func setup(caller: Node, options: int = ADD_EASING):
 		caller.target_link = NodeUtils.get_node_or_add(caller, "TargetLink", preload("res://src/TargetLink.gd"))
 	#endregion
 	#region Init TriggerBase
-	caller.base = NodeUtils.get_node_or_add(caller, "TriggerBase", preload("res://src/triggers/trigger_components/TriggerBase.gd"))
+	caller.base = NodeUtils.get_node_or_add(caller, "TriggerBase", preload("res://src/interactables/TriggerBase.gd"))
 	#endregion
 	#region Init TriggerEasing (a few triggers that are always instant might not need one, e.g. ToggleTrigger and SongTrigger)
 	if options & ADD_EASING:
-		caller.easing = NodeUtils.get_node_or_add(caller, "TriggerEasing", preload("res://src/triggers/trigger_components/TriggerEasing.gd"))
+		caller.easing = NodeUtils.get_node_or_add(caller, "TriggerEasing", preload("res://src/interactables/triggers/trigger_components/TriggerEasing.gd"))
 	#endregion
 	#region Set children owner to make them show in the scene tree
 	NodeUtils.set_child_owner(caller, caller.base)
