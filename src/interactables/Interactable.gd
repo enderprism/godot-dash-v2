@@ -24,3 +24,8 @@ func register_public(component: Component) -> void:
 
 func has(component_type: Script) -> bool:
 	return components.any(func(component): return component.get_script() == component_type)
+
+
+func query(component_type: Script) -> Component:
+	var component_idx := components.find_custom(func(component): return component.get_script() == component_type)
+	return components[component_idx] if component_idx >= 0 else null
