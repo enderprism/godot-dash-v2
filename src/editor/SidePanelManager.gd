@@ -39,7 +39,7 @@ func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 	group_editor.selected_objects = selection
 	#endsection
 	#section Trigger
-	interactable_section.visible = selection.all(InteractableEditor.is_interactable)
+	interactable_section.visible = not selection.is_empty() and selection.all(InteractableEditor.is_interactable)
 	interactable_section.fold(not interactable_section.visible)
 	#endsection
 	#section Colors
