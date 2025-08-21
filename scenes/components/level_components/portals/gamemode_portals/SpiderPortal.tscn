@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://duj3dae6qcvtm"]
 
 [ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="1_r0h5n"]
-[ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="2_213bg"]
+[ext_resource type="Script" uid="uid://rt6vy5mae3if" path="res://src/interactables/TriggerInteractable.gd" id="2_i7fr7"]
 [ext_resource type="Texture2D" uid="uid://b8hgbelfp1y2t" path="res://assets/textures/portals/gamemode_portals/spider_portal/SpiderPortalBack.png" id="2_tj15i"]
 [ext_resource type="Texture2D" uid="uid://mhmstl4xjq2g" path="res://assets/textures/portals/gamemode_portals/spider_portal/SpiderPortalFront.png" id="3_tcgxp"]
 [ext_resource type="Texture2D" uid="uid://dky8o4pp8v101" path="res://assets/textures/portals/gamemode_portals/spider_portal/SpiderPortalIndicatorBG.png" id="4_3wlc5"]
@@ -38,7 +38,7 @@ shader_parameter/mode = 2
 [node name="SpiderPortal" type="Area2D"]
 material = SubResource("ShaderMaterial_tll7r")
 collision_layer = 8
-script = ExtResource("2_213bg")
+script = ExtResource("2_i7fr7")
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("6_8yut6")]
 modulate = Color(0.258824, 0.0901961, 1, 1)

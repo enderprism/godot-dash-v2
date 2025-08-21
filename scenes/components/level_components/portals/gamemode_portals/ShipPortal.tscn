@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://ctf8cfrxbjfdk"]
 
-[ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_silvg"]
+[ext_resource type="Script" uid="uid://rt6vy5mae3if" path="res://src/interactables/TriggerInteractable.gd" id="1_vnd63"]
 [ext_resource type="Texture2D" uid="uid://cilrx38i18agf" path="res://assets/textures/portals/gamemode_portals/ship_portal/ShipPortalBack.png" id="2_cs1mo"]
 [ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="2_eb732"]
 [ext_resource type="Texture2D" uid="uid://byomqjoflsnnw" path="res://assets/textures/portals/gamemode_portals/ship_portal/ShipPortalFront.png" id="3_kgeug"]
@@ -28,7 +28,7 @@ shader_parameter/mode = 2
 
 [node name="ShipPortal" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_silvg")
+script = ExtResource("1_vnd63")
 metadata/_edit_group_ = true
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("6_kigd0")]

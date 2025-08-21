@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://duu44mnb4uo8u"]
 
-[ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_b8x22"]
+[ext_resource type="Script" uid="uid://rt6vy5mae3if" path="res://src/interactables/TriggerInteractable.gd" id="1_dnjdv"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_n641x"]
 [ext_resource type="Texture2D" uid="uid://d3bxk0igncw1" path="res://assets/textures/portals/gamemode_portals/ball_portal/BallPortalBack.png" id="2_u2e3e"]
 [ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="3_bjtqn"]
@@ -28,7 +28,7 @@ shader_parameter/mode = 2
 
 [node name="BallPortal" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_b8x22")
+script = ExtResource("1_dnjdv")
 metadata/_edit_group_ = true
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_n641x")]

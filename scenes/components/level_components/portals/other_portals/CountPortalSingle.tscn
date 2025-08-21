@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://ycasm4t3yh3a"]
 
-[ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_h7dob"]
+[ext_resource type="Script" uid="uid://rt6vy5mae3if" path="res://src/interactables/TriggerInteractable.gd" id="1_otxjx"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_87atq"]
 [ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="3_4g2oi"]
 [ext_resource type="Texture2D" uid="uid://cqypd8m8hoq03" path="res://assets/textures/portals/other_portals/count_portal_single/CountPortalSingleBack.png" id="4_h7dob"]
@@ -24,7 +24,7 @@ shader_parameter/mode = 2
 
 [node name="CountPortalSingle" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_h7dob")
+script = ExtResource("1_otxjx")
 metadata/_edit_group_ = true
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_87atq")]

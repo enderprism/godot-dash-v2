@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dvdjnndhk1ir0"]
 
-[ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_lt2hg"]
+[ext_resource type="Script" uid="uid://rt6vy5mae3if" path="res://src/interactables/TriggerInteractable.gd" id="1_lt2hg"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_orkb7"]
 [ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="3_tsh4p"]
 [ext_resource type="Texture2D" uid="uid://c4ex0v5xsqcma" path="res://assets/textures/portals/other_portals/count_portal_dual/CountPortalDualBack.png" id="4_wghhi"]

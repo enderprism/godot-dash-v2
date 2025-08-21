@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://bwqcjqk3as34v"]
 
-[ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_h0qlj"]
+[ext_resource type="Script" uid="uid://rt6vy5mae3if" path="res://src/interactables/TriggerInteractable.gd" id="1_ukvqu"]
 [ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="2_rwy5o"]
 [ext_resource type="Texture2D" uid="uid://d0shbispfys6s" path="res://assets/textures/portals/other_portals/gravity_portal_normal/GravityPortalNormalBack.png" id="3_h3dng"]
 [ext_resource type="Texture2D" uid="uid://dsq6xk2pblqrm" path="res://assets/textures/portals/other_portals/gravity_portal_normal/GravityPortalNormalFront.png" id="4_m7fq6"]
@@ -27,7 +27,7 @@ shader_parameter/mode = 2
 
 [node name="GravityPortalNormal" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_h0qlj")
+script = ExtResource("1_ukvqu")
 metadata/_edit_group_ = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]

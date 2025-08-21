@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://bvu6th40mvb3q"]
 
-[ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_m5xxy"]
+[ext_resource type="Script" uid="uid://rt6vy5mae3if" path="res://src/interactables/TriggerInteractable.gd" id="1_d7c5a"]
 [ext_resource type="PackedScene" uid="uid://dl5c5hukbve28" path="res://scenes/particle_emitter_presets/SpeedPortalParticles.tscn" id="2_va7rq"]
 [ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="3_yah2m"]
 [ext_resource type="Texture2D" uid="uid://b8gagycaqj5bl" path="res://assets/textures/portals/speed_portals/SpeedPortal5x.svg" id="4_n3fdh"]
@@ -39,7 +39,7 @@ size = Vector2(318, 226)
 
 [node name="SpeedPortal5x" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_m5xxy")
+script = ExtResource("1_d7c5a")
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_va7rq")]
 modulate = Color(0.117647, 0.419608, 1, 1)

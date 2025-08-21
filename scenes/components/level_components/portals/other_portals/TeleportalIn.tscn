@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://d05asiy6k2voi"]
 
-[ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_tja0n"]
+[ext_resource type="Script" uid="uid://rt6vy5mae3if" path="res://src/interactables/TriggerInteractable.gd" id="1_3sgph"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_6nd4y"]
 [ext_resource type="PackedScene" uid="uid://l2ofoyvoxbr2" path="res://scenes/components/game_components/TargetLink.tscn" id="2_g4fee"]
 [ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="3_c01u1"]
@@ -24,7 +24,7 @@ shader_parameter/mode = 2
 size = Vector2(106, 384)
 
 [node name="TeleportalIn" type="Area2D"]
-script = ExtResource("1_tja0n")
+script = ExtResource("1_3sgph")
 
 [node name="TargetLink" parent="." instance=ExtResource("2_g4fee")]
 z_index = -50

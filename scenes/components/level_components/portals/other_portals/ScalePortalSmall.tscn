@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://b2civdkigbcth"]
 
-[ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_yfaxq"]
+[ext_resource type="Script" uid="uid://rt6vy5mae3if" path="res://src/interactables/TriggerInteractable.gd" id="1_gq85d"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_nhqe7"]
 [ext_resource type="Texture2D" uid="uid://dgxusv262ihsp" path="res://assets/textures/portals/other_portals/scale_portal_normal/ScalePortalNormalBack.png" id="2_q1isf"]
 [ext_resource type="Shader" uid="uid://dyxk030ey5wno" path="res://resources/shaders/ColorPulse.gdshader" id="2_u1bij"]
@@ -24,7 +24,7 @@ shader_parameter/mode = 2
 
 [node name="ScalePortalSmall" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_yfaxq")
+script = ExtResource("1_gq85d")
 metadata/_edit_group_ = true
 
 [node name="ParticleEmitter" parent="." instance=ExtResource("2_nhqe7")]

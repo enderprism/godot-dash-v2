@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://dspnvt3u8uhqy"]
 
-[ext_resource type="Script" uid="uid://c13bd47nn7q63" path="res://src/interactables/Interactable.gd" id="1_qafnf"]
+[ext_resource type="Script" uid="uid://rt6vy5mae3if" path="res://src/interactables/TriggerInteractable.gd" id="1_7s044"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_u83oa"]
 [ext_resource type="Texture2D" uid="uid://b5x6gqlo78mnx" path="res://assets/textures/portals/gamemode_portals/swing_portal/SwingPortalBack.png" id="2_yfowc"]
 [ext_resource type="Texture2D" uid="uid://bp6ukusnk6ufx" path="res://assets/textures/portals/gamemode_portals/swing_portal/SwingPortalFront.png" id="3_1igv7"]
@@ -28,7 +28,7 @@ shader_parameter/mode = 2
 
 [node name="SwingPortal" type="Area2D"]
 collision_layer = 8
-script = ExtResource("1_qafnf")
+script = ExtResource("1_7s044")
 metadata/_edit_group_ = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
