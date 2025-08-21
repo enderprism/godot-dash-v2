@@ -33,6 +33,7 @@ func _ready() -> void:
 
 
 func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
+	clear_ui()
 	if selection.is_empty() or not selection.all(is_interactable):
 		return
 	var interactables: Array[Interactable]
@@ -40,8 +41,11 @@ func _on_edit_handler_selection_changed(selection: Array[Node2D]) -> void:
 	build_ui(interactables)
 
 
-func build_ui(interactables: Array[Interactable]) -> void:
+func clear_ui() -> void:
 	%ComponentRoot.get_children().map(func(child): child.queue_free())
+
+
+func build_ui(interactables: Array[Interactable]) -> void:
 	var first_interactable := interactables[0]
 	var ui_root := VBoxContainer.new()
 	for component in first_interactable.components:
