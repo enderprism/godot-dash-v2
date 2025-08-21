@@ -14,7 +14,7 @@ const TRIGGER_UI_DIRECTORY: String = "res://scenes/components/game_components/tr
 static func setup(caller: Node, options: int = ADD_EASING):
 	# "Group" parent in Godot to avoid moving its TriggerBase instead of it directly
 	caller.set_meta("_edit_group_", true)
-	#region Avoid re-instancing TriggerBase, TriggerEasing and TargetLink if they already exist
+	#region Avoid re-instancing TriggerBase, EasingComponent and TargetLink if they already exist
 	#region Init TargetLink (some triggers may not need it, if their target is outside the level scene)
 	if options & ADD_TARGET_LINK:
 		caller.target_link = NodeUtils.get_node_or_add(caller, "TargetLink", preload("res://src/TargetLink.gd"))
@@ -22,9 +22,9 @@ static func setup(caller: Node, options: int = ADD_EASING):
 	#region Init TriggerBase
 	caller.base = NodeUtils.get_node_or_add(caller, "TriggerBase", preload("res://src/interactables/TriggerBase.gd"))
 	#endregion
-	#region Init TriggerEasing (a few triggers that are always instant might not need one, e.g. ToggleTrigger and SongTrigger)
+	#region Init EasingComponent (a few triggers that are always instant might not need one, e.g. ToggleTrigger and SongTrigger)
 	if options & ADD_EASING:
-		caller.easing = NodeUtils.get_node_or_add(caller, "TriggerEasing", preload("res://src/interactables/triggers/trigger_components/TriggerEasing.gd"))
+		caller.easing = NodeUtils.get_node_or_add(caller, "EasingComponent", preload("res://src/interactables/public_components/EasingComponent.gd"))
 	#endregion
 	#region Set children owner to make them show in the scene tree
 	NodeUtils.set_child_owner(caller, caller.base)

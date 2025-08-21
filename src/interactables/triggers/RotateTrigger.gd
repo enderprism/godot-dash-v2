@@ -35,7 +35,7 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_READ_ONLY
 
 var base: TriggerBase
-var easing: TriggerEasing
+var easing: EasingComponent
 var target_link: TargetLink
 
 var _targets: Array[Node] ## Array of all the [Node2D] in a group.

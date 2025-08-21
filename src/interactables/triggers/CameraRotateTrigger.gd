@@ -25,7 +25,7 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 var base: TriggerBase
-var easing: TriggerEasing
+var easing: EasingComponent
 
 var _player_camera: PlayerCamera:
 	get(): return LevelManager.player_camera if not Engine.is_editor_hint() else null

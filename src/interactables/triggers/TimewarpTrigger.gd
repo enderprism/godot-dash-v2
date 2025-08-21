@@ -6,7 +6,7 @@ class_name TimewarpTrigger
 @export_range(0.0, 1.0 , 0.01, "or_greater") var _time_scale: float = 1.0
 
 var base: TriggerBase
-var easing: TriggerEasing
+var easing: EasingComponent
 
 var _initial_time_scale: float
 

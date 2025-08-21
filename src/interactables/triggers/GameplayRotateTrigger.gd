@@ -20,7 +20,7 @@ class_name GameplayRotateTrigger
 
 
 var base: TriggerBase
-var easing: TriggerEasing
+var easing: EasingComponent
 
 var _players: Array[Player]
 var _initial_global_rotation_degrees: Dictionary

@@ -18,7 +18,7 @@ var base: TriggerBase
 
 var _player_camera: PlayerCamera:
 	get(): return LevelManager.player_camera if not Engine.is_editor_hint() else null
-var easing: TriggerEasing
+var easing: EasingComponent
 var _initial_zoom: Vector2
 
 func _ready() -> void:

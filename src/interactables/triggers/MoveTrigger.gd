@@ -36,7 +36,7 @@ func _validate_property(property: Dictionary) -> void:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 var base: TriggerBase
-var easing: TriggerEasing
+var easing: EasingComponent
 var target_link: TargetLink
 
 var CELLS_TO_PX := Vector2(LevelManager.CELL_SIZE, -LevelManager.CELL_SIZE)

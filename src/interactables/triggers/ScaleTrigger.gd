@@ -34,7 +34,7 @@ func _validate_property(property: Dictionary) -> void:
 var _targets: Array[Node] ## Array of all the [Node2D] in a group.
 var _initial_scales: Dictionary ## Scale for every [Node2D] in [member _targets]
 var base: TriggerBase
-var easing: TriggerEasing
+var easing: EasingComponent
 var target_link: TargetLink
 
 func _ready() -> void:

@@ -33,7 +33,7 @@ func _validate_property(property: Dictionary) -> void:
 
 
 var base: TriggerBase
-var easing: TriggerEasing
+var easing: EasingComponent
 var target_link: TargetLink
 
 var _player: Player:

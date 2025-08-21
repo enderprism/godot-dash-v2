@@ -15,7 +15,7 @@ enum Mode {
 @export var from_center: bool
 
 var base: TriggerBase
-var easing: TriggerEasing
+var easing: EasingComponent
 
 var _player_camera: PlayerCamera:
 	get(): return LevelManager.player_camera if not Engine.is_editor_hint() else null

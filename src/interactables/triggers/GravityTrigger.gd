@@ -5,7 +5,7 @@ class_name GravityTrigger
 @export_range(0.0, 1.0 , 0.01, "or_greater") var gravity_multiplier: float = 1.0
 
 var base: TriggerBase
-var easing: TriggerEasing
+var easing: EasingComponent
 
 var _player: Player:
 	get(): return LevelManager.player if not Engine.is_editor_hint() else null
