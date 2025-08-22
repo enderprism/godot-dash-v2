@@ -1,17 +1,15 @@
 @tool
 extends Line2D
-
 class_name TargetLink
 
 var target: Node2D
 
-var _lock_position_to_parent: bool
 
 func _ready() -> void:
 	z_index = -50
 
+
 func _process(delta: float) -> void:
-	if _lock_position_to_parent: position = Vector2.ZERO
 	if target == null:
 		clear_points()
 		return
