@@ -35,11 +35,11 @@ static func setup(caller: Node, options: int = ADD_EASING):
 	#endregion
 	#region Signal connections
 	if not options & DONT_CONNECT_START:
-		NodeUtils.connect_new(caller.base.body_entered, caller.start)
+		NodeUtils.connect_once(caller.base.body_entered, caller.start)
 	if options & ADD_EASING:
-		NodeUtils.connect_new(caller.base.body_entered, caller.easing.start)
+		NodeUtils.connect_once(caller.base.body_entered, caller.easing.start)
 	if options & ADD_TARGET_LINK:
-		NodeUtils.connect_new(caller.base.target_changed, caller.update_target_link)
+		NodeUtils.connect_once(caller.base.target_changed, caller.update_target_link)
 	#endregion
 	#region UI Layout
 	var ui_path: String = TRIGGER_UI_DIRECTORY + caller.get_script().get_global_name() + "UI.tscn"

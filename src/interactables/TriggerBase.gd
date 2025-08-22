@@ -72,7 +72,7 @@ func _ready() -> void:
 	sprite.scale = Vector2.ONE * 0.2
 	sprite.set_texture(DEFAULT_TRIGGER_TEXTURE)
 	NodeUtils.get_node_or_add(self, "SingleUsageComponent", SingleUsageComponent, NodeUtils.INTERNAL)
-	NodeUtils.connect_new(hitbox_shape_changed, _hitbox_display.update_shape)
+	NodeUtils.connect_once(hitbox_shape_changed, _hitbox_display.update_shape)
 	_center_anchor = NodeUtils.get_node_or_add(self, "Center Anchor", Control, NodeUtils.INTERNAL)
 	group_display = NodeUtils.get_node_or_add(_center_anchor, "Group Display", Label, NodeUtils.INTERNAL)
 	_set_hitbox_shape()

@@ -51,7 +51,7 @@ static func get_node_or_add(caller: Node, path: NodePath, script, options: int =
 	return node
 
 
-static func connect_new(_signal: Signal, callable: Callable) -> void:
+static func connect_once(_signal: Signal, callable: Callable) -> void:
 	if not _signal.is_connected(callable):
 		_signal.connect(callable)
 
