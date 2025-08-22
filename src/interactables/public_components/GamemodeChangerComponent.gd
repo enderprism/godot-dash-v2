@@ -8,7 +8,7 @@ enum GamemodeChange {
 }
 
 @export var _gamemode: Player.Gamemode
-@export var change: GamemodeChange
+@export var gamemode_change: GamemodeChange
 
 
 func _ready() -> void:
@@ -17,7 +17,7 @@ func _ready() -> void:
 
 
 func set_gamemode(player: Player) -> void:
-	match change:
+	match gamemode_change:
 		GamemodeChange.BOTH:
 			player.internal_gamemode = _gamemode
 			player.displayed_gamemode = _gamemode
