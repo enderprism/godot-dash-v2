@@ -9,6 +9,8 @@ func _ready() -> void:
 
 
 func require(component_types: Array[Script]) -> void:
+	if not parent.is_node_ready():
+		await parent.ready
 	for component_type in component_types:
 		if not parent.has(component_type):
 			push_warning("%s is missing %s" % [parent, component_type.get_global_name()])
