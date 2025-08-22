@@ -8,6 +8,8 @@ var COMPONENT_WHITELIST: Array[Script] = [
 	ToggleComponent,
 	TeleportComponent,
 	GroundMoverComponent,
+	TargetObjectComponent,
+	TargetGroupComponent,
 ]
 
 # Querying this at runtime is overkill
