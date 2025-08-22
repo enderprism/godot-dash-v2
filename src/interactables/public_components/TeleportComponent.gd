@@ -2,17 +2,12 @@
 extends Component
 class_name TeleportComponent
 
-
 enum Axis {
 	BOTH,
 	X,
 	Y,
 }
 
-@export var target: Node2D:
-	set(value):
-		target = value
-		$"../TargetLink".target = value
 @export var restrict_axis: Axis
 @export var redirect_velocity: bool:
 	set(value):
@@ -38,22 +33,27 @@ func _validate_property(property: Dictionary) -> void:
 	if property.name in ["new_velocity", "new_velocity_axes"] and override_velocity == false:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
+
 func _ready() -> void:
 	super()
+	require([TargetObjectComponent])
 	if redirect_velocity:
 		parent.collision_layer |= 1 << 10 # Velocity redirectors
 	parent.interacted.connect(teleport)
 	$"../TargetLink".visible = LevelManager.in_editor
 
+
 func teleport(player: Player) -> void:
-	if target != null:
-		match restrict_axis:
-			Axis.BOTH:
-				player.global_position = target.global_position
-			Axis.X:
-				player.global_position.x = target.global_position.x
-			Axis.Y:
-				player.global_position.y = target.global_position.y
+	var target_component: TargetObjectComponent = parent.query(TargetObjectComponent)
+	var target := target_component.target
+	# No null checking as the component is required and should always exist.
+	match restrict_axis:
+		Axis.BOTH:
+			player.global_position = target.global_position
+		Axis.X:
+			player.global_position.x = target.global_position.x
+		Axis.Y:
+			player.global_position.y = target.global_position.y
 	if redirect_velocity:
 		var local_velocity_to_entrance := player.velocity.rotated(-parent.global_rotation)
 		local_velocity_to_entrance.y *= -1
