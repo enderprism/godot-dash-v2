@@ -50,7 +50,9 @@ func build_ui(interactables: Array[Interactable]) -> void:
 	var ui_root := VBoxContainer.new()
 	for component in first_interactable.components:
 		var component_section := SectionHeading.new()
-		component.property_list_changed.connect(build_ui.bind(interactables))
+		component.property_list_changed.connect(func():
+			clear_ui()
+			build_ui(interactables))
 		component_section.name = component.name.trim_suffix("Component").capitalize()
 		component_section.label_settings = preload("res://resources/SectionHeadings.tres")
 		component_section.label_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -146,7 +148,7 @@ func connect_ui(interactables: Array[Interactable], ui_root: Control) -> void:
 				property.value_changed.disconnect(connection.callable)
 		property.value_changed.get_connections().map(remove_connections)
 		var property_name := property.name.to_snake_case()
-		if property in marker_properties.values():
+		if property is BoolProperty and property in marker_properties.values():
 			property.value_changed.connect(refresh_marker.bind(marker_properties.find_key(property), interactables))
 			continue
 		property.value_changed.connect(save_property.bind(property.get_meta("component_name"), property_name, interactables))
@@ -172,7 +174,7 @@ func load_properties(interactable: Interactable, ui_root: Control) -> void:
 	if properties.is_empty():
 		return
 	for property in properties as Array[AbstractProperty]:
-		if property in marker_properties.values():
+		if property is BoolProperty and property in marker_properties.values():
 			property.set_value_no_signal(interactable.has(marker_properties.find_key(property)))
 			continue
 		var property_name := property.name.to_snake_case()
