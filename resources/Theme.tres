@@ -4,7 +4,9 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_521vp"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1wseb"]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_10srq"]
+color = Color(0, 0, 0, 0.5)
+thickness = 2
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2htm"]
 
@@ -14,12 +16,14 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qg2e3"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2g2l"]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_jaexg"]
+color = Color(1, 1, 1, 0.25)
+thickness = 2
 
 [resource]
 default_font = ExtResource("1_10srq")
 Button/styles/focus = SubResource("StyleBoxEmpty_521vp")
-HSeparator/styles/separator = SubResource("StyleBoxEmpty_1wseb")
+HSeparator/styles/separator = SubResource("StyleBoxLine_10srq")
 LineEdit/styles/focus = SubResource("StyleBoxEmpty_h2htm")
 MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 10
@@ -28,4 +32,4 @@ MarginContainer/constants/margin_top = 10
 TabBar/styles/tab_focus = SubResource("StyleBoxEmpty_8t62t")
 TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_o1vdk")
 Tree/styles/focus = SubResource("StyleBoxEmpty_qg2e3")
-VSeparator/styles/separator = SubResource("StyleBoxEmpty_h2g2l")
+VSeparator/styles/separator = SubResource("StyleBoxLine_jaexg")
