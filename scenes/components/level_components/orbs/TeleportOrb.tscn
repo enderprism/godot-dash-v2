@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbcetmg5ilsc1"]
+[gd_scene load_steps=14 format=3 uid="uid://bbcetmg5ilsc1"]
 
 [ext_resource type="Script" uid="uid://f5fvarclvwxg" path="res://src/interactables/OrbInteractable.gd" id="1_h1cfv"]
 [ext_resource type="Texture2D" uid="uid://bifer0ndxb2i0" path="res://assets/textures/orbs/TeleportationOrbOutline.svg" id="2_dyh4w"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="7_l85uw"]
 [ext_resource type="Script" uid="uid://i73oidoqs007" path="res://src/interactables/public_components/TeleportComponent.gd" id="9_dm5qn"]
 [ext_resource type="Script" uid="uid://crvw7wonis42n" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="9_ktqww"]
+[ext_resource type="Script" uid="uid://b1h4lmrngdiim" path="res://src/interactables/public_components/TargetObjectComponent.gd" id="9_rbnha"]
 [ext_resource type="Script" uid="uid://b0qdkfpjncyhk" path="res://src/interactables/private_components/VariableFillColor.gd" id="10_yqox7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jwypc"]
@@ -53,11 +54,15 @@ script = ExtResource("6_g47p7")
 [node name="PulseCircle" type="Node2D" parent="."]
 script = ExtResource("7_l85uw")
 
-[node name="DirectionChangerComponent" type="Node" parent="."]
-script = ExtResource("9_ktqww")
+[node name="TargetObjectComponent" type="Node" parent="."]
+script = ExtResource("9_rbnha")
+metadata/_custom_type_script = "uid://b1h4lmrngdiim"
 
 [node name="TeleportComponent" type="Node" parent="."]
 script = ExtResource("9_dm5qn")
+
+[node name="DirectionChangerComponent" type="Node" parent="."]
+script = ExtResource("9_ktqww")
 
 [node name="Detail" type="Node2D" parent="."]
 script = ExtResource("10_yqox7")

@@ -57,14 +57,14 @@ debug_color = Color(0, 1, 0, 0)
 scale = Vector2(1.4, 3)
 type = 8
 
-[node name="PulseWhite" type="Node" parent="."]
-script = ExtResource("7_vbgas")
-
-[node name="TeleportComponent" type="Node" parent="."]
-script = ExtResource("8_crgvb")
-
 [node name="PulseCircle" type="Node2D" parent="."]
 script = ExtResource("9_rk7d5")
 
+[node name="PulseWhite" type="Node" parent="."]
+script = ExtResource("7_vbgas")
+
 [node name="TargetObjectComponent" type="Node" parent="."]
 script = ExtResource("10_ohmk0")
+
+[node name="TeleportComponent" type="Node" parent="."]
+script = ExtResource("8_crgvb")
