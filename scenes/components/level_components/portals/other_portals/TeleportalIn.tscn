@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d05asiy6k2voi"]
+[gd_scene load_steps=14 format=3 uid="uid://d05asiy6k2voi"]
 
 [ext_resource type="Script" uid="uid://rt6vy5mae3if" path="res://src/interactables/TriggerInteractable.gd" id="1_3sgph"]
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="2_6nd4y"]
@@ -7,8 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://dpymoijvgn47q" path="res://assets/textures/portals/other_portals/teleportal_in/TeleportalInBack.png" id="4_62kgg"]
 [ext_resource type="Texture2D" uid="uid://bjkrqus0iq7o2" path="res://assets/textures/portals/other_portals/teleportal_in/TeleportalInFront.png" id="5_toxp5"]
 [ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="7_vbgas"]
+[ext_resource type="PackedScene" uid="uid://cnru264bpjwxo" path="res://scenes/components/level_components/EditorSelectionCollider.tscn" id="7_wo8fp"]
 [ext_resource type="Script" uid="uid://i73oidoqs007" path="res://src/interactables/public_components/TeleportComponent.gd" id="8_crgvb"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="9_rk7d5"]
+[ext_resource type="Script" uid="uid://b1h4lmrngdiim" path="res://src/interactables/public_components/TargetObjectComponent.gd" id="10_ohmk0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bg8ge"]
 resource_local_to_scene = true
@@ -24,6 +26,7 @@ shader_parameter/mode = 2
 size = Vector2(106, 384)
 
 [node name="TeleportalIn" type="Area2D"]
+collision_layer = 8
 script = ExtResource("1_3sgph")
 
 [node name="TargetLink" parent="." instance=ExtResource("2_g4fee")]
@@ -50,6 +53,10 @@ position = Vector2(53, 0)
 shape = SubResource("RectangleShape2D_k1q4x")
 debug_color = Color(0, 1, 0, 0)
 
+[node name="EditorSelectionCollider" parent="." instance=ExtResource("7_wo8fp")]
+scale = Vector2(1.4, 3)
+type = 8
+
 [node name="PulseWhite" type="Node" parent="."]
 script = ExtResource("7_vbgas")
 
@@ -58,3 +65,6 @@ script = ExtResource("8_crgvb")
 
 [node name="PulseCircle" type="Node2D" parent="."]
 script = ExtResource("9_rk7d5")
+
+[node name="TargetObjectComponent" type="Node" parent="."]
+script = ExtResource("10_ohmk0")
