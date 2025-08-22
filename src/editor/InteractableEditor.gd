@@ -47,17 +47,17 @@ func clear_ui() -> void:
 	%ComponentRoot.get_children().map(func(child): child.queue_free())
 
 
+func rebuild_ui(interactables: Array[Interactable]) -> void:
+	clear_ui()
+	build_ui(interactables)
+
+
 func build_ui(interactables: Array[Interactable]) -> void:
 	var first_interactable := interactables[0]
 	var ui_root := VBoxContainer.new()
-	for component in first_interactable.components:
-		var component_section := SectionHeading.new()
-		component.property_list_changed.connect(func():
-			clear_ui()
-			build_ui(interactables))
-		component_section.name = component.name.trim_suffix("Component").capitalize()
-		component_section.label_settings = preload("res://resources/SectionHeadings.tres")
-		component_section.label_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	for i in first_interactable.components.size():
+		var component = first_interactable.components[i]
+		NodeUtils.connect_once(component.property_list_changed, rebuild_ui)
 		if component.get_script() not in COMPONENT_WHITELIST:
 			continue
 		var fields = component.script.get_script_property_list()
@@ -75,8 +75,9 @@ func build_ui(interactables: Array[Interactable]) -> void:
 			property.name = field_name.capitalize()
 			property.set_meta("component_name", component.name)
 			property.set_input_state.call_deferred(not field.usage & PROPERTY_USAGE_READ_ONLY)
-			component_section.add_child(property)
-		ui_root.add_child(component_section)
+			ui_root.add_child(property)
+		if i != first_interactable.components.size() - 1:
+			ui_root.add_child(HSeparator.new())
 	%ComponentRoot.add_child(ui_root)
 
 	connect_ui(interactables, self)
