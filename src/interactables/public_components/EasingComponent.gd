@@ -1,6 +1,7 @@
 extends Component
 class_name EasingComponent
 
+signal progressed(weight_delta: float)
 signal finished
 
 @export_range(0.0, 10.0, 0.0001, "or_more") var duration: float = 1.0
@@ -8,7 +9,6 @@ signal finished
 @export var easing_type: Tween.EaseType = Tween.EASE_IN_OUT
 @export var easing_transition: Tween.TransitionType
 
-var weight_delta: float
 var tween: Tween
 var weight: float
 var _previous_weight: float
@@ -19,7 +19,8 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	weight_delta = get_weight_delta()
+	if not is_inactive():
+		progressed.emit(get_weight_delta())
 
 
 func start(_body: Node2D) -> void:
