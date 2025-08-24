@@ -3,13 +3,19 @@ extends Line2D
 class_name TargetLink
 
 var target: Node2D
+var target_component: TargetObjectComponent
 
 
 func _ready() -> void:
+	target_component = NodeUtils.get_child_of_type(get_parent(), TargetObjectComponent)
 	z_index = -50
 
 
 func _process(delta: float) -> void:
+	if target_component == null:
+		clear_points()
+		return
+	target = target_component.target
 	if target == null:
 		clear_points()
 		return
