@@ -79,6 +79,7 @@ func build_ui(interactables: Array[Interactable]) -> void:
 		if i != first_interactable.components.size() - 1:
 			ui_root.add_child(HSeparator.new())
 	%ComponentRoot.add_child(ui_root)
+	%ComponentRoot.visible = ui_root.get_child_count() > 0
 
 	connect_ui(interactables, self)
 	load_properties.call_deferred(first_interactable, self)
