@@ -15,6 +15,7 @@ var _previous_weight: float
 
 
 func _ready() -> void:
+	super()
 	parent.interacted.connect(start)
 
 
