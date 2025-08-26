@@ -36,7 +36,7 @@ func _validate_property(property: Dictionary) -> void:
 
 func _ready() -> void:
 	super()
-	require([TargetObjectComponent])
+	await require([TargetObjectComponent])
 	if redirect_velocity:
 		parent.collision_layer |= 1 << 10 # Velocity redirectors
 	parent.interacted.connect(teleport)
