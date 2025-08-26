@@ -20,14 +20,14 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if not is_inactive():
+	if not Engine.is_editor_hint() and not is_inactive():
 		progressed.emit(get_weight_delta())
 
 
 func start(_body: Node2D) -> void:
 	tween = get_tree().create_tween()
 	reset()
-	tween.tween_property(self, "weight", 1.0, duration) \
+	tween.tween_property(self, ^"weight", 1.0, duration) \
 		.set_trans(easing_transition) \
 		.set_ease(easing_type).from(0.0)
 	tween.finished.connect(func(): finished.emit())
