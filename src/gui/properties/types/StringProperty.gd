@@ -7,7 +7,7 @@ signal value_changed(value: String)
 @export var default: String
 @export var placeholder: String
 @export var select_all_on_focus: bool
-@export var lineedit_width: float = 100.0
+@export var lineedit_width: float = 160.0
 @export_tool_button("Refresh") var _refresh = refresh
 
 var label: Label
