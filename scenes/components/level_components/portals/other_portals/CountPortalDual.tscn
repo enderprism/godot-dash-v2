@@ -58,4 +58,4 @@ script = ExtResource("8_7bsqi")
 
 [node name="PlayerCountChangerComponent" type="Node" parent="."]
 script = ExtResource("9_orkb7")
-count = 2
+_player_count = 2

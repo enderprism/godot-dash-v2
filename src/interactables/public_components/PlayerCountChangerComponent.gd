@@ -1,7 +1,8 @@
+@tool
 extends Component
 class_name PlayerCountChangerComponent
 
-@export_range(1, 10, 1, "or_greater") var count: int = 1
+@export_range(1, 10, 1, "or_greater") var _player_count: int = 1
 @export var same_gravity: bool
 
 
@@ -10,8 +11,13 @@ func _ready() -> void:
 	parent.body_entered.connect(set_player_count)
 
 
+func _validate_property(property: Dictionary) -> void:
+	if property.name == "same_gravity" and _player_count == 1:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+
+
 func set_player_count(player: Player) -> void:
-	var dual_count := count - 1
+	var dual_count := _player_count - 1
 	if dual_count < len(LevelManager.player_duals):
 		if dual_count == 0 and player.dual_index > 0:
 			# Movement
