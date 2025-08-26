@@ -2,14 +2,16 @@ extends Control
 class_name InteractableEditor
 
 # Scripts aren't constants but the array shouldn't be modified nontheless.
-var COMPONENT_WHITELIST: Array[Script] = [
-	DirectionChangerComponent,
-	GamemodeChangerComponent,
-	ToggleComponent,
-	TeleportComponent,
-	GroundMoverComponent,
-	TargetObjectComponent,
-	TargetGroupComponent,
+var COMPONENT_BLACKLIST: Array[Script] = [
+	JumpBoostComponent,
+	GravityChangerComponent,
+	ReboundComponent,
+	SpiderDashComponent,
+	FireDashComponent,
+	SpeedChangerComponent,
+	# PlayerCountChangerComponent, # we need to be able to set if duals use the same gravity
+	PlayerScaleChangerComponent,
+	TextureRotationPin,
 ]
 
 # Querying this at runtime is overkill
@@ -22,7 +24,7 @@ var marker_properties: Dictionary[Script, BoolProperty]
 
 
 func _init() -> void:
-	COMPONENT_WHITELIST.make_read_only()
+	COMPONENT_BLACKLIST.make_read_only()
 	MARKER_COMPONENTS.make_read_only()
 
 
@@ -58,7 +60,8 @@ func build_ui(interactables: Array[Interactable]) -> void:
 	for i in first_interactable.components.size():
 		var component = first_interactable.components[i]
 		NodeUtils.connect_once(component.property_list_changed, rebuild_ui)
-		if component.get_script() not in COMPONENT_WHITELIST:
+		if component.get_script() in COMPONENT_BLACKLIST \
+				or component.get_script() in MARKER_COMPONENTS:
 			continue
 		var fields = component.script.get_script_property_list()
 		# Follow _validate_property
@@ -98,6 +101,8 @@ func generate_property(variant_type: int, field: Dictionary) -> AbstractProperty
 				property = FloatProperty.new()
 				property.allow_lesser = true
 				property.allow_greater = true
+				property.rounded = true
+				property.step = 1.0
 		TYPE_FLOAT:
 			property = FloatProperty.new()
 			if field.hint == PROPERTY_HINT_NONE:
@@ -159,7 +164,10 @@ func connect_ui(interactables: Array[Interactable], ui_root: Control) -> void:
 
 
 func save_property(value: Variant, component_name: String, property: String, interactables: Array[Interactable]) -> void:
-	interactables.map(func(interactable): interactable.get_node(component_name).set(property, value))
+	interactables.map(func(interactable):
+		if interactable.get_node(component_name) is TargetGroupComponent:
+			value = GroupEditor.GROUP_PREFIX + value
+		interactable.get_node(component_name).set(property, value))
 
 
 func refresh_marker(enabled: bool, marker_script: Script, interactables: Array[Interactable]) -> void:
@@ -187,6 +195,8 @@ func load_properties(interactable: Interactable, ui_root: Control) -> void:
 			printerr("Can't load property ", property_name, " on ", interactable)
 			continue
 		var value = component.get(property_name)
+		if component is TargetGroupComponent:
+			value = value.trim_prefix(GroupEditor.GROUP_PREFIX)
 		property.set_value_no_signal(value)
 
 
