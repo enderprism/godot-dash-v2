@@ -115,7 +115,7 @@ func generate_property(variant_type: int, field: Dictionary) -> AbstractProperty
 					property.allow_greater = true
 				if "or_less" in hint_string:
 					property.allow_lesser = true
-		TYPE_STRING:
+		TYPE_STRING, TYPE_STRING_NAME:
 			property = StringProperty.new()
 		TYPE_COLOR:
 			property = ColorProperty.new()
