@@ -22,7 +22,7 @@ func _update_groups(selection: Array[Node2D], group: String, add: bool) -> void:
 				return
 			selection.map(func(object): object.add_to_group(group, true))
 			var group_button := Button.new()
-			group_button.text = group.lstrip(GROUP_PREFIX)
+			group_button.text = group.trim_prefix(GROUP_PREFIX)
 			group_button.pressed.connect(_remove_group)
 			group_container.add_child(group_button)
 			group_buttons[group] = group_button
@@ -74,7 +74,7 @@ func _populate_group_list(selection: Array[Node2D]) -> void:
 	for new_group in new_groups:
 		if new_group not in group_buttons.keys() and new_group != null:
 			group_buttons[new_group] = Button.new()
-			group_buttons[new_group].text = new_group.lstrip(GROUP_PREFIX)
+			group_buttons[new_group].text = new_group.trim_prefix(GROUP_PREFIX)
 			group_buttons[new_group].pressed.connect(_remove_group)
 			group_container.add_child(group_buttons[new_group])
 	# Substractive pass

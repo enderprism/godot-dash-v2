@@ -17,7 +17,7 @@ func _on_property_focus_entered() -> void:
 
 
 func _on_base_color_value_changed(base_channel: String) -> void:
-	var existing_color_channels := LevelManager.current_level.color_channels.map(func(channel): return channel.associated_group.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX))
+	var existing_color_channels := LevelManager.current_level.color_channels.map(func(channel): return channel.associated_group.trim_prefix(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX))
 	if base_channel != "" and not base_channel in existing_color_channels:
 		base.set_value_no_signal("")
 		return
@@ -36,7 +36,7 @@ func _on_base_color_value_changed(base_channel: String) -> void:
 
 func _on_detail_color_value_changed(value:Variant) -> void:
 	var detail_channel := value as String
-	var existing_color_channels := LevelManager.current_level.color_channels.map(func(channel): return channel.associated_group.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX))
+	var existing_color_channels := LevelManager.current_level.color_channels.map(func(channel): return channel.associated_group.trim_prefix(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX))
 	if not detail_channel in existing_color_channels:
 		detail.set_value_no_signal("")
 		return
@@ -72,7 +72,7 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 	var base_channel: String
 	if not base_channel_array.is_empty():
 		base_channel = base_channel_array[0]
-	base_channel = base_channel.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX)
+	base_channel = base_channel.trim_prefix(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX)
 	if base_channel != null or base_channel != "":
 		base.set_value(base_channel)
 	else:
@@ -90,7 +90,7 @@ func _on_edit_handler_selection_changed(selection:Array[Node2D]) -> void:
 	var detail_channel: String
 	if not detail_channel_array.is_empty():
 		detail_channel = detail_channel_array[0]
-	detail_channel = detail_channel.lstrip(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX)
+	detail_channel = detail_channel.trim_prefix(ColorChannelItem.COLOR_CHANNEL_GROUP_PREFIX)
 	if detail_channel != null or base_channel != "":
 		detail.set_value(detail_channel)
 	else:
