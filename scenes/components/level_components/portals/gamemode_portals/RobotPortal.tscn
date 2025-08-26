@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://ch7r67xegri61" path="res://src/interactables/public_components/GamemodeChangerComponent.gd" id="9_rtwxu"]
 [ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="11_jb6b4"]
 [ext_resource type="Script" uid="uid://dh8clxh0ec2bd" path="res://src/interactables/public_components/GroundMoverComponent.gd" id="12_kxch4"]
-[ext_resource type="Script" uid="uid://cd3jqi4il3x2p" path="res://src/interactables/private_components/TextureRotatePin.gd" id="13_c3ums"]
+[ext_resource type="Script" uid="uid://cd3jqi4il3x2p" path="res://src/interactables/public_components/TextureRotationPinComponent.gd" id="13_c3ums"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
 size = Vector2(128, 384)
@@ -78,5 +78,6 @@ metadata/_custom_type_script = "uid://n8ym1w4r5ke"
 [node name="GroundMoverComponent" type="Node" parent="."]
 script = ExtResource("12_kxch4")
 
-[node name="TextureRotationPin" type="Node" parent="."]
+[node name="TextureRotationPin" type="Node" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("13_c3ums")
+sprite = NodePath("../Sprites/IndicatorIcon")

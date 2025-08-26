@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://ch7r67xegri61" path="res://src/interactables/public_components/GamemodeChangerComponent.gd" id="9_ahdn2"]
 [ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="11_ecaga"]
 [ext_resource type="Script" uid="uid://dh8clxh0ec2bd" path="res://src/interactables/public_components/GroundMoverComponent.gd" id="12_0v1uf"]
-[ext_resource type="Script" uid="uid://cd3jqi4il3x2p" path="res://src/interactables/private_components/TextureRotatePin.gd" id="13_vfit2"]
+[ext_resource type="Script" uid="uid://cd3jqi4il3x2p" path="res://src/interactables/public_components/TextureRotationPinComponent.gd" id="13_vfit2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
 size = Vector2(128, 384)
@@ -78,5 +78,6 @@ script = ExtResource("11_ecaga")
 [node name="GroundMoverComponent" type="Node" parent="."]
 script = ExtResource("12_0v1uf")
 
-[node name="TextureRotationPin" type="Node" parent="."]
+[node name="TextureRotationPin" type="Node" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("13_vfit2")
+sprite = NodePath("../Sprites/IndicatorIcon")
