@@ -40,7 +40,7 @@ func start(_player: Player) -> void:
 			.map(into_hsv_watcher))
 	group_objects.map(func(object): inital_alphas.set(object, object.modulate.a))
 	if mode == Mode.COPY and copy_target == null and LevelManager.in_editor:
-		Toasts.new_toast("In %s: copy_target is unset!" % name, 1.0, Toasts.ERROR)
+		Toasts.new_toast("In %s: copy_target is unset!" % parent.name, 1.0, Toasts.ERROR)
 
 
 func _on_easing_progressed(weight_delta: float) -> void:

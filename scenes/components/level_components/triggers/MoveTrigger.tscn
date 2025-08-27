@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://ctxjk60spq5il"]
+
+[ext_resource type="Script" uid="uid://rt6vy5mae3if" path="res://src/interactables/TriggerInteractable.gd" id="1_p13ss"]
+[ext_resource type="Texture2D" uid="uid://odtrgqretvc6" path="res://assets/textures/triggers/Move.svg" id="2_p13ss"]
+[ext_resource type="PackedScene" uid="uid://cqc5xe1c2thcj" path="res://scenes/components/game_components/GroupDisplay.tscn" id="3_o0lk4"]
+[ext_resource type="Script" uid="uid://bu1sqxc337su3" path="res://src/interactables/public_components/TargetGroupComponent.gd" id="4_wtuau"]
+[ext_resource type="Script" uid="uid://ds4yyoya8ma0" path="res://src/interactables/public_components/ObjectMoverComponent.gd" id="5_p13ss"]
+[ext_resource type="Script" uid="uid://tfriwfc7uruu" path="res://src/interactables/public_components/EasingComponent.gd" id="6_u37kq"]
+[ext_resource type="Script" uid="uid://cilw18c36fh6" path="res://src/interactables/public_components/TriggerHitboxComponent.gd" id="7_w7ouf"]
+[ext_resource type="Script" uid="uid://cd3jqi4il3x2p" path="res://src/interactables/public_components/TextureRotationPinComponent.gd" id="8_poktr"]
+[ext_resource type="Script" uid="uid://m5i4ldkc8kfv" path="res://src/interactables/private_components/HitboxDisplay.gd" id="9_chdsi"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4ydte"]
+a = Vector2(0, -8192)
+b = Vector2(0, 8192)
+
+[node name="MoveTrigger" type="Area2D"]
+script = ExtResource("1_p13ss")
+metadata/_custom_type_script = "uid://rt6vy5mae3if"
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_p13ss")
+
+[node name="GroupDisplay" parent="Sprite" instance=ExtResource("3_o0lk4")]
+offset_left = -512.0
+offset_top = -512.0
+offset_right = -512.0
+offset_bottom = -512.0
+scale = Vector2(5, 5)
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+scale = Vector2(1.2, 1.2)
+shape = SubResource("SegmentShape2D_4ydte")
+debug_color = Color(0, 1, 0, 0)
+
+[node name="TargetGroupComponent" type="Node" parent="."]
+script = ExtResource("4_wtuau")
+metadata/_custom_type_script = "uid://bu1sqxc337su3"
+
+[node name="ObjectMoverComponent" type="Node" parent="."]
+script = ExtResource("5_p13ss")
+
+[node name="EasingComponent" type="Node" parent="."]
+script = ExtResource("6_u37kq")
+metadata/_custom_type_script = "uid://tfriwfc7uruu"
+
+[node name="TriggerHitboxComponent" type="Node" parent="." node_paths=PackedStringArray("_hitbox")]
+script = ExtResource("7_w7ouf")
+_hitbox = NodePath("../Hitbox")
+metadata/_custom_type_script = "uid://cilw18c36fh6"
+
+[node name="TextureRotationPinComponent" type="Node" parent="." node_paths=PackedStringArray("pinned")]
+script = ExtResource("8_poktr")
+pinned = NodePath("../Sprite")
+sprite_scale = Vector2(0.2, 0.2)
+metadata/_custom_type_script = "uid://cd3jqi4il3x2p"
+
+[node name="HitboxDisplay" type="Node2D" parent="." node_paths=PackedStringArray("hitbox")]
+show_behind_parent = true
+script = ExtResource("9_chdsi")
+hitbox = NodePath("../Hitbox")
+color = Color(0, 1, 1, 1)
+metadata/_custom_type_script = "uid://m5i4ldkc8kfv"
+
+[connection signal="changed" from="TargetGroupComponent" to="Sprite/GroupDisplay" method="_on_target_group_component_changed"]
