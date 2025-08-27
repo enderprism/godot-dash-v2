@@ -57,7 +57,11 @@ func rebuild_ui(interactables: Array[Interactable]) -> void:
 func build_ui(interactables: Array[Interactable]) -> void:
 	var first_interactable := interactables[0]
 	var ui_root := VBoxContainer.new()
-	for i in first_interactable.components.size():
+	var should_component_be_displayed := func(component): return not component.get_script() in COMPONENT_BLACKLIST and not component.get_script() in MARKER_COMPONENTS
+	var displayed_components := first_interactable \
+			.components \
+			.filter(should_component_be_displayed)
+	for i in displayed_components.size():
 		var component = first_interactable.components[i]
 		NodeUtils.connect_once(component.property_list_changed, rebuild_ui)
 		if component.get_script() in COMPONENT_BLACKLIST \
@@ -79,7 +83,7 @@ func build_ui(interactables: Array[Interactable]) -> void:
 			property.set_meta("component_name", component.name)
 			property.set_input_state.call_deferred(not field.usage & PROPERTY_USAGE_READ_ONLY)
 			ui_root.add_child(property)
-		if i != first_interactable.components.size() - 1:
+		if i < displayed_components.size() - 1:
 			ui_root.add_child(HSeparator.new())
 	%ComponentRoot.add_child(ui_root)
 	%ComponentRoot.visible = ui_root.get_child_count() > 0
