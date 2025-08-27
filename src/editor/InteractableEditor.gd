@@ -122,6 +122,7 @@ func generate_property(variant_type: int, field: Dictionary) -> AbstractProperty
 					property.allow_lesser = true
 		TYPE_STRING, TYPE_STRING_NAME:
 			property = StringProperty.new()
+			property.placeholder = field.hint_string
 		TYPE_COLOR:
 			property = ColorProperty.new()
 		TYPE_VECTOR2:
