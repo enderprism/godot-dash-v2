@@ -72,8 +72,9 @@ func _on_easing_progressed(weight_delta: float) -> void:
 				if move_towards == null:
 					return
 				var initial_distance := initial_distances[group_object]
+				# FIXME: doesn't work when `move_towards` is moving
 				group_object.global_position += (move_towards.global_position - initial_global_position
-						+ initial_distance * distance_multiplier
-						+ offset * CELLS_TO_PX * weight_delta)
+						+ initial_distance * -distance_multiplier
+						+ offset * CELLS_TO_PX) * weight_delta
 
 
