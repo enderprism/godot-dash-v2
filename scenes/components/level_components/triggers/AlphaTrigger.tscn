@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://cd3jqi4il3x2p" path="res://src/interactables/public_components/TextureRotationPinComponent.gd" id="8_alqnf"]
 [ext_resource type="PackedScene" uid="uid://cqc5xe1c2thcj" path="res://scenes/components/game_components/GroupDisplay.tscn" id="9_4ydte"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_alqnf"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4ydte"]
 a = Vector2(0, -8192)
 b = Vector2(0, 8192)
 
@@ -22,9 +22,16 @@ metadata/_custom_type_script = "uid://rt6vy5mae3if"
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_rd6u2")
 
+[node name="GroupDisplay" parent="Sprite" instance=ExtResource("9_4ydte")]
+offset_left = -512.0
+offset_top = -512.0
+offset_right = -512.0
+offset_bottom = -512.0
+scale = Vector2(5, 5)
+
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 scale = Vector2(1.2, 1.2)
-shape = SubResource("SegmentShape2D_alqnf")
+shape = SubResource("SegmentShape2D_4ydte")
 debug_color = Color(0, 1, 0, 0)
 
 [node name="TargetGroupComponent" type="Node" parent="."]
@@ -44,9 +51,9 @@ script = ExtResource("5_qf320")
 _hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://cilw18c36fh6"
 
-[node name="TextureRotationPinComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+[node name="TextureRotationPinComponent" type="Node" parent="." node_paths=PackedStringArray("pinned")]
 script = ExtResource("8_alqnf")
-sprite = NodePath("../Sprite")
+pinned = NodePath("../Sprite")
 sprite_scale = Vector2(0.2, 0.2)
 metadata/_custom_type_script = "uid://cd3jqi4il3x2p"
 
@@ -57,6 +64,4 @@ hitbox = NodePath("../Hitbox")
 color = Color(0, 1, 1, 1)
 metadata/_custom_type_script = "uid://m5i4ldkc8kfv"
 
-[node name="GroupDisplay" parent="." instance=ExtResource("9_4ydte")]
-
-[connection signal="changed" from="TargetGroupComponent" to="GroupDisplay" method="_on_target_group_component_changed"]
+[connection signal="changed" from="TargetGroupComponent" to="Sprite/GroupDisplay" method="_on_target_group_component_changed"]
