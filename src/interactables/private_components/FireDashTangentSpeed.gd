@@ -18,5 +18,4 @@ func get_velocity(player: Player) -> Vector2:
 			angle = -clampf(pingpong(angle - PI/2, PI) - PI/2, deg_to_rad(-70), deg_to_rad(70))
 		velocity.y = tan(angle) * player.speed.x * direction * player.speed_multiplier
 	velocity.x = player.speed.x * direction * player.speed_multiplier
-	parent.angle = angle
 	return velocity

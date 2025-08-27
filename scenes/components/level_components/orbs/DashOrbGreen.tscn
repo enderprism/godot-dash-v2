@@ -26,6 +26,7 @@ script = ExtResource("3_8l25v")
 
 [node name="DashOrbPreview" type="Line2D" parent="."]
 points = PackedVector2Array(64, 0, 768, 0)
+width = 4.0
 default_color = Color(0, 1, 0, 1)
 end_cap_mode = 2
 

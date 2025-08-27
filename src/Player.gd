@@ -502,15 +502,12 @@ func _rotate_sprite_degrees(delta: float):
 					$Icon/Cube.rotation,
 					snapped($Icon/Cube.rotation - sprite_floor_angle, PI/2) + sprite_floor_angle,
 					ICON_LERP_FACTOR * delta * 60)
-	else:
-		$Icon/Cube.rotation_degrees += delta * 800 * dash_horizontal_direction
 	#endregion
 	#region ship/swing
 	$Icon/Ship.scale.y = sign(gravity_multiplier)
 	$Icon/Swing.scale.y = 1.0
-	if get_direction() != 0:
-		$Icon/Ship.scale.x = sign(get_direction())
-		$Icon/Swing.scale.x = sign(get_direction())
+	$Icon/Ship.scale.x = dash_horizontal_direction
+	$Icon/Swing.scale.x = dash_horizontal_direction
 	if not dash_control:
 		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
 			var target_rotation_degrees := gameplay_rotation_degrees + local_velocity_angle_degrees
@@ -525,9 +522,6 @@ func _rotate_sprite_degrees(delta: float):
 		else:
 			$Icon/Ship.rotation = lerp_angle($Icon/Ship.rotation, sprite_floor_angle, ICON_LERP_FACTOR * delta * 60)
 			$Icon/Swing.rotation = lerp_angle($Icon/Swing.rotation, sprite_floor_angle, ICON_LERP_FACTOR * delta * 60)
-	else:
-		$Icon/Ship.rotation = lerpf($Icon/Ship.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR)
-		$Icon/Swing.rotation = lerpf($Icon/Swing.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR)
 	#endregion
 	#region wave
 	$Icon/Wave.rotation = lerpf($Icon/Wave.rotation, gameplay_rotation, ICON_LERP_FACTOR * delta * 60)
@@ -535,8 +529,7 @@ func _rotate_sprite_degrees(delta: float):
 	if get_direction() != 0 or _get_jump_state() != 0:
 		$Icon/Wave.set_meta("last_8_direction", Vector2(get_direction(), _get_jump_state()))
 	var wave_8_direction = $Icon/Wave.get_meta("last_8_direction", Vector2(0, -1))
-	if get_direction() != 0:
-		$Icon/Wave.scale.x = sign(get_direction())
+	$Icon/Wave.scale.x = dash_horizontal_direction
 	if not dash_control:
 		if not is_on_floor() and not is_on_ceiling():
 			if wave_8_direction == Vector2.UP or wave_8_direction == Vector2.DOWN:
@@ -553,15 +546,12 @@ func _rotate_sprite_degrees(delta: float):
 					$Icon/Wave/Icon.rotation,
 					sprite_floor_angle * sign(gravity_multiplier) * $Icon/Wave.scale.x - gameplay_rotation,
 					ICON_LERP_FACTOR * delta * 60)
-	else:
-		$Icon/Wave/Icon.rotation = lerpf($Icon/Wave/Icon.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR * delta * 60)
 	#endregion
 	#region ufo
 	$Icon/UFO.scale.y = sign(gravity_multiplier)
 	$Icon/Jetpack.scale.y = sign(gravity_multiplier)
-	if get_direction() != 0:
-		$Icon/UFO.scale.x = sign(get_direction())
-		$Icon/Jetpack.scale.x = sign(get_direction())
+	$Icon/UFO.scale.x = dash_horizontal_direction
+	$Icon/Jetpack.scale.x = dash_horizontal_direction
 	if not dash_control:
 		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
 			$Icon/UFO.rotation_degrees = lerpf($Icon/UFO.rotation_degrees, velocity.rotated(-gameplay_rotation).y * delta * get_direction() * 0.2, ICON_LERP_FACTOR * delta * 60)
@@ -571,9 +561,6 @@ func _rotate_sprite_degrees(delta: float):
 				$Icon/Jetpack.rotation,
 				deg_to_rad(velocity.rotated(-gameplay_rotation).x/speed_multiplier * delta * 5) + sprite_floor_angle,
 				ICON_LERP_FACTOR * delta * 60)
-	else:
-		$Icon/UFO.rotation = lerpf($Icon/UFO.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR * delta * 60)
-		$Icon/Jetpack.rotation = lerpf($Icon/UFO.rotation, dash_control.angle * get_direction(), ICON_LERP_FACTOR * delta * 60)
 	#endregion
 	#region ball
 	$Icon/Ball.scale.y = 1.0
@@ -609,11 +596,21 @@ func _rotate_sprite_degrees(delta: float):
 	$Icon/Robot.scale.y = sign(gravity_multiplier)
 	#endregion
 	#region dash
-	var dash_particles_degrees := rad_to_deg(atan2(velocity.y * horizontal_direction, velocity.x * horizontal_direction))
-	$DashParticles.rotation_degrees = dash_particles_degrees
-	$DashParticles.process_material.angle_min = dash_particles_degrees
-	$DashParticles.process_material.angle_max = dash_particles_degrees
-	$DashFlame.scale.x = abs($DashFlame.scale.x) * dash_horizontal_direction
+	if dash_control:
+		var dash_angle: float = dash_control.path.get_velocity(self).angle()
+		var dash_angle_one_sided: float = pingpong(dash_angle - PI/2, PI) - PI/2
+		# HACK: wave doesn't rotate correctly in reverse??
+		var dash_angle_one_sided_wave: float = pingpong(-dash_angle - PI/2, PI) - PI/2
+		$DashParticles.rotation = dash_angle
+		$DashParticles.process_material.angle_min = rad_to_deg(dash_angle)
+		$DashParticles.process_material.angle_max = rad_to_deg(dash_angle)
+		$DashFlame.rotation = dash_angle
+		$Icon/Cube.rotation_degrees += delta * 800 * dash_horizontal_direction
+		$Icon/Ship.rotation = lerpf($Icon/Ship.rotation, dash_angle_one_sided, ICON_LERP_FACTOR * delta * 60)
+		$Icon/Swing.rotation = lerpf($Icon/Swing.rotation, dash_angle_one_sided, ICON_LERP_FACTOR * delta * 60)
+		$Icon/UFO.rotation = lerpf($Icon/UFO.rotation, dash_angle_one_sided, ICON_LERP_FACTOR * delta * 60)
+		$Icon/Jetpack.rotation = lerpf($Icon/UFO.rotation, dash_angle_one_sided, ICON_LERP_FACTOR * delta * 60)
+		$Icon/Wave/Icon.rotation = lerpf($Icon/Wave/Icon.rotation, dash_angle_one_sided_wave, ICON_LERP_FACTOR * delta * 60)
 	#endregion
 
 
