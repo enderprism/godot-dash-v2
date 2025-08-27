@@ -1,4 +1,4 @@
-[gd_scene load_steps=229 format=3 uid="uid://b3u17qn20dek3"]
+[gd_scene load_steps=230 format=3 uid="uid://b3u17qn20dek3"]
 
 [ext_resource type="Script" uid="uid://ccok7xaujrlpn" path="res://src/EditorScene.gd" id="1_ftcrp"]
 [ext_resource type="PackedScene" uid="uid://db7ebleody4s3" path="res://scenes/GameScene.tscn" id="1_ql4al"]
@@ -195,6 +195,7 @@
 [ext_resource type="Theme" uid="uid://cntfsyilhn2ic" path="res://resources/Theme.tres" id="147_1ad2k"]
 [ext_resource type="PackedScene" uid="uid://ctxjk60spq5il" path="res://scenes/components/level_components/triggers/MoveTrigger.tscn" id="153_gdkvu"]
 [ext_resource type="PackedScene" uid="uid://dbh4utdrx5n2c" path="res://scenes/components/level_components/triggers/RotateTrigger.tscn" id="156_vtwef"]
+[ext_resource type="PackedScene" uid="uid://dfybg5ac3hmh6" path="res://scenes/components/level_components/triggers/ToggleTrigger.tscn" id="167_7k2uw"]
 [ext_resource type="Script" uid="uid://bss8ppxnt7gio" path="res://src/gui/properties/types/BoolProperty.gd" id="179_0v0om"]
 [ext_resource type="PackedScene" uid="uid://ylswfd45fw38" path="res://scenes/components/game_components/LevelSettings.tscn" id="180_nk067"]
 [ext_resource type="PackedScene" uid="uid://b4vh26wn3qq40" path="res://scenes/components/game_components/InteractableEditor.tscn" id="183_momrj"]
@@ -3999,8 +4000,8 @@ block_palette_button = true
 
 [node name="BlockPaletteRef" type="Node" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Toggle"]
 script = ExtResource("7_f0stj")
-type = 9
-object = ExtResource("7_ii36d")
+type = 8
+object = ExtResource("167_7k2uw")
 trigger_script = ExtResource("121_r2yu4")
 
 [node name="CenterAnchor" type="Control" parent="EditorUI/EditorContainer/VBoxContainer/VSplitContainer/EditorModes/Place/Triggers/MarginContainer/ButtonContainer/Toggle"]

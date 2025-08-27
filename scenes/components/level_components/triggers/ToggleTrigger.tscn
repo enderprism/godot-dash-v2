@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://dfybg5ac3hmh6"]
+
+[ext_resource type="Script" uid="uid://rt6vy5mae3if" path="res://src/interactables/TriggerInteractable.gd" id="1_iid00"]
+[ext_resource type="Texture2D" uid="uid://b7fnymfkmta1d" path="res://assets/textures/triggers/ToggleMultipleGroups.svg" id="2_iid00"]
+[ext_resource type="Script" uid="uid://wlises1hss4a" path="res://src/interactables/private_components/ToggleTriggerSprite.gd" id="3_hvadl"]
+[ext_resource type="Script" uid="uid://bxvjbgjx18gup" path="res://src/interactables/public_components/ToggleComponent.gd" id="3_vnerw"]
+[ext_resource type="Script" uid="uid://cilw18c36fh6" path="res://src/interactables/public_components/TriggerHitboxComponent.gd" id="7_72sgc"]
+[ext_resource type="Script" uid="uid://cd3jqi4il3x2p" path="res://src/interactables/public_components/TextureRotationPinComponent.gd" id="8_8kq85"]
+[ext_resource type="Script" uid="uid://m5i4ldkc8kfv" path="res://src/interactables/private_components/HitboxDisplay.gd" id="9_vhwbu"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4ydte"]
+a = Vector2(0, -8192)
+b = Vector2(0, 8192)
+
+[node name="ToggleTrigger" type="Area2D"]
+script = ExtResource("1_iid00")
+metadata/_custom_type_script = "uid://rt6vy5mae3if"
+
+[node name="Sprite" type="Sprite2D" parent="." node_paths=PackedStringArray("toggle_component")]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_iid00")
+script = ExtResource("3_hvadl")
+toggle_component = NodePath("../ToggleComponent")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+scale = Vector2(1.2, 1.2)
+shape = SubResource("SegmentShape2D_4ydte")
+debug_color = Color(0, 1, 0, 0)
+
+[node name="ToggleComponent" type="Node" parent="."]
+script = ExtResource("3_vnerw")
+metadata/_custom_type_script = "uid://bxvjbgjx18gup"
+
+[node name="TriggerHitboxComponent" type="Node" parent="." node_paths=PackedStringArray("_hitbox")]
+script = ExtResource("7_72sgc")
+_hitbox = NodePath("../Hitbox")
+metadata/_custom_type_script = "uid://cilw18c36fh6"
+
+[node name="TextureRotationPinComponent" type="Node" parent="." node_paths=PackedStringArray("pinned")]
+script = ExtResource("8_8kq85")
+pinned = NodePath("../Sprite")
+sprite_scale = Vector2(0.2, 0.2)
+metadata/_custom_type_script = "uid://cd3jqi4il3x2p"
+
+[node name="HitboxDisplay" type="Node2D" parent="." node_paths=PackedStringArray("hitbox")]
+z_index = -20
+script = ExtResource("9_vhwbu")
+hitbox = NodePath("../Hitbox")
+color = Color(0, 1, 1, 1)
+metadata/_custom_type_script = "uid://m5i4ldkc8kfv"
