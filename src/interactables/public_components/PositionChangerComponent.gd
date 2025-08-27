@@ -1,5 +1,5 @@
 extends Component
-class_name ObjectMoverComponent
+class_name PositionChangerComponent
 
 const CELLS_TO_PX := Vector2(LevelManager.CELL_SIZE, -LevelManager.CELL_SIZE)
 
