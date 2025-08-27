@@ -38,7 +38,6 @@ func _ready() -> void:
 	parent.query(EasingComponent).progressed.connect(_on_easing_progressed)
 
 
-# Hide unneeded elements in the inspector
 func _validate_property(property: Dictionary) -> void:
 	if property.name in ["move_towards", "group_center", "offset", "distance_multiplier"] and mode != Mode.MOVE_TOWARDS:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
@@ -68,9 +67,7 @@ func _on_easing_progressed(weight_delta: float) -> void:
 				group_object.global_position += position * CELLS_TO_PX * weight_delta
 			Mode.SET:
 				group_object.global_position += (parent.to_global(position * CELLS_TO_PX) - initial_global_position) * weight_delta
-			Mode.MOVE_TOWARDS:
-				if move_towards == null:
-					return
+			Mode.MOVE_TOWARDS when move_towards != null:
 				var initial_distance := initial_distances[group_object]
 				# FIXME: doesn't work when `move_towards` is moving
 				group_object.global_position += (move_towards.global_position - initial_global_position
