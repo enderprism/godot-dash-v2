@@ -58,7 +58,7 @@ sprite_scale = Vector2(0.2, 0.2)
 metadata/_custom_type_script = "uid://cd3jqi4il3x2p"
 
 [node name="HitboxDisplay" type="Node2D" parent="." node_paths=PackedStringArray("hitbox")]
-show_behind_parent = true
+z_index = -20
 script = ExtResource("6_651ls")
 hitbox = NodePath("../Hitbox")
 color = Color(0, 1, 1, 1)
