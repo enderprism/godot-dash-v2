@@ -6,7 +6,6 @@ const TOAST_LAYER_PACKED := preload("res://scenes/components/game_components/Toa
 enum {
 	NONE = 0,
 	PERSISTENT = 1, # Doesn't disappear after a delay, the user must click on it to dismiss it.
-	ERROR = 1 << 2,
 }
 
 var toast_layer: CanvasLayer
@@ -24,7 +23,17 @@ func new_toast(text: String, duration: float = 1.0, options: int = NONE) -> Toas
 	toast.text = text
 	toast.lifetime = duration
 	toast.persistent = options & PERSISTENT
-	if options & ERROR:
-		toast.modulate = Color.DEEP_PINK
 	toast_container.add_child(toast)
+	return toast
+
+
+func error(text: String, duration: float = 1.0, options: int = NONE) -> Toast:
+	var toast = new_toast(text, duration, options)
+	toast.modulate = Color.DEEP_PINK
+	return toast
+
+
+func warning(text: String, duration: float = 1.0, options: int = NONE) -> Toast:
+	var toast = new_toast(text, duration, options)
+	toast.modulate = Color.YELLOW
 	return toast

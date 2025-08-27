@@ -39,8 +39,10 @@ func start(_player: Player) -> void:
 			.filter(func(object): return object is Node2D) \
 			.map(into_hsv_watcher))
 	group_objects.map(func(object): inital_alphas.set(object, object.modulate.a))
+	if group_objects.is_empty():
+		Toasts.warning("In %s: target group doesn't contain any objects" % parent.name)
 	if mode == Mode.COPY and copy_target == null and LevelManager.in_editor:
-		Toasts.new_toast("In %s: copy_target is unset!" % parent.name, 1.0, Toasts.ERROR)
+		Toasts.error("In %s: copy target is unset" % parent.name)
 
 
 func _on_easing_progressed(weight_delta: float) -> void:

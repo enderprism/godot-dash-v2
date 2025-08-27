@@ -51,11 +51,13 @@ func start(_player: Player) -> void:
 			.get_nodes_in_group(parent.query(TargetGroupComponent).target_group) \
 			.filter(func(object): return object is Node2D))
 	group_objects.map(func(object): initial_global_positions.set(object, object.global_position))
+	if group_objects.is_empty():
+		Toasts.warning("In %s: target group doesn't contain any objects" % parent.name)
 	if mode == Mode.MOVE_TOWARDS:
 		if move_towards:
 			group_objects.map(func(object): initial_distances.set(object, move_towards.global_position - object.global_position))
 		elif LevelManager.in_editor:
-			Toasts.new_toast("In %s: move_towards is unset" % parent.name, 1.0, Toasts.ERROR)
+			Toasts.error("In %s: move towards is unset" % parent.name)
 
 
 func _on_easing_progressed(weight_delta: float) -> void:
