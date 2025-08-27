@@ -38,7 +38,6 @@ func start(_player: Player) -> void:
 			.get_nodes_in_group(parent.query(TargetGroupComponent).target_group) \
 			.filter(func(object): return object is Node2D) \
 			.map(into_hsv_watcher))
-	print_debug(group_objects)
 	group_objects.map(func(object): inital_alphas.set(object, object.modulate.a))
 	if mode == Mode.COPY and copy_target == null and LevelManager.in_editor:
 		Toasts.new_toast("In %s: copy_target is unset!" % name, 1.0, Toasts.ERROR)
