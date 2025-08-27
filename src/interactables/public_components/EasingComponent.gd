@@ -4,7 +4,7 @@ class_name EasingComponent
 signal progressed(weight_delta: float)
 signal finished
 
-@export_range(0.0, 10.0, 0.0001, "or_more") var duration: float = 1.0
+@export_range(0.0, 10.0, 0.0001, "or_more", "suffix:s") var duration: float = 1.0
 @export var keep_active: bool ## Keep the easing active after it completes.
 @export var easing_type: Tween.EaseType = Tween.EASE_IN_OUT
 @export var easing_transition: Tween.TransitionType

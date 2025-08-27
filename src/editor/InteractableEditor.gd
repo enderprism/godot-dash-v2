@@ -111,9 +111,10 @@ func generate_property(variant_type: int, field: Dictionary) -> AbstractProperty
 				property.allow_greater = true
 			elif field.hint == PROPERTY_HINT_RANGE:
 				var hint_string: String = field.hint_string
-				var min_value = hint_string.get_slice(",", 0)
-				var max_value = hint_string.get_slice(",", 1)
-				var step = hint_string.get_slice(",", 2)
+				var split_hint_string := Array(hint_string.split(","))
+				var min_value = split_hint_string[0]
+				var max_value = split_hint_string[1]
+				var step = split_hint_string[2]
 				property.min_value = min_value
 				property.max_value = max_value
 				property.step = step
@@ -121,6 +122,10 @@ func generate_property(variant_type: int, field: Dictionary) -> AbstractProperty
 					property.allow_greater = true
 				if "or_less" in hint_string:
 					property.allow_lesser = true
+				if "degrees" in hint_string:
+					property.suffix = "°"
+				if "suffix" in hint_string:
+					property.suffix = split_hint_string[split_hint_string.find("suffix")].get_slice(":", 1)
 		TYPE_STRING, TYPE_STRING_NAME:
 			property = StringProperty.new()
 			property.placeholder = field.hint_string
