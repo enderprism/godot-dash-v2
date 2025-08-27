@@ -63,10 +63,7 @@ func build_ui(interactables: Array[Interactable]) -> void:
 			.filter(should_component_be_displayed)
 	for i in displayed_components.size():
 		var component = first_interactable.components[i]
-		NodeUtils.connect_once(component.property_list_changed, rebuild_ui)
-		if component.get_script() in COMPONENT_BLACKLIST \
-				or component.get_script() in MARKER_COMPONENTS:
-			continue
+		NodeUtils.connect_once(component.property_list_changed, rebuild_ui.bind(interactables))
 		var fields = component.script.get_script_property_list()
 		# Follow _validate_property
 		if component.has_method(&"_validate_property"):
