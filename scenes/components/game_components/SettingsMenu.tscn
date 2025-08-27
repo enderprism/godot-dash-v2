@@ -23,10 +23,11 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_r47on")
-current_tab = 0
+current_tab = 2
 script = ExtResource("3_rvg0e")
 
 [node name="Graphics" type="ScrollContainer" parent="."]
+visible = false
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
@@ -182,7 +183,6 @@ config_property = &"mute_game_on_unfocus"
 metadata/_custom_type_script = "uid://ckqgnvpbftev7"
 
 [node name="Editor" type="ScrollContainer" parent="."]
-visible = false
 layout_mode = 2
 focus_mode = 1
 theme = ExtResource("1_r47on")
@@ -196,6 +196,47 @@ size_flags_vertical = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="Editor/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Interface" type="VBoxContainer" parent="Editor/MarginContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("8_eb8rq")
+label_settings = ExtResource("6_ea76q")
+label_alignment = 1
+metadata/_custom_type_script = "uid://cuih47milvqcs"
+
+[node name="Hide grid on playtest" type="BoxContainer" parent="Editor/MarginContainer/VBoxContainer/Interface"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+script = ExtResource("11_egxjo")
+default = true
+metadata/_custom_type_script = "uid://bss8ppxnt7gio"
+
+[node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Interface/Hide grid on playtest"]
+script = ExtResource("6_p6jor")
+config_property = &"hide_grid_on_playtest"
+
+[node name="Level" type="VBoxContainer" parent="Editor/MarginContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("8_eb8rq")
+label_settings = ExtResource("6_ea76q")
+label_alignment = 1
+metadata/_custom_type_script = "uid://cuih47milvqcs"
+
+[node name="Autosave Delay" type="BoxContainer" parent="Editor/MarginContainer/VBoxContainer/Level"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+tooltip_text = "Delay in minutes after which the level will be automatically saved.
+The autosave timer will not start for levels that were never saved."
+script = ExtResource("7_ndunm")
+default = 2.0
+max_value = 1.0
+allow_greater = true
+suffix = "min"
+metadata/_custom_type_script = "uid://dd75trm1kaaiu"
+
+[node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
+script = ExtResource("6_p6jor")
+config_property = &"autosave_delay"
 
 [node name="Colors" type="VBoxContainer" parent="Editor/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 34)
@@ -263,29 +304,6 @@ metadata/_custom_type_script = "uid://dd75trm1kaaiu"
 script = ExtResource("6_p6jor")
 config_property = &"trigger_hitbox_fill_alpha"
 
-[node name="Level" type="VBoxContainer" parent="Editor/MarginContainer/VBoxContainer"]
-layout_mode = 2
-script = ExtResource("8_eb8rq")
-label_settings = ExtResource("6_ea76q")
-label_alignment = 1
-metadata/_custom_type_script = "uid://cuih47milvqcs"
-
-[node name="Autosave Delay" type="BoxContainer" parent="Editor/MarginContainer/VBoxContainer/Level"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-tooltip_text = "Delay in minutes after which the level will be automatically saved.
-The autosave timer will not start for levels that were never saved."
-script = ExtResource("7_ndunm")
-default = 2.0
-max_value = 1.0
-allow_greater = true
-suffix = "min"
-metadata/_custom_type_script = "uid://dd75trm1kaaiu"
-
-[node name="PropertySaveLoad" type="Node" parent="Editor/MarginContainer/VBoxContainer/Level/Autosave Delay"]
-script = ExtResource("6_p6jor")
-config_property = &"autosave_delay"
-
 [node name="Debug" type="ScrollContainer" parent="."]
 visible = false
 layout_mode = 2
@@ -299,13 +317,20 @@ size_flags_vertical = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="Debug/MarginContainer"]
 layout_mode = 2
 
-[node name="Draw debug overlays" type="BoxContainer" parent="Debug/MarginContainer/VBoxContainer"]
+[node name="Debug" type="VBoxContainer" parent="Debug/MarginContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("8_eb8rq")
+label_settings = ExtResource("6_ea76q")
+label_alignment = 1
+metadata/_custom_type_script = "uid://cuih47milvqcs"
+
+[node name="Draw debug overlays" type="BoxContainer" parent="Debug/MarginContainer/VBoxContainer/Debug"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 script = ExtResource("11_egxjo")
 metadata/_custom_type_script = "uid://bss8ppxnt7gio"
 
-[node name="PropertySaveLoad" type="Node" parent="Debug/MarginContainer/VBoxContainer/Draw debug overlays"]
+[node name="PropertySaveLoad" type="Node" parent="Debug/MarginContainer/VBoxContainer/Debug/Draw debug overlays"]
 script = ExtResource("6_p6jor")
 config_property = &"draw_debug_overlays"
 

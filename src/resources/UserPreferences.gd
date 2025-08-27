@@ -13,11 +13,12 @@ class_name UserPreferences extends Resource
 @export var mute_game_on_unfocus: bool = true
 
 @export_group("Editor")
+@export var hide_grid_on_playtest: bool = true
+@export var autosave_delay: float
 @export var selection_zone_color := Color.GREEN
 @export_range(0, 1, .05) var selection_zone_fill_alpha := 0.2
 @export var trigger_hitbox_color := Color.CYAN
 @export_range(0, 1, .05) var trigger_hitbox_fill_alpha := 0.2
-@export var autosave_delay: float
 
 @export_group("Debug")
 @export var draw_debug_overlays: bool
