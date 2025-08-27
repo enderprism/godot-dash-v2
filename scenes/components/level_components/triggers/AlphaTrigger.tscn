@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bxhdprvq16gwq"]
+[gd_scene load_steps=11 format=3 uid="uid://bxhdprvq16gwq"]
 
 [ext_resource type="Script" uid="uid://rt6vy5mae3if" path="res://src/interactables/TriggerInteractable.gd" id="1_stasq"]
 [ext_resource type="Texture2D" uid="uid://cihka00vqqj3m" path="res://assets/textures/triggers/Alpha.svg" id="2_rd6u2"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bu1sqxc337su3" path="res://src/interactables/public_components/TargetGroupComponent.gd" id="6_78nkh"]
 [ext_resource type="Script" uid="uid://m5i4ldkc8kfv" path="res://src/interactables/private_components/HitboxDisplay.gd" id="6_651ls"]
 [ext_resource type="Script" uid="uid://cd3jqi4il3x2p" path="res://src/interactables/public_components/TextureRotationPinComponent.gd" id="8_alqnf"]
+[ext_resource type="PackedScene" uid="uid://cqc5xe1c2thcj" path="res://scenes/components/game_components/GroupDisplay.tscn" id="9_4ydte"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_alqnf"]
 a = Vector2(0, -8192)
@@ -43,6 +44,12 @@ script = ExtResource("5_qf320")
 _hitbox = NodePath("../Hitbox")
 metadata/_custom_type_script = "uid://cilw18c36fh6"
 
+[node name="TextureRotationPinComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("8_alqnf")
+sprite = NodePath("../Sprite")
+sprite_scale = Vector2(0.2, 0.2)
+metadata/_custom_type_script = "uid://cd3jqi4il3x2p"
+
 [node name="HitboxDisplay" type="Node2D" parent="." node_paths=PackedStringArray("hitbox")]
 show_behind_parent = true
 script = ExtResource("6_651ls")
@@ -50,8 +57,6 @@ hitbox = NodePath("../Hitbox")
 color = Color(0, 1, 1, 1)
 metadata/_custom_type_script = "uid://m5i4ldkc8kfv"
 
-[node name="TextureRotationPin" type="Node" parent="." node_paths=PackedStringArray("sprite")]
-script = ExtResource("8_alqnf")
-sprite = NodePath("../Sprite")
-sprite_scale = Vector2(0.2, 0.2)
-metadata/_custom_type_script = "uid://cd3jqi4il3x2p"
+[node name="GroupDisplay" parent="." instance=ExtResource("9_4ydte")]
+
+[connection signal="changed" from="TargetGroupComponent" to="GroupDisplay" method="_on_target_group_component_changed"]
