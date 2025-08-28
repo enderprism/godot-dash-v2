@@ -43,12 +43,12 @@ func start(_body: Node2D) -> void:
 	if _player not in _players:
 		_players.append(_player)
 	if is_zero_approx(easing.duration):
-		if not LevelManager.platformer or _player.gravity_multiplier > 0:
+		if not LevelManager.platformer or _player.gravity_flip > 0:
 			_player.gameplay_rotation_degrees = _rotation_degrees
 		else:
 			_player.gameplay_rotation_degrees = wrapf(_rotation_degrees + 180, -180, 180)
 		if not LevelManager.platformer:
-			_player.gravity_multiplier = abs(_player.gravity_multiplier)
+			_player.gravity_flip = abs(_player.gravity_flip)
 			_player.velocity = _player.velocity.rotated(deg_to_rad(_rotation_degrees))
 
 func reset() -> void:

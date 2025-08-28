@@ -98,8 +98,8 @@ var player_scale: PlayerScale = PlayerScale.NORMAL:
 var can_hit_ceiling: bool
 var jump_hold_disabled: bool
 var speed_multiplier: float = 1.0
+var gravity_flip: int = 1
 var gravity_multiplier: float = 1.0
-var gameplay_trigger_gravity_multiplier: float = 1
 var horizontal_direction: int = 1
 var speed: Vector2:
 	get():
@@ -156,7 +156,7 @@ func _physics_process(delta: float) -> void:
 	if _dead or not LevelManager.level_playing:
 		return
 	
-	up_direction = Vector2.UP.rotated(gameplay_rotation) * sign(gravity_multiplier)
+	up_direction = Vector2.UP.rotated(gameplay_rotation) * sign(gravity_flip)
 	velocity = _compute_velocity(delta, velocity, get_direction(), _get_jump_state(EVALUATE_CLICK_BUFFER))
 	if not $SlopeShapecast.is_colliding() and $GroundCollider.shape is CircleShape2D:
 		$GroundCollider.shape = default_collider
@@ -172,7 +172,7 @@ func _physics_process(delta: float) -> void:
 		add_child(_last_spider_trail)
 		_last_spider_trail.trail_global_position = $Icon/Spider/SpiderCast/SpiderTrailSpawnPoint.global_position if horizontal_direction > 0 \
 			else $Icon/Spider/SpiderCast/SpiderTrailSpawnPointReverse.global_position
-		_last_spider_trail.displayed_scale_y = abs(_last_spider_trail_height) * sign(gravity_multiplier)
+		_last_spider_trail.displayed_scale_y = abs(_last_spider_trail_height) * sign(gravity_flip)
 		_last_spider_trail.displayed_scale_x = -horizontal_direction
 		_last_spider_trail = null
 	#region 0x speed portal position nudge
@@ -221,7 +221,7 @@ func get_floor_angle_signed(last_slide: bool) -> float:
 		floor_normal = get_floor_normal()
 	var floor_angle: float
 	if _is_flying_gamemode and is_on_ceiling() and _get_jump_state() == 1:
-		var local_up_direction: Vector2 = Vector2.DOWN.rotated(gameplay_rotation) * sign(gravity_multiplier)
+		var local_up_direction: Vector2 = Vector2.DOWN.rotated(gameplay_rotation) * sign(gravity_flip)
 		floor_angle = snappedf(rad_to_deg(floor_normal.angle_to(local_up_direction)), 0.01)
 	else:
 		floor_angle = snappedf(rad_to_deg(floor_normal.angle_to(up_direction)), 0.01)
@@ -307,7 +307,7 @@ func _compute_velocity(delta: float,
 	#endregion
 
 	if (internal_gamemode == Gamemode.SWING or internal_gamemode == Gamemode.BALL) and jump_state == 1 and orb_queue.is_empty():
-		gravity_multiplier *= -1
+		gravity_flip *= -1
 
 	$GroundCollider.rotation = gameplay_rotation
 	$SolidOverlapCheck.rotation = gameplay_rotation
@@ -315,33 +315,33 @@ func _compute_velocity(delta: float,
 	$KillColliderRectangularHazard.rotation = gameplay_rotation
 	$KillColliderCircularHazard.rotation = gameplay_rotation
 	$GroundRaycast.rotation = gameplay_rotation
-	$GroundRaycast.scale.y = gravity_multiplier
+	$GroundRaycast.scale.y = gravity_flip
 	$SlopeShapecast.rotation = gameplay_rotation
-	$SlopeShapecast.scale.y = gravity_multiplier
+	$SlopeShapecast.scale.y = gravity_flip
 
 	#region Apply Gravity
 	if not dash_control:
 		if internal_gamemode == Gamemode.SHIP:
-			_velocity.y += GRAVITY * delta * gravity_multiplier * gameplay_trigger_gravity_multiplier * jump_state * -1 * FLY_GRAVITY_MULTIPLIER
+			_velocity.y += GRAVITY * delta * gravity_flip * gravity_multiplier * jump_state * -1 * FLY_GRAVITY_MULTIPLIER
 			_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
 		elif internal_gamemode == Gamemode.SWING:
-			_velocity.y += GRAVITY * delta * gravity_multiplier * gameplay_trigger_gravity_multiplier * FLY_GRAVITY_MULTIPLIER
+			_velocity.y += GRAVITY * delta * gravity_flip * gravity_multiplier * FLY_GRAVITY_MULTIPLIER
 			_velocity.y = clamp(_velocity.y, -FLY_TERMINAL_VELOCITY.y, FLY_TERMINAL_VELOCITY.y)
 		elif internal_gamemode == Gamemode.WAVE:
-			_velocity.y = SPEED.x * gravity_multiplier * gameplay_trigger_gravity_multiplier * jump_state * -1
+			_velocity.y = SPEED.x * gravity_flip * gravity_multiplier * jump_state * -1
 			if speed_multiplier > 0: _velocity.y *= speed_multiplier
 			if player_scale == PlayerScale.MINI:
 				_velocity.y *= 2
 			elif player_scale == PlayerScale.BIG:
 				_velocity.y *= 0.5
 		elif internal_gamemode == Gamemode.SPIDER:
-			_velocity.y += GRAVITY * delta * gravity_multiplier * gameplay_trigger_gravity_multiplier * jump_state * -1 * SPIDER_GRAVITY_MULTIPLIER
+			_velocity.y += GRAVITY * delta * gravity_flip * gravity_multiplier * jump_state * -1 * SPIDER_GRAVITY_MULTIPLIER
 			_velocity.y = clamp(_velocity.y, -TERMINAL_VELOCITY.y, TERMINAL_VELOCITY.y)
 		elif not is_on_floor() and not $GroundRaycast.is_colliding():
 			if internal_gamemode == Gamemode.UFO:
-				_velocity.y += GRAVITY * delta * gravity_multiplier * gameplay_trigger_gravity_multiplier * UFO_GRAVITY_MULTIPLIER
+				_velocity.y += GRAVITY * delta * gravity_flip * gravity_multiplier * UFO_GRAVITY_MULTIPLIER
 			else:
-				_velocity.y += GRAVITY * delta * gravity_multiplier * gameplay_trigger_gravity_multiplier
+				_velocity.y += GRAVITY * delta * gravity_flip * gravity_multiplier
 			# _velocity.y = clamp(_velocity.y, -TERMINAL_VELOCITY.y, TERMINAL_VELOCITY.y)
 	#endregion
 	
@@ -365,7 +365,7 @@ func _compute_velocity(delta: float,
 					_spider_state_machine.travel("jump")
 			elif component is SpiderDashComponent:
 				component.set_dash_flip_state(self)
-				gravity_multiplier *= -1
+				gravity_flip *= -1
 				position += Vector2.DOWN.rotated(gameplay_rotation) * _get_spider_velocity_delta()
 				jump_hold_disabled = true
 	#endregion
@@ -375,16 +375,16 @@ func _compute_velocity(delta: float,
 		if _is_flying_gamemode:
 			pass
 		elif internal_gamemode == Gamemode.SPIDER:
-			gravity_multiplier *= -1
+			gravity_flip *= -1
 			position += Vector2.DOWN.rotated(gameplay_rotation) * _get_spider_velocity_delta()
 		elif internal_gamemode == Gamemode.BALL:
-			_velocity.y = speed.y * gravity_multiplier * 0.5
+			_velocity.y = speed.y * gravity_flip * 0.5
 		elif internal_gamemode == Gamemode.ROBOT:
-			_velocity.y = SPEED.x * gravity_multiplier * -1
+			_velocity.y = SPEED.x * gravity_flip * -1
 		elif internal_gamemode == Gamemode.UFO:
-			_velocity.y = -speed.y * gravity_multiplier * UFO_GRAVITY_MULTIPLIER
+			_velocity.y = -speed.y * gravity_flip * UFO_GRAVITY_MULTIPLIER
 		else:
-			_velocity.y = -speed.y * gravity_multiplier
+			_velocity.y = -speed.y * gravity_flip
 	#endregion
 
 	if not LevelManager.platformer or (LevelManager.platformer and internal_gamemode == Gamemode.WAVE):
@@ -407,11 +407,11 @@ func _compute_velocity(delta: float,
 	
 	var visual_gameplay_rotation_degrees: float = round(gameplay_rotation_degrees - LevelManager.player_camera.global_rotation_degrees)
 	var gameplay_rotation_in_180_quadrant: bool = abs(visual_gameplay_rotation_degrees) > 135.0 and abs(visual_gameplay_rotation_degrees) < 225.0
-	var flipped_controls_in_90_quadrant: bool = gravity_multiplier < 0 and abs(visual_gameplay_rotation_degrees) > 45.0 and abs(visual_gameplay_rotation_degrees) < 135.0
+	var flipped_controls_in_90_quadrant: bool = gravity_flip < 0 and abs(visual_gameplay_rotation_degrees) > 45.0 and abs(visual_gameplay_rotation_degrees) < 135.0
 
 	if LevelManager.platformer and abs(_velocity.x) < 10.0 and (gameplay_rotation_in_180_quadrant or flipped_controls_in_90_quadrant):
 		gameplay_rotation_degrees = wrapf((abs(gameplay_rotation_degrees) - 180.0) * signf(gameplay_rotation_degrees), -180.0, 180.0)
-		gravity_multiplier *= -1
+		gravity_flip *= -1
 	
 	#region Apply orbs velocity
 	if not orb_queue.is_empty() and (
@@ -431,7 +431,7 @@ func _compute_velocity(delta: float,
 					_spider_state_machine.travel("jump")
 			elif component is SpiderDashComponent:
 				component.set_dash_flip_state(self)
-				gravity_multiplier = -sign($Icon/Spider/SpiderCast.scale.y)
+				gravity_flip = -sign($Icon/Spider/SpiderCast.scale.y)
 				position += Vector2.DOWN.rotated(gameplay_rotation) * _get_spider_velocity_delta()
 				jump_hold_disabled = true
 		if not colliding_orb.has(SingleUsageComponent):
@@ -496,7 +496,7 @@ func _rotate_sprite_degrees(delta: float):
 		$Icon/Cube.scale.x = horizontal_direction
 	if not dash_control:
 		if not is_on_floor() and not is_on_ceiling() and speed_multiplier > 0.0:
-			$Icon/Cube.rotation_degrees += delta * gravity_multiplier * 400 * get_direction()
+			$Icon/Cube.rotation_degrees += delta * gravity_flip * 400 * get_direction()
 		else:
 			$Icon/Cube.rotation = lerp_angle(
 					$Icon/Cube.rotation,
@@ -504,7 +504,7 @@ func _rotate_sprite_degrees(delta: float):
 					ICON_LERP_FACTOR * delta * 60)
 	#endregion
 	#region ship/swing
-	$Icon/Ship.scale.y = sign(gravity_multiplier)
+	$Icon/Ship.scale.y = sign(gravity_flip)
 	$Icon/Swing.scale.y = 1.0
 	$Icon/Ship.scale.x = dash_horizontal_direction
 	$Icon/Swing.scale.x = dash_horizontal_direction
@@ -533,23 +533,23 @@ func _rotate_sprite_degrees(delta: float):
 	if not dash_control:
 		if not is_on_floor() and not is_on_ceiling():
 			if wave_8_direction == Vector2.UP or wave_8_direction == Vector2.DOWN:
-				$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 90.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25 * delta * 60)
+				$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 90.0 * -wave_8_direction.y * sign(gravity_flip), 0.25 * delta * 60)
 			elif wave_8_direction:
 				if player_scale == PlayerScale.NORMAL:
-					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 45.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25 * delta * 60)
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 45.0 * -wave_8_direction.y * sign(gravity_flip), 0.25 * delta * 60)
 				elif player_scale == PlayerScale.MINI:
-					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 60.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25 * delta * 60)
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 60.0 * -wave_8_direction.y * sign(gravity_flip), 0.25 * delta * 60)
 				elif player_scale == PlayerScale.BIG:
-					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 30.0 * -wave_8_direction.y * sign(gravity_multiplier), 0.25 * delta * 60)
+					$Icon/Wave/Icon.rotation_degrees = lerpf($Icon/Wave/Icon.rotation_degrees, 30.0 * -wave_8_direction.y * sign(gravity_flip), 0.25 * delta * 60)
 		else:
 			$Icon/Wave/Icon.rotation = lerp_angle(
 					$Icon/Wave/Icon.rotation,
-					sprite_floor_angle * sign(gravity_multiplier) * $Icon/Wave.scale.x - gameplay_rotation,
+					sprite_floor_angle * sign(gravity_flip) * $Icon/Wave.scale.x - gameplay_rotation,
 					ICON_LERP_FACTOR * delta * 60)
 	#endregion
 	#region ufo
-	$Icon/UFO.scale.y = sign(gravity_multiplier)
-	$Icon/Jetpack.scale.y = sign(gravity_multiplier)
+	$Icon/UFO.scale.y = sign(gravity_flip)
+	$Icon/Jetpack.scale.y = sign(gravity_flip)
 	$Icon/UFO.scale.x = dash_horizontal_direction
 	$Icon/Jetpack.scale.x = dash_horizontal_direction
 	if not dash_control:
@@ -565,9 +565,9 @@ func _rotate_sprite_degrees(delta: float):
 	#region ball
 	$Icon/Ball.scale.y = 1.0
 	if speed_multiplier > 0.0:
-		var rotation_delta := delta * 0.6 * gameplay_trigger_gravity_multiplier * (velocity.rotated(-gameplay_rotation).x / speed_multiplier)
+		var rotation_delta := delta * 0.6 * gravity_multiplier * (velocity.rotated(-gameplay_rotation).x / speed_multiplier)
 		if not dash_control:
-			rotation_delta *= gravity_multiplier
+			rotation_delta *= gravity_flip
 		$Icon/Ball.rotation_degrees += rotation_delta
 	if not dash_control:
 		var ball_grounded_look_factor = $Icon/Ball.get_meta("ball_grounded_look_factor", 0.0)
@@ -583,7 +583,7 @@ func _rotate_sprite_degrees(delta: float):
 	$Icon/Spider.rotation_degrees = gameplay_rotation_degrees
 	$Icon/Spider/SpiderSprites.rotation = lerp_angle(
 			$Icon/Spider/SpiderSprites.rotation,
-			(sprite_floor_angle - gameplay_rotation) * sign(gravity_multiplier),
+			(sprite_floor_angle - gameplay_rotation) * sign(gravity_flip),
 			ICON_LERP_FACTOR * delta * 60)
 	$Icon/Robot.rotation = lerp_angle(
 			$Icon/Robot.rotation,
@@ -592,8 +592,8 @@ func _rotate_sprite_degrees(delta: float):
 	if get_direction() != 0:
 		$Icon/Spider/SpiderSprites.scale.x = sign(get_direction())
 		$Icon/Robot.scale.x = sign(get_direction())
-	$Icon/Spider.scale.y = sign(gravity_multiplier)
-	$Icon/Robot.scale.y = sign(gravity_multiplier)
+	$Icon/Spider.scale.y = sign(gravity_flip)
+	$Icon/Robot.scale.y = sign(gravity_flip)
 	#endregion
 	#region dash
 	if dash_control:
@@ -615,7 +615,7 @@ func _rotate_sprite_degrees(delta: float):
 
 
 func _update_swing_fire(delta: float) -> void:
-	if gravity_multiplier < 0.0:
+	if gravity_flip < 0.0:
 		$Icon/Swing/FireBoostTop.position = $Icon/Swing/FireBoostTop.position.lerp(Vector2.ZERO, 1-exp(-delta * 12))
 		$Icon/Swing/FireBoostBottom.position = $Icon/Swing/FireBoostBottom.position.lerp(Vector2(-54.0, 63.0), 1-exp(-delta * 12))
 	else:
@@ -651,7 +651,7 @@ func _get_spider_velocity_delta() -> float:
 	var _target_position = $Icon/Spider/SpiderCast.get_collision_point(0)
 	var _spider_velocity_delta: float = abs((_target_position - position).rotated(-gameplay_rotation).y)
 	_spider_velocity_delta -= LevelManager.CELL_SIZE/2.0 * scale.y
-	var result := _spider_velocity_delta * gravity_multiplier * gameplay_trigger_gravity_multiplier
+	var result := _spider_velocity_delta * gravity_flip * gravity_multiplier
 	_last_spider_trail = SPIDER_TRAIL.instantiate()
 	_last_spider_trail_height = abs(result/SpiderTrail.SPIDER_TRAIL_HEIGHT)
 	_last_spider_trail.scale.x = horizontal_direction

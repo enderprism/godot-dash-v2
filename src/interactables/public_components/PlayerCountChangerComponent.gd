@@ -25,8 +25,8 @@ func set_player_count(player: Player) -> void:
 			LevelManager.player.velocity = player.velocity
 			LevelManager.player.gameplay_rotation = player.gameplay_rotation
 			LevelManager.player.horizontal_direction = player.horizontal_direction
+			LevelManager.player.gravity_flip = player.gravity_flip
 			LevelManager.player.gravity_multiplier = player.gravity_multiplier
-			LevelManager.player.gameplay_trigger_gravity_multiplier = player.gameplay_trigger_gravity_multiplier
 			LevelManager.player.speed_multiplier = player.speed_multiplier
 			# Gamemode
 			LevelManager.player.internal_gamemode = player.internal_gamemode
@@ -55,8 +55,8 @@ func set_player_count(player: Player) -> void:
 			player_instance.velocity = LevelManager.player.velocity
 			player_instance.gameplay_rotation = LevelManager.player.gameplay_rotation
 			player_instance.horizontal_direction = LevelManager.player.horizontal_direction
+			player_instance.gravity_flip = LevelManager.player.gravity_flip
 			player_instance.gravity_multiplier = LevelManager.player.gravity_multiplier
-			player_instance.gameplay_trigger_gravity_multiplier = LevelManager.player.gameplay_trigger_gravity_multiplier
 			player_instance.speed_multiplier = LevelManager.player.speed_multiplier
 			# Gamemode
 			player_instance.internal_gamemode = LevelManager.player.internal_gamemode
@@ -65,7 +65,7 @@ func set_player_count(player: Player) -> void:
 			player_instance.player_scale = LevelManager.player.player_scale
 			# Different gravity
 			if not same_gravity and dual_index % 2 == 1:
-				player_instance.gravity_multiplier *= -1
+				player_instance.gravity_flip *= -1
 				player_instance.velocity = Vector2(
 						player_instance.velocity.rotated(-player_instance.gameplay_rotation).x,
 						-player_instance.velocity.rotated(-player_instance.gameplay_rotation).y

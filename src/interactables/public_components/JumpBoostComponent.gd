@@ -5,4 +5,4 @@ class_name JumpBoostComponent
 
 
 func get_velocity(player: Player) -> float:
-	return jump_boost * -player.speed.y * player.gameplay_trigger_gravity_multiplier * sign(player.gravity_multiplier)
+	return jump_boost * -player.speed.y * player.gravity_multiplier * sign(player.gravity_flip)

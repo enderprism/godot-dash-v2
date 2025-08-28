@@ -1,25 +1,25 @@
 extends Component
 class_name GravityChangerComponent
 
-enum Gravity {
+enum FlipState {
 	DOWN,
 	UP,
 	FLIP,
 }
 
-@export var gravity := Gravity.DOWN
+@export var flip_state := FlipState.DOWN
 
 func _ready() -> void:
 	super()
 	parent.interacted.connect(set_gravity)
 
 func set_gravity(player: Player) -> void:
-	match gravity:
-		Gravity.DOWN:
-			player.gravity_multiplier = 1
-		Gravity.UP:
-			player.gravity_multiplier = -1
-		Gravity.FLIP:
-			player.gravity_multiplier *= -1
+	match flip_state:
+		FlipState.DOWN:
+			player.gravity_flip = 1
+		FlipState.UP:
+			player.gravity_flip = -1
+		FlipState.FLIP:
+			player.gravity_flip *= -1
 
 

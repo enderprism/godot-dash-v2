@@ -11,11 +11,11 @@ func _ready() -> void:
 		parent.collision_layer |= 1 << 10 # Velocity redirectors
 
 func _physics_process(delta: float) -> void:
-	var player_velocity := LevelManager.player.velocity.rotated(-LevelManager.player.gameplay_rotation) \
-			* LevelManager.player.gravity_multiplier
+	var player_velocity: Vector2 = LevelManager.player.velocity.rotated(-LevelManager.player.gameplay_rotation) \
+			* LevelManager.player.gravity_flip
 	player_distance = (parent.global_position.rotated(-LevelManager.player.gameplay_rotation).y \
 			- LevelManager.player.global_position.rotated(-LevelManager.player.gameplay_rotation).y) \
-			* LevelManager.player.gravity_multiplier
+			* LevelManager.player.gravity_flip
 	if player_distance > Player.TERMINAL_VELOCITY.y * delta:
 		_velocity = player_velocity.y
 	if player_velocity.y <= 0:
@@ -23,4 +23,4 @@ func _physics_process(delta: float) -> void:
 
 func get_velocity(player: Player) -> float:
 	# Not compatible with dual (can't choose which player to track dynamically so it'll track P1)
-	return -_velocity * player.gravity_multiplier
+	return -_velocity * player.gravity_flip
