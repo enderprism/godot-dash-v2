@@ -45,7 +45,7 @@ func start(_player: Player) -> void:
 		Toasts.error("In %s: copy target is unset" % parent.name)
 
 
-func _on_easing_progressed(weight_delta: float) -> void:
+func _on_easing_progressed(_player: Player, weight_delta: float) -> void:
 	for group_object in group_objects:
 		var initial_alpha := inital_alphas[group_object]
 		match mode:

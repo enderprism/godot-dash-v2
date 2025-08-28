@@ -48,7 +48,7 @@ func _process(_delta: float) -> void:
 						_target.modulate.a += (alpha * _initial_alpha - _initial_alpha) * easing.weight_delta
 					Mode.COPY:
 						if copy_target != null:
-							_target.modulate.a = lerp(_initial_alpha, copy_target.modulate.a * copy_multiplier, easing.weight)
+							_target.modulate.a = lerp(_initial_alpha, copy_target.modulate.a * copy_multiplier, easing.weights)
 						elif LevelManager.in_editor and LevelManager.level_playing:
 							printerr("In ", name, ": copy_target is unset!")
 		elif LevelManager.in_editor and LevelManager.level_playing:

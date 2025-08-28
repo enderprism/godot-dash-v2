@@ -63,7 +63,7 @@ func _physics_process(_delta: float) -> void:
 						_scale_delta = ((_initial_global_scale / target_scale) - _initial_global_scale) * easing.weight_delta
 					Mode.COPY:
 						if copy_target != null:
-							_target.global_scale = lerp(_initial_global_scale, copy_target.global_scale * copy_multiplier, easing.weight)
+							_target.global_scale = lerp(_initial_global_scale, copy_target.global_scale * copy_multiplier, easing.weights)
 						elif LevelManager.in_editor and LevelManager.level_playing:
 							printerr("In ", name, ": copy_target is unset!")
 						# Escape the current loop iteration to avoid adding the rotation delta, even if it's null.

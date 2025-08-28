@@ -109,23 +109,23 @@ func _physics_process(_delta: float) -> void:
 						_player_camera.global_position.x = lerpf(
 							_initial_global_position.x,
 							_target.global_position.x,
-							easing.weight)
+							easing.weights)
 					if not ignore_y:
 						_player_camera.global_position.y = lerpf(
 							_initial_global_position.y,
 							_target.global_position.y,
-							easing.weight)
+							easing.weights)
 				Mode.EXIT:
 					if not ignore_x:
 						_player_camera.global_position.x = lerpf(
 							_initial_global_position.x,
 							_player.global_position.x + _player_camera.get_offset_target().x if not LevelManager.platformer else _player.global_position.x,
-							easing.weight)
+							easing.weights)
 					if not ignore_y:
 						_player_camera.global_position.y = lerpf(
 							_initial_global_position.y,
 							_player.global_position.y + _player_camera.get_offset_target().y,
-							easing.weight)
+							easing.weights)
 		else:
 			printerr("In ", name, ": _player_camera is unset")
 	elif Engine.is_editor_hint():

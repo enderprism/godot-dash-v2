@@ -59,7 +59,7 @@ func start(_player: Player) -> void:
 			Toasts.error("In %s: move towards is unset" % parent.name)
 
 
-func _on_easing_progressed(weight_delta: float) -> void:
+func _on_easing_progressed(_player: Player, weight_delta: float) -> void:
 	for group_object in group_objects:
 		var initial_global_position = initial_global_positions[group_object]
 		match mode:

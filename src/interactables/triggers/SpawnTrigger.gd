@@ -62,7 +62,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if not Engine.is_editor_hint() and not easing.is_inactive():
 		if spawned_groups != null:
-			var elapsed_time: float = _duration * easing.weight
+			var elapsed_time: float = _duration * easing.weights
 			for group in spawned_groups:
 				if (elapsed_time > group.time or is_equal_approx(elapsed_time, group.time)) and group.loop_idx != _current_loop:
 					if LevelManager.current_level.get_node(group.path).has_node("TriggerBase"):

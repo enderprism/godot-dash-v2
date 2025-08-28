@@ -65,7 +65,7 @@ func _physics_process(_delta: float) -> void:
 							_target.global_position = lerp(
 									_initial_global_position,
 									_move_towards_target.global_position + (_initial_distance * _move_towards_distance_multiplier) + _move_towards_offset * CELLS_TO_PX,
-									easing.weight)
+									easing.weights)
 						elif LevelManager.in_editor and LevelManager.level_playing:
 							printerr("In ", name, ": move_towards_target is unset!")
 		elif LevelManager.in_editor and LevelManager.level_playing:

@@ -44,7 +44,7 @@ func start(_player: Player) -> void:
 		Toasts.warning("In %s: target group doesn't contain any objects" % parent.name)
 
 
-func _on_easing_progressed(weight_delta: float) -> void:
+func _on_easing_progressed(_player: Player, weight_delta: float) -> void:
 	for group_object in group_objects:
 		var initial_global_rotation_degrees := initial_global_rotations_degrees[group_object]
 		var rotation_delta: float
