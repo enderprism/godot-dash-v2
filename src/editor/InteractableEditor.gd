@@ -4,7 +4,7 @@ class_name InteractableEditor
 # Scripts aren't constants but the array shouldn't be modified nontheless.
 var COMPONENT_BLACKLIST: Array[Script] = [
 	JumpBoostComponent,
-	GravityChangerComponent,
+	GravityFlipChangerComponent,
 	ReboundComponent,
 	SpiderDashComponent,
 	FireDashComponent,

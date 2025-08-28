@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d23j4fpbpdrv4" path="res://scenes/particle_emitter_presets/PortalParticles.tscn" id="7_c150s"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="11_n2d6i"]
 [ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="12_v67i3"]
-[ext_resource type="Script" uid="uid://df636dbhnu65v" path="res://src/interactables/public_components/GravityChangerComponent.gd" id="13_3nflt"]
+[ext_resource type="Script" uid="uid://df636dbhnu65v" path="res://src/interactables/public_components/GravityFlipChangerComponent.gd" id="13_3nflt"]
 [ext_resource type="Script" uid="uid://cd3jqi4il3x2p" path="res://src/interactables/public_components/TextureRotationPinComponent.gd" id="14_8ggw0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
@@ -70,7 +70,7 @@ script = ExtResource("11_n2d6i")
 [node name="PulseWhite" type="Node" parent="."]
 script = ExtResource("12_v67i3")
 
-[node name="GravityChangerComponent" type="Node" parent="."]
+[node name="GravityFlipChangerComponent" type="Node" parent="."]
 script = ExtResource("13_3nflt")
 gravity = 1
 

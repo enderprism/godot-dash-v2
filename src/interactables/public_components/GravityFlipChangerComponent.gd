@@ -1,5 +1,5 @@
 extends Component
-class_name GravityChangerComponent
+class_name GravityFlipChangerComponent
 
 enum FlipState {
 	DOWN,
@@ -9,9 +9,11 @@ enum FlipState {
 
 @export var flip_state := FlipState.DOWN
 
+
 func _ready() -> void:
 	super()
 	parent.interacted.connect(set_gravity)
+
 
 func set_gravity(player: Player) -> void:
 	match flip_state:

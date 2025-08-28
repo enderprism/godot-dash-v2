@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://dfqmc7gmqqhe3" path="res://src/interactables/public_components/SingleUsageComponent.gd" id="8_61yf8"]
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="9_vwkm0"]
 [ext_resource type="Script" uid="uid://n8ym1w4r5ke" path="res://src/interactables/private_components/PulseWhite.gd" id="10_5buh7"]
-[ext_resource type="Script" uid="uid://df636dbhnu65v" path="res://src/interactables/public_components/GravityChangerComponent.gd" id="11_1s3np"]
+[ext_resource type="Script" uid="uid://df636dbhnu65v" path="res://src/interactables/public_components/GravityFlipChangerComponent.gd" id="11_1s3np"]
 [ext_resource type="Script" uid="uid://cd3jqi4il3x2p" path="res://src/interactables/public_components/TextureRotationPinComponent.gd" id="12_hfs0d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cghk8"]
@@ -74,7 +74,7 @@ script = ExtResource("9_vwkm0")
 [node name="PulseWhite" type="Node" parent="."]
 script = ExtResource("10_5buh7")
 
-[node name="GravityChangerComponent" type="Node" parent="."]
+[node name="GravityFlipChangerComponent" type="Node" parent="."]
 script = ExtResource("11_1s3np")
 gravity = 2
 

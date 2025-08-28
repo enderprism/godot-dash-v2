@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://blkbj1no2k35m" path="res://src/interactables/private_components/PulseRing.gd" id="8_6lhw2"]
 [ext_resource type="Script" uid="uid://cqkay7r3kwd6f" path="res://src/interactables/public_components/JumpBoostComponent.gd" id="10_ofvbe"]
 [ext_resource type="Script" uid="uid://crvw7wonis42n" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="10_ulqwe"]
-[ext_resource type="Script" uid="uid://df636dbhnu65v" path="res://src/interactables/public_components/GravityChangerComponent.gd" id="11_ihas7"]
+[ext_resource type="Script" uid="uid://df636dbhnu65v" path="res://src/interactables/public_components/GravityFlipChangerComponent.gd" id="11_ihas7"]
 [ext_resource type="Script" uid="uid://cx0n1qip15t20" path="res://src/interactables/private_components/MusicScale.gd" id="11_ysoaw"]
 [ext_resource type="Script" uid="uid://uatxmfuua4wq" path="res://src/interactables/private_components/TextureRotate.gd" id="13_gbohu"]
 
@@ -49,7 +49,7 @@ script = ExtResource("8_6lhw2")
 script = ExtResource("10_ofvbe")
 jump_boost = 0.985
 
-[node name="GravityChangerComponent" type="Node" parent="."]
+[node name="GravityFlipChangerComponent" type="Node" parent="."]
 script = ExtResource("11_ihas7")
 gravity = 2
 

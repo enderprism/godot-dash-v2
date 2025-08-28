@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://cvm8jm6xidbjf" path="res://src/interactables/private_components/PulseCircle.gd" id="5_tgwkr"]
 [ext_resource type="Script" uid="uid://c772o12ml0hud" path="res://src/interactables/public_components/FireDashComponent.gd" id="7_35cbg"]
 [ext_resource type="Script" uid="uid://734ig4xqcu7j" path="res://src/interactables/private_components/FireDashTangentSpeed.gd" id="8_fdxk0"]
-[ext_resource type="Script" uid="uid://df636dbhnu65v" path="res://src/interactables/public_components/GravityChangerComponent.gd" id="9_tqky4"]
+[ext_resource type="Script" uid="uid://df636dbhnu65v" path="res://src/interactables/public_components/GravityFlipChangerComponent.gd" id="9_tqky4"]
 [ext_resource type="Script" uid="uid://bxwbrvsv1wbcj" path="res://src/interactables/private_components/FireDashRotatedSpeed.gd" id="10_0a3a8"]
 [ext_resource type="Script" uid="uid://crvw7wonis42n" path="res://src/interactables/public_components/DirectionChangerComponent.gd" id="10_y60uf"]
 
@@ -59,7 +59,7 @@ script = ExtResource("8_fdxk0")
 [node name="FireDashRotatedSpeed" type="Node" parent="FireDashComponent"]
 script = ExtResource("10_0a3a8")
 
-[node name="GravityChangerComponent" type="Node" parent="."]
+[node name="GravityFlipChangerComponent" type="Node" parent="."]
 script = ExtResource("9_tqky4")
 gravity = 2
 
