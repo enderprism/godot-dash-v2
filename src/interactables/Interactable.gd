@@ -1,7 +1,7 @@
 extends Area2D
 class_name Interactable
 
-signal interacted(body: Node2D)
+signal interacted(player: Player)
 
 var components: Array[Component]
 
