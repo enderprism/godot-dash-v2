@@ -9,7 +9,7 @@ size = Vector2(128, 128)
 
 [sub_resource type="LabelSettings" id="LabelSettings_unfh5"]
 font = ExtResource("3_0r1mm")
-font_size = 142
+font_size = 35
 
 [node name="StopDash" type="Area2D"]
 script = ExtResource("1_1vsyb")
@@ -33,12 +33,11 @@ patch_margin_right = 35
 patch_margin_bottom = 35
 
 [node name="Letter" type="Label" parent="."]
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0
-scale = Vector2(0.25, 0.25)
-pivot_offset = Vector2(256, 256)
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+pivot_offset = Vector2(64, 64)
 text = "stop
 dash"
 label_settings = SubResource("LabelSettings_unfh5")

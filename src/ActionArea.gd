@@ -45,8 +45,8 @@ func _process(_delta: float) -> void:
 		_ninepatchrect.position = -_ninepatchrect.size/2
 		_ninepatchrect.pivot_offset = _ninepatchrect.size/2
 	if has_node("Letter"):
-		_letter.scale = Vector2(0.25, 0.25) / scale.abs()
-		_letter.size = Vector2(512.0, 512.0) * scale.abs()
+		_letter.scale = Vector2.ONE / scale.abs()
+		_letter.size = Vector2.ONE * 128.0 * scale.abs()
 		_letter.position = -_letter.size/2
 		_letter.pivot_offset = _letter.size/2
 
