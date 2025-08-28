@@ -45,14 +45,14 @@ instance_dock/preview_resolution=Vector2i(64, 64)
 
 [application]
 
-config/name="godot-dash-v2"
+config/name="Godot Dash"
 config/version="0.0.1"
 run/main_scene="res://scenes/MainScene.tscn"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=60
 boot_splash/image="uid://c1mj3e3vvh1h0"
-config/icon="uid://8t3i3wfji7of"
+config/icon="uid://c8auew2txgxb5"
 
 [audio]
 
