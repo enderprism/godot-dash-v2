@@ -15,7 +15,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if LevelManager.level_playing and event.is_action_pressed("restart_level"):
 		_on_restart_pressed()
-	if event.is_action_pressed("pause_level") and LevelManager.shortcut_blocker == null:
+	if event.is_action_pressed("pause_level") and LevelManager.shortcut_blocker == null and not SceneTransition.is_transitioning:
 		_on_continue_pressed()
 	if event.is_action_pressed("hide_pause_menu"):
 		visible = not visible
@@ -34,9 +34,12 @@ func _on_leave_pressed() -> void:
 	LevelManager.level_playing = false
 	SongManager.unload_all()
 	SFXManager.play_sfx("res://assets/sounds/sfx/game_sfx/LevelQuit.ogg")
-	await get_tree().create_timer(0.5).timeout # Avoid the frozen frame
+	SceneTransition.is_transitioning = true
+	# HACK: removing the delay gets the screen frozen on the last frame after pressing the button instead of fading to black
+	await get_tree().create_timer(0.5).timeout
 	LevelManager.game_scene = null
 	LevelManager.editor_clipboard.clear()
+	SceneTransition.is_transitioning = false
 	get_tree().change_scene_to_packed(main_scene)
 
 func _on_continue_pressed() -> void:

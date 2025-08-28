@@ -7,6 +7,7 @@ enum Scene {
 }
 
 var previous: Scene
+var is_transitioning: bool
 
 
 func from_main() -> bool:
