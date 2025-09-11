@@ -1,3 +1,6 @@
+# Moved to https://codeberg.org/enderprism/godot-dash/
+## The GitHub repository will not read PRs, put them on Codeberg instead.
+
 <p align="center">
  <img src="assets/logo/logo.png" align="center" width="256" alt="Godot Dash logo"></img>
  <h1 align="center">Godot Dash V2</h1>
